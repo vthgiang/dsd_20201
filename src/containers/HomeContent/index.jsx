@@ -25,13 +25,13 @@ const HomeContent = ({ history }) => {
                 alt='example'
                 s
                 height='300px'
-                src={IMAGES.chayrung}
+                src={IMAGES.forestFires}
               />
             }
           >
             <Meta
               title='Sự cố cháy rừng'
-              description='Giải pháp giúp theo dõi khu vực rừng một cách thường xuyên và có thể dự đoán được giúp ngăn chặn sự cố xảy ra. Từ các chiến dịch kiểm soát được tạo lập, nhà quản lý có thể đưa ra các phương án xử lý vừa đảm bảo sự an toàn vừa để bảo vệ nguồn tài nguyên.'
+              description='Giải pháp giúp theo dõi khu vực rừng một cách thường xuyên và có thể dự đoán được sự sự cố xảy ra, giúp ngăn chặn và bảo vệ nguồn tài nguyên rừng.'
             />
           </Card>
         </Col>
@@ -44,7 +44,7 @@ const HomeContent = ({ history }) => {
               <Image
                 alt='example'
                 height='300px'
-                src={IMAGES.dedieu}
+                src={IMAGES.dike}
               />
             }
           >
@@ -63,7 +63,7 @@ const HomeContent = ({ history }) => {
               <Image
                 alt='example'
                 height='300px'
-                src={IMAGES.luoidien}
+                src={IMAGES.highVoltageGrid}
               />
             }
           >
@@ -82,7 +82,7 @@ const HomeContent = ({ history }) => {
               <Image
                 alt='example'
                 height='300px'
-                src={IMAGES.caytrong}
+                src={IMAGES.tree}
               />
             }
           >

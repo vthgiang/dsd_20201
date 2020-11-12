@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Layout, Menu } from 'antd';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { StyleSidebarMenu, StyleLogo } from './index.style';
-import { IMAGES } from '../../constants';
 import { sidebarMenu } from './config';
 
 const { Sider } = Layout;
-const { SubMenu } = Menu;
+const { SubMenu } = Menu; 
 
 const Sidebar = ({ collapsed, toggle }) => {
   const [key, setKey] = useState('Dashboard');

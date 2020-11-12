@@ -1,10 +1,8 @@
 import React from 'react';
-import { Col, Image, Layout, Row } from 'antd';
+import { Col, Image, Row } from 'antd';
 import StyleLogin from './index.style';
 import { IMAGES } from '../../constants';
 import LoginForm from '../../containers/LoginForm';
-
-const { Header, Content, Footer } = Layout;
 
 const Login = () => {
   return (

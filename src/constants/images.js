@@ -1,13 +1,13 @@
-import { PUBLIC_URL } from "../configs";
+import { PUBLIC_URL } from '../configs';
 
 const IMAGES = {
   logo: `${PUBLIC_URL}/images/logo.png`,
   logoThumbnail: `${PUBLIC_URL}/images/logo_thumbnail.png`,
   drone: `${PUBLIC_URL}/images/drone.png`,
-  caytrong: `${PUBLIC_URL}/images/caytrong.jpg`,
-  luoidien: `${PUBLIC_URL}/images/luoidien.jpg`,
-  dedieu: `${PUBLIC_URL}/images/dedieu.jpg`,
-  chayrung: `${PUBLIC_URL}/images/chayrung.jpg`,
+  tree: `${PUBLIC_URL}/images/tree.jpg`,
+  highVoltageGrid: `${PUBLIC_URL}/images/high_voltage_grid.jpg`,
+  dike: `${PUBLIC_URL}/images/dike.jpg`,
+  forestFires: `${PUBLIC_URL}/images/forest_fires.jpg`,
 };
 
 export default IMAGES;

@@ -11,7 +11,7 @@ const StyleHomeContent = styled.div`
   }
   .card-content {
     /* width: 300px; */
-    height: 56vh;
+    height: 100%;
   }
 `;
 export default StyleHomeContent;

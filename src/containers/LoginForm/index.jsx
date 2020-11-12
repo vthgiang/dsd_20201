@@ -7,14 +7,14 @@ import { withRouter } from 'react-router-dom';
 
 const { Title } = Typography;
 
-const LoginForm = ({ history}) => {
+const LoginForm = ({ history }) => {
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
   };
 
   return (
-      <StyleLoginForm>
-    <Title level={2}>Hệ thống giám sát bằng Drone</Title>
+    <StyleLoginForm>
+      <Title level={2}>Hệ thống giám sát bằng Drone</Title>
       <Form
         name='normal_login'
         className='login-form'
@@ -57,7 +57,7 @@ const LoginForm = ({ history}) => {
             <Checkbox>Lưu tài khoản</Checkbox>
           </Form.Item>
 
-          <a className='login-form-forgot' href=''>
+          <a className='login-form-forgot' href='#'>
             Quên mật khẩu
           </a>
         </Form.Item>
