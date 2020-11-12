@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Layout, Menu } from "antd";
-import Icon from "@material-ui/core/Icon";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { StyleSidebarMenu, StyleLogo } from "./index.style";
 import { IMAGES } from "../../constants";
@@ -53,7 +52,7 @@ const Sidebar = ({ collapsed, toggle }) => {
           <Menu.Item
             key={key}
             icon={
-              <Icon className={`${icon} menu-item-icon`} fontSize="small" />
+              <i className={`${icon} menu-item-icon`} fontSize="small" />
             }
             onClick={() => handleClickMenu(menuItem)}
           >
@@ -66,7 +65,7 @@ const Sidebar = ({ collapsed, toggle }) => {
           key={key}
           title={
             <span>
-              <Icon className={`${icon} menu-item-icon`} fontSize="small" />
+              <i className={`${icon} menu-item-icon`} fontSize="small" />
               <span className="collapsed">{heading}</span>
             </span>
           }

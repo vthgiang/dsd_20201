@@ -88,6 +88,6 @@ export default () => (
         />
       );
     })}
-    <Redirect to='/dashboard' />
+    <Redirect to='/' />
   </Switch>
 );
