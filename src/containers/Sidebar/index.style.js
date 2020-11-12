@@ -1,11 +1,16 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 export const StyleLogo = styled.div`
   cursor: pointer;
-  height: 64px;
+  /* height: 64px;
   padding: 16px;
-  .logo {
-    height: 32px !important;
-  }
+  .logo { */
+  padding: 16px;
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 24px;
+  background: rgba(255, 255, 255, 0.3);
+  /* } */
 `;
 
 export const StyleSidebarMenu = styled.div`

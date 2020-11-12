@@ -1,11 +1,14 @@
 import React from 'react';
-import { Card, Col, Row, Typography } from 'antd';
+import { Card, Col, Image, Row, Typography } from 'antd';
 import StyleHomeContent from './index.style';
 import Meta from 'antd/lib/card/Meta';
+import { withRouter } from 'react-router-dom';
+import { IMAGES } from '../../constants';
 
 const { Title } = Typography;
 
-const HomeContent = () => {
+const HomeContent = ({ history }) => {
+  console.log({ history });
   return (
     <StyleHomeContent>
       <Title level={2} className='title'>
@@ -16,11 +19,13 @@ const HomeContent = () => {
           <Card
             hoverable
             className='card-content'
+            onClick={() => history.push('/dashboard')}
             cover={
-              <img
+              <Image
                 alt='example'
-s                height='300vw'
-                src='https://aqualife.vn/wp-content/uploads/Nguy%C3%AAn-nh%C3%A2n-v%C3%A0-h%E1%BA%ADu-qu%E1%BA%A3-c%E1%BB%A7a-ch%C3%A1y-r%E1%BB%ABng.jpg'
+                s
+                height='300px'
+                src={IMAGES.chayrung}
               />
             }
           >
@@ -34,11 +39,12 @@ s                height='300vw'
           <Card
             hoverable
             className='card-content'
+            onClick={() => history.push('/dashboard')}
             cover={
-              <img
+              <Image
                 alt='example'
-                height='300vw'
-                src='https://lh3.googleusercontent.com/proxy/HSfDdA8LbSe1tn_P5_qy0PzdwWMB6vvECSCN7pnTjdkHRW1Wdsbg9ycvRAl83f_wrnE3qSUE0ZwYEpBrV_nUPYLxBQ3Ecu7nxTwcIdlcv7F_-bpcMB8K3NSmA81QQP3Udrgq9dB5Pj9zpRImrwyJ'
+                height='300px'
+                src={IMAGES.dedieu}
               />
             }
           >
@@ -52,11 +58,12 @@ s                height='300vw'
           <Card
             hoverable
             className='card-content'
+            onClick={() => history.push('/dashboard')}
             cover={
-              <img
+              <Image
                 alt='example'
-                height='300vw'
-                src='https://vnreview.vn/image/55/00/550062.jpg'
+                height='300px'
+                src={IMAGES.luoidien}
               />
             }
           >
@@ -70,11 +77,12 @@ s                height='300vw'
           <Card
             hoverable
             className='card-content'
+            onClick={() => history.push('/dashboard')}
             cover={
-              <img
+              <Image
                 alt='example'
-                height='300vw'
-                src='https://2.bp.blogspot.com/-g_9cmGHU7FU/Uz6Ccp6l4LI/AAAAAAAAIIw/lokv9orIoxc/s1600/1phan+bon+EMZ-USA+01.jpg'
+                height='300px'
+                src={IMAGES.caytrong}
               />
             }
           >
@@ -89,4 +97,4 @@ s                height='300vw'
   );
 };
 
-export default HomeContent;
+export default withRouter(HomeContent);

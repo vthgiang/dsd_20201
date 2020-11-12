@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout } from 'antd';
 import StyleHome from './index.style';
 import HomeContent from '../../containers/HomeContent';
@@ -6,6 +6,9 @@ import HomeContent from '../../containers/HomeContent';
 const { Header, Content, Footer } = Layout;
 
 const Home = () => {
+  useEffect(() => {
+    document.title = 'Home';
+  }, [])
   return (
     <StyleHome>
       <Layout className='layout'>
