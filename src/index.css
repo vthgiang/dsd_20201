@@ -7,36 +7,33 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.menu-item-icon {
+  text-align: center;
+}
+
 .ant-menu-item:first-child {
   margin-top: 0 !important;
 }
-
 .ant-menu-item {
   display: flex;
   align-items: center;
 }
-
-.ant-menu-item .MuiIcon-root {
-  vertical-align: middle;
+.ant-menu-item i {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 1.25em !important;
+  font-size: 1em !important;
 }
 
-.ant-menu-item .MuiIcon-fontSizeSmall {
+.ant-menu-submenu i {
+  text-align: center;
   width: 1.25em !important;
   height: 1.25em !important;
   font-size: 1em !important;
-  line-height: 1.25em;
 }
 
-.ant-menu-submenu .MuiIcon-fontSizeSmall {
-  width: 1.25em !important;
-  height: 1.25em !important;
-  font-size: 1em !important;
-  line-height: 1.25em;
-}
-
-.ant-menu-submenu .MuiIcon-root {
-  vertical-align: middle;
-}
 .ant-menu-item .collapsed {
   margin-left: 7.5px !important;
 }

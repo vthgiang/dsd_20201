@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const StyleLogin = styled.div`
   .login-row {
@@ -9,7 +9,11 @@ const StyleLogin = styled.div`
     height: 80vh;
   }
   .login-form {
+    height: 80vh;
     background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 export default StyleLogin;

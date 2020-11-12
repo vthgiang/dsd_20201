@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Layout, Menu } from 'antd';
-import { Link, useLocation, useHistory } from 'react-router-dom';
-import { StyleSidebarMenu, StyleLogo } from './index.style';
-import { sidebarMenu } from './config';
+import React, { useEffect, useState } from "react";
+import { Layout, Menu } from "antd";
+import { Link, useLocation, useHistory } from "react-router-dom";
+import { StyleSidebarMenu } from "./index.style";
+import Logo from "../../components/Logo";
+import { sidebarMenu } from "./config";
 
 const { Sider } = Layout;
-const { SubMenu } = Menu; 
+const { SubMenu } = Menu;
 
 const Sidebar = ({ collapsed, toggle }) => {
-  const [key, setKey] = useState('Dashboard');
+  const [key, setKey] = useState("Dashboard");
   const { pathname } = useLocation();
   const history = useHistory();
 
   useEffect(() => {
-    const currentRoute = `/${pathname.split('/')[1]}`;
+    const currentRoute = `/${pathname.split("/")[1]}`;
     const getFirstRouteMounted = (menu) => {
       for (let idx = 0; idx < menu.length; idx++) {
         const menuItem = menu[idx];
@@ -50,10 +51,10 @@ const Sidebar = ({ collapsed, toggle }) => {
         return (
           <Menu.Item
             key={key}
-            icon={<i className={`${icon} menu-item-icon`} fontSize='small' />}
+            icon={<i className={`${icon} menu-item-icon`} />}
             onClick={() => handleClickMenu(menuItem)}
           >
-            <span className='collapsed'>{heading}</span>
+            <span className="collapsed">{heading}</span>
           </Menu.Item>
         );
       }
@@ -62,8 +63,8 @@ const Sidebar = ({ collapsed, toggle }) => {
           key={key}
           title={
             <span>
-              <i className={`${icon} menu-item-icon`} fontSize='small' />
-              <span className='collapsed'>{heading}</span>
+              <i className={`${icon} menu-item-icon`} />
+              <span className="collapsed">{heading}</span>
             </span>
           }
         >
@@ -75,9 +76,9 @@ const Sidebar = ({ collapsed, toggle }) => {
 
   return (
     <Sider
-      breakpoint='lg'
+      breakpoint="lg"
       width={210}
-      collapsedWidth='80px'
+      collapsedWidth="80px"
       collapsible
       trigger={null}
       collapsed={collapsed}
@@ -85,16 +86,16 @@ const Sidebar = ({ collapsed, toggle }) => {
         toggle();
       }}
     >
-      <Link to='/'>
-        <StyleLogo />
+      <Link to="/">
+        <Logo collapsed={collapsed}></Logo>
       </Link>
       <StyleSidebarMenu collapsed={collapsed}>
         <Menu
-          theme='dark'
-          mode='inline'
-          defaultSelectedKeys={['Dashboard', key]}
+          theme="dark"
+          mode="inline"
+          defaultSelectedKeys={["Dashboard", key]}
           selectedKeys={key}
-          triggerSubMenuAction='click'
+          triggerSubMenuAction="click"
         >
           {renderListMenu(sidebarMenu)}
         </Menu>

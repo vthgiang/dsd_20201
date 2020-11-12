@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const StyleHome = styled.div`
   .header {
-    /* background: rgb(241, 243, 244); */
+    display: flex;
+    justify-content: space-between;
   }
   .layout {
     height: 100vh;

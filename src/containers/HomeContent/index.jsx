@@ -23,7 +23,6 @@ const HomeContent = ({ history }) => {
             cover={
               <Image
                 alt='example'
-                s
                 height='300px'
                 src={IMAGES.forestFires}
               />

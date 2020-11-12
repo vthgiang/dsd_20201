@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Layout } from 'antd';
-import StyleLayout from './index.style';
-import Header from '../Header';
-import Sidebar from '../Sidebar';
+import React, { useState } from "react";
+import { Layout } from "antd";
+import StyleLayout from "./index.style";
+import Header from "../Header";
+import Sidebar from "../Sidebar";
 
 const { Content } = Layout;
 
