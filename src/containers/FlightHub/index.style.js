@@ -10,7 +10,7 @@ export const StyleContent = styled.div`
   /* flex: 1; */
   border: 1px dashed #e9e9e9;
   border-radius: 2px;
-  background-color: #fafafa;
+  background-color: rgba(0, 0, 0, 0.0015);
   margin-top: 24px;
   padding: 16px;
 `;

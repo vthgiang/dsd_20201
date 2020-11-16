@@ -5,7 +5,7 @@ import { VALIDATE_MESSAGES, LAYOUT } from '../config';
 
 const { RangePicker } = DatePicker;
 
-const Step1 = ({ nextStep, preStep, handleChangeData }) => {
+const Step1 = ({ nextStep, preStep, data, handleChangeData }) => {
   const onFinish = (values) => {
     handleChangeData(values);
     nextStep();
@@ -17,6 +17,7 @@ const Step1 = ({ nextStep, preStep, handleChangeData }) => {
         name="flight-hub-name"
         onFinish={onFinish}
         validateMessages={VALIDATE_MESSAGES}
+        initialValues={data}
       >
         <Form.Item
           name="name"
