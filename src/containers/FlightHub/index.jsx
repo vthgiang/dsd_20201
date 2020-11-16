@@ -30,6 +30,7 @@ const FlightHub = () => {
       <Component
         nextStep={nextStep}
         prevStep={prevStep}
+        data={data}
         handleChangeData={handleChangeData}
       />
     );
