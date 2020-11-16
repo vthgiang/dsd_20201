@@ -11,7 +11,7 @@ const FlightHub = () => {
   const [data, setData] = useState({});
 
   const nextStep = () => {
-    if (current === MAX_STEPS_SIZE - 2) return;
+    if (current === MAX_STEPS_SIZE - 1) return;
     setCurrent(current + 1);
   };
 
