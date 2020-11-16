@@ -1,12 +1,13 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import Dashboard from './Dashboard';
+import DashboardPage from './Dashboard';
+import FlightHubPage from './FlightHub';
 
 export const routes = [
   {
     path: '/dashboard',
-    component: Dashboard,
+    component: DashboardPage,
     exact: true,
   },
   {
@@ -27,7 +28,7 @@ export const routes = [
   },
   {
     path: '/flight-hub',
-    component: () => <div>Flight Hub</div>,
+    component: FlightHubPage,
   },
   {
     path: '/payloads',
@@ -88,6 +89,6 @@ export default () => (
         />
       );
     })}
-    <Redirect to='/' />
+    <Redirect to="/" />
   </Switch>
 );
