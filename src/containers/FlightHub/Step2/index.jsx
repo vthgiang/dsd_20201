@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSeparator, StyleTitle } from '../../../themes/default';
 import StyleStep2 from './index.style';
-import { Button, Row, Table, message } from 'antd';
+import { Button, Row, Table, message, Col } from 'antd';
 
 const originData = [
   {
@@ -73,12 +73,12 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
         dataSource={originData}
       />
       <Row type="flex">
-        <Button type="primary" onClick={handleNextStep}>
-          Tiếp theo
-        </Button>
-        &ensp;
         <Button type="default" onClick={prevStep}>
           Quay lại
+        </Button>
+        &ensp;
+        <Button type="primary" onClick={handleNextStep}>
+          Tiếp theo
         </Button>
       </Row>
     </StyleStep2>

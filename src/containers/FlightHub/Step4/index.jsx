@@ -1,33 +1,53 @@
 import React from 'react';
 import StyleStep4 from './index.style';
-import {
-  Button,
-  Col,
-  Form,
-  Input,
-  Select,
-  Row,
-  Popconfirm,
-  message,
-} from 'antd';
+import { Button, Col, Form, Input, Select, Row, message, Modal } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { convertTimeRangeToData } from '../services';
 
 const { Option } = Select;
 const { TextArea } = Input;
 
-const Step4 = ({ nextStep, prevStep, handleChangeData }) => {
-  const onFinish = (values) => {
-    handleChangeData(values);
-  };
-
-  const save = () => {
+const Step4 = ({ prevStep, data, handleChangeData }) => {
+  const saved = () => {
     message.success('Lưu thành công');
   };
+
+  const handleCreate = (dataSubmit) => () => {
+    console.log({ dataSubmit });
+    saved();
+  };
+
+  const submitConfirm = (dataSubmit) => {
+    const { name } = dataSubmit;
+    Modal.confirm({
+      title: 'Xác nhận',
+      icon: <ExclamationCircleOutlined />,
+      content: (
+        <span>
+          Bạn có muốn tạo đợi giám sát <strong>{name}</strong>?
+        </span>
+      ),
+      okText: 'Đồng ý',
+      cancelText: 'Hủy',
+      onOk: handleCreate(dataSubmit),
+    });
+  };
+
+  const onFinish = (values) => {
+    handleChangeData(values);
+    const { timeRange } = data;
+    const timeRangeDate = convertTimeRangeToData(timeRange);
+    delete data.timeRange;
+    const dataSubmit = { ...data, ...timeRangeDate, ...values };
+    submitConfirm(dataSubmit);
+  };
+
   return (
     <StyleStep4>
       <Form
         {...LAYOUT}
-        name="flight-hub-name"
+        name="flight-hub-storage"
         onFinish={onFinish}
         validateMessages={VALIDATE_MESSAGES}
       >
@@ -36,11 +56,7 @@ const Step4 = ({ nextStep, prevStep, handleChangeData }) => {
           label="Cơ chế thu thập"
           rules={[{ type: 'string', required: true }]}
         >
-          <Select
-            showSearch
-            style={{ width: 300 }}
-            placeholder="Chọn cơ chế thu thập"
-          >
+          <Select showSearch placeholder="Chọn cơ chế thu thập">
             <Option value="manually">Thủ công</Option>
             <Option value="auto">Tự động</Option>
           </Select>
@@ -50,11 +66,7 @@ const Step4 = ({ nextStep, prevStep, handleChangeData }) => {
           label="Dạng lưu trữ"
           rules={[{ type: 'string', required: true }]}
         >
-          <Select
-            showSearch
-            style={{ width: 300 }}
-            placeholder="Chọn dạng lưu trữ"
-          >
+          <Select showSearch placeholder="Chọn dạng lưu trữ">
             <Option value="photo">Hình ảnh</Option>
             <Option value="video">Video</Option>
           </Select>
@@ -64,11 +76,7 @@ const Step4 = ({ nextStep, prevStep, handleChangeData }) => {
           label="Độ phân giải"
           rules={[{ type: 'string', required: true }]}
         >
-          <Select
-            showSearch
-            style={{ width: 300 }}
-            placeholder="Chọn độ phân giải"
-          >
+          <Select showSearch placeholder="Chọn độ phân giải">
             <Option value="480p">480p</Option>
             <Option value="720p">720p</Option>
             <Option value="1080p">1080p</Option>
@@ -81,7 +89,6 @@ const Step4 = ({ nextStep, prevStep, handleChangeData }) => {
         >
           <Select
             showSearch
-            style={{ width: 300 }}
             mode="tags"
             placeholder="Chọn Các tham số đính kèm"
           >
@@ -101,27 +108,19 @@ const Step4 = ({ nextStep, prevStep, handleChangeData }) => {
           rules={[{ type: 'string', required: false }]}
         >
           <TextArea
-            placeholder="Gõ vào đây bất cứ ghi chú nào bạn muốn nhắn nhủ..."
+            placeholder="Để lại lời nhắn..."
             autoSize={{ minRows: 2, maxRows: 6 }}
           />
         </Form.Item>
         <Col offset={6}>
           <Row>
             <Button type="default" onClick={prevStep}>
-              {'<< quay lại'}
+              Quay lại
             </Button>
             &ensp;
-            <Popconfirm
-              title="Bạn có chắc chắn muốn lưu không?"
-              onConfirm={save}
-              // onCancel={cancel}
-              okText="Lưu"
-              cancelText="Hủy"
-            >
-              <Button type="primary" htmlType="submit">
-                {'Lưu'}
-              </Button>
-            </Popconfirm>
+            <Button type="primary" htmlType="submit">
+              Lưu
+            </Button>
           </Row>
         </Col>
       </Form>

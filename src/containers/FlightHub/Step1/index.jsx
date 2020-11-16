@@ -5,7 +5,7 @@ import { VALIDATE_MESSAGES, LAYOUT } from '../config';
 
 const { RangePicker } = DatePicker;
 
-const Step1 = ({ nextStep, preStep, data, handleChangeData }) => {
+const Step1 = ({ nextStep, data, handleChangeData }) => {
   const onFinish = (values) => {
     handleChangeData(values);
     nextStep();
@@ -24,7 +24,7 @@ const Step1 = ({ nextStep, preStep, data, handleChangeData }) => {
           label="Tên đợt giám sát"
           rules={[{ type: 'string', required: true }]}
         >
-          <Input></Input>
+          <Input placeholder="VD: Đọt giám sát rừng phòng hộ quý 1"></Input>
         </Form.Item>
         <Form.Item
           name="timeRange"

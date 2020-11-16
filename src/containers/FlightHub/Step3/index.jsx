@@ -5,12 +5,7 @@ import { VALIDATE_MESSAGES, LAYOUT } from '../config';
 
 const { Option } = Select;
 
-const Step3 = ({ nextStep, prevStep, handleChangeData }) => {
-  const onFinish = (values) => {
-    handleChangeData(values);
-    nextStep();
-  };
-
+const Step3 = ({ nextStep, prevStep, data, handleChangeData }) => {
   const getObjectOptions = () => {
     let data = [
       {
@@ -28,7 +23,11 @@ const Step3 = ({ nextStep, prevStep, handleChangeData }) => {
     ];
 
     const options = data.map((item) => {
-      return <Option value={item._id}>{item.name}</Option>;
+      return (
+        <Option key={item._id} value={item._id}>
+          {item.name}
+        </Option>
+      );
     });
     return options;
   };
@@ -50,54 +49,55 @@ const Step3 = ({ nextStep, prevStep, handleChangeData }) => {
     ];
 
     const options = data.map((item) => {
-      return <Option value={item._id}>{item.name}</Option>;
+      return (
+        <Option key={item._id} value={item._id}>
+          {item.name}
+        </Option>
+      );
     });
     return options;
+  };
+
+  const onFinish = (values) => {
+    handleChangeData(values);
+    nextStep();
   };
 
   return (
     <StyleStep3>
       <Form
         {...LAYOUT}
-        name="flight-hub-name"
+        name="flight-hub-object"
         onFinish={onFinish}
         validateMessages={VALIDATE_MESSAGES}
+        initialValues={data}
       >
         <Form.Item
           name="object_id"
           label="Đối tượng giám sát"
           rules={[{ type: 'string', required: true }]}
         >
-          <Select
-            showSearch
-            style={{ width: 300 }}
-            placeholder="Chọn đối tượng giám sát"
-          >
+          <Select showSearch placeholder="Chọn đối tượng giám sát">
             {getObjectOptions()}
           </Select>
         </Form.Item>
-        ,
         <Form.Item
           name="location"
           label="Miền giám sát"
           rules={[{ type: 'string', required: true }]}
         >
-          <Select
-            showSearch
-            style={{ width: 300 }}
-            placeholder="Chọn miền giám sát"
-          >
+          <Select showSearch placeholder="Chọn miền giám sát">
             {getLocationOptions()}
           </Select>
         </Form.Item>
         <Col offset={6}>
-          <Row>
+          <Row type="flex">
             <Button type="default" onClick={prevStep}>
-              {'<< quay lại'}
+              Quay lại
             </Button>
             &ensp;
             <Button type="primary" htmlType="submit">
-              {'Tiếp theo >>'}
+              Tiếp theo
             </Button>
           </Row>
         </Col>

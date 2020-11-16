@@ -22,8 +22,9 @@ export const MAX_STEPS_SIZE = 4;
 
 export const LAYOUT = {
   layout: 'horizontal',
-  labelCol: { span: 6 },
+  labelCol: { offset: 2, span: 4 },
   wrapperCol: { span: 16 },
+  labelAlign: 'left',
 };
 
 export const VALIDATE_MESSAGES = {
