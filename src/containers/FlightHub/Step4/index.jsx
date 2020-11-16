@@ -107,13 +107,10 @@ const Step4 = ({ nextStep, prevStep, handleChangeData }) => {
         </Form.Item>
         <Col offset={6}>
           <Row>
-            <Button
-              type="primary"
-              onClick={prevStep}
-              style={{ marginRight: '20px' }}
-            >
+            <Button type="default" onClick={prevStep}>
               {'<< quay lại'}
             </Button>
+            &ensp;
             <Popconfirm
               title="Bạn có chắc chắn muốn lưu không?"
               onConfirm={save}

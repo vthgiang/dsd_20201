@@ -92,13 +92,10 @@ const Step3 = ({ nextStep, prevStep, handleChangeData }) => {
         </Form.Item>
         <Col offset={6}>
           <Row>
-            <Button
-              type="primary"
-              onClick={prevStep}
-              style={{ marginRight: '20px' }}
-            >
+            <Button type="default" onClick={prevStep}>
               {'<< quay lại'}
             </Button>
+            &ensp;
             <Button type="primary" htmlType="submit">
               {'Tiếp theo >>'}
             </Button>
