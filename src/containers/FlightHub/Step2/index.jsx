@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSeparator, StyleTitle } from '../../../themes/default';
 import StyleStep2 from './index.style';
-import { Button, Row, Table, message, Col } from 'antd';
+import { Button, Row, Table, message } from 'antd';
 
 const originData = [
   {
@@ -25,6 +25,7 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
 
   useEffect(() => {
     // call Api get list drone available
+    
     setDrones(originData || []);
   }, []);
   const columns = [
