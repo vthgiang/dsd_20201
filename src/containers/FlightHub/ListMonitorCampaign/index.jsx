@@ -30,12 +30,22 @@ const initialDataFake = {
 };
 
 const data = [];
+const objectsData = [
+  'Rừng nguyên sinh',
+  'Rừng đặc dụng',
+  'Rừng trồng',
+  'Rừng phòng hộ',
+  'Rừng phòng hộ',
+  'Rừng sản xuất',
+];
 for (let i = 0; i < 20; i++) {
   data.push({
     key: i,
     id: i,
     ...initialDataFake,
     name: `Đợt giám sát ${i + 1}`,
+    objectId: objectsData[Math.floor(Math.random() * objectsData.length)],
+    location: `Tiểu khu ${String.fromCharCode(i + 65)}`,
   });
 }
 
@@ -79,13 +89,13 @@ const ListMonitorCampaign = () => {
     {
       dataIndex: 'id',
       title: 'Mã đợt giám sát',
-      width: '15%',
+      width: '10%',
       align: 'center',
     },
     {
       dataIndex: 'name',
       title: 'Tên đợt giám sát',
-      width: '25%',
+      width: '20%',
     },
     {
       dataIndex: 'startTime',
@@ -100,6 +110,16 @@ const ListMonitorCampaign = () => {
       title: 'Thời gian kết thúc',
       render: formatMomentDateToDateTimeString,
       align: 'center',
+    },
+    {
+      dataIndex: 'objectId',
+      title: 'Đối tượng giám sát',
+      width: '15%',
+    },
+    {
+      dataIndex: 'location',
+      title: 'Miền giám sát',
+      width: '15%',
     },
     {
       key: 'actions',
