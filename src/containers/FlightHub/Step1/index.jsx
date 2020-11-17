@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import StyleStep1 from './index.style';
 import { Button, Col, DatePicker, Form, Input, Row } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
@@ -7,14 +7,22 @@ import { DATE_TIME_FORMAT } from '../../../configs';
 const { RangePicker } = DatePicker;
 
 const Step1 = ({ nextStep, data, handleChangeData }) => {
+  const [form] = Form.useForm();
+
+  useEffect(() => {
+    form.setFieldsValue(data);
+  }, [data, form]);
+
   const onFinish = (values) => {
     handleChangeData(values);
     nextStep();
   };
+
   return (
     <StyleStep1>
       <Form
         {...LAYOUT}
+        form={form}
         name="flight-hub-name"
         onFinish={onFinish}
         validateMessages={VALIDATE_MESSAGES}

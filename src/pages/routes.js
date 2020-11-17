@@ -3,6 +3,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import DashboardPage from './Dashboard';
 import FlightHubPage from './FlightHub';
+import CreateMonitorCampaignPage from './FlightHub/CreateMonitorCampaign';
+import UpdateMonitorCampaignPage from './FlightHub/UpdateMonitorCampaign';
 
 export const routes = [
   {
@@ -25,6 +27,14 @@ export const routes = [
   {
     path: '/drone-statistic',
     component: () => <div>Thống kê drone</div>,
+  },
+  {
+    path: '/flight-hub/create',
+    component: CreateMonitorCampaignPage,
+  },
+  {
+    path: '/flight-hub/:id',
+    component: UpdateMonitorCampaignPage,
   },
   {
     path: '/flight-hub',

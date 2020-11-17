@@ -21,25 +21,22 @@ const originData = [
     brandName: 'DJI',
   },
 ];
+
 const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
-  const [selectedDrones, setSelectedDrones] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [drones, setDrones] = useState([]);
   const { timeRange = [new Date(), new Date()] } = data;
 
   useEffect(() => {
-    const onFilterSelectedKey = (drones) => {
-      return (drones && drones.length && drones.map((item) => item.key)) || [];
-    };
-    const newKeys = onFilterSelectedKey(data.drones);
-    setSelectedRowKeys(newKeys);
+    const { drones = [] } = data;
+    setSelectedRowKeys(drones);
   }, []);
 
   useEffect(() => {
     // call Api get list drone available
-
     setDrones(originData || []);
   }, []);
+
   const columns = [
     {
       key: 'id',
@@ -60,18 +57,17 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
-      setSelectedDrones(selectedRows);
       setSelectedRowKeys(selectedRowKeys);
     },
     selectedRowKeys: selectedRowKeys,
   };
 
   const handleNextStep = () => {
-    if (!selectedDrones.length) {
+    if (!selectedRowKeys.length) {
       message.warning('Nhóm drones tham gia không được để trống!');
       return;
     }
-    handleChangeData({ drones: selectedDrones });
+    handleChangeData({ drones: selectedRowKeys });
     nextStep();
   };
 
@@ -91,7 +87,7 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
         }}
         selections={true}
         columns={columns}
-        dataSource={originData}
+        dataSource={drones}
       />
       <Row type="flex">
         <Button type="default" onClick={prevStep}>

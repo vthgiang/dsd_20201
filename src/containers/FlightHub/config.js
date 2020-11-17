@@ -30,3 +30,5 @@ export const LAYOUT = {
 export const VALIDATE_MESSAGES = {
   required: `'\${label}' không được để trống!`,
 };
+
+

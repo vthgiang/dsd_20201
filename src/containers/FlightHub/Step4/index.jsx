@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import StyleStep4 from './index.style';
 import { Button, Col, Form, Input, Select, Row, message, Modal } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { convertTimeRangeToData } from '../services';
+import { useHistory } from 'react-router-dom';
 
 const { Option } = Select;
 const { TextArea } = Input;
 
 const Step4 = ({ prevStep, data, handleChangeData }) => {
+  const history = useHistory();
+
+  const [form] = Form.useForm();
+  useEffect(() => {
+    form.setFieldsValue(data);
+  }, [data, form]);
+
+  const goBack = () => {
+    history.goBack();
+  };
   const saved = () => {
     message.success('Lưu thành công');
+    goBack();
   };
 
   const handleCreate = (dataSubmit) => () => {
@@ -47,6 +59,7 @@ const Step4 = ({ prevStep, data, handleChangeData }) => {
     <StyleStep4>
       <Form
         {...LAYOUT}
+        form={form}
         name="flight-hub-storage"
         onFinish={onFinish}
         validateMessages={VALIDATE_MESSAGES}

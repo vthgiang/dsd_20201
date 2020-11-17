@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Steps } from 'antd';
-import { StyleTitle } from '../../themes/default';
-import StyleFlightHub, { StyleContent } from './index.style';
-import { steps, MAX_STEPS_SIZE } from './config';
+import { StyleTitle } from '../../../themes/default';
+import StyleMonitorCampaignForm, { StyleContent } from './index.style';
+import { steps, MAX_STEPS_SIZE } from '../config';
 
 const { Step } = Steps;
 
-const FlightHub = () => {
-  const [current, setCurrent] = React.useState(1);
+const MonitorCampaignForm = ({ initialData, title }) => {
+  const [current, setCurrent] = React.useState(0);
   const [data, setData] = useState({});
+
+  useEffect(() => {
+    console.log({ initialData });
+    setData(initialData);
+  }, [initialData]);
 
   const nextStep = () => {
     if (current === MAX_STEPS_SIZE - 1) return;
@@ -37,16 +42,16 @@ const FlightHub = () => {
   };
 
   return (
-    <StyleFlightHub>
-      <StyleTitle>Cấu hình Flight Hub</StyleTitle>
+    <StyleMonitorCampaignForm>
+      <StyleTitle>{title}</StyleTitle>
       <Steps current={current}>
         {steps.map(({ title, description }) => (
           <Step key={title} title={title} description={description} />
         ))}
       </Steps>
       <StyleContent>{renderContent()}</StyleContent>
-    </StyleFlightHub>
+    </StyleMonitorCampaignForm>
   );
 };
 
-export default FlightHub;
+export default MonitorCampaignForm;

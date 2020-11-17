@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import StyleStep3 from './index.style';
 import { Button, Col, Form, Select, Row } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
@@ -6,6 +6,11 @@ import { VALIDATE_MESSAGES, LAYOUT } from '../config';
 const { Option } = Select;
 
 const Step3 = ({ nextStep, prevStep, data, handleChangeData }) => {
+  const [form] = Form.useForm();
+  useEffect(() => {
+    form.setFieldsValue(data);
+  }, [data, form]);
+
   const getObjectOptions = () => {
     let data = [
       {
@@ -67,13 +72,14 @@ const Step3 = ({ nextStep, prevStep, data, handleChangeData }) => {
     <StyleStep3>
       <Form
         {...LAYOUT}
+        form={form}
         name="flight-hub-object"
         onFinish={onFinish}
         validateMessages={VALIDATE_MESSAGES}
         initialValues={data}
       >
         <Form.Item
-          name="object_id"
+          name="objectId"
           label="Đối tượng giám sát"
           rules={[{ type: 'string', required: true }]}
         >
