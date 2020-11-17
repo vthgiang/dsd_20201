@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { StyleSeparator, StyleTitle } from '../../../themes/default';
 import StyleStep2 from './index.style';
 import { Button, Row, Table, message } from 'antd';
+import moment from 'moment';
+import { DATE_TIME_FORMAT } from '../../../configs';
 
 const originData = [
   {
@@ -21,11 +23,21 @@ const originData = [
 ];
 const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
   const [selectedDrones, setSelectedDrones] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [drones, setDrones] = useState([]);
+  const { timeRange = [new Date(), new Date()] } = data;
+
+  useEffect(() => {
+    const onFilterSelectedKey = (drones) => {
+      return (drones && drones.length && drones.map((item) => item.key)) || [];
+    };
+    const newKeys = onFilterSelectedKey(data.drones);
+    setSelectedRowKeys(newKeys);
+  }, []);
 
   useEffect(() => {
     // call Api get list drone available
-    
+
     setDrones(originData || []);
   }, []);
   const columns = [
@@ -49,7 +61,9 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedDrones(selectedRows);
+      setSelectedRowKeys(selectedRowKeys);
     },
+    selectedRowKeys: selectedRowKeys,
   };
 
   const handleNextStep = () => {
@@ -63,13 +77,19 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
 
   return (
     <StyleStep2>
-      <StyleTitle>Danh sách drone sẵn sàng</StyleTitle>
+      <StyleTitle>
+        {'Danh sách drone sẵn sàng từ ' +
+          moment(timeRange[0]).format(DATE_TIME_FORMAT) +
+          ' đến ' +
+          moment(timeRange[1]).format(DATE_TIME_FORMAT)}
+      </StyleTitle>
       <StyleSeparator />
       <Table
         rowSelection={{
           type: 'checkbox',
           ...rowSelection,
         }}
+        selections={true}
         columns={columns}
         dataSource={originData}
       />

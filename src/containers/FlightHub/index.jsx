@@ -7,7 +7,7 @@ import { steps, MAX_STEPS_SIZE } from './config';
 const { Step } = Steps;
 
 const FlightHub = () => {
-  const [current, setCurrent] = React.useState(0);
+  const [current, setCurrent] = React.useState(1);
   const [data, setData] = useState({});
 
   const nextStep = () => {

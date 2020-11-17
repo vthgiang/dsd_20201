@@ -2,6 +2,7 @@ import React from 'react';
 import StyleStep1 from './index.style';
 import { Button, Col, DatePicker, Form, Input, Row } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
+import { DATE_TIME_FORMAT } from '../../../configs';
 
 const { RangePicker } = DatePicker;
 
@@ -36,7 +37,7 @@ const Step1 = ({ nextStep, data, handleChangeData }) => {
             },
           ]}
         >
-          <RangePicker showTime format="YYYY-MM-DD HH:mm:ss" />
+          <RangePicker showTime format={DATE_TIME_FORMAT} />
         </Form.Item>
 
         <Col offset={6}>
