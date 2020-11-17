@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Steps } from 'antd';
 import { StyleTitle } from '../../../themes/default';
 import StyleMonitorCampaignForm, { StyleContent } from './index.style';
-import { steps, MAX_STEPS_SIZE } from '../config';
+import { STEPS, MAX_STEPS_SIZE } from '../config';
 
 const { Step } = Steps;
 
@@ -30,7 +30,7 @@ const MonitorCampaignForm = ({ initialData, title }) => {
   };
 
   const renderContent = () => {
-    const Component = steps[current].content;
+    const Component = STEPS[current].content;
     return (
       <Component
         nextStep={nextStep}
@@ -45,7 +45,7 @@ const MonitorCampaignForm = ({ initialData, title }) => {
     <StyleMonitorCampaignForm>
       <StyleTitle>{title}</StyleTitle>
       <Steps current={current}>
-        {steps.map(({ title, description }) => (
+        {STEPS.map(({ title, description }) => (
           <Step key={title} title={title} description={description} />
         ))}
       </Steps>

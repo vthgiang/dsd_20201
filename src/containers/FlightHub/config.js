@@ -3,7 +3,7 @@ import Step2 from './Step2';
 import Step3 from './Step3';
 import Step4 from './Step4';
 
-export const steps = [
+export const STEPS = [
   { title: 'Bước 1', description: 'Tên đợt giám sát', content: Step1 },
   {
     title: 'Bước 2',
@@ -30,5 +30,3 @@ export const LAYOUT = {
 export const VALIDATE_MESSAGES = {
   required: `'\${label}' không được để trống!`,
 };
-
-
