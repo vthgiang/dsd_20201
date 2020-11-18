@@ -14,3 +14,8 @@ export const StyleContent = styled.div`
   margin-top: 24px;
   padding: 16px;
 `;
+
+export const StyleIconBack = styled.div`
+  margin-bottom: 12px;
+  margin-right: 7.5px;
+`;

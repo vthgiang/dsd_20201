@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Steps } from 'antd';
+import { Row, Steps } from 'antd';
 import { StyleTitle } from '../../../themes/default';
-import StyleMonitorCampaignForm, { StyleContent } from './index.style';
+import StyleMonitorCampaignForm, {
+  StyleContent,
+  StyleIconBack,
+} from './index.style';
 import { STEPS, MAX_STEPS_SIZE } from '../config';
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
 
 const { Step } = Steps;
 
 const MonitorCampaignForm = ({ initialData, title }) => {
+  const history = useHistory();
   const [current, setCurrent] = React.useState(0);
   const [data, setData] = useState({});
 
@@ -41,9 +47,18 @@ const MonitorCampaignForm = ({ initialData, title }) => {
     );
   };
 
+  const goBack = () => {
+    history.goBack();
+  };
   return (
     <StyleMonitorCampaignForm>
-      <StyleTitle>{title}</StyleTitle>
+      <Row type="flex" align="middle">
+        <StyleIconBack>
+          <ArrowLeftOutlined size={32} onClick={goBack} />
+        </StyleIconBack>
+        &ensp;
+        <StyleTitle>{title}</StyleTitle>
+      </Row>
       <Steps current={current}>
         {STEPS.map(({ title, description }) => (
           <Step key={title} title={title} description={description} />
