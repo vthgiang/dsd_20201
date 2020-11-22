@@ -1,0 +1,101 @@
+[   
+    {
+        "PARK_ID": 1,
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                21.00481,
+                105.845577
+            ]
+        }
+    },
+    {
+        "PARK_ID": 2,
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                21.007529,
+                105.843959
+            ]
+        }
+    },
+    {
+        "PARK_ID": 3,
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                21.001750,
+                105.841373
+            ]
+        }
+    },
+    {
+        "PARK_ID": 4,
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                20.996481,
+                105.845556
+            ]
+        }
+    },
+    {
+        "PARK_ID": 5,
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                20.995760,
+                105.850140
+            ]
+        }
+    },{
+        "PARK_ID": 6,
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                20.996181,
+                105.862641
+            ]
+        }
+    },
+    {
+        "PARK_ID": 7,
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                21.002992,
+                105.861696
+            ]
+        }
+    },
+    {
+        "PARK_ID": 8,
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                21.005656,
+                105.847427
+            ]
+        }
+    },
+    {
+        "PARK_ID": 9,
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                21.001590,
+                105.843901
+            ]
+        }
+    },
+    {
+        "PARK_ID": 10,
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                21.003943,
+                105.842716
+            ]
+        }
+    }
+]
