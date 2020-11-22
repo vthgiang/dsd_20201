@@ -9,7 +9,12 @@ import {
 } from '@ant-design/icons';
 import { convertFieldValuesToDataSubmit } from '../services';
 import { useHistory } from 'react-router-dom';
-import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../../constants';
+import {
+  ATTACH_PARAMS,
+  MECHANISM,
+  METADATA_TYPES,
+  RESOLUTION,
+} from '../../../../constants';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -104,18 +109,18 @@ const Step4 = ({ prevStep, data, handleChangeData }) => {
           rules={[{ type: 'array', required: true }]}
         >
           <Select
-            showSearch
+            allowClear
             mode="tags"
-            placeholder="Chọn Các tham số đính kèm"
+            placeholder="Chọn các tham số đính kèm"
           >
-            <Option value="uav_source">Nguồn UAV</Option>
-            <Option value="time">Thời gian</Option>
-            <Option value="coordinate">Tọa độ</Option>
-            <Option value="location">Vị trí</Option>
-            <Option value="journeys">Hành trình</Option>
-            <Option value="weather">Thời tiết</Option>
-            <Option value="temperature">Nhiệt độ</Option>
-            <Option value="humidity">Độ ẩm</Option>
+            <Option value={ATTACH_PARAMS.UAV_SOURCE}>Nguồn UAV</Option>
+            <Option value={ATTACH_PARAMS.TIME}>Thời gian</Option>
+            <Option value={ATTACH_PARAMS.COORDINATE}>Tọa độ</Option>
+            <Option value={ATTACH_PARAMS.LOCATION}>Vị trí</Option>
+            <Option value={ATTACH_PARAMS.JOURNEYS}>Hành trình</Option>
+            <Option value={ATTACH_PARAMS.WEATHER}>Thời tiết</Option>
+            <Option value={ATTACH_PARAMS.TEMPERATURE}>Nhiệt độ</Option>
+            <Option value={ATTACH_PARAMS.HUMIDITY}>Độ ẩm</Option>
           </Select>
         </Form.Item>
         <Form.Item

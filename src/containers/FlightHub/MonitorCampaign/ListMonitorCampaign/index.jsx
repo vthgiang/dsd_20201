@@ -33,7 +33,12 @@ import {
 import { randomDateTime } from '../services';
 import moment from 'moment';
 import { DATE_TIME_FORMAT } from '../../../../configs';
-import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../../constants';
+import {
+  ATTACH_PARAMS,
+  MECHANISM,
+  METADATA_TYPES,
+  RESOLUTION,
+} from '../../../../constants';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -63,19 +68,18 @@ for (let i = 1; i <= 20; i++) {
     endTime: randomDateTime(new Date('2020-11-25'), new Date('2020-11-29')),
     mechanism: Math.round(Math.random()) ? 'manually' : 'auto',
     resolution: Math.round(Math.random()) ? '720p' : '1080p',
-    metadataType: Math.round(Math.random()) ? 'photo' : 'video',
+    metadataType: Math.round(Math.random())
+      ? METADATA_TYPES.PHOTO
+      : METADATA_TYPES.VIDEO,
     monitoredZone:
       monitoredZones[Math.floor(Math.random() * monitoredZones.length)],
     monitorObject:
       monitorObjects[Math.floor(Math.random() * monitorObjects.length)],
     attachParams: [
-      'uav_source',
-      'time',
-      'coordinate',
-      'monitoredZone',
-      'journeys',
-      'weather',
-      'temperature',
+      ATTACH_PARAMS.UAV_SOURCE,
+      ATTACH_PARAMS.COORDINATE,
+      ATTACH_PARAMS.TIME,
+      ATTACH_PARAMS.HUMIDITY,
     ],
     description: 'Ghi chú',
   });
@@ -99,11 +103,11 @@ const ListMonitorCampaign = () => {
 
   const goToUpdateMonitorCampaign = (item) => () => {
     const { id } = item;
-    history.push(`/flight-hub/${id}`);
+    history.push(`/flight-hub/monitor-campaigns/${id}`);
   };
 
   const goToCreate = () => {
-    history.push(`/flight-hub/create`);
+    history.push(`/flight-hub/monitor-campaigns/create`);
   };
 
   const handleDeleteMonitorCampaign = (item) => () => {
@@ -184,6 +188,9 @@ const ListMonitorCampaign = () => {
       width: '7.5%',
       align: 'center',
       sorter: (a, b) => a.metadataType.localeCompare(b.metadataType),
+      render: (data) => (
+        <span>{data === METADATA_TYPES.VIDEO ? 'Video' : 'Ảnh'}</span>
+      ),
     },
     {
       dataIndex: 'resolution',

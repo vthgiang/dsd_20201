@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../constants';
+import {
+  MECHANISM,
+  METADATA_TYPES,
+  RESOLUTION,
+  ATTACH_PARAMS,
+} from '../../../constants';
 import MonitorCampaignForm from './MonitorCampaignForm';
 import { convertInitialDataToFieldValues, randomDateTime } from './services';
 
@@ -18,15 +23,12 @@ const monitoredZones = [
   { id: '5249b4ddd2781d08c0989789', name: `Tiểu khu C` },
 ];
 
-const initialDataFake = {
+const initialData = {
   attachParams: [
-    'uav_source',
-    'time',
-    'coordinate',
-    'monitoredZone',
-    'journeys',
-    'weather',
-    'temperature',
+    ATTACH_PARAMS.UAV_SOURCE,
+    ATTACH_PARAMS.COORDINATE,
+    ATTACH_PARAMS.TIME,
+    ATTACH_PARAMS.HUMIDITY,
   ],
   name: 'Đợt giám sát A',
   drones: [1],
@@ -41,12 +43,12 @@ const initialDataFake = {
 };
 
 const UpdateMonitorCampaign = () => {
-  const [data, setData] = useState(initialDataFake || {});
+  const [data, setData] = useState(initialData || {});
   const params = useParams();
   useEffect(() => {
     const { id } = params;
     // call api get monitor campaign detail
-    setData(initialDataFake);
+    setData(initialData);
   }, [params]);
   return (
     <MonitorCampaignForm
