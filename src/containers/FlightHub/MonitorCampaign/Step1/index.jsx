@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import StyleStep1 from './index.style';
 import { Button, Col, DatePicker, Form, Input, Row } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
-import { DATE_TIME_FORMAT } from '../../../configs';
+import { DATE_TIME_FORMAT } from '../../../../configs';
 
 const { RangePicker } = DatePicker;
 

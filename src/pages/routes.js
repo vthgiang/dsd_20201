@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import DashboardPage from './Dashboard';
-import FlightHubPage from './FlightHub';
+import FlightHubPage from './FlightHub/ListMonitorCampaign';
 import CreateMonitorCampaignPage from './FlightHub/CreateMonitorCampaign';
 import UpdateMonitorCampaignPage from './FlightHub/UpdateMonitorCampaign';
 

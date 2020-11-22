@@ -5,63 +5,20 @@ import { VALIDATE_MESSAGES, LAYOUT } from '../config';
 
 const { Option } = Select;
 
-const Step3 = ({ nextStep, prevStep, data, handleChangeData }) => {
+const Step3 = ({
+  nextStep,
+  prevStep,
+  data,
+  handleChangeData,
+  monitorObjects,
+  monitoredZones,
+}) => {
   const [form] = Form.useForm();
+
   useEffect(() => {
+    form.resetFields();
     form.setFieldsValue(data);
   }, [data, form]);
-
-  const getObjectOptions = () => {
-    let data = [
-      {
-        _id: '1',
-        name: 'Rừng đặc dụng',
-      },
-      {
-        _id: '2',
-        name: 'Rừng nguyên sinh',
-      },
-      {
-        _id: '3',
-        name: 'Rừng phòng hộ',
-      },
-    ];
-
-    const options = data.map((item) => {
-      return (
-        <Option key={item._id} value={item._id}>
-          {item.name}
-        </Option>
-      );
-    });
-    return options;
-  };
-
-  const getLocationOptions = () => {
-    let data = [
-      {
-        _id: '1',
-        name: 'Tiểu khu A',
-      },
-      {
-        _id: '2',
-        name: 'Tiểu khu B',
-      },
-      {
-        _id: '3',
-        name: 'Tiểu khu C',
-      },
-    ];
-
-    const options = data.map((item) => {
-      return (
-        <Option key={item._id} value={item._id}>
-          {item.name}
-        </Option>
-      );
-    });
-    return options;
-  };
 
   const onFinish = (values) => {
     handleChangeData(values);
@@ -79,21 +36,29 @@ const Step3 = ({ nextStep, prevStep, data, handleChangeData }) => {
         initialValues={data}
       >
         <Form.Item
-          name="objectId"
+          name="monitorObjectId"
           label="Đối tượng giám sát"
           rules={[{ type: 'string', required: true }]}
         >
-          <Select showSearch placeholder="Chọn đối tượng giám sát">
-            {getObjectOptions()}
+          <Select allowClear placeholder="Chọn đối tượng giám sát">
+            {monitorObjects.map(({ id, name }) => (
+              <Option key={id} value={id}>
+                {name}
+              </Option>
+            ))}
           </Select>
         </Form.Item>
         <Form.Item
-          name="location"
+          name="monitoredZoneId"
           label="Miền giám sát"
           rules={[{ type: 'string', required: true }]}
         >
-          <Select showSearch placeholder="Chọn miền giám sát">
-            {getLocationOptions()}
+          <Select allowClear placeholder="Chọn miền giám sát">
+            {monitoredZones.map(({ id, name }) => (
+              <Option key={id} value={id}>
+                {name}
+              </Option>
+            ))}
           </Select>
         </Form.Item>
         <Col offset={6}>

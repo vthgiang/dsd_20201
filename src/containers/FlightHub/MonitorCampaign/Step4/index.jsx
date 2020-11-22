@@ -3,8 +3,12 @@ import StyleStep4 from './index.style';
 import { Button, Col, Form, Input, Select, Row, message, Modal } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { convertTimeRangeToData } from '../services';
+import {
+  convertFieldValuesToDataSubmit,
+  convertTimeRangeToData,
+} from '../services';
 import { useHistory } from 'react-router-dom';
+import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../../constants';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -48,10 +52,8 @@ const Step4 = ({ prevStep, data, handleChangeData }) => {
 
   const onFinish = (values) => {
     handleChangeData(values);
-    const { timeRange } = data;
-    const timeRangeDate = convertTimeRangeToData(timeRange);
-    delete data.timeRange;
-    const dataSubmit = { ...data, ...timeRangeDate, ...values };
+    const fieldValues = { ...data, ...values };
+    const dataSubmit = convertFieldValuesToDataSubmit(fieldValues);
     submitConfirm(dataSubmit);
   };
 
@@ -70,8 +72,8 @@ const Step4 = ({ prevStep, data, handleChangeData }) => {
           rules={[{ type: 'string', required: true }]}
         >
           <Select showSearch placeholder="Chọn cơ chế thu thập">
-            <Option value="manually">Thủ công</Option>
-            <Option value="auto">Tự động</Option>
+            <Option value={MECHANISM.AUTO}>Tự động</Option>
+            <Option value={MECHANISM.MANUALLY}>Thủ công</Option>
           </Select>
         </Form.Item>
         <Form.Item
@@ -79,9 +81,9 @@ const Step4 = ({ prevStep, data, handleChangeData }) => {
           label="Dạng lưu trữ"
           rules={[{ type: 'string', required: true }]}
         >
-          <Select showSearch placeholder="Chọn dạng lưu trữ">
-            <Option value="photo">Hình ảnh</Option>
-            <Option value="video">Video</Option>
+          <Select showSearch allowClear placeholder="Video/Ảnh">
+            <Option value={METADATA_TYPES.VIDEO}>Video</Option>
+            <Option value={METADATA_TYPES.PHOTO}>Ảnh</Option>
           </Select>
         </Form.Item>
         <Form.Item
@@ -90,9 +92,9 @@ const Step4 = ({ prevStep, data, handleChangeData }) => {
           rules={[{ type: 'string', required: true }]}
         >
           <Select showSearch placeholder="Chọn độ phân giải">
-            <Option value="480p">480p</Option>
-            <Option value="720p">720p</Option>
-            <Option value="1080p">1080p</Option>
+            <Option value={RESOLUTION['480p']}>480p</Option>
+            <Option value={RESOLUTION['720p']}>720p</Option>
+            <Option value={RESOLUTION['1080p']}>1080p</Option>
           </Select>
         </Form.Item>
         <Form.Item

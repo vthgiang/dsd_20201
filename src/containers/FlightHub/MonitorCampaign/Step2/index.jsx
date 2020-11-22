@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSeparator, StyleTitle } from '../../../themes/default';
+import { StyleSeparator, StyleTitle } from '../../../../themes/default';
 import StyleStep2 from './index.style';
 import { Button, Row, Table, message } from 'antd';
 import moment from 'moment';
-import { DATE_TIME_FORMAT } from '../../../configs';
+import { DATE_TIME_FORMAT } from '../../../../configs';
 
 const originData = [
   {

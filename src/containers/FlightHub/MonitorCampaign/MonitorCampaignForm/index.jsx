@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Steps } from 'antd';
-import { StyleTitle } from '../../../themes/default';
+import { StyleTitle } from '../../../../themes/default';
 import StyleMonitorCampaignForm, {
   StyleContent,
   StyleIconBack,
@@ -11,7 +11,12 @@ import { useHistory } from 'react-router-dom';
 
 const { Step } = Steps;
 
-const MonitorCampaignForm = ({ initialData, title }) => {
+const MonitorCampaignForm = ({
+  initialData,
+  title,
+  monitorObjects = [],
+  monitoredZones = [],
+}) => {
   const history = useHistory();
   const [current, setCurrent] = React.useState(0);
   const [data, setData] = useState({});
@@ -42,6 +47,8 @@ const MonitorCampaignForm = ({ initialData, title }) => {
         nextStep={nextStep}
         prevStep={prevStep}
         data={data}
+        monitorObjects={monitorObjects}
+        monitoredZones={monitoredZones}
         handleChangeData={handleChangeData}
       />
     );
@@ -56,7 +63,6 @@ const MonitorCampaignForm = ({ initialData, title }) => {
         <StyleIconBack>
           <ArrowLeftOutlined size={32} onClick={goBack} />
         </StyleIconBack>
-        &ensp;
         <StyleTitle>{title}</StyleTitle>
       </Row>
       <Steps current={current}>
