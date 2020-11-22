@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import StyleStep3 from './index.style';
 import { Button, Col, Form, Select, Row } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
+import { StepBackwardOutlined, StepForwardOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 
@@ -63,11 +64,19 @@ const Step3 = ({
         </Form.Item>
         <Col offset={6}>
           <Row type="flex">
-            <Button type="default" onClick={prevStep}>
+            <Button
+              type="default"
+              icon={<StepBackwardOutlined />}
+              onClick={prevStep}
+            >
               Quay lại
             </Button>
             &ensp;
-            <Button type="primary" htmlType="submit">
+            <Button
+              type="primary"
+              icon={<StepForwardOutlined />}
+              htmlType="submit"
+            >
               Tiếp theo
             </Button>
           </Row>

@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import StyleStep4 from './index.style';
 import { Button, Col, Form, Input, Select, Row, message, Modal } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
 import {
-  convertFieldValuesToDataSubmit,
-  convertTimeRangeToData,
-} from '../services';
+  ExclamationCircleOutlined,
+  FormOutlined,
+  StepBackwardOutlined,
+} from '@ant-design/icons';
+import { convertFieldValuesToDataSubmit } from '../services';
 import { useHistory } from 'react-router-dom';
 import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../../constants';
 
@@ -129,11 +130,15 @@ const Step4 = ({ prevStep, data, handleChangeData }) => {
         </Form.Item>
         <Col offset={6}>
           <Row>
-            <Button type="default" onClick={prevStep}>
+            <Button
+              type="default"
+              icon={<StepBackwardOutlined />}
+              onClick={prevStep}
+            >
               Quay lại
             </Button>
             &ensp;
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" icon={<FormOutlined />} htmlType="submit">
               Lưu
             </Button>
           </Row>

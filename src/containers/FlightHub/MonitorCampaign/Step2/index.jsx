@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSeparator, StyleTitle } from '../../../../themes/default';
 import StyleStep2 from './index.style';
 import { Button, Row, Table, message } from 'antd';
+import { StepBackwardOutlined, StepForwardOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { DATE_TIME_FORMAT } from '../../../../configs';
 
@@ -90,11 +91,19 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
         dataSource={drones}
       />
       <Row type="flex">
-        <Button type="default" onClick={prevStep}>
+        <Button
+          type="default"
+          icon={<StepBackwardOutlined />}
+          onClick={prevStep}
+        >
           Quay lại
         </Button>
         &ensp;
-        <Button type="primary" onClick={handleNextStep}>
+        <Button
+          type="primary"
+          icon={<StepForwardOutlined />}
+          onClick={handleNextStep}
+        >
           Tiếp theo
         </Button>
       </Row>

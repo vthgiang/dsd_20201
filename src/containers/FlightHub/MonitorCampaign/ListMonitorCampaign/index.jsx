@@ -11,7 +11,13 @@ import {
   Form,
   DatePicker,
 } from 'antd';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+import {
+  DeleteOutlined,
+  EditOutlined,
+  ExclamationCircleOutlined,
+  HistoryOutlined,
+  PlusOutlined,
+} from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import StyleListMonitorCampaign from './index.style';
 import {
@@ -46,9 +52,9 @@ const monitoredZones = [
   { id: '5249b4ddd2781d08c0989789', name: `Tiểu khu C` },
 ];
 
-const data = [];
+const initData = [];
 for (let i = 1; i <= 20; i++) {
-  data.push({
+  initData.push({
     key: i,
     id: `MC${i < 10 ? '0' + i : i}`,
     drones: [1],
@@ -76,14 +82,19 @@ for (let i = 1; i <= 20; i++) {
 }
 
 const ListMonitorCampaign = () => {
-  const [fieldValues, setFieldValues] = useState({});
+  const [data, setData] = useState(initData);
+  const [form] = Form.useForm();
   const history = useHistory();
 
-  const handleSearch = (values) => {
-    const newFieldValues = { ...fieldValues, ...values };
-    setFieldValues(newFieldValues);
+  const handleSearch = () => {
+    const newFieldValues = form.getFieldsValue();
     const dataSubmit = convertFieldValuesToDataSubmit(newFieldValues);
     console.log({ dataSubmit });
+    // call api => result => setData()
+  };
+
+  const onResetFieldValues = () => {
+    form.resetFields();
   };
 
   const goToUpdateMonitorCampaign = (item) => () => {
@@ -189,10 +200,19 @@ const ListMonitorCampaign = () => {
       render: (data, record) => {
         return (
           <Space size={4}>
-            <Button size="small" onClick={goToUpdateMonitorCampaign(record)}>
+            <Button
+              icon={<EditOutlined />}
+              size="small"
+              onClick={goToUpdateMonitorCampaign(record)}
+            >
               Sửa
             </Button>
-            <Button type="danger" size="small" onClick={deleteConfirm(record)}>
+            <Button
+              icon={<DeleteOutlined />}
+              type="danger"
+              size="small"
+              onClick={deleteConfirm(record)}
+            >
               Xóa
             </Button>
           </Space>
@@ -206,7 +226,12 @@ const ListMonitorCampaign = () => {
       <StyleTitle>Danh sách đợt giám sát</StyleTitle>
 
       <Row type="flex" justify="end" align="middle">
-        <Button type="primary" size="middle" onClick={goToCreate}>
+        <Button
+          icon={<PlusOutlined />}
+          type="primary"
+          size="middle"
+          onClick={goToCreate}
+        >
           Tạo đợt giám sát
         </Button>
       </Row>
@@ -215,6 +240,7 @@ const ListMonitorCampaign = () => {
 
       <StyleSearchForm>
         <Form
+          form={form}
           layout="horizontal"
           labelCol={{ span: 10 }}
           wrapperCol={{ span: 13 }}
@@ -305,6 +331,19 @@ const ListMonitorCampaign = () => {
               </Form.Item>
             </Col>
           </Row>
+          <Col span={8} offset={16}>
+            <Col span={13} offset={10}>
+              <Row type="flex" justify="end">
+                <Button
+                  size="middle"
+                  icon={<HistoryOutlined />}
+                  onClick={onResetFieldValues}
+                >
+                  Đặt lại
+                </Button>
+              </Row>
+            </Col>
+          </Col>
         </Form>
       </StyleSearchForm>
 
