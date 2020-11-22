@@ -7,7 +7,7 @@ import { STEPS, MAX_STEPS_SIZE } from '../config';
 const { Step } = Steps;
 
 const MonitorCampaignForm = ({ initialData, title }) => {
-  const [current, setCurrent] = React.useState(0);
+  const [current, setCurrent] = React.useState(2);
   const [data, setData] = useState({});
 
   useEffect(() => {
