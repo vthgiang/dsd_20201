@@ -31,19 +31,19 @@ export const routes = [
     component: () => <div>Thống kê drone</div>,
   },
   {
-    path: '/flight-hub/monitor-campaigns/create',
+    path: '/flight-hub-monitor-campaigns/create',
     component: CreateMonitorCampaignPage,
   },
   {
-    path: '/flight-hub/monitor-campaigns/:id',
+    path: '/flight-hub-monitor-campaigns/:id',
     component: UpdateMonitorCampaignPage,
   },
   {
-    path: '/flight-hub/monitor-campaigns',
+    path: '/flight-hub-monitor-campaigns',
     component: ListMonitorCampaignPage,
   },
   {
-    path: '/flight-hub/other-params',
+    path: '/flight-hub-other-params',
     component: ListOtherParamsPage,
   },
   {

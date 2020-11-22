@@ -31,6 +31,7 @@ export const convertInitialDataToFieldValues = (data) => {
   Object.keys(data).forEach((key) => {
     if (Array.isArray(data[key])) {
       data[key] = data[key].map((item) => item.id || item);
+      
     } else if (typeof data[key] === 'object' && data[key]) {
       data[`${key}Id`] = data[key].id || data[key];
       delete data[key];

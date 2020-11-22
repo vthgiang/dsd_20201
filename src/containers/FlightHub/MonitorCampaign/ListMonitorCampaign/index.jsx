@@ -103,11 +103,11 @@ const ListMonitorCampaign = () => {
 
   const goToUpdateMonitorCampaign = (item) => () => {
     const { id } = item;
-    history.push(`/flight-hub/monitor-campaigns/${id}`);
+    history.push(`/flight-hub-monitor-campaigns/${id}`);
   };
 
   const goToCreate = () => {
-    history.push(`/flight-hub/monitor-campaigns/create`);
+    history.push(`/flight-hub-monitor-campaigns/create`);
   };
 
   const handleDeleteMonitorCampaign = (item) => () => {

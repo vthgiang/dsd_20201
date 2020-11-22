@@ -31,7 +31,14 @@ const initialData = {
     ATTACH_PARAMS.HUMIDITY,
   ],
   name: 'Đợt giám sát A',
-  drones: [1],
+  drones: [
+    {
+      id: '5349b4ddd2781d08c0981203',
+      name: 'Drone A',
+      type: 'Loại 1',
+      brandName: 'DJI',
+    },
+  ],
   monitorObject: { id: '5349b4ddd2781d08c0989012', name: 'Người hút thuốc' },
   monitoredZone: { id: '5249b4ddd2781d08c0989123', name: `Tiểu khu A` },
   mechanism: MECHANISM.AUTO,
