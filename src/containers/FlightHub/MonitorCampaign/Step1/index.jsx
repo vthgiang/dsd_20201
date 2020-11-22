@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import StyleStep1 from './index.style';
 import { Button, Col, DatePicker, Form, Input, Row } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
-import { DATE_TIME_FORMAT } from '../../../configs';
+import { DATE_TIME_FORMAT } from '../../../../configs';
+import { StepForwardOutlined } from '@ant-design/icons';
 
 const { RangePicker } = DatePicker;
 
@@ -50,7 +51,11 @@ const Step1 = ({ nextStep, data, handleChangeData }) => {
 
         <Col offset={6}>
           <Row>
-            <Button type="primary" htmlType="submit">
+            <Button
+              icon={<StepForwardOutlined />}
+              type="primary"
+              htmlType="submit"
+            >
               Tiếp theo
             </Button>
           </Row>

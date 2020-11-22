@@ -2,9 +2,11 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import DashboardPage from './Dashboard';
-import FlightHubPage from './FlightHub';
+import ListMonitorCampaignPage from './FlightHub/ListMonitorCampaign';
 import CreateMonitorCampaignPage from './FlightHub/CreateMonitorCampaign';
 import UpdateMonitorCampaignPage from './FlightHub/UpdateMonitorCampaign';
+
+import ListOtherParamsPage from './FlightHub/OtherParams';
 
 export const routes = [
   {
@@ -29,16 +31,20 @@ export const routes = [
     component: () => <div>Thống kê drone</div>,
   },
   {
-    path: '/flight-hub/create',
+    path: '/flight-hub-monitor-campaigns/create',
     component: CreateMonitorCampaignPage,
   },
   {
-    path: '/flight-hub/:id',
+    path: '/flight-hub-monitor-campaigns/:id',
     component: UpdateMonitorCampaignPage,
   },
   {
-    path: '/flight-hub',
-    component: FlightHubPage,
+    path: '/flight-hub-monitor-campaigns',
+    component: ListMonitorCampaignPage,
+  },
+  {
+    path: '/flight-hub-other-params',
+    component: ListOtherParamsPage,
   },
   {
     path: '/payloads',

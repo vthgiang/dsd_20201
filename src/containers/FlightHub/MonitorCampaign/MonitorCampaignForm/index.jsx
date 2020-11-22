@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Steps } from 'antd';
-import { StyleTitle } from '../../../themes/default';
-import StyleMonitorCampaignForm, { StyleContent } from './index.style';
+import { Row, Steps } from 'antd';
+import { StyleTitle } from '../../../../themes/default';
+import StyleMonitorCampaignForm, {
+  StyleContent,
+  StyleIconBack,
+} from './index.style';
 import { STEPS, MAX_STEPS_SIZE } from '../config';
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
 
 const { Step } = Steps;
 
-const MonitorCampaignForm = ({ initialData, title }) => {
+const MonitorCampaignForm = ({
+  initialData,
+  title,
+  monitorObjects = [],
+  monitoredZones = [],
+}) => {
+  const history = useHistory();
   const [current, setCurrent] = React.useState(2);
   const [data, setData] = useState({});
 
@@ -36,14 +47,24 @@ const MonitorCampaignForm = ({ initialData, title }) => {
         nextStep={nextStep}
         prevStep={prevStep}
         data={data}
+        monitorObjects={monitorObjects}
+        monitoredZones={monitoredZones}
         handleChangeData={handleChangeData}
       />
     );
   };
 
+  const goBack = () => {
+    history.goBack();
+  };
   return (
     <StyleMonitorCampaignForm>
-      <StyleTitle>{title}</StyleTitle>
+      <Row type="flex" align="middle">
+        <StyleIconBack>
+          <ArrowLeftOutlined size={32} onClick={goBack} />
+        </StyleIconBack>
+        <StyleTitle>{title}</StyleTitle>
+      </Row>
       <Steps current={current}>
         {STEPS.map(({ title, description }) => (
           <Step key={title} title={title} description={description} />

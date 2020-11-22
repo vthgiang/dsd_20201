@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSeparator, StyleTitle } from '../../../themes/default';
+import { StyleSeparator, StyleTitle } from '../../../../themes/default';
 import StyleStep2 from './index.style';
 import { Button, Row, Table, message } from 'antd';
+import { StepBackwardOutlined, StepForwardOutlined } from '@ant-design/icons';
 import moment from 'moment';
-import { DATE_TIME_FORMAT } from '../../../configs';
+import { DATE_TIME_FORMAT } from '../../../../configs';
 
-const originData = [
+const initData = [
   {
-    key: 1,
-    id: 1,
+    key: '5349b4ddd2781d08c0981203',
+    id: '5349b4ddd2781d08c0981203',
     name: 'Drone A',
     type: 'Loại 1',
     brandName: 'DJI',
   },
   {
-    key: 2,
-    id: 2,
+    key: '5349b4ddd2781d08c0981102',
+    id: '5349b4ddd2781d08c0981102',
     name: 'Drone B',
     type: 'Loại 2',
     brandName: 'DJI',
@@ -28,27 +29,25 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
   const { timeRange = [new Date(), new Date()] } = data;
 
   useEffect(() => {
-    const { drones = [] } = data;
-    setSelectedRowKeys(drones);
+    const { droneIds = [] } = data;
+    setSelectedRowKeys(droneIds);
   }, []);
 
   useEffect(() => {
-    // call Api get list drone available
-    setDrones(originData || []);
+    // call Api get list drones available
+    setDrones(initData || []);
   }, []);
 
   const columns = [
     {
-      key: 'id',
       dataIndex: 'id',
       title: 'Mã drone',
       width: '10%',
       align: 'center',
     },
-    { key: 'name', dataIndex: 'name', title: 'Tên drone', width: '30%' },
-    { key: 'type', dataIndex: 'type', title: 'Loại drone', width: '30%' },
+    { dataIndex: 'name', title: 'Tên drone', width: '30%' },
+    { dataIndex: 'type', title: 'Loại drone', width: '30%' },
     {
-      key: 'brandName',
       dataIndex: 'brandName',
       title: 'Nhà sản xuất',
       width: '30%',
@@ -67,7 +66,7 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
       message.warning('Nhóm drones tham gia không được để trống!');
       return;
     }
-    handleChangeData({ drones: selectedRowKeys });
+    handleChangeData({ droneIds: selectedRowKeys });
     nextStep();
   };
 
@@ -90,11 +89,19 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
         dataSource={drones}
       />
       <Row type="flex">
-        <Button type="default" onClick={prevStep}>
+        <Button
+          type="default"
+          icon={<StepBackwardOutlined />}
+          onClick={prevStep}
+        >
           Quay lại
         </Button>
         &ensp;
-        <Button type="primary" onClick={handleNextStep}>
+        <Button
+          type="primary"
+          icon={<StepForwardOutlined />}
+          onClick={handleNextStep}
+        >
           Tiếp theo
         </Button>
       </Row>
