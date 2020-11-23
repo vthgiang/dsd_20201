@@ -8,29 +8,36 @@ const { Option } = Select;
 
 const Step3 = ({ nextStep, prevStep, data, handleChangeData }) => {
   const [form] = Form.useForm();
-  const [location, setLocation] = useState(null);
 
   useEffect(() => {
     form.setFieldsValue(data);
   }, [data, form]);
 
   const getObjectOptions = () => {
-    let data = [
+    let objectsData = [
       {
         _id: '1',
-        name: 'Khói',
+        name: 'Người hút thuốc',
       },
       {
         _id: '2',
-        name: 'Lửa',
+        name: 'Lửa trại',
       },
       {
         _id: '3',
-        name: 'Nhiệt độ',
+        name: 'Núi lửa phun trào',
+      },
+      {
+        _id: '4',
+        name: 'Đám cháy',
+      },
+      {
+        _id: '5',
+        name: 'Khói',
       },
     ];
 
-    const options = data.map((item) => {
+    const options = objectsData.map((item) => {
       return (
         <Option key={item._id} value={item._id}>
           {item.name}
@@ -45,9 +52,10 @@ const Step3 = ({ nextStep, prevStep, data, handleChangeData }) => {
     nextStep();
   };
 
-  const onChangeLocation = (location) => {
-    console.log('location', location);
-    setLocation(location);
+  const onChangeLocation = (park) => {
+    let formData = data ? data : {};
+    formData.location = `${park.PARK_ID}`;
+    form.setFieldsValue(formData);
   };
 
   return (
@@ -80,6 +88,7 @@ const Step3 = ({ nextStep, prevStep, data, handleChangeData }) => {
             containerElement={<div style={{ height: `400px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
             onChangeLocation={onChangeLocation}
+            parkIdInit={data ? data.location : undefined}
           />
         </Form.Item>
         <Col offset={6}>

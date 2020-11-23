@@ -12,13 +12,19 @@ import parksData from './data.json';
 import { Input } from 'antd';
 const { Search } = Input;
 
-const Map = ({ onChangeLocation }) => {
+const Map = ({ onChangeLocation, parkIdInit }) => {
   const [selectedPark, setSelectedPark] = useState(null);
   const [searchText, searchTextValue] = useState('');
   const [dataPark, setDataPark] = useState([]);
 
   useEffect(() => {
     setDataPark(parksData);
+
+    //khởi tạo park nếu đã có sẵn
+    if (parkIdInit) {
+      let park = parksData.find((element) => element.PARK_ID == parkIdInit);
+      handleParkChange(park);
+    }
   }, []);
 
   const searchOnChange = (e) => {
