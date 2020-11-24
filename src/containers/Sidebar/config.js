@@ -42,6 +42,38 @@ export const sidebarMenu = [
     heading: 'Payloads',
     icon: 'fas fa-layer-group',
     route: '/payloads',
+    subMenu: [
+      {
+        key: 'PayloadManagement',
+        heading: 'Quản lý payload',
+        icon: 'fal fa-monitor-heart-rate',
+        route: '/payload-management',
+      },
+     /*  {
+        key: 'PayloadSetting',
+        heading: 'Cấu hình payload',
+        icon: 'fa fa-cog',
+        route: '/payload-configuration',
+      }, */
+      {
+        key: 'PayloadStatistic',
+        heading: 'Thống kê Payload',
+        icon: 'fa fa-file-chart-line',
+        route: '/payload-statistic',
+      },
+      {
+        key: 'PayloadMaintenance',
+        heading: 'Bảo dưỡng Payload',
+        icon: 'fa fa-tools',
+        route: '/payload-maintenance',
+      },
+      {
+        key: 'PayloadToDrone',
+        heading: 'Payload - Drone',
+        icon: 'fa fa-drone-alt',
+        route: '/payload-drone',
+      },
+    ],
   },
   {
     key: 'metadata',

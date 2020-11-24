@@ -2,6 +2,25 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
+//Payload
+import ListPayload from './Payload/PayloadManagement/List';
+import PayloadMaintenance from './Payload/PayloadMaintenance/List';
+import EditSchedule from './Payload/PayloadMaintenance/Edit';
+import AddSchedule from './Payload/PayloadMaintenance/Add';
+import PayloadSetting from './Payload/PayloadSetting';
+//Payload  Statistic
+import PayloadStatistic from './Payload/PayloadStatistic';
+import PayloadStatisticFrequency from './Payload/PayloadStatistic/PayloadStatisticFrequency';
+import PayloadStatisticTime from "./Payload/PayloadStatistic/PayloadStatisticTime";
+import PayloadStatisticStatus from "./Payload/PayloadStatistic/PayloadStatisticStatus";
+import PayloadStatisticMoment from "./Payload/PayloadStatistic/PayloadStatisticMoment";
+import PayloadStatisticDrone from "./Payload/PayloadStatistic/PayloadStatisticDrone";
+
+import EditPayload from './Payload/PayloadManagement/Edit';
+import AddPayload from './Payload/PayloadManagement/Add';
+import PayloadDrone from './Payload/PayloadToDrone/List';
+import EditSignupPayloadDrone from './Payload/PayloadToDrone/Edit';
+import AddSignupPayloadDrone from './Payload/PayloadToDrone/Add';
 
 export const routes = [
   {
@@ -29,10 +48,78 @@ export const routes = [
     path: '/flight-hub',
     component: () => <div>Flight Hub</div>,
   },
-  {
+   //PAYLOAD
+   {
     path: '/payloads',
     component: () => <div>PayloadManagement</div>,
   },
+  {
+    path: '/payload-management',
+    component: ListPayload,
+  },
+  {
+    path: '/edit-payload',
+    component: EditPayload,
+  },
+  {
+    path: '/add-payload',
+    component: AddPayload,
+  },
+  {
+    path: '/payload-drone',
+    component: PayloadDrone,
+  },
+  {
+    path: '/edit-signup-payload-drone',
+    component: EditSignupPayloadDrone,
+  },
+  {
+    path: '/add-signup-payload-drone',
+    component: AddSignupPayloadDrone,
+  },
+  {
+    path: '/payload-configuration',
+    component: PayloadSetting,
+  },
+  {
+    path: '/payload-maintenance',
+    component: PayloadMaintenance,
+  },
+  {
+    path: '/edit-schedule',
+    component: EditSchedule,
+  },
+  {
+    path: '/add-schedule',
+    component: AddSchedule,
+  },
+
+  //Payload statistic
+  {
+    path: '/payload-statistic',
+    component: PayloadStatistic,
+  },
+  {
+    path: '/payload-statistic-frequency',
+    component: PayloadStatisticFrequency,
+  },
+  {
+    path: '/payload-statistic-time',
+    component: PayloadStatisticTime,
+  },
+  {
+    path: '/payload-statistic-moment',
+    component: PayloadStatisticMoment,
+  },
+  {
+    path: '/payload-statistic-status',
+    component: PayloadStatisticStatus,
+  },
+  {
+    path: '/payload-statistic-drone',
+    component: PayloadStatisticDrone,
+  },
+
   {
     path: '/metadata',
     component: () => <div>Meta Data</div>,
