@@ -1,6 +1,7 @@
 [   
     {
         "PARK_ID": 1,
+        "NAME": "Cổng Trần Đại Nghĩa, đại học bách khoa Hà Nội",
         "geometry": {
             "type": "Point",
             "coordinates": [
@@ -11,6 +12,7 @@
     },
     {
         "PARK_ID": 2,
+        "NAME": "Cổng Đại Cồ Việt, trường đại học bách khoa Hà Nội",
         "geometry": {
             "type": "Point",
             "coordinates": [
@@ -21,6 +23,7 @@
     },
     {
         "PARK_ID": 3,
+        "NAME": "Bệnh viện Bạch Mai",
         "geometry": {
             "type": "Point",
             "coordinates": [
@@ -31,6 +34,7 @@
     },
     {
         "PARK_ID": 4,
+        "NAME": "Ngã tư Vọng",
         "geometry": {
             "type": "Point",
             "coordinates": [
@@ -41,6 +45,7 @@
     },
     {
         "PARK_ID": 5,
+        "NAME": "Chợ Mơ",
         "geometry": {
             "type": "Point",
             "coordinates": [
@@ -50,6 +55,7 @@
         }
     },{
         "PARK_ID": 6,
+        "NAME": "Ngã tư Tam Trinh - Minh Khai",
         "geometry": {
             "type": "Point",
             "coordinates": [
@@ -60,6 +66,7 @@
     },
     {
         "PARK_ID": 7,
+        "NAME": "Ngã tư Thanh Nhàn - Kim Ngưu",
         "geometry": {
             "type": "Point",
             "coordinates": [
@@ -70,6 +77,7 @@
     },
     {
         "PARK_ID": 8,
+        "NAME": "Ký túc xá B10",
         "geometry": {
             "type": "Point",
             "coordinates": [
@@ -80,6 +88,7 @@
     },
     {
         "PARK_ID": 9,
+        "NAME": "Điểm dừng bus Lê Thanh Nghị",
         "geometry": {
             "type": "Point",
             "coordinates": [
@@ -90,6 +99,7 @@
     },
     {
         "PARK_ID": 10,
+        "NAME": "Đại học xây dựng Hà Nội",
         "geometry": {
             "type": "Point",
             "coordinates": [

@@ -2,52 +2,9 @@ import React, { useEffect, useState } from 'react';
 import StyleStep3 from './index.style';
 import { Button, Col, Form, Select, Row } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
-import {
-  GoogleMap,
-  withScriptjs,
-  withGoogleMap,
-  Marker,
-  InfoWindow,
-} from 'react-google-maps';
-import parksData from './data.json';
+import WrappedMap from './map';
 
 const { Option } = Select;
-
-const Map = (props) => {
-  const [selectedPark, setSelectedPark] = useState(null);
-  return (
-    <GoogleMap
-      defaultZoom={10}
-      defaultCenter={{ lat: 21.003943, lng: 105.842716 }}
-    >
-      {parksData.map((park) => (
-        <Marker
-          key={park.PARK_ID}
-          position={{
-            lat: park.geometry.coordinates[0],
-            lng: park.geometry.coordinates[1],
-          }}
-          onClick={() => {
-            setSelectedPark(park);
-          }}
-        />
-      ))}
-      {selectedPark && (
-        <InfoWindow
-          position={{
-            lat: selectedPark.geometry.coordinates[0],
-            lng: selectedPark.geometry.coordinates[1],
-          }}
-          onCloseClick={() => {
-            setSelectedPark(null);
-          }}
-        />
-      )}
-    </GoogleMap>
-  );
-};
-
-const WrappedMap = withScriptjs(withGoogleMap(Map));
 
 const Step3 = ({
   nextStep,
@@ -57,12 +14,9 @@ const Step3 = ({
   monitorObjects,
 }) => {
   const [form] = Form.useForm();
-  const [isMarkerShown, setIsMarkerShown] = useState(false);
 
   useEffect(() => {
     form.setFieldsValue(data);
-    delayedShowMarker();
-    console.log({ data });
   }, [data, form]);
 
   const onFinish = (values) => {
@@ -70,15 +24,10 @@ const Step3 = ({
     nextStep();
   };
 
-  const delayedShowMarker = () => {
-    setTimeout(() => {
-      setIsMarkerShown(true);
-    }, 500);
-  };
-
-  const handleMarkerClick = () => {
-    setIsMarkerShown(false);
-    delayedShowMarker();
+  const onChangeLocation = (park) => {
+    let formData = data ? data : {};
+    formData.location = `${park.PARK_ID}`;
+    form.setFieldsValue(formData);
   };
 
   return (
@@ -112,14 +61,13 @@ const Step3 = ({
           label="Miền giám sát"
           rules={[{ type: 'string' }]}
         >
-          {/* <WrappedMap /> */}
           <WrappedMap
-            isMarkerShown={isMarkerShown}
-            onMarkerClick={handleMarkerClick}
-            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCV09KQtrmzDnyXYeC_UzB-HAwMKytXRpE"
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `400px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
+            onChangeLocation={onChangeLocation}
+            parkIdInit={data ? data.location : undefined}
           />
         </Form.Item>
 

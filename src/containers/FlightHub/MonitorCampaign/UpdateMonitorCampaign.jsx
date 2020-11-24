@@ -62,8 +62,8 @@ const attachParams = [
   },
 ];
 
+// monitorCampaign
 const initialData = {
-  //monitorcampaign
   attachParams: [
     '5349b4ddd2781d0111111111',
     '5349b4ddd2781d0222222222',
