@@ -49,40 +49,21 @@ const Map = (props) => {
 
 const WrappedMap = withScriptjs(withGoogleMap(Map));
 
-const Step3 = ({ nextStep, prevStep, data, handleChangeData }) => {
+const Step3 = ({
+  nextStep,
+  prevStep,
+  data,
+  handleChangeData,
+  monitorObjects,
+}) => {
   const [form] = Form.useForm();
   const [isMarkerShown, setIsMarkerShown] = useState(false);
 
   useEffect(() => {
     form.setFieldsValue(data);
     delayedShowMarker();
+    console.log({ data });
   }, [data, form]);
-
-  const getObjectOptions = () => {
-    let data = [
-      {
-        _id: '1',
-        name: 'Khói',
-      },
-      {
-        _id: '2',
-        name: 'Lửa',
-      },
-      {
-        _id: '3',
-        name: 'Nhiệt độ',
-      },
-    ];
-
-    const options = data.map((item) => {
-      return (
-        <Option key={item._id} value={item._id}>
-          {item.name}
-        </Option>
-      );
-    });
-    return options;
-  };
 
   const onFinish = (values) => {
     handleChangeData(values);
@@ -111,18 +92,25 @@ const Step3 = ({ nextStep, prevStep, data, handleChangeData }) => {
         initialValues={data}
       >
         <Form.Item
-          name="objectId"
+          name="monitorObject"
           label="Đối tượng giám sát"
           rules={[{ type: 'string', required: true }]}
         >
           <Select showSearch placeholder="Chọn đối tượng giám sát">
-            {getObjectOptions()}
+            {monitorObjects.map(({ id, name }) => {
+              return (
+                <Option key={id} value={id}>
+                  {name}
+                </Option>
+              );
+            })}
           </Select>
         </Form.Item>
+
         <Form.Item
-          name="location"
+          name="monitoredZone"
           label="Miền giám sát"
-          rules={[{ type: 'string', required: true }]}
+          rules={[{ type: 'string' }]}
         >
           {/* <WrappedMap /> */}
           <WrappedMap
@@ -134,6 +122,7 @@ const Step3 = ({ nextStep, prevStep, data, handleChangeData }) => {
             mapElement={<div style={{ height: `100%` }} />}
           />
         </Form.Item>
+
         <Col offset={6}>
           <Row type="flex">
             <Button type="default" onClick={prevStep}>

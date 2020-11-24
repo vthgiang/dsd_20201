@@ -16,9 +16,10 @@ const MonitorCampaignForm = ({
   title,
   monitorObjects = [],
   monitoredZones = [],
+  attachParams,
 }) => {
   const history = useHistory();
-  const [current, setCurrent] = React.useState(2);
+  const [current, setCurrent] = React.useState(0);
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -49,6 +50,7 @@ const MonitorCampaignForm = ({
         data={data}
         monitorObjects={monitorObjects}
         monitoredZones={monitoredZones}
+        attachParams={attachParams}
         handleChangeData={handleChangeData}
       />
     );

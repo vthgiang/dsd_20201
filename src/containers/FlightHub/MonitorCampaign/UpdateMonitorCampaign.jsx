@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import {
-  MECHANISM,
-  METADATA_TYPES,
-  RESOLUTION,
-  ATTACH_PARAMS,
-} from '../../../constants';
+import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../constants';
 import MonitorCampaignForm from './MonitorCampaignForm';
 import { convertInitialDataToFieldValues, randomDateTime } from './services';
 
+//data fake
 const monitorObjects = [
   { id: '5349b4ddd2781d08c0989012', name: 'Người hút thuốc' },
   { id: '5349b4ddd2781d08c0989123', name: 'Lửa trại' },
@@ -23,12 +19,56 @@ const monitoredZones = [
   { id: '5249b4ddd2781d08c0989789', name: `Tiểu khu C` },
 ];
 
+const attachParams = [
+  {
+    id: '5349b4ddd2781d0111111111',
+    property: 'uavSource',
+    name: 'UAV nguồn',
+  },
+  {
+    id: '5349b4ddd2781d0222222222',
+    property: 'time',
+    name: 'Thời gian',
+  },
+  {
+    id: '5349b4ddd2781d0855555555',
+    property: 'coordinate',
+    name: 'Tọa độ',
+  },
+  {
+    id: '5349b4ddd2781d0866666666',
+    property: 'location',
+    name: 'Vị trí',
+  },
+  {
+    id: '5349b4ddd2781d0877777777',
+    property: 'journeys',
+    name: 'Hành trình',
+  },
+  {
+    id: '5349b4ddd2781d0888888888',
+    property: 'weather',
+    name: 'Thời tiết',
+  },
+  {
+    id: '5349b4ddd2781d0999999999',
+    property: 'temperature',
+    name: 'Nhiệt độ',
+  },
+  {
+    id: '5349b4ddd2781d0999999999',
+    property: 'humidity',
+    name: 'Độ ẩm',
+  },
+];
+
 const initialData = {
+  //monitorcampaign
   attachParams: [
-    ATTACH_PARAMS.UAV_SOURCE,
-    ATTACH_PARAMS.COORDINATE,
-    ATTACH_PARAMS.TIME,
-    ATTACH_PARAMS.HUMIDITY,
+    '5349b4ddd2781d0111111111',
+    '5349b4ddd2781d0222222222',
+    '5349b4ddd2781d0855555555',
+    '5349b4ddd2781d0877777777',
   ],
   name: 'Đợt giám sát A',
   drones: [
@@ -63,6 +103,7 @@ const UpdateMonitorCampaign = () => {
       title="Sửa đợt giám sát"
       monitorObjects={monitorObjects}
       monitoredZones={monitoredZones}
+      attachParams={attachParams}
     ></MonitorCampaignForm>
   );
 };

@@ -29,8 +29,8 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
   const { timeRange = [new Date(), new Date()] } = data;
 
   useEffect(() => {
-    const { droneIds = [] } = data;
-    setSelectedRowKeys(droneIds);
+    const { drones = [] } = data;
+    setSelectedRowKeys(drones);
   }, []);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
       message.warning('Nhóm drones tham gia không được để trống!');
       return;
     }
-    handleChangeData({ droneIds: selectedRowKeys });
+    handleChangeData({ drones: selectedRowKeys });
     nextStep();
   };
 

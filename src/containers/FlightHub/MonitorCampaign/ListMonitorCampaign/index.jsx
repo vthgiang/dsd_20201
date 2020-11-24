@@ -43,6 +43,7 @@ import {
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
+//data fake
 const monitorObjects = [
   { id: '5349b4ddd2781d08c0989012', name: 'Người hút thuốc' },
   { id: '5349b4ddd2781d08c0989123', name: 'Lửa trại' },
@@ -76,10 +77,10 @@ for (let i = 1; i <= 20; i++) {
     monitorObject:
       monitorObjects[Math.floor(Math.random() * monitorObjects.length)],
     attachParams: [
-      ATTACH_PARAMS.UAV_SOURCE,
-      ATTACH_PARAMS.COORDINATE,
-      ATTACH_PARAMS.TIME,
-      ATTACH_PARAMS.HUMIDITY,
+      '5349b4ddd2781d0111111111',
+      '5349b4ddd2781d0222222222',
+      '5349b4ddd2781d0855555555',
+      '5349b4ddd2781d0877777777',
     ],
     description: 'Ghi chú',
   });
@@ -277,7 +278,7 @@ const ListMonitorCampaign = () => {
             </Col>
 
             <Col span={8}>
-              <Form.Item name="monitorObjectId" label="Đối tượng giám sát">
+              <Form.Item name="monitorObject" label="Đối tượng giám sát">
                 <Select allowClear placeholder="Chọn đối tượng giám sát">
                   {monitorObjects.map(({ id, name }) => (
                     <Option key={id} value={id}>
@@ -289,7 +290,7 @@ const ListMonitorCampaign = () => {
             </Col>
 
             <Col span={8}>
-              <Form.Item name="monitoredZoneId" label="Miền giám sát">
+              <Form.Item name="monitoredZone" label="Miền giám sát">
                 <Select allowClear placeholder="Chọn miền giám sát">
                   {monitoredZones.map(({ id, name }) => (
                     <Option key={id} value={id}>

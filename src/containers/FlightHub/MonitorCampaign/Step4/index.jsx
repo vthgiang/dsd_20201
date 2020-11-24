@@ -9,17 +9,12 @@ import {
 } from '@ant-design/icons';
 import { convertFieldValuesToDataSubmit } from '../services';
 import { useHistory } from 'react-router-dom';
-import {
-  ATTACH_PARAMS,
-  MECHANISM,
-  METADATA_TYPES,
-  RESOLUTION,
-} from '../../../../constants';
+import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../../constants';
 
 const { Option } = Select;
 const { TextArea } = Input;
 
-const Step4 = ({ prevStep, data, handleChangeData }) => {
+const Step4 = ({ prevStep, data, handleChangeData, attachParams }) => {
   const history = useHistory();
 
   const [form] = Form.useForm();
@@ -113,14 +108,13 @@ const Step4 = ({ prevStep, data, handleChangeData }) => {
             mode="tags"
             placeholder="Chọn các tham số đính kèm"
           >
-            <Option value={ATTACH_PARAMS.UAV_SOURCE}>Nguồn UAV</Option>
-            <Option value={ATTACH_PARAMS.TIME}>Thời gian</Option>
-            <Option value={ATTACH_PARAMS.COORDINATE}>Tọa độ</Option>
-            <Option value={ATTACH_PARAMS.LOCATION}>Vị trí</Option>
-            <Option value={ATTACH_PARAMS.JOURNEYS}>Hành trình</Option>
-            <Option value={ATTACH_PARAMS.WEATHER}>Thời tiết</Option>
-            <Option value={ATTACH_PARAMS.TEMPERATURE}>Nhiệt độ</Option>
-            <Option value={ATTACH_PARAMS.HUMIDITY}>Độ ẩm</Option>
+            {attachParams.map(({ id, name }) => {
+              return (
+                <Option key={id} value={id}>
+                  {name}
+                </Option>
+              );
+            })}
           </Select>
         </Form.Item>
         <Form.Item
