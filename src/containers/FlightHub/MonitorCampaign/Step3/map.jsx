@@ -14,8 +14,8 @@ const { Search } = Input;
 
 const Map = ({ onChangeLocation, parkIdInit }) => {
   const [selectedPark, setSelectedPark] = useState(null);
-  const [searchText, searchTextValue] = useState('');
   const [dataPark, setDataPark] = useState([]);
+  const [searchText, searchTextValue] = useState('');
 
   useEffect(() => {
     setDataPark(parksData);
