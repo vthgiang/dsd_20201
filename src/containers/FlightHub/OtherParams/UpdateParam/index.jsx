@@ -6,13 +6,13 @@ import { omitIsNil } from '../../../../utils/omit';
 import { updateParamApi } from '../../../../apis/param';
 
 const UpdateParam = ({ visible, hideModal, paramDetails, updateParam }) => {
-  const onUpdateParam = async ({ name, description, mappingField }) => {
+  const onUpdateParam = async ({ name, description, property }) => {
     const paramData = omitIsNil(
       {
         id: paramDetails.id || '',
         name,
         description,
-        mappingField,
+        property,
       },
       { deep: false },
     );
