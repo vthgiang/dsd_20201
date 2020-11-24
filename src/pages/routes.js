@@ -13,12 +13,12 @@ import PayloadStatistic from './Payload/PayloadStatistic';
 import PayloadStatisticFrequency from './Payload/PayloadStatistic/PayloadStatisticFrequency';
 import PayloadStatisticTime from "./Payload/PayloadStatistic/PayloadStatisticTime";
 import PayloadStatisticStatus from "./Payload/PayloadStatistic/PayloadStatisticStatus";
-import PayloadStatisticMoment from "./Payload/PayloadStatistic/PayloadStatisticMoment";
-import PayloadStatisticDrone from "./Payload/PayloadStatistic/PayloadStatisticDrone";
+import PayloadStatisticWorking from "./Payload/PayloadStatistic/PayloadStatisticWorking";
+import PayloadStatisticDroneFixing from "./Payload/PayloadStatistic/PayloadStatisticDroneFixing";
 
 import EditPayload from './Payload/PayloadManagement/Edit';
 import AddPayload from './Payload/PayloadManagement/Add';
-import PayloadDrone from './Payload/PayloadToDrone/List';
+import PayloadDroneHistory from './Payload/PayloadToDrone/List';
 import EditSignupPayloadDrone from './Payload/PayloadToDrone/Edit';
 import AddSignupPayloadDrone from './Payload/PayloadToDrone/Add';
 
@@ -67,7 +67,7 @@ export const routes = [
   },
   {
     path: '/payload-drone',
-    component: PayloadDrone,
+    component: PayloadDroneHistory,
   },
   {
     path: '/edit-signup-payload-drone',
@@ -109,7 +109,7 @@ export const routes = [
   },
   {
     path: '/payload-statistic-moment',
-    component: PayloadStatisticMoment,
+    component: PayloadStatisticWorking,
   },
   {
     path: '/payload-statistic-status',
@@ -117,7 +117,7 @@ export const routes = [
   },
   {
     path: '/payload-statistic-drone',
-    component: PayloadStatisticDrone,
+    component: PayloadStatisticDroneFixing,
   },
 
   {
