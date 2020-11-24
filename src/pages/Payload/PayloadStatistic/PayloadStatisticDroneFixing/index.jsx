@@ -21,12 +21,9 @@ class PayloadStatisticDrone extends Component {
   
 
   componentDidMount() {
-    console.log("aaaa");
-    axios.get('https://dsd06.herokuapp.com/api/payloadStat/feeWorking')
+    axios.get('https://dsd06.herokuapp.com/api/payloadStat/feeFixing')
       .then(res => {
         const listPayloadFixing = res.data;
-        console.log("aaaa");
-        console.log(res.data);
         this.setState({ listPayloadFixing });
       })
   }
@@ -34,11 +31,11 @@ class PayloadStatisticDrone extends Component {
   render() {
     //let history = useHistory();
     const columns = [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
-    },
+    // {
+    //   title: 'ID',
+    //   dataIndex: 'id',
+    //   key: 'id',
+    // },
     {
       title: 'Mã Payload',
       dataIndex: 'payloadCode',
@@ -80,7 +77,7 @@ class PayloadStatisticDrone extends Component {
     const dataSource = 
       this.state.listPayloadFixing.map(payloadFixing =>
         ({
-          id: payloadFixing._id,
+          // id: payloadFixing._id,
           payloadCode: payloadFixing.payload.code,
           payloadName: payloadFixing.payload.name,
           type: payloadFixing.type,
@@ -95,9 +92,10 @@ class PayloadStatisticDrone extends Component {
     return (
     <StyleList>
       <div>
-        <h2>Thống kê Payload theo trạng thái</h2>
+        <h2>Thống kê lịch sử sửa chữa Payload</h2>
         <div className="searchtype">
-          {/* <a onClick={() => history.push('/payload-statistic')}>Thống kê Payload</a> <span>/</span> <a onClick={() => history.push('/payload-statistic/drone')}>Theo Drone</a> */}
+          <a onClick={() => this.props.history.push('/payload-statistic')}>Thống kê Payload</a> <span>/</span>
+          <a onClick={() => this.props.history.push('/payload-statistic/moment')}>Lịch sử sửa chữa</a>
         </div>
 
         <Form
@@ -108,15 +106,16 @@ class PayloadStatisticDrone extends Component {
         >
           <Row justify="space-around">
             <Col span={4}>
-              <Form.Item label="Chọn trạng thái">
-                <Select>
-                  <Select.Option value="demo1">Drone TJAS1</Select.Option>
-                  <Select.Option value="demo2">Drone TBDMD</Select.Option>
-                  <Select.Option value="demo3">Drone YBDH1</Select.Option>
-                  <Select.Option value="demo4">Drone YWDVH</Select.Option>
-                  <Select.Option value="demo5">Drone HJJDN</Select.Option>
-                </Select>
-              </Form.Item>
+              <br/>
+              {/*<Form.Item label="Chọn trạng thái">*/}
+              {/*  <Select>*/}
+              {/*    <Select.Option value="demo1">Drone TJAS1</Select.Option>*/}
+              {/*    <Select.Option value="demo2">Drone TBDMD</Select.Option>*/}
+              {/*    <Select.Option value="demo3">Drone YBDH1</Select.Option>*/}
+              {/*    <Select.Option value="demo4">Drone YWDVH</Select.Option>*/}
+              {/*    <Select.Option value="demo5">Drone HJJDN</Select.Option>*/}
+              {/*  </Select>*/}
+              {/*</Form.Item>*/}
             </Col>
 
           </Row>

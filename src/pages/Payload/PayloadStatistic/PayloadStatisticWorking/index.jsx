@@ -22,8 +22,6 @@ class PayloadStatisticWorking extends Component {
      axios.get('https://dsd06.herokuapp.com/api/payloadStat/feeWorking')
       .then(res => {
         const listPayloadWorking = res.data;
-        console.log("aaaa");
-        console.log(res.data);
         this.setState({ listPayloadWorking });
       })
   }
@@ -31,11 +29,11 @@ class PayloadStatisticWorking extends Component {
   render() {
     //let history = useHistory();
     const columns = [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
-    },
+    // {
+    //   title: 'ID',
+    //   dataIndex: 'id',
+    //   key: 'id',
+    // },
     {
       title: 'Mã Payload',
       dataIndex: 'payloadCode',
@@ -96,10 +94,10 @@ class PayloadStatisticWorking extends Component {
     return (
     <StyleList>
       <div>
-        <h2>Thống kê Payload theo trạng thái</h2>
+        <h2>Thống kê lịch sử hoạt động Payload </h2>
         <div className="searchtype">
           <a onClick={() => this.props.history.push('/payload-statistic')}>Thống kê Payload</a> <span>/</span> 
-          <a onClick={() => this.props.history.push('/payload-statistic/drone')}>Theo Drone</a>
+          <a onClick={() => this.props.history.push('/payload-statistic/drone')}>Lịch sử hoạt động</a>
         </div>
 
         <Form
@@ -110,33 +108,23 @@ class PayloadStatisticWorking extends Component {
         >
           <Row justify="space-around">
             <Col span={4}>
-              <Form.Item label="Chọn trạng thái">
-                <Select>
-                  <Select.Option value="demo1">Drone TJAS1</Select.Option>
-                  <Select.Option value="demo2">Drone TBDMD</Select.Option>
-                  <Select.Option value="demo3">Drone YBDH1</Select.Option>
-                  <Select.Option value="demo4">Drone YWDVH</Select.Option>
-                  <Select.Option value="demo5">Drone HJJDN</Select.Option>
-                </Select>
-              </Form.Item>
+              <br/>
+              {/*<Form.Item label="Chọn trạng thái">*/}
+              {/*  <Select>*/}
+              {/*    <Select.Option value="demo1">Drone TJAS1</Select.Option>*/}
+              {/*    <Select.Option value="demo2">Drone TBDMD</Select.Option>*/}
+              {/*    <Select.Option value="demo3">Drone YBDH1</Select.Option>*/}
+              {/*    <Select.Option value="demo4">Drone YWDVH</Select.Option>*/}
+              {/*    <Select.Option value="demo5">Drone HJJDN</Select.Option>*/}
+              {/*  </Select>*/}
+              {/*</Form.Item>*/}
             </Col>
 
           </Row>
         </Form>
 
-        <Table dataSource={dataSource} columns={columns} />;
+        <Table dataSource={dataSource} columns={columns} />
         </div>
-
-        <Modal
-          title="Basic Modal"
-          // visible={visible}
-          //onOk={handleOk}
-          //onCancel={handleCancel}
-        >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
     </StyleList>
     );
   }
