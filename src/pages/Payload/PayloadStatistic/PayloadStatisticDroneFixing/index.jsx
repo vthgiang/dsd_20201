@@ -27,7 +27,7 @@ class PayloadStatisticDrone extends Component {
         const listPayloadFixing = res.data;
         console.log("aaaa");
         console.log(res.data);
-        this.setState =({ listPayloadFixing });
+        this.setState({ listPayloadFixing });
       })
   }
 
@@ -35,7 +35,7 @@ class PayloadStatisticDrone extends Component {
     //let history = useHistory();
     const columns = [
     {
-      title: 'STT',
+      title: 'ID',
       dataIndex: 'id',
       key: 'id',
     },
@@ -80,7 +80,7 @@ class PayloadStatisticDrone extends Component {
     const dataSource = 
       this.state.listPayloadFixing.map(payloadFixing =>
         ({
-          id: payloadFixing.id,
+          id: payloadFixing._id,
           payloadCode: payloadFixing.payload.code,
           payloadName: payloadFixing.payload.name,
           type: payloadFixing.type,

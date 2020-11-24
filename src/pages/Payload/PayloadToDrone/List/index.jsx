@@ -174,9 +174,8 @@ class PayloadDroneHistory extends Component {
     axios.get('https://dsd06.herokuapp.com/api/payloadregister/histories/:id')
       .then(res => {
         const listPayloadDroneHistory = res.data;
-        console.log("aaaa");
         console.log(res.data);
-        this.setState =({ listPayloadDroneHistory });
+        this.setState({ listPayloadDroneHistory });
       })
   }
 

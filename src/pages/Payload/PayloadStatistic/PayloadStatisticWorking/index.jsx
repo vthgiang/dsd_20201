@@ -17,16 +17,14 @@ class PayloadStatisticWorking extends Component {
     }
   }
 
-  
 
-  componentDidMount() {
-    console.log("aaaa");
-    axios.get('https://dsd06.herokuapp.com/api/payloadStat/feeWorking')
+  async componentDidMount() {
+     axios.get('https://dsd06.herokuapp.com/api/payloadStat/feeWorking')
       .then(res => {
         const listPayloadWorking = res.data;
         console.log("aaaa");
         console.log(res.data);
-        this.setState =({ listPayloadWorking });
+        this.setState({ listPayloadWorking });
       })
   }
 
@@ -34,7 +32,7 @@ class PayloadStatisticWorking extends Component {
     //let history = useHistory();
     const columns = [
     {
-      title: 'STT',
+      title: 'ID',
       dataIndex: 'id',
       key: 'id',
     },
@@ -59,9 +57,14 @@ class PayloadStatisticWorking extends Component {
       key: 'reason',
     },
     {
-      title: 'Drone',
+      title: 'DroneId',
       dataIndex: 'droneId',
       key: 'droneId',
+    },
+    {
+      title: 'Chi phí',
+      dataIndex: 'fee',
+      key: 'fee',
     },
     {
       title: 'Thời gian bắt đầu',
@@ -75,29 +78,28 @@ class PayloadStatisticWorking extends Component {
     },
 
   ];
-    // const dataSource = []
-
     const dataSource = 
       this.state.listPayloadWorking.map(payloadWorking =>
         ({
-          id: payloadWorking.id,
+          id: payloadWorking._id,
           payloadCode: payloadWorking.payload.code,
           payloadName: payloadWorking.payload.name,
           type: payloadWorking.type,
           reason: payloadWorking.reason,
           droneId: payloadWorking.droneId,
+          fee: payloadWorking.fee,
           startedAt: payloadWorking.startedAt,
           finishedAt: payloadWorking.finishedAt
         })
       )
-    
     
     return (
     <StyleList>
       <div>
         <h2>Thống kê Payload theo trạng thái</h2>
         <div className="searchtype">
-          {/* <a onClick={() => history.push('/payload-statistic')}>Thống kê Payload</a> <span>/</span> <a onClick={() => history.push('/payload-statistic/drone')}>Theo Drone</a> */}
+          <a onClick={() => this.props.history.push('/payload-statistic')}>Thống kê Payload</a> <span>/</span> 
+          <a onClick={() => this.props.history.push('/payload-statistic/drone')}>Theo Drone</a>
         </div>
 
         <Form
