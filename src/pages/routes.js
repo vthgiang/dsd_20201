@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
+import ImageVideo from "./ImageVideo";
 
 export const routes = [
   {
@@ -35,7 +36,7 @@ export const routes = [
   },
   {
     path: '/metadata',
-    component: () => <div>Meta Data</div>,
+    component: () => <ImageVideo />,
   },
   {
     path: '/problem',
