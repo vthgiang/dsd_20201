@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+
+
+//NEW COMPONENT
+import React, { Component } from "react";
 import { Form, Input, Button, Select, DatePicker} from 'antd';
 import StyleEdit from '../index.style';
+import axios from 'axios';
+
 const layout = {
   labelCol: { span: 5 },
   wrapperCol: { span: 10 },
@@ -11,40 +16,95 @@ const tailLayout = {
 
 const { TextArea } = Input;
 
-const AddSignupPayloadDrone = ({ history }) => {
-  const onFinish = values => {
-    console.log('Success:', values);
-  };
+class AddSignupPayloadDrone extends Component {
 
-  const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-  };
+  constructor(props) {
+    super(props)
 
-  return (
-    <StyleEdit>
+  }
+
+  state = {
+        time: '',
+        payloadType: '',
+        payloadId: '',
+        panning: '',
+        titling: '',
+        zoom: '',
+        manufacturer: '',
+        opticalZoom: '',
+        digitalZoom: '',
+        shooting: '',
+        tracking: '',
+        drone: ''
+      }
+    
+      handleChange = event => {
+            this.setState({time: event.target.value});
+          }
+        
+      handleSubmit = event => {
+            event.preventDefault();
+        
+            const payloadToDrone = {
+              time: this.state.time,
+              payloadType: this.state.payloadType,
+              payloadId: this.state.payloadId,
+              panning: this.state.pan,
+              titling: this.state.tilt,
+              zoom: this.state.zoom,
+              manufacturer: this.state.manufacturer,
+              opticalZoom: this.state.opticalZoom,
+              digitalZoom: this.state.digitalZoom,
+              tracking: this.state.tracking,
+              shooting: this.state.shooting,
+              drone: this.state.droneId
+            }
+        
+            axios.post('https://dsd06.herokuapp.com/api/payloadregister/working/:id', {payloadToDrone})
+                .then(res => {
+                console.log(res.data);
+              })
+          }
+        
+  
+    render() {
+      return (
+        // <div>
+        //   <form onSubmit={this.handleSubmit}>
+        //     <label>
+        //       Person Name:
+        //       <input type="text" name="name" onChange={this.handleChange} />
+        //     </label>
+        //     <button type="submit">Add</button>
+        //   </form>
+        // </div>
+      <StyleEdit>
       <div className="searchtype">
-        <a onClick={() => history.push('/payload-drone')}>Danh sách đăng ký payload drone</a> <span>/</span> <a onClick={() => history.push('/add-signup-payload-drone')}>Đăng ký mới</a>
+        {/* <a onClick={() => history.push('/payload-drone')}>Danh sách đăng ký payload drone</a> <span>/</span> <a onClick={() => history.push('/add-signup-payload-drone')}>Đăng ký mới</a> */}
+        <a onClick={() => this.props.history.push('/payload-drone')}>Danh sách đăng ký payload drone</a> <span>/</span> 
+        <a onClick={() => this.props.history.push('/add-signup-payload-drone')}>Đăng ký mới</a>
+
       </div>
 
       <Form
         {...layout}
-        name="basic"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        name="basic" onSubmit={this.handleSubmit}
+        // initialValues={{ remember: true }}
+        // onFinish={onFinish}
+        // onFinishFailed={onFinishFailed}
       >
         <h3 className="searchtype"  >Thông tin đăng ký</h3>
         <Form.Item
           label="Thời gian"
           name="time"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+          rules={[{ required: true  }]}
         >
           <DatePicker/>
           </Form.Item>
         <Form.Item
             label="Loại thiết bị"
-            name="payloadId"
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            name="payloadType"
+            rules={[{required: true }]}
         >
             <Select>
                 <option value="camera">Camera</option>
@@ -55,23 +115,41 @@ const AddSignupPayloadDrone = ({ history }) => {
         <Form.Item
           label="Payload"
           name="payloadId"
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          rules={[{required: true }]}
         >
           <Select>
-                <option>Payload 1</option>
-                <option>Payload 2</option>
-                <option>Payload 3</option>
+                <option value="payload1">Payload 1</option>
+                <option value="payload2">Payload 2</option>
+                <option value="payload3">Payload 3</option>
 
             </Select>
         </Form.Item>
-        <Form.Item
-          label="Trạng thái"
-          name="status"
-          rules={[{ required: true, message: 'Please input your password!' }]}
-        >
+        <Form.Item label="Panning(Từ trái qua phải)" name ="pan" rules={[{  message: 'Please input panning!' }]}>
+          <Input placeholder="0 độ - 360 độ"></Input>
+        </Form.Item>
+        <Form.Item label="Tilting(Từ trên xuống dưới)" name ="tilt" rules={[{  message: 'Please input tilting!' }]}>
+          <Input placeholder="0 độ - 360 độ"></Input>
+        </Form.Item>
+        <Form.Item label="Zooming" name ="zoom" rules={[{  message: 'Please input zooming!' }]}>
+          <Input placeholder="2.0 Megapixel trở lên"></Input>
+        </Form.Item>
+        <Form.Item label="Auto Tracking" name ="tracking" rules={[{ }]}>
           <Select>
-              <option>Hoạt động</option>
-              <option>Không hoạt động</option>
+            <option value="on">Bật tự động theo dõi</option>
+            <option value="off">Tắt tự động theo dõi</option>
+          </Select>
+        </Form.Item>
+        <Form.Item label="Shoot interval" name ="shoot" rules={[{  }]}>
+          <Select>
+            <option value="10s">10s</option>
+            <option value="20s">20s</option>
+          </Select>
+        </Form.Item>
+        <Form.Item label="Drone" name ="droneId" rules={[{ required: true }]}>
+          <Select>
+          <option value="drone1">Drone 1</option>
+          <option value="drone2">Drone 2</option>
+          <option value="drone3">Drone 3</option>
           </Select>
         </Form.Item>
         <Form.Item
@@ -89,6 +167,9 @@ const AddSignupPayloadDrone = ({ history }) => {
         </Form.Item>
       </Form>
     </StyleEdit>
-  );
-};
-export default AddSignupPayloadDrone;
+      )
+    }
+  
+  
+}
+export default AddSignupPayloadDrone; 
