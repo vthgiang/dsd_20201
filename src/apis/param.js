@@ -13,12 +13,12 @@ export const addParamApi = async data => {
     result: {
       id: Math.floor(Math.random() * 1000000000),
       name: 'Độ ẩm',
+      property: 'humidity',
       description: 'Độ ẩm của không khí',
-      mappingField: 'doAm',
-      isOther: true,
-      createdAt: '2020-08-24 09:16:06.051Z',
-      updatedAt: '2020-08-24 09:16:06.051Z',
-      ...data
+      isDefault: true,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      ...data,
     },
   };
 };
@@ -36,9 +36,9 @@ export const getListParamsApi = async () => {
       {
         id: '1234123124124',
         name: 'Độ ẩm',
+        property: 'humidity',
         description: 'Độ ẩm của không khí',
-        mappingField: 'doAm',
-        isOther: true,
+        isDefault: true,
         createdAt: '2020-08-24 09:16:06.051Z',
         updatedAt: '2020-08-24 09:16:06.051Z',
       },
@@ -68,12 +68,12 @@ export const updateParamApi = async data => {
     result: {
       id: '1234123124124',
       name: 'Độ ẩm',
+      property: 'humidity',
       description: 'Độ ẩm của không khí',
-      mappingField: 'doAm',
-      isOther: true,
+      isDefault: true,
       createdAt: '2020-08-24 09:16:06.051Z',
-      updatedAt: '2020-08-24 09:16:06.051Z',
-      ...data
+      updatedAt: new Date(),
+      ...data,
     },
   };
 };

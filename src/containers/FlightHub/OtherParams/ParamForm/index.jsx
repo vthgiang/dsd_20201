@@ -43,6 +43,7 @@ const ParamForm = ({
 
   const onFinish = (values) => {
     onOk(values);
+    form.resetFields();
   };
 
   const showExpandDetails = () => {
@@ -85,16 +86,16 @@ const ParamForm = ({
           <Input disabled={isDetails} placeholder="Nhập tên tham số" />
         </Form.Item>
 
-        <Form.Item name="description" label="Mô tả">
-          <Input disabled={isDetails} placeholder="Nhập mô tả tham số" />
-        </Form.Item>
-
         <Form.Item
-          name="mappingField"
-          label="Trường dữ liệu "
+          name="property"
+          label="Trường dữ liệu"
           rules={[{ type: 'string', required: !isDetails }]}
         >
-          <Input disabled={isDetails} placeholder="Nhập trường mapping" />
+          <Input disabled={isDetails} placeholder="Nhập tên trường dữ liệu" />
+        </Form.Item>
+
+        <Form.Item name="description" label="Mô tả">
+          <Input disabled={isDetails} placeholder="Nhập mô tả tham số" />
         </Form.Item>
 
         {isDetails && showExpandDetails()}

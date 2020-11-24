@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Input, Row, Table, Modal, notification, Button } from 'antd';
+import moment from 'moment';
 
 import {
   DeleteOutlined,
@@ -12,6 +13,7 @@ import AddParam from '../AddParam';
 import UpdateParam from '../UpdateParam';
 
 import { deleteParamApi, getListParamsApi } from '../../../../apis/param';
+import { formatMomentDateToDateTimeString } from '../../MonitorCampaign/services';
 
 const { Search } = Input;
 
@@ -81,15 +83,15 @@ const ListParams = () => {
     hideModalUpdate();
   };
 
-  const handleDeleteParam = (id) => async () => {
+  const handleDeleteParam = (paramId) => async () => {
     try {
-      const resp = await deleteParamApi(id);
+      const resp = await deleteParamApi(paramId);
 
       if (!resp || !resp.status) throw new Error('Máy chủ lỗi');
 
       const newListParams = listParams.filter((param) => {
         const { id = '' } = param;
-        return id !== id;
+        return paramId !== id;
       });
 
       setListParams(newListParams);
@@ -127,30 +129,37 @@ const ListParams = () => {
       dataIndex: 'name',
       title: 'Tên tham số',
       width: '10%',
+      sorter: (a, b) => a.name.localeCompare(b.name),
+    },
+    {
+      key: 'property',
+      dataIndex: 'property',
+      title: 'Tên trường',
+      width: '10%',
+      sorter: (a, b) => a.property.localeCompare(b.property),
     },
     {
       key: 'description',
       dataIndex: 'description',
       title: 'Mô tả',
       width: '20%',
-    },
-    {
-      key: 'mappingField',
-      dataIndex: 'mappingField',
-      title: 'Mapping Field',
-      width: '10%',
+      sorter: (a, b) => a.description.localeCompare(b.description),
     },
     {
       key: 'createdAt',
       dataIndex: 'createdAt',
       title: 'Ngày tạo',
       width: '20%',
+      render: formatMomentDateToDateTimeString,
+      sorter: (a, b) => moment(a.startTime).diff(moment(b.startTime)),
     },
     {
       key: 'updatedAt',
       dataIndex: 'updatedAt',
       title: 'Ngày cập nhật',
       width: '20%',
+      render: formatMomentDateToDateTimeString,
+      sorter: (a, b) => moment(a.startTime).diff(moment(b.startTime)),
     },
     {
       key: 'actions',
@@ -207,7 +216,11 @@ const ListParams = () => {
             enterButton
           />
         </Col>
-        <Button icon={<PlusOutlined />} onClick={showModalCreate}>
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={showModalCreate}
+        >
           Thêm tham số
         </Button>
       </Row>
