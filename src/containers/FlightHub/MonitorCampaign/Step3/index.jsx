@@ -26,7 +26,7 @@ const Step3 = ({
 
   const onChangeLocation = (park) => {
     let formData = data ? data : {};
-    formData.location = `${park.PARK_ID}`;
+    formData.monitoredZone = `${park.id}`;
     form.setFieldsValue(formData);
   };
 
@@ -59,9 +59,10 @@ const Step3 = ({
         <Form.Item
           name="monitoredZone"
           label="Miền giám sát"
-          rules={[{ type: 'string' }]}
+          rules={[{ type: 'string', required: true }]}
         >
           <WrappedMap
+            monitorObjects={monitorObjects}
             googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCV09KQtrmzDnyXYeC_UzB-HAwMKytXRpE"
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `400px` }} />}
