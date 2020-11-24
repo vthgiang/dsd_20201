@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Select} from 'antd';
+import { Form, Input, Button, Select } from 'antd';
 import StyleEdit from './index.style';
 const layout = {
   labelCol: { span: 5 },
@@ -18,12 +18,35 @@ const EditPayload = ({ history }) => {
     console.log('Failed:', errorInfo);
   };
 
+  const CustomizedForm = ({ onChange, fields }) => {
   return (
-    <StyleEdit>
-      <div className="searchtype">
-        <a onClick={() => history.push('/payload-management')}>Quản lý Payload</a> <span>/</span> <a onClick={() => history.push('/edit-payload')}>Chỉnh sửa Payload</a>
-      </div>
+    <Form
+      name="global_state"
+      layout="inline"
+      fields={fields}
+      onFieldsChange={(changedFields, allFields) => {
+        onChange(allFields);
+      }}
+    >
+      <Form.Item
+        name="username"
+        label="Username"
+        rules={[
+          {
+            required: true,
+            message: 'Username is required!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+    </Form>
+  );
+};
 
+  return (
+
+    <StyleEdit>
       <Form
         {...layout}
         name="basic"
@@ -63,11 +86,6 @@ const EditPayload = ({ history }) => {
             <Select.Option value="demo">Demo</Select.Option>
           </Select>
         </Form.Item>
-
-        {/* <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item> */}
-
         <Form.Item {...tailLayout}>
           <Button type="primary" htmlType="submit">
             Submit
