@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
+import MyList from '../components/Group4/Notification'
 
 export const routes = [
   {
@@ -55,7 +56,7 @@ export const routes = [
   },
   {
     path: '/warning',
-    component: () => <div>Cảnh báo</div>,
+    component: () => <MyList />,
   },
   {
     path: '/activity-log',
