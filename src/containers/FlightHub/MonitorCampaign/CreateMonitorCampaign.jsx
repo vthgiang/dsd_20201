@@ -1,7 +1,7 @@
 import React from 'react';
 import MonitorCampaignForm from './MonitorCampaignForm';
 
-const monitorObjects = [
+const monitoredObjects = [
   { id: '5349b4ddd2781d08c0989012', name: 'Người hút thuốc' },
   { id: '5349b4ddd2781d08c0989123', name: 'Lửa trại' },
   { id: '5349b4ddd2781d08c0989234', name: 'Núi lửa phun trào' },
@@ -138,7 +138,7 @@ const CreateMonitorCampaign = () => {
   return (
     <MonitorCampaignForm
       title="Tạo đợt giám sát"
-      monitorObjects={monitorObjects}
+      monitoredObjects={monitoredObjects}
       monitoredZones={monitoredZones}
       attachParams={attachParams}
     ></MonitorCampaignForm>

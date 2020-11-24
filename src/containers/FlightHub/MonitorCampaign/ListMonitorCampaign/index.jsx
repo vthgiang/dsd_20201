@@ -44,7 +44,7 @@ const { Option } = Select;
 const { RangePicker } = DatePicker;
 
 //data fake
-const monitorObjects = [
+const monitoredObjects = [
   { id: '5349b4ddd2781d08c0989012', name: 'Người hút thuốc' },
   { id: '5349b4ddd2781d08c0989123', name: 'Lửa trại' },
   { id: '5349b4ddd2781d08c0989234', name: 'Núi lửa phun trào' },
@@ -151,8 +151,8 @@ for (let i = 1; i <= 20; i++) {
       : METADATA_TYPES.VIDEO,
     monitoredZone:
       monitoredZones[Math.floor(Math.random() * monitoredZones.length)],
-    monitorObject:
-      monitorObjects[Math.floor(Math.random() * monitorObjects.length)],
+    monitoredObject:
+      monitoredObjects[Math.floor(Math.random() * monitoredObjects.length)],
     attachParams: [
       '5349b4ddd2781d0111111111',
       '5349b4ddd2781d0222222222',
@@ -239,7 +239,7 @@ const ListMonitorCampaign = () => {
       render: formatMomentDateToDateTimeString,
     },
     {
-      dataIndex: 'monitorObject',
+      dataIndex: 'monitoredObject',
       title: 'Đối tượng giám sát',
       width: '12.5%',
       sorter: (a, b) => a.name.localeCompare(b.name),
@@ -355,9 +355,9 @@ const ListMonitorCampaign = () => {
             </Col>
 
             <Col span={8}>
-              <Form.Item name="monitorObject" label="Đối tượng giám sát">
+              <Form.Item name="monitoredObject" label="Đối tượng giám sát">
                 <Select allowClear placeholder="Chọn đối tượng giám sát">
-                  {monitorObjects.map(({ id, name }) => (
+                  {monitoredObjects.map(({ id, name }) => (
                     <Option key={id} value={id}>
                       {name}
                     </Option>

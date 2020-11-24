@@ -14,7 +14,7 @@ const { Step } = Steps;
 const MonitorCampaignForm = ({
   initialData,
   title,
-  monitorObjects = [],
+  monitoredObjects = [],
   monitoredZones = [],
   attachParams,
 }) => {
@@ -48,7 +48,7 @@ const MonitorCampaignForm = ({
         nextStep={nextStep}
         prevStep={prevStep}
         data={data}
-        monitorObjects={monitorObjects}
+        monitoredObjects={monitoredObjects}
         monitoredZones={monitoredZones}
         attachParams={attachParams}
         handleChangeData={handleChangeData}

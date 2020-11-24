@@ -11,7 +11,7 @@ const Step3 = ({
   prevStep,
   data,
   handleChangeData,
-  monitorObjects,
+  monitoredObjects,
 }) => {
   const [form] = Form.useForm();
 
@@ -41,12 +41,12 @@ const Step3 = ({
         initialValues={data}
       >
         <Form.Item
-          name="monitorObject"
+          name="monitoredObject"
           label="Đối tượng giám sát"
           rules={[{ type: 'string', required: true }]}
         >
           <Select showSearch placeholder="Chọn đối tượng giám sát">
-            {monitorObjects.map(({ id, name }) => {
+            {monitoredObjects.map(({ id, name }) => {
               return (
                 <Option key={id} value={id}>
                   {name}
@@ -62,7 +62,7 @@ const Step3 = ({
           rules={[{ type: 'string', required: true }]}
         >
           <WrappedMap
-            monitorObjects={monitorObjects}
+            monitoredObjects={monitoredObjects}
             googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCV09KQtrmzDnyXYeC_UzB-HAwMKytXRpE"
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `400px` }} />}

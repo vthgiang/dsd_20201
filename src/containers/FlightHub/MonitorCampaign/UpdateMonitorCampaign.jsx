@@ -5,7 +5,7 @@ import MonitorCampaignForm from './MonitorCampaignForm';
 import { convertInitialDataToFieldValues, randomDateTime } from './services';
 
 //data fake
-const monitorObjects = [
+const monitoredObjects = [
   { id: '5349b4ddd2781d08c0989012', name: 'Người hút thuốc' },
   { id: '5349b4ddd2781d08c0989123', name: 'Lửa trại' },
   { id: '5349b4ddd2781d08c0989234', name: 'Núi lửa phun trào' },
@@ -155,7 +155,7 @@ const initialData = {
       brandName: 'DJI',
     },
   ],
-  monitorObject: { id: '5349b4ddd2781d08c0989012', name: 'Người hút thuốc' },
+  monitoredObject: { id: '5349b4ddd2781d08c0989012', name: 'Người hút thuốc' },
   monitoredZone: { id: '5249b4ddd2781d08c0989123', name: `Tiểu khu A` },
   mechanism: MECHANISM.AUTO,
   metadataType: METADATA_TYPES.VIDEO,
@@ -177,7 +177,7 @@ const UpdateMonitorCampaign = () => {
     <MonitorCampaignForm
       initialData={convertInitialDataToFieldValues(data)}
       title="Sửa đợt giám sát"
-      monitorObjects={monitorObjects}
+      monitoredObjects={monitoredObjects}
       monitoredZones={monitoredZones}
       attachParams={attachParams}
     ></MonitorCampaignForm>
