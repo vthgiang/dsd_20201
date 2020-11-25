@@ -33,22 +33,25 @@ class List extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://dsd06.herokuapp.com/api/payload`)
-      .then(res => {
-        //const persons = res.data;
-        this.setState({ tables: res.data });
-      })
-
+      this.loadAllPayload();
       this.getAllTypePayload();
   }
-
+  
+  loadAllPayload(){
+    axios.get(`http://dsd06.herokuapp.com/api/payload`)
+    .then(res => {
+      //const persons = res.data;
+      this.setState({ tables: res.data });
+    })
+  }
 
 
   showModal = (record) => {
     this.setState({ visible: true });
     
     this.setState({ detailPayload: record });
-    this.getDetailPayload(record.id);
+    this.setState({ idPayload: record.id })
+    //this.getDetailPayload(record.id);
   };
 
   handleOk = e => {
@@ -63,22 +66,6 @@ class List extends Component {
   handleCancelAdd = e => {
     this.setState({ visibleAdd: false })
   };
-
-  
-
-  handleSubmit = event => {
-    event.preventDefault();
-
-    const data = {
-      name: this.state.name
-    };
-
-    axios.post(`https://jsonplaceholder.typicode.com/users`, { data })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-  }
 
   getAllTypePayload() {
     axios.get(`https://dsd06.herokuapp.com/api/payloadtype`)
@@ -96,60 +83,189 @@ class List extends Component {
     //alert(this.state.Options)
   }
 
-  getDetailPayload(id) {
+  /* getDetailPayload(id) {
     axios.get(`http://dsd06.herokuapp.com/api/payload/` + id)
       .then(res => {
         //const persons = res.data;
-        this.setState({ payload: res.data });
+        
+        this.setState({ detailPayload: res.data });
+        console.log(this.state.detailPayload)
       })
+  } */
+
+  handleFormSubmitEdit(values){
+    const data = {
+      code: values.code,
+      name: values.name,
+      type: values.type,
+      detail: {
+        manufacturer: values.manufacturer,
+        weight: values.weight,
+        opticalZoom: values.opticalZoom,
+        digitalZoom: values.digitalZoom,
+        panning: {
+          min: values.panningmin,
+          max: values.panningmax,
+        },
+        tilting: {
+          min: values.tiltingmin,
+          max: values.tiltingmax
+        },
+        zoom: {
+          min: values.zoomingmin,
+          max: values.zoomingmax
+        },
+        size: {
+          width: values.sizewidth,
+          length: values.sizelength,
+          height: values.sizeheight
+        }
+      }
+
+    };
+    axios.put(`https://dsd06.herokuapp.com/api/payload/`+ this.state.idPayload , data)
+      .then(res => {
+        console.log(res.data);
+        this.setState({ visible: false })
+        this.loadAllPayload();
+      })
+    
   }
 
   renderModal() {
-    //this.getDetailPayload();
-    //alert(this.state.detailPayload.id)
-    //alert(this.state.detailPayload.id)
-    //console.log(this.state.options.length)
+    const layout = {
+      labelCol: { span: 6 },
+      wrapperCol: { span: 10 },
+    };
+    return <Form   {...layout} onFinish={(values) => this.handleFormSubmitEdit(values)} >
 
-    //alert(option.length)
-    return <Form onSubmit={this.handleSubmit}  >
+      <Row gutter={16}>
+        <Col className="gutter-row" span={12}>
+          <Form.Item initialValue={this.state.detailPayload.code}
+            label="Mã"
+            name="code"
+            rules={[{ required: true, message: 'Hãy nhập mã!' }]}
+          >
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={12}>
+          <Form.Item initialValue={this.state.detailPayload.name}
+            label="Tên"
+            name="name"
+            rules={[{ required: true, message: 'Hãy nhập tên payload!' }]}
+          >
+            <Input />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col className="gutter-row" span={12}>
+          <Form.Item
+            label="Loại" initialValue={this.state.detailPayload.type_id}
+            name="type"
+            rules={[{ required: true, message: 'Please input your password!' }]}
+          >
+            <Select options={this.state.Options} />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={12}>
+          <Form.Item
+            label="Mô tả"
+            name="desciption"
+            
+          >
+            <Input />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col className="gutter-row" span={12}>
+          <Form.Item label="Weight" name="weight" initialValue={this.state.detailPayload.weight}>
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={12}>
+          <Form.Item label="Nhà sản xuất" name="manufacturer" initialValue={this.state.detailPayload.manufacturer}>
+            <Input />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col className="gutter-row" span={12}>
+          <Form.Item label="OpticalZoom" name="opticalZoom" initialValue={this.state.detailPayload.opticalZoom} >
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={12}>
+          <Form.Item label="DigitalZoom" name="digitalZoom" initialValue={this.state.detailPayload.digitalZoom}>
+            <Input />
+          </Form.Item>
+        </Col>
+      </Row>
+      
+      <Row gutter={16}>
+        <Col className="gutter-row" span={12}>
+          <Form.Item label="Panning min" name="panningmin" initialValue={this.state.detailPayload.panningmin}>
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={12}>
+          <Form.Item label="Panning max" name="panningmax" initialValue={this.state.detailPayload.panningmax}>
+            <Input />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col className="gutter-row" span={12}>
+          <Form.Item label="Tilting min" name="tiltingmin" initialValue={this.state.detailPayload.tiltingmin} >
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={12}>
+          <Form.Item label="Tilting max" name="tiltingmax" initialValue={this.state.detailPayload.tiltingmax}>
+            <Input />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col className="gutter-row" span={12}>
+          <Form.Item label="Zooming min" name="zoomingmin" initialValue={this.state.detailPayload.zoommin}>
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={12}>
+          <Form.Item label="Zooming max" name="zoomingmax" initialValue={this.state.detailPayload.zoommax}>
+            <Input />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col className="gutter-row" span={8}>
+          <Form.Item label="Width" name="sizewidth" initialValue={this.state.detailPayload.sizewidth}>
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={8} >
+          <Form.Item label="Height" name="sizeheight" initialValue={this.state.detailPayload.sizeheight}>
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={8}>
+          <Form.Item label="Length" name="sizelength" initialValue={this.state.detailPayload.sizelength}>
+            <Input />
+          </Form.Item>
+        </Col>
+      </Row>
 
-      <Form.Item
-        label="Mã" onChange={this.handleChange}
-        name="code" initialValue={this.state.detailPayload.code}
-        rules={[{ required: true, message: 'Please input your username!' }]}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        label="Tên"
-        name="username" initialValue={this.state.detailPayload.name}
-        rules={[{ required: true, message: 'Please input your username!' }]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        label="Loại"
-        name="tilting"
-        rules={[{ required: true, message: 'Please input your password!' }]}
-      >
-
-        <Select options={this.state.Options} defaultValue={this.state.detailPayload.type} />
-
-      </Form.Item>
-      <Form.Item
-        label="Mô tả"
-        name="des" initialValue={this.state.detailPayload.des}
-        rules={[{ required: true, message: 'Please input your password!' }]}
-      >
-        <Input />
-      </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">
           Submit
-      </Button>
+   </Button>
       </Form.Item>
     </Form>
+
+     
 
   }
 
@@ -157,19 +273,59 @@ class List extends Component {
     this.setState({ visibleAdd: true });
   }
 
+  handleFormSubmit(values){
+    console.log(values)
+    const data = {
+      code: values.code,
+      name: values.name,
+      type: values.type,
+      detail: {
+        manufacturer: values.manufacturer,
+        weight: values.weight,
+        opticalZoom: values.opticalZoom,
+        digitalZoom: values.digitalZoom,
+        panning: {
+          min: values.panningmin,
+          max: values.panningmax,
+        },
+        tilting: {
+          min: values.tiltingmin,
+          max: values.tiltingmax
+        },
+        zoom: {
+          min: values.zoomingmin,
+          max: values.zoomingmax
+        },
+        size: {
+          width: values.sizewidth,
+          length: values.sizelength,
+          height: values.sizeheight
+        }
+      }
+
+    };
+    axios.post(`https://dsd06.herokuapp.com/api/payload`, data)
+      .then(res => {
+        console.log(res.data);
+        this.setState({ visibleAdd: false })
+        this.loadAllPayload();
+      })
+    
+  }
+
   renderModalAdd() {
     const layout = {
       labelCol: { span: 6 },
       wrapperCol: { span: 10 },
     };
-    return <Form   {...layout}  >
+    return <Form   {...layout} onFinish={(values) => this.handleFormSubmit(values)} >
 
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
           <Form.Item
             label="Mã"
             name="code"
-            rules={[{ required: true, message: 'Please input your mã!' }]}
+            rules={[{ required: true, message: 'Hãy nhập mã!' }]}
           >
             <Input />
           </Form.Item>
@@ -177,8 +333,8 @@ class List extends Component {
         <Col className="gutter-row" span={12}>
           <Form.Item
             label="Tên"
-            name="username"
-            rules={[{ required: true, message: 'Please input your username!' }]}
+            name="name"
+            rules={[{ required: true, message: 'Hãy nhập tên payload!' }]}
           >
             <Input />
           </Form.Item>
@@ -188,7 +344,7 @@ class List extends Component {
         <Col className="gutter-row" span={12}>
           <Form.Item
             label="Loại"
-            name="tilting"
+            name="type"
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
             <Select options={this.state.Options} />
@@ -197,7 +353,7 @@ class List extends Component {
         <Col className="gutter-row" span={12}>
           <Form.Item
             label="Mô tả"
-            name="des"
+            name="desciption"
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
             <Input />
@@ -206,24 +362,24 @@ class List extends Component {
       </Row>
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="Weight">
+          <Form.Item label="Weight" name="weight">
             <Input />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="Nhà sản xuất">
+          <Form.Item label="Nhà sản xuất" name="manufacturer">
             <Input />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="OpticalZoom">
+          <Form.Item label="OpticalZoom" name="opticalZoom">
             <Input />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="DigitalZoom">
+          <Form.Item label="DigitalZoom" name="digitalZoom">
             <Input />
           </Form.Item>
         </Col>
@@ -231,53 +387,53 @@ class List extends Component {
       
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="Panning min">
+          <Form.Item label="Panning min" name="panningmin">
             <Input />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="Panning max">
+          <Form.Item label="Panning max" name="panningmax">
             <Input />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="Tilting min">
+          <Form.Item label="Tilting min" name="tiltingmin">
             <Input />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="Tilting max">
+          <Form.Item label="Tilting max" name="tiltingmax">
             <Input />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="Zooming min">
+          <Form.Item label="Zooming min" name="zoomingmin">
             <Input />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="Zooming max">
+          <Form.Item label="Zooming max" name="zoomingmax">
             <Input />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={16}>
         <Col className="gutter-row" span={8}>
-          <Form.Item label="Width">
+          <Form.Item label="Width" name="sizewidth">
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={8} >
+          <Form.Item label="Height" name="sizeheight">
             <Input />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={8}>
-          <Form.Item label="Height">
-            <Input />
-          </Form.Item>
-        </Col>
-        <Col className="gutter-row" span={8}>
-          <Form.Item label="Length">
+          <Form.Item label="Length" name="sizelength">
             <Input />
           </Form.Item>
         </Col>
@@ -303,6 +459,20 @@ class List extends Component {
         type: payload.type.name,
         des: payload.type.description,
         type_id: payload.type._id,
+        weight: payload.detail.weight,
+        manufacturer: payload.detail.manufacturer,
+        opticalZoom: payload.detail.opticalZoom,
+        digitalZoom: payload.detail.digitalZoom,
+        sizewidth: payload.detail.size.width,
+        sizeheight: payload.detail.size.height,
+        sizelength: payload.detail.size.length,
+        panningmin: payload.detail.panning.min,
+        panningmax: payload.detail.panning.max,
+        tiltingmin: payload.detail.tilting.min,
+        tiltingmax: payload.detail.tilting.max,
+        zoommin: payload.detail.zoom.min,
+        zoommax: payload.detail.zoom.max,
+
       })
     )
 
@@ -399,7 +569,7 @@ class List extends Component {
           visible={visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
-          footer={null}
+          footer={null} width={800}
         >
           {
             this.renderModal()
