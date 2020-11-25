@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
+import Incident from './Incident';
 
 export const routes = [
   {
@@ -67,7 +68,7 @@ export const routes = [
   },
   {
     path: '/handle-problem',
-    component: () => <div>Xử lý sự cố</div>,
+    component: Incident,
   },
   {
     path: '/user-management',
