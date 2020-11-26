@@ -26,6 +26,11 @@ class List extends Component {
       visibleAdd: false,
       visibleDelete: false,
       idPayloadDelete: null,
+      status: [
+        { value: 'working', label: 'Đang sử dụng' },
+        { value: 'idle', label: 'Sẵn có' },
+        { value: 'fixing', label: 'Đang sửa' }
+      ]
     }
   }
 
@@ -35,22 +40,22 @@ class List extends Component {
   }
 
   componentDidMount() {
-      this.loadAllPayload();
-      this.getAllTypePayload();
+    this.loadAllPayload();
+    this.getAllTypePayload();
   }
-  
-  loadAllPayload(){
+
+  loadAllPayload() {
     axios.get(`http://dsd06.herokuapp.com/api/payload`)
-    .then(res => {
-      //const persons = res.data;
-      this.setState({ tables: res.data });
-    })
+      .then(res => {
+        //const persons = res.data;
+        this.setState({ tables: res.data });
+      })
   }
 
 
   showModal = (record) => {
     this.setState({ visible: true });
-    
+
     this.setState({ detailPayload: record });
     this.setState({ idPayload: record.id })
     //this.getDetailPayload(record.id);
@@ -64,12 +69,12 @@ class List extends Component {
     this.setState({ visible: false })
   };
 
-  
+
   handleCancelAdd = e => {
     this.setState({ visibleAdd: false })
   };
 
-  handleCancelDelete= e => {
+  handleCancelDelete = e => {
     this.setState({ visibleDelete: false })
   }
 
@@ -82,24 +87,11 @@ class List extends Component {
             value: payload._id,
           })
         )
-        //const persons = res.data;
         this.setState({ Options: options });
       })
-    //console.log(this.state.Options.length)
-    //alert(this.state.Options)
+    
   }
-
-  /* getDetailPayload(id) {
-    axios.get(`http://dsd06.herokuapp.com/api/payload/` + id)
-      .then(res => {
-        //const persons = res.data;
-        
-        this.setState({ detailPayload: res.data });
-        console.log(this.state.detailPayload)
-      })
-  } */
-
-  handleFormSubmitEdit(values){
+  handleFormSubmitEdit(values) {
     const data = {
       code: values.code,
       name: values.name,
@@ -129,13 +121,13 @@ class List extends Component {
       }
 
     };
-    axios.put(`https://dsd06.herokuapp.com/api/payload/`+ this.state.idPayload , data)
+    axios.put(`https://dsd06.herokuapp.com/api/payload/` + this.state.idPayload, data)
       .then(res => {
         console.log(res.data);
         this.setState({ visible: false })
         this.loadAllPayload();
       })
-    
+
   }
 
   renderModal() {
@@ -179,7 +171,7 @@ class List extends Component {
           <Form.Item
             label="Mô tả"
             name="desciption"
-            
+
           >
             <Input />
           </Form.Item>
@@ -209,7 +201,7 @@ class List extends Component {
           </Form.Item>
         </Col>
       </Row>
-      
+
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
           <Form.Item label="Panning min" name="panningmin" initialValue={this.state.detailPayload.panningmin}>
@@ -271,7 +263,7 @@ class List extends Component {
       </Form.Item>
     </Form>
 
-     
+
 
   }
 
@@ -279,7 +271,7 @@ class List extends Component {
     this.setState({ visibleAdd: true });
   }
 
-  handleFormSubmit(values){
+  handleFormSubmit(values) {
     console.log(values)
     const data = {
       code: values.code,
@@ -316,7 +308,7 @@ class List extends Component {
         this.setState({ visibleAdd: false })
         this.loadAllPayload();
       })
-    
+
   }
 
   renderModalAdd() {
@@ -390,7 +382,7 @@ class List extends Component {
           </Form.Item>
         </Col>
       </Row>
-      
+
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
           <Form.Item label="Panning min" name="panningmin">
@@ -448,18 +440,18 @@ class List extends Component {
       <Form.Item>
         <Button type="primary" htmlType="submit">
           Submit
-   </Button>
+      </Button>
       </Form.Item>
     </Form>
   }
 
   showModalDelete(record) {
-    this.setState({visibleDelete: true})
-    this.setState({idPayloadDelete: record.id})
+    this.setState({ visibleDelete: true })
+    this.setState({ idPayloadDelete: record.id })
   }
 
-  deleteRecord(){
-    axios.delete(`https://dsd06.herokuapp.com/api/payload/`+ this.state.idPayloadDelete)
+  deleteRecord() {
+    axios.delete(`https://dsd06.herokuapp.com/api/payload/` + this.state.idPayloadDelete)
       .then(res => {
         console.log(res.data);
         this.setState({ visibleDelete: false })
@@ -468,11 +460,20 @@ class List extends Component {
   }
 
   renderModalDelete() {
-    return<div>
+    return <div>
       <p>Bạn có chắc xóa bản ghi này?</p>
       <Button type="primary" danger onClick={() => this.deleteRecord()}>Xóa</Button>
-      </div>
-    
+    </div>
+
+  }
+
+  searchPayload(values) {
+    console.log(values)
+    axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { type: values.type, status: values.status } })
+      .then(res => {
+        //const persons = res.data;
+        this.setState({ tables: res.data });
+      })
   }
 
 
@@ -554,7 +555,7 @@ class List extends Component {
       },
     ];
 
-    const { visible, visibleAdd,visibleDelete, currentTable, tables } = this.state;
+    const { visible, visibleAdd, visibleDelete, currentTable, tables } = this.state;
 
     return (
       <StyleList>
@@ -562,30 +563,22 @@ class List extends Component {
           <div>Quản lý Payload</div>
           <Form
             layout="horizontal"
-            className="searchtype"
+            className="searchtype" onFinish={(values) => this.searchPayload(values)}
           >
             <Row justify="space-around">
               <Col span={4}>
-                <Form.Item label="Tên">
-                  <Input />
+                <Form.Item label="Loại" name="type">
+                  <Select options={this.state.Options} />
+
                 </Form.Item>
               </Col>
               <Col span={4}>
-                <Form.Item label="Loại">
-                  <Select>
-                    <Select.Option value="demo">Demo</Select.Option>
-                  </Select>
+                <Form.Item label="Trạng thái" name="status">
+                  <Select options={this.state.status} />
                 </Form.Item>
               </Col>
               <Col span={4}>
-                <Form.Item label="Trạng thái">
-                  <Select>
-                    <Select.Option value="demo">Demo</Select.Option>
-                  </Select>
-                </Form.Item>
-              </Col>
-              <Col span={4}>
-                <Button type="primary" icon={<SearchOutlined />}>
+                <Button type="primary" htmlType="submit" icon={<SearchOutlined />}>
                   Tìm kiếm
               </Button>
               </Col>
