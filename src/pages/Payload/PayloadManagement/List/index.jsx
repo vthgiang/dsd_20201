@@ -24,6 +24,8 @@ class List extends Component {
       options: [],
       payload: {},
       visibleAdd: false,
+      visibleDelete: false,
+      idPayloadDelete: null,
     }
   }
 
@@ -66,6 +68,10 @@ class List extends Component {
   handleCancelAdd = e => {
     this.setState({ visibleAdd: false })
   };
+
+  handleCancelDelete= e => {
+    this.setState({ visibleDelete: false })
+  }
 
   getAllTypePayload() {
     axios.get(`https://dsd06.herokuapp.com/api/payloadtype`)
@@ -447,6 +453,30 @@ class List extends Component {
     </Form>
   }
 
+  showModalDelete(record) {
+    this.setState({visibleDelete: true})
+    this.setState({idPayloadDelete: record.id})
+  }
+
+  deleteRecord(){
+    axios.delete(`https://dsd06.herokuapp.com/api/payload/`+ this.state.idPayloadDelete)
+      .then(res => {
+        console.log(res.data);
+        this.setState({ visibleDelete: false })
+        this.loadAllPayload();
+      })
+  }
+
+  renderModalDelete() {
+    return<div>
+      <p>Bạn có chắc xóa bản ghi này?</p>
+      <Button type="primary" danger onClick={() => this.deleteRecord()}>Xóa</Button>
+      </div>
+    
+  }
+
+
+
   render() {
 
     const dataSource = this.state.tables.map(payload =>
@@ -518,13 +548,13 @@ class List extends Component {
           <Space size="small" >
             {/*  <Button type="link" onClick={() => history.push('/payload-configuration')}>Cấu hình</Button> */}
             <Button type="link" onClick={() => this.showModal(record)} >Sửa</Button>
-            <Button danger type="text">Xóa</Button>
+            <Button danger type="text" onClick={() => this.showModalDelete(record)}>Xóa</Button>
           </Space>
         ),
       },
     ];
 
-    const { visible, visibleAdd, currentTable, tables } = this.state;
+    const { visible, visibleAdd,visibleDelete, currentTable, tables } = this.state;
 
     return (
       <StyleList>
@@ -585,6 +615,18 @@ class List extends Component {
         >
           {
             this.renderModalAdd()
+          }
+        </Modal>
+
+        <Modal
+          title="Xóa Payload"
+          visible={visibleDelete}
+          onOk={this.handleOkDelete}
+          onCancel={this.handleCancelDelete}
+          footer={null}
+        >
+          {
+            this.renderModalDelete()
           }
         </Modal>
       </StyleList>

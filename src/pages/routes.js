@@ -15,9 +15,6 @@ import PayloadStatisticTime from "./Payload/PayloadStatistic/PayloadStatisticTim
 import PayloadStatisticStatus from "./Payload/PayloadStatistic/PayloadStatisticStatus";
 import PayloadStatisticWorking from "./Payload/PayloadStatistic/PayloadStatisticWorking";
 import PayloadStatisticDroneFixing from "./Payload/PayloadStatistic/PayloadStatisticDroneFixing";
-
-import EditPayload from './Payload/PayloadManagement/Edit';
-import AddPayload from './Payload/PayloadManagement/Add';
 import PayloadDroneHistory from './Payload/PayloadToDrone/List';
 import EditSignupPayloadDrone from './Payload/PayloadToDrone/Edit';
 import AddSignupPayloadDrone from './Payload/PayloadToDrone/Add';
@@ -56,14 +53,6 @@ export const routes = [
   {
     path: '/payload-management',
     component: ListPayload,
-  },
-  {
-    path: '/edit-payload',
-    component: EditPayload,
-  },
-  {
-    path: '/add-payload',
-    component: AddPayload,
   },
   {
     path: '/payload-drone',
