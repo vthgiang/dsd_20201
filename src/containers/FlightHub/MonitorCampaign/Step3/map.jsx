@@ -33,7 +33,7 @@ const Map = ({ onChangeLocation, parkIdInit }) => {
 
   const submitSearch = (value) => {
     let data = parksData.filter((element) => {
-      let textElement = removeVietnameseTones(element.NAME);
+      let textElement = removeVietnameseTones(element.name);
       let textValue = removeVietnameseTones(value);
       if (textElement.includes(textValue)) {
         return element;
@@ -45,7 +45,7 @@ const Map = ({ onChangeLocation, parkIdInit }) => {
 
   const handleParkChange = (park) => {
     setSelectedPark(park);
-    searchTextValue(park.NAME);
+    searchTextValue(park.name);
     onChangeLocation(park);
   };
 
@@ -83,7 +83,7 @@ const Map = ({ onChangeLocation, parkIdInit }) => {
           }}
         >
           <div>
-            <h3>{selectedPark.NAME}</h3>
+            <h3>{selectedPark.name}</h3>
             <div>Vĩ độ: {selectedPark.geometry.coordinates[0]}</div>
             <div>Kinh độ: {selectedPark.geometry.coordinates[1]}</div>
           </div>
