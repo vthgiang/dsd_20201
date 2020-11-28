@@ -491,7 +491,6 @@ class List extends Component {
         des: payload.type.description,
         type_id: payload.type._id,
         weight: payload.detail.weight,
-        manufacturer: payload.detail.manufacturer,
         opticalZoom: payload.detail.opticalZoom,
         digitalZoom: payload.detail.digitalZoom,
         sizewidth: payload.detail.size.width,
@@ -560,7 +559,8 @@ class List extends Component {
     return (
       <StyleList>
         <div>
-          <div>Quản lý Payload</div>
+          <h2>Quản lý Payload</h2>
+          <br/>
           <Form
             layout="horizontal"
             className="searchtype" onFinish={(values) => this.searchPayload(values)}
@@ -568,9 +568,9 @@ class List extends Component {
             <Row justify="space-around">
               <Col span={4}>
                 <Form.Item label="Loại" name="type">
-                  <Select options={this.state.Options} />
+                <Select options={this.state.Options} />
 
-                </Form.Item>
+              </Form.Item>
               </Col>
               <Col span={4}>
                 <Form.Item label="Trạng thái" name="status">

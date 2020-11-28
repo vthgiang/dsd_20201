@@ -95,7 +95,7 @@ export const routes = [
     component: PayloadStatistic,
   },
   {
-    path: '/payload-statistic-frequency',
+    path: '/payload-statistic-type',
     component: PayloadStatisticFrequency,
   },
   {
@@ -103,7 +103,7 @@ export const routes = [
     component: PayloadStatisticTime,
   },
   {
-    path: '/payload-statistic-moment',
+    path: '/payload-statistic-work',
     component: PayloadStatisticWorking,
   },
   {
@@ -111,7 +111,7 @@ export const routes = [
     component: PayloadStatisticStatus,
   },
   {
-    path: '/payload-statistic-drone',
+    path: '/payload-statistic-fix',
     component: PayloadStatisticDroneFixing,
   },
 
