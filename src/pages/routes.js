@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Dashboard from './Dashboard';
 //Payload
 import ListPayload from './Payload/PayloadManagement/List';
+import ListTypePayload from "./Payload/PayloadType/List";
 import PayloadMaintenance from './Payload/PayloadMaintenance/List';
 import EditSchedule from './Payload/PayloadMaintenance/Edit';
 import AddSchedule from './Payload/PayloadMaintenance/Add';
@@ -54,6 +55,11 @@ export const routes = [
     path: '/payload-management',
     component: ListPayload,
   },
+  {
+    path: '/payload-type',
+    component: ListTypePayload,
+  },
+
   {
     path: '/payload-drone',
     component: PayloadDroneHistory,
