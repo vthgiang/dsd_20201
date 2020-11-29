@@ -2,7 +2,8 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
-import MyList from '../components/Group4/Notification'
+import MyList from '../components/Group4/Notification';
+import DetailedNotification from '../components/Group4/DetailedNotification';
 
 export const routes = [
   {
@@ -57,6 +58,10 @@ export const routes = [
   {
     path: '/warning',
     component: () => <MyList />,
+  },
+  {
+    path: '/warning-detail/:id',
+    component: () => <DetailedNotification />,
   },
   {
     path: '/activity-log',
