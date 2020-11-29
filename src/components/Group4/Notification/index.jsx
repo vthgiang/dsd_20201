@@ -8,7 +8,7 @@ import StarIcon from '@material-ui/icons/Star';
 import Dialog from "../Dialog";
 import { IMAGES } from '../../../constants';
 import { InvertColorsOff, SentimentSatisfied } from '@material-ui/icons';
-
+import ref from '../config4'
 var axios = require('axios');
 
 
@@ -52,9 +52,9 @@ const Primary = (props) => {
 const MyList = () => {
 
     const [datas, setDatas] = useState([]);
-    const isLoad = false;
+
     useEffect(() => {
-        if (!isLoad) {
+
             var config = {
                 method: 'get',
                 url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf',
@@ -73,8 +73,8 @@ const MyList = () => {
                 .catch(function (error) {
                     console.log(error);
                 });
-        }
-    })
+
+    },[])
 
     console.log(datas.length);
 
@@ -102,7 +102,7 @@ const MyList = () => {
             {datas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(data => (
                 <ListItemStyle className={classes.item} onClick={handleClickOpen}>
                     <ListItemAvatar className="name">
-                        <Avatar src='/images/tree.jpg' className={classes.avatar} variant="rounded">
+                        <Avatar src={ref.prop[data.ref._type].img} className={classes.avatar} variant="rounded">
                             {data.image}
                         </Avatar>
                     </ListItemAvatar>
