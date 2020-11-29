@@ -21,8 +21,8 @@ const useStyles = makeStyles({
         color: blue[600],
     },
     dialogPaper: {
-        height : '400px',
-        width: '400px'
+        height : '800px',
+        width: '800px'
     },
 });
 
@@ -36,27 +36,9 @@ function SimpleDialog(props) {
 
     return (
         <Dialog onClose={onClose} open={open} classes={{ paper: classes.dialogPaper}}>
-            <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
+            <DialogTitle id="simple-dialog-title">Thông tin chi tiết</DialogTitle>
             <List>
-                {emails.map((email) => (
-                <ListItem button onClick={() => handleListItemClick(email)} key={email}>
-                    <ListItemAvatar>
-                    <Avatar className={classes.avatar}>
-                        <PersonIcon />
-                    </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary={email} />
-                </ListItem>
-                ))}
-
-                <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
-                <ListItemAvatar>
-                    <Avatar>
-                    <AddIcon />
-                    </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary="Add account" />
-                </ListItem>
+                
             </List>
         </Dialog>
     );
