@@ -15,7 +15,16 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/react-fontawesome": "^0.1.9",
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "video-react": "0.14.0",
+    "reactjs-popup": "latest",
+    "bootstrap": "^4.4.1",
+    "react-bootstrap": "^1.0.1",
+    "redux": "^4.0.5"
   },
   "browserslist": {
     "production": [

@@ -3,6 +3,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
 
+import TableDrone from './TableDrone';
+
 export const routes = [
   {
     path: '/dashboard',
@@ -15,7 +17,7 @@ export const routes = [
   },
   {
     path: '/drone-state',
-    component: () => <div>Tình trạng drone</div>,
+    component: TableDrone,
   },
   {
     path: '/fly-setting',
