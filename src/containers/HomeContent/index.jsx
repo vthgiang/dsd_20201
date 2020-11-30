@@ -1,14 +1,37 @@
-import React from 'react';
-import { Card, Col, Image, Row, Typography } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Card, Col, Image, Row, Typography, notification } from 'antd';
 import StyleHomeContent from './index.style';
 import Meta from 'antd/lib/card/Meta';
 import { withRouter } from 'react-router-dom';
 import { IMAGES } from '../../constants';
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "../../modules/user/store";
+import { setHeaders } from "../../services/axios";
 
 const { Title } = Typography;
 
 const HomeContent = ({ history }) => {
-  console.log({ history });
+  const user = useSelector(state => state.user.user);
+  const isLogin = useSelector(state => state.user.isLogin);
+  const dispatch = useDispatch();
+
+  const handleClickIncident = (type) => {
+    if (!isLogin) {
+      localStorage.setItem("project-type", type);
+      dispatch(actions.setProjectType(type));
+      setHeaders({"project-type": type});
+      history.push('/login');
+    } else {
+      if (isLogin && user.type == type) {
+        history.push('/dashboard');
+      } else {
+        notification.warning({
+          message: "Warning",
+          description: "Bạn không có quyền vào dự án này",
+        });
+      }
+    }
+  }
   return (
     <StyleHomeContent>
       <Title level={2} className='title'>
@@ -19,7 +42,7 @@ const HomeContent = ({ history }) => {
           <Card
             hoverable
             className='card-content'
-            onClick={() => history.push('/dashboard')}
+            onClick={() => handleClickIncident("CHAY_RUNG")}
             cover={
               <Image
                 alt='example'
@@ -38,7 +61,7 @@ const HomeContent = ({ history }) => {
           <Card
             hoverable
             className='card-content'
-            onClick={() => history.push('/dashboard')}
+            onClick={() => handleClickIncident("DE_DIEU")}
             cover={
               <Image
                 alt='example'
@@ -57,7 +80,7 @@ const HomeContent = ({ history }) => {
           <Card
             hoverable
             className='card-content'
-            onClick={() => history.push('/dashboard')}
+            onClick={() => handleClickIncident("LUOI_DIEN")}
             cover={
               <Image
                 alt='example'
@@ -76,7 +99,7 @@ const HomeContent = ({ history }) => {
           <Card
             hoverable
             className='card-content'
-            onClick={() => history.push('/dashboard')}
+            onClick={() => handleClickIncident("CAY_TRONG")}
             cover={
               <Image
                 alt='example'

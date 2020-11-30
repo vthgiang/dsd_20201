@@ -8,13 +8,17 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.3.0",
+    "@reduxjs/toolkit": "^1.4.0",
     "antd": "^4.6.6",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "react": "16.9.0",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
+    "redux-persist": "^6.0.0",
     "styled-components": "^5.1.1"
   },
   "browserslist": {

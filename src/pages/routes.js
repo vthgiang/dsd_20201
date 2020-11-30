@@ -1,82 +1,83 @@
-import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import ListUser from "../modules/user/components/listUser";
 
-import Dashboard from './Dashboard';
+import Dashboard from "./Dashboard";
 
 export const routes = [
   {
-    path: '/dashboard',
+    path: "/dashboard",
     component: Dashboard,
     exact: true,
   },
   {
-    path: '/drones',
+    path: "/drones",
     component: () => <div>DroneManagement</div>,
   },
   {
-    path: '/drone-state',
+    path: "/drone-state",
     component: () => <div>Tình trạng drone</div>,
   },
   {
-    path: '/fly-setting',
+    path: "/fly-setting",
     component: () => <div>Thiết lập đường bay</div>,
   },
   {
-    path: '/drone-statistic',
+    path: "/drone-statistic",
     component: () => <div>Thống kê drone</div>,
   },
   {
-    path: '/flight-hub',
+    path: "/flight-hub",
     component: () => <div>Flight Hub</div>,
   },
   {
-    path: '/payloads',
+    path: "/payloads",
     component: () => <div>PayloadManagement</div>,
   },
   {
-    path: '/metadata',
+    path: "/metadata",
     component: () => <div>Meta Data</div>,
   },
   {
-    path: '/problem',
+    path: "/problem",
     component: () => <div>Problem</div>,
   },
   {
-    path: '/supervised-object',
+    path: "/supervised-object",
     component: () => <div>Đối tượng giám sát</div>,
   },
   {
-    path: '/statistic',
+    path: "/statistic",
     component: () => <div>Báo cáo thống kê</div>,
   },
   {
-    path: '/problems',
+    path: "/problems",
     component: () => <div>Sự cố</div>,
   },
   {
-    path: '/warning',
+    path: "/warning",
     component: () => <div>Cảnh báo</div>,
   },
   {
-    path: '/activity-log',
+    path: "/activity-log",
     component: () => <div>Lịch sử hoạt động</div>,
   },
   {
-    path: '/surveillance-domain',
+    path: "/surveillance-domain",
     component: () => <div>Miền giám sát</div>,
   },
   {
-    path: '/handle-problem',
+    path: "/handle-problem",
     component: () => <div>Xử lý sự cố</div>,
   },
   {
-    path: '/user-management',
-    component: () => <div>Quản lý người dùng</div>,
+    path: "/user-management",
+    component: ListUser,
   },
 ];
 
 export default () => (
-  <Switch>
+  <Fragment>
     {routes.map(({ path, exact = false, component: Component, ...rest }) => {
       return (
         <Route
@@ -88,6 +89,5 @@ export default () => (
         />
       );
     })}
-    <Redirect to='/' />
-  </Switch>
+  </Fragment>
 );

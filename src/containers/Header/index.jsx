@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -6,8 +6,11 @@ import {
 import { Layout } from "antd";
 import StyleHeader from "./index.style";
 import Navbar from "../Navbar";
+import { useSelector } from "react-redux";
 
 const Header = ({ collapsed, toggle }) => {
+  const isLogin = useSelector(state => state.user.isLogin);
+
   return (
     <StyleHeader>
       <Layout.Header className="header-content">
@@ -18,7 +21,7 @@ const Header = ({ collapsed, toggle }) => {
             onClick: toggle,
           }
         )}
-        <Navbar />
+        {isLogin && <Navbar />}
       </Layout.Header>
     </StyleHeader>
   );
