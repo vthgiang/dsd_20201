@@ -4,7 +4,7 @@ const initialState = {
     user: {},
     listUser: [],
     projectType: '',
-    isLogin: false
+    isLogin: false,
 };
 
 const user = createSlice({

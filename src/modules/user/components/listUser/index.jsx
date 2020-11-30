@@ -10,11 +10,9 @@ import {
     Select,
     Button,
     Modal,
-    Form,
-    DatePicker,
     notification,
 } from "antd";
-import { getListUsers } from "../../store/services";
+import { getListUsers, deleteUser } from "../../store/services";
 import { roles, statuses } from "../../config/UserConfig";
 import ModalUser from "./ModalUser";
 import { useSelector } from "react-redux";
@@ -33,8 +31,18 @@ const ListUser = () => {
 
     const fetchListUser = useCallback(async () => {
         const res = await getListUsers(filter, user.type);
-        setMeta(res.meta);
-        setListUser(res.result);
+        if (res.status === 'successful') {
+            setMeta(res.meta);
+            setListUser(res.result);
+        } else {
+            setMeta({ page_size: 20, page_id: 0 });
+            setListUser([]);
+            notification.error({
+                message: "Lỗi",
+                description: res.message && res.message !== "" ? res.message : "Có lỗi. Vui lòng thử lại!",
+            });
+        }
+        
     }, [filter, user]);
 
     useEffect(() => {
@@ -47,15 +55,26 @@ const ListUser = () => {
         }
     }, [visible]);
 
-    const handleDelete = () => {
+    const handleDelete = async (user) => {
         Modal.confirm({
             title: "Xác nhận?",
             content: "Bạn có thực sự muốn xóa người dùng này",
             onOk() {
-                notification.success({
-                    message: "Thành công",
-                    description: "Xóa người dùng thành công",
-                });
+                const res = new Promise((resolve, reject) => {
+                    resolve(deleteUser(user.id));
+                    
+                }).catch(() => console.log('Oops errors!'));
+                if (res.status == 'successful') {
+                    notification.success({
+                        message: "Thành công",
+                        description: "Xóa người dùng thành công",
+                    });
+                } else {
+                    notification.error({
+                        message: "Lỗi",
+                        description: res.message,
+                    });
+                }
             },
             onCancel() {
             },
@@ -127,7 +146,7 @@ const ListUser = () => {
                         <a onClick={() => handleEdit(record, "user")}>Edit</a>
                     </Space>
                     <Space size="middle">
-                        <a onClick={handleDelete}>Delete</a>
+                        <a onClick={() => handleDelete(record)}>Delete</a>
                     </Space>
                 </Fragment>
             ),
@@ -139,7 +158,7 @@ const ListUser = () => {
         <Select
             className="select-box"
             value={filter.status}
-            onChange={(value) => setFilter({ ...filter, status: value })}
+            onChange={(value) => setFilter({ ...filter, status: value, page_id: 0 })}
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
@@ -157,7 +176,7 @@ const ListUser = () => {
         <Select
             className="select-box"
             value={filter.role}
-            onChange={(value) => setFilter({ ...filter, role: value })}
+            onChange={(value) => setFilter({ ...filter, role: value, page_id: 0 })}
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
@@ -210,7 +229,7 @@ const ListUser = () => {
                     <Search
                         placeholder="Tìm kiếm"
                         onChange={(e) =>
-                            setFilter({ ...filter, search: e.target.value })
+                            setFilter({ ...filter, search: e.target.value, page_id: 0 })
                         }
                     />
                 </Col>

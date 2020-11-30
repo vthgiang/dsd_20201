@@ -7,6 +7,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../store/services";
 import { actions } from "../../../store";
+import { setHeaders } from "../../../../../services/axios";
 
 const { Title } = Typography;
 
@@ -19,7 +20,23 @@ const LoginForm = () => {
 
     const [message, setMessage] = useState("");
     const projectType = useSelector((state) => state.user.projectType);
+    const [saveInfo, setSaveInfo] = useState(false);
 
+    useEffect(() => {
+        const saveLogin = localStorage.getItem("saveLogin");
+
+        if (saveLogin) {
+            setSaveInfo((saveLogin == 'true'));
+        } else {
+            setSaveInfo(true);
+        }
+        const userData = JSON.parse(localStorage.getItem("dataLogin"));
+        if (saveLogin == "true") {
+            setUserInfo(userData);
+        }
+    }, []);
+
+    console.log(saveInfo)
     useEffect(() => {
         if (!projectType || projectType == "") {
             history.push("/");
@@ -28,9 +45,7 @@ const LoginForm = () => {
 
     const history = useHistory();
     const location = useLocation();
-    const [saveInfo, setSaveInfo] = useState(false);
-    const isLogin = useSelector(state => state.user.isLogin);
-
+    const isLogin = useSelector((state) => state.user.isLogin);
     useEffect(() => {
         if (isLogin) {
             history.push("/dashboard");
@@ -41,7 +56,6 @@ const LoginForm = () => {
         if (location.state && location.state.message) {
             setMessage(location.state.message);
         }
-       
     }, [location]);
 
     useEffect(() => {
@@ -66,10 +80,17 @@ const LoginForm = () => {
             if (res.status == "successful") {
                 dispatch(actions.setUserData(res.result));
                 dispatch(actions.setLogin(true));
-                localStorage.setItem('token', res.result.api_token);
+                localStorage.setItem("token", res.result.api_token);
+                setHeaders({ token: res.result.api_token });
                 history.push("/dashboard");
             } else {
                 setMessage(res.message);
+            }
+            localStorage.setItem("saveLogin", saveInfo);
+            if (saveInfo) {
+                localStorage.setItem("dataLogin", JSON.stringify(dataLogin));
+            } else {
+                localStorage.removeItem("dataLogin");
             }
         } catch (error) {}
     };
@@ -95,6 +116,10 @@ const LoginForm = () => {
         return retval;
     }, [userInfo]);
 
+    const handleChangeSaveInfo = (e) => {
+        setSaveInfo(e.target.checked);
+    };
+
     return (
         <StyleLoginForm>
             <Title level={2}>Hệ thống giám sát bằng Drone</Title>
@@ -111,7 +136,7 @@ const LoginForm = () => {
                             <UserOutlined className="site-form-item-icon" />
                         }
                         placeholder="Email hoặc sdt"
-                        value={userInfo.username}
+                        value={userInfo?.username}
                         onChange={(e) =>
                             setUserInfo({
                                 ...userInfo,
@@ -127,7 +152,7 @@ const LoginForm = () => {
                         }
                         type="password"
                         placeholder="Mật khẩu"
-                        value={userInfo.password}
+                        value={userInfo?.password}
                         onChange={(e) =>
                             setUserInfo({
                                 ...userInfo,
@@ -140,8 +165,8 @@ const LoginForm = () => {
                 <Form.Item>
                     <Form.Item name="remember" valuePropName="checked" noStyle>
                         <Checkbox
-                            onChange={(e) => setSaveInfo(e.target.value)}
-                            value={saveInfo}
+                            onChange={handleChangeSaveInfo}
+                            checked={saveInfo}
                         >
                             Lưu tài khoản
                         </Checkbox>

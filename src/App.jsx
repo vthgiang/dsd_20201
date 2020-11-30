@@ -18,6 +18,8 @@ const App = () => {
   useEffect(() => {
     if(localStorage.getItem('project-type')) {
       setHeaders({'project-type': localStorage.getItem('project-type')});
+    }
+    if(localStorage.getItem('token')) {
       setHeaders({'token': localStorage.getItem('token')});
     }
   }, [])
