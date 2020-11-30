@@ -2,7 +2,18 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
-
+import LogUser from './LogUser';
+import LogDrone from './LogDrone';
+import LogWarn from './LogWarn';
+import LogProblem from './LogProblem';
+import LogVideo from './LogVideo';
+import LogPayLoad from './LogPayLoad';
+import LogImage from './LogImage';
+import LogIncident from './LogIncident';
+import LogObjMonitor from './LogObjMonitor';
+import LogRegion from './LogRegion';
+import LogStatistic from './LogStatistic';
+import LogUAV from './LogUAV';
 export const routes = [
   {
     path: '/dashboard',
@@ -60,6 +71,54 @@ export const routes = [
   {
     path: '/activity-log',
     component: () => <div>Lịch sử hoạt động</div>,
+  },
+  {
+    path: '/log-user',
+    component: LogUser,
+  },
+  {
+    path: '/log-drone',
+    component: LogDrone,
+  },
+  {
+    path: '/log-problem',
+    component: LogProblem,
+  },
+  {
+    path: '/log-warn',
+    component: LogWarn,
+  },
+  {
+    path: '/log-payload',
+    component: LogPayLoad,
+  },
+  {
+    path: '/log-image',
+    component: LogImage,
+  },
+  {
+    path: '/log-video',
+    component: LogVideo,
+  },
+  {
+    path: '/log-incident',
+    component: LogIncident,
+  },
+  {
+    path: '/log-objmonitor',
+    component: LogObjMonitor,
+  },
+  {
+    path: '/log-region',
+    component: LogRegion,
+  },
+  {
+    path: '/log-statistic',
+    component: LogStatistic,
+  },
+  {
+    path: '/log-uav',
+    component: LogUAV,
   },
   {
     path: '/surveillance-domain',

@@ -78,6 +78,83 @@ export const sidebarMenu = [
     heading: 'Lịch sử hoạt động',
     icon: 'fas fa-file-signature',
     route: '/activity-log',
+    subMenu: [
+      
+      {
+        key: 'LogDrone',
+        heading: 'Lịch sử hoạt động của drone',
+        icon: 'fas fa-drone-alt',
+        route: '/log-drone',
+      },
+      {
+        key: 'LogPayLoad',
+        heading: 'Lịch sử hoạt động của PayLoad',
+     
+        icon: 'fas fa-layer-group',
+        route: '/log-payload',
+      },
+      {
+        key: 'LogUser',
+        heading: 'Lịch sử hoạt động người dùng',
+        icon: 'fas fa-user-circle',
+        route: '/log-user',
+      },
+      {
+        key: 'LogImage',
+        heading: 'Lịch sử lưu trữ hình ảnh',
+        icon: 'fas fa-images',
+        route: '/log-image',
+      },
+      {
+        key: 'LogVideo',
+        heading: 'Lịch sử lưu trữ video',
+        icon: 'fas fa-images',
+        route: '/log-video',
+      },
+      {
+        key: 'LogProblem',
+        heading: 'Lịch sử sự cố',
+        icon: 'fas fa-toolbox',
+        route: '/log-problem',
+      },
+      {
+        key: 'LogObjMonitor',
+        heading: 'Lịch sử hoạt động của đối tượng giám sát',
+        icon: 'fas fa-binoculars',
+        route: '/log-objmonitor',
+      },
+      {
+        key: 'LogWarn',
+        heading: 'Lịch sử cảnh báo',
+        icon: 'far fa-bell',
+        route: '/log-warn',
+      },
+      {
+        key: 'LogIncident',
+        heading: 'Lịch sử xử lý sự cố',
+        icon: 'fas fa-toolbox',
+        route: '/log-incident',
+      },
+      
+      {
+        key: 'LogRegion',
+        heading: 'Lịch sử hoạt động của miền giám sát',
+        icon: 'fas fa-crop-alt',
+        route: '/log-region',
+      },
+      {
+        key: 'LogStatistic',
+        heading: 'Lịch sử báo cáo, thống kê',
+        icon: 'fa fa-file-chart-line',
+        route: '/log-statistic',
+      },
+      {
+        key: 'LogUAV',
+        heading: 'Lịch sử kết nối UAV',
+        icon: 'fas fa-images',
+        route: '/log-uav',
+      },
+    ],
   },
   {
     key: 'SurveillanceDomain',
