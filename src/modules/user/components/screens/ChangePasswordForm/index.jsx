@@ -6,11 +6,12 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { actions } from "../../../store";
 import { Typography } from "antd";
-import { withRouter } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const { Title } = Typography;
 
-const ChangePasswordForm = ({ history }) => {
+const ChangePasswordForm = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const [userInfo, setUserInfo] = useState({
         oldPassword: "",
@@ -19,6 +20,8 @@ const ChangePasswordForm = ({ history }) => {
         repassword: "",
     });
     const [message, setMessage] = useState("");
+    const location = useLocation();
+
     const handleChangePassword = async () => {
         try {
             if (!validateData()) {
@@ -34,11 +37,7 @@ const ChangePasswordForm = ({ history }) => {
             setMessage("");
             const res = await changePassword(dataChangePassword);
             if (res.status == "successful") {
-                dispatch(actions.setUserData({}));
-                history.push({
-                    pathname: "/login",
-                    state: { message: "Vui lòng đăng nhập lại!" },
-                });
+                history.push(location.state.lastRoute);
             } else {
                 setMessage(res.message);
             }
@@ -76,6 +75,10 @@ const ChangePasswordForm = ({ history }) => {
         }
         return retval;
     }, [userInfo]);
+
+    const handleGoBack = () => {
+        history.push(location.state.lastRoute);
+    }
 
     return (
         <StyleChangePasswordForm>
@@ -124,11 +127,8 @@ const ChangePasswordForm = ({ history }) => {
                 </Form.Item>
                 {message && <p className="noti-message">{message}</p>}
                 <Form.Item>
-                    <a className="first-button" onClick={() => history.push("/login")}>
-                        Đăng nhập
-                    </a>
-                    <a className="second-button" onClick={() => history.push("/register")}>
-                        Đăng ký
+                    <a className="second-button" onClick={() => handleGoBack}>
+                        Quay lại
                     </a>
                 </Form.Item>
 
@@ -139,7 +139,7 @@ const ChangePasswordForm = ({ history }) => {
                         className="login-form-button"
                         onClick={handleChangePassword}
                     >
-                        Đăng ký
+                        Đổi mật khẩu
                     </Button>
                 </Form.Item>
             </Form>
@@ -147,4 +147,4 @@ const ChangePasswordForm = ({ history }) => {
     );
 };
 
-export default withRouter(ChangePasswordForm);
+export default ChangePasswordForm;

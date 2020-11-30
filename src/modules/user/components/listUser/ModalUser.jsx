@@ -11,6 +11,7 @@ import { updateUser, createUser, getUser } from "../../store/services";
 import React, { useCallback, useEffect, useState } from "react";
 import UploadImage from "./UploadImage";
 import { roles, statuses, userHost } from "../../config/UserConfig";
+import moment from "moment";
 
 const { Option } = Select;
 
@@ -19,12 +20,11 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
     const [imageUrl, setImageUrl] = useState("");
     const [message, setMessage] = useState("");
 
-
     useEffect(() => {
-        if(!visible) {
-            setImageUrl('')
+        if (!visible) {
+            setImageUrl("");
         }
-    }, [visible])
+    }, [visible]);
 
     const fetchUser = useCallback(async () => {
         try {
@@ -56,6 +56,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
             return;
         }
         const dataUser = buildUserData();
+        console.log(dataUser);
         if (userId && userId != "") {
             dataUser.id = userId;
             res = await updateUser(dataUser);
@@ -68,7 +69,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
         } else {
             notification.error({
                 message: "",
-                description: res.result,
+                description: res.message,
             });
         }
     };
@@ -135,7 +136,6 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
             "phone",
             "avatar",
             "address",
-            "birthday",
             "status",
             "role",
         ];
@@ -145,6 +145,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
             }
         });
         data.type = localStorage.getItem("project-type");
+        data.birthday = moment(user["birthday"]).format("YYYY-MM-DD 00:00:00");
         return data;
     };
 
@@ -183,24 +184,6 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
                 return (
                     <Option key={index} value={status.code}>
                         {status.name}
-                    </Option>
-                );
-            })}
-        </Select>
-    );
-
-    const renderSelectType = () => (
-        <Select
-            className="select-box"
-            value={user?.type}
-            onChange={(value) => setUser({ ...user, type: value })}
-            defaultValue="Chưa xác định"
-            style={{ width: "100%" }}
-        >
-            {roles.map((type, index) => {
-                return (
-                    <Option key={index} value={type.code}>
-                        {type.name}
                     </Option>
                 );
             })}
@@ -342,9 +325,16 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
                     <Form.Item name="role" style={{ width: "45%" }}>
                         <label htmlFor="">Ngày sinh</label>
                         <DatePicker
-                            value={user?.birthday}
+                            value={
+                                user.birthday
+                                    ? moment(user?.birthday, "YYYY-MM-DD")
+                                    : ""
+                            }
                             onChange={(date) =>
-                                setUser({ ...user, birthday: date })
+                                setUser({
+                                    ...user,
+                                    birthday: date,
+                                })
                             }
                             style={{ width: "100%" }}
                             format={"YYYY-MM-DD"}
@@ -368,7 +358,9 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
                     <Form.Item name="status" style={{ margin: "0 auto" }}>
                         <label htmlFor="">Avatar</label>
                         <UploadImage
-                            imageUrl={imageUrl ? imageUrl : `media/users/blank.png`}
+                            imageUrl={
+                                imageUrl ? imageUrl : `media/users/blank.png`
+                            }
                             setImageUrl={setImageUrl}
                         />
                     </Form.Item>

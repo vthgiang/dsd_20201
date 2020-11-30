@@ -9,7 +9,7 @@ import { Popover, Avatar, Badge } from "antd";
 import { BellOutlined, UserOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../modules/user/store";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import {
   Input,
   Row,
@@ -25,6 +25,8 @@ const Navbar = () => {
   const history = useHistory();
   const [user, setUser] = useState(useSelector(state => state.user.user));
   const [visible, setVisible] = useState(false);
+  const location = useLocation();
+
   const notification = () => (
     <div>
       <p>Thông báo</p>
@@ -47,6 +49,7 @@ const Navbar = () => {
   const profile = () => (
     <div>
       <p onClick={handleEdit} style={{ cursor: "pointer" }}>Tài khoản</p>
+      <p onClick={handleChangePassword} style={{ cursor: "pointer" }}>Đổi mật khẩu</p>
       <p onClick={handleLogout} style={{ cursor: "pointer" }}>
         Đăng xuất
       </p>
@@ -55,6 +58,13 @@ const Navbar = () => {
 
   const handleSave = async () => {
     const res = await updateUser(user);
+  }
+
+  const handleChangePassword = () => {
+    history.push({
+      pathname: '/change-password',
+      state: { lastRoute: location.pathname },
+    });
   }
 
   return (

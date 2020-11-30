@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Input, Button, Checkbox, Select } from "antd";
 import StyleRegisterForm from "./index.style";
 import { register } from "../../../store/services";
@@ -22,7 +22,7 @@ const RegisterForm = () => {
         repassword: "",
         type: ""
     });
-
+    const projectType = useSelector(state => state.user.projectType);
     const [message, setMessage] = useState("");
 
     const handleRegister = async () => {
@@ -36,7 +36,7 @@ const RegisterForm = () => {
                 email: userInfo.email,
                 password: userInfo.password,
                 repassword: userInfo.repassword,
-                type: userInfo.type
+                type: projectType,
             };
             setMessage("");
             const res = await register(dataRegister);
@@ -80,11 +80,6 @@ const RegisterForm = () => {
         if (userInfo.repassword !== userInfo.password) {
             retval = false;
             setMessage("Xác nhận mật khẩu không đúng!");
-            return retval;
-        }
-        if (typeof userInfo.type === 'undefined' || userInfo.type === "Chưa xác định") {
-            retval = false;
-            setMessage("Vui lòng chọn dự án!");
             return retval;
         }
         return retval;
@@ -157,26 +152,6 @@ const RegisterForm = () => {
                             })
                         }
                     />
-                </Form.Item>
-                <Form.Item>
-                    <label htmlFor="">Loại dự án</label>
-                    <Select
-                        className="select-box"
-                        value={userInfo?.type}
-                        onChange={(value) => {
-                            setUserInfo({ ...userInfo, type: value });
-                        }}
-                        defaultValue="Chưa xác định"
-                        style={{ width: "100%" }}
-                    >
-                        {types.map((type, index) => {
-                            return (
-                                <Option key={index} value={type.code}>
-                                    {type.name}
-                                </Option>
-                            );
-                        })}
-                    </Select>
                 </Form.Item>
                 {message && <p className="noti-message">{message}</p>}
                 <Form.Item>

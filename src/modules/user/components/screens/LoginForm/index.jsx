@@ -25,11 +25,12 @@ const LoginForm = () => {
             history.push("/");
         }
     }, [projectType]);
+
     const history = useHistory();
     const location = useLocation();
     const [saveInfo, setSaveInfo] = useState(false);
     const isLogin = useSelector(state => state.user.isLogin);
- 
+
     useEffect(() => {
         if (isLogin) {
             history.push("/dashboard");
@@ -40,11 +41,17 @@ const LoginForm = () => {
         if (location.state && location.state.message) {
             setMessage(location.state.message);
         }
-        const timer = setTimeout(() => {
-            setMessage("");
-        }, 3000);
-        return () => clearTimeout(timer);
+       
     }, [location]);
+
+    useEffect(() => {
+        if (message && message !== "") {
+            const timer = setTimeout(() => {
+                setMessage("");
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [message]);
 
     const handleLogin = async () => {
         try {
@@ -59,7 +66,7 @@ const LoginForm = () => {
             if (res.status == "successful") {
                 dispatch(actions.setUserData(res.result));
                 dispatch(actions.setLogin(true));
-                dispatch(actions.setProjectType(res.result.type));
+                localStorage.setItem('token', res.result.api_token);
                 history.push("/dashboard");
             } else {
                 setMessage(res.message);

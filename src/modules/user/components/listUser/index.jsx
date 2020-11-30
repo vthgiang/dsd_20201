@@ -75,7 +75,7 @@ const ListUser = () => {
         },
         { title: "Email", dataIndex: "email", key: "email" },
         { title: "Sdt", dataIndex: "phone", key: "phone" },
-        { title: "Địa chỉ", dataIndex: "address", key: "address" },
+        { title: "Địa chỉ", dataIndex: "address", key: "address", width: "30%" },
         {
             title: "Trạng thái",
             key: "status",
@@ -131,6 +131,7 @@ const ListUser = () => {
                     </Space>
                 </Fragment>
             ),
+            width: "10%",
         },
     ];
 
