@@ -2,7 +2,7 @@
 
 //NEW COMPONENT
 import React, { Component } from "react";
-import { Form, Input, Button, Select, DatePicker} from 'antd';
+import { Form, Input, Button, Select, DatePicker, TimePicker} from 'antd';
 import StyleEdit from '../index.style';
 import axios from 'axios';
 
@@ -45,12 +45,13 @@ class AddSignupPayloadDrone extends Component {
         { value: 'true', label: 'Bật tự động theo dõi' },
         { value: 'false', label: 'tắt tự động theo dõi' },
       ],
-      // drone: [
-      //   {value: '1', label: 'Drone 1'},
-      //   {value: '2', label: 'Drone 2'},
-      //   {value: '3', label: 'Drone 3'},
 
-      // ]
+      numberOfConfigs: [
+         {value: '1', label: '1'},
+         {value: '2', label: '2'},{value: '3', label: '3'},
+      ],
+      numberConfig: '',
+      configs: [],
     }
   }
 
@@ -72,42 +73,58 @@ class AddSignupPayloadDrone extends Component {
               shootInterval: event.target.value,
               reason: event.target.value,
               droneId: event.target.value,
+              numberOfConfigs: event.target.value,
             });
           }
         
       handleFormSubmit(values) {
-            console.log(values);        
-            const payloadToDrone = {
-              // time: this.state.time,
-              // payloadType: this.state.payloadType,
-              // payloadId: this.state.payloadId,
-             
-              // manufacturer: this.state.manufacturer,
-              // opticalZoom: this.state.opticalZoom,
-              // digitalZoom: this.state.digitalZoom,
-              // shooting: this.state.shooting,
+        const configsPayload = [];
 
-              config: [{
-                panning: values.pan,
-                tilting: values.tilt,
-                zoom: values.zoom,
-                autoTracking: values.tracking,
-                shootInterval: values.shooting
-              }],
+        for (var i = 0; i < values.numberOfConfigs; i ++) {
+          var startTimeName = 'configsStartTime' + i; 
+          var endTimeName = "configsEndTime" + i; 
+          var objectName = "configsObject" + i; 
+          var panName = "configsPan" + i; 
+          var tiltName = "configsTilt" + i; 
+          var zoomName = "configsZoom" + i; 
+          var trackingName = "configsTracking" + i; 
+          var shootName = "configsShoot" + i; 
+
+          configsPayload.push({
+            startTime: values[startTimeName].format("HH:mm:ss"),
+                  endTime: values[endTimeName].format("HH:mm:ss"),
+                  object: values[objectName],
+                  config: {
+                    panning: values[panName],
+                    tilting: values[tiltName],
+                    zoom: values[zoomName],
+                    autoTracking: values[trackingName],
+                    shootInterval: values[shootName]
+                  },
+          })
+        }
+
+            const payloadToDrone = {
+              configs: configsPayload,
+              
               droneId: values.droneId,
               payloadId: values.payloadId,
               reason: values.reason,
 
             }
+            console.log(payloadToDrone);
         
             axios.post('https://dsd06.herokuapp.com/api/payloadregister/working/' + payloadToDrone.payloadId, payloadToDrone)
                 .then(res => {
                 console.log(res.data);
+                setTimeout(function() {
+                  window.location.reload(false);
+                }, 3000)
               })
           }
         
           getAllPayload() {
-            axios.get('https://dsd06.herokuapp.com/api/payload')
+            axios.get('https://dsd06.herokuapp.com/api/payload?status=idle')
             .then(res => {
               const options = res.data.map(payload =>
                 ({
@@ -131,11 +148,18 @@ class AddSignupPayloadDrone extends Component {
               this.setState({DroneOptions: options});
             })
           }
-
+          
+          handleSelectNumberOfConfig = (e) => {
+            const valueSelected = e;
+            this.setState({ numberConfig : valueSelected});
+         }
+        
+         configNumbers() {
+          return [...Array(parseInt(this.state.numberConfig || 0)).keys()];
+        }
 
     render() {
-      const { visible, visibleAdd, visibleDelete, currentTable, tables } = this.state;
-
+      const { visible, visibleAdd, visibleDelete, currentTable, tables} = this.state;
 
       return (
       <StyleEdit>
@@ -160,6 +184,26 @@ class AddSignupPayloadDrone extends Component {
         >
           <DatePicker/>
           </Form.Item> */}
+        <Form.Item label="Số lượng cấu hình" name="numberOfConfigs">
+            <Select options={this.state.numberOfConfigs} onChange ={this.handleSelectNumberOfConfig}>
+            </Select>
+        </Form.Item>
+        <Form.Item label="Drone" name ="droneId" rules={[{ required: true }]}>
+          <Select options={this.state.DroneOptions}>
+          </Select>
+        </Form.Item>
+        {/* <Form.Item
+          label="Mô tả"
+          name="status"
+          rules={[{ required: true, message: 'Please input your password!' }]}
+        >
+          <TextArea/>
+        </Form.Item> */}
+        <Form.Item label="Lý do" name="reason">
+          <Input placeholder="Lý do"></Input>
+
+        </Form.Item>
+
         <Form.Item
             label="Thiết bị"
             name="payloadId"
@@ -168,18 +212,16 @@ class AddSignupPayloadDrone extends Component {
             <Select options = {this.state.Options}>
             </Select>
         </Form.Item>
-        {/* <Form.Item
-          label="Payload"
-          name="payloadId"
-          rules={[{required: true }]}
-        >
-          <Select>
-                <option value="payload1">Payload 1</option>
-                <option value="payload2">Payload 2</option>
-                <option value="payload3">Payload 3</option>
-
-            </Select>
-        </Form.Item> */}
+      
+        {/* <Form.Item label="Thời gian bắt đâu" name="startTime" rules={[{required: true, message: 'Please select time!'}]}>
+          <TimePicker></TimePicker>
+        </Form.Item>
+        <Form.Item label="Thời gian kết thúc" name="endTime" rules={[{required: true, message: 'Please select time!'}]}>
+          <TimePicker></TimePicker>
+        </Form.Item>
+        <Form.Item label="Đối tượng" name="object">
+          <Input></Input>
+        </Form.Item>
         <Form.Item label="Panning(Từ trái qua phải)" name ="pan" rules={[{  message: 'Please input panning!' }]}>
           <Input placeholder="0 độ - 360 độ"></Input>
         </Form.Item>
@@ -198,22 +240,43 @@ class AddSignupPayloadDrone extends Component {
           <Select options={this.state.shooting}>
             
           </Select>
-        </Form.Item>
-        <Form.Item label="Drone" name ="droneId" rules={[{ required: true }]}>
-          <Select options={this.state.DroneOptions}>
-          </Select>
-        </Form.Item>
-        {/* <Form.Item
-          label="Mô tả"
-          name="status"
-          rules={[{ required: true, message: 'Please input your password!' }]}
-        >
-          <TextArea/>
         </Form.Item> */}
-        <Form.Item label="Lý do" name="reason">
-          <Input placeholder="Lý do"></Input>
 
-        </Form.Item>
+        {/* FORM DYNAMIC */}
+        
+        {this.configNumbers().map(i => (
+            <Form.Item key={i} name="configs" {...layout} style={{marginLeft: '200px'}}>
+               <h4>Cấu hình {i+1}</h4>
+              <Form.Item label="Thời gian bắt đâu" name={`configsStartTime${i}`} rules={[{required: true, message: 'Please select time!'}]}>
+                <TimePicker></TimePicker>
+              </Form.Item>
+              <Form.Item label="Thời gian kết thúc" name={`configsEndTime${i}`} rules={[{required: true, message: 'Please select time!'}]}>
+                <TimePicker></TimePicker>
+              </Form.Item>
+              <Form.Item label="Đối tượng" name={`configsObject${i}`}>
+                <Input></Input>
+              </Form.Item>
+              <Form.Item label="Panning(Từ trái qua phải)" name ={`configsPan${i}`} rules={[{  message: 'Please input panning!' }]}>
+                <Input placeholder="0 độ - 360 độ"></Input>
+              </Form.Item>
+              <Form.Item label="Tilting(Từ trên xuống dưới)" name ={`configsTilt${i}`} rules={[{  message: 'Please input tilting!' }]}>
+                <Input placeholder="0 độ - 360 độ"></Input>
+              </Form.Item>
+              <Form.Item label="Zooming" name ={`configsZoom${i}`} rules={[{  message: 'Please input zooming!' }]}>
+                <Input placeholder="2.0 Megapixel trở lên"></Input>
+              </Form.Item>
+              <Form.Item label="Auto Tracking" name ={`configsTracking${i}`} rules={[{ }]}>
+                <Select options={this.state.tracking}>
+                
+                </Select>
+              </Form.Item>
+              <Form.Item label="Shoot interval" name ={`configsShoot${i}`} rules={[{  }]}>
+                <Select options={this.state.shooting}>
+                  
+                </Select>
+              </Form.Item> 
+          </Form.Item>
+        ))}
 
         <Form.Item {...tailLayout}>
           <Button type="primary" htmlType="submit">
