@@ -2,7 +2,7 @@
 
 //NEW COMPONENT
 import React, { Component } from "react";
-import { Form, Input, Button, Select, DatePicker, TimePicker} from 'antd';
+import { Form, Input, Button, Select, DatePicker, TimePicker, Alert} from 'antd';
 import StyleEdit from '../index.style';
 import axios from 'axios';
 
@@ -52,6 +52,8 @@ class AddSignupPayloadDrone extends Component {
       ],
       numberConfig: '',
       configs: [],
+      showSuccessAlert: false,
+      showFailAlert: false,
     }
   }
 
@@ -117,15 +119,17 @@ class AddSignupPayloadDrone extends Component {
             axios.post('https://dsd06.herokuapp.com/api/payloadregister/working/' + payloadToDrone.payloadId, payloadToDrone)
                 .then(res => {
                 console.log(res.data);
+                this.setState({showSuccessAlert: true});
                 setTimeout(function() {
                   window.location.reload(false);
-                }, 3000)
+                }, 2000)
               })
           }
         
           getAllPayload() {
             axios.get('https://dsd06.herokuapp.com/api/payload?status=idle')
             .then(res => {
+              console.log(res.data);
               const options = res.data.map(payload =>
                 ({
                   label: payload.name,
@@ -176,6 +180,7 @@ class AddSignupPayloadDrone extends Component {
         // onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
       >
+        { this.state.showSuccessAlert && <Alert type={"success"} data={"Update succesfully"} /> }
         <h3 className="searchtype"  >Thông tin đăng ký</h3>
         {/* <Form.Item
           label="Thời gian"

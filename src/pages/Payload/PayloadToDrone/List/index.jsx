@@ -153,6 +153,7 @@ import StyleList from '../index.style';
 import { useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -168,7 +169,13 @@ class PayloadDroneHistory extends Component {
       PayloadOptions: [],
       PayloadTypeOptions: [],
       idPayloadReturn: null,
-      visableReturnModal: false
+      visableReturnModal: false,
+
+      payloadCode: '',
+      payloadName: '',
+      status: '',
+      startedAt: '',
+      type: '',
     }
   }
 
@@ -213,23 +220,46 @@ class PayloadDroneHistory extends Component {
   }
 
   handleFindPayloadHistory(values){
-    const payloadId = { payloadId: values.payloadId };
-    axios.get('https://dsd06.herokuapp.com/api/payloadregister/histories/' + payloadId)
+    // const payloadId = { payloadId: values.payloadId };
+    axios.get('https://dsd06.herokuapp.com/api/payloadregister/histories/' + values.payloadId)
       .then(res => {
         const listPayloadDroneHistory = res.data;
-        console.log(res.data);
+        listPayloadDroneHistory.map(payloadHistory => {
+          const payloadId = payloadHistory.payload;
+          this.setState(
+            {startedAt: payloadHistory.startedAt,
+              type: payloadHistory.type,
+              payloadId: payloadHistory.payload
+            });
+          this.findPayloadById(payloadId);
+        })
+        console.log(listPayloadDroneHistory);
         this.setState({ listPayloadDroneHistory });
+        // this.setState({ payloadId: res.data.payload});
+        
       })
 
+  }
+
+  findPayloadById(payloadId) {
+    axios.get('https://dsd06.herokuapp.com/api/payload/' + payloadId)
+    .then(res => {
+      const payload = res.data;
+      this.setState({
+        payloadCode: payload.code,
+        payloadName: payload.name,
+        status: payload.status
+      })
+    })
   }
 
   handleCancelReturnPayload = e => {
     this.setState({ visableReturnModal: false })
   }
 
-  showModalReturnPayload(record) {
+  showModalReturnPayload() {
     this.setState({ visableReturnModal: true })
-    this.setState({ idPayloadReturn: record.id })
+    this.setState({ idPayloadReturn: this.state.payloadId })
   }
 
   returnPayload() {
@@ -258,11 +288,11 @@ class PayloadDroneHistory extends Component {
     ]
     
     const columns = [
-      {
-        title: 'STT',
-        dataIndex: 'id',
-        key: 'id',
-      },
+      // {
+      //   title: 'STT',
+      //   dataIndex: 'id',
+      //   key: 'id',
+      // },
       {
         title: 'Mã payload',
         dataIndex: 'payloadCode',
@@ -273,59 +303,91 @@ class PayloadDroneHistory extends Component {
         dataIndex: 'payloadName',
         key: 'payloadName',
       },
+      // {
+      //   title: 'Loại thiết bị',
+      //   dataIndex: 'typeDevice',
+      //   key: 'typeDevice',
+      // },
+      // {
+      //   title: 'Tên Drone',
+      //   dataIndex: 'drone',
+      //   key: 'drone',
+      // },
+      // {
+      //   title: 'Phí dịch vụ',
+      //   dataIndex: 'fee',
+      //   key: 'fee'
+      // },
+      // {
+      //   title:  'Lý do',
+      //   dataIndex: 'reason',
+      //   key: 'reason'
+      // },
+      // {
+      //   title: 'Ngày đăng ký',
+      //   dataIndex: 'createdTime',
+      //   key: 'createdTime',
+      // },
+      // {
+      //   title: 'Payload',
+      //   dataIndex: 'payloadId',
+      //   key: 'payloadId'
+      // },
       {
-        title: 'Loại thiết bị',
-        dataIndex: 'typeDevice',
-        key: 'typeDevice',
+        title: 'Thời gian bắt đầu',
+        dataIndex: 'startedAt',
+        key: 'startedAt'
       },
       {
-        title: 'Tên Drone',
-        dataIndex: 'drone',
-        key: 'drone',
+        title: 'Trạng thái',
+        dataIndex: 'type',
+        key: 'type'
       },
-      {
-        title: 'Phí dịch vụ',
-        dataIndex: 'fee',
-        key: 'fee'
-      },
-      {
-        title:  'Lý do',
-        dataIndex: 'reason',
-        key: 'reason'
-      },
-      {
-        title: 'Ngày đăng ký',
-        dataIndex: 'createdTime',
-        key: 'createdTime',
-      },
-      {
-        title: 'Hành động',
-        key: 'operation',
-        width: 100,
-        render: (text, record) => (
-          <Space size="small" >
-            {/* <Button type="link" onClick={() => this.props.history.push('/edit-signup-payload-drone')}>Sửa</Button> */}
-            {/* <Button danger type="text">Trả payload</Button> */}
-            <Button danger type="text" onClick={() => this.showModalReturnPayload(record)}>Trả payload</Button>
-          </Space>
-        ),
-      },
+      // {
+      //   title: 'Hành động',
+      //   key: 'payloadId',
+      //   width: 100,
+      //   dataIndex: 'payloadId',
+      //   render: (text, record) => (
+      //     <Space size="small" >
+      //       {/* <Button type="link" onClick={() => this.props.history.push('/edit-signup-payload-drone')}>Sửa</Button> */}
+      //       {/* <Button danger type="text">Trả payload</Button> */}
+      //       <Button style={{backgroundColor: "red", color:"white"}} danger type="text" onClick={() => this.showModalReturnPayload()}>Trả payload</Button>
+      //     </Space>
+      //   ),
+      // },
     ];
 
-    const dataSource = 
-      this.state.listPayloadDroneHistory.map(payloadDroneHistory =>
-        ({
-          id: payloadDroneHistory.id,
-          payloadCode: payloadDroneHistory.payload.code,
-          payloadName: payloadDroneHistory.payload.name,
-          type: payloadDroneHistory.type,
-          reason: payloadDroneHistory.reason,
-          fee: payloadDroneHistory.fee,
-          droneId: payloadDroneHistory.droneId,
-          startedAt: payloadDroneHistory.startedAt,
-          finishedAt: payloadDroneHistory.finishedAt
-        })
-      )
+    // const dataSource = 
+    //   this.state.listPayloadDroneHistory.map(payloadDroneHistory =>
+    //     // ({
+    //     //   id: payloadDroneHistory.id,
+    //     //   payloadCode: payloadDroneHistory.payload.code,
+    //     //   payloadName: payloadDroneHistory.payload.name,
+    //     //   type: payloadDroneHistory.type,
+    //     //   reason: payloadDroneHistory.reason,
+    //     //   fee: payloadDroneHistory.fee,
+    //     //   droneId: payloadDroneHistory.droneId,
+    //     //   startedAt: payloadDroneHistory.startedAt,
+    //     //   finishedAt: payloadDroneHistory.finishedAt
+    //     // })
+    //     ({
+    //         droneId: payloadDroneHistory.droneId,
+    //         payloadId: payloadDroneHistory.payload,
+    //         startedAt: payloadDroneHistory.startedAt,
+    //         type: payloadDroneHistory.type,
+
+
+    //     })
+    //   )
+
+    const dataSource = [{
+      payloadCode: this.state.payloadCode,
+      payloadName: this.state.payloadName,
+      startedAt: this.state.startedAt,
+      type: this.state.type,
+      payloadId: this.state.payloadId
+    }]
   
       const { visible, visibleAdd, visableReturnModal, currentTable, tables } = this.state;
 
@@ -364,7 +426,7 @@ class PayloadDroneHistory extends Component {
             </Col>
 
             <Col span={3}>
-              <Button type="primary" icon={<SearchOutlined />} >
+              <Button type="primary" htmlType="submit" icon={<SearchOutlined />} >
                 Tìm kiếm
               </Button>
             </Col>

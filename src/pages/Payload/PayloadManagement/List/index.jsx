@@ -47,6 +47,7 @@ class List extends Component {
   loadAllPayload() {
     axios.get(`http://dsd06.herokuapp.com/api/payload`)
       .then(res => {
+        console.log(res.data);
         //const persons = res.data;
         this.setState({ tables: res.data });
       })
