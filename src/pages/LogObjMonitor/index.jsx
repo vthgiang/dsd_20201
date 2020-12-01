@@ -448,7 +448,7 @@ class App extends React.Component{
     );
   }
 }
-function LogIncident(){
+function LogObjMonitor(){
   return(
     <>
       <App />
@@ -456,4 +456,4 @@ function LogIncident(){
     </>
   );
 }
-export default LogIncident;
+export default LogObjMonitor;
