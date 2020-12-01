@@ -76,11 +76,11 @@ export const routes = [
     path: '/payload-configuration',
     component: PayloadSetting,
   },
-  {
+  /* {
     path: '/payload-maintenance',
     component: PayloadMaintenance,
-  },
-  {
+  }, */
+  /* {
     path: '/edit-schedule',
     component: EditSchedule,
   },
@@ -88,7 +88,7 @@ export const routes = [
     path: '/add-schedule',
     component: AddSchedule,
   },
-
+ */
   //Payload statistic
   {
     path: '/payload-statistic',

@@ -61,12 +61,12 @@ export const sidebarMenu = [
         icon: 'fa fa-file-chart-line',
         route: '/payload-statistic',
       },
-      {
+      /* {
         key: 'PayloadMaintenance',
         heading: 'Bảo dưỡng Payload',
         icon: 'fa fa-tools',
         route: '/payload-maintenance',
-      },
+      }, */
       {
         key: 'PayloadToDrone',
         heading: 'Payload - Drone',
