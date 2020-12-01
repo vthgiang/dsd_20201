@@ -139,8 +139,7 @@ class MonitorRegionActivity extends React.Component {
         title: 'Thời gian',
         key: 'timestamp',
         dataIndex: 'timestamp',
-        sorter: (a, b) => a.timestamp - b.timestamp,
-        sortOrder: sortedInfo.columnKey === 'timestamp' && sortedInfo.order,
+        ...this.getColumnSearchProps('timestamp'),
       },
       {
         title: 'Trạng thái',
@@ -290,8 +289,7 @@ class MonitorRegion extends React.Component {
         title: 'Thời gian',
         key: 'timestamp',
         dataIndex: 'timestamp',
-        sorter: (a, b) => a.timestamp - b.timestamp,
-        sortOrder: sortedInfo.columnKey === 'timestamp' && sortedInfo.order,
+        ...this.getColumnSearchProps('timestamp'),
       },
      
     ];

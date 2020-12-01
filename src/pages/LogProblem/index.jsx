@@ -139,8 +139,7 @@ class User extends React.Component {
         title: 'Thời gian',
         dataIndex: 'timestamp',
         key: 'timestamp',
-        sorter: (a, b) => a.timestamp - b.name.timstamp,
-        sortOrder: sortedInfo.columnKey === 'timstamp' && sortedInfo.order,
+        ...this.getColumnSearchProps('timestamp'),
       },
      
     ];
@@ -291,8 +290,7 @@ class UserActivity extends React.Component {
         title: 'Thời gian',
         dataIndex: 'timestamp',
         key: 'timestamp',
-        sorter: (a, b) => a.timestamp- b.timestamp,
-        sortOrder: sortedInfo.columnKey === 'timestamp' && sortedInfo.order,
+        ...this.getColumnSearchProps('timestamp'),
       },
       {
         title: 'Trạng thái',
