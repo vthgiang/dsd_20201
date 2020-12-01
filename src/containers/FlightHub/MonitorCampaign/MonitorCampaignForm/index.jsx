@@ -19,7 +19,7 @@ const MonitorCampaignForm = ({
   attachParams,
 }) => {
   const history = useHistory();
-  const [current, setCurrent] = React.useState(0);
+  const [current, setCurrent] = React.useState(2);
   const [data, setData] = useState({});
 
   useEffect(() => {
