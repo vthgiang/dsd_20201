@@ -52,6 +52,7 @@ const Map = ({
               });
               setCurrentMonitoredZone(zone);
             }
+            setSelectedMonitoredZone(monitoredZoneInit);
           }
         }
       })
@@ -146,7 +147,6 @@ const Map = ({
           }
           onClick={(e) => handleClickMonitoredZones(monitoredZonesData[1], e)}
           options={
-            monitoredZoneInit === monitoredZonesData[1]._id ||
             selectedMonitoredZone === monitoredZonesData[1]._id
               ? {
                   strokeColor: '#d34052',
@@ -196,8 +196,7 @@ const Map = ({
                 justifyContent: 'center',
               }}
             >
-              {currentMonitoredZone._id === monitoredZoneInit ||
-              currentMonitoredZone._id === selectedMonitoredZone ? (
+              {currentMonitoredZone._id === selectedMonitoredZone ? (
                 <button onClick={(e) => handleMonitoredZoneChange('', e)}>
                   <HeatMapOutlined /> &ensp;
                   <a>Bỏ chọn miền g/s này</a>
