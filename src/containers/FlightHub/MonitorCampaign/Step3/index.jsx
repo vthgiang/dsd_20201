@@ -3,6 +3,7 @@ import StyleStep3 from './index.style';
 import { Button, Col, Form, Select, Row } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
 import WrappedMap from './map';
+const axios = require('axios');
 
 const { Option } = Select;
 
@@ -14,10 +15,38 @@ const Step3 = ({
   monitoredObjects,
 }) => {
   const [form] = Form.useForm();
+  const [objectData, setObjectData] = useState([]);
+
+  const getObjectData = () => {
+    axios({
+      method: 'GET',
+      url: `https://dsd05-monitored-object.herokuapp.com/monitored-object`,
+    })
+      .then((res) => {
+        if (res.data) {
+          setObjectData(res.data.content);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     form.setFieldsValue(data);
+    getObjectData();
   }, [data, form]);
+
+  const getObjectOptions = () => {
+    const options = objectData.map((item) => {
+      return (
+        <Option key={item._id} value={item._id}>
+          {item.name}
+        </Option>
+      );
+    });
+    return options;
+  };
 
   const onFinish = (values) => {
     handleChangeData(values);
