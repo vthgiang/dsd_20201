@@ -14,11 +14,12 @@ const { Step } = Steps;
 const MonitorCampaignForm = ({
   initialData,
   title,
-  monitorObjects = [],
+  monitoredObjects = [],
   monitoredZones = [],
+  attachParams,
 }) => {
   const history = useHistory();
-  const [current, setCurrent] = React.useState(2);
+  const [current, setCurrent] = React.useState(0);
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -47,8 +48,9 @@ const MonitorCampaignForm = ({
         nextStep={nextStep}
         prevStep={prevStep}
         data={data}
-        monitorObjects={monitorObjects}
+        monitoredObjects={monitoredObjects}
         monitoredZones={monitoredZones}
+        attachParams={attachParams}
         handleChangeData={handleChangeData}
       />
     );

@@ -7,7 +7,13 @@ const axios = require('axios');
 
 const { Option } = Select;
 
-const Step3 = ({ nextStep, prevStep, data, handleChangeData }) => {
+const Step3 = ({
+  nextStep,
+  prevStep,
+  data,
+  handleChangeData,
+  monitoredObjects,
+}) => {
   const [form] = Form.useForm();
   const [objectData, setObjectData] = useState([]);
 
@@ -49,7 +55,7 @@ const Step3 = ({ nextStep, prevStep, data, handleChangeData }) => {
 
   const onChangeLocation = (park) => {
     let formData = data ? data : {};
-    formData.location = `${park.PARK_ID}`;
+    formData.monitoredZone = `${park.id}`;
     form.setFieldsValue(formData);
   };
 
@@ -64,20 +70,28 @@ const Step3 = ({ nextStep, prevStep, data, handleChangeData }) => {
         initialValues={data}
       >
         <Form.Item
-          name="objectId"
+          name="monitoredObject"
           label="Đối tượng giám sát"
           rules={[{ type: 'string', required: true }]}
         >
           <Select showSearch placeholder="Chọn đối tượng giám sát">
-            {getObjectOptions()}
+            {monitoredObjects.map(({ id, name }) => {
+              return (
+                <Option key={id} value={id}>
+                  {name}
+                </Option>
+              );
+            })}
           </Select>
         </Form.Item>
+
         <Form.Item
-          name="location"
+          name="monitoredZone"
           label="Miền giám sát"
           rules={[{ type: 'string', required: true }]}
         >
           <WrappedMap
+            monitoredObjects={monitoredObjects}
             googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCV09KQtrmzDnyXYeC_UzB-HAwMKytXRpE"
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `400px` }} />}
@@ -86,6 +100,7 @@ const Step3 = ({ nextStep, prevStep, data, handleChangeData }) => {
             parkIdInit={data ? data.location : undefined}
           />
         </Form.Item>
+
         <Col offset={6}>
           <Row type="flex">
             <Button type="default" onClick={prevStep}>

@@ -8,7 +8,6 @@ import {
   Rectangle,
 } from 'react-google-maps';
 import { removeVietnameseTones } from '../../../../helpers/removeVietnameseTones';
-import parksData from './data.json';
 
 import { Input } from 'antd';
 import { HeatMapOutlined } from '@ant-design/icons';
@@ -54,20 +53,19 @@ const Map = ({ onChangeLocation, parkIdInit }) => {
   };
 
   const submitSearch = (value) => {
-    let data = parksData.filter((element) => {
-      let textElement = removeVietnameseTones(element.NAME);
-      let textValue = removeVietnameseTones(value);
-      if (textElement.includes(textValue)) {
-        return element;
-      }
-    });
-
+    // let data = parksData.filter((element) => {
+    //   let textElement = removeVietnameseTones(element.name);
+    //   let textValue = removeVietnameseTones(value);
+    //   if (textElement.includes(textValue)) {
+    //     return element;
+    //   }
+    // });
     // setDataPark(data);
   };
 
   const handleParkChange = (park) => {
     // setSelectedPark(park);
-    searchTextValue(park.NAME);
+    searchTextValue(park.name);
     onChangeLocation(park);
   };
 

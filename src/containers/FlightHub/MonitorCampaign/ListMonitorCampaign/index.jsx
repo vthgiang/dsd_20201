@@ -43,7 +43,8 @@ import {
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-const monitorObjects = [
+//data fake
+const monitoredObjects = [
   { id: '5349b4ddd2781d08c0989012', name: 'Người hút thuốc' },
   { id: '5349b4ddd2781d08c0989123', name: 'Lửa trại' },
   { id: '5349b4ddd2781d08c0989234', name: 'Núi lửa phun trào' },
@@ -52,9 +53,86 @@ const monitorObjects = [
 ];
 
 const monitoredZones = [
-  { id: '5249b4ddd2781d08c0989123', name: `Tiểu khu A` },
-  { id: '5249b4ddd2781d08c0989456', name: `Tiểu khu B` },
-  { id: '5249b4ddd2781d08c0989789', name: `Tiểu khu C` },
+  {
+    id: '5249b4ddd2781d08c0989123',
+    name: 'Cổng Trần Đại Nghĩa, đại học bách khoa Hà Nội',
+    geometry: {
+      type: 'Point',
+      coordinates: [21.00481, 105.845577],
+    },
+  },
+  {
+    id: '5249b4ddd2781d08c0989456',
+    name: 'Cổng Đại Cồ Việt, trường đại học bách khoa Hà Nội',
+    geometry: {
+      type: 'Point',
+      coordinates: [21.007529, 105.843959],
+    },
+  },
+  {
+    id: '5249b4ddd2781d08c0989789',
+    name: 'Bệnh viện Bạch Mai',
+    geometry: {
+      type: 'Point',
+      coordinates: [21.00175, 105.841373],
+    },
+  },
+  {
+    id: '5249b4ddd2781d08c0989987',
+    name: 'Ngã tư Vọng',
+    geometry: {
+      type: 'Point',
+      coordinates: [20.996481, 105.845556],
+    },
+  },
+  {
+    id: '5249b4ddd2781d08c0989876',
+    name: 'Chợ Mơ',
+    geometry: {
+      type: 'Point',
+      coordinates: [20.99576, 105.85014],
+    },
+  },
+  {
+    id: '5249b4ddd2781d08c0989765',
+    name: 'Ngã tư Tam Trinh - Minh Khai',
+    geometry: {
+      type: 'Point',
+      coordinates: [20.996181, 105.862641],
+    },
+  },
+  {
+    id: '5249b4ddd2781d08c0989654',
+    name: 'Ngã tư Thanh Nhàn - Kim Ngưu',
+    geometry: {
+      type: 'Point',
+      coordinates: [21.002992, 105.861696],
+    },
+  },
+  {
+    id: '5249b4ddd2781d08c0989543',
+    name: 'Ký túc xá B10',
+    geometry: {
+      type: 'Point',
+      coordinates: [21.005656, 105.847427],
+    },
+  },
+  {
+    id: '5249b4ddd2781d08c0989432',
+    name: 'Điểm dừng bus Lê Thanh Nghị',
+    geometry: {
+      type: 'Point',
+      coordinates: [21.00159, 105.843901],
+    },
+  },
+  {
+    id: '5249b4ddd2781d08c0989321',
+    name: 'Đại học xây dựng Hà Nội',
+    geometry: {
+      type: 'Point',
+      coordinates: [21.003943, 105.842716],
+    },
+  },
 ];
 
 const initData = [];
@@ -73,13 +151,13 @@ for (let i = 1; i <= 20; i++) {
       : METADATA_TYPES.VIDEO,
     monitoredZone:
       monitoredZones[Math.floor(Math.random() * monitoredZones.length)],
-    monitorObject:
-      monitorObjects[Math.floor(Math.random() * monitorObjects.length)],
+    monitoredObject:
+      monitoredObjects[Math.floor(Math.random() * monitoredObjects.length)],
     attachParams: [
-      ATTACH_PARAMS.UAV_SOURCE,
-      ATTACH_PARAMS.COORDINATE,
-      ATTACH_PARAMS.TIME,
-      ATTACH_PARAMS.HUMIDITY,
+      '5349b4ddd2781d0111111111',
+      '5349b4ddd2781d0222222222',
+      '5349b4ddd2781d0855555555',
+      '5349b4ddd2781d0877777777',
     ],
     description: 'Ghi chú',
   });
@@ -161,7 +239,7 @@ const ListMonitorCampaign = () => {
       render: formatMomentDateToDateTimeString,
     },
     {
-      dataIndex: 'monitorObject',
+      dataIndex: 'monitoredObject',
       title: 'Đối tượng giám sát',
       width: '12.5%',
       sorter: (a, b) => a.name.localeCompare(b.name),
@@ -277,9 +355,9 @@ const ListMonitorCampaign = () => {
             </Col>
 
             <Col span={8}>
-              <Form.Item name="monitorObjectId" label="Đối tượng giám sát">
+              <Form.Item name="monitoredObject" label="Đối tượng giám sát">
                 <Select allowClear placeholder="Chọn đối tượng giám sát">
-                  {monitorObjects.map(({ id, name }) => (
+                  {monitoredObjects.map(({ id, name }) => (
                     <Option key={id} value={id}>
                       {name}
                     </Option>
@@ -289,7 +367,7 @@ const ListMonitorCampaign = () => {
             </Col>
 
             <Col span={8}>
-              <Form.Item name="monitoredZoneId" label="Miền giám sát">
+              <Form.Item name="monitoredZone" label="Miền giám sát">
                 <Select allowClear placeholder="Chọn miền giám sát">
                   {monitoredZones.map(({ id, name }) => (
                     <Option key={id} value={id}>
