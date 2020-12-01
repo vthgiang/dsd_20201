@@ -23,7 +23,8 @@ class PayloadStatisticDrone extends Component {
   componentDidMount() {
     axios.get('https://dsd06.herokuapp.com/api/payloadStat/feeFixing')
       .then(res => {
-        const listPayloadFixing = res.data;
+        var listPayloadFixing = res.data;
+        listPayloadFixing = listPayloadFixing.filter( x => x.payload != null)
         this.setState({ listPayloadFixing });
       })
   }
@@ -121,7 +122,7 @@ class PayloadStatisticDrone extends Component {
           </Row>
         </Form>
 
-        <Table dataSource={dataSource} columns={columns} />;
+        <Table dataSource={dataSource} columns={columns} />
         </div>
 
         <Modal

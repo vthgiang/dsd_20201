@@ -21,7 +21,8 @@ class PayloadStatisticWorking extends Component {
   async componentDidMount() {
      axios.get('https://dsd06.herokuapp.com/api/payloadStat/feeWorking')
       .then(res => {
-        const listPayloadWorking = res.data;
+        var listPayloadWorking = res.data;
+        listPayloadWorking = listPayloadWorking.filter( x => x.payload != null)
         this.setState({ listPayloadWorking });
       })
   }

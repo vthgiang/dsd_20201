@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Space, Input, Form, Select, Modal, DatePicker, Row, Col } from 'antd';
+import { Table, Space, Input, Form, Select, Modal, Row, Col } from 'antd';
 import { Button } from 'antd';
 import StyleList from './index.style';
 import { useState } from 'react';
@@ -25,14 +25,17 @@ class List extends Component {
       payload: {},
       visibleAdd: false,
       visibleDelete: false,
+      visibleMaintenance: false,
       idPayloadDelete: null,
       status: [
         { value: 'working', label: 'Đang sử dụng' },
         { value: 'idle', label: 'Sẵn có' },
         { value: 'fixing', label: 'Đang sửa' }
-      ]
+      ],
+      idPayloadFix: null
     }
   }
+
 
   handleClick() {
     let history = useHistory();
@@ -90,7 +93,7 @@ class List extends Component {
         )
         this.setState({ Options: options });
       })
-    
+
   }
   handleFormSubmitEdit(values) {
     const data = {
@@ -468,6 +471,33 @@ class List extends Component {
 
   }
 
+  renderModalMaintenance() {
+    const { TextArea } = Input
+    return <div>
+      <Form onFinish={(values) => this.handleSubmitMaintenance(values)} >
+        <Form.Item label="Lý do" name="reason">
+          <TextArea rows={4} />
+        </Form.Item>
+        <Button type="primary" htmlType="submit">
+          Lưu
+      </Button>
+      </Form>
+    </div>
+  }
+
+  handleSubmitMaintenance(values) {
+    //console.log(values.reason);
+    axios.post(`https://dsd06.herokuapp.com/api/payloadregister/fix/` + this.state.idPayloadFix, values.reason)
+      .then(res => {
+        console.log(res.data);
+        this.setState({ visibleMaintenance: false })
+        this.loadAllPayload();
+      })
+
+  }
+
+
+
   searchPayload(values) {
     console.log(values)
     axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { type: values.type, status: values.status } })
@@ -475,6 +505,11 @@ class List extends Component {
         //const persons = res.data;
         this.setState({ tables: res.data });
       })
+  }
+
+  showMaintenance(id) {
+    this.setState({idPayloadFix: id});
+    this.setState({ visibleMaintenance: true });
   }
 
 
@@ -547,21 +582,21 @@ class List extends Component {
         render: (text, record) => (
 
           <Space size="small" >
-            {/*  <Button type="link" onClick={() => history.push('/payload-configuration')}>Cấu hình</Button> */}
             <Button type="link" onClick={() => this.showModal(record)} >Sửa</Button>
             <Button danger type="text" onClick={() => this.showModalDelete(record)}>Xóa</Button>
+            <Button type="link" onClick={() => this.showMaintenance(record.id)}>Bảo dưỡng</Button>
           </Space>
         ),
       },
     ];
 
-    const { visible, visibleAdd, visibleDelete, currentTable, tables } = this.state;
+    const { visible, visibleAdd, visibleDelete, visibleMaintenance, tables } = this.state;
 
     return (
       <StyleList>
         <div>
           <h2>Quản lý Payload</h2>
-          <br/>
+          <br />
           <Form
             layout="horizontal"
             className="searchtype" onFinish={(values) => this.searchPayload(values)}
@@ -569,9 +604,9 @@ class List extends Component {
             <Row justify="space-around">
               <Col span={4}>
                 <Form.Item label="Loại" name="type">
-                <Select options={this.state.Options} />
+                  <Select options={this.state.Options} />
 
-              </Form.Item>
+                </Form.Item>
               </Col>
               <Col span={4}>
                 <Form.Item label="Trạng thái" name="status">
@@ -621,6 +656,17 @@ class List extends Component {
         >
           {
             this.renderModalDelete()
+          }
+        </Modal>
+        <Modal
+          title="Đăng ký bảo dưỡng"
+          visible={visibleMaintenance}
+          onOk={this.handleOkDelete}
+          onCancel={this.handleCancelDelete}
+          footer={null}
+        >
+          {
+            this.renderModalMaintenance()
           }
         </Modal>
       </StyleList>
