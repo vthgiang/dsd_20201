@@ -7,94 +7,125 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import SimpleRating from '../Rating';
 import { useParams } from "react-router-dom";
-import Box from '@material-ui/core/Box';
+import Rating from '@material-ui/lab/Rating';
+import Link from '@material-ui/core/Link';
+import { PROJECT_TYPE_MAP_TITLE, ref } from '../config4'
 
 var axios = require('axios');
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    paper: {
-        padding: theme.spacing(2),
-        marginTop: 8,
-        maxWidth: 1400,
-    },
-    image: {
-        width: 700,
-        height: "auto",
-    },
-    img: {
-        margin: 'auto',
-        display: 'block',
-        maxWidth: '100%',
-        maxHeight: '100%',
-    },
-    title: {
-        fontWeight: "bold",
-        textTransform: "uppercase",
-    },
-    header: {
-        fontSize: 24
-    },
-    gridDescription: {
-        direction: "row",
-        justify: "flex-start",
-        alignItems: "center"
-    }
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    marginTop: 8,
+    maxWidth: 1400,
+  },
+  image: {
+    width: 700,
+    height: "auto",
+  },
+  img: {
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
+  title: {
+    fontWeight: "bold",
+    textTransform: "uppercase",
+  },
+  header: {
+    fontSize: 24
+  },
+  gridDescription: {
+    direction: "row",
+    justify: "flex-start",
+    alignItems: "center"
+  }
 }));
 
+
+const GridDetailed = (props) => {
+  const { title, content, link } = props;
+  const classes = useStyles();
+  return (
+    <Grid container spacing={3}>
+      <Grid item sm={3} xs={12}>
+        <Typography className={classes.gridDescription, classes.title}>{title}</Typography>
+      </Grid>
+      <Grid item sm={9} xs={12}>
+        {link ? 
+          <Typography><Link href={content}>{content}</Link></Typography> :
+          <Typography>{content}</Typography>
+        }
+      </Grid>
+    </Grid>
+  )
+}
+
 const DetailedNotification = () => {
-    const { id } = useParams();
-    const classes = useStyles();
-    const [notification, setNotification] = useState([]);
+  const { id } = useParams();
+  const classes = useStyles();
+  const [notification, setNotification] = useState([]);
 
-    useEffect(() => {
-        var config = {
-            method: 'get',
-            url: 'http://localhost:5000/get_ntf',
-            headers: {
-                'Content-Type': 'application/json',
-                'api-token': '1fa6b94047ba20d998b44ff1a2c78bba',
-                'project-type': 'CHAY_RUNG'
-            },
-            params: { "idNtf": id }
-        };
-        axios(config).then(function (response) {
-            setNotification(response.data);
-        }).catch(function (error) {
-            console.log(error);
-        });
+  useEffect(() => {
+    var config = {
+      method: 'get',
+      url: 'https://it4483-dsd04.herokuapp.com/get_ntf',
+      headers: {
+        'Content-Type': 'application/json',
+        'api-token': '1fa6b94047ba20d998b44ff1a2c78bba',
+        'project-type': 'CHAY_RUNG'
+      },
+      params: { "idNtf": id }
+    };
+    axios(config).then(function (response) {
+      setNotification(response.data.data);
+      console.log(response.data);
+    }).catch(function (error) {
+      console.log(error);
+    });
 
-    }, [])
+  }, [])
 
-    console.log(notification);
+  console.log(`notification: ${notification}`);
 
-    return (
-        <div className={classes.root}>
-            <div className={classes.header}>Thông tin cảnh báo chi tiết</div>
-            <Paper className={classes.paper}>
-                <Grid container spacing={2}>
-                    <Grid item>
-                        <ButtonBase className={classes.image}>
-                            <img className={classes.img} alt="complex" src="/images/forest_fires.jpg" />
-                        </ButtonBase>
-                    </Grid>
-                    <Grid item xs={12} sm container>
-                        <Grid item xs container direction="column" spacing={2}>
-                            <Grid item xs>
-                                <Typography gutterBottom variant="h4" className={classes.title} >Sự cố cháy rừng</Typography>
-                                <Typography variant="body2" gutterBottom>ID: {notification._id}</Typography>
-                                <SimpleRating level={notification.level || 0} />
-                                <Typography variant="body2" gutterBottom>Mô tả: {notification.content}</Typography>
-                                {notification.fromUser && <Typography variant="body2" gutterBottom>From User: {notification.fromUser._id}</Typography>}
-                            </Grid>
-                        </Grid>
-                    </Grid>
+  return (
+    <div className={classes.root}>
+      <div className={classes.header}>Thông tin cảnh báo chi tiết</div>
+      <Paper className={classes.paper}>
+        <Grid container spacing={2}>
+          <Grid item>
+            <ButtonBase className={classes.image}>
+              { notification.ref && <img className={classes.img} alt="complex" src={ref.prop[notification.ref._type].img} />}
+            </ButtonBase>
+          </Grid>
+          <Grid item xs={12} sm container>
+            <Grid item xs container direction="column" spacing={2}>
+              <Grid item xs>
+                {notification.project_type && <Typography gutterBottom variant="h4" className={classes.title} >{PROJECT_TYPE_MAP_TITLE[notification.project_type]}</Typography>}
+                <GridDetailed title={"ID Sự cố:"} content={notification._id}></GridDetailed>
+                <Grid container spacing={3}>
+                  <Grid item sm={3} xs={12}>
+                    <Typography className={classes.gridDescription, classes.title}>Mức độ:</Typography>
+                  </Grid>
+                  <Grid item sm={9} xs={12}>
+                    <Rating name="read-only" value={notification.level || 0} readOnly />
+                  </Grid>
                 </Grid>
-            </Paper>
-        </div>
-    );
+                <GridDetailed title={"Mô tả:"} content={notification.content}></GridDetailed>
+                {notification.fromUser && <GridDetailed title={"From user:"} content={notification.fromUser._id}></GridDetailed>}
+                <GridDetailed title={"created At:"} content={notification.createdAt}></GridDetailed>
+                {notification.ref && <GridDetailed title={"Ref Link:"} content={notification.ref._link} link={true}></GridDetailed>}
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Paper>
+    </div>
+  );
 
 }
 

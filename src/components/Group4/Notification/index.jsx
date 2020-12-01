@@ -16,8 +16,7 @@ import {
   sendSubscriptionToPushServer,
   sendPushNotification
 } from '../../../services/pushNotifications';
-
-
+import { ref } from '../config4'
 var axios = require('axios');
 
 
@@ -84,7 +83,6 @@ const Secondary = (props) => {
 const MyList = () => {
 
     const [datas, setDatas] = useState([]);
-    console.log(datas.length);
     const [open, setOpen] = React.useState(false);
     const [page, setPage] = React.useState(0);
     const rowsPerPage = 5;
@@ -165,7 +163,7 @@ const MyList = () => {
             {datas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(data => (
                 <ListItemStyle className={classes.item} onClick={() => handleClick(data._id)}>
                     <ListItemAvatar className="name">
-                        <Avatar src='/images/tree.jpg' className={classes.avatar} variant="rounded">
+                        <Avatar src={ref.prop[data.ref._type].img} className={classes.avatar} variant="rounded">
                             {data.image}
                         </Avatar>
                     </ListItemAvatar>
