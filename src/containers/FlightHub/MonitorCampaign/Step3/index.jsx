@@ -53,9 +53,9 @@ const Step3 = ({
     nextStep();
   };
 
-  const onChangeLocation = (park) => {
+  const onChangeMonitoredZone = (zoneId) => {
     let formData = data ? data : {};
-    formData.monitoredZone = `${park.id}`;
+    formData.monitoredZone = zoneId;
     form.setFieldsValue(formData);
   };
 
@@ -70,22 +70,6 @@ const Step3 = ({
         initialValues={data}
       >
         <Form.Item
-          name="monitoredObject"
-          label="Đối tượng giám sát"
-          rules={[{ type: 'string', required: true }]}
-        >
-          <Select showSearch placeholder="Chọn đối tượng giám sát">
-            {monitoredObjects.map(({ id, name }) => {
-              return (
-                <Option key={id} value={id}>
-                  {name}
-                </Option>
-              );
-            })}
-          </Select>
-        </Form.Item>
-
-        <Form.Item
           name="monitoredZone"
           label="Miền giám sát"
           rules={[{ type: 'string', required: true }]}
@@ -96,9 +80,23 @@ const Step3 = ({
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `400px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
-            onChangeLocation={onChangeLocation}
-            parkIdInit={data ? data.location : undefined}
+            onChangeMonitoredZone={onChangeMonitoredZone}
+            monitoredZoneInit={data ? data.monitoredZone : undefined}
           />
+        </Form.Item>
+
+        <Form.Item
+          name="monitoredObject"
+          label="Đối tượng giám sát"
+          rules={[{ type: 'array', required: true }]}
+        >
+          <Select
+            mode="multiple"
+            showSearch
+            placeholder="Chọn đối tượng giám sát"
+          >
+            {getObjectOptions()}
+          </Select>
         </Form.Item>
 
         <Col offset={6}>
