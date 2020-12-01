@@ -5,7 +5,6 @@ import {
   StyleUserProfileContainer,
 } from "./index.style";
 import { Row, Popover, Avatar, Badge } from "antd";
-
 import { BellOutlined, UserOutlined } from "@ant-design/icons";
 
 const Navbar = () => {
@@ -31,7 +30,9 @@ const Navbar = () => {
           content={notification}
           trigger="click"
         >
-          <BellOutlined style={{ color: "gray", fontSize: 32 }} />
+          <Badge count={99}>
+            <BellOutlined style={{ color: "gray", fontSize: 32 }} />
+          </Badge> 
         </Popover>
       </StyleNavItem>
 
