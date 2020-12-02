@@ -115,7 +115,7 @@ class User extends React.Component {
         dataIndex: 'entityId',
         key: 'entityId',
         sorter: (a, b) => a.entityId - b.entityId,
-        sortOrder: sortedInfo.columnKey === 'entityId' && sortedInfo.order,
+      
       },
       {
         title: 'Tên',
@@ -143,7 +143,7 @@ class User extends React.Component {
         title: 'Thời gian truy cập',
         dataIndex: 'timestamp',
         key: 'timestamp',
-        ...this.getColumnSearchProps('timestamp'),
+        sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1: -1
       },
       {
         title: 'Địa điểm quản lý',
@@ -279,7 +279,7 @@ class UserActivity extends React.Component {
         dataIndex: 'entityId',
         key: 'entityId',
         sorter: (a, b) => a.entityId - b.entityId,
-        sortOrder: sortedInfo.columnKey === 'entityId' && sortedInfo.order,
+      
       },
       {
         title: 'Tên',
@@ -320,7 +320,7 @@ class UserActivity extends React.Component {
         title: 'Thời gian truy cập',
         dataIndex: 'timestamp',
         key: 'timestamp',
-        ...this.getColumnSearchProps('timestamp'),
+        sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1: -1
       },
       {
         title: 'Công việc đang làm',

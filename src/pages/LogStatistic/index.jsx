@@ -137,8 +137,7 @@ class StatisticActivity extends React.Component {
   };
 
   render() {
-    let { sortedInfo} = this.state;
-    sortedInfo = sortedInfo || {};
+   
   
     const columns = [
       {
@@ -146,7 +145,7 @@ class StatisticActivity extends React.Component {
         dataIndex: 'entityId',
         key: 'entityId',
         sorter: (a, b) => a.entityId - b.entityId,
-        sortOrder: sortedInfo.columnKey === 'entityId' && sortedInfo.order,
+
       },
       {
         title: 'Tên',
@@ -170,7 +169,7 @@ class StatisticActivity extends React.Component {
         title: 'Thời gian',
         key: 'timestamp',
         dataIndex: 'timestamp',
-        ...this.getColumnSearchProps('timestamp'),
+        sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1: -1
       },
       {
         title: 'Trạng thái',
@@ -287,8 +286,7 @@ class Statistic extends React.Component {
     });
   };
   render() {
-    let { sortedInfo } = this.state;
-    sortedInfo = sortedInfo || {};
+ 
     
     const columns = [
       {
@@ -296,7 +294,7 @@ class Statistic extends React.Component {
         dataIndex: 'entityId',
         key: 'entityId',
         sorter: (a, b) => a.entityId - b.entityId,
-        sortOrder: sortedInfo.columnKey === 'entityId' && sortedInfo.order,
+
       },
       {
         title: 'Tên',
@@ -320,7 +318,7 @@ class Statistic extends React.Component {
         title: 'Thời gian',
         key: 'timestamp',
         dataIndex: 'timestamp',
-        ...this.getColumnSearchProps('timestamp'),
+        sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1: -1
       },
    
      

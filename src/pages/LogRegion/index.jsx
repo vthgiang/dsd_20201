@@ -107,15 +107,14 @@ class MonitorRegionActivity extends React.Component {
   };
 
   render() {
-    let { sortedInfo} = this.state;
-    sortedInfo = sortedInfo || {};
+   
     const columns = [
       {
         title: 'ID',
         dataIndex: 'entityId',
         key: 'entityId',
         sorter: (a, b) => a.entityId - b.entityId,
-        sortOrder: sortedInfo.columnKey === 'entityId' && sortedInfo.order,
+ 
       },
       {
         title: 'Tên',
@@ -139,7 +138,7 @@ class MonitorRegionActivity extends React.Component {
         title: 'Thời gian',
         key: 'timestamp',
         dataIndex: 'timestamp',
-        ...this.getColumnSearchProps('timestamp'),
+        sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1: -1
       },
       {
         title: 'Trạng thái',
@@ -256,16 +255,14 @@ class MonitorRegion extends React.Component {
   };
 
   render() {
-    let { sortedInfo } = this.state;
-    sortedInfo = sortedInfo || {};
-  
+
     const columns = [
       {
         title: 'ID',
         dataIndex: 'entityId',
         key: 'entityId',
         sorter: (a, b) => a.entityId - b.entityId,
-        sortOrder: sortedInfo.columnKey === 'entityId' && sortedInfo.order,
+       
       },
       {
         title: 'Miền giám sát',
@@ -289,7 +286,7 @@ class MonitorRegion extends React.Component {
         title: 'Thời gian',
         key: 'timestamp',
         dataIndex: 'timestamp',
-        ...this.getColumnSearchProps('timestamp'),
+        sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1: -1
       },
      
     ];
