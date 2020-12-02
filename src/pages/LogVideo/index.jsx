@@ -359,7 +359,7 @@ class App extends React.Component{
         let videoActivityData = response.data.map((video, index) => ({
           key: index,
           entityId:video.entityId,
-          name:video,
+          name:video.name,
           type:video.type,
           description:video.description,
           timestamp:video.timestamp,

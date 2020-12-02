@@ -124,7 +124,7 @@ class User extends React.Component {
       {
         title: 'Kinh độ',
         dataIndex: 'longitude',
-        key: 'longtitude',
+        key: 'longitude',
         ...this.getColumnSearchProps('longitude'),
       },
       {
@@ -142,7 +142,7 @@ class User extends React.Component {
       },
       {
         title: 'Mô tả',
-        dataIndex: 'descripiton',
+        dataIndex: 'description',
         key: 'description',
         ...this.getColumnSearchProps('description'),
       },
@@ -290,8 +290,8 @@ class UserActivity extends React.Component {
       {
         title: 'Kinh độ',
         dataIndex: 'longitude',
-        key: 'longtitude',
-        ...this.getColumnSearchProps('longtitude'),
+        key: 'longitude',
+        ...this.getColumnSearchProps('longitude'),
       },
       {
         title: 'Vĩ độ',
@@ -307,7 +307,7 @@ class UserActivity extends React.Component {
       },
       {
         title: 'Mô tả',
-        dataIndex: 'descripiton',
+        dataIndex: 'description',
         key: 'description',
         ...this.getColumnSearchProps('description'),
       },
@@ -373,7 +373,14 @@ class App extends React.Component {
       .then((response) => {
         let userData = response.data.map((drone, index) => ({
           key: index,
-          ...drone
+          name: drone.name,
+          entityId:drone.entityId,
+          timestamp: drone.timestamp,
+          type: drone.type,
+          description: drone.description,
+          latitude:drone.latitude,
+          longitude:drone.longitude,
+          regionName:drone.regionName
         }));
         userData.forEach((userData) => {
           for(let key in userData) {
@@ -406,8 +413,14 @@ class App extends React.Component {
       .then((response) => {
         let userActivityData = response.data.map((user, index) => ({
           key: index,
-          ...user
-          
+          name: user.name,
+          entityId:user.entityId,
+          timestamp: user.timestamp,
+          type: user.type,
+          description: user.description,
+          latitude:user.latitude,
+          longitude:user.longitude,
+          regionName:user.regionName
         }));
         userActivityData.forEach((userData) => {
           for(let key in userData) {

@@ -129,7 +129,7 @@ class User extends React.Component {
       },
       {
         title: 'Mô tả',
-        dataIndex: 'descripiton',
+        dataIndex: 'description',
         key: 'description',
         ...this.getColumnSearchProps('description'),
       },
@@ -276,7 +276,7 @@ class UserActivity extends React.Component {
       },
       {
         title: 'Mô tả',
-        dataIndex: 'descripiton',
+        dataIndex: 'description',
         key: 'description',
         ...this.getColumnSearchProps('description'),
       },

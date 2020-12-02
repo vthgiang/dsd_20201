@@ -358,7 +358,7 @@ class App extends React.Component{
         let objMonitorActivityData = response.data.map((objMonitor, index) => ({
           key: index,
           entityId:objMonitor.entityId,
-          name:objMonitor,
+          name:objMonitor.name,
           type:objMonitor.type,
           description:objMonitor.description,
           timestamp:objMonitor.timestamp,

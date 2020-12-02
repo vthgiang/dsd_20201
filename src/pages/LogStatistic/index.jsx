@@ -408,7 +408,7 @@ class App extends React.Component{
         let statisticActivityData = response.data.map((statistic, index) => ({
           key: index,
           entityId:statistic.entityId,
-          name:statistic,
+          name:statistic.name,
           type:statistic.type,
           description:statistic.description,
           timestamp:statistic.timestamp,

@@ -358,7 +358,7 @@ class App extends React.Component{
         let resolveProblemActivityData = response.data.map((resolveProblem, index) => ({
           key: index,
           entityId:resolveProblem.entityId,
-          name:resolveProblem,
+          name:resolveProblem.name,
           type:resolveProblem.type,
           description:resolveProblem.description,
           timestamp:resolveProblem.timestamp,

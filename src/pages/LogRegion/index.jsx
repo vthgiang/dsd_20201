@@ -340,6 +340,7 @@ class App extends React.Component{
           name: monitor_region.name,
           entityId:monitor_region.entityId,
           timestamp: monitor_region.timestamp,
+          description:monitor_region.description,
           type: monitor_region.type,
         }));
         monitorRegionData.forEach((monitorRegionData) => {

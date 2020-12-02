@@ -359,7 +359,7 @@ class App extends React.Component{
         let imageActivityData = response.data.map((image, index) => ({
           key: index,
           entityId:image.entityId,
-          name:image,
+          name:image.name,
           type:image.type,
           description:image.description,
           timestamp:image.timestamp,

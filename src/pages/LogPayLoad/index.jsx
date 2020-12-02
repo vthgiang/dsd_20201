@@ -108,7 +108,7 @@ class PayloadActivity extends React.Component {
       
       },
       {
-        title: 'Tên',
+        title: 'Payload',
         dataIndex: 'name',
         key: 'name',
         ...this.getColumnSearchProps('name'),
@@ -359,7 +359,7 @@ class App extends React.Component{
         let payloadActivityData = response.data.map((payload, index) => ({
           key: index,
           entityId:payload.entityId,
-          name:payload,
+          name:payload.name,
           type:payload.type,
           description:payload.description,
           timestamp:payload.timestamp,
