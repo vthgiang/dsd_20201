@@ -23,14 +23,10 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1400,
   },
   image: {
-    width: 700,
-    height: "auto",
-  },
-  img: {
     margin: 'auto',
     display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
+    width: 650,
+    height: 410,
   },
   title: {
     fontWeight: "bold",
@@ -56,7 +52,7 @@ const GridDetailed = (props) => {
         <Typography className={classes.gridDescription, classes.title}>{title}</Typography>
       </Grid>
       <Grid item sm={9} xs={12}>
-        {link ? 
+        {link ?
           <Typography><Link href={content}>{content}</Link></Typography> :
           <Typography>{content}</Typography>
         }
@@ -99,7 +95,7 @@ const DetailedNotification = () => {
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase className={classes.image}>
-              { notification.ref && <img className={classes.img} alt="complex" src={ref.prop[notification.ref._type].img} />}
+              {notification.ref && <img className={classes.image} alt="complex" src={ref.prop[notification.ref._type].img} />}
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
