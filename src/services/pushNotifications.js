@@ -37,7 +37,7 @@ function initializePushNotifications() {
 
 // register service worker file to listen push event from server
 function registerServiceWorker() {
-  navigator.serviceWorker.register("/serviceWorker.js");
+  navigator.serviceWorker.register("../serviceWorker.js");
 }
 
 
