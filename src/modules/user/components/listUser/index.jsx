@@ -62,8 +62,8 @@ const ListUser = () => {
             onOk() {
                 const res = new Promise((resolve, reject) => {
                     resolve(deleteUser(user.id));
-                    
                 }).catch(() => console.log('Oops errors!'));
+                console.log(res);
                 if (res.status == 'successful') {
                     notification.success({
                         message: "Thành công",

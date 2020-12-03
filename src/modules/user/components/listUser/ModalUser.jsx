@@ -56,7 +56,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
             return;
         }
         const dataUser = buildUserData();
-        console.log(dataUser);
+
         if (userId && userId != "") {
             dataUser.id = userId;
             res = await updateUser(dataUser);
