@@ -24,9 +24,8 @@ const LoginForm = () => {
 
     useEffect(() => {
         const saveLogin = localStorage.getItem("saveLogin");
-
         if (saveLogin) {
-            setSaveInfo((saveLogin == 'true'));
+            setSaveInfo(saveLogin == "true");
         } else {
             setSaveInfo(true);
         }
@@ -36,7 +35,8 @@ const LoginForm = () => {
         }
     }, []);
 
-    console.log(saveInfo)
+    console.log(userInfo);
+
     useEffect(() => {
         if (!projectType || projectType == "") {
             history.push("/");
@@ -46,6 +46,7 @@ const LoginForm = () => {
     const history = useHistory();
     const location = useLocation();
     const isLogin = useSelector((state) => state.user.isLogin);
+
     useEffect(() => {
         if (isLogin) {
             history.push("/dashboard");
@@ -136,7 +137,7 @@ const LoginForm = () => {
                             <UserOutlined className="site-form-item-icon" />
                         }
                         placeholder="Email hoặc sdt"
-                        value={userInfo?.username}
+                        value={userInfo.username}
                         onChange={(e) =>
                             setUserInfo({
                                 ...userInfo,
@@ -152,7 +153,7 @@ const LoginForm = () => {
                         }
                         type="password"
                         placeholder="Mật khẩu"
-                        value={userInfo?.password}
+                        value={userInfo.password}
                         onChange={(e) =>
                             setUserInfo({
                                 ...userInfo,
