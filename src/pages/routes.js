@@ -7,6 +7,8 @@ import TableDrone from './TableDrone';
 
 import FlightPathDrone from './FLightPathDrone';
 
+import FlightPoint from './FlightPoint'
+
 export const routes = [
   {
     path: '/dashboard',
@@ -26,8 +28,8 @@ export const routes = [
     component: FlightPathDrone,
   },
   {
-    path: '/drone-statistic',
-    component: () => <div>Thống kê drone</div>,
+    path: '/flight-point',
+    component: FlightPoint,
   },
   {
     path: '/flight-hub',

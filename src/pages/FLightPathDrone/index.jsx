@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Card from 'react-bootstrap/Card'
+import { TableHeader, Pagination, Search } from "../../components/DataTable";
+import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import {
   withGoogleMap,
   withScriptjs,
@@ -7,60 +10,56 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps";
-import * as parkData from "../../data/skateboard-parks.json";
 // import mapStyles from "./mapStyles";
-var mapPath;
-const FlightPath = () => {
+
+
+function Map() {
+
+
+  const [selectedPoint, setSelectedPoint] = useState(null);
+
+  const style = {
+    margin: 0,
+    top: 'auto',
+    right: 20,
+    bottom: 20,
+    left: 'auto',
+    position: 'fixed',
+};
+
+  const headers = [
+    { name: "IdDrone", field: "idDrone", sortable: true },
+    { name: "Tên đường bay", field: "name", sortable: true },
+    { name: "Id Miền giám sát", field: "idSupervisedArea", sortable: true },
+    { name: "Trần bay", field: "heightFlight", sortable: false },
+    { name: "Bắt đầu", field: "timeStart", sortable: false },
+    { name: "Kết thúc", field: "timeEnd", sortable: false },
+   
+  ];
   const [path, setPath] = useState([]);
-  const getDataFlightPath = () => {
+  const [flightPoints, setFlightPoints] = useState([])
+  const getAllFlightPath = () => {
     fetch(`http://skyrone.cf:6789/flightPath/getAllPath`)
         .then(response => response.json())
         .then(json => {
             setPath(json);
-            console.log(json);
+        });
+  };
+
+  const getPointOfPath = (id) => {
+    fetch(`http://skyrone.cf:6789/flightPoint/getPointOfPath/`+id)
+        .then(response => response.json())
+        .then(json => {
+
+          setFlightPoints(json);
         });
   };
 
   useEffect(() => {
-    getDataFlightPath();
-  }, []);
-
-  return (
-    <>
-       {path.map(pathFlight => (
-            <Card
-            onClick={() => {
-              parkData = pathFlight;
-
-              console.log("map path ; "+parkData)
-            }}
-            style={{ width: '60%' }}>
-              <Card.Body>
-                <Card.Title>{pathFlight.name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">#ID: {pathFlight.id} </Card.Subtitle>
-                <Card.Text>
-                <p>Thời gian xuất phátt: {pathFlight.timeStart} <br></br>
-                Thời gian kết thúc: {pathFlight.timeEnd} </p>
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          ))}
-    </>
-  )
-}
-
-function Map() {
-
-  const [selectedPark, setSelectedPark] = useState(null);
-
-  const [selectedPoint, setSelectedPoint] = useState(null);
-  
-  useEffect(() => {
-    console.log("lnggnfan "+mapPath);
+    getAllFlightPath();
     const listener = e => {
       if (e.key === "Escape") {
-        setSelectedPark(null);
-        // setSelectedPoint(null);.
+        setSelectedPoint(null);
         
       }
     };
@@ -73,30 +72,27 @@ function Map() {
 
   return (
   <>
-  <div style={{ width: "100vw", height: "88vh" }}>
-  <div className="row" style={{ height: `100%` }}>
-    <div className="col-md-7" >
-          <GoogleMap
+    <GoogleMap
       onClick={(e) => {
         console.log("NA "+e.latLng.lat());
         setSelectedPoint(e);
       }}
-      defaultZoom={11}
-      defaultCenter={{ lat: 45.4211, lng: -75.6903 }}
+      defaultZoom={13}
+      defaultCenter={{ lat: 21.031558, lng: 105.864435 }}
       // defaultOptions={{ styles: mapStyles }}
     >
-      {parkData.features.map(park => (
-        <Marker
-          key={park.properties.PARK_ID}
-          position={{
-            lat: park.geometry.coordinates[1],
-            lng: park.geometry.coordinates[0]
-          }}
-          onClick={() => {
-            setSelectedPark(park);
-          }}
-        >
-          </Marker>
+      
+      {flightPoints.map(point => (
+            <Marker
+            key={point.id}
+              position={{
+                lat: point.locationLat,
+                lng: point.locationLng
+              }}
+              onClick={() => {
+              }}
+            >
+              </Marker>
       ))}
 
       {selectedPoint && (
@@ -110,37 +106,56 @@ function Map() {
           }}
         >
           <div>
-            <h2>Na</h2>
-            <p>na</p>
+        <p>{selectedPoint.latLng.lat()} - {selectedPoint.latLng.lng()}</p>
           </div>
         </InfoWindow>
       )}
 
-
-      {selectedPark && (
-        <InfoWindow
-          onCloseClick={() => {
-            setSelectedPark(null);
-          }}
-          position={{
-            lat: selectedPark.geometry.coordinates[1],
-            lng: selectedPark.geometry.coordinates[0]
-          }}
-        >
-          <div>
-            <h2>{selectedPark.properties.NAME}</h2>
-            <p>{selectedPark.properties.DESCRIPTIO}</p>
-          </div>
-        </InfoWindow>
-      )}
     </GoogleMap>
-    </div>
-    <div className="col-md-5">
-        <div><h1>Danh sách đường bay</h1></div>
-            <FlightPath></FlightPath>
-    </div>
-  </div>
-    </div>
+    <Fab 
+    color="primary" aria-label="add" style={style}
+    onClick={(e) => {
+      e.preventDefault();
+      window.location.href='/flight-point';
+      }}
+    >
+        <AddIcon />
+    </Fab>
+        <table style={{ height: `45%` }}className="table table-striped">
+          <TableHeader
+              headers={headers}
+              // onSorting={(field, order) =>
+              //     setSorting({ field, order })
+              // }
+          />
+          <tbody>
+              {path.map(pathFlight => (
+                  <tr >
+                      <th scope="row" key={pathFlight.id}>
+                          {pathFlight.idDrone}
+                      </th>
+                      <td>{pathFlight.name}</td>
+                      <td>{pathFlight.idSupervisedArea}</td>
+                      <td>{pathFlight.heightFlight}</td>
+                      <td>{pathFlight.timeStart}</td>
+                      <td>{pathFlight.timeEnd}</td>
+                      <td>
+                      <Button
+                        onClick={ () => {
+                          console.log("A Td Element was clicked!" + pathFlight.id)
+                          getPointOfPath(pathFlight.id)
+                        }
+                        }
+                        variant="contained"
+                        color="primary"
+                      >
+                      Xem đường bay
+                      </Button>
+                      </td>
+                  </tr>
+              ))}
+          </tbody>
+      </table>
   </>
   );
 }
@@ -153,8 +168,8 @@ export default function App() {
 
           <MapWrapped
               googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBYUJNgbfjL9QvyUobTRpfmhOpLlvtLaAY`}
-              loadingElement={<div style={{ height: `50%` }} />}
-              containerElement={<div style={{ height: `50%` }} />}
+              loadingElement={<div style={{ height: `65%` }} />}
+              containerElement={<div style={{ height: `65%` }} />}
               mapElement={<div style={{ height: `100%` }} />}
             />
          
