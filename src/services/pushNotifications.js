@@ -1,6 +1,6 @@
 const pushServerPublicKey = "BL-eBn1GmJUsvUaBuiretJuPyWuyiJqyazFBHEcZchR6EKGdVQE2axsaBD-oPj_Y_Q7upi5GuChjHiLfDJbQquY";
-// const host = process.env.PUSH_SERVER_URL || "https://dsd-pushnotification-server.herokuapp.com"
-const host = process.env.PUSH_SERVER_URL || "http://localhost:5000"
+const host = process.env.PUSH_SERVER_URL || "https://dsd-pushnotification-server.herokuapp.com"
+//const host = process.env.PUSH_SERVER_URL || "http://localhost:5000"
 // post function
 function post(path, body) {
   console.log(JSON.stringify(body));
@@ -37,7 +37,7 @@ function initializePushNotifications() {
 
 // register service worker file to listen push event from server
 function registerServiceWorker() {
-  navigator.serviceWorker.register("../serviceWorker.js");
+  navigator.serviceWorker.register("serviceWorker.js");
 }
 
 
@@ -100,8 +100,6 @@ function sendPushNotification(body) {
     console.log(`message: ${message}`);
   });
 }
-
-
 
 export {
   isPushNotificationSupported,

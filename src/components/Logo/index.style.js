@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { ListItem } from "@material-ui/core"
 
 export default styled.div`
   cursor: pointer;
