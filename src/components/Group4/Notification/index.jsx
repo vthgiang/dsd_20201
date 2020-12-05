@@ -17,6 +17,21 @@ import {
   sendPushNotification
 } from '../../../services/pushNotifications';
 import { ref } from '../config4'
+import TimeAgo from 'javascript-time-ago'
+
+// English.
+import vi from 'javascript-time-ago/locale/vi'
+import ReactTimeAgo from 'react-time-ago'
+
+function LastSeen({ date }) {
+  return (
+      <ReactTimeAgo date={date} timeStyle="round-minute" locale="en-US"/>
+  )
+}
+
+TimeAgo.addDefaultLocale(vi)
+
+
 var axios = require('axios');
 
 
@@ -51,9 +66,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TimeHistory = (props) => {
+    const { createdAt } = props;
     return <div>
         <UpdateIcon />
-        <span>10 phút trước</span>
+        <LastSeen date={createdAt}></LastSeen>
     </div>
 }
 
@@ -75,7 +91,7 @@ const Secondary = (props) => {
             alignItems="flex-start"
         >
             <SimpleRating {...props}></SimpleRating>
-            <TimeHistory />
+            <TimeHistory {...props}/>
         </Grid>
     </div>
 }
@@ -137,7 +153,7 @@ const MyList = () => {
         })
       }
     }
-  
+
     const handleOnclickSendNotification = () => {
       console.log("clicked to send notification")
       sendPushNotification({
