@@ -14,11 +14,12 @@ const Header = ({ headers, onSorting }) => {
         onSorting(field, order);
     };
 
+
     return (
         <thead>
-            <tr>
+            <tr >
                 {headers.map(({ name, field, sortable }) => (
-                    <th
+                    <th className='sticky-column' style={{backgroundColor: "white"}}
                         key={name}
                         onClick={() =>
                             sortable ? onSortingChange(field) : null

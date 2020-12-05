@@ -6,8 +6,28 @@ import Button from '@material-ui/core/Button';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import ModalEditDataTable from '../../containers/ModalEditDataTable';
 import ModalAddDataTable from '../../containers/ModalAddDataTable'
+import styled from "styled-components";
 
 const DataTable = () => {
+
+    const Styles = styled.div`
+  > div {
+    height: 80vh;
+    overflow: auto;
+  }
+  table {
+
+    border-spacing: 0;
+
+    thead > tr {
+      th {
+        text-align: center;
+        z-index: 50;
+      }
+    }
+
+    
+`;
 
     const [drones, setDrones] = useState([]);
     const [loader, showLoader, hideLoader] = useFullPageLoader();
@@ -28,7 +48,8 @@ const DataTable = () => {
         { name: "Tốc độ tối đa (m/min)", field: "maxFlightSpeed", sortable: false },
         { name: "Thời gian bay tối đa (min)", field: "maxFlightTime", sortable: false },
         { name: "Trần cao (m)", field: "maxFlightHeight", sortable: false },
-        { name: "Dung lượng pin (mAh)", field: "rangeBattery", sortable: false }
+        { name: "Dung lượng pin (mAh)", field: "rangeBattery", sortable: false },
+        { name: "_____", field: "rangeBattery", sortable: false }
     ];
     const getData = () => {
         showLoader();
@@ -52,7 +73,7 @@ const DataTable = () => {
         if (search) {
             computedDrones = computedDrones.filter(
                 comment =>
-                    comment.name.toLowerCase().includes(search.toLowerCase())
+                    comment.id.toLowerCase().includes(search.toLowerCase())
             );
         }
 
@@ -77,63 +98,66 @@ const DataTable = () => {
     return (
 
         <>
-
-            <div className="row w-100">
-                <div className="col mb-3 col-12 text-center">
-                    <div className="row">
-                        <div className="col-md-3">
-                            <ModalAddDataTable />
-                        </div>
-                        <div className="col-md-5">
-                            <Pagination
-                                total={totalItems}
-                                itemsPerPage={ITEMS_PER_PAGE}
-                                currentPage={currentPage}
-                                onPageChange={page => setCurrentPage(page)}
-                            />
-                        </div>
-                        <div className="col-md-4 d-flex flex-row-reverse">
-                            <Search
-                                onSearch={value => {
-                                    setSearch(value);
-                                    setCurrentPage(1);
-                                }}
-                            />
-                        </div>
-                    </div>
-
-                    <table className="table table-striped">
-                        <TableHeader
-                            headers={headers}
-                            onSorting={(field, order) =>
-                                setSorting({ field, order })
-                            }
-                        />
-                        <tbody>
-                            {dronesData.map(drone => (
-                                <tr>
-                                    <th scope="row" key={drone.id}>
-                                        {drone.id}
-                                    </th>
-                                    <td>{drone.name}</td>
-                                    <td>{drone.brand}</td>
-                                    <td>{drone.color}</td>
-                                    <td>{drone.dimensions}</td>
-                                    <td>{drone.maxFlightRange}</td>
-                                    <td>{drone.maxFlightSpeed}</td>
-                                    <td>{drone.maxFlightTime}</td>
-                                    <td>{drone.maxFlightHeight}</td>
-                                    <td>{drone.rangeBattery}</td>
-                                    <td>
-                                        <ModalEditDataTable code={drone.code} id={drone.id} />
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+            <div className="row">
+                <div className="col-md-3">
+                    <ModalAddDataTable />
+                </div>
+                <div className="col-md-5">
+                    <Pagination
+                        total={totalItems}
+                        itemsPerPage={ITEMS_PER_PAGE}
+                        currentPage={currentPage}
+                        onPageChange={page => setCurrentPage(page)}
+                    />
+                </div>
+                <div className="col-md-4 d-flex flex-row-reverse">
+                    <Search
+                        onSearch={value => {
+                            setSearch(value);
+                            setCurrentPage(1);
+                        }}
+                    />
                 </div>
             </div>
+            <Styles>
             {loader}
+                <div className="row w-100">
+                    <div className="col mb-3 col-12 text-center">
+
+
+                        <table className="table table-striped sticky-table">
+                            <TableHeader
+                                headers={headers}
+                                onSorting={(field, order) =>
+                                    setSorting({ field, order })
+                                }
+                            />
+                            <tbody>
+                                {dronesData.map(drone => (
+                                    <tr>
+                                        <th scope="row" key={drone.id}>
+                                            {drone.id}
+                                        </th>
+                                        <td>{drone.name}</td>
+                                        <td>{drone.brand}</td>
+                                        <td>{drone.color}</td>
+                                        <td>{drone.dimensions}</td>
+                                        <td>{drone.maxFlightRange}</td>
+                                        <td>{drone.maxFlightSpeed}</td>
+                                        <td>{drone.maxFlightTime}</td>
+                                        <td>{drone.maxFlightHeight}</td>
+                                        <td>{drone.rangeBattery}</td>
+                                        <td>
+                                            <ModalEditDataTable code={drone.code} id={drone.id} />
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+               
+            </Styles>
         </>
     );
 };

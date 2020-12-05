@@ -12,7 +12,7 @@ const Search = ({ onSearch }) => {
             type="text"
             className="form-control"
             style={{ width: "240px" }}
-            placeholder="Search Name"
+            placeholder="Tìm kiếm ID"
             value={search}
             onChange={e => onInputChange(e.target.value)}
         />

@@ -10,6 +10,7 @@ import { Form, Input, Col, Row } from "antd";
 import React, { useEffect, useState, useMemo } from "react";
 
 const useStyles = makeStyles((theme) => ({
+
   input: {
     fontSize: 20,
   },
@@ -49,12 +50,13 @@ export default function TransitionsModal(props) {
   const [drones, setDrones] = useState([]);
 
   const getData = () => {
-    fetch("http://skyrone.cf:6789/drone/getByCode/" + props.code)
+    fetch("http://skyrone.cf:6789/drone/getById/" + props.id)
       .then(response => response.json())
       .then(json => {
         setDrones(json);
         console.log(json);
         setOpen(true);
+        initFormData();
       });
   };
 
@@ -62,6 +64,10 @@ export default function TransitionsModal(props) {
       getData();
       
   };
+
+  const handleChangeInput = (val) => {
+    return val;
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -73,6 +79,7 @@ export default function TransitionsModal(props) {
         setDrones(json);
         alert("Đã xóa thành công")
         setOpen(false);
+        window.location.reload();
       });
   };
   const initFormData = () => {
@@ -87,7 +94,7 @@ export default function TransitionsModal(props) {
     setMaxFlightTime(drones.maxFlightTime);
     setBattery(drones.rangeBattery);
   }
-  const [name, setName] = useState(drones.name);
+  const [name, setName] = useState("NGOC ANH");
   const [brand, setBrand] = useState(drones.brand);
   const [color, setColor] = useState(drones.color);
   const [dimensions, setDimensions] = useState(drones.dimensions);
@@ -97,7 +104,7 @@ export default function TransitionsModal(props) {
   const [maxFlightTime, setMaxFlightTime] = useState(drones.maxFlightTime);
   const [rangeBattery, setBattery] = useState(drones.rangeBattery);
   const saveDrone = () => {
-    initFormData();
+   
     let headers = new Headers();
 
     headers.append('Content-Type', 'application/json');
@@ -128,7 +135,10 @@ export default function TransitionsModal(props) {
     .then(response => response.text())
     .then(contents =>  {
       alert("Đã cập nhật thành công"); 
-      setOpen(false)})
+      setOpen(false);
+      window.location.reload();
+    })
+
     .catch(() => console.log("Can’t access " + 'http://skyrone.cf:6789/drone/save' + " response. Blocked by browser?"))
       
   }
@@ -163,15 +173,15 @@ export default function TransitionsModal(props) {
                 <Form.Item className={classes.formItem}>
                   <h4>Tên</h4>
                   <Input
-                    defaultValue={drones.name}
+                    value={drones.name}
                     className={classes.input}
-                    onChange={event => setName(event.target.value)}
+                    onChange={event => setDrones({name : event.target.value})}
                   />
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Nhãn Hiệu</h4>
                   <Input
-                    defaultValue={drones.brand}
+                    value={drones.brand}
                     className={classes.input}
                     onChange={event => setBrand(event.target.value)}
                   />
@@ -180,7 +190,7 @@ export default function TransitionsModal(props) {
                   <h4>Màu</h4>
                   <Input
                     type="text" 
-                    defaultValue={drones.color}
+                    value={drones.color}
                     className={classes.input}
                     onChange={event => setColor(event.target.value)}
                   />
