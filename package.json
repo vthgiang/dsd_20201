@@ -17,11 +17,13 @@
     "antd": "^4.6.6",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
+    "javascript-time-ago": "^2.3.3",
     "react": "16.9.0",
     "react-dom": "^16.13.1",
     "react-infinite-scroller": "^1.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
+    "react-time-ago": "^6.2.1",
     "styled-components": "^5.1.1"
   },
   "browserslist": {

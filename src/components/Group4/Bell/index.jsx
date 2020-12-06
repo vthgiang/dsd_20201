@@ -1,35 +1,27 @@
-import React, { useEffect, useState } from "react";
 import { BellOutlined } from "@ant-design/icons";
-import { Popover, Badge } from "antd";
-import { List, message, Avatar, Spin, Space } from 'antd';
 import Rating from '@material-ui/lab/Rating';
-import './index.style.css';
-import { ref } from '../config4'
-import { Row, Col } from 'antd';
-import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
-
+import { Avatar, Badge, Button, List, message, Popover, Spin } from "antd";
+import React, { useEffect, useState } from "react";
 import InfiniteScroll from 'react-infinite-scroller';
+import { ref } from '../config4';
+import { StyleListNotification } from './index.style';
+
 
 var axios = require('axios');
 
 const BellNotification = () => {
 
-  const [count, setCount] = useState();
+  const [total, setTotal] = useState(0);
+  const count = 5;
+  const [index, setIndex] = useState(0);
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
-  const IconText = ({ icon, text }) => (
-    <Space>
-      {React.createElement(icon)}
-      {text}
-    </Space>
-  );
-
   useEffect(() => {
-    loadData();
-    setInterval(loadData, 5000);
-  }, [count])
+    loadData(0, 5);
+    // setInterval(() => loadData(0, 0), 5000);
+  }, [])
 
   const handleInfiniteOnLoad = () => {
     setLoading(true);
@@ -39,10 +31,12 @@ const BellNotification = () => {
       setLoading(false);
       return;
     }
+    console.log(`${hasMore} -- ${loading}`)
+    loadData(index, count);
   }
 
   const notification = () => (
-    <div className="demo-infinite-container">
+    <StyleListNotification>
       <InfiniteScroll
         initialLoad={false}
         pageStart={0}
@@ -51,31 +45,23 @@ const BellNotification = () => {
         useWindow={false}
       >
         <List
+          itemLayout="vertical"
           dataSource={notifications}
-          actions={[
-            <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
-            <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
-            <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
-          ]}
           renderItem={item => (
-            <List.Item key={item._id}>
-              <Row>
-                <Col span={12}>
-                  <List.Item.Meta
-                    avatar={
-                      <Avatar src={ref.prop[item.ref._type].img} />
-                    }
-                  />
-                </Col>
-                <Col span={12}>
-                  <p><a href="https://ant.design">{item.content}</a></p>
-                </Col>
-              </Row>
-              <Row>
-                <Col span={24}>
-                  <Rating name="read-only" value={item.level || 0} readOnly />
-                </Col>
-              </Row>
+            <List.Item
+              actions={[
+                <Button size="small" type="primary">Accept</Button>,
+                <Button size="small" type="primary" danger>Decline</Button>
+              ]}
+              key={item._id}>
+
+              <List.Item.Meta
+                avatar={
+                  <Avatar shape="square" size={64} src={ref.prop[item.ref._type].img} />
+                }
+                title={<a href="https://ant.design">{item.content}</a>}
+                description={<Rating name="read-only" value={item.level || 0} readOnly style={{ color: "red" }} />}
+              />
             </List.Item>
           )}
         >
@@ -86,10 +72,11 @@ const BellNotification = () => {
           )}
         </List>
       </InfiniteScroll>
-    </div>
+    </StyleListNotification>
   );
 
-  const loadData = () => {
+  const loadData = (start, to) => {
+    console.log(`${index} -- ${count}`)
     var config = {
       method: 'get',
       url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf',
@@ -97,19 +84,24 @@ const BellNotification = () => {
         'Content-Type': 'application/json',
         'api-token': '1fa6b94047ba20d998b44ff1a2c78bba',
         'project-type': 'CHAY_RUNG'
+      },
+      params: {
+        index: start,
+        count: to
       }
     };
 
     axios(config)
       .then(function (response) {
-        setCount(response.data.data.length);
-        setNotifications(response.data.data);
-        console.log(`loading data: ${response.data.data.length}`);
+        console.log(`notifications: ${notifications.length}`)
+        setTotal(response.data.data.total);
+        setNotifications(notifications.concat(response.data.data.notifications));
+        setIndex(index + to);
+        setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
       });
-
   }
 
   return (
@@ -120,7 +112,7 @@ const BellNotification = () => {
       trigger="click"
       style={{ width: 300 }}
     >
-      <Badge count={count}>
+      <Badge total={total}>
         <BellOutlined style={{ color: "gray", fontSize: 32 }} />
       </Badge>
     </Popover>

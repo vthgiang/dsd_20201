@@ -4,11 +4,15 @@ import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import { WarningFilled } from '@ant-design/icons';
 
 const useStyles = makeStyles((theme) => ({
   boxContainer: {
     display: "flex",
     marginBottom: 0
+  },
+  rating: {
+    color: 'red'
   }
 }));
 
@@ -25,8 +29,7 @@ const SimpleRating = (props) => {
         justify="flex-start"
         alignItems="center"
       >
-        <Typography component="legend" style={{ width: "auto" }}>Mức độ:</Typography>
-        <Rating name="read-only" value={level} readOnly />
+        <Rating className={classes.rating} name="read-only" value={level} readOnly />
       </Grid>
     </Box>
   );

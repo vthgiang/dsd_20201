@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import StarIcon from '@material-ui/icons/Star';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import { CheckCircleTwoTone } from '@ant-design/icons';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import SimpleRating from '../Rating';
-import { useParams } from "react-router-dom";
-import Rating from '@material-ui/lab/Rating';
+import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
-import { PROJECT_TYPE_MAP_TITLE, ref } from '../config4'
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Rating from '@material-ui/lab/Rating';
+import { Tooltip } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
+import { PROJECT_TYPE_MAP_TITLE, ref } from '../config4';
 
 var axios = require('axios');
 
@@ -65,6 +65,11 @@ const DetailedNotification = () => {
   const { id } = useParams();
   const classes = useStyles();
   const [notification, setNotification] = useState([]);
+  const [status, setStatus] = useState(false);
+
+  const onVerify = () => {
+    setStatus(!status);
+  }
 
   useEffect(() => {
     var config = {
@@ -101,14 +106,24 @@ const DetailedNotification = () => {
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
-                {notification.project_type && <Typography gutterBottom variant="h4" className={classes.title} >{PROJECT_TYPE_MAP_TITLE[notification.project_type]}</Typography>}
+                <Grid
+                  container
+                  direction="row"
+                  justify="flex-start"
+                  alignItems="center"
+                >
+                  {notification.project_type && <Typography gutterBottom variant="h4" className={classes.title} >{PROJECT_TYPE_MAP_TITLE[notification.project_type]}</Typography>}
+                  <Tooltip title={status ? "verified" : "unverified"}>
+                    <CheckCircleTwoTone twoToneColor={status ? "#52c41a" : "#8c8c8c"} style={{ fontSize: 32, marginLeft: 8, marginBottom: 10, cursor: "pointer" }} onClick={onVerify} />
+                  </Tooltip>
+                </Grid>
                 <GridDetailed title={"ID Sự cố:"} content={notification._id}></GridDetailed>
                 <Grid container spacing={3}>
                   <Grid item sm={3} xs={12}>
                     <Typography className={classes.gridDescription, classes.title}>Mức độ:</Typography>
                   </Grid>
                   <Grid item sm={9} xs={12}>
-                    <Rating name="read-only" value={notification.level || 0} readOnly />
+                    <Rating name="read-only" value={notification.level || 0} readOnly style={{ color: "red" }} />
                   </Grid>
                 </Grid>
                 <GridDetailed title={"Mô tả:"} content={notification.content}></GridDetailed>

@@ -1,22 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { List, ListItem, ListItemAvatar, Avatar, ListItemText, TablePagination, Button } from '@material-ui/core'
-import Typography from '@material-ui/core/Typography';
-import { ListItemStyle, ButtonStyle } from './index.style'
-import Paper from '@material-ui/core/Paper';
+import { Avatar, Button, List, ListItemAvatar, ListItemText, TablePagination } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import UpdateIcon from '@material-ui/icons/Update';
-import SimpleRating from '../Rating';
+import { makeStyles } from '@material-ui/core/styles';
+import TimeAgo from 'javascript-time-ago';
+// English.
+import vi from 'javascript-time-ago/locale/vi';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
+import ReactTimeAgo from 'react-time-ago';
 import {
-  isPushNotificationSupported,
-  initializePushNotifications,
-  registerServiceWorker,
   createNotificationSubscription,
-  sendSubscriptionToPushServer,
-  sendPushNotification
+  initializePushNotifications,
+  isPushNotificationSupported,
+  registerServiceWorker,
+  sendPushNotification, sendSubscriptionToPushServer
 } from '../../../services/pushNotifications';
-import { ref } from '../config4'
+import { ref } from '../config4';
+import SimpleRating from '../Rating';
+import { ListItemStyle } from './index.style';
+
+
+function LastSeen({ date }) {
+  return (
+    <ReactTimeAgo date={date} timeStyle="round-minute" locale="en-US" />
+  )
+}
+
+TimeAgo.addDefaultLocale(vi)
+
+
 var axios = require('axios');
 
 
@@ -51,9 +62,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TimeHistory = (props) => {
+  const { createdAt } = props;
   return <div>
-    <UpdateIcon />
-    <span>10 phút trước</span>
+    <Grid
+      container
+      direction="row"
+      justify="flex-start"
+      alignItems="center"
+    >
+      <LastSeen date={createdAt}></LastSeen>
+    </Grid>
   </div>
 }
 
@@ -75,7 +93,7 @@ const Secondary = (props) => {
       alignItems="flex-start"
     >
       <SimpleRating {...props}></SimpleRating>
-      <TimeHistory />
+      <TimeHistory {...props} />
     </Grid>
   </div>
 }
@@ -83,9 +101,11 @@ const Secondary = (props) => {
 const MyList = () => {
 
   const [datas, setDatas] = useState([]);
-  const [open, setOpen] = React.useState(false);
-  const [page, setPage] = React.useState(0);
+  const [page, setPage] = useState(0);
   const rowsPerPage = 5;
+  const [index, setIndex] = useState(0);
+  const [count, setCount] = useState(5);
+  const [total, setTotal] = useState(0);
   const classes = useStyles();
   const history = useHistory();
 
@@ -97,22 +117,29 @@ const MyList = () => {
         'Content-Type': 'application/json',
         'api-token': '1fa6b94047ba20d998b44ff1a2c78bba',
         'project-type': 'CHAY_RUNG'
+      },
+      params: {
+        index: index,
+        count: count
       }
     };
 
     axios(config)
       .then(function (response) {
-        setDatas(response.data.data);
-        console.log(datas);
+        setDatas(datas.concat(response.data.data.notifications));
+        setTotal(response.data.data.total);
+        console.log(datas.length);
       })
       .catch(function (error) {
         console.log(error);
       });
 
-  }, [])
+  }, [index, count])
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+    setIndex(index + count);
+    console.log(`index: ${index} -- count: ${count}`)
   }
 
   const handleClick = (id) => {
@@ -174,11 +201,10 @@ const MyList = () => {
     <TablePagination
       rowsPerPageOptions={[5, 10, 25]}
       component="div"
-      count={datas.length}
+      count={total}
       rowsPerPage={5}
       page={page}
       onChangePage={handleChangePage}
-    // onChangeRowsPerPage={handleChangeRowsPerPage}
     />
   </div>
 
