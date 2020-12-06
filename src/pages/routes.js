@@ -12,7 +12,7 @@ import FlightPoint from './FlightPoint'
 export const routes = [
   {
     path: '/dashboard',
-    component: Dashboard,
+    component: () => <div>DroneManagement</div>,
     exact: true,
   },
   {

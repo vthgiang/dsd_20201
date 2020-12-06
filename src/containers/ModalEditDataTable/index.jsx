@@ -44,6 +44,21 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function TransitionsModal(props) {
+  // state = {
+  //   brand: "",
+  //   color: "",
+  //   dimensions: "",
+  //   id: props.id,
+  //   idLog: 0,
+  //   maxFlightHeight: 0,
+  //   maxFlightRange: 0,
+  //   maxFlightSpeed: 0,
+  //   maxFlightTime: 0,
+  //   name: "",
+  //   rangeBattery: 0,
+  //   task: 0,
+  //   used: true
+  // }
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -56,7 +71,7 @@ export default function TransitionsModal(props) {
         setDrones(json);
         console.log(json);
         setOpen(true);
-        initFormData();
+        initFormData(json);
       });
   };
 
@@ -82,17 +97,18 @@ export default function TransitionsModal(props) {
         window.location.reload();
       });
   };
-  const initFormData = () => {
-    console.log('name '+drones.name)
-    setName(drones.name);
-    setBrand(drones.brand);
-    setColor(drones.color);
-    setDimensions(drones.dimensions);
-    setMaxFlightHeight(drones.maxFlightHeight);
-    setMaxFlightRange(drones.maxFlightRange);
-    setMaxFlightSpeed(drones.maxFlightSpeed);
-    setMaxFlightTime(drones.maxFlightTime);
-    setBattery(drones.rangeBattery);
+  const initFormData = (json) => {
+
+    setName(json.name);
+    setBrand(json.brand);
+    setColor(json.color);
+    setDimensions(json.dimensions);
+    setMaxFlightHeight(json.maxFlightHeight);
+    setMaxFlightRange(json.maxFlightRange);
+    setMaxFlightSpeed(json.maxFlightSpeed);
+    setMaxFlightTime(json.maxFlightTime);
+    setBattery(json.rangeBattery);
+    console.log('name '+json.brand)
   }
   const [name, setName] = useState("NGOC ANH");
   const [brand, setBrand] = useState(drones.brand);
@@ -173,15 +189,15 @@ export default function TransitionsModal(props) {
                 <Form.Item className={classes.formItem}>
                   <h4>Tên</h4>
                   <Input
-                    value={drones.name}
+                    value={name}
                     className={classes.input}
-                    onChange={event => setDrones({name : event.target.value})}
+                    onChange={event => setName(event.target.value)}
                   />
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Nhãn Hiệu</h4>
                   <Input
-                    value={drones.brand}
+                    value={brand}
                     className={classes.input}
                     onChange={event => setBrand(event.target.value)}
                   />
@@ -190,7 +206,7 @@ export default function TransitionsModal(props) {
                   <h4>Màu</h4>
                   <Input
                     type="text" 
-                    value={drones.color}
+                    value={color}
                     className={classes.input}
                     onChange={event => setColor(event.target.value)}
                   />
@@ -198,7 +214,7 @@ export default function TransitionsModal(props) {
                 <Form.Item className={classes.formItem}>
                   <h4>Kích thước</h4>
                   <Input
-                    defaultValue={drones.dimensions}
+                    value={dimensions}
                     className={classes.input}
                     onChange={event => setDimensions(event.target.value)}
                   />
@@ -206,7 +222,7 @@ export default function TransitionsModal(props) {
                 <Form.Item className={classes.formItem}>
                   <h4>Giới hạn tầm bay (m)</h4>
                   <Input
-                    defaultValue={drones.maxFlightRange}
+                    value={maxFlightRange}
                     className={classes.input}
                     onChange={event => setMaxFlightRange(event.target.value)}
                   />
@@ -217,7 +233,7 @@ export default function TransitionsModal(props) {
                 <Form.Item className={classes.formItem}>
                   <h4>Tốc độ tối đa (m/phút)</h4>
                   <Input
-                    defaultValue={drones.maxFlightSpeed}
+                    value={maxFlightSpeed}
                     className={classes.input}
                     onChange={event => setMaxFlightSpeed(event.target.value)}
                   />
@@ -225,7 +241,7 @@ export default function TransitionsModal(props) {
                 <Form.Item className={classes.formItem}>
                   <h4>Thời gian bay (phút)</h4>
                   <Input
-                    defaultValue={drones.maxFlightTime}
+                    value={maxFlightTime}
                     className={classes.input}
                     onChange={event => setMaxFlightTime(event.target.value)}
                   />
@@ -233,7 +249,7 @@ export default function TransitionsModal(props) {
                 <Form.Item className={classes.formItem}>
                   <h4>Trần bay (m)</h4>
                   <Input
-                    defaultValue={drones.maxFlightHeight}
+                    value={maxFlightHeight}
                     className={classes.input}
                     onChange={event => setMaxFlightHeight(event.target.value)}
                   />
@@ -241,7 +257,7 @@ export default function TransitionsModal(props) {
                 <Form.Item className={classes.formItem}>
                   <h4>Dung lượng pin (mAh)</h4>
                   <Input
-                    defaultValue={drones.rangeBattery}
+                    value={rangeBattery}
                     className={classes.input}
                     onChange={event => setBattery(event.target.value)}
                   />
