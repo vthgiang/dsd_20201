@@ -3,4 +3,4 @@ export const TemplateSectionType = {
   TEXT: 'text',
   TEXT_KEY: 'text-key',
   TABLE: 'table',
-}
+};

@@ -1,2 +1,3 @@
-import IMAGES from "./images";
+import IMAGES from './images';
+
 export { IMAGES };
