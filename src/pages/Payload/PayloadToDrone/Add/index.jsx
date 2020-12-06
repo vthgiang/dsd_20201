@@ -1,5 +1,4 @@
 
-
 //NEW COMPONENT
 import React, { Component } from "react";
 import { Form, Input, Button, Select, DatePicker, TimePicker, Alert} from 'antd';
@@ -24,6 +23,7 @@ class AddSignupPayloadDrone extends Component {
     this.state = {
       options: [],
       droneOptions: [],
+      sdCardOptions: [],
       visable: false,
       visableAdd: false,
       time: '',
@@ -60,6 +60,7 @@ class AddSignupPayloadDrone extends Component {
       componentDidMount() {
         this.getAllPayload();
         this.getAllDrone();
+        this.getAllSDCard();
       }
     
       handleChange = event => {
@@ -93,7 +94,7 @@ class AddSignupPayloadDrone extends Component {
           var shootName = "configsShoot" + i; 
 
           configsPayload.push({
-            startTime: values[startTimeName].format("HH:mm:ss"),
+                  startTime: values[startTimeName].format("HH:mm:ss"),
                   endTime: values[endTimeName].format("HH:mm:ss"),
                   object: values[objectName],
                   config: {
@@ -103,18 +104,18 @@ class AddSignupPayloadDrone extends Component {
                     autoTracking: values[trackingName],
                     shootInterval: values[shootName]
                   },
+
           })
         }
 
             const payloadToDrone = {
               configs: configsPayload,
-              
               droneId: values.droneId,
               payloadId: values.payloadId,
               reason: values.reason,
-
+              sdCardId: values.sdCardId,
             }
-            console.log(payloadToDrone);
+            console.log(payloadToDrone.droneId);
         
             axios.post('https://dsd06.herokuapp.com/api/payloadregister/working/' + payloadToDrone.payloadId, payloadToDrone)
                 .then(res => {
@@ -129,7 +130,6 @@ class AddSignupPayloadDrone extends Component {
           getAllPayload() {
             axios.get('https://dsd06.herokuapp.com/api/payload?status=idle')
             .then(res => {
-              console.log(res.data);
               const options = res.data.map(payload =>
                 ({
                   label: payload.name,
@@ -143,6 +143,7 @@ class AddSignupPayloadDrone extends Component {
           getAllDrone() {
             axios.get('http://skyrone.cf:6789/drone/getAll')
             .then(res => {
+              console.log(res.data);
               const options = res.data.map(drone => 
                 ({
                   label: drone.code,
@@ -153,6 +154,19 @@ class AddSignupPayloadDrone extends Component {
             })
           }
           
+          getAllSDCard() {
+            axios.get('https://dsd06.herokuapp.com/api/sdcard')
+            .then(res => {
+              const optionSDCard = res.data.map(card => 
+                ({
+                    label: card.name + card.volume,
+                    value: card._id
+                })
+              )
+              this.setState({sdCardOptions: optionSDCard});
+            })
+          }
+
           handleSelectNumberOfConfig = (e) => {
             const valueSelected = e;
             this.setState({ numberConfig : valueSelected});
@@ -217,6 +231,15 @@ class AddSignupPayloadDrone extends Component {
             <Select options = {this.state.Options}>
             </Select>
         </Form.Item>
+
+        <Form.Item
+            label="Loại thẻ nhớ"
+            name="sdCardId"
+            rules={[{required: true }]}
+        >
+            <Select options = {this.state.sdCardOptions}>
+            </Select>
+        </Form.Item>
       
         {/* <Form.Item label="Thời gian bắt đâu" name="startTime" rules={[{required: true, message: 'Please select time!'}]}>
           <TimePicker></TimePicker>
@@ -272,7 +295,6 @@ class AddSignupPayloadDrone extends Component {
               </Form.Item>
               <Form.Item label="Auto Tracking" name ={`configsTracking${i}`} rules={[{ }]}>
                 <Select options={this.state.tracking}>
-                
                 </Select>
               </Form.Item>
               <Form.Item label="Shoot interval" name ={`configsShoot${i}`} rules={[{  }]}>

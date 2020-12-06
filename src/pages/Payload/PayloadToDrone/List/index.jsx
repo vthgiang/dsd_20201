@@ -154,7 +154,7 @@ import { useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-
+// import {qs} from 'qs';
 
 
 
@@ -176,20 +176,39 @@ class PayloadDroneHistory extends Component {
       status: '',
       startedAt: '',
       type: '',
+
+      droneName: '',
+      isGetAllHistoryPayload: true,
+      listAllHistories: [],
     }
   }
 
  
 
   componentDidMount() {
-    // axios.get('https://dsd06.herokuapp.com/api/payloadregister/histories/:id')
-    //   .then(res => {
-    //     const listPayloadDroneHistory = res.data;
-    //     console.log(res.data);
-    //     this.setState({ listPayloadDroneHistory });
-    //   })
+    this.setState({isGetAllHistoryPayload: true});
     this.getAllPayload();
     this.getAllTypePayload();
+    this.getAllHistories();
+  }
+
+  getAllHistories () {
+    axios.get('https://dsd06.herokuapp.com/api/payloadregister/allHistories')
+    .then(res => {
+      var listAllHistoriesFromServer = res.data;
+      var listHistoriesHasPayloadNull = [];
+      var listHistoriesHasPayload = [];
+
+      listAllHistoriesFromServer.map(history => {
+        if (history.payload == null || history.sdCardId == null || history.sdCardId == '') {
+          listHistoriesHasPayloadNull.push(history);
+        } else {
+          listHistoriesHasPayload.push(history);
+        }
+      })
+
+      this.setState({listAllHistories: listHistoriesHasPayload});
+    })
   }
 
   getAllPayload() {
@@ -221,34 +240,30 @@ class PayloadDroneHistory extends Component {
 
   handleFindPayloadHistory(values){
     // const payloadId = { payloadId: values.payloadId };
+    this.setState({isGetAllHistoryPayload: false});
     axios.get('https://dsd06.herokuapp.com/api/payloadregister/histories/' + values.payloadId)
       .then(res => {
-        const listPayloadDroneHistory = res.data;
-        listPayloadDroneHistory.map(payloadHistory => {
-          const payloadId = payloadHistory.payload;
-          this.setState(
-            {startedAt: payloadHistory.startedAt,
-              type: payloadHistory.type,
-              payloadId: payloadHistory.payload
-            });
-          this.findPayloadById(payloadId);
-        })
-        console.log(listPayloadDroneHistory);
-        this.setState({ listPayloadDroneHistory });
-        // this.setState({ payloadId: res.data.payload});
+        const listPayloadDroneHistoryFromServer = res.data;
+        console.log(values.payloadId);
+        listPayloadDroneHistoryFromServer.map(payloadHistory => {
+          const droneId = payloadHistory.droneId;
         
+          this.findDroneById(droneId);
+
+        })
+        this.setState({ listPayloadDroneHistory: listPayloadDroneHistoryFromServer });
+        // this.setState({ payloadId: res.data.payload});
       })
 
   }
 
-  findPayloadById(payloadId) {
-    axios.get('https://dsd06.herokuapp.com/api/payload/' + payloadId)
+  findDroneById(droneId) {
+       axios.get('http://skyrone.cf:6789/drone/getById/' + droneId)
     .then(res => {
-      const payload = res.data;
+      const drone = res.data;
+      console.log(drone);
       this.setState({
-        payloadCode: payload.code,
-        payloadName: payload.name,
-        status: payload.status
+        droneName: drone.name,
       })
     })
   }
@@ -257,26 +272,38 @@ class PayloadDroneHistory extends Component {
     this.setState({ visableReturnModal: false })
   }
 
-  showModalReturnPayload() {
+  showModalReturnPayload(record) {
+    console.log(record);
     this.setState({ visableReturnModal: true })
-    this.setState({ idPayloadReturn: this.state.payloadId })
+    // this.setState({ idPayloadReturn: this.state.payloadId })
+    this.setState({ idPayloadReturn: record.payloadId })
   }
 
-  returnPayload() {
-    axios.post('https://dsd06.herokuapp.com/api/payloadregister/return/' + this.state.idPayloadReturn)
+  returnPayload(valuesOfReturnPayload) {
+    const fee = valuesOfReturnPayload.fee;
+    const qs = require('qs');
+    axios.post('https://dsd06.herokuapp.com/api/payloadregister/return/' + this.state.idPayloadReturn, qs.stringify({'fee': fee}))
     .then(res => {
       console.log(res.data);
         this.setState({ visableReturnModal: false })
-        this.handleFindPayloadHistory();
+        // this.handleFindPayloadHistory(this.state.idPayloadReturn);
+        setTimeout(function() {
+          window.location.reload(false);
+        }, 2000)
     })
   }
 
   renderModalReturnPayload() {
     return <div>
+      <Form onFinish= {(valuesOfReturnPayload) => this.returnPayload(valuesOfReturnPayload)}>
       <p>Bạn có chắc trả lại payload này?</p>
-      <Button type="primary" danger onClick={() => this.returnPayload()}>Trả payload</Button>
+      <Form.Item label="Chi phí" name="fee" rules={[{required: true, message: 'Vui lòng nhập chi phí!'}]}>
+        <Input></Input>
+      </Form.Item>
+      <Button type="primary" htmlType="submit" danger>Trả payload</Button>
+      </Form>
+   
     </div>
-
   }
 
   render() {
@@ -303,26 +330,31 @@ class PayloadDroneHistory extends Component {
         dataIndex: 'payloadName',
         key: 'payloadName',
       },
-      // {
-      //   title: 'Loại thiết bị',
-      //   dataIndex: 'typeDevice',
-      //   key: 'typeDevice',
-      // },
-      // {
-      //   title: 'Tên Drone',
-      //   dataIndex: 'drone',
-      //   key: 'drone',
-      // },
-      // {
-      //   title: 'Phí dịch vụ',
-      //   dataIndex: 'fee',
-      //   key: 'fee'
-      // },
-      // {
-      //   title:  'Lý do',
-      //   dataIndex: 'reason',
-      //   key: 'reason'
-      // },
+      {
+        title: 'Trạng thái',
+        dataIndex: 'status',
+        key: 'status',
+      },
+      {
+        title: 'Tên Drone',
+        dataIndex: 'droneName',
+        key: 'droneName',
+      },
+      {
+        title: 'Thẻ nhớ',
+        dataIndex: 'memory',
+        key: 'memory',
+      },
+      {
+        title: 'Phí dịch vụ',
+        dataIndex: 'fee',
+        key: 'fee'
+      },
+      {
+        title:  'Lý do',
+        dataIndex: 'reason',
+        key: 'reason'
+      },
       // {
       //   title: 'Ngày đăng ký',
       //   dataIndex: 'createdTime',
@@ -339,55 +371,84 @@ class PayloadDroneHistory extends Component {
         key: 'startedAt'
       },
       {
-        title: 'Trạng thái',
+        title: 'Thời gian kết thúc',
+        dataIndex: 'finishedAt',
+        key: 'finishedAt'
+      },
+      {
+        title: 'Loại hoạt động',
         dataIndex: 'type',
         key: 'type'
       },
-      // {
-      //   title: 'Hành động',
-      //   key: 'payloadId',
-      //   width: 100,
-      //   dataIndex: 'payloadId',
-      //   render: (text, record) => (
-      //     <Space size="small" >
-      //       {/* <Button type="link" onClick={() => this.props.history.push('/edit-signup-payload-drone')}>Sửa</Button> */}
-      //       {/* <Button danger type="text">Trả payload</Button> */}
-      //       <Button style={{backgroundColor: "red", color:"white"}} danger type="text" onClick={() => this.showModalReturnPayload()}>Trả payload</Button>
-      //     </Space>
-      //   ),
-      // },
+      {
+        title: 'Hành động',
+        key: 'operation',
+        width: 100,
+        // dataIndex: 'payloadId',
+        render: (text, record) => (
+          <Space size="small" >
+            {/* <Button type="link" onClick={() => this.props.history.push('/edit-signup-payload-drone')}>Sửa</Button> */}
+            {/* <Button danger type="text">Trả payload</Button> */}
+            <Button style={{backgroundColor: "red", color:"white"}} danger type="text" onClick={() => this.showModalReturnPayload(record)}>Trả payload</Button>
+          </Space>
+        ),
+      },
     ];
-
+    var dataSource = [{}];
+    if (this.state.isGetAllHistoryPayload === true) {
+      dataSource = 
+      this.state.listAllHistories.map(payloadDroneHistory =>
+        ({
+            // droneId: payloadDroneHistory._id,
+            droneName: this.state.droneName,
+            payloadId: payloadDroneHistory.payload._id,
+            payloadCode: payloadDroneHistory.payload.code,
+            payloadName: payloadDroneHistory.payload.name,
+            startedAt: payloadDroneHistory.startedAt,
+            finishedAt: payloadDroneHistory.finishedAt,
+            type: payloadDroneHistory.type,
+            fee: payloadDroneHistory.fee,
+            status: payloadDroneHistory.payload.status,
+            memory: payloadDroneHistory.sdCardId.name + payloadDroneHistory.sdCardId.volume,
+            reason: payloadDroneHistory.reason,
+        })
+      )
+    } else {
+      dataSource = 
+      this.state.listPayloadDroneHistory.map(payloadDroneHistory =>
+        ({
+            // droneId: payloadDroneHistory._id,
+            droneName: this.state.droneName,
+            payloadId: payloadDroneHistory.payload._id,
+            payloadCode: payloadDroneHistory.payload.code,
+            payloadName: payloadDroneHistory.payload.name,
+            startedAt: payloadDroneHistory.startedAt,
+            finishedAt: payloadDroneHistory.finishedAt,
+            type: payloadDroneHistory.type,
+            fee: payloadDroneHistory.fee,
+            status: payloadDroneHistory.payload.status,
+            memory: payloadDroneHistory.sdCardId.name + payloadDroneHistory.sdCardId.volume,
+            reason: payloadDroneHistory.reason,
+        })
+      )
+    }
     // const dataSource = 
     //   this.state.listPayloadDroneHistory.map(payloadDroneHistory =>
-    //     // ({
-    //     //   id: payloadDroneHistory.id,
-    //     //   payloadCode: payloadDroneHistory.payload.code,
-    //     //   payloadName: payloadDroneHistory.payload.name,
-    //     //   type: payloadDroneHistory.type,
-    //     //   reason: payloadDroneHistory.reason,
-    //     //   fee: payloadDroneHistory.fee,
-    //     //   droneId: payloadDroneHistory.droneId,
-    //     //   startedAt: payloadDroneHistory.startedAt,
-    //     //   finishedAt: payloadDroneHistory.finishedAt
-    //     // })
     //     ({
-    //         droneId: payloadDroneHistory.droneId,
-    //         payloadId: payloadDroneHistory.payload,
+    //         // droneId: payloadDroneHistory._id,
+    //         droneName: this.state.droneName,
+    //         payloadId: payloadDroneHistory.payload._id,
+    //         payloadCode: payloadDroneHistory.payload.code,
+    //         payloadName: payloadDroneHistory.payload.name,
     //         startedAt: payloadDroneHistory.startedAt,
+    //         finishedAt: payloadDroneHistory.finishedAt,
     //         type: payloadDroneHistory.type,
-
-
+    //         fee: payloadDroneHistory.fee,
+    //         status: payloadDroneHistory.payload.status,
+    //         memory: payloadDroneHistory.sdCardId.name + payloadDroneHistory.sdCardId.volume,
     //     })
     //   )
-
-    const dataSource = [{
-      payloadCode: this.state.payloadCode,
-      payloadName: this.state.payloadName,
-      startedAt: this.state.startedAt,
-      type: this.state.type,
-      payloadId: this.state.payloadId
-    }]
+    //   console.log(dataSource);
   
       const { visible, visibleAdd, visableReturnModal, currentTable, tables } = this.state;
 
@@ -419,7 +480,7 @@ class PayloadDroneHistory extends Component {
                <Select options = {typeDeviceOption}/>
               </Form.Item>
             </Col> */}
-            <Col span={3}>
+            <Col span={9}>
               <Form.Item label="Payload" name="payloadId">
                 <Select options={this.state.PayloadOptions}></Select>
               </Form.Item>
