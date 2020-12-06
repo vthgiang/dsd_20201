@@ -63,9 +63,67 @@ export const sidebarMenu = [
   },
   {
     key: 'GeneralStatistic',
-    heading: 'Báo cáo thống kê',
+    heading: 'Thống kê',
     icon: 'fas fa-chart-line',
     route: '/statistic',
+    subMenu: [
+      {
+        key: 'DashboardStatistic',
+        heading: 'Dashboard',
+        icon: 'fas fa-chart-line',
+        route: '/dashboard-statistic',
+      },
+      {
+        key: 'DroneStatistic',
+        heading: 'Drone',
+        icon: 'fas fa-drone-alt',
+        route: '/drone-statistic',
+      },
+      {
+        key: 'PayloadStatistic',
+        heading: 'Payload',
+        icon: 'fas fa-layer-group',
+        route: '/payload-statistic',
+      },
+      {
+        key: 'ProblemStatistic',
+        heading: 'Sự cố',
+        icon: 'fas fa-layer-group',
+        route: '/trouble-statistic',
+      },
+      {
+        key: 'UserStatistic',
+        heading: 'Người dùng',
+        icon: 'fas fa-times-octagon',
+        route: '/user-statistic',
+      },
+    ],
+  },
+  {
+    key: 'GeneralReport',
+    heading: 'Báo cáo',
+    icon: 'fas fa-book',
+    route: '/report',
+    subMenu: [
+      {
+        key: 'CreateReport',
+        heading: 'Tạo báo cáo',
+        icon: 'fas fa-drone-alt',
+        route: '/create-report',
+      },
+      {
+        key: 'ViewReport',
+        heading: 'Xem báo cáo',
+        icon: 'fas fa-drone-alt',
+        route: '/view-report',
+      },
+      {
+        key: 'ManageReportTemplate',
+        heading: 'Quản lý mẫu báo cáo',
+        icon: 'fas fa-drone-alt',
+        route: '/manage-report-template',
+      },
+    ],
   },
   {
     key: 'Warning',

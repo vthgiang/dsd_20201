@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   StyleNavItem,
   StyleUserName,
@@ -8,7 +8,29 @@ import { Row, Popover, Avatar, Badge } from "antd";
 
 import { BellOutlined, UserOutlined } from "@ant-design/icons";
 
+import { useUserState } from '../../hooks/useUserState';
+
 const Navbar = () => {
+  const { userState, login } = useUserState();
+
+  const onLoginManager = useCallback(() => {
+    login({
+      uid: 11,
+      token: '4e3fe3463afd3a705c0be7ec2322c335',
+      projectType: 'LUOI_DIEN',
+      role: 'MANAGER',
+    });
+  }, [login]);
+
+  const onLoginStaff = useCallback(() => {
+    login({
+      uid: 3,
+      token: '4e3fe3463afd3a705c0be7ec2322c335',
+      projectType: 'LUOI_DIEN',
+      role: 'DRONE_STAFF',
+    });
+  }, [login]);
+
   const notification = () => (
     <div>
       <p>Thông báo</p>
@@ -17,6 +39,12 @@ const Navbar = () => {
 
   const profile = () => (
     <div>
+      <p>
+        <a onClick={onLoginManager}>Login Manager</a>
+      </p>
+      <p>
+        <a onClick={onLoginStaff}>Login Staff</a>
+      </p>
       <p>Tài khoản</p>
       <p>Đăng xuất</p>
     </div>
@@ -52,7 +80,7 @@ const Navbar = () => {
               />
             </Badge>
             <StyleUserName>
-              <span className="text-info role">Admin</span>
+              <span className="text-info role">{userState?.info?.role}</span>
               <span className="text-info username">Vũ Đức Đam</span>
             </StyleUserName>
           </StyleUserProfileContainer>
