@@ -39,7 +39,7 @@ const Navbar = () => {
     dispatch(actions.setLogin(false));
     localStorage.removeItem('token');
     localStorage.removeItem('project-type');
-    history.push("/");
+    history.push("/login");
   };
 
   const handleEdit = () => {
@@ -83,7 +83,7 @@ const Navbar = () => {
       <StyleNavItem>
         <Popover
           placement="bottom"
-          title="Profile"
+          title="Thông tin tài khoản"
           content={profile}
           trigger="click"
         >

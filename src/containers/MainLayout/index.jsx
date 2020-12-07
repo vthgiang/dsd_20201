@@ -15,11 +15,11 @@ const MainLayout = ({ children, history }) => {
     setCollapsed(!collapsed);
   };
 
-  const isLogin = useSelector(state => state.user.isLogin);
+  const projectType = useSelector(state => state.user.projectType);
 
   useEffect(() => {
-    if (!isLogin) {
-      history.push("/login");
+    if (!projectType) {
+      history.push("/home");
     }
   }, []);
 

@@ -58,4 +58,15 @@ export const types = [
     },
 ];
 
+export const statusesActivate = [
+    {
+        name: "Có thể nhận việc",
+        code: "FREE",
+    },
+    {
+        name: "Bận",
+        code: "BUSY",
+    },
+];
+
 export const uploadPath = "upload/";

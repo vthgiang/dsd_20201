@@ -17,12 +17,10 @@ const HomeContent = ({ history }) => {
 
   const handleClickIncident = (type) => {
     if (!isLogin) {
-      localStorage.setItem("project-type", type);
-      dispatch(actions.setProjectType(type));
-      setHeaders({"project-type": type});
       history.push('/login');
     } else {
-      if (isLogin && user.type == type) {
+      if (isLogin && (user.type == type || user.type == "SUPER_ADMIN")) {
+        dispatch(actions.setProjectType(type));
         history.push('/dashboard');
       } else {
         notification.warning({

@@ -1,9 +1,15 @@
-import React, { useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React, { Fragment, useEffect } from "react";
+import {
+    BrowserRouter,
+    Switch,
+    Route,
+    useHistory,
+    Redirect,
+} from "react-router-dom";
 import MainLayout from "./containers/MainLayout";
 import Home from "./pages/Home";
 import AppRouter from "./pages/routes";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import store, { persistor } from "../src/services";
 import { PersistGate } from "redux-persist/lib/integration/react";
 
@@ -14,34 +20,62 @@ import ChangePassword from "../src/modules/user/components/changePassword";
 import { setHeaders } from "./services/axios";
 
 const App = () => {
+    useEffect(() => {
+        if (localStorage.getItem("project-type")) {
+            setHeaders({
+                "project-type": localStorage.getItem("project-type"),
+            });
+        }
+        if (localStorage.getItem("token")) {
+            setHeaders({ token: localStorage.getItem("token") });
+        }
+    }, []);
 
-  useEffect(() => {
-    if(localStorage.getItem('project-type')) {
-      setHeaders({'project-type': localStorage.getItem('project-type')});
-    }
-    if(localStorage.getItem('token')) {
-      setHeaders({'token': localStorage.getItem('token')});
-    }
-  }, [])
+    return (
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+                <AppModule />
+            </PersistGate>
+        </Provider>
+    );
+};
 
-  return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+const PrivateRoute = ({ component: Component, ...rest }) => {
+    const isLogin = useSelector((state) => state.user.isLogin);
+
+    return (
+        <Route
+            {...rest}
+            render={(props) =>
+                isLogin ? <Component {...props} /> : <Redirect to="/login" />
+            }
+        />
+    );
+};
+
+const AppModule = () => {
+    return (
         <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/forgot-password" component={ForgotPassword} />
-            <Route exact path="/change-password" component={ChangePassword} />
-            <MainLayout>
-              <AppRouter />
-            </MainLayout>
-          </Switch>
+            <Switch>
+                <PrivateRoute exact path="/home" component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Route
+                    exact
+                    path="/forgot-password"
+                    component={ForgotPassword}
+                />
+                <Route
+                    exact
+                    path="/change-password"
+                    component={ChangePassword}
+                />
+                <MainLayout>
+                    <AppRouter />
+                </MainLayout>
+            </Switch>
         </BrowserRouter>
-      </PersistGate>
-    </Provider>
-  );
+    );
 };
 
 export default App;

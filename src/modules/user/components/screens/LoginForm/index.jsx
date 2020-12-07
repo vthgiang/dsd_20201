@@ -37,12 +37,6 @@ const LoginForm = () => {
 
     console.log(userInfo);
 
-    useEffect(() => {
-        if (!projectType || projectType == "") {
-            history.push("/");
-        }
-    }, [projectType]);
-
     const history = useHistory();
     const location = useLocation();
     const isLogin = useSelector((state) => state.user.isLogin);
@@ -82,8 +76,9 @@ const LoginForm = () => {
                 dispatch(actions.setUserData(res.result));
                 dispatch(actions.setLogin(true));
                 localStorage.setItem("token", res.result.api_token);
+                localStorage.setItem("project-type", res.result.type);
                 setHeaders({ token: res.result.api_token });
-                history.push("/dashboard");
+                history.push("/home");
             } else {
                 setMessage(res.message);
             }
