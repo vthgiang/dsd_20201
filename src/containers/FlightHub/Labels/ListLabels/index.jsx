@@ -52,10 +52,14 @@ const ListLabels = () => {
 
   const handleSearch = (value) => {
     let dataSearchResult = listLabelsInit.filter((label) => {
-      let labelConvert = removeVietnameseTones(label.name);
+      let labelNameConvert = removeVietnameseTones(label.name);
+      let labelDescriptionConvert = removeVietnameseTones(label.description);
       let valueConvert = removeVietnameseTones(value);
 
-      if (labelConvert.includes(valueConvert)) {
+      if (
+        labelNameConvert.includes(valueConvert) ||
+        labelDescriptionConvert.includes(valueConvert)
+      ) {
         return label;
       }
     });
@@ -155,7 +159,7 @@ const ListLabels = () => {
       key: 'createdAt',
       dataIndex: 'createdAt',
       title: 'Ngày tạo',
-      width: '15%',
+      width: '20%',
       render: formatMomentDateToDateTimeString,
       sorter: (a, b) => moment(a.startTime).diff(moment(b.startTime)),
     },
@@ -163,7 +167,7 @@ const ListLabels = () => {
       key: 'updatedAt',
       dataIndex: 'updatedAt',
       title: 'Ngày cập nhật',
-      width: '15%',
+      width: '20%',
       render: formatMomentDateToDateTimeString,
       sorter: (a, b) => moment(a.startTime).diff(moment(b.startTime)),
     },
@@ -219,7 +223,11 @@ const ListLabels = () => {
 
       <Row type="flex" justify="space-between" align="middle">
         <Col span={8}>
-          <Search placeholder="Tên nhãn" onSearch={handleSearch} enterButton />
+          <Search
+            placeholder="Tìm tên nhãn, mô tả..."
+            onSearch={handleSearch}
+            enterButton
+          />
         </Col>
         <Button
           type="primary"
