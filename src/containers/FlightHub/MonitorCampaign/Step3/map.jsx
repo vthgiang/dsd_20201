@@ -55,9 +55,11 @@ const Map = ({
             });
           }
 
+          console.log('monitoredZoneInit', monitoredZoneInit);
+
           // khởi tạo park nếu đã có sẵn
           if (monitoredZoneInit) {
-            let zone = res.data.content.monitoredArea.find(
+            let zone = res.data.content.zone.find(
               (element) => element._id == monitoredZoneInit,
             );
             if (zone) {
