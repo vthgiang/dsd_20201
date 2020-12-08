@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Row,
   Input,
@@ -10,6 +10,7 @@ import {
   Select,
   Form,
   DatePicker,
+  notification,
 } from 'antd';
 import {
   DeleteOutlined,
@@ -33,12 +34,9 @@ import {
 import { randomDateTime } from '../services';
 import moment from 'moment';
 import { DATE_TIME_FORMAT } from '../../../../configs';
-import {
-  ATTACH_PARAMS,
-  MECHANISM,
-  METADATA_TYPES,
-  RESOLUTION,
-} from '../../../../constants';
+import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../../constants';
+
+import { monitorCampaignApi } from '../../../../apis';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -135,38 +133,24 @@ const monitoredZones = [
   },
 ];
 
-const initData = [];
-for (let i = 1; i <= 20; i++) {
-  initData.push({
-    key: i,
-    id: `MC${i < 10 ? '0' + i : i}`,
-    drones: [1],
-    name: `Đợt giám sát ${i + 1}`,
-    startTime: randomDateTime(new Date('2020-11-20'), new Date('2020-11-25')),
-    endTime: randomDateTime(new Date('2020-11-25'), new Date('2020-11-29')),
-    mechanism: Math.round(Math.random()) ? 'manually' : 'auto',
-    resolution: Math.round(Math.random()) ? '720p' : '1080p',
-    metadataType: Math.round(Math.random())
-      ? METADATA_TYPES.PHOTO
-      : METADATA_TYPES.VIDEO,
-    monitoredZone:
-      monitoredZones[Math.floor(Math.random() * monitoredZones.length)],
-    monitoredObject:
-      monitoredObjects[Math.floor(Math.random() * monitoredObjects.length)],
-    attachParams: [
-      '5349b4ddd2781d0111111111',
-      '5349b4ddd2781d0222222222',
-      '5349b4ddd2781d0855555555',
-      '5349b4ddd2781d0877777777',
-    ],
-    description: 'Ghi chú',
-  });
-}
-
 const ListMonitorCampaign = () => {
-  const [data, setData] = useState(initData);
+  const [listMonitorCampaignsData, setListMonitorCampaignsData] = useState([]);
   const [form] = Form.useForm();
   const history = useHistory();
+
+  useEffect(() => {
+    const fetchListMonitorCampaignsData = async () => {
+      try {
+        const resp = await monitorCampaignApi.getListMonitorCampaigns();
+        setListMonitorCampaignsData(resp.data.result.monitorCampaigns);
+      } catch (error) {
+        notification.error({
+          message: 'Có lỗi xảy ra! Xin thử lại',
+        });
+      }
+    };
+    fetchListMonitorCampaignsData();
+  }, []);
 
   const handleSearch = () => {
     const newFieldValues = form.getFieldsValue();
@@ -188,11 +172,23 @@ const ListMonitorCampaign = () => {
     history.push(`/flight-hub-monitor-campaigns/create`);
   };
 
-  const handleDeleteMonitorCampaign = (item) => () => {
-    console.log({ item });
+  const handleDeleteMonitorCampaign = (item, index) => async () => {
+    try {
+      const resp = await monitorCampaignApi.deleteMonitorCampaign(item._id);
+      const newListMonitorCampaignsData = [...listMonitorCampaignsData];
+      newListMonitorCampaignsData.splice(index, 1);
+      setListMonitorCampaignsData(newListMonitorCampaignsData);
+      notification.info({
+        message: 'Xóa thành công!',
+      });
+    } catch (error) {
+      notification.error({
+        message: 'Có lỗi xảy ra! Xin thử lại',
+      });
+    }
   };
 
-  const deleteConfirm = (item) => () => {
+  const deleteConfirm = (item, index) => () => {
     const { name } = item;
     Modal.confirm({
       title: 'Cảnh báo',
@@ -204,13 +200,13 @@ const ListMonitorCampaign = () => {
       ),
       okText: 'Đồng ý',
       cancelText: 'Hủy',
-      onOk: handleDeleteMonitorCampaign(item),
+      onOk: handleDeleteMonitorCampaign(item, index),
     });
   };
 
   const columns = [
     {
-      dataIndex: 'id',
+      dataIndex: '_id',
       title: 'Mã đợt giám sát',
       width: '7.5%',
       align: 'center',
@@ -280,9 +276,9 @@ const ListMonitorCampaign = () => {
     {
       key: 'actions',
       title: 'Hành động',
-      width: 'auto',
+      width: '10%',
       align: 'center',
-      render: (data, record) => {
+      render: (data, record, index) => {
         return (
           <Space size={4}>
             <Button
@@ -296,7 +292,7 @@ const ListMonitorCampaign = () => {
               icon={<DeleteOutlined />}
               type="danger"
               size="small"
-              onClick={deleteConfirm(record)}
+              onClick={deleteConfirm(record, index)}
             >
               Xóa
             </Button>
@@ -434,7 +430,11 @@ const ListMonitorCampaign = () => {
 
       <StyleSeparator />
       <StyleTable>
-        <Table columns={columns} dataSource={data} />
+        <Table
+          columns={columns}
+          dataSource={listMonitorCampaignsData}
+          scroll={{ x: 1560 }}
+        />
       </StyleTable>
     </StyleListMonitorCampaign>
   );

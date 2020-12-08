@@ -9,4 +9,39 @@ const createMonitorCampaign = async (data) => {
   return result;
 };
 
-export default { createMonitorCampaign };
+const getListMonitorCampaigns = async (params) => {
+  const result = await axiosInstance.get(`/api/monitor-campaigns`);
+  return result;
+};
+
+const getMonitorCampaign = async (monitorCampaignId) => {
+  const result = await axiosInstance({
+    method: 'GET',
+    url: `/api/monitor-campaigns/${monitorCampaignId}`,
+  });
+  return result;
+};
+
+const updateMonitorCampaign = async (data) => {
+  const result = await axiosInstance({
+    method: 'PATCH',
+    url: `/api/monitor-campaigns`,
+    data,
+  });
+  return result;
+};
+const deleteMonitorCampaign = async () => {
+  const result = await axiosInstance({
+    method: 'DELETE',
+    url: `/api/monitor-campaigns`,
+  });
+  return result;
+};
+
+export default {
+  createMonitorCampaign,
+  getListMonitorCampaigns,
+  getMonitorCampaign,
+  updateMonitorCampaign,
+  deleteMonitorCampaign,
+};
