@@ -4,15 +4,14 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Dashboard from './Dashboard';
 
 import TableDrone from './TableDrone';
-
 import FlightPathDrone from './FLightPathDrone';
-
-import FlightPoint from './FlightPoint'
+import FlightPoint from './FlightPoint';
+import TableDroneState from './TableDroneState';
 
 export const routes = [
   {
     path: '/dashboard',
-    component: () => <div>DroneManagement</div>,
+    component: Dashboard,
     exact: true,
   },
   {
@@ -20,8 +19,12 @@ export const routes = [
     component: () => <div>DroneManagement</div>,
   },
   {
-    path: '/drone-state',
+    path: '/drone-list',
     component: TableDrone,
+  },
+  {
+    path: '/drone-state',
+    component: TableDroneState,
   },
   {
     path: '/fly-setting',

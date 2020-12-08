@@ -13,9 +13,9 @@ export const sidebarMenu = [
     subMenu: [
       {
         key: 'DroneState',
-        heading: 'Tình trạng drone',
+        heading: 'Danh sách drone',
         icon: 'fal fa-monitor-heart-rate',
-        route: '/drone-state',
+        route: '/drone-list',
       },
       {
         key: 'FlySetting',
@@ -27,7 +27,7 @@ export const sidebarMenu = [
         key: 'DroneStatistic',
         heading: 'Thống kê drone',
         icon: 'fa fa-file-chart-line',
-        route: '/drone-statistic',
+        route: '/drone-state',
       },
     ],
   },

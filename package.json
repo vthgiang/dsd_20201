@@ -27,7 +27,8 @@
     "reactjs-popup": "latest",
     "redux": "^4.0.5",
     "styled-components": "^5.1.1",
-    "video-react": "0.14.0"
+    "video-react": "0.14.0",
+    "react-tabs" : "latest"
   },
   "browserslist": {
     "production": [
