@@ -1,10 +1,13 @@
-import { Tag } from 'antd';
+import { Image, Tag } from 'antd';
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+export const problemTypes = ["Cháy rừng", "Lưới điện", "Đê điều", "Cây trồng"];
 
 export const columns = [
     {
         title: 'Mã',
-        dataIndex: 'key',
+        dataIndex: 'id',
     },
     {
         title: 'Tên',
@@ -12,7 +15,7 @@ export const columns = [
     },
     {
         title: 'Ảnh/video',
-        dataIndex: 'image_video',
+        dataIndex: 'link'
     },
     {
         title: 'Thể loại',
@@ -31,26 +34,18 @@ export const columns = [
         dataIndex: 'latitude',
     },
     {
-        title: 'Trạng thái sự cố',
-        dataIndex: 'status',
-        render: status => status ? <Tag color="error">Có sự cố</Tag> : <Tag color="green">Không có sự cố</Tag>
+        title: 'Loại sự cố',
+        dataIndex: 'problemType'
     },
     {
         title: 'Ngày tạo',
-        dataIndex: 'createdAtDate',
+        dataIndex: 'createdAt',
     },
     {
-        title: 'Giờ tạo',
-        dataIndex: 'createdAtTime',
-    },
-    {
-        title: 'Mã sự cố',
-        dataIndex: 'problemId',
-    },
-    {
-        title: 'Mã drone',
-        dataIndex: 'droneId',
-    },
+        title: '',
+        dataIndex: 'id',
+        render: id => <Link to={`/image-video-detail/${id}`} >Xem chi tiết</Link>
+    }
 ];
 
 export const data = [

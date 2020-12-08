@@ -3,6 +3,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
 import ImageVideo from "./ImageVideo";
+import Detail from "./ImageVideo/detail";
+import Stream from "./ImageVideo/stream";
 
 export const routes = [
   {
@@ -37,6 +39,14 @@ export const routes = [
   {
     path: '/metadata',
     component: () => <ImageVideo />,
+  },
+  {
+    path: '/stream',
+    component: () => <Stream />,
+  },
+  {
+    path: '/image-video-detail/:id',
+    component: () => <Detail />,
   },
   {
     path: '/problem',

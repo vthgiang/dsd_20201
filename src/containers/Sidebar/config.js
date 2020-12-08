@@ -47,7 +47,20 @@ export const sidebarMenu = [
     key: 'metadata',
     heading: 'Hình ảnh và video',
     icon: 'fas fa-images',
-    route: '/metadata',
+    subMenu: [
+      {
+        key: 'ImageVideo',
+        heading: 'Quản lý hình ảnh, video',
+        icon: 'fal fa-monitor-heart-rate',
+        route: '/metadata',
+      },
+      {
+        key: 'Stream',
+        heading: 'Stream',
+        icon: 'fal fa-monitor-heart-rate',
+        route: '/stream',
+      }
+    ]
   },
   {
     key: 'Problems',
