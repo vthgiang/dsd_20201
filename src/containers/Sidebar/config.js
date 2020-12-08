@@ -93,8 +93,22 @@ export const sidebarMenu = [
   },
   {
     key: 'UserManagement',
-    heading: 'Quản lý người dùng',
+    heading: 'Người dùng',
     icon: 'fas fa-user-circle',
     route: '/user-management',
+    subMenu: [
+      {
+        key: 'FlySetting',
+        heading: 'Quản lý người dùng',
+        icon: 'fa fa-users',
+        route: '/user',
+      },
+      {
+        key: 'DroneState',
+        heading: 'Quản lý phòng ban',
+        icon: 'fa fa-building',
+        route: '/department',
+      },
+    ],
   },
 ];

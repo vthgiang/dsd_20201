@@ -19,7 +19,7 @@ const HomeContent = ({ history }) => {
     if (!isLogin) {
       history.push('/login');
     } else {
-      if (isLogin && (user.type == type || user.type == "SUPER_ADMIN")) {
+      if (isLogin && (user.type == type || user.role == "SUPER_ADMIN")) {
         dispatch(actions.setProjectType(type));
         history.push('/dashboard');
       } else {

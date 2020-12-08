@@ -49,23 +49,26 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
     const handleSave = async () => {
         var res = {};
         if (!validateData()) {
-            notification.warning({
-                message: "Đóng",
-                description: message,
-            });
             return;
         }
         const dataUser = buildUserData();
+        var description = "";
 
         if (userId && userId != "") {
             dataUser.id = userId;
             res = await updateUser(dataUser);
-            fetchListUser();
+            description = "Cập nhật thành công!";
         } else {
             res = await createUser(dataUser);
+            description = "Tạo mới thành công!";
         }
         if (res.status === "successful") {
+            notification.success({
+                message: "Thành công",
+                description: description
+            })
             handleCloseModal();
+            fetchListUser();
         } else {
             notification.error({
                 message: "",
@@ -82,33 +85,57 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
         var retval = true;
         if (typeof user.full_name === "undefined" || user.full_name === "") {
             retval = false;
-            setMessage("Vui lòng nhập họ tên!");
+            setMessage({
+                value: "Vui lòng nhập họ tên!",
+                type: "error",
+                title: "Lỗi"
+            });
             return retval;
         }
         if (typeof user.username === "undefined" || user.username === "") {
             retval = false;
-            setMessage("Vui lòng nhập tên đăng nhập!");
+            setMessage({
+                value: "Vui lòng nhập tên đăng nhập!",
+                type: "error",
+                title: "Lỗi"
+            });
             return retval;
         }
         if (typeof user.email === "undefined" || user.email === "") {
             retval = false;
-            setMessage("Vui lòng nhập email!");
+            setMessage({
+                value: "Vui lòng nhập email!",
+                type: "error",
+                title: "Lỗi"
+            });
             return retval;
         }
         if (!userId) {
             if (typeof user.password === "undefined" || user.password === "") {
                 retval = false;
-                setMessage("Vui lòng nhập mật khẩu!");
+                setMessage({
+                    value: "Vui lòng nhập mật khẩu!",
+                    type: "error",
+                    title: "Lỗi"
+                });
                 return retval;
             }
             if (typeof user.repassword === "undefined") {
                 retval = false;
-                setMessage("Vui lòng xác nhận mật khẩu!");
+                setMessage({
+                    value: "Vui lòng xác nhận mật khẩu!",
+                    type: "error",
+                    title: "Lỗi"
+                });
                 return retval;
             }
             if (user.repassword !== user.password) {
                 retval = false;
-                setMessage("Xác nhận mật khẩu không đúng!");
+                setMessage({
+                    value: "Xác nhận mật khẩu không đúng!",
+                    type: "error",
+                    title: "Lỗi"
+                });
                 return retval;
             }
         }
@@ -153,6 +180,29 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
         setUser({});
         setVisible(false);
     };
+
+    useEffect(() => {
+        if (message && message != "") {
+            if (message.type == 'error') {
+                notification.error({
+                    message: message.title,
+                    description: message.value
+                })
+            }
+            if (message.type == 'warning') {
+                notification.warning({
+                    message: message.title,
+                    description: message.value
+                })
+            }
+            if (message.type == 'success') {
+                notification.success({
+                    message: message.title,
+                    description: message.value
+                })
+            }
+        }
+    }, [message]);
 
     const renderSelectStatus = () => (
         <Select
@@ -222,8 +272,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
                     </Form.Item>
                     <Form.Item name="username" style={{ width: "45%" }}>
                         <label htmlFor="">
-                            Tên đăng nhập{" "}
-                            <span style={{ color: "red" }}>*</span>
+                            Tên đăng nhập <span style={{ color: "red" }}>*</span>
                         </label>
                         <Input
                             className="input-box"
@@ -255,7 +304,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
                         />
                     </Form.Item>
                     <Form.Item name="phone" style={{ width: "45%" }}>
-                        <label htmlFor="">Sdt:</label>
+                        <label htmlFor="">Sdt <span style={{ color: "red" }}>*</span></label>
                         <Input
                             className="input-box"
                             placeholder="Số điện thoại"
@@ -289,8 +338,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
                         </Form.Item>
                         <Form.Item name="re-password" style={{ width: "45%" }}>
                             <label htmlFor="">
-                                Xác nhận mật khẩu{" "}
-                                <span style={{ color: "red" }}>*</span>
+                                Xác nhận mật khẩu <span style={{ color: "red" }}>*</span>
                             </label>
                             <Input
                                 type="password"
@@ -311,7 +359,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
                         name="address"
                         style={{ width: "45%", marginRight: 10 }}
                     >
-                        <label htmlFor="">Address</label>
+                        <label htmlFor="">Address </label>
                         <Input
                             className="input-box"
                             type="text"
@@ -323,7 +371,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
                         />
                     </Form.Item>
                     <Form.Item name="role" style={{ width: "45%" }}>
-                        <label htmlFor="">Ngày sinh</label>
+                        <label htmlFor="">Ngày sinh </label>
                         <DatePicker
                             value={
                                 user.birthday
@@ -346,17 +394,17 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser }) => {
                         name="role"
                         style={{ width: "45%", marginRight: 10 }}
                     >
-                        <label htmlFor="">Chức vụ</label>
+                        <label htmlFor="">Chức vụ </label>
                         {renderSelectRole()}
                     </Form.Item>
                     <Form.Item name="status" style={{ width: "45%" }}>
-                        <label htmlFor="">Trạng thái:</label>
+                        <label htmlFor="">Trạng thái </label>
                         {renderSelectStatus()}
                     </Form.Item>
                 </Row>
                 <Row>
                     <Form.Item name="status" style={{ margin: "0 auto" }}>
-                        <label htmlFor="">Avatar</label>
+                        <label htmlFor="">Avatar </label>
                         <UploadImage
                             imageUrl={
                                 imageUrl ? imageUrl : `media/users/blank.png`

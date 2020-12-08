@@ -30,7 +30,7 @@ const ListUser = () => {
     const user = useSelector((state) => state.user.user);
 
     const fetchListUser = useCallback(async () => {
-        const res = await getListUsers(filter, user.type);
+        const res = await getListUsers(filter);
         if (res.status === 'successful') {
             setMeta(res.meta);
             setListUser(res.result);
@@ -69,6 +69,7 @@ const ListUser = () => {
                             message: "Thành công",
                             description: "Xóa người dùng thành công",
                         });
+                        fetchListUser();
                     } else {
                         notification.error({
                             message: "Lỗi",
@@ -144,10 +145,10 @@ const ListUser = () => {
             render: (text, record) => (
                 <Fragment>
                     <Space size="middle" style={{ marginRight: 10 }}>
-                        <a onClick={() => handleEdit(record, "user")}>Edit</a>
+                        <a onClick={() => handleEdit(record)}>Sửa</a>
                     </Space>
                     <Space size="middle">
-                        <a onClick={() => handleDelete(record)}>Delete</a>
+                        <a onClick={() => handleDelete(record)}>Xóa</a>
                     </Space>
                 </Fragment>
             ),
@@ -195,7 +196,7 @@ const ListUser = () => {
         setFilter({ ...filter, page_id: value - 1, page_size: pageSize });
     };
 
-    const handleEdit = (record, type) => {
+    const handleEdit = (record) => {
         setVisible(true);
         setUserId(record.id);
     };
@@ -218,10 +219,10 @@ const ListUser = () => {
                         block
                         type="primary"
                         onClick={() => setVisible(true)}
-                        style={{ width: 120 }}
+                        style={{ width: 200, float: "right" }}
                     >
                         <UserAddOutlined />
-                        New User
+                        Thêm người dùng
                     </Button>
                 </Col>
             </Row>

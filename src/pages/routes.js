@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom";
 import ListUser from "../modules/user/components/listUser";
+import ListDepartment from "../modules/user/components/listDepartment";
 
 import Dashboard from "./Dashboard";
 
@@ -74,6 +75,14 @@ export const routes = [
     {
         path: "/user-management",
         component: ListUser,
+    },
+    {
+        path: "/user",
+        component: ListUser,
+    },
+    {
+        path: "/department",
+        component: ListDepartment,
     },
 ];
 

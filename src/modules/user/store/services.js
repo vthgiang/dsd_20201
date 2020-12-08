@@ -27,13 +27,16 @@ export const changePassword = (body) =>
         return error.response.data;
     });
 
-export const getListUsers = (filter, type) => {
-    var url = `user?page_id=${filter.page_id}&sorts=-id&page_size=${filter.page_size}&filters=`;
+export const getListUsers = (filter) => {
+    var url = `user?page_id=${filter.page_id}&page_size=${filter.page_size}&sorts=-id&embeds=department&filters=`;
     if (filter.role && filter.role != "Chưa xác định") {
         url += ",role=" + filter.role;
     }
     if (filter.status && filter.status != "Chưa xác định") {
         url += ",status=" + filter.status;
+    }
+    if (filter.statusActivation && filter.statusActivation != "Chưa xác định") {
+        url += ",status_activation=" + filter.statusActivation;
     }
     if (filter.search) {
         url += "&q=" + filter.search;
@@ -86,5 +89,52 @@ export const uploadAvatar = ({ file }) => {
 
     return apiAxios.post("upload", formData).then((res) => {
         return res.data;
+    });
+};
+
+export const getListDepartments = (filter) => {
+    var url = `department?page_id=${filter.page_id}&page_size=${filter.page_size}&sorts=-id&filters=`;
+    if (filter.search) {
+        url += "&q=" + filter.search;
+    };
+    return apiAxios.get(url).then((res) => {
+        return res.data;
+    }).catch((error) => {
+        return error.response.data;
+    });
+};
+
+export const getDepartment = (userId) => {
+    return apiAxios
+        .get(`department/${userId}`)
+        .then((res) => {
+            return res.data;
+        })
+        .catch((error) => {
+            return error.response.data;
+        });
+};
+
+export const updateDepartment = (body) => {
+    return apiAxios.patch(`department/${body.id}`, body).then((res) => {
+        return res.data;
+    }).catch((error) => {
+        return error.response.data;
+    });
+};
+
+export const createDepartment = (body) => {
+    return apiAxios.post("department", body).then((res) => {
+        return res.data;
+    }).catch((error) => {
+        return error.response.data;
+    });
+};
+
+export const deleteDepartment = (userId) => {
+    return apiAxios.delete(`department/${userId}`).then((res) => {
+        return res.data;
+    }).catch((error) => {
+        return error.response.data;
     });
 };
