@@ -8,6 +8,7 @@ import {
   Space,
   Table,
   Tabs,
+  Spin,
 } from "antd";
 import {
   ComposedChart,
@@ -27,6 +28,9 @@ import {
   Text,
   AreaChart,
 } from "recharts";
+
+import DroneDashboard from "./DroneDashboard";
+import { getDroneOverallMetrics } from "../../services/statistics";
 
 const { TabPane } = Tabs;
 
@@ -293,6 +297,17 @@ function callback(key) {
 }
 
 function Dashboard() {
+  const [droneMetrics, setDroneMetrics] = React.useState(null);
+
+  React.useEffect(() => {
+    const fetchAll = async () => {
+      const drone = await getDroneOverallMetrics();
+      setDroneMetrics(drone);
+    }
+
+    fetchAll();
+  }, []);
+
   return (
     <div>
       <Breadcrumb
@@ -318,9 +333,15 @@ function Dashboard() {
             style={{ height: "100%" }}
           >
             <h4>Drone</h4>
-            <div>Tổng: 500</div>
-            <div>Đang sử dụng: 450</div>
-            <div>Dự phòng: 50</div>
+            {!droneMetrics ? (
+              <Spin />
+            ) : (
+              <>
+                <div>Tổng: {droneMetrics.all}</div>
+                <div>Đang sử dụng: {droneMetrics.working}</div>
+                <div>Đang hỏng: {droneMetrics.broken}</div>
+              </>
+            )}
           </Card>
         </Col>
         <Col span={6}>
@@ -367,27 +388,11 @@ function Dashboard() {
         <Col span={24}>
           <Card className="u-shadow u-rounded">
             <Tabs defaultActiveKey="1" onChange={callback}>
-              <TabPane key="Tab 1" tab="Drone">
-                <h1>Drone</h1>
-                <ResponsiveContainer height={300} width="100%">
-                  <ComposedChart
-                    data={dataChart1}
-                    margin={{
-                      top: 16,
-                      right: 16,
-                      bottom: 16,
-                      left: 16,
-                    }}
-                  >
-                    <CartesianGrid stroke="#f5f5f5" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="error" barSize={20} fill="#413ea0" />
-                    <Line type="monotone" dataKey="error" stroke="#ff7300" />
-                  </ComposedChart>
-                </ResponsiveContainer>
+              <TabPane key="Drone" tab="Drone">
+                <DroneDashboard />
+              </TabPane>
+              <TabPane key="Payload" tab="Payload">
+                <div />
               </TabPane>
               <TabPane key="Tab 2" tab="Sự cố">
                 <h1>Thống kê sự cố theo tháng</h1>
@@ -543,6 +548,24 @@ function Dashboard() {
                     <Table dataSource={dataSource} columns={columns} />;
                   </Col>
                 </Row>
+              </TabPane>
+              <TabPane key="Cảnh báo" tab="Cảnh báo">
+                <div />
+              </TabPane>
+              <TabPane key="Ảnh/Video" tab="Ảnh/Video">
+                <div />
+              </TabPane>
+              <TabPane key="Đợt giám sát" tab="Đợt giám sát">
+                <div />
+              </TabPane>
+              <TabPane key="Miền giám sát" tab="Miền giám sát">
+                <div />
+              </TabPane>
+              <TabPane key="Đối tượng giám sát" tab="Đối tượng giám sát">
+                <div />
+              </TabPane>
+              <TabPane key="Báo cáo" tab="Báo cáo">
+                <div />
               </TabPane>
             </Tabs>
           </Card>
