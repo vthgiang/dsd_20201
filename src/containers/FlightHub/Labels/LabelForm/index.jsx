@@ -86,13 +86,13 @@ const LabelForm = ({
           <Input disabled={isDetails} placeholder="Nhập tên nhãn" />
         </Form.Item>
 
-        <Form.Item
+        {/* <Form.Item
           name="property"
           label="Trường dữ liệu"
           rules={[{ type: 'string', required: !isDetails }]}
         >
           <Input disabled={isDetails} placeholder="Nhập tên trường dữ liệu" />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item name="description" label="Mô tả">
           <Input disabled={isDetails} placeholder="Nhập mô tả nhãn" />
