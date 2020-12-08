@@ -245,7 +245,7 @@ class ListTypePayload extends Component {
           <h2>Quản lý loại Payload</h2>
           <br/>
           <Button type="primary" className="buttontype" onClick={() => this.showModalAdd()} >Thêm loại mới</Button>
-          <Table dataSource={dataSource} columns={columns} />;
+          <Table dataSource={dataSource} columns={columns} />
         </div>
         <Modal
           title="Chi tiết"

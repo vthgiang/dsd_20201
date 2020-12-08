@@ -34,23 +34,23 @@ class List extends Component {
       ],
         typeData: [
             {
-                x: "Panorama Camera",
+                x: "Camera góc rộng",
                 y: 0,
             },
             {
-                x: "Camera TRBS 827",
+                x: "Camera nhiệt",
                 y: 0,
             },
             {
-                x: "Camera VISUO",
+                x: "Camera hồng ngoại",
                 y: 0,
             },
             {
-                x: "Camera SJRC F11",
+                x: "Cảm biến nhiệt độ",
                 y: 0,
             },
             {
-                x: "Temp Sensor",
+                x: "Cảm biến tiệm cận",
                 y: 0,
             },
         ],
@@ -259,11 +259,13 @@ class List extends Component {
                 </Row>
               <Row justify="space-around">
                 <Col span={9}>
+                    <br/>
                   <Form.Item label="Chọn loại Payload" name="type">
                     <Select options={this.state.Options} />
                   </Form.Item>
                 </Col>
                 <Col span={14}>
+                    <br/>
                   <Button type="primary" htmlType="submit" icon={<SearchOutlined />}>
                     Lọc
                   </Button>
