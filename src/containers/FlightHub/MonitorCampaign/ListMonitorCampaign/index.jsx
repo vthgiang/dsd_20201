@@ -144,8 +144,8 @@ const ListMonitorCampaign = () => {
     try {
       setLoading(true);
       const resp = await monitorCampaignApi.getListMonitorCampaigns(params);
-      setLoading(false);
       setListMonitorCampaignsData(resp.data.result.monitorCampaigns);
+      setLoading(false);
     } catch (error) {
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại',
