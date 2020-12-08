@@ -9,7 +9,7 @@ const UpdateLabel = ({ visible, hideModal, labelDetails, updateLabel }) => {
   const onUpdateLabel = async ({ name, description, property }) => {
     const labelData = omitIsNil(
       {
-        id: labelDetails.id || '',
+        _id: labelDetails._id || '',
         name,
         description,
         property,
