@@ -174,7 +174,6 @@ const ListMonitorCampaign = () => {
   };
 
   const handleDeleteMonitorCampaign = (item, index) => async () => {
-    console.log('item ', item);
     try {
       const resp = await monitorCampaignApi.deleteMonitorCampaign(item._id);
       const newListMonitorCampaignsData = [...listMonitorCampaignsData];
@@ -244,7 +243,7 @@ const ListMonitorCampaign = () => {
       render: (data = []) => {
         return data.map((elem) => {
           const { name } = elem.content;
-          return <div>{name}</div>;
+          return <div key={Date.now().toString()}>{name}</div>;
         });
       },
     },

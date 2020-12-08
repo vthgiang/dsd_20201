@@ -34,10 +34,11 @@ const updateMonitorCampaign = async (data) => {
   });
   return result;
 };
-const deleteMonitorCampaign = async (id) => {
+const deleteMonitorCampaign = async (monitorCampaignId) => {
   const result = await axiosInstance({
     method: 'DELETE',
-    url: `/api/monitor-campaigns/${id}`,
+    url: `/api/monitor-campaigns`,
+    data: { _id: monitorCampaignId },
   });
   return result;
 };
