@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import 'ant-design-pro/dist/ant-design-pro.css';
+import { Pie, yuan } from 'ant-design-pro/lib/Charts';
 import { Table, Space, Input, Form, Select, Modal, DatePicker, Row, Col } from 'antd';
 import { Button } from 'antd';
 import StyleList from './index.style';
@@ -30,7 +32,22 @@ class List extends Component {
         { value: 'working', label: 'Đang sử dụng' },
         { value: 'idle', label: 'Sẵn có' },
         { value: 'fixing', label: 'Đang sửa' }
-      ]
+      ],
+
+        salesPieData: [
+            {
+                x: 'Đang hoạt động',
+                y: 1,
+            },
+            {
+                x: 'Sẵn có',
+                y: 1,
+            },
+            {
+                x: 'Đang sửa',
+                y: 1,
+            },
+        ]
     }
   }
 
@@ -67,6 +84,8 @@ class List extends Component {
                 value: payload._id,
               })
           )
+
+
           this.setState({ Options: options });
         })
 
@@ -74,8 +93,8 @@ class List extends Component {
 
 
 
+
   searchPayload(values) {
-    console.log(values)
     axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { type: values.type, status: values.status } })
         .then(res => {
           //const persons = res.data;
@@ -84,8 +103,33 @@ class List extends Component {
   }
 
 
+  componentWillMount() {
+      var that = this;
+      axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { status: "working" } })
+          .then(res => {
+              const data = res.data;
+              let { salesPieData } = that.state;
+              salesPieData[0].y = data.length;
+              this.setState(salesPieData);
+          })
+      axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { status: "idle" } })
+          .then(res => {
+              const data = res.data;
+              let { salesPieData } = that.state;
+              salesPieData[1].y = data.length;
+              this.setState(salesPieData);
+          })
+      axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { status: "fixing" } })
+          .then(res => {
+              const data = res.data;
+              let { salesPieData } = that.state;
+              salesPieData[2].y = data.length;
+              this.setState(salesPieData);
+          })
+  }
 
-  render() {
+
+    render() {
 
     const dataSource = this.state.tables.map(payload =>
         ({
@@ -148,7 +192,7 @@ class List extends Component {
       },
     ];
 
-    const { visible, visibleAdd, visibleDelete, currentTable, tables } = this.state;
+    const { visible, visibleAdd, visibleDelete, currentTable, tables, salesPieData } = this.state;
 
     return (
         <StyleList>
@@ -162,7 +206,29 @@ class List extends Component {
                 layout="horizontal"
                 className="searchtype" onFinish={(values) => this.searchPayload(values)}
             >
+                <Row justify="space-around">
+                    <Col span={16}>
+                        <Pie
+                            hasLegend
+                            title="Theo trạng thái"
+                            subTitle="Theo trạng thái"
+                            total={() => (
+                                <span
+                                    dangerouslySetInnerHTML={{
+                                        __html: (salesPieData.reduce((pre, now) => now.y + pre, 0))+ " payload",
+                                    }}
+                                />
+                            )}
+                            data={salesPieData.filter(item => item.y > 0)}
+                            valueFormat={val => <span dangerouslySetInnerHTML={{ __html: (val) }} />}
+                            height={324}
+                        />
+
+                    </Col>
+                    <br/>
+                </Row>
               <Row justify="space-around">
+                  <br/>
                 <Col span={9}>
                   <Form.Item label="Trạng thái" name="status">
                     <Select options={this.state.status} />

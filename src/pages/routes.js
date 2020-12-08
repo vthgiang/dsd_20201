@@ -19,6 +19,7 @@ import PayloadStatisticDroneFixing from "./Payload/PayloadStatistic/PayloadStati
 import PayloadDroneHistory from './Payload/PayloadToDrone/List';
 import EditSignupPayloadDrone from './Payload/PayloadToDrone/Edit';
 import AddSignupPayloadDrone from './Payload/PayloadToDrone/Add';
+import DScard from './Payload/PayloadSDcard';
 
 export const routes = [
   {
@@ -54,6 +55,10 @@ export const routes = [
   {
     path: '/payload-management',
     component: ListPayload,
+  },
+  {
+    path: '/payload-dscard',
+    component: DScard
   },
   {
     path: '/payload-type',

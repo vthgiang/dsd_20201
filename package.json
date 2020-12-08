@@ -8,6 +8,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "ant-design-pro": "^2.3.2",
     "antd": "^4.6.6",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
