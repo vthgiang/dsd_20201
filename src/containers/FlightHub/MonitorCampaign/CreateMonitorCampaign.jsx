@@ -1,50 +1,8 @@
 import React from 'react';
 import MonitorCampaignForm from './MonitorCampaignForm';
-import { monitorCampaignApi } from '../../../apis';
 import { notification } from 'antd';
 import { useHistory } from 'react-router-dom';
-const attachParams = [
-  {
-    id: '5349b4ddd2781d0111111111',
-    property: 'uavSource',
-    name: 'UAV nguồn',
-  },
-  {
-    id: '5349b4ddd2781d0222222222',
-    property: 'time',
-    name: 'Thời gian',
-  },
-  {
-    id: '5349b4ddd2781d0855555555',
-    property: 'coordinate',
-    name: 'Tọa độ',
-  },
-  {
-    id: '5349b4ddd2781d0866666666',
-    property: 'location',
-    name: 'Vị trí',
-  },
-  {
-    id: '5349b4ddd2781d0877777777',
-    property: 'journeys',
-    name: 'Hành trình',
-  },
-  {
-    id: '5349b4ddd2781d0888888888',
-    property: 'weather',
-    name: 'Thời tiết',
-  },
-  {
-    id: '5349b4ddd2781d0999999999',
-    property: 'temperature',
-    name: 'Nhiệt độ',
-  },
-  {
-    id: '5349b4ddd2781d0999999999',
-    property: 'humidity',
-    name: 'Độ ẩm',
-  },
-];
+import { monitorCampaignApi } from '../../../apis';
 
 const CreateMonitorCampaign = () => {
   const history = useHistory();
@@ -71,7 +29,6 @@ const CreateMonitorCampaign = () => {
   return (
     <MonitorCampaignForm
       title="Tạo đợt giám sát"
-      attachParams={attachParams}
       handleSubmit={createMonitorCampaign}
     ></MonitorCampaignForm>
   );

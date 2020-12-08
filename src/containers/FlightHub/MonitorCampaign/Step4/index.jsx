@@ -9,13 +9,7 @@ const axios = require('axios');
 
 const { Option } = Select;
 
-const Step4 = ({
-  prevStep,
-  nextStep,
-  data,
-  handleChangeData,
-  // attachParams,
-}) => {
+const Step4 = ({ prevStep, nextStep, data, handleChangeData }) => {
   const [form] = Form.useForm();
   const history = useHistory();
   const [labelsData, setLabelsData] = useState([]);

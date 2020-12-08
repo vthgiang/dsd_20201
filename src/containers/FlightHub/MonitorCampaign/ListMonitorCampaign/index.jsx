@@ -151,7 +151,7 @@ const ListMonitorCampaign = () => {
     };
     fetchListMonitorCampaignsData();
   }, []);
-
+  console.log('listMonitorCampaignsData ', listMonitorCampaignsData);
   const handleSearch = () => {
     const newFieldValues = form.getFieldsValue();
     const dataSubmit = convertFieldValuesToDataSubmit(newFieldValues);
@@ -239,14 +239,14 @@ const ListMonitorCampaign = () => {
       title: 'Đối tượng giám sát',
       width: '12.5%',
       sorter: (a, b) => a.name.localeCompare(b.name),
-      render: ({ name }) => <span>{name}</span>,
+      render: (data) => data && <span>{data.name}</span>,
     },
     {
       dataIndex: 'monitoredZone',
       title: 'Miền giám sát',
       width: '12.5%',
       sorter: (a, b) => a.name.localeCompare(b.name),
-      render: ({ name }) => <span>{name}</span>,
+      render: (data) => data && <span>{data.name}</span>,
     },
     {
       dataIndex: 'mechanism',
