@@ -1,5 +1,5 @@
 export const getFormatTagName = (format) => {
-  if (format === 'header') return 'h1';
+  if (format === 'header') return 'h3';
   if (format === 'quote') return 'blockquote';
   return 'p';
 };

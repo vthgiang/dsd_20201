@@ -58,7 +58,7 @@ export default function ViewReport() {
         className="u-shadow u-rounded"
         style={{ marginBottom: 16 }}
       >
-        <h1>Báo cáo của tôi</h1>
+        <h3>Báo cáo của tôi</h3>
         <Table
           size="small"
           columns={[
@@ -79,7 +79,7 @@ export default function ViewReport() {
           className="u-shadow u-rounded"
           style={{ marginBottom: 16 }}
         >
-          <h1>Báo cáo gửi cho tôi</h1>
+          <h3>Báo cáo gửi cho tôi</h3>
           <Table
             size="small"
             columns={[

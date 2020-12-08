@@ -33,9 +33,9 @@ export default function FooterSection({
     >
       <Row style={{ flexDirection: 'row', display: ' flex', justifyContent: 'space-between' }}>
         <Col span={10}>
-          <h1 className="u-fontBold">
+          <h3 className="u-fontBold">
             Người phê duyệt
-          </h1>
+          </h3>
           <div style={{ marginTop: 100 }}>
             {formatted ? (
               section?.keys['reviewer']
@@ -51,9 +51,9 @@ export default function FooterSection({
         </Col>
         <Col span={4} />
         <Col span={10}>
-          <h1 className="u-fontBold">
+          <h3 className="u-fontBold">
             Người lập báo cáo
-          </h1>
+          </h3>
           <div style={{ marginTop: 100 }}>
             {formatted ? (
               section?.keys['author']

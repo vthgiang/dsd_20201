@@ -37,7 +37,7 @@ export default function HeaderSection({
     >
       <Row style={{ flexDirection: 'row', display: ' flex', justifyContent: 'space-between' }}>
         <Col span={8}>
-          <h1 style={{ textTransform: 'uppercase' }} className="u-fontBold">
+          <h3 style={{ textTransform: 'uppercase' }} className="u-fontBold">
             {formatted ? (
               section?.keys['company_name']
             ) : (
@@ -49,7 +49,7 @@ export default function HeaderSection({
                 className="u-fontBold"
               />
             )}
-          </h1>
+          </h3>
           <div className="u-fontBold">------------------</div>
           <div style={{ marginTop: '10px' }}>
             <span>Số</span>
@@ -66,8 +66,8 @@ export default function HeaderSection({
           </div>
         </Col>
         <Col span={16}>
-          <h1 className="u-fontBold">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h1>
-          <h1 className="u-fontBold">Độc lập - Tự do - Hạnh phúc</h1>
+          <h3 className="u-fontBold">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h3>
+          <h3 className="u-fontBold">Độc lập - Tự do - Hạnh phúc</h3>
           <div style={{ fontStyle: 'italic' }}>
             {formatted ? (
               section?.keys['city']

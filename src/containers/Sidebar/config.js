@@ -68,12 +68,6 @@ export const sidebarMenu = [
     route: '/statistic',
     subMenu: [
       {
-        key: 'DashboardStatistic',
-        heading: 'Dashboard',
-        icon: 'fas fa-chart-line',
-        route: '/dashboard-statistic',
-      },
-      {
         key: 'DroneStatistic',
         heading: 'Drone',
         icon: 'fas fa-drone-alt',

@@ -75,7 +75,7 @@ export default function ReportViewer({
     <Card className="u-shadow u-rounded u-reportCard">
       {!currentReport && <Spin size="large" />}
       {currentReport && (
-        <h1>Bạn đang xem báo cáo: <span>{`${currentReport.name}`}</span></h1>
+        <h3>Bạn đang xem báo cáo: <span>{`${currentReport.name}`}</span></h3>
       )}
       {currentReport?.sections && (
         <div className="u-reportContainer">
