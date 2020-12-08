@@ -18,10 +18,12 @@ const Step3 = ({
   const [form] = Form.useForm();
   const [objectData, setObjectData] = useState([]);
 
-  const getObjectData = () => {
+  const getObjectData = (monitoredZone) => {
+    console.log('zoneId', monitoredZone);
     axios({
       method: 'GET',
-      url: `https://dsd05-monitored-object.herokuapp.com/monitored-object`,
+      url: `https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-zone`,
+      params: { monitoredZone },
     })
       .then((res) => {
         if (res.data) {
@@ -35,7 +37,6 @@ const Step3 = ({
 
   useEffect(() => {
     form.setFieldsValue(data);
-    getObjectData();
   }, [data, form]);
 
   const getObjectOptions = () => {
@@ -58,6 +59,9 @@ const Step3 = ({
     let formData = data ? data : {};
     formData.monitoredZone = zoneId;
     form.setFieldsValue(formData);
+    // console.log('zoneId', zoneId);
+    // setMonitoredZoneId(zoneId);
+    getObjectData([zoneId]);
   };
 
   return (
