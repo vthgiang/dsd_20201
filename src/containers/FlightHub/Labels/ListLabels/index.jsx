@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Input, Row, Table, Modal, notification, Button } from 'antd';
+import { removeVietnameseTones } from '../../../../helpers/removeVietnameseTones';
 import moment from 'moment';
 
 import {
@@ -22,6 +23,7 @@ const ListLabels = () => {
   const [modalUpdateVisible, setModalUpdateVisible] = useState(false);
   const [labelUpdateData, setLabelUpdateData] = useState();
   const [listLabels, setListLabels] = useState();
+  const [listLabelsInit, setListLabelsInit] = useState();
 
   useEffect(() => {
     if (listLabels) return;
@@ -38,6 +40,7 @@ const ListLabels = () => {
         }
 
         setListLabels(resp.result);
+        setListLabelsInit(resp.result);
       } catch (error) {
         notification.error({
           message: 'Máy chủ lỗi, vui lòng thử lại sau',
@@ -48,7 +51,16 @@ const ListLabels = () => {
   }, [listLabels]);
 
   const handleSearch = (value) => {
-    console.log(value);
+    let dataSearchResult = listLabelsInit.filter((label) => {
+      let labelConvert = removeVietnameseTones(label.name);
+      let valueConvert = removeVietnameseTones(value);
+
+      if (labelConvert.includes(valueConvert)) {
+        return label;
+      }
+    });
+
+    setListLabels(dataSearchResult);
   };
 
   const showModalCreate = () => {
