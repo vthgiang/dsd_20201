@@ -61,25 +61,6 @@ const Step4 = ({ prevStep, nextStep, data, handleChangeData }) => {
             <Option value={RESOLUTION['1080p']}>1080p</Option>
           </Select>
         </Form.Item>
-        {/* <Form.Item
-          name="attachParams"
-          label="Tham số đính kèm"
-          rules={[{ type: 'array', required: true }]}
-        >
-          <Select
-            allowClear
-            mode="tags"
-            placeholder="Chọn các tham số đính kèm"
-          >
-            {attachParams.map(({ id, name }) => {
-              return (
-                <Option key={id} value={id}>
-                  {name}
-                </Option>
-              );
-            })}
-          </Select>
-        </Form.Item> */}
 
         <Col offset={6}>
           <Row>

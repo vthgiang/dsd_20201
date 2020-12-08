@@ -11,13 +11,7 @@ import { useHistory } from 'react-router-dom';
 
 const { Step } = Steps;
 
-const MonitorCampaignForm = ({
-  initialData,
-  title,
-
-  attachParams,
-  handleSubmit,
-}) => {
+const MonitorCampaignForm = ({ initialData, title, handleSubmit }) => {
   const history = useHistory();
   const [current, setCurrent] = React.useState(0);
   const [data, setData] = useState({});
@@ -48,7 +42,6 @@ const MonitorCampaignForm = ({
         prevStep={prevStep}
         data={data}
         handleSubmit={handleSubmit}
-        attachParams={attachParams}
         handleChangeData={handleChangeData}
       />
     );

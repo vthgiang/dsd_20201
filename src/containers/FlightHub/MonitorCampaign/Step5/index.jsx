@@ -96,7 +96,7 @@ const Step5 = ({ prevStep, data, handleChangeData, handleSubmit }) => {
           label="Nhãn đính kèm"
           rules={[{ type: 'array', required: false }]}
         >
-          <Select mode="multiple" placeholder="Chọn nhãn đính kèm">
+          <Select mode="multiple" allowClear placeholder="Chọn nhãn đính kèm">
             {labelsData.map(({ _id, name }) => {
               return (
                 <Select.Option key={_id} value={_id}>

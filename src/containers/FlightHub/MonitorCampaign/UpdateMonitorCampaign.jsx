@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import MonitorCampaignForm from './MonitorCampaignForm';
-import { convertInitialDataToFieldValues, randomDateTime } from './services';
+import { convertInitialDataToFieldValues } from './services';
 import { monitorCampaignApi } from '../../../apis';
 import { notification } from 'antd';
 
@@ -32,7 +32,7 @@ const UpdateMonitorCampaign = () => {
     try {
       const { id } = params;
       const dataSubmit = { _id: id, ...values };
-      const resp = await monitorCampaignApi.updateMonitorCampaign(dataSubmit);
+      await monitorCampaignApi.updateMonitorCampaign(dataSubmit);
 
       notification.success({
         message: 'Cập nhật thành công!',

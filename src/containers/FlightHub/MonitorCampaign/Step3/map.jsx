@@ -3,13 +3,12 @@ import {
   GoogleMap,
   withScriptjs,
   withGoogleMap,
-  Marker,
   InfoWindow,
   Rectangle,
 } from 'react-google-maps';
 import { removeVietnameseTones } from '../../../../helpers/removeVietnameseTones';
 
-import { Input, Form, message } from 'antd';
+import { Input, Form } from 'antd';
 import { HeatMapOutlined } from '@ant-design/icons';
 const axios = require('axios');
 const { Search } = Input;
@@ -19,7 +18,6 @@ const Map = ({
   onChangeMonitoredZone,
   monitoredZoneInit,
 }) => {
-  const [form] = Form.useForm();
   const [monitoredZonesDataInit, setMonitoredZonesDataInit] = useState(null);
   const [monitoredZonesData, setMonitoredZonesData] = useState(null);
   const [currentMonitoredZone, setCurrentMonitoredZone] = useState(null);

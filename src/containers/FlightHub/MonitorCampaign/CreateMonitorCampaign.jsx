@@ -13,7 +13,7 @@ const CreateMonitorCampaign = () => {
   const createMonitorCampaign = async (data) => {
     console.log('data ', data);
     try {
-      const resp = await monitorCampaignApi.createMonitorCampaign(data);
+      await monitorCampaignApi.createMonitorCampaign(data);
 
       notification.success({
         message: 'Tạo thành công!',

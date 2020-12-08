@@ -138,25 +138,24 @@ const ListMonitorCampaign = () => {
   const [form] = Form.useForm();
   const history = useHistory();
 
+  const fetchListMonitorCampaignsData = async (params) => {
+    try {
+      const resp = await monitorCampaignApi.getListMonitorCampaigns(params);
+      setListMonitorCampaignsData(resp.data.result.monitorCampaigns);
+    } catch (error) {
+      notification.error({
+        message: 'Có lỗi xảy ra! Xin thử lại',
+      });
+    }
+  };
   useEffect(() => {
-    const fetchListMonitorCampaignsData = async () => {
-      try {
-        const resp = await monitorCampaignApi.getListMonitorCampaigns();
-        setListMonitorCampaignsData(resp.data.result.monitorCampaigns);
-      } catch (error) {
-        notification.error({
-          message: 'Có lỗi xảy ra! Xin thử lại',
-        });
-      }
-    };
     fetchListMonitorCampaignsData();
   }, []);
-  console.log('listMonitorCampaignsData ', listMonitorCampaignsData);
+
   const handleSearch = () => {
     const newFieldValues = form.getFieldsValue();
-    const dataSubmit = convertFieldValuesToDataSubmit(newFieldValues);
-    console.log({ dataSubmit });
-    // call api => result => setData()
+    const params = convertFieldValuesToDataSubmit(newFieldValues);
+    fetchListMonitorCampaignsData(params);
   };
 
   const onResetFieldValues = () => {

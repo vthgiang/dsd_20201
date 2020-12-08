@@ -10,7 +10,11 @@ const createMonitorCampaign = async (data) => {
 };
 
 const getListMonitorCampaigns = async (params) => {
-  const result = await axiosInstance.get(`/api/monitor-campaigns`);
+  const result = await axiosInstance({
+    method: 'GET',
+    url: `/api/monitor-campaigns`,
+    params,
+  });
   return result;
 };
 
