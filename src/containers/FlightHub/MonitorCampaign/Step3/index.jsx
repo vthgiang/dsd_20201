@@ -94,7 +94,7 @@ const Step3 = ({
         </Form.Item>
 
         <Form.Item
-          name="monitoredObject"
+          name="monitoredObjects"
           label="Đối tượng giám sát"
           rules={[{ type: 'array', required: true }]}
         >

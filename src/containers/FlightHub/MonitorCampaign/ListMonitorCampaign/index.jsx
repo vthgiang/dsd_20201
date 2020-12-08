@@ -152,6 +152,8 @@ const ListMonitorCampaign = () => {
     fetchListMonitorCampaignsData();
   }, []);
 
+  console.log('listMonitorCampaignsData ', listMonitorCampaignsData);
+
   const handleSearch = () => {
     const newFieldValues = form.getFieldsValue();
     const params = convertFieldValuesToDataSubmit(newFieldValues);
@@ -163,8 +165,8 @@ const ListMonitorCampaign = () => {
   };
 
   const goToUpdateMonitorCampaign = (item) => () => {
-    const { id } = item;
-    history.push(`/flight-hub-monitor-campaigns/${id}`);
+    const { _id } = item;
+    history.push(`/flight-hub-monitor-campaigns/${_id}`);
   };
 
   const goToCreate = () => {
@@ -234,11 +236,16 @@ const ListMonitorCampaign = () => {
       render: formatMomentDateToDateTimeString,
     },
     {
-      dataIndex: 'monitoredObject',
+      dataIndex: 'monitoredObjects',
       title: 'Đối tượng giám sát',
       width: '12.5%',
-      sorter: (a, b) => a.name.localeCompare(b.name),
-      render: (data) => data && <span>{data.name}</span>,
+      sorter: (a, b) => 1,
+      render: (data = []) => {
+        return data.map((elem) => {
+          const { name } = elem.content;
+          return <div>{name}</div>;
+        });
+      },
     },
     {
       dataIndex: 'monitoredZone',
@@ -430,6 +437,7 @@ const ListMonitorCampaign = () => {
       <StyleSeparator />
       <StyleTable>
         <Table
+          rowKey="_id"
           columns={columns}
           dataSource={listMonitorCampaignsData}
           scroll={{ x: 1560 }}
