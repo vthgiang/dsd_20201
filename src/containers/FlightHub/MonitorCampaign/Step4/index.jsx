@@ -8,13 +8,7 @@ import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../../constants';
 
 const { Option } = Select;
 
-const Step4 = ({
-  prevStep,
-  nextStep,
-  data,
-  handleChangeData,
-  attachParams,
-}) => {
+const Step4 = ({ prevStep, nextStep, data, handleChangeData }) => {
   const [form] = Form.useForm();
   const history = useHistory();
 
@@ -67,7 +61,7 @@ const Step4 = ({
             <Option value={RESOLUTION['1080p']}>1080p</Option>
           </Select>
         </Form.Item>
-        <Form.Item
+        {/* <Form.Item
           name="attachParams"
           label="Tham số đính kèm"
           rules={[{ type: 'array', required: true }]}
@@ -85,7 +79,7 @@ const Step4 = ({
               );
             })}
           </Select>
-        </Form.Item>
+        </Form.Item> */}
 
         <Col offset={6}>
           <Row>

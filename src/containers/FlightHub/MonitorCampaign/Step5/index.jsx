@@ -44,7 +44,7 @@ const Step5 = ({ prevStep, data, handleChangeData, handleSubmit }) => {
         ) {
           throw new Error('Máy chủ lỗi');
         }
-
+        console.log('resp.result ', resp.result);
         setLabelsData(resp.result);
       } catch (error) {
         notification.error({
@@ -97,9 +97,9 @@ const Step5 = ({ prevStep, data, handleChangeData, handleSubmit }) => {
           rules={[{ type: 'array', required: false }]}
         >
           <Select mode="multiple" placeholder="Chọn nhãn đính kèm">
-            {labelsData.map(({ id, name }) => {
+            {labelsData.map(({ _id, name }) => {
               return (
-                <Select.Option key={id} value={id}>
+                <Select.Option key={_id} value={_id}>
                   {name}
                 </Select.Option>
               );
