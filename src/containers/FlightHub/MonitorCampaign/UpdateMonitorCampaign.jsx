@@ -50,7 +50,6 @@ const UpdateMonitorCampaign = () => {
       initialData={convertInitialDataToFieldValues(monitorCampaignData)}
       title="Sửa đợt giám sát"
       handleSubmit={updateMonitorCampaign}
-      attachParams={attachParams}
     ></MonitorCampaignForm>
   );
 };

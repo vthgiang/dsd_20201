@@ -29,7 +29,6 @@ const CreateMonitorCampaign = () => {
   return (
     <MonitorCampaignForm
       title="Tạo đợt giám sát"
-      attachParams={attachParams}
       handleSubmit={createMonitorCampaign}
     ></MonitorCampaignForm>
   );
