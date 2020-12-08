@@ -11,33 +11,14 @@ const { Option } = Select;
 
 const Step4 = ({ prevStep, nextStep, data, handleChangeData }) => {
   const [form] = Form.useForm();
-  const history = useHistory();
-  const [labelsData, setLabelsData] = useState([]);
 
   useEffect(() => {
     form.setFieldsValue(data);
-    getLabels();
   }, [data, form]);
 
   const onFinish = (values) => {
     handleChangeData(values);
     nextStep();
-  };
-
-  const getLabels = () => {
-    axios({
-      method: 'GET',
-      url: `https://flight-hub-api.herokuapp.com/api/labels`,
-    })
-      .then((res) => {
-        console.log('res.result.labels', res.data.result.labels);
-        if (res.data) {
-          setLabelsData(res.data.result.labels);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   return (
