@@ -9,7 +9,7 @@ import {
 } from 'react-google-maps';
 import { removeVietnameseTones } from '../../../../helpers/removeVietnameseTones';
 
-import { Input, Form } from 'antd';
+import { Input, Form, message } from 'antd';
 import { HeatMapOutlined } from '@ant-design/icons';
 const axios = require('axios');
 const { Search } = Input;
@@ -20,11 +20,16 @@ const Map = ({
   monitoredZoneInit,
 }) => {
   const [form] = Form.useForm();
+  const [monitoredZonesDataInit, setMonitoredZonesDataInit] = useState(null);
   const [monitoredZonesData, setMonitoredZonesData] = useState(null);
   const [currentMonitoredZone, setCurrentMonitoredZone] = useState(null);
   const [selectedMonitoredZone, setSelectedMonitoredZone] = useState(null);
   const [positionClick, setPositionClick] = useState(null);
   const [searchText, searchTextValue] = useState('');
+  const [initLocation, setInitLocation] = useState({
+    lat: 21.017374,
+    lng: 105.859521,
+  });
 
   useEffect(() => {
     getMonitoredZone();
@@ -33,12 +38,22 @@ const Map = ({
   const getMonitoredZone = async () => {
     await axios({
       method: 'GET',
-      url: `https://monitoredzoneserver.herokuapp.com/area`,
+      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone`,
     })
       .then((res) => {
         if (res.data) {
-          setMonitoredZonesData(res.data.content.monitoredArea);
-          console.log(res.data.content.monitoredArea);
+          console.log('data', res.data.content);
+          setMonitoredZonesData(res.data.content.zone);
+          setMonitoredZonesDataInit(res.data.content.zone);
+          console.log(res.data.content.zone);
+
+          //Khởi tạo render ban đầu
+          if (res.data.content.zone) {
+            setInitLocation({
+              lat: parseFloat(res.data.content.zone[0].startPoint.latitude),
+              lng: parseFloat(res.data.content.zone[0].startPoint.longitude),
+            });
+          }
 
           // khởi tạo park nếu đã có sẵn
           if (monitoredZoneInit) {
@@ -66,14 +81,14 @@ const Map = ({
   };
 
   const submitSearch = (value) => {
-    // let data = parksData.filter((element) => {
-    //   let textElement = removeVietnameseTones(element.name);
-    //   let textValue = removeVietnameseTones(value);
-    //   if (textElement.includes(textValue)) {
-    //     return element;
-    //   }
-    // });
-    // setDataPark(data);
+    let data = monitoredZonesDataInit.filter((element) => {
+      let textElement = removeVietnameseTones(element.name);
+      let textValue = removeVietnameseTones(value);
+      if (textElement.includes(textValue)) {
+        return element;
+      }
+    });
+    setMonitoredZonesData(data);
   };
 
   const handleClickMonitoredZones = (zone, e) => {
@@ -101,9 +116,8 @@ const Map = ({
 
   return (
     <GoogleMap
-      defaultZoom={2}
-      // defaultCenter={{ lat: 40.712216, lng: -74.22655 }}
-      defaultCenter={{ lat: 57.2959, lng: 176.13119 }}
+      defaultZoom={12}
+      defaultCenter={initLocation} // Hiển thị ra vùng trung tâm ban đầu
     >
       <Search
         placeholder="Nhập vào miền giám sát"
@@ -130,39 +144,41 @@ const Map = ({
             }
           />
         ))} */}
+      {console.log('monitoredZonesData', initLocation)}
 
-      {monitoredZonesData && monitoredZonesData.length && (
-        <Rectangle
-          defaultBounds={
-            new window.google.maps.LatLngBounds(
-              new window.google.maps.LatLng(
-                monitoredZonesData[1].startPoint.latitude,
-                monitoredZonesData[1].startPoint.longitude,
-              ),
-              new window.google.maps.LatLng(
-                monitoredZonesData[1].endPoint.latitude,
-                monitoredZonesData[1].endPoint.longitude,
-              ),
-            )
-          }
-          onClick={(e) => handleClickMonitoredZones(monitoredZonesData[1], e)}
-          options={
-            selectedMonitoredZone === monitoredZonesData[1]._id
-              ? {
-                  strokeColor: '#d34052',
-                  fillColor: '#d34052',
-                  strokeOpacity: '0.5',
-                  strokeWeight: '2',
-                }
-              : {
-                  strokeColor: '#d34052',
-                  fillColor: '#70b8fb',
-                  strokeOpacity: '0.5',
-                  strokeWeight: '2',
-                }
-          }
-        />
-      )}
+      {monitoredZonesData &&
+        monitoredZonesData.map((zone) => (
+          <Rectangle
+            defaultBounds={
+              new window.google.maps.LatLngBounds(
+                new window.google.maps.LatLng(
+                  zone.startPoint.latitude,
+                  zone.startPoint.longitude,
+                ),
+                new window.google.maps.LatLng(
+                  zone.endPoint.latitude,
+                  zone.endPoint.longitude,
+                ),
+              )
+            }
+            onClick={(e) => handleClickMonitoredZones(zone, e)}
+            options={
+              selectedMonitoredZone === zone._id
+                ? {
+                    strokeColor: '#d34052',
+                    fillColor: '#d34052',
+                    strokeOpacity: '0.5',
+                    strokeWeight: '2',
+                  }
+                : {
+                    strokeColor: '#d34052',
+                    fillColor: '#70b8fb',
+                    strokeOpacity: '0.5',
+                    strokeWeight: '2',
+                  }
+            }
+          />
+        ))}
 
       {currentMonitoredZone && (
         <InfoWindow
