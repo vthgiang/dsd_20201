@@ -58,9 +58,9 @@ const Step3 = ({
   const onChangeMonitoredZone = (zoneId) => {
     let formData = data ? data : {};
     formData.monitoredZone = zoneId;
+    formData.monitoredObject = [];
     form.setFieldsValue(formData);
-    // console.log('zoneId', zoneId);
-    // setMonitoredZoneId(zoneId);
+    //Gọi các đối tượng trong miền
     getObjectData([zoneId]);
   };
 
