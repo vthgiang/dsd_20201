@@ -10,6 +10,8 @@ import { Tooltip } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { PROJECT_TYPE_MAP_TITLE, ref } from '../config4';
+import { Button, notification } from 'antd';
+import { type } from 'os';
 
 var axios = require('axios');
 
@@ -64,12 +66,22 @@ const GridDetailed = (props) => {
 const DetailedNotification = () => {
   const { id } = useParams();
   const classes = useStyles();
-  const [notification, setNotification] = useState([]);
+  const [notificationDetail, setNotificationDetail] = useState([]);
   const [status, setStatus] = useState(false);
 
+
   const onVerify = () => {
+    if (status) openNotificationWithIcon("success", "Notification", "Unverified Incident Successfully")
+    else openNotificationWithIcon("success", "Notification", "Verified Incident Successfully")
     setStatus(!status);
   }
+
+  const openNotificationWithIcon = (type, message, description) => {
+    notification[type]({
+      message: message,
+      description: description
+    });
+  };
 
   useEffect(() => {
     var config = {
@@ -83,7 +95,7 @@ const DetailedNotification = () => {
       params: { "idNtf": id }
     };
     axios(config).then(function (response) {
-      setNotification(response.data.data);
+      setNotificationDetail(response.data.data);
       console.log(response.data);
     }).catch(function (error) {
       console.log(error);
@@ -91,7 +103,7 @@ const DetailedNotification = () => {
 
   }, [])
 
-  console.log(`notification: ${notification}`);
+  console.log(`notificationDetail: ${notificationDetail}`);
 
   return (
     <div className={classes.root}>
@@ -100,7 +112,7 @@ const DetailedNotification = () => {
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase className={classes.image}>
-              {notification.ref && <img className={classes.image} alt="complex" src={ref.prop[notification.ref._type].img} />}
+              {notificationDetail.ref && <img className={classes.image} alt="complex" src={ref.prop[notificationDetail.ref._type].img} />}
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
@@ -112,24 +124,24 @@ const DetailedNotification = () => {
                   justify="flex-start"
                   alignItems="center"
                 >
-                  {notification.project_type && <Typography gutterBottom variant="h4" className={classes.title} >{PROJECT_TYPE_MAP_TITLE[notification.project_type]}</Typography>}
+                  {notificationDetail.project_type && <Typography gutterBottom variant="h4" className={classes.title} >{PROJECT_TYPE_MAP_TITLE[notificationDetail.project_type]}</Typography>}
                   <Tooltip title={status ? "verified" : "unverified"}>
                     <CheckCircleTwoTone twoToneColor={status ? "#52c41a" : "#8c8c8c"} style={{ fontSize: 32, marginLeft: 8, marginBottom: 10, cursor: "pointer" }} onClick={onVerify} />
                   </Tooltip>
                 </Grid>
-                <GridDetailed title={"ID Sự cố:"} content={notification._id}></GridDetailed>
+                <GridDetailed title={"ID Sự cố:"} content={notificationDetail._id}></GridDetailed>
                 <Grid container spacing={3}>
                   <Grid item sm={3} xs={12}>
                     <Typography className={classes.gridDescription, classes.title}>Mức độ:</Typography>
                   </Grid>
                   <Grid item sm={9} xs={12}>
-                    <Rating name="read-only" value={notification.level || 0} readOnly style={{ color: "red" }} />
+                    <Rating name="read-only" value={notificationDetail.level || 0} readOnly style={{ color: "red" }} />
                   </Grid>
                 </Grid>
-                <GridDetailed title={"Mô tả:"} content={notification.content}></GridDetailed>
-                {notification.fromUser && <GridDetailed title={"From user:"} content={notification.fromUser._id}></GridDetailed>}
-                <GridDetailed title={"created At:"} content={notification.createdAt}></GridDetailed>
-                {notification.ref && <GridDetailed title={"Ref Link:"} content={notification.ref._link} link={true}></GridDetailed>}
+                <GridDetailed title={"Mô tả:"} content={notificationDetail.content}></GridDetailed>
+                {notificationDetail.fromUser && <GridDetailed title={"From user:"} content={notificationDetail.fromUser._id}></GridDetailed>}
+                <GridDetailed title={"created At:"} content={notificationDetail.createdAt}></GridDetailed>
+                {notificationDetail.ref && <GridDetailed title={"Ref Link:"} content={notificationDetail.ref._link} link={true}></GridDetailed>}
               </Grid>
             </Grid>
           </Grid>
