@@ -7,34 +7,97 @@ import { useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import StyleList from '../index.style';
+import {Bar} from "ant-design-pro/lib/Charts";
 
 
 class PayloadStatisticWorking extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      listPayloadWorking:[]
+      listPayloadWorking:[],
+        workData:[
+            {
+                x: '2020-11-28',
+                y: 0,
+            },
+            {
+                x: '2020-11-29',
+                y: 0,
+            },
+            {
+                x: '2020-11-30',
+                y: 0,
+            },
+            {
+                x: '2020-12-01',
+                y: 0,
+            },
+            {
+                x: '2020-12-02',
+                y: 0,
+            },
+            {
+                x: '2020-12-03',
+                y: 0,
+            },
+            {
+                x: '2020-12-04',
+                y: 0,
+            },
+            {
+                x: '2020-12-05',
+                y: 0,
+            },
+            {
+                x: '2020-12-06',
+                y: 0,
+            },
+            {
+                x: '2020-12-07',
+                y: 0,
+            },
+        ],
     }
   }
 
 
-  async componentDidMount() {
+  componentDidMount() {
      axios.get('https://dsd06.herokuapp.com/api/payloadStat/feeWorking')
       .then(res => {
         var listPayloadWorking = res.data;
         listPayloadWorking = listPayloadWorking.filter( x => x.payload != null)
+                for( var i = 0; i < listPayloadWorking.length; i++){
+          listPayloadWorking[i].startedAt = listPayloadWorking[i].startedAt.replace(/\:([0-9]+)(\.[0-9a-zA-Z]+)?$/g, ':$1').replace(/T/, ' ');
+          if(listPayloadWorking[i].finishedAt != null){
+            listPayloadWorking[i].finishedAt = listPayloadWorking[i].finishedAt.replace(/\:([0-9]+)(\.[0-9a-zA-Z]+)?$/g, ':$1').replace(/T/, ' ');
+          }
+        }
         this.setState({ listPayloadWorking });
       })
   }
 
+    componentWillMount() {
+        var that = this;
+        axios.get(`https://dsd06.herokuapp.com/api/payloadStat/feeWorking`)
+            .then(res => {
+                var listPayloadWorking = res.data;
+                let { workData } = that.state;
+                listPayloadWorking = listPayloadWorking.filter( x => x.payload != null)
+                for( var i = 0; i < listPayloadWorking.length; i++){
+                    listPayloadWorking[i].startedAt = listPayloadWorking[i].startedAt.split("T")[0];
+                    for( var j = 0; j < workData.length; j++ ){
+                        if(listPayloadWorking[i].startedAt == workData[j].x){
+                            workData[j].y = workData[j].y + 1;
+                        }
+                    }
+                }
+                this.setState(workData);
+            })
+    }
+
   render() {
     //let history = useHistory();
     const columns = [
-    // {
-    //   title: 'ID',
-    //   dataIndex: 'id',
-    //   key: 'id',
-    // },
     {
       title: 'Mã Payload',
       dataIndex: 'payloadCode',
@@ -50,16 +113,16 @@ class PayloadStatisticWorking extends Component {
       dataIndex: 'type',
       key: 'type',
     },
-    {
-      title: 'Lý do',
-      dataIndex: 'reason',
-      key: 'reason',
-    },
-    {
-      title: 'DroneId',
-      dataIndex: 'droneId',
-      key: 'droneId',
-    },
+    // {
+    //   title: 'Lý do',
+    //   dataIndex: 'reason',
+    //   key: 'reason',
+    // },
+    // {
+    //   title: 'DroneId',
+    //   dataIndex: 'droneId',
+    //   key: 'droneId',
+    // },
     {
       title: 'Chi phí',
       dataIndex: 'fee',
@@ -91,6 +154,7 @@ class PayloadStatisticWorking extends Component {
           finishedAt: payloadWorking.finishedAt
         })
       )
+      const {  workData } = this.state;
     
     return (
     <StyleList>
@@ -101,25 +165,14 @@ class PayloadStatisticWorking extends Component {
           <a onClick={() => this.props.history.push('/payload-statistic/drone')}>Lịch sử hoạt động</a>
         </div>
 
-        <Form
-            // layout="horizontal"
-            // initialValues={{ size: componentSize }} className="searchtype"
-            // onValuesChange={onFormLayoutChange}
-            // size={componentSize}
-        >
+        <Form>
           <Row justify="space-around">
-            <Col span={4}>
+                <Col span={18}>
+                    <Bar height={300} title="Lịch sử hoạt động theo ngày" data={workData.filter( item => item.y >= 0)} />
+                    <br/>
+                </Col>
               <br/>
-              {/*<Form.Item label="Chọn trạng thái">*/}
-              {/*  <Select>*/}
-              {/*    <Select.Option value="demo1">Drone TJAS1</Select.Option>*/}
-              {/*    <Select.Option value="demo2">Drone TBDMD</Select.Option>*/}
-              {/*    <Select.Option value="demo3">Drone YBDH1</Select.Option>*/}
-              {/*    <Select.Option value="demo4">Drone YWDVH</Select.Option>*/}
-              {/*    <Select.Option value="demo5">Drone HJJDN</Select.Option>*/}
-              {/*  </Select>*/}
-              {/*</Form.Item>*/}
-            </Col>
+
 
           </Row>
         </Form>

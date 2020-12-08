@@ -7,6 +7,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom";
 
 import axios from 'axios';
+import {Pie} from "ant-design-pro/lib/Charts";
 
 class List extends Component {
 
@@ -30,7 +31,29 @@ class List extends Component {
         { value: 'working', label: 'Đang sử dụng' },
         { value: 'idle', label: 'Sẵn có' },
         { value: 'fixing', label: 'Đang sửa' }
-      ]
+      ],
+        typeData: [
+            {
+                x: "Panorama Camera",
+                y: 0,
+            },
+            {
+                x: "Camera TRBS 827",
+                y: 0,
+            },
+            {
+                x: "Camera VISUO",
+                y: 0,
+            },
+            {
+                x: "Camera SJRC F11",
+                y: 0,
+            },
+            {
+                x: "Temp Sensor",
+                y: 0,
+            },
+        ],
     }
   }
 
@@ -58,8 +81,8 @@ class List extends Component {
   };
 
 
-  getAllTypePayload() {
-    axios.get(`https://dsd06.herokuapp.com/api/payloadtype`)
+    async getAllTypePayload() {
+        await axios.get(`https://dsd06.herokuapp.com/api/payloadtype`)
         .then(res => {
           const options = res.data.map(payload =>
               ({
@@ -72,16 +95,68 @@ class List extends Component {
 
   }
 
+    async componentWillMount() {
+        var that = this;
+        let valu = await axios.get('https://dsd06.herokuapp.com/api/payloadtype')
+            .then(function(response){
+                return response.data.map(payload =>
+                    ({
+                        x: payload.name,
+                        y: payload._id,
+                    })
+                );
+            })
+            .catch(function(error){
+                return [];
+            });
+
+            axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { type: valu[0].y }} )
+                .then(res => {
+                    const data = res.data;
+                    let { typeData } = that.state;
+                    typeData[0].y = data.length;
+                    this.setState(typeData);
+                })
+        axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { type: valu[1].y }} )
+            .then(res => {
+                const data = res.data;
+                let { typeData } = that.state;
+                typeData[1].y = data.length;
+                this.setState(typeData);
+            });
+        axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { type: valu[2].y }} )
+            .then(res => {
+                const data = res.data;
+                let { typeData } = that.state;
+                typeData[2].y = data.length;
+                this.setState(typeData);
+            });
+        axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { type: valu[3].y }} )
+            .then(res => {
+                const data = res.data;
+                let { typeData } = that.state;
+                typeData[3].y = data.length;
+                this.setState(typeData);
+            })
+        axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { type: valu[4].y }} )
+            .then(res => {
+                const data = res.data;
+                let { typeData } = that.state;
+                typeData[4].y = data.length;
+                this.setState(typeData);
+            });
+    }
+
 
 
   searchPayload(values) {
-    console.log(values)
     axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { type: values.type, status: values.status } })
         .then(res => {
           //const persons = res.data;
           this.setState({ tables: res.data });
         })
   }
+
 
 
 
@@ -148,7 +223,7 @@ class List extends Component {
       },
     ];
 
-    const { visible, visibleAdd, visibleDelete, currentTable, tables } = this.state;
+    const { visible, visibleAdd, visibleDelete, currentTable, tables, typeData } = this.state;
 
     return (
         <StyleList>
@@ -162,6 +237,26 @@ class List extends Component {
                 layout="horizontal"
                 className="searchtype" onFinish={(values) => this.searchPayload(values)}
             >
+                <Row justify="space-around">
+                    <Col span={16}>
+                        <Pie
+                            hasLegend
+                            title="Theo loại"
+                            subTitle="Theo lọai"
+                            total={() => (
+                                <span
+                                    dangerouslySetInnerHTML={{
+                                        __html: (typeData.reduce((pre, now) => now.y + pre, 0))+ " payload",
+                                    }}
+                                />
+                            )}
+                            data={typeData.filter(item => item.y > 0)}
+                            valueFormat={val => <span dangerouslySetInnerHTML={{ __html: (val) }} />}
+                            height={324}
+                        />
+
+                    </Col>
+                </Row>
               <Row justify="space-around">
                 <Col span={9}>
                   <Form.Item label="Chọn loại Payload" name="type">

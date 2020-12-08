@@ -1,8 +1,7 @@
-
-// NEW COMPONENT
-
 import React, { Component } from "react";
 import { Table, Space, Input, Form, Select, Modal, DatePicker, Row, Col } from 'antd';
+import 'ant-design-pro/dist/ant-design-pro.css';
+import { Bar } from 'ant-design-pro/lib/Charts';
 import { Button } from 'antd';
 import { useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
@@ -14,7 +13,7 @@ class PayloadStatisticDrone extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      listPayloadFixing:[]
+      listPayloadFixing:[],
     }
   }
 
@@ -25,18 +24,17 @@ class PayloadStatisticDrone extends Component {
       .then(res => {
         var listPayloadFixing = res.data;
         listPayloadFixing = listPayloadFixing.filter( x => x.payload != null)
+        for( var i = 0; i < listPayloadFixing.length; i++){
+          listPayloadFixing[i].startedAt = listPayloadFixing[i].startedAt.replace(/\:([0-9]+)(\.[0-9a-zA-Z]+)?$/g, ':$1').replace(/T/, ' ');;
+        }
         this.setState({ listPayloadFixing });
       })
   }
 
+
   render() {
     //let history = useHistory();
     const columns = [
-    // {
-    //   title: 'ID',
-    //   dataIndex: 'id',
-    //   key: 'id',
-    // },
     {
       title: 'Mã Payload',
       dataIndex: 'payloadCode',
@@ -88,7 +86,7 @@ class PayloadStatisticDrone extends Component {
           finishedAt: payloadFixing.finishedAt
         })
       )
-    
+
     
     return (
     <StyleList>
@@ -99,24 +97,10 @@ class PayloadStatisticDrone extends Component {
           <a onClick={() => this.props.history.push('/payload-statistic/moment')}>Lịch sử sửa chữa</a>
         </div>
 
-        <Form
-            // layout="horizontal"
-            // initialValues={{ size: componentSize }} className="searchtype"
-            // onValuesChange={onFormLayoutChange}
-            // size={componentSize}
-        >
+        <Form>
           <Row justify="space-around">
-            <Col span={4}>
+            <Col span={18}>
               <br/>
-              {/*<Form.Item label="Chọn trạng thái">*/}
-              {/*  <Select>*/}
-              {/*    <Select.Option value="demo1">Drone TJAS1</Select.Option>*/}
-              {/*    <Select.Option value="demo2">Drone TBDMD</Select.Option>*/}
-              {/*    <Select.Option value="demo3">Drone YBDH1</Select.Option>*/}
-              {/*    <Select.Option value="demo4">Drone YWDVH</Select.Option>*/}
-              {/*    <Select.Option value="demo5">Drone HJJDN</Select.Option>*/}
-              {/*  </Select>*/}
-              {/*</Form.Item>*/}
             </Col>
 
           </Row>
@@ -127,9 +111,6 @@ class PayloadStatisticDrone extends Component {
 
         <Modal
           title="Basic Modal"
-          // visible={visible}
-          //onOk={handleOk}
-          //onCancel={handleCancel}
         >
           <p>Some contents...</p>
           <p>Some contents...</p>
