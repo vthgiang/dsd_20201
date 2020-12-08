@@ -74,9 +74,9 @@ const ListLabels = () => {
   };
 
   const updateLabel = (label) => {
-    const { id } = label;
+    const { _id } = label;
     const updatedListLabels = listLabels.map((element) =>
-      element.id === id ? label : element,
+      element._id === _id ? label : element,
     );
 
     setListLabels(updatedListLabels);
@@ -107,7 +107,7 @@ const ListLabels = () => {
   };
 
   const deleteConfirm = (item) => {
-    const { id, name } = item;
+    const { _id, name } = item;
 
     Modal.confirm({
       title: 'Cảnh báo',
@@ -119,7 +119,7 @@ const ListLabels = () => {
       ),
       okText: 'Xóa',
       cancelText: 'Hủy',
-      onOk: handleDeleteLabel(id),
+      onOk: handleDeleteLabel(_id),
     });
   };
 

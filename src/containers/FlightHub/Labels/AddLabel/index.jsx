@@ -10,7 +10,7 @@ const AddLabel = ({ visible, hideModal, addLabel }) => {
     let labelData = omitIsNil(
       {
         name,
-        property,
+        // property,
         description,
         isDefault: true,
       },
