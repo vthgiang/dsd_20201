@@ -50,6 +50,12 @@ export const sidebarMenu = [
         route: '/payload-management',
       },
       {
+        key: 'PayloadSDcard',
+        heading: 'DSCard Payload',
+        icon: 'fa fa-tools',
+        route: '/payload-dscard',
+      },
+      {
         key: 'PayloadType',
         heading: 'Quản lý loại payload',
         icon: 'fa fa-tasks',
@@ -61,12 +67,6 @@ export const sidebarMenu = [
         icon: 'fa fa-file-chart-line',
         route: '/payload-statistic',
       },
-      /* {
-        key: 'PayloadMaintenance',
-        heading: 'Bảo dưỡng Payload',
-        icon: 'fa fa-tools',
-        route: '/payload-maintenance',
-      }, */
       {
         key: 'PayloadToDrone',
         heading: 'Payload - Drone',
