@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Input, Row, Table, Modal, notification, Button } from 'antd';
+import { removeVietnameseTones } from '../../../../helpers/removeVietnameseTones';
 import moment from 'moment';
 
 import {
@@ -22,6 +23,7 @@ const ListLabels = () => {
   const [modalUpdateVisible, setModalUpdateVisible] = useState(false);
   const [labelUpdateData, setLabelUpdateData] = useState();
   const [listLabels, setListLabels] = useState();
+  const [listLabelsInit, setListLabelsInit] = useState();
 
   useEffect(() => {
     if (listLabels) return;
@@ -38,6 +40,7 @@ const ListLabels = () => {
         }
 
         setListLabels(resp.result);
+        setListLabelsInit(resp.result);
       } catch (error) {
         notification.error({
           message: 'Máy chủ lỗi, vui lòng thử lại sau',
@@ -48,7 +51,20 @@ const ListLabels = () => {
   }, [listLabels]);
 
   const handleSearch = (value) => {
-    console.log(value);
+    let dataSearchResult = listLabelsInit.filter((label) => {
+      let labelNameConvert = removeVietnameseTones(label.name);
+      let labelDescriptionConvert = removeVietnameseTones(label.description);
+      let valueConvert = removeVietnameseTones(value);
+
+      if (
+        labelNameConvert.includes(valueConvert) ||
+        labelDescriptionConvert.includes(valueConvert)
+      ) {
+        return label;
+      }
+    });
+
+    setListLabels(dataSearchResult);
   };
 
   const showModalCreate = () => {
@@ -143,7 +159,7 @@ const ListLabels = () => {
       key: 'createdAt',
       dataIndex: 'createdAt',
       title: 'Ngày tạo',
-      width: '15%',
+      width: '20%',
       render: formatMomentDateToDateTimeString,
       sorter: (a, b) => moment(a.startTime).diff(moment(b.startTime)),
     },
@@ -151,7 +167,7 @@ const ListLabels = () => {
       key: 'updatedAt',
       dataIndex: 'updatedAt',
       title: 'Ngày cập nhật',
-      width: '15%',
+      width: '20%',
       render: formatMomentDateToDateTimeString,
       sorter: (a, b) => moment(a.startTime).diff(moment(b.startTime)),
     },
@@ -207,7 +223,11 @@ const ListLabels = () => {
 
       <Row type="flex" justify="space-between" align="middle">
         <Col span={8}>
-          <Search placeholder="Tên nhãn" onSearch={handleSearch} enterButton />
+          <Search
+            placeholder="Tìm tên nhãn, mô tả..."
+            onSearch={handleSearch}
+            enterButton
+          />
         </Col>
         <Button
           type="primary"
