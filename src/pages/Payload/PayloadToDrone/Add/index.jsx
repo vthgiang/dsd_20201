@@ -4,6 +4,8 @@ import React, { Component } from "react";
 import { Form, Input, Button, Select, DatePicker, TimePicker, Alert} from 'antd';
 import StyleEdit from '../index.style';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+
 
 const layout = {
   labelCol: { span: 5 },
@@ -122,7 +124,7 @@ class AddSignupPayloadDrone extends Component {
                 console.log(res.data);
                 this.setState({showSuccessAlert: true});
                 setTimeout(function() {
-                  window.location.reload(false);
+                  this.props.history.push('/payload-drone');
                 }, 2000)
               })
           }
