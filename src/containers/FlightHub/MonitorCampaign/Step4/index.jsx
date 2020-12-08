@@ -16,7 +16,7 @@ const Step4 = ({ prevStep, nextStep, data, handleChangeData }) => {
 
   useEffect(() => {
     form.setFieldsValue(data);
-    getAttachParams();
+    getLabels();
   }, [data, form]);
 
   const onFinish = (values) => {
@@ -24,7 +24,7 @@ const Step4 = ({ prevStep, nextStep, data, handleChangeData }) => {
     nextStep();
   };
 
-  const getAttachParams = () => {
+  const getLabels = () => {
     axios({
       method: 'GET',
       url: `https://flight-hub-api.herokuapp.com/api/labels`,
