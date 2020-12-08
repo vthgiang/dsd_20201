@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation, useHistory } from "react-router-dom";
 import {
   Breadcrumb,
   Row,
@@ -11,10 +12,7 @@ import {
   Spin,
 } from "antd";
 import {
-  ComposedChart,
-  Line,
   Area,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -23,104 +21,25 @@ import {
   ResponsiveContainer,
   PieChart,
   Pie,
-  Sector,
   Cell,
-  Text,
   AreaChart,
 } from "recharts";
+import QueryString from "query-string";
 
 import DroneDashboard from "./DroneDashboard";
-import { getDroneOverallMetrics } from "../../services/statistics";
+import IncidentDashboard from "./IncidentDashboard";
+import {
+  getDroneOverallMetrics,
+  getIncidentOverallMetrics,
+} from "../../services/statistics";
 
 const { TabPane } = Tabs;
-
-const dataChart1 = [
-  {
-    name: "Th1",
-    error: 590,
-    pass: 800,
-    amt: 1400,
-  },
-  {
-    name: "Th2",
-    error: 868,
-    pass: 967,
-    amt: 1506,
-  },
-  {
-    name: "Th3",
-    error: 1397,
-    pass: 1098,
-    amt: 989,
-  },
-  {
-    name: "Th4",
-    error: 1480,
-    pass: 1200,
-    amt: 1228,
-  },
-  {
-    name: "Th5",
-    error: 1520,
-    pass: 1108,
-    amt: 1100,
-  },
-  {
-    name: "Th6",
-    error: 1400,
-    pass: 680,
-    amt: 1700,
-  },
-  {
-    name: "Th7",
-    error: 1400,
-    pass: 680,
-    amt: 1700,
-  },
-  {
-    name: "Th8",
-    error: 1400,
-    pass: 680,
-    amt: 1700,
-  },
-  {
-    name: "Th9",
-    error: 1400,
-    pass: 680,
-    amt: 1700,
-  },
-  {
-    name: "Th10",
-    error: 1400,
-    pass: 680,
-    amt: 1700,
-  },
-  {
-    name: "Th11",
-    error: 1400,
-    pass: 680,
-    amt: 1700,
-  },
-  {
-    name: "Th12",
-    error: 1400,
-    pass: 680,
-    amt: 1700,
-  },
-];
 
 const dataChart2 = [
   { name: "Admin", value: 4 },
   { name: "NV Giám sát", value: 10 },
   { name: "NV Xử lý sự cố", value: 15 },
   { name: "Khác", value: 5 },
-];
-
-const dataDB = [
-  { name: "Drone", num: "100", used: "20" },
-  { name: "Sự cố", num: "100", used: "20" },
-  { name: "Đối tượng giám sát", num: "100", used: "20" },
-  { name: "Người dùng", num: "100", used: "20" },
 ];
 
 const dataChart3 = [
@@ -297,12 +216,30 @@ function callback(key) {
 }
 
 function Dashboard() {
+  const location = useLocation();
+  const history = useHistory();
+  const query = QueryString.parse(location);
+  const [activeTab, setActiveTab] = React.useState(query.tab);
   const [droneMetrics, setDroneMetrics] = React.useState(null);
+  const [incidentMetrics, setIncidentMetrics] = React.useState(null);
+
+  const onTabChange = React.useCallback((key) => {
+    history.push({
+      pathname: location.pathname,
+      search: QueryString.stringify({
+        ...query,
+        tab: key,
+      }),
+    });
+    setActiveTab(key);
+  }, [history, location]);
 
   React.useEffect(() => {
     const fetchAll = async () => {
       const drone = await getDroneOverallMetrics();
+      const incident = await getIncidentOverallMetrics();
       setDroneMetrics(drone);
+      setIncidentMetrics(incident);
     }
 
     fetchAll();
@@ -350,9 +287,16 @@ function Dashboard() {
             style={{ height: "100%" }}
           >
             <h4>Sự cố</h4>
-            <div>Sự cố mới trong tháng: 100</div>
-            <div>Đang khắc phục: 30</div>
-            <div>Đã sửa chữa: 70</div>
+            {!incidentMetrics ? (
+              <Spin />
+            ) : (
+              <>
+                <div>Tổng số sự cố: {incidentMetrics.all}</div>
+                <div>Đang khắc phục: {incidentMetrics.doing}</div>
+                <div>Đã xử lý: {incidentMetrics.done}</div>
+                <div>Đang chờ: {incidentMetrics.pending}</div>
+              </>
+            )}
           </Card>
         </Col>
         <Col span={6}>
@@ -376,18 +320,15 @@ function Dashboard() {
             <div>Đang hoạt động: 15</div>
           </Card>
         </Col>
-        {/* <Col span={4}>
-          <Card className="u-shadow u-rounded">
-            <h1>Drone</h1>
-            <div>Tổng: 100</div>
-            <div>Đang sử dụng: 30</div>
-          </Card>
-        </Col> */}
       </Row>
       <Row wrap={false} gutter={[16, 16]}>
         <Col span={24}>
           <Card className="u-shadow u-rounded">
-            <Tabs defaultActiveKey="1" onChange={callback}>
+            <Tabs
+              defaultActiveKey="Drone"
+              // activeKey={activeTab}
+              onChange={onTabChange}
+            >
               <TabPane key="Drone" tab="Drone">
                 <DroneDashboard />
               </TabPane>
@@ -395,39 +336,7 @@ function Dashboard() {
                 <div />
               </TabPane>
               <TabPane key="Tab 2" tab="Sự cố">
-                <h1>Thống kê sự cố theo tháng</h1>
-                <Row>
-                  <Col span="12">
-                    <h3>Danh sách sự cố theo thángtháng</h3>
-                    <ResponsiveContainer height={500} width="100%">
-                      <ComposedChart
-                        data={dataChart1}
-                        margin={{
-                          top: 16,
-                          right: 16,
-                          bottom: 16,
-                          left: 16,
-                        }}
-                      >
-                        <CartesianGrid stroke="#f5f5f5" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="error" barSize={20} fill="#413ea0" />
-                        <Line
-                          type="monotone"
-                          dataKey="error"
-                          stroke="#ff7300"
-                        />
-                      </ComposedChart>
-                    </ResponsiveContainer>
-                  </Col>
-                  <Col span={11} offset={1}>
-                    <h3>Danh sách sự cố</h3>
-                    <Table dataSource={dataSource} columns={columns} />;
-                  </Col>
-                </Row>
+                <IncidentDashboard />
               </TabPane>
               <TabPane key="Tab 3" tab="Lịch sử hoạt động">
                 <h1>Lịch sử hoạt động của hệ thống</h1>
