@@ -6,6 +6,9 @@ import Dashboard from './Dashboard';
 import TableDrone from './TableDrone';
 
 import FlightPathDrone from './FLightPathDrone';
+import MapTest from './MapTest';
+import FlightPathManagement from './FlightPathManagement';
+import FlightSchedule from './FlightSchedule';
 
 export const routes = [
   {
@@ -16,6 +19,18 @@ export const routes = [
   {
     path: '/drones',
     component: () => <div>DroneManagement</div>,
+  },
+  {
+    path: '/my-map-test',
+    component: MapTest,
+  },
+  {
+    path: '/flight-path',
+    component: FlightPathManagement,
+  },
+  {
+    path: '/flight-schedule',
+    component: FlightSchedule,
   },
   {
     path: '/drone-state',
