@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Space, Input, Form, Select, Modal, Row, Col } from 'antd';
+import { Table, Space, Input, Form, Select, Modal, notification , Row, Col } from 'antd';
 import { Button } from 'antd';
 import StyleList from './index.style';
 import { useState } from 'react';
@@ -30,12 +30,24 @@ class List extends Component {
       status: [
         { value: 'working', label: 'Đang sử dụng' },
         { value: 'idle', label: 'Sẵn có' },
-        { value: 'fixing', label: 'Đang sửa' }
+        { value: 'fixing', label: 'Đang sửa' },
+        { value: 'charging', label: 'Đang sạc' }
       ],
       idPayloadFix: null
     }
   }
 
+   openNotificationSucess = (message) => {
+    notification.success({
+      message: message,
+    })
+  };
+
+  openNotificationError = (message) => {
+    notification.error({
+      message: message,
+    })
+  };
 
   handleClick() {
     let history = useHistory();
@@ -309,6 +321,7 @@ class List extends Component {
     axios.post(`https://dsd06.herokuapp.com/api/payload`, data)
       .then(res => {
         console.log(res.data);
+        this.openNotificationSucess("Thêm thành công")
         this.setState({ visibleAdd: false })
         this.loadAllPayload();
       })
@@ -457,7 +470,7 @@ class List extends Component {
   deleteRecord() {
     axios.delete(`https://dsd06.herokuapp.com/api/payload/` + this.state.idPayloadDelete)
       .then(res => {
-        console.log(res.data);
+        this.openNotificationSucess("Xóa thành công")
         this.setState({ visibleDelete: false })
         this.loadAllPayload();
       })
@@ -489,8 +502,8 @@ class List extends Component {
     //console.log(values.reason);
     axios.post(`https://dsd06.herokuapp.com/api/payloadregister/fix/` + this.state.idPayloadFix, values.reason)
       .then(res => {
-        console.log(res.data);
         this.setState({ visibleMaintenance: false })
+        this.openNotificationSucess("Chuyển trạng thái thành công")
         this.loadAllPayload();
       })
 
@@ -510,6 +523,18 @@ class List extends Component {
   showMaintenance(id) {
     this.setState({idPayloadFix: id});
     this.setState({ visibleMaintenance: true });
+  }
+
+  handleCancelMaintenance = e => {
+    this.setState({ visibleMaintenance: false })
+  }
+
+  showCharging(id) {
+    axios.post(`https://dsd06.herokuapp.com/api/payloadregister/charge/` + id)
+      .then(res => {
+        this.openNotificationSucess("Chuyển trạng thái sạc thành công")
+        this.loadAllPayload();
+      })
   }
 
 
@@ -585,6 +610,7 @@ class List extends Component {
             <Button type="link" onClick={() => this.showModal(record)} >Sửa</Button>
             <Button danger type="text" onClick={() => this.showModalDelete(record)}>Xóa</Button>
             <Button type="link" onClick={() => this.showMaintenance(record.id)}>Bảo dưỡng</Button>
+            <Button type="link" onClick={() => this.showCharging(record.id)}>Sạc</Button>
           </Space>
         ),
       },
@@ -662,7 +688,7 @@ class List extends Component {
           title="Đăng ký bảo dưỡng"
           visible={visibleMaintenance}
           onOk={this.handleOkDelete}
-          onCancel={this.handleCancelDelete}
+          onCancel={this.handleCancelMaintenance}
           footer={null}
         >
           {
