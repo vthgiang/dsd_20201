@@ -18,8 +18,11 @@ const Step3 = ({
   const [form] = Form.useForm();
   const [objectData, setObjectData] = useState([]);
 
+  useEffect(() => {
+    getObjectData(data.monitoredZone);
+  }, []);
+
   const getObjectData = (monitoredZone) => {
-    console.log('zoneId', monitoredZone);
     axios({
       method: 'GET',
       url: `https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-zone`,
