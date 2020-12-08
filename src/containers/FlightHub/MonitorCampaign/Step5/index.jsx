@@ -18,15 +18,14 @@ import {
   StepBackwardOutlined,
 } from '@ant-design/icons';
 import { convertFieldValuesToDataSubmit } from '../services';
-import { useHistory } from 'react-router-dom';
+
 import { getListLabelsApi } from '../../../../apis/label';
 
 const { TextArea } = Input;
 
-const Step5 = ({ prevStep, data, handleChangeData, attachParams }) => {
+const Step5 = ({ prevStep, data, handleChangeData, handleSubmit }) => {
   const [labelsData, setLabelsData] = useState([]);
 
-  const history = useHistory();
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -56,18 +55,8 @@ const Step5 = ({ prevStep, data, handleChangeData, attachParams }) => {
     fetchListLabelsData();
   }, []);
 
-  const goBack = () => {
-    history.goBack();
-  };
-
-  const saved = () => {
-    message.success('Lưu thành công');
-    goBack();
-  };
-
-  const handleCreate = (dataSubmit) => () => {
-    console.log({ dataSubmit });
-    saved();
+  const handleCreate = (dataSubmit) => async () => {
+    await handleSubmit(dataSubmit);
   };
 
   const submitConfirm = (dataSubmit) => {
@@ -109,7 +98,11 @@ const Step5 = ({ prevStep, data, handleChangeData, attachParams }) => {
         >
           <Select mode="multiple" placeholder="Chọn nhãn đính kèm">
             {labelsData.map(({ id, name }) => {
-              return <Select.Option value={id}>{name}</Select.Option>;
+              return (
+                <Select.Option key={id} value={id}>
+                  {name}
+                </Select.Option>
+              );
             })}
           </Select>
         </Form.Item>

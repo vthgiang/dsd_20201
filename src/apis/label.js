@@ -93,3 +93,10 @@ export const deleteLabelApi = async (id) => {
     status: 1,
   };
 };
+
+export default {
+  addLabelApi,
+  getListLabelsApi,
+  updateLabelApi,
+  deleteLabelApi,
+};

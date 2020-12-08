@@ -19,8 +19,8 @@ const Step3 = ({
   const [objectData, setObjectData] = useState([]);
 
   useEffect(() => {
-    getObjectData(data.monitoredZone);
-  }, []);
+    if (data && data.monitoredZone) getObjectData(data.monitoredZone);
+  }, [data]);
 
   const getObjectData = (monitoredZone) => {
     axios({
