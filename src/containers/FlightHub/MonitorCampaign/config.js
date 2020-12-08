@@ -20,8 +20,6 @@ export const STEPS = [
   { title: 'Bước 5', description: 'Chọn nhãn đính kèm', content: Step5 },
 ];
 
-export const MAX_STEPS_SIZE = 5;
-
 export const LAYOUT = {
   layout: 'horizontal',
   labelCol: { offset: 2, span: 4 },

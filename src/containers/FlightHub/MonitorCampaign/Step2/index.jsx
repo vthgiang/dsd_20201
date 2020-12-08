@@ -26,7 +26,7 @@ const initData = [
 const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [drones, setDrones] = useState([]);
-  const { timeRange = [new Date(), new Date()] } = data;
+  const { timeRange = [new Date(), new Date(Date.now() + 24 * 60000)] } = data;
 
   useEffect(() => {
     const { drones = [] } = data;
