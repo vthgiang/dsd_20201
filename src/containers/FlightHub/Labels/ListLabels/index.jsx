@@ -74,9 +74,9 @@ const ListLabels = () => {
   };
 
   const updateLabel = (label) => {
-    const { id } = label;
+    const { _id } = label;
     const updatedListLabels = listLabels.map((element) =>
-      element.id === id ? label : element,
+      element._id === _id ? label : element,
     );
 
     setListLabels(updatedListLabels);
