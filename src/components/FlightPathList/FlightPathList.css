@@ -1,0 +1,14 @@
+.btn-view{
+    border: none;
+    color: #312a52;
+    background-color: transparent;
+}
+button.btn-view:focus {
+    border: none;
+    outline:0;  
+}
+button.btn-view:active {
+    border: none;
+    color: rgb(184, 163, 241);
+    outline:0;  
+}

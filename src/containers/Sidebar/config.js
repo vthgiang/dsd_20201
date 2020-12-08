@@ -18,6 +18,18 @@ export const sidebarMenu = [
         route: '/drone-list',
       },
       {
+        key: 'FlightPathManagement',
+        heading: 'Quản lý đường bay',
+        icon: 'fas fa-route',
+        route: '/flight-path',
+      },
+      {
+        key: 'FlightSchedule',
+        heading: 'Lịch bay',
+        icon: 'far fa-calendar-alt',
+        route: '/flight-schedule',
+      },
+      {
         key: 'FlySetting',
         heading: 'Thiết lập đường bay',
         icon: 'fa fa-user-chart',
