@@ -174,6 +174,7 @@ const ListMonitorCampaign = () => {
   };
 
   const handleDeleteMonitorCampaign = (item, index) => async () => {
+    console.log('item ', item);
     try {
       const resp = await monitorCampaignApi.deleteMonitorCampaign(item._id);
       const newListMonitorCampaignsData = [...listMonitorCampaignsData];

@@ -18,7 +18,8 @@ const UpdateMonitorCampaign = () => {
     const fetchMonitorCampaignData = async () => {
       try {
         const resp = await monitorCampaignApi.getMonitorCampaign(id);
-        setMonitorCampaignData(resp.data);
+
+        setMonitorCampaignData(resp.data.result.monitorCampaign);
       } catch (error) {
         notification.error({
           message: 'Có lỗi xảy ra! Xin thử lại',
