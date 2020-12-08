@@ -29,7 +29,6 @@ export default function IncidentDashboard() {
       normal: getMonthData(month).filter(item => item.level.code === 0).length,
       urgent: getMonthData(month).filter(item => item.level.code === 1).length,
     }));
-    console.log({ data })
     return data;
   }, [incidentMetrics]);
 

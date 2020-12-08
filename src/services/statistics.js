@@ -96,7 +96,65 @@ export const getUsersMetrics = async () => {
       })
     );
     const metrics = {};
-    metrics.all = result;
+    metrics.data = result;
+    metrics.all = result.length;
+    metrics.active = result.filter(item => item.status === 'ACTIVE').length;
+    metrics.inactive = result.filter(item => item.status === 'INACTIVE').length;
+    metrics.pending = result.filter(item => item.status === 'PENDING').length;
+    metrics.admin = result.filter(item => item.role === 'ADMIN');
+    metrics.manager = result.filter(item => item.role === 'MANAGER');
+    metrics.droneStaff = result.filter(item => item.role === 'DRONE_STAFF');
+    metrics.incidentStaff = result.filter(item => item.role === 'INCIDENT_STAFF');
+    metrics.supervisor = result.filter(item => item.role === 'SUPERVISOR');
+    return metrics;
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+}
+
+export const getPayloadOverallMetrics = async () => {
+  try {
+    const { data } = await requestWithCache(
+      'getPayloadOverallMetrics',
+      () => Axios.get('https://dsd06.herokuapp.com/api/payload')
+    );
+    const metrics = {};
+    metrics.all = data.length;
+    metrics.idle = data.filter((item) => item.status !== 'working').length;
+    metrics.working = metrics.all - metrics.idle;
+    return metrics;
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+};
+
+export const getPayloadDetailedMetrics = async () => {
+  try {
+    const results = await Promise.all([
+      requestWithCache(
+        'getPayloadOverallMetrics',
+        () => Axios.get('https://dsd06.herokuapp.com/api/payload')
+      ),
+      requestWithCache(
+        'getPayloadFixingMetrics',
+        () => Axios.get('https://dsd06.herokuapp.com/api/payloadStat/feeFixing')
+      ),
+      requestWithCache(
+        'getPayloadWorkingMetrics',
+        () => Axios.get('https://dsd06.herokuapp.com/api/payloadStat/feeWorking')
+      ),
+    ])
+    const metrics = {};
+    metrics.working = results[0]?.data.filter((item) => item.status !== 'working').length;
+    metrics.idle = results[0]?.data.filter((item) => item.status !== 'idle').length;
+    metrics.fixing = results[0]?.data.filter((item) => item.status !== 'fixing').length;
+    metrics.charging = results[0]?.data.filter((item) => item.status !== 'charging').length;
+    metrics.fee = {
+      fixing: results[1].data,
+      working: results[2].data,
+    }
     return metrics;
   } catch (error) {
     console.error(error);

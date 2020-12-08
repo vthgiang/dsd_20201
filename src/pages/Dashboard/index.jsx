@@ -28,9 +28,13 @@ import QueryString from "query-string";
 
 import DroneDashboard from "./DroneDashboard";
 import IncidentDashboard from "./IncidentDashboard";
+import UsersDashboard from "./UsersDashboard";
+import PayloadDashboard from "./PayloadDashboard";
 import {
   getDroneOverallMetrics,
   getIncidentOverallMetrics,
+  getUsersMetrics,
+  getPayloadOverallMetrics,
 } from "../../services/statistics";
 
 const { TabPane } = Tabs;
@@ -222,6 +226,8 @@ function Dashboard() {
   const [activeTab, setActiveTab] = React.useState(query.tab);
   const [droneMetrics, setDroneMetrics] = React.useState(null);
   const [incidentMetrics, setIncidentMetrics] = React.useState(null);
+  const [usersMetrics, setUsersMetrics] = React.useState(null);
+  const [payloadMetrics, setPayloadMetrics] = React.useState(null);
 
   const onTabChange = React.useCallback((key) => {
     history.push({
@@ -236,10 +242,16 @@ function Dashboard() {
 
   React.useEffect(() => {
     const fetchAll = async () => {
-      const drone = await getDroneOverallMetrics();
-      const incident = await getIncidentOverallMetrics();
-      setDroneMetrics(drone);
-      setIncidentMetrics(incident);
+      const results = await Promise.all([
+        getDroneOverallMetrics(),
+        getIncidentOverallMetrics(),
+        getUsersMetrics(),
+        getPayloadOverallMetrics(),
+      ]);
+      setDroneMetrics(results[0]);
+      setIncidentMetrics(results[1]);
+      setUsersMetrics(results[2]);
+      setPayloadMetrics(results[3]);
     }
 
     fetchAll();
@@ -283,6 +295,23 @@ function Dashboard() {
         </Col>
         <Col span={6}>
           <Card
+            className="u-shadow u-rounded border-warning border-top-0 border-right-0 border-bottom-0 u-border-medium"
+            style={{ height: "100%" }}
+          >
+            <h4>Payload</h4>
+            {!payloadMetrics ? (
+              <Spin />
+            ) : (
+              <>
+                <div>Tổng: {payloadMetrics.all}</div>
+                <div>Đang sử dụng: {payloadMetrics.working}</div>
+                <div>Đang chờ: {payloadMetrics.idle}</div>
+              </>
+            )}
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card
             className="u-shadow u-rounded border-danger border-top-0 border-right-0 border-bottom-0 u-border-medium"
             style={{ height: "100%" }}
           >
@@ -301,23 +330,20 @@ function Dashboard() {
         </Col>
         <Col span={6}>
           <Card
-            className="u-shadow u-rounded border-warning border-top-0 border-right-0 border-bottom-0 u-border-medium"
-            style={{ height: "100%" }}
-          >
-            <h4>Lịch sử hoạt động</h4>
-            <div>Hoạt động được thực hiện: 2000</div>
-            <div>Lỗi hệ thống: 20</div>
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card
             className="u-shadow u-rounded border-success border-top-0 border-right-0 border-bottom-0 u-border-medium"
             style={{ height: "100%" }}
           >
             <h4>Người dùng</h4>
-            <div>Tổng: 20</div>
-            <div>Admin: 5</div>
-            <div>Đang hoạt động: 15</div>
+            {!usersMetrics ? (
+              <Spin />
+            ) : (
+              <>
+                <div>Tổng: {usersMetrics.all}</div>
+                <div>Đang hoạt động: {usersMetrics.active}</div>
+                <div>Đang chờ: {usersMetrics.pending}</div>
+                <div>Đang không hoạt động: {usersMetrics.inactive}</div>
+              </>
+            )}
           </Card>
         </Col>
       </Row>
@@ -333,10 +359,31 @@ function Dashboard() {
                 <DroneDashboard />
               </TabPane>
               <TabPane key="Payload" tab="Payload">
-                <div />
+                <PayloadDashboard />
               </TabPane>
               <TabPane key="Tab 2" tab="Sự cố">
                 <IncidentDashboard />
+              </TabPane>
+              <TabPane tab="Người sử dụng" key="Tab 4">
+                <UsersDashboard />
+              </TabPane>
+              <TabPane key="Cảnh báo" tab="Cảnh báo">
+                <div />
+              </TabPane>
+              <TabPane key="Ảnh/Video" tab="Ảnh/Video">
+                <div />
+              </TabPane>
+              <TabPane key="Đợt giám sát" tab="Đợt giám sát">
+                <div />
+              </TabPane>
+              <TabPane key="Miền giám sát" tab="Miền giám sát">
+                <div />
+              </TabPane>
+              <TabPane key="Đối tượng giám sát" tab="Đối tượng giám sát">
+                <div />
+              </TabPane>
+              <TabPane key="Báo cáo" tab="Báo cáo">
+                <div />
               </TabPane>
               <TabPane key="Tab 3" tab="Lịch sử hoạt động">
                 <h1>Lịch sử hoạt động của hệ thống</h1>
@@ -418,63 +465,6 @@ function Dashboard() {
                     <Table dataSource={dataSource} columns={columns} />;
                   </Col>
                 </Row>
-              </TabPane>
-              <TabPane tab="Người sử dụng" key="Tab 4">
-                <h1>Tổng quan người dùng</h1>
-                <Row>
-                  <Col span={10} offset={2}>
-                    <h3 className="mb-5">Tỉ lệ người dùng</h3>
-                    <ResponsiveContainer
-                      height={300}
-                      width="80%"
-                      className="alight-item-center"
-                    >
-                      <PieChart>
-                        <Pie
-                          data={dataChart2}
-                          cx={100}
-                          cy={100}
-                          labelLine={false}
-                          label={renderCustomizedLabel}
-                          outerRadius={100}
-                          fill="#8884d8"
-                          dataKey="value"
-                          margin={{ bottom: 10 }}
-                        >
-                          {dataChart2.map((entry, index) => (
-                            <Cell
-                              key={`cell-${index}`}
-                              fill={COLORS[index % COLORS.length]}
-                            />
-                          ))}
-                        </Pie>
-                        <Legend style={{ marginTop: 16 }} />
-                      </PieChart>
-                    </ResponsiveContainer>
-                  </Col>
-                  <Col span={11} offset={1}>
-                    <h3>Danh sách người dùng</h3>
-                    <Table dataSource={dataSource} columns={columns} />;
-                  </Col>
-                </Row>
-              </TabPane>
-              <TabPane key="Cảnh báo" tab="Cảnh báo">
-                <div />
-              </TabPane>
-              <TabPane key="Ảnh/Video" tab="Ảnh/Video">
-                <div />
-              </TabPane>
-              <TabPane key="Đợt giám sát" tab="Đợt giám sát">
-                <div />
-              </TabPane>
-              <TabPane key="Miền giám sát" tab="Miền giám sát">
-                <div />
-              </TabPane>
-              <TabPane key="Đối tượng giám sát" tab="Đối tượng giám sát">
-                <div />
-              </TabPane>
-              <TabPane key="Báo cáo" tab="Báo cáo">
-                <div />
               </TabPane>
             </Tabs>
           </Card>
