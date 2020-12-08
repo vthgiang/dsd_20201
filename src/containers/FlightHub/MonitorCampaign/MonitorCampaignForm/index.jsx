@@ -14,17 +14,15 @@ const { Step } = Steps;
 const MonitorCampaignForm = ({
   initialData,
   title,
-  monitoredObjects = [],
-  monitoredZones = [],
+
   attachParams,
   handleSubmit,
 }) => {
   const history = useHistory();
-  const [current, setCurrent] = React.useState(4);
+  const [current, setCurrent] = React.useState(0);
   const [data, setData] = useState({});
 
   useEffect(() => {
-    console.log({ initialData });
     setData(initialData);
   }, [initialData]);
 

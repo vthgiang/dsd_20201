@@ -1,56 +1,70 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSeparator, StyleTitle } from '../../../../themes/default';
 import StyleStep2 from './index.style';
-import { Button, Row, Table, message } from 'antd';
+import { Button, Row, Table, message, notification } from 'antd';
 import { StepBackwardOutlined, StepForwardOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { DATE_TIME_FORMAT } from '../../../../configs';
-
-const initData = [
-  {
-    key: '5349b4ddd2781d08c0981203',
-    id: '5349b4ddd2781d08c0981203',
-    name: 'Drone A',
-    type: 'Loại 1',
-    brandName: 'DJI',
-  },
-  {
-    key: '5349b4ddd2781d08c0981102',
-    id: '5349b4ddd2781d08c0981102',
-    name: 'Drone B',
-    type: 'Loại 2',
-    brandName: 'DJI',
-  },
-];
+import { droneApi } from '../../../../apis';
+import { formatMomentDateToDateTimeString } from '../services';
+// const initData = [
+//   {
+//     key: '5349b4ddd2781d08c0981203',
+//     id: '5349b4ddd2781d08c0981203',
+//     name: 'Drone A',
+//     type: 'Loại 1',
+//     brandName: 'DJI',
+//   },
+//   {
+//     key: '5349b4ddd2781d08c0981102',
+//     id: '5349b4ddd2781d08c0981102',
+//     name: 'Drone B',
+//     type: 'Loại 2',
+//     brandName: 'DJI',
+//   },
+// ];
 
 const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [drones, setDrones] = useState([]);
-  const { timeRange = [new Date(), new Date(Date.now() + 24 * 60000)] } = data;
+  const { timeRange } = data;
+
+  useEffect(() => {
+    const fetchDronesData = async () => {
+      const timeStart = formatMomentDateToDateTimeString(timeRange[0]);
+      const timeEnd = formatMomentDateToDateTimeString(timeRange[1]);
+      try {
+        const resp = await droneApi.getDroneAvailable({ timeStart, timeEnd });
+        console.log('resp ', resp.data);
+        setDrones(resp.data);
+      } catch (error) {
+        notification.error({
+          message: 'Có lỗi xảy ra! Xin thử lại.',
+        });
+      }
+    };
+    fetchDronesData();
+  }, []);
 
   useEffect(() => {
     const { drones = [] } = data;
     setSelectedRowKeys(drones);
   }, [data]);
 
-  useEffect(() => {
-    // call Api get list drones available
-    setDrones(initData || []);
-  }, []);
-
   const columns = [
     {
       dataIndex: 'id',
       title: 'Mã drone',
-      width: '10%',
+      width: '15%',
       align: 'center',
     },
-    { dataIndex: 'name', title: 'Tên drone', width: '30%' },
-    { dataIndex: 'type', title: 'Loại drone', width: '30%' },
+    { dataIndex: 'name', title: 'Tên drone', width: 'auto' },
+    { dataIndex: 'dimensions', title: 'Kịch thước', width: '15%' },
+    { dataIndex: 'color', title: 'Màu', width: '15%' },
     {
-      dataIndex: 'brandName',
+      dataIndex: 'brand',
       title: 'Nhà sản xuất',
-      width: '30%',
+      width: '15%',
     },
   ];
 
@@ -84,6 +98,7 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
           type: 'checkbox',
           ...rowSelection,
         }}
+        rowKey="id"
         selections={true}
         columns={columns}
         dataSource={drones}
