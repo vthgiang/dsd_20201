@@ -226,7 +226,3 @@ const ListLabels = () => {
 };
 
 export default ListLabels;
-
-const a = {
-  labelIds: ['123456', '32164564'],
-};

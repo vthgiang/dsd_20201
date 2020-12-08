@@ -103,7 +103,7 @@ const Step5 = ({ prevStep, data, handleChangeData, attachParams }) => {
         validateMessages={VALIDATE_MESSAGES}
       >
         <Form.Item
-          name="label"
+          name="labels"
           label="Nhãn đính kèm"
           rules={[{ type: 'array', required: false }]}
         >
