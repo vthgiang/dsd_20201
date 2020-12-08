@@ -123,9 +123,10 @@ class AddSignupPayloadDrone extends Component {
                 .then(res => {
                 console.log(res.data);
                 this.setState({showSuccessAlert: true});
-                setTimeout(function() {
-                  this.props.history.push('/payload-drone');
-                }, 2000)
+                this.props.history.push('/payload-drone');
+
+                // setTimeout(function() {
+                // }, 2000)
               })
           }
         
