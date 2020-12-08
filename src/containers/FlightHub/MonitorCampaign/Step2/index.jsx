@@ -31,7 +31,7 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
   useEffect(() => {
     const { drones = [] } = data;
     setSelectedRowKeys(drones);
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     // call Api get list drones available

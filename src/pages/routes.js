@@ -6,7 +6,7 @@ import ListMonitorCampaignPage from './FlightHub/ListMonitorCampaign';
 import CreateMonitorCampaignPage from './FlightHub/CreateMonitorCampaign';
 import UpdateMonitorCampaignPage from './FlightHub/UpdateMonitorCampaign';
 
-import ListOtherParamsPage from './FlightHub/OtherParams';
+import ListLabelsPage from './FlightHub/Labels';
 
 export const routes = [
   {
@@ -44,7 +44,7 @@ export const routes = [
   },
   {
     path: '/flight-hub-other-params',
-    component: ListOtherParamsPage,
+    component: ListLabelsPage,
   },
   {
     path: '/payloads',

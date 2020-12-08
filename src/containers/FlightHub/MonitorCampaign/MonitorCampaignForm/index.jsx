@@ -5,7 +5,7 @@ import StyleMonitorCampaignForm, {
   StyleContent,
   StyleIconBack,
 } from './index.style';
-import { STEPS, MAX_STEPS_SIZE } from '../config';
+import { STEPS } from '../config';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ const MonitorCampaignForm = ({
   attachParams,
 }) => {
   const history = useHistory();
-  const [current, setCurrent] = React.useState(2);
+  const [current, setCurrent] = React.useState(4);
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const MonitorCampaignForm = ({
   }, [initialData]);
 
   const nextStep = () => {
-    if (current === MAX_STEPS_SIZE - 1) return;
+    if (current === Object.keys(STEPS).length - 1) return;
     setCurrent(current + 1);
   };
 

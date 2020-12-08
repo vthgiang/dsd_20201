@@ -45,7 +45,7 @@ export const sidebarMenu = [
       },
       {
         key: 'OtherParams',
-        heading: 'Thuộc tính đính kèm',
+        heading: 'Nhãn đính kèm',
         icon: 'fa fa-puzzle-piece',
         route: '/flight-hub-other-params',
       },

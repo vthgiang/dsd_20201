@@ -1,9 +1,9 @@
 // import axiosInstance from './api';
 
-export const addParamApi = async data => {
+export const addLabelApi = async (data) => {
   // const result = await axiosInstance({
   //   method: 'POST',
-  //   url: '/params',
+  //   url: '/labels',
   //   data
   // });
 
@@ -13,7 +13,6 @@ export const addParamApi = async data => {
     result: {
       id: Math.floor(Math.random() * 1000000000),
       name: 'Độ ẩm',
-      property: 'humidity',
       description: 'Độ ẩm của không khí',
       isDefault: true,
       createdAt: Date.now(),
@@ -23,10 +22,10 @@ export const addParamApi = async data => {
   };
 };
 
-export const getListParamsApi = async () => {
+export const getListLabelsApi = async () => {
   // const result = await axiosInstance({
   //   method: 'GET',
-  //   url: '/params',
+  //   url: '/labels',
   // });
 
   // return result;
@@ -35,30 +34,35 @@ export const getListParamsApi = async () => {
     result: [
       {
         id: '1234123124124',
-        name: 'Độ ẩm',
-        property: 'humidity',
-        description: 'Độ ẩm của không khí',
-        isDefault: true,
+        name: 'Tập huấn',
+        description: 'Đợt tập huấn phòng cháy chữa cháy',
         createdAt: '2020-08-24 09:16:06.051Z',
-        updatedAt: '2020-08-24 09:16:06.051Z',
+        updatedAt: '2020-08-25 09:16:06.051Z',
+      },
+      {
+        id: '156546465465321',
+        name: 'Cao điểm mùa nóng',
+        description: 'Đợt giám sát cao điểm trong mùa nắng nóng',
+        createdAt: '2020-08-24 09:16:06.051Z',
+        updatedAt: '2020-08-25 09:16:06.051Z',
       },
     ],
   };
 };
 
-// export const getParamDetailsApi = async id => {
+// export const getLabelDetailsApi = async id => {
 //   const result = await axiosInstance({
 //     method: 'GET',
-//     url: `/params/${id}`,
+//     url: `/labels/${id}`,
 //   });
 
 //   return result;
 // };
 
-export const updateParamApi = async data => {
+export const updateLabelApi = async (data) => {
   // const result = await axiosInstance({
   //   method: 'PUT',
-  //   url: `/params/${id}`,
+  //   url: `/labels/${id}`,
   //   data
   // });
 
@@ -78,10 +82,10 @@ export const updateParamApi = async data => {
   };
 };
 
-export const deleteParamApi = async id => {
+export const deleteLabelApi = async (id) => {
   // const result = await axiosInstance({
   //   method: 'DELETE',
-  //   url: `/params/${id}`,
+  //   url: `/labels/${id}`,
   // });
 
   // return result;

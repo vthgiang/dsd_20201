@@ -8,26 +8,26 @@ import {
   ExclamationCircleOutlined,
   PlusOutlined,
 } from '@ant-design/icons';
-import StyleListParams, { StyledTable } from './index.style';
-import AddParam from '../AddParam';
-import UpdateParam from '../UpdateParam';
+import StyleListLabels, { StyledTable } from './index.style';
+import AddLabel from '../AddLabel';
+import UpdateLabel from '../UpdateLabel';
 
-import { deleteParamApi, getListParamsApi } from '../../../../apis/param';
+import { deleteLabelApi, getListLabelsApi } from '../../../../apis/label';
 import { formatMomentDateToDateTimeString } from '../../MonitorCampaign/services';
 
 const { Search } = Input;
 
-const ListParams = () => {
+const ListLabels = () => {
   const [modalCreateVisible, setModalCreateVisible] = useState(false);
   const [modalUpdateVisible, setModalUpdateVisible] = useState(false);
-  const [paramUpdateData, setParamUpdateData] = useState();
-  const [listParams, setListParams] = useState();
+  const [labelUpdateData, setLabelUpdateData] = useState();
+  const [listLabels, setListLabels] = useState();
 
   useEffect(() => {
-    if (listParams) return;
-    const fetchListParams = async () => {
+    if (listLabels) return;
+    const fetchListLabels = async () => {
       try {
-        const resp = await getListParamsApi();
+        const resp = await getListLabelsApi();
         if (
           !resp ||
           !resp.status ||
@@ -37,15 +37,15 @@ const ListParams = () => {
           throw new Error('Máy chủ lỗi');
         }
 
-        setListParams(resp.result);
+        setListLabels(resp.result);
       } catch (error) {
         notification.error({
           message: 'Máy chủ lỗi, vui lòng thử lại sau',
         });
       }
     };
-    fetchListParams();
-  }, [listParams]);
+    fetchListLabels();
+  }, [listLabels]);
 
   const handleSearch = (value) => {
     console.log(value);
@@ -60,7 +60,7 @@ const ListParams = () => {
   };
 
   const showModalUpdate = (record) => () => {
-    setParamUpdateData(record);
+    setLabelUpdateData(record);
     setModalUpdateVisible(true);
   };
 
@@ -68,36 +68,36 @@ const ListParams = () => {
     setModalUpdateVisible(false);
   };
 
-  const addParam = (param) => {
-    setListParams([param, ...listParams]);
+  const addLabel = (label) => {
+    setListLabels([label, ...listLabels]);
     hideModalCreate();
   };
 
-  const updateParam = (param) => {
-    const { id } = param;
-    const updatedListParams = listParams.map((element) =>
-      element.id === id ? param : element,
+  const updateLabel = (label) => {
+    const { id } = label;
+    const updatedListLabels = listLabels.map((element) =>
+      element.id === id ? label : element,
     );
 
-    setListParams(updatedListParams);
+    setListLabels(updatedListLabels);
     hideModalUpdate();
   };
 
-  const handleDeleteParam = (paramId) => async () => {
+  const handleDeleteLabel = (labelId) => async () => {
     try {
-      const resp = await deleteParamApi(paramId);
+      const resp = await deleteLabelApi(labelId);
 
       if (!resp || !resp.status) throw new Error('Máy chủ lỗi');
 
-      const newListParams = listParams.filter((param) => {
-        const { id = '' } = param;
-        return paramId !== id;
+      const newListLabels = listLabels.filter((label) => {
+        const { id = '' } = label;
+        return labelId !== id;
       });
 
-      setListParams(newListParams);
+      setListLabels(newListLabels);
 
       notification.success({
-        message: 'Xóa tham số thành công',
+        message: 'Xóa nhãn thành công',
       });
     } catch (error) {
       notification.error({
@@ -114,12 +114,12 @@ const ListParams = () => {
       icon: <ExclamationCircleOutlined />,
       content: (
         <span>
-          Bạn có muốn xóa tham số <strong>{name}</strong> không?
+          Bạn có muốn xóa nhãn <strong>{name}</strong> không?
         </span>
       ),
       okText: 'Xóa',
       cancelText: 'Hủy',
-      onOk: handleDeleteParam(id),
+      onOk: handleDeleteLabel(id),
     });
   };
 
@@ -127,17 +127,11 @@ const ListParams = () => {
     {
       key: 'name',
       dataIndex: 'name',
-      title: 'Tên tham số',
-      width: '10%',
+      title: 'Tên nhãn',
+      width: '15%',
       sorter: (a, b) => a.name.localeCompare(b.name),
     },
-    {
-      key: 'property',
-      dataIndex: 'property',
-      title: 'Tên trường',
-      width: '10%',
-      sorter: (a, b) => a.property.localeCompare(b.property),
-    },
+
     {
       key: 'description',
       dataIndex: 'description',
@@ -149,7 +143,7 @@ const ListParams = () => {
       key: 'createdAt',
       dataIndex: 'createdAt',
       title: 'Ngày tạo',
-      width: '20%',
+      width: '15%',
       render: formatMomentDateToDateTimeString,
       sorter: (a, b) => moment(a.startTime).diff(moment(b.startTime)),
     },
@@ -157,7 +151,7 @@ const ListParams = () => {
       key: 'updatedAt',
       dataIndex: 'updatedAt',
       title: 'Ngày cập nhật',
-      width: '20%',
+      width: '15%',
       render: formatMomentDateToDateTimeString,
       sorter: (a, b) => moment(a.startTime).diff(moment(b.startTime)),
     },
@@ -168,23 +162,26 @@ const ListParams = () => {
       align: 'center',
       render: (data, record) => {
         return (
-          <Row type="flex" justify="center" align="middle">
-            <Button
-              icon={<EditOutlined />}
-              size="small"
-              onClick={showModalUpdate(record)}
-            >
-              Cập nhật
-            </Button>
-            &ensp;
-            <Button
-              icon={<DeleteOutlined />}
-              danger
-              size="small"
-              onClick={() => deleteConfirm(record)}
-            >
-              Xóa
-            </Button>
+          <Row type="flex" gutter={[8, 8]} justify="center" align="middle">
+            <Col>
+              <Button
+                icon={<EditOutlined />}
+                size="small"
+                onClick={showModalUpdate(record)}
+              >
+                Cập nhật
+              </Button>
+            </Col>
+            <Col>
+              <Button
+                icon={<DeleteOutlined />}
+                danger
+                size="small"
+                onClick={() => deleteConfirm(record)}
+              >
+                Xóa
+              </Button>
+            </Col>
           </Row>
         );
       },
@@ -192,44 +189,44 @@ const ListParams = () => {
   ];
 
   return (
-    <StyleListParams>
-      <AddParam
+    <StyleListLabels>
+      <AddLabel
         visible={modalCreateVisible}
         hideModal={hideModalCreate}
-        addParam={addParam}
+        addLabel={addLabel}
       />
 
-      <UpdateParam
+      <UpdateLabel
         visible={modalUpdateVisible}
         hideModal={hideModalUpdate}
-        paramDetails={paramUpdateData}
-        updateParam={updateParam}
+        labelDetails={labelUpdateData}
+        updateLabel={updateLabel}
       />
 
-      <h3>Danh sách tham số</h3>
+      <h3>Danh sách nhãn</h3>
 
       <Row type="flex" justify="space-between" align="middle">
         <Col span={8}>
-          <Search
-            placeholder="Tên tham số"
-            onSearch={handleSearch}
-            enterButton
-          />
+          <Search placeholder="Tên nhãn" onSearch={handleSearch} enterButton />
         </Col>
         <Button
           type="primary"
           icon={<PlusOutlined />}
           onClick={showModalCreate}
         >
-          Thêm tham số
+          Thêm nhãn
         </Button>
       </Row>
 
       <StyledTable>
-        <Table columns={columns} dataSource={listParams} />
+        <Table columns={columns} dataSource={listLabels} />
       </StyledTable>
-    </StyleListParams>
+    </StyleListLabels>
   );
 };
 
-export default ListParams;
+export default ListLabels;
+
+const a = {
+  labelIds: ['123456', '32164564'],
+};

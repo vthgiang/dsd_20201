@@ -25,7 +25,7 @@ const validateMessages = {
 
 const defaultValues = {};
 
-const ParamForm = ({
+const LabelForm = ({
   visible,
   onCancel,
   title,
@@ -71,19 +71,19 @@ const ParamForm = ({
       <Form
         {...layout}
         form={form}
-        name="paramForm"
+        name="labelForm"
         validateMessages={validateMessages}
         onFinish={onFinish}
         initialValues={initialValues}
         scrollToFirstError
-        className="param-form"
+        className="label-form"
       >
         <Form.Item
           name="name"
-          label="Tên tham số"
+          label="Tên nhãn"
           rules={[{ type: 'string', required: !isDetails }]}
         >
-          <Input disabled={isDetails} placeholder="Nhập tên tham số" />
+          <Input disabled={isDetails} placeholder="Nhập tên nhãn" />
         </Form.Item>
 
         <Form.Item
@@ -95,7 +95,7 @@ const ParamForm = ({
         </Form.Item>
 
         <Form.Item name="description" label="Mô tả">
-          <Input disabled={isDetails} placeholder="Nhập mô tả tham số" />
+          <Input disabled={isDetails} placeholder="Nhập mô tả nhãn" />
         </Form.Item>
 
         {isDetails && showExpandDetails()}
@@ -116,4 +116,4 @@ const ParamForm = ({
   );
 };
 
-export default ParamForm;
+export default LabelForm;

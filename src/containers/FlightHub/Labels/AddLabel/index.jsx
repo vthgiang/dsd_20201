@@ -1,13 +1,13 @@
 import React from 'react';
 import { notification } from 'antd';
 
-import ParamForm from '../ParamForm';
+import LabelForm from '../LabelForm';
 import { omitIsNil } from '../../../../utils/omit';
-import { addParamApi } from '../../../../apis/param';
+import { addLabelApi } from '../../../../apis/label';
 
-const AddParam = ({ visible, hideModal, addParam }) => {
-  const onAddParam = async ({ name, description, property }) => {
-    let paramData = omitIsNil(
+const AddLabel = ({ visible, hideModal, addLabel }) => {
+  const onAddLabel = async ({ name, description, property }) => {
+    let labelData = omitIsNil(
       {
         name,
         property,
@@ -17,15 +17,15 @@ const AddParam = ({ visible, hideModal, addParam }) => {
       { deep: false },
     );
     try {
-      const resp = await addParamApi(paramData);
+      const resp = await addLabelApi(labelData);
 
       if (!resp || !resp.status || !resp.result) throw new Error('Máy chủ lỗi');
 
-      const { result: newParam } = resp;
-      addParam(newParam);
+      const { result: newLabel } = resp;
+      addLabel(newLabel);
 
       notification.success({
-        message: 'Thêm tham số thành công',
+        message: 'Thêm nhãn thành công',
       });
     } catch (error) {
       notification.error({
@@ -35,15 +35,15 @@ const AddParam = ({ visible, hideModal, addParam }) => {
   };
 
   return (
-    <ParamForm
-      title="Thêm tham số"
+    <LabelForm
+      title="Thêm nhãn"
       okText="Thêm"
       cancelText="Hủy"
-      onOk={onAddParam}
+      onOk={onAddLabel}
       onCancel={hideModal}
       visible={visible}
     />
   );
 };
 
-export default AddParam;
+export default AddLabel;

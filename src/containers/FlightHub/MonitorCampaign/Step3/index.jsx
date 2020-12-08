@@ -3,6 +3,7 @@ import StyleStep3 from './index.style';
 import { Button, Col, Form, Select, Row } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
 import WrappedMap from './map';
+import { FormOutlined, StepBackwardOutlined } from '@ant-design/icons';
 const axios = require('axios');
 
 const { Option } = Select;
@@ -101,11 +102,15 @@ const Step3 = ({
 
         <Col offset={6}>
           <Row type="flex">
-            <Button type="default" onClick={prevStep}>
+            <Button
+              type="default"
+              icon={<StepBackwardOutlined />}
+              onClick={prevStep}
+            >
               Quay lại
             </Button>
             &ensp;
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" icon={<FormOutlined />} htmlType="submit">
               Tiếp theo
             </Button>
           </Row>

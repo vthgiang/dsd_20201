@@ -2,60 +2,29 @@ import React, { useEffect } from 'react';
 import StyleStep4 from './index.style';
 import { Button, Col, Form, Input, Select, Row, message, Modal } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
-import {
-  ExclamationCircleOutlined,
-  FormOutlined,
-  StepBackwardOutlined,
-} from '@ant-design/icons';
-import { convertFieldValuesToDataSubmit } from '../services';
+import { StepBackwardOutlined, StepForwardOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../../constants';
 
 const { Option } = Select;
-const { TextArea } = Input;
 
-const Step4 = ({ prevStep, data, handleChangeData, attachParams }) => {
+const Step4 = ({
+  prevStep,
+  nextStep,
+  data,
+  handleChangeData,
+  attachParams,
+}) => {
+  const [form] = Form.useForm();
   const history = useHistory();
 
-  const [form] = Form.useForm();
   useEffect(() => {
     form.setFieldsValue(data);
   }, [data, form]);
 
-  const goBack = () => {
-    history.goBack();
-  };
-  const saved = () => {
-    message.success('Lưu thành công');
-    goBack();
-  };
-
-  const handleCreate = (dataSubmit) => () => {
-    console.log({ dataSubmit });
-    saved();
-  };
-
-  const submitConfirm = (dataSubmit) => {
-    const { name } = dataSubmit;
-    Modal.confirm({
-      title: 'Xác nhận',
-      icon: <ExclamationCircleOutlined />,
-      content: (
-        <span>
-          Bạn có muốn tạo đợi giám sát <strong>{name}</strong>?
-        </span>
-      ),
-      okText: 'Đồng ý',
-      cancelText: 'Hủy',
-      onOk: handleCreate(dataSubmit),
-    });
-  };
-
   const onFinish = (values) => {
     handleChangeData(values);
-    const fieldValues = { ...data, ...values };
-    const dataSubmit = convertFieldValuesToDataSubmit(fieldValues);
-    submitConfirm(dataSubmit);
+    nextStep();
   };
 
   return (
@@ -117,16 +86,7 @@ const Step4 = ({ prevStep, data, handleChangeData, attachParams }) => {
             })}
           </Select>
         </Form.Item>
-        <Form.Item
-          name="description"
-          label="Ghi chú"
-          rules={[{ type: 'string', required: false }]}
-        >
-          <TextArea
-            placeholder="Để lại lời nhắn..."
-            autoSize={{ minRows: 2, maxRows: 6 }}
-          />
-        </Form.Item>
+
         <Col offset={6}>
           <Row>
             <Button
@@ -137,8 +97,12 @@ const Step4 = ({ prevStep, data, handleChangeData, attachParams }) => {
               Quay lại
             </Button>
             &ensp;
-            <Button type="primary" icon={<FormOutlined />} htmlType="submit">
-              Lưu
+            <Button
+              type="primary"
+              icon={<StepForwardOutlined />}
+              htmlType="submit"
+            >
+              Tiếp theo
             </Button>
           </Row>
         </Col>
