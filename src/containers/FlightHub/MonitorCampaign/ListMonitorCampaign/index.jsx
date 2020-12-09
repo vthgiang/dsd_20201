@@ -11,6 +11,7 @@ import {
   Form,
   DatePicker,
   notification,
+  Spin,
 } from 'antd';
 import {
   DeleteOutlined,
@@ -135,13 +136,16 @@ const monitoredZones = [
 
 const ListMonitorCampaign = () => {
   const [listMonitorCampaignsData, setListMonitorCampaignsData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const history = useHistory();
 
   const fetchListMonitorCampaignsData = async (params) => {
     try {
+      setLoading(true);
       const resp = await monitorCampaignApi.getListMonitorCampaigns(params);
       setListMonitorCampaignsData(resp.data.result.monitorCampaigns);
+      setLoading(false);
     } catch (error) {
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại',
@@ -435,14 +439,18 @@ const ListMonitorCampaign = () => {
       </StyleSearchForm>
 
       <StyleSeparator />
-      <StyleTable>
-        <Table
-          rowKey="_id"
-          columns={columns}
-          dataSource={listMonitorCampaignsData}
-          scroll={{ x: 1560 }}
-        />
-      </StyleTable>
+      {loading ? (
+        <Spin />
+      ) : (
+        <StyleTable>
+          <Table
+            rowKey="_id"
+            columns={columns}
+            dataSource={listMonitorCampaignsData}
+            scroll={{ x: 1560 }}
+          />
+        </StyleTable>
+      )}
     </StyleListMonitorCampaign>
   );
 };

@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Input, Row, Table, Modal, notification, Button } from 'antd';
+import {
+  Col,
+  Input,
+  Row,
+  Table,
+  Modal,
+  notification,
+  Button,
+  Spin,
+} from 'antd';
 import { removeVietnameseTones } from '../../../../helpers/removeVietnameseTones';
 import moment from 'moment';
 
@@ -24,11 +33,13 @@ const ListLabels = () => {
   const [labelUpdateData, setLabelUpdateData] = useState();
   const [listLabels, setListLabels] = useState();
   const [listLabelsInit, setListLabelsInit] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (listLabels) return;
     const fetchListLabels = async () => {
       try {
+        setLoading(true);
         const resp = await getListLabelsApi();
         if (
           !resp ||
@@ -41,6 +52,7 @@ const ListLabels = () => {
 
         setListLabels(resp.result);
         setListLabelsInit(resp.result);
+        setLoading(false);
       } catch (error) {
         notification.error({
           message: 'Máy chủ lỗi, vui lòng thử lại sau',
@@ -237,10 +249,13 @@ const ListLabels = () => {
           Thêm nhãn
         </Button>
       </Row>
-
-      <StyledTable>
-        <Table columns={columns} dataSource={listLabels} />
-      </StyledTable>
+      {loading ? (
+        <Spin />
+      ) : (
+        <StyledTable>
+          <Table columns={columns} dataSource={listLabels} />
+        </StyledTable>
+      )}
     </StyleListLabels>
   );
 };
