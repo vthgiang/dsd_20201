@@ -21,7 +21,7 @@ import {
   PlusOutlined,
 } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
-import StyleListMonitorCampaign from './index.style';
+import StyleListMonitorCampaign, { StyleSpinContainer } from './index.style';
 import {
   StyleTitle,
   StyleSeparator,
@@ -440,7 +440,9 @@ const ListMonitorCampaign = () => {
 
       <StyleSeparator />
       {loading ? (
-        <Spin />
+        <StyleSpinContainer>
+          <Spin />
+        </StyleSpinContainer>
       ) : (
         <StyleTable>
           <Table
