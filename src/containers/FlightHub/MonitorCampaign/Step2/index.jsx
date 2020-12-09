@@ -59,7 +59,7 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
       align: 'center',
     },
     { dataIndex: 'name', title: 'Tên drone', width: 'auto' },
-    { dataIndex: 'dimensions', title: 'Kịch thước', width: '15%' },
+    { dataIndex: 'dimensions', title: 'Kích thước', width: '15%' },
     { dataIndex: 'color', title: 'Màu', width: '15%' },
     {
       dataIndex: 'brand',
