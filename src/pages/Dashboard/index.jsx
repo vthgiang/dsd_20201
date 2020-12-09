@@ -370,11 +370,9 @@ function Dashboard() {
               <TabPane key="Cảnh báo" tab="Cảnh báo">
                 <div />
               </TabPane>
-              <TabPane key="Ảnh/Video" tab="Ảnh/Video">
-                <div />
-              </TabPane>
               <TabPane key="Đợt giám sát" tab="Đợt giám sát">
-                <div />
+                <div>Thống kê số đợt giám sát theo tháng</div>
+                <div>Thống kê số đợt giám sát theo khoảng thời gian</div>
               </TabPane>
               <TabPane key="Miền giám sát" tab="Miền giám sát">
                 <div />

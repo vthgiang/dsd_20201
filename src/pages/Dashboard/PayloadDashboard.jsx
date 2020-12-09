@@ -63,6 +63,34 @@ export default function PayloadDashboard() {
       { name: "Đang bảo trì", value: payloadMetrics.fixing },
     ]
   }, [payloadMetrics]);
+  const tableData = React.useMemo(() => {
+    if (!payloadMetrics) return [];
+    return [
+      { status: "Đang rảnh", amount: payloadMetrics.idle },
+      { status: "Đang bay", amount: payloadMetrics.working },
+      { status: "Đang sạc", amount: payloadMetrics.charging },
+      { status: "Đang bảo trì", amount: payloadMetrics.fixing },
+    ]
+  }, [payloadMetrics]);
+  const columns = [
+    {
+      title: "Trạng thái",
+      dataIndex: "status",
+      key: "status",
+    },
+    {
+      title: "Số lượng",
+      dataIndex: "amount",
+      key: "amount",
+    },
+    {
+      title: "Hành động",
+      key: "action",
+      render: (text, record) => (
+        <a href="#">Chi tiết</a>
+      ),
+    },
+  ];
   const lineChartData = React.useMemo(() => {
     console.log({ payloadMetrics })
     const getMonthData = (month) => {
@@ -95,12 +123,12 @@ export default function PayloadDashboard() {
         <Spin />
       ) : (
         <Row>
-          <Col span={8} offset={2}>
-            <h3>Tổng quan</h3>
+          <Col span={10} offset={0} className="mt-5">
+            <h3 className="ml-5">Tổng quan</h3>
             <ResponsiveContainer
               height={300}
               width={300}
-              className="alight-item-center"
+              className="alight-item-center mx-auto mt-5"
             >
               <PieChart>
                 <Pie
@@ -125,9 +153,20 @@ export default function PayloadDashboard() {
               </PieChart>
             </ResponsiveContainer>
           </Col>
-          <Col span={14}>
-            <h3>Chi phí hoạt động và sửa chữa</h3>
+          <Col span={12} offset={2} className="mt-5">
+            <h3 className="ml-5"> Số lượng payload theo trạng thái </h3>
+            <Table
+              className="mt-5"
+              dataSource={tableData}
+              columns={columns}
+              size="small"
+              bordered
+            />
+          </Col>
+          <Col span={12} className="mt-5">
+            <h3 className="ml-5">Chi phí hoạt động và sửa chữa</h3>
             <LineChart
+              className="mt-5"
               width={500}
               height={300}
               data={lineChartData}

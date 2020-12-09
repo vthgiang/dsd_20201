@@ -139,10 +139,11 @@ export default function DroneDashboard() {
       ) : (
         <Row>
           <Col span={10} offset={2}>
+          <h3 className="ml-5">Tổng quan</h3>
             <ResponsiveContainer
               height={300}
               width={300}
-              className="alight-item-center"
+              className="alight-item-center mt-5 mx-auto"
             >
               <PieChart>
                 <Pie
@@ -168,7 +169,9 @@ export default function DroneDashboard() {
             </ResponsiveContainer>
           </Col>
           <Col span={11} offset={1}>
+            <h3 className="ml-5">Số lượng từng loại</h3>
             <Table
+              className="mt-5"
               dataSource={tableData}
               columns={columns}
               size="small"
