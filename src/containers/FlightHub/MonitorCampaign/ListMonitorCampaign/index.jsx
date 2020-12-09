@@ -242,8 +242,8 @@ const ListMonitorCampaign = () => {
       sorter: (a, b) => 1,
       render: (data = []) => {
         return data.map((elem) => {
-          const { name } = elem.content;
-          return <div key={Date.now().toString()}>{name}</div>;
+          const { name, createdAt } = elem.content;
+          return <div key={createdAt.toString()}>{name}</div>;
         });
       },
     },
