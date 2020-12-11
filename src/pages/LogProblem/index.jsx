@@ -1,11 +1,12 @@
 import React from 'react';
-import { Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Radio } from 'antd';
+import { Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Select } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 var axios = require('axios');
 const { RangePicker } = DatePicker;
+const {Option} = Select;
 
-class User extends React.Component {
+class DroneActivity extends React.Component {
   state = {
     searchText: '',
     searchedColumn: '',
@@ -107,197 +108,74 @@ class User extends React.Component {
 
   render() {
     
-
     const columns = [
       {
-        title: 'ID',
+        title: 'sự cố',
+        dataIndex: 'name',
+        key: 'name',
+        ...this.getColumnSearchProps('name'),
+    
+      },
+      {
+        title: 'Id sự cố',
         dataIndex: 'entityId',
         key: 'entityId',
         sorter: (a, b) => a.entityId - b.entityId,
     
       },
       {
-        title: 'Tên sự cố',
-        dataIndex: 'name',
-        key: 'name',
-        ...this.getColumnSearchProps('name'),
-      },
-      {
-        title: 'Hành động',
-        dataIndex: 'type',
-        key: 'type',
-        ...this.getColumnSearchProps('type'),
-      },
-      {
-        title: 'Mô tả',
-        dataIndex: 'description',
-        key: 'description',
-        ...this.getColumnSearchProps('description'),
-      },
-      {
-        title: 'Thời gian',
-        dataIndex: 'timestamp',
-        key: 'timestamp',
-        sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1: -1
-      },
-     
-    ];
-    return (
-      <>
-        <Table columns={columns} dataSource={this.props.data} loading={this.props.loading} onChange={this.handleChange} />
-      </>
-    );
-  }
-}
-
-class UserActivity extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      searchText: '',
-      searchedColumn: '',
-      filteredInfo: null,
-      sortedInfo: null,
-    };
-  }
-  handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
-    this.setState({
-      filteredInfo: filters,
-      sortedInfo: sorter,
-    });
-  };
-
-  clearFilters = () => {
-    this.setState({ filteredInfo: null });
-  };
-
-  clearAll = () => {
-    this.setState({
-      filteredInfo: null,
-      sortedInfo: null,
-    });
-  };
-
-  setAgeSort = () => {
-    this.setState({
-      sortedInfo: {
-        order: 'descend',
-        columnKey: 'time',
-      },
-    });
-  };
-  getColumnSearchProps = dataIndex => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={node => {
-            this.searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
-            Reset
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
-        : '',
-    onFilterDropdownVisibleChange: visible => {
-      if (visible) {
-        setTimeout(() => this.searchInput.select(), 100);
-      }
-    },
-    render: text =>
-      this.state.searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-          searchWords={[this.state.searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ''}
-        />
-      ) : (
-          text
-        ),
-  });
-
-  handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    this.setState({
-      searchText: selectedKeys[0],
-      searchedColumn: dataIndex,
-    });
-  };
-
-  handleReset = clearFilters => {
-    clearFilters();
-    this.setState({ searchText: '' });
-  };
-
- 
-  render() {
-   
-  
-
-    const columns = [
-      {
-        title: 'ID',
-        dataIndex: 'entityId',
-        key: 'entityId',
-        sorter: (a, b) => a.entityId - b.entityId,
+        title: 'Id hình ảnh',
+        dataIndex: 'imageId',
+        key: 'imageId',
+        sorter: (a, b) => a.imageId - b.imageId,
     
       },
       {
-        title: 'Tên sự cố',
-        dataIndex: 'name',
-        key: 'name',
-        ...this.getColumnSearchProps('name'),
+        title: 'Id video',
+        dataIndex: 'videoId',
+        key: 'videoId',
+        sorter: (a, b) => a.videoId - b.videoId,
+    
       },
       {
-        title: 'Hành động',
-        dataIndex: 'type',
-        key: 'type',
-        ...this.getColumnSearchProps('type'),
-      },
-      
-      {
-        title: 'Mô tả',
-        dataIndex: 'description',
-        key: 'description',
-        ...this.getColumnSearchProps('description'),
+        title: 'Id miền giám sát',
+        dataIndex: 'regionId',
+        key: 'regionId',
+        sorter: (a, b) => a.regionId - b.regionId,
+    
       },
       {
-        title: 'Thời gian',
-        dataIndex: 'timestamp',
-        key: 'timestamp',
-        sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1: -1
-      },
-      {
-        title: 'Trạng thái',
+        title: 'trạng thái',
         dataIndex: 'state',
         key: 'state',
-        ...this.getColumnSearchProps('state'),
+        sorter: (a, b) => a.state - b.state,
+      },
+      {
+        title: 'Hành động',
+        dataIndex: 'type',
+        key: 'type',
+        ...this.getColumnSearchProps('type'),
+        
+      },
+      {
+        title: 'Mô tả',
+        dataIndex: 'description',
+        key: 'description',
+        ...this.getColumnSearchProps('description'),
+      },
+      {
+        title: 'Thời gian',
+        dataIndex: 'timestamp',
+        key: 'timestamp',
+        sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1: -1
+      },
+      {
+        title: 'Id người thực hiện',
+        dataIndex: 'authorId',
+        key: 'authorId',
+        ...this.getColumnSearchProps('authorId'),
       },
     ];
-
     return (
       <>
         <Table columns={columns} dataSource={this.props.data} loading={this.props.loading} onChange={this.handleChange} />
@@ -305,68 +183,34 @@ class UserActivity extends React.Component {
     );
   }
 }
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tableShow: '',
+      projectType: 'de_dieu',
       fromDate: '',
       toDate: '',
-      logData: null,
       logActivityData: null,
-      isLoadedLogData: false,
       isLoadedLogActivityData: false,
     };
-    this.onTableShowChange = this.onTableShowChange.bind(this);
     this.onRangePickerChange = this.onRangePickerChange.bind(this);
-    this.setLogData = this.setLogData.bind(this);
     this.setLogActivityData = this.setLogActivityData.bind(this);
   }
 
-  onTableShowChange(tableShow){
-    this.setState({tableShow: tableShow});
+  onProjectTypeChange = (projectType) => {
+    console.log("hahahaha" + projectType)
+    this.setState({projectType: projectType});
   }
 
-  setLogData(fromDate, toDate) {
+  setLogActivityData() {
     let url = null;
+    let fromDate = this.state.fromDate;
+    let toDate = this.state.toDate;
     if (fromDate && toDate) {
-      url = 'https://it4883logging.herokuapp.com/api/incident?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G5&password=123';
+      url = 'https://it4883logging.herokuapp.com/api/incident?minDate=' + fromDate +'&maxDate=' + toDate +'&projectType=' + this.state.projectType;
     } else {
-      url = 'https://it4883logging.herokuapp.com/api/incident?username=G5&password=123';
-    }
-     
-    let config = {
-      method: 'get',
-      url: url,
-      headers: {}
-    };
-
-    axios(config)
-      .then((response) => {
-        let userData = response.data.map((user, index) => ({
-          key: index,
-          ...user
-        }));
-        userData.forEach((userData) => {
-          for(let key in userData) {
-            console.log(userData[key])
-            if (userData[key] == null) userData[key] ='';
-          }
-        });
-        this.setState({ logData: userData, isLoadedLogData: true });
-        
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
-  setLogActivityData(fromDate, toDate) {
-    let url = null;
-    if (fromDate && toDate) {
-      url = 'https://it4883logging.herokuapp.com/api/activity/incident?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G5&password=123';
-    } else {
-      url = 'https://it4883logging.herokuapp.com/api/activity/incident?username=G5&password=123';
+      url = 'https://it4883logging.herokuapp.com/api/incident?projectType=' + this.state.projectType;
     }
      
     let config = {
@@ -376,17 +220,16 @@ class App extends React.Component {
     };
     axios(config)
       .then((response) => {
-        let userActivityData = response.data.map((user, index) => ({
+        let logActivityData = response.data.map((data, index) => ({
           key: index,
-          ...user
-          
+          ...data
         }));
-        userActivityData.forEach((userData) => {
-          for(let key in userData) {
-            if (userData[key] == null) userData[key] ='';
+        logActivityData.forEach((logData) => {
+          for(let key in logData) {
+            if (logData[key] == null) logData[key] ='';
           }
         });
-        this.setState({ logActivityData: userActivityData, isLoadedLogActivityData: true });
+        this.setState({ logActivityData: logActivityData, isLoadedLogActivityData: true });
       })
       .catch(function (error) {
         console.log(error);
@@ -394,7 +237,7 @@ class App extends React.Component {
   }
 
   onRangePickerChange(dates, dateStrings) {
-    this.setState({isLoadedLogData: false, isLoadedLogActivityData:false});
+    this.setState({isLoadedLogActivityData:false});
     let fromDate = "";
     let toDate = "";
 
@@ -403,14 +246,12 @@ class App extends React.Component {
       toDate = dates[1].format('YYYY-MM-DDThh:mm:ss');
     }
 
-    this.setLogData(fromDate, toDate);
-    this.setLogActivityData(fromDate, toDate);
+    this.setLogActivityData();
     
   }
 
   componentDidMount(){
-    this.setLogData(null, null);
-    this.setLogActivityData(null, null);
+    this.setLogActivityData();
   }
   render() {
     return (
@@ -427,29 +268,30 @@ class App extends React.Component {
               />
             }
           >
-            <h1>
-              Chọn thời gian bạn muốn kiểm tra lịch sử hoạt động
-            </h1>
+            <h2>
+              Lịch sử sự cố
+            </h2>
             <br />
-            <Form rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
-              <Space direction="vertical" size={12}>
+            <Form layout="inline" >
+              <Form.Item
+                label="Chọn khoảng thời gian"
+              >
                 <RangePicker format='DD/MM/YYYY' onChange={(dates, dateStrings) => this.onRangePickerChange(dates, dateStrings)} />
-              </Space >
+              </Form.Item>
+              <Form.Item
+                label="Chọn loại dự án"
+              >
+                <Select defaultValue="de_dieu" style={{ width: 120 }} onChange={(value) => {this.setState({isLoadedLogActivityData:false});this.onProjectTypeChange(value); this.setLogActivityData()}}>
+                  <Option value="de_dieu">Đê điều</Option>
+                  <Option value="luoi_dien">Lưới điện</Option>
+                  <Option value="chay_rung">Cháy rừng</Option>
+                  <Option value="cay_trong">Cây trồng</Option>
+                </Select>
+              </Form.Item>
             </Form>
             <br />
-
-            <Radio.Group buttonStyle="solid" onChange={(e) => {this.onTableShowChange(e.target.value)}} style={{marginBottom:'20px'}}>
-              <Radio.Button value="log">Log</Radio.Button>
-              <Radio.Button value="logActivity">LogActivity</Radio.Button>
-            </Radio.Group>
-            <br />
+              <DroneActivity data={this.state.logActivityData} loading={!this.state.isLoadedLogActivityData}/>
             
-            <div style={{ display: this.state.tableShow === 'log' ? "block" : "none" }}>
-              <User data={this.state.logData} loading={!this.state.isLoadedLogData}/>
-            </div>
-            <div style={{ display: this.state.tableShow === 'logActivity' ? "block" : "none" }}>
-              <UserActivity data={this.state.logActivityData} loading={!this.state.isLoadedLogActivityData}/>
-            </div>
           </Card>
         </Col>
       </>

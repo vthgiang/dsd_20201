@@ -1,18 +1,19 @@
-import { Table, Input, Button, Space,BackTop,DatePicker,Form,Col,Card,Radio} from 'antd';
+import React from 'react';
+import { Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Select } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
-import React from 'react';
 var axios = require('axios');
 const { RangePicker } = DatePicker;
+const {Option} = Select;
 
-class ResolveProblemActivity extends React.Component {
-  
+class DroneActivity extends React.Component {
   state = {
     searchText: '',
     searchedColumn: '',
     filteredInfo: null,
     sortedInfo: null,
   };
+
   handleChange = (pagination, filters, sorter) => {
     console.log('Various parameters', pagination, filters, sorter);
     this.setState({
@@ -32,6 +33,14 @@ class ResolveProblemActivity extends React.Component {
     });
   };
 
+  setAgeSort = () => {
+    this.setState({
+      sortedInfo: {
+        order: 'descend',
+        columnKey: 'time',
+      },
+    });
+  };
   getColumnSearchProps = dataIndex => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div style={{ padding: 8 }}>
@@ -98,254 +107,89 @@ class ResolveProblemActivity extends React.Component {
   };
 
   render() {
-  
+    
     const columns = [
       {
-        title: 'ID',
+        title: 'Id xử lý sự cố',
         dataIndex: 'entityId',
         key: 'entityId',
         sorter: (a, b) => a.entityId - b.entityId,
-      
+    
       },
       {
-        title: 'Sự cố',
-        dataIndex: 'name',
-        key: 'name',
-        ...this.getColumnSearchProps('name'),
+        title: 'Id miền giám sát',
+        dataIndex: 'regionId',
+        key: 'regionId',
+        sorter: (a, b) => a.regionId - b.regionId,
+    
+      },
+      {
+        title: 'trạng thái',
+        dataIndex: 'state',
+        key: 'state',
+        sorter: (a, b) => a.state - b.state,
       },
       {
         title: 'Hành động',
         dataIndex: 'type',
         key: 'type',
         ...this.getColumnSearchProps('type'),
+        
       },
       {
         title: 'Mô tả',
-        key: 'description',
         dataIndex: 'description',
+        key: 'description',
         ...this.getColumnSearchProps('description'),
       },
       {
         title: 'Thời gian',
-        key: 'timestamp',
         dataIndex: 'timestamp',
+        key: 'timestamp',
         sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1: -1
       },
       {
-        title: 'Trạng thái',
-        key: 'state',
-        dataIndex: 'state',
-        ...this.getColumnSearchProps('state'),
-      }
+        title: 'Id người thực hiện',
+        dataIndex: 'authorId',
+        key: 'authorId',
+        ...this.getColumnSearchProps('authorId'),
+      },
     ];
     return (
       <>
-       <Table columns={columns} dataSource={this.props.data} loading={this.props.loading} onChange={this.handleChange} />
+        <Table columns={columns} dataSource={this.props.data} loading={this.props.loading} onChange={this.handleChange} />
       </>
-    )
-  }
-}
-class ResolveProblem extends React.Component {
-  
-  state = {
-    searchText: '',
-    searchedColumn: '',
-    filteredInfo: null,
-    sortedInfo: null,
-  };
-  handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
-    this.setState({
-      filteredInfo: filters,
-      sortedInfo: sorter,
-    });
-  };
-
-  clearFilters = () => {
-    this.setState({ filteredInfo: null });
-  };
-
-  clearAll = () => {
-    this.setState({
-      filteredInfo: null,
-      sortedInfo: null,
-    });
-  };
-
-  getColumnSearchProps = dataIndex => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={node => {
-            this.searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
-            Reset
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
-        : '',
-    onFilterDropdownVisibleChange: visible => {
-      if (visible) {
-        setTimeout(() => this.searchInput.select(), 100);
-      }
-    },
-    render: text =>
-      this.state.searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-          searchWords={[this.state.searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ''}
-        />
-      ) : (
-        text
-      ),
-  });
-
-  handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    this.setState({
-      searchText: selectedKeys[0],
-      searchedColumn: dataIndex,
-    });
-  };
-
-  handleReset = clearFilters => {
-    clearFilters();
-    this.setState({ searchText: '' });
-  };
-
-  render() {
-   
-    const columns = [
-      {
-        title: 'ID',
-        dataIndex: 'entityId',
-        key: 'entityId',
-        sorter: (a, b) => a.entityId - b.entityId,
-     
-      },
-      {
-        title: 'Sự cố',
-        dataIndex: 'name',
-        key: 'name',
-        ...this.getColumnSearchProps('name'),
-      },
-      {
-        title: 'Hành động',
-        dataIndex: 'type',
-        key: 'type',
-        ...this.getColumnSearchProps('type'),
-      },
-      {
-        title: 'Mô tả',
-        key: 'description',
-        dataIndex: 'description',
-        ...this.getColumnSearchProps('description'),
-      },
-      {
-        title: 'Thời gian',
-        key: 'timestamp',
-        dataIndex: 'timestamp',
-        sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1: -1
-      },
-     
-    ];
-    return (
-<>
-<Table columns={columns} dataSource={this.props.data} loading={this.props.loading} onChange={this.handleChange} />
-</>
     );
   }
 }
-class App extends React.Component{
+
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tableShow: '',
+      projectType: 'de_dieu',
       fromDate: '',
       toDate: '',
-      logData: null,
       logActivityData: null,
-      isLoadedLogData: false,
       isLoadedLogActivityData: false,
     };
-    this.onTableShowChange = this.onTableShowChange.bind(this);
     this.onRangePickerChange = this.onRangePickerChange.bind(this);
-    this.setLogData = this.setLogData.bind(this);
     this.setLogActivityData = this.setLogActivityData.bind(this);
   }
 
-  onTableShowChange(tableShow){
-    this.setState({tableShow: tableShow});
+  onProjectTypeChange = (projectType) => {
+    console.log("hahahaha" + projectType)
+    this.setState({projectType: projectType});
   }
 
-  setLogData(fromDate, toDate) {
+  setLogActivityData() {
     let url = null;
+    let fromDate = this.state.fromDate;
+    let toDate = this.state.toDate;
     if (fromDate && toDate) {
-      url = 'https://it4883logging.herokuapp.com/api/resolve-problem?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G3&password=123';
+      url = 'https://it4883logging.herokuapp.com/api/resolve-problem?minDate=' + fromDate +'&maxDate=' + toDate +'&projectType=' + this.state.projectType;
     } else {
-      url = 'https://it4883logging.herokuapp.com/api/resolve-problem?username=G3&password=123';
-    }
-     
-    let config = {
-      method: 'get',
-      url: url,
-      headers: {}
-    };
-
-    axios(config)
-      .then((response) => {
-        console.log(response.data);
-        let resolveProblemData = response.data.map((resolveProblem, index) => ({
-          key: index,
-          name: resolveProblem.name,
-          entityId:resolveProblem.entityId,
-          timestamp: resolveProblem.timestamp,
-          type: resolveProblem.type,
-          description: resolveProblem.description,
-        }));
-        resolveProblemData.forEach((resolveProblemData) => {
-          for(let key in resolveProblemData) {
-            if (resolveProblemData[key] == null) resolveProblemData[key] ='';
-          }
-        });
-        this.setState({ logData: resolveProblemData, isLoadedLogData: true });
-        
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
-  setLogActivityData(fromDate, toDate) {
-    let url = null;
-    if (fromDate && toDate) {
-      url = 'https://it4883logging.herokuapp.com/api/activity/resolve-problem?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G3&password=123';
-    } else {
-      url = 'https://it4883logging.herokuapp.com/api/activity/resolve-problem?username=G3&password=123';
+      url = 'https://it4883logging.herokuapp.com/api/resolve-problem?projectType=' + this.state.projectType;
     }
      
     let config = {
@@ -355,22 +199,16 @@ class App extends React.Component{
     };
     axios(config)
       .then((response) => {
-        let resolveProblemActivityData = response.data.map((resolveProblem, index) => ({
+        let logActivityData = response.data.map((data, index) => ({
           key: index,
-          entityId:resolveProblem.entityId,
-          name:resolveProblem.name,
-          type:resolveProblem.type,
-          description:resolveProblem.description,
-          timestamp:resolveProblem.timestamp,
-         state:resolveProblem.state
-          
+          ...data
         }));
-        resolveProblemActivityData.forEach((resolveProblemData) => {
-          for(let key in resolveProblemData) {
-            if (resolveProblemData[key] == null) resolveProblemData[key] ='';
+        logActivityData.forEach((logData) => {
+          for(let key in logData) {
+            if (logData[key] == null) logData[key] ='';
           }
         });
-        this.setState({ logActivityData: resolveProblemActivityData, isLoadedLogActivityData: true });
+        this.setState({ logActivityData: logActivityData, isLoadedLogActivityData: true });
       })
       .catch(function (error) {
         console.log(error);
@@ -378,7 +216,7 @@ class App extends React.Component{
   }
 
   onRangePickerChange(dates, dateStrings) {
-    this.setState({isLoadedLogData: false, isLoadedLogActivityData:false});
+    this.setState({isLoadedLogActivityData:false});
     let fromDate = "";
     let toDate = "";
 
@@ -387,68 +225,64 @@ class App extends React.Component{
       toDate = dates[1].format('YYYY-MM-DDThh:mm:ss');
     }
 
-    this.setLogData(fromDate, toDate);
-    this.setLogActivityData(fromDate, toDate);
+    this.setLogActivityData();
     
   }
 
   componentDidMount(){
-    this.setLogData(null, null);
-    this.setLogActivityData(null, null);
+    this.setLogActivityData();
   }
   render() {
     return (
       <>
-       <Col  style={{marginRight:'4%',marginTop:20}}>
-            <Card
+        <Col style={{ marginRight: '4%', marginTop: 20 }}>
+          <Card
             hoverable
-          style={{ width: '100',marginLeft:40 }}
-          cover={
-            <img
-            style={{height:400}}
-              alt="example"
-              src="https://store.hp.com/app/assets/images/uploads/prod/how-to-operate-drone-camera-hero1563465531828438.jpg"
-            />
-          }
-        >
-<h1>
-          Chọn thời gian bạn muốn kiểm tra lịch sử xử lí sự cố
-        </h1>
-        <br/>
-        <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
-       <Space direction="vertical" size={12}>
-       <RangePicker format='DD/MM/YYYY' onChange={(dates, dateStrings) => this.onRangePickerChange(dates, dateStrings)} />
-    
-  </Space >
-  </Form>
-       
-  <br/>
-  <Radio.Group buttonStyle="solid" onChange={(e) => {this.onTableShowChange(e.target.value)}} style={{marginBottom:'20px'}}>
-              <Radio.Button value="log">Log</Radio.Button>
-              <Radio.Button value="logActivity">LogActivity</Radio.Button>
-            </Radio.Group>
+            style={{ width: '100', marginLeft: 40 }}
+            cover={
+              <img
+                style={{ height: 400 }}
+                alt="example"
+                src="https://i.pinimg.com/originals/11/9d/e3/119de34b79d90fc7ee2c175525726741.jpg"
+              />
+            }
+          >
+            <h2>
+              Lịch sử xử lý sự cố
+            </h2>
             <br />
+            <Form layout="inline" >
+              <Form.Item
+                label="Chọn khoảng thời gian"
+              >
+                <RangePicker format='DD/MM/YYYY' onChange={(dates, dateStrings) => this.onRangePickerChange(dates, dateStrings)} />
+              </Form.Item>
+              <Form.Item
+                label="Chọn loại dự án"
+              >
+                <Select defaultValue="de_dieu" style={{ width: 120 }} onChange={(value) => {this.setState({isLoadedLogActivityData:false});this.onProjectTypeChange(value); this.setLogActivityData()}}>
+                  <Option value="de_dieu">Đê điều</Option>
+                  <Option value="luoi_dien">Lưới điện</Option>
+                  <Option value="chay_rung">Cháy rừng</Option>
+                  <Option value="cay_trong">Cây trồng</Option>
+                </Select>
+              </Form.Item>
+            </Form>
+            <br />
+              <DroneActivity data={this.state.logActivityData} loading={!this.state.isLoadedLogActivityData}/>
             
-            <div style={{ display: this.state.tableShow === 'log' ? "block" : "none" }}>
-              <ResolveProblem data={this.state.logData} loading={!this.state.isLoadedLogData}/>
-            </div>
-            <div style={{ display: this.state.tableShow === 'logActivity' ? "block" : "none" }}>
-              <ResolveProblemActivity data={this.state.logActivityData} loading={!this.state.isLoadedLogActivityData}/>
-            </div>
-            
-      </Card>
-      </Col>
-      
+          </Card>
+        </Col>
       </>
     );
   }
 }
-function LogIncident(){
-  return(
+function LogDrone() {
+  return (
     <>
-<App />
-<BackTop/>
-</>
+      <App />
+      <BackTop />
+    </>
   );
-  }
-  export default LogIncident;
+}
+export default LogDrone;
