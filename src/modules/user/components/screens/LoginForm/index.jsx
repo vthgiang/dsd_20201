@@ -35,8 +35,6 @@ const LoginForm = () => {
         }
     }, []);
 
-    console.log(userInfo);
-
     const history = useHistory();
     const location = useLocation();
     const isLogin = useSelector((state) => state.user.isLogin);
