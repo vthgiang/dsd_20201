@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Col, Row, Select, Button, Input } from "antd";
 import { statuses, types, names } from "../../config/UserMetaConfig";
-import { UserAddOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { getAllUsers } from "../../store/services";
 const { Option } = Select;
@@ -140,18 +139,7 @@ const Filter = ({ filter, setFilter, setVisible }) => {
     return (
         <Fragment>
             <Row gutter={[16, 16]}>
-                <Col span={12}>Danh sách người dùng</Col>
-                <Col flex="right" span={2} offset={10}>
-                    <Button
-                        block
-                        type="primary"
-                        onClick={() => setVisible(true)}
-                        style={{ width: 200, float: "right" }}
-                    >
-                        <UserAddOutlined />
-                        Thêm người dùng
-                    </Button>
-                </Col>
+                <Col span={12}>Lịch sử người dùng</Col>
             </Row>
             <Row gutter={[16, 16]}>
                 <Col span={7}>

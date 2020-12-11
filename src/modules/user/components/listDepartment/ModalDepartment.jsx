@@ -69,6 +69,7 @@ const ModalUser = ({
             retval = false;
             setMessage({
                 value: "Vui lòng nhập tên!",
+                type: "error",
                 title: "Lỗi"
             });
             return retval;
@@ -80,6 +81,7 @@ const ModalUser = ({
             retval = false;
             setMessage({
                 value: "Vui lòng nhập mô tả!",
+                type: "error",
                 title: "Lỗi"
             });
             return retval;
