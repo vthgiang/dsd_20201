@@ -1,15 +1,11 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import StyleListUser from "./index.style";
-import {
-    Table,
-    Tag,
-    Space,
-    Modal,
-    notification,
-} from "antd";
+import { Table, Tag, notification } from "antd";
 import { getListUsersMeta } from "../../store/services";
 import { useSelector } from "react-redux";
 import Filter from "./Filter";
+import { getByField } from "../../Utils/helper";
+import { names } from "../../config/UserMetaConfig";
 
 const ListUserMeta = () => {
     const [filter, setFilter] = useState({ page_size: 20, page_id: 0 });
@@ -48,7 +44,7 @@ const ListUserMeta = () => {
             title: "Tên",
             dataIndex: "name",
             key: "name",
-            render: (text) => <a>{text}</a>,
+            render: (text) => <a>{getByField(names, "code", text).name}</a>,
         },
         {
             title: "Mô tả",
@@ -74,12 +70,7 @@ const ListUserMeta = () => {
             dataIndex: "status",
             render: (status) => (
                 <Tag
-                    color={
-                        status == "DONE"
-                            ? "success"
-                            : "geekblue"
-
-                    }
+                    color={status == "DONE" ? "success" : "geekblue"}
                     key={status}
                 >
                     {status}
@@ -94,7 +85,7 @@ const ListUserMeta = () => {
 
     return (
         <StyleListUser>
-            <Filter setFilter={setFilter} filter={filter}/>
+            <Filter setFilter={setFilter} filter={filter} />
             <Table
                 rowKey="id"
                 columns={columns}

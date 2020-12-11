@@ -160,7 +160,7 @@ const ListUser = () => {
                 <div>{department ? department.name : ""}</div>
             ),
         },
-        user.role == "SUPER_ADMIN" && {
+        (user.role == "SUPER_ADMIN" ? {
             title: "Dự án",
             key: "type",
             dataIndex: "type",
@@ -181,7 +181,7 @@ const ListUser = () => {
                     {type}
                 </Tag>
             ),
-        },
+        } : {}),
         {
             title: "Hành động",
             key: "action",

@@ -133,7 +133,8 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             status: "Chưa xác định",
             type: "Chưa xác định",
             search: "",
-            department_id: null
+            department_id: null,
+            statusActivation: "Chưa xác định",
         });
     };
 
