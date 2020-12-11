@@ -8,7 +8,7 @@ import {
 } from 'react-google-maps';
 import { removeVietnameseTones } from '../../../../helpers/removeVietnameseTones';
 
-import { Input, Form } from 'antd';
+import { Input } from 'antd';
 import { HeatMapOutlined } from '@ant-design/icons';
 const axios = require('axios');
 const { Search } = Input;

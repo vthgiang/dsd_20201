@@ -39,7 +39,7 @@ const LabelForm = ({
   useEffect(() => {
     form.resetFields();
     form.setFieldsValue(initialValues);
-  }, [initialValues]);
+  }, [initialValues, form]);
 
   const onFinish = (values) => {
     onOk(values);

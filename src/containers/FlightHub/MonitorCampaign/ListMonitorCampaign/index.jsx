@@ -31,7 +31,6 @@ import {
   convertFieldValuesToDataSubmit,
   formatMomentDateToDateTimeString,
 } from '../services';
-import { randomDateTime } from '../services';
 import moment from 'moment';
 import { DATE_TIME_FORMAT } from '../../../../configs';
 import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../../constants';
@@ -175,7 +174,7 @@ const ListMonitorCampaign = () => {
 
   const handleDeleteMonitorCampaign = (item, index) => async () => {
     try {
-      const resp = await monitorCampaignApi.deleteMonitorCampaign(item._id);
+      await monitorCampaignApi.deleteMonitorCampaign(item._id);
       const newListMonitorCampaignsData = [...listMonitorCampaignsData];
       newListMonitorCampaignsData.splice(index, 1);
       setListMonitorCampaignsData(newListMonitorCampaignsData);
@@ -242,8 +241,8 @@ const ListMonitorCampaign = () => {
       sorter: (a, b) => 1,
       render: (data = []) => {
         return data.map((elem) => {
-          const { name } = elem.content;
-          return <div key={Date.now().toString()}>{name}</div>;
+          const { name, createAt } = elem.content;
+          return <div key={createAt}>{name}</div>;
         });
       },
     },
