@@ -107,6 +107,8 @@ const Filter = ({ filter, setFilter, setVisible }) => {
 
     const renderSelectDepartment = () => (
         <Select
+            showSearch
+            optionFilterProp="children"
             className="select-box"
             value={filter.department_id ? filter.department_id : "Chưa xác định"}
             onChange={(value) =>

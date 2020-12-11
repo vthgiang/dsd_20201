@@ -82,9 +82,9 @@ const Filter = ({ filter, setFilter, setVisible }) => {
     const renderSelectUser = () => (
         <Select
             className="select-box"
-            value={
-                filter.user_id ? filter.user_id : "Chưa xác định"
-            }
+            value={filter.user_id ? filter.user_id : "Chưa xác định"}
+            showSearch
+            optionFilterProp="children"
             onChange={(value) =>
                 setFilter({ ...filter, user_id: value, page_id: 0 })
             }
@@ -103,10 +103,10 @@ const Filter = ({ filter, setFilter, setVisible }) => {
 
     const renderSelectTarget = () => (
         <Select
+            showSearch
+            optionFilterProp="children"
             className="select-box"
-            value={
-                filter.target_id ? filter.target_id : "Chưa xác định"
-            }
+            value={filter.target_id ? filter.target_id : "Chưa xác định"}
             onChange={(value) =>
                 setFilter({ ...filter, target_id: value, page_id: 0 })
             }
