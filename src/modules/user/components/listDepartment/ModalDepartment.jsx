@@ -138,6 +138,7 @@ const ModalUser = ({
             onOk={handleSave}
             onCancel={handleCloseModal}
             okText="Lưu"
+            cancelText="Hủy"
         >
             <Form>
                 <Row gutter={[16, 16]}>

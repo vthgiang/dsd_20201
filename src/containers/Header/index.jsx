@@ -8,21 +8,11 @@ import StyleHeader from "./index.style";
 import Navbar from "../Navbar";
 import { useSelector } from "react-redux";
 import { types } from "../../modules/user/config/UserConfig";
-
+import { getByField } from "../../modules/user/Utils/helper"
 const Header = ({ collapsed, toggle }) => {
   const isLogin = useSelector(state => state.user.isLogin);
   const projectType = useSelector(state => state.user.projectType);
 
-  const getByField = (list, fieldName, value) => {
-    var retVal = null;
-    list.forEach(function (item) {
-        if (item[fieldName] == value) {
-            retVal = item;
-        }
-    });
-    //return
-    return retVal;
-  };
   return (
     <StyleHeader>
       <Layout.Header className="header-content" style={{ display: "flex", justifyContent: "space-between" }}>

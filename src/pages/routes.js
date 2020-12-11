@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom";
 import ListUser from "../modules/user/components/listUser";
 import ListDepartment from "../modules/user/components/listDepartment";
+import ListUserMeta from "../modules/user/components/listUserMeta";
 
 import Dashboard from "./Dashboard";
 
@@ -83,6 +84,10 @@ export const routes = [
     {
         path: "/department",
         component: ListDepartment,
+    },
+    {
+        path: "/user-meta",
+        component: ListUserMeta,
     },
 ];
 

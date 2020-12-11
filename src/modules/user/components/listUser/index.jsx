@@ -4,22 +4,14 @@ import {
     Table,
     Tag,
     Space,
-    Col,
-    Input,
-    Row,
-    Select,
-    Button,
     Modal,
     notification,
 } from "antd";
-import { getListUsers, deleteUser } from "../../store/services";
-import { roles, statuses } from "../../config/UserConfig";
+import { getListUsers, deleteUser, getAllDepartments } from "../../store/services";
 import ModalUser from "./ModalUser";
 import { useSelector } from "react-redux";
-import { UserAddOutlined } from "@ant-design/icons";
-
-const { Search } = Input;
-const { Option } = Select;
+import { formatPhone } from "../../Utils/helper";
+import Filter from "./Filter";
 
 const ListUser = () => {
     const [visible, setVisible] = useState(false);
@@ -31,7 +23,7 @@ const ListUser = () => {
 
     const fetchListUser = useCallback(async () => {
         const res = await getListUsers(filter);
-        if (res.status === 'successful') {
+        if (res.status === "successful") {
             setMeta(res.meta);
             setListUser(res.result);
         } else {
@@ -39,10 +31,12 @@ const ListUser = () => {
             setListUser([]);
             notification.error({
                 message: "Lỗi",
-                description: res.message && res.message !== "" ? res.message : "Có lỗi. Vui lòng thử lại!",
+                description:
+                    res.message && res.message !== ""
+                        ? res.message
+                        : "Có lỗi. Vui lòng thử lại!",
             });
         }
-        
     }, [filter, user]);
 
     useEffect(() => {
@@ -59,12 +53,14 @@ const ListUser = () => {
         Modal.confirm({
             title: "Xác nhận?",
             content: "Bạn có thực sự muốn xóa người dùng này",
+            okText: "Xác nhận",
+            cancelText: "Hủy",
             onOk() {
                 const res = new Promise((resolve, reject) => {
                     resolve(deleteUser(user.id));
-                }).catch(() => console.log('Oops errors!'));
-                Promise.resolve(res).then(e => {
-                    if (e.status == 'successful') {
+                }).catch(() => console.log("Oops errors!"));
+                Promise.resolve(res).then((e) => {
+                    if (e.status == "successful") {
                         notification.success({
                             message: "Thành công",
                             description: "Xóa người dùng thành công",
@@ -76,10 +72,9 @@ const ListUser = () => {
                             description: e.message,
                         });
                     }
-                })
+                });
             },
-            onCancel() {
-            },
+            onCancel() {},
         });
     };
 
@@ -94,9 +89,27 @@ const ListUser = () => {
             key: "full_name",
             render: (text) => <a>{text}</a>,
         },
-        { title: "Email", dataIndex: "email", key: "email" },
-        { title: "Sdt", dataIndex: "phone", key: "phone" },
-        { title: "Địa chỉ", dataIndex: "address", key: "address", width: "30%" },
+        {
+            title: "Email",
+            dataIndex: "email",
+            key: "email",
+            width: "20%",
+            render: (text) => <p style={{ wordBreak: "break-word" }}>{text}</p>,
+        },
+        {
+            title: "Sdt",
+            dataIndex: "phone",
+            key: "phone",
+            width: "10%",
+            render: (text) => <p>{formatPhone(text)}</p>,
+        },
+        {
+            title: "Địa chỉ",
+            dataIndex: "address",
+            key: "address",
+            width: "30%",
+            render: (text) => <p style={{ wordBreak: "break-word" }}>{text}</p>,
+        },
         {
             title: "Trạng thái",
             key: "status",
@@ -140,7 +153,37 @@ const ListUser = () => {
             ),
         },
         {
-            title: "Action",
+            title: "Phòng ban",
+            key: "department",
+            dataIndex: "department",
+            render: (department) => (
+                <div>{department ? department.name : ""}</div>
+            ),
+        },
+        user.role == "SUPER_ADMIN" && {
+            title: "Dự án",
+            key: "type",
+            dataIndex: "type",
+            width: "10%",
+            render: (type) => (
+                <Tag
+                    color={
+                        type == "CHAY_RUNG"
+                            ? "red"
+                            : type == "DE_DIEU"
+                            ? "cyan"
+                            : type == "CAY_TRONG"
+                            ? "green"
+                            : "purple"
+                    }
+                    key={type}
+                >
+                    {type}
+                </Tag>
+            ),
+        },
+        {
+            title: "Hành động",
             key: "action",
             render: (text, record) => (
                 <Fragment>
@@ -156,42 +199,6 @@ const ListUser = () => {
         },
     ];
 
-    const renderSelectStatus = (type) => (
-        <Select
-            className="select-box"
-            value={filter.status}
-            onChange={(value) => setFilter({ ...filter, status: value, page_id: 0 })}
-            defaultValue="Chưa xác định"
-            style={{ width: "75%", marginLeft: 10 }}
-        >
-            {statuses.map((status, index) => {
-                return (
-                    <Option key={index} value={status.code}>
-                        {status.name}
-                    </Option>
-                );
-            })}
-        </Select>
-    );
-
-    const renderSelectRole = (type) => (
-        <Select
-            className="select-box"
-            value={filter.role}
-            onChange={(value) => setFilter({ ...filter, role: value, page_id: 0 })}
-            defaultValue="Chưa xác định"
-            style={{ width: "75%", marginLeft: 10 }}
-        >
-            {roles.map((status, index) => {
-                return (
-                    <Option key={index} value={status.code}>
-                        {status.name}
-                    </Option>
-                );
-            })}
-        </Select>
-    );
-
     const changePagination = (value, pageSize) => {
         setFilter({ ...filter, page_id: value - 1, page_size: pageSize });
     };
@@ -201,65 +208,9 @@ const ListUser = () => {
         setUserId(record.id);
     };
 
-    const handlResetFilter = () => {
-        setFilter({
-            page_id: 0,
-            page_size: 20,
-            role: "Chưa xác định",
-            status: "Chưa xác định",
-        });
-    };
-
     return (
         <StyleListUser>
-            <Row gutter={[16, 16]}>
-                <Col span={12}>List Users</Col>
-                <Col flex="right" span={2} offset={10}>
-                    <Button
-                        block
-                        type="primary"
-                        onClick={() => setVisible(true)}
-                        style={{ width: 200, float: "right" }}
-                    >
-                        <UserAddOutlined />
-                        Thêm người dùng
-                    </Button>
-                </Col>
-            </Row>
-            <Row gutter={[16, 16]}>
-                <Col span={8}>
-                    <Search
-                        placeholder="Tìm kiếm"
-                        onChange={(e) =>
-                            setFilter({ ...filter, search: e.target.value, page_id: 0 })
-                        }
-                    />
-                </Col>
-                <Col span={7}>
-                    <label htmlFor="">Trạng thái</label>
-                    {renderSelectStatus("filter")}
-                </Col>
-                <Col span={7}>
-                    <label htmlFor="">Chức vụ</label>
-                    {renderSelectRole("filter")}
-                </Col>
-            </Row>
-            <Row gutter={[16, 16]}>
-                <Col span={8}>
-                </Col>
-            </Row>
-            <Row>
-                <Col span={2} style={{ display: "flex", margin: "0 auto" }}>
-                    <Button
-                        type="primary"
-                        block
-                        style={{ marginBottom: 10 }}
-                        onClick={handlResetFilter}
-                    >
-                        Reset
-                    </Button>
-                </Col>
-            </Row>
+            <Filter setFilter={setFilter} setVisible={setVisible} filter={filter}/>
             <Table
                 rowKey="id"
                 columns={columns}
@@ -269,7 +220,6 @@ const ListUser = () => {
                     onChange: changePagination,
                 }}
                 dataSource={listUser}
-                
             />
             <ModalUser
                 visible={visible}

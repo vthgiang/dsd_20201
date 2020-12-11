@@ -58,7 +58,7 @@ export const types = [
     },
 ];
 
-export const statusesActivate = [
+export const statusesActivation = [
     {
         name: "Có thể nhận việc",
         code: "FREE",

@@ -98,16 +98,22 @@ export const sidebarMenu = [
     route: '/user-management',
     subMenu: [
       {
-        key: 'FlySetting',
+        key: 'UserSetting',
         heading: 'Quản lý người dùng',
         icon: 'fa fa-users',
         route: '/user',
       },
       {
-        key: 'DroneState',
+        key: 'DepartmentSetting',
         heading: 'Quản lý phòng ban',
         icon: 'fa fa-building',
         route: '/department',
+      },
+      {
+        key: 'UserMetaSetting',
+        heading: 'Lịch sử người dùng',
+        icon: 'fa fa-building',
+        route: '/user-meta',
       },
     ],
   },

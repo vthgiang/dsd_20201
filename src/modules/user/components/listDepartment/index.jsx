@@ -3,20 +3,15 @@ import StyleListDepartment from "./index.style";
 import {
     Table,
     Space,
-    Col,
     Input,
-    Row,
-    Button,
     Modal,
     notification,
-    message,
 } from "antd";
 import { getListDepartments, deleteDepartment } from "../../store/services";
 import ModalDepartment from "./ModalDepartment";
 import { useSelector } from "react-redux";
-import { FolderAddOutlined } from "@ant-design/icons";
-
-const { Search } = Input;
+import moment from "moment";
+import Filter from "./Filter";
 
 const ListDepartment = () => {
     const [visible, setVisible] = useState(false);
@@ -58,6 +53,8 @@ const ListDepartment = () => {
         Modal.confirm({
             title: "Xác nhận?",
             content: "Bạn có thực sự muốn xóa phòng ban này",
+            okText: "Xác nhận",
+            cancelText: "Hủy",
             onOk() {
                 const res = new Promise((resolve, reject) => {
                     resolve(deleteDepartment(user.id));
@@ -92,9 +89,15 @@ const ListDepartment = () => {
             key: "name",
             render: (text) => <a>{text}</a>,
         },
-        { title: "Description", dataIndex: "description", key: "description" },
+        { title: "Mô tả", dataIndex: "description", key: "description" },
         {
-            title: "Action",
+            title: "Ngày tạo",
+            dataIndex: "created_at",
+            key: "created_at",
+            render: (text) => <p>{moment(text).format("mm:hh DD-MM-YYYY")}</p>,
+        },
+        {
+            title: "Hành động",
             key: "action",
             render: (text, record) => (
                 <Fragment>
@@ -119,60 +122,9 @@ const ListDepartment = () => {
         setDepartmentId(record.id);
     };
 
-    const handlResetFilter = () => {
-        setFilter({
-            page_id: 0,
-            page_size: 20,
-            role: "Chưa xác định",
-            status: "Chưa xác định",
-        });
-    };
-
     return (
         <StyleListDepartment>
-            <Row gutter={[16, 16]}>
-                <Col span={12}>Danh sách người dùng</Col>
-                <Col flex="right" span={2} offset={10}>
-                    <Button
-                        block
-                        type="primary"
-                        onClick={() => setVisible(true)}
-                        style={{ width: 200, float: "right" }}
-                    >
-                        <FolderAddOutlined />
-                        Thêm phòng ban
-                    </Button>
-                </Col>
-            </Row>
-            <Row gutter={[16, 16]}>
-                <Col span={8}>
-                    <Search
-                        placeholder="Tìm kiếm"
-                        onChange={(e) =>
-                            setFilter({
-                                ...filter,
-                                search: e.target.value,
-                                page_id: 0,
-                            })
-                        }
-                    />
-                </Col>
-            </Row>
-            <Row gutter={[16, 16]}>
-                <Col span={8}></Col>
-            </Row>
-            <Row>
-                <Col span={2} style={{ display: "flex", margin: "0 auto" }}>
-                    <Button
-                        type="primary"
-                        block
-                        style={{ marginBottom: 10 }}
-                        onClick={handlResetFilter}
-                    >
-                        Reset
-                    </Button>
-                </Col>
-            </Row>
+            <Filter setFilter={setFilter} setVisible={setVisible} filter={filter} />
             <Table
                 rowKey="id"
                 columns={columns}
