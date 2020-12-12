@@ -44,6 +44,9 @@ import PayloadDroneHistory from './Payload/PayloadToDrone/List';
 import EditSignupPayloadDrone from './Payload/PayloadToDrone/Edit';
 import AddSignupPayloadDrone from './Payload/PayloadToDrone/Add';
 import DScard from './Payload/PayloadSDcard';
+import ImageVideo from "./ImageVideo";
+import Detail from "./ImageVideo/detail";
+import Stream from "./ImageVideo/stream";
 
 export const routes = [
   {
@@ -158,7 +161,15 @@ export const routes = [
 
   {
     path: '/metadata',
-    component: () => <div>Meta Data</div>,
+    component: () => <ImageVideo />,
+  },
+  {
+    path: '/stream',
+    component: () => <Stream />,
+  },
+  {
+    path: '/image-video-detail/:id',
+    component: () => <Detail />,
   },
   {
     path: '/problem',
