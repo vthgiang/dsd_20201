@@ -5,10 +5,11 @@ import {
   StyleUserProfileContainer,
 } from "./index.style";
 import { Row, Popover, Avatar, Badge } from "antd";
-
 import { BellOutlined, UserOutlined } from "@ant-design/icons";
+import BellNotification from '../../components/Group4/Bell';
 
 const Navbar = () => {
+
   const notification = () => (
     <div>
       <p>Thông báo</p>
@@ -25,14 +26,7 @@ const Navbar = () => {
   return (
     <Row type="flex" justify="end" align="middle" className="right-header">
       <StyleNavItem>
-        <Popover
-          placement="bottom"
-          title="Thông báo"
-          content={notification}
-          trigger="click"
-        >
-          <BellOutlined style={{ color: "gray", fontSize: 32 }} />
-        </Popover>
+        <BellNotification />
       </StyleNavItem>
 
       <StyleNavItem>

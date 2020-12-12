@@ -1,17 +1,19 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import DashboardPage from './Dashboard';
 import ListMonitorCampaignPage from './FlightHub/ListMonitorCampaign';
 import CreateMonitorCampaignPage from './FlightHub/CreateMonitorCampaign';
 import UpdateMonitorCampaignPage from './FlightHub/UpdateMonitorCampaign';
 
 import ListLabelsPage from './FlightHub/Labels';
+import Dashboard from './Dashboard';
+import MyList from '../components/Group4/Notification';
+import DetailedNotification from '../components/Group4/DetailedNotification';
 
 export const routes = [
   {
     path: '/dashboard',
-    component: DashboardPage,
+    component: Dashboard,
     exact: true,
   },
   {
@@ -72,7 +74,11 @@ export const routes = [
   },
   {
     path: '/warning',
-    component: () => <div>Cảnh báo</div>,
+    component: () => <MyList />,
+  },
+  {
+    path: '/warning-detail/:id',
+    component: () => <DetailedNotification />,
   },
   {
     path: '/activity-log',
