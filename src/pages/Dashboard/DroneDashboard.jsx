@@ -1,6 +1,3 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable react/no-array-index-key */
 import React from "react";
 import {
   Row,
@@ -16,6 +13,8 @@ import {
   Cell,
 } from "recharts";
 import { getDroneDetailedMetrics } from "../../services/statistics";
+
+const RADIAN = Math.PI / 180;
 
 const renderCustomizedLabel = ({
   cx,
@@ -45,8 +44,6 @@ const renderCustomizedLabel = ({
 };
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#ff8279"];
-
-const RADIAN = Math.PI / 180;
 
 const columns = [
   {

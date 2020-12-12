@@ -37,6 +37,7 @@ import {
   getUsersMetrics,
   getPayloadOverallMetrics,
 } from "../../services/statistics";
+import MonitorZoneDashboard from "./MonitorZoneDashboard";
 
 const { TabPane } = Tabs;
 
@@ -378,7 +379,7 @@ function Dashboard() {
                 <FlightHubDashboard />
               </TabPane>
               <TabPane key="Miền giám sát" tab="Miền giám sát">
-                <div />
+                <MonitorZoneDashboard />
               </TabPane>
               <TabPane key="Đối tượng giám sát" tab="Đối tượng giám sát">
                 <div />

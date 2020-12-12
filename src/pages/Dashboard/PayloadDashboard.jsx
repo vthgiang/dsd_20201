@@ -1,5 +1,3 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable react/no-array-index-key */
 import React from "react";
 import {
   Row,
@@ -20,6 +18,8 @@ import {
   Tooltip,
 } from "recharts";
 import { getPayloadDetailedMetrics } from "../../services/statistics";
+
+const RADIAN = Math.PI / 180;
 
 const renderCustomizedLabel = ({
   cx,
@@ -49,8 +49,6 @@ const renderCustomizedLabel = ({
 };
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#ff8279"];
-
-const RADIAN = Math.PI / 180;
 
 export default function PayloadDashboard() {
   const [payloadMetrics, setPayloadMetrics] = React.useState(null);

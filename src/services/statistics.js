@@ -165,12 +165,10 @@ export const getPayloadDetailedMetrics = async () => {
 
 export const getFlightHubMetrics = async (startDate, endDate) => {
   try {
-    const results = await Promise.all([
-      Axios.get(startDate && endDate ? `https://flight-hub-api.herokuapp.com/api/statistics/monitor-campaigns?timeFrom=${startDate}&timeTo=${endDate}`
-        : "https://flight-hub-api.herokuapp.com/api/statistics/monitor-campaigns/currently"),
-    ]);
+    const results = await Axios.get((startDate && endDate) ? `https://flight-hub-api.herokuapp.com/api/statistics/monitor-campaigns?timeFrom=${startDate}&timeTo=${endDate}`
+      : "https://flight-hub-api.herokuapp.com/api/statistics/monitor-campaigns/currently");
     const metrics = {};
-    const { statistics } = results[0]?.data.result;
+    const { statistics } = results?.data.result;
     if (statistics.length > 0 && statistics[0]) {
       const dykeFound = statistics.filter((item) => (item._id === "Đê điều"));
       const fireFound = statistics.filter((item) => (item._id === "Cháy rừng"));
@@ -186,6 +184,29 @@ export const getFlightHubMetrics = async (startDate, endDate) => {
     metrics.fire = 0;
     metrics.electric = 0;
     metrics.tree = 0;
+    return metrics;
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+};
+
+export const getMonitorZoneMetrics = async () => {
+  try {
+    const results = await Promise.all([
+      requestWithCache(
+        "getAreaFrequencyMetrics",
+        () => Axios.get("https://monitoredzoneserver.herokuapp.com/area/statisticFrequency"),
+      ),
+      requestWithCache(
+        "getZoneFrequencyMetrics",
+        () => Axios.get("https://monitoredzoneserver.herokuapp.com/monitoredzone/statisticFrequency"),
+      ),
+    ]);
+    const metrics = {
+      area: results[0].data.content.data,
+      zone: results[1].data.content.data,
+    };
     return metrics;
   } catch (error) {
     console.error(error);

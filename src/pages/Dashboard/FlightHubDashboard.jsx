@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable no-use-before-define */
-/* eslint-disable react/no-array-index-key */
 import React from "react";
 import {
   Row,
@@ -11,11 +8,7 @@ import {
   Button,
 } from "antd";
 import {
-  Legend,
   ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
   Bar,
   Tooltip,
   YAxis,
@@ -25,37 +18,6 @@ import {
 } from "recharts";
 import moment from "moment";
 import { getFlightHubMetrics } from "../../services/statistics";
-
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-}) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-  if (percent < 0.1) return null;
-
-  return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      textAnchor={x > cx ? "start" : "end"}
-      dominantBaseline="central"
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
-
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#ff8279"];
-
-const RADIAN = Math.PI / 180;
 
 const columns = [
   {
@@ -135,14 +97,14 @@ export default function FlightHubDashboard() {
         )
           : (
             <>
-              <Col span={8} offset={2}>
+              <Col span={8}>
                 <ResponsiveContainer
-                  width={300}
+                  width={400}
                   height={300}
                   className="alight-item-center"
                 >
                   <BarChart
-                    width={500}
+                    width={400}
                     height={300}
                     data={chartData}
                   >
@@ -150,11 +112,11 @@ export default function FlightHubDashboard() {
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
-                    <Bar dataKey="value" fill="#FF8042" />
+                    <Bar dataKey="value" fill="#FF8042" label />
                   </BarChart>
                 </ResponsiveContainer>
               </Col>
-              <Col span={8} offset={1}>
+              <Col span={8} offset={3}>
                 <Table
                   dataSource={tableData}
                   columns={columns}

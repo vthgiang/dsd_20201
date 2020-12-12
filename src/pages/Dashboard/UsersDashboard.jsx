@@ -19,6 +19,8 @@ import {
 } from "recharts";
 import { getUsersMetrics } from "../../services/statistics";
 
+const RADIAN = Math.PI / 180;
+
 const renderCustomizedLabel = ({
   cx,
   cy,
@@ -26,7 +28,6 @@ const renderCustomizedLabel = ({
   innerRadius,
   outerRadius,
   percent,
-  index,
 }) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -49,8 +50,6 @@ const renderCustomizedLabel = ({
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#ff8279"];
 
-const RADIAN = Math.PI / 180;
-
 export default function UsersDashboard() {
   const [usersMetrics, setUsersMetrics] = React.useState(null);
   const chartData = React.useMemo(() => {
@@ -61,15 +60,15 @@ export default function UsersDashboard() {
       { name: "Nhân viên Drone", value: usersMetrics.droneStaff.length },
       { name: "Nhân viên Sự cố", value: usersMetrics.incidentStaff.length },
       { name: "Nhân viên Giám sát", value: usersMetrics.supervisor.length },
-    ]
+    ];
   }, [usersMetrics]);
   const barChartData = React.useMemo(() => {
     if (!usersMetrics) return [];
-    const data = ["admin", "manager", "droneStaff", "incidentStaff", "supervisor"].map(role => ({
+    const data = ["admin", "manager", "droneStaff", "incidentStaff", "supervisor"].map((role) => ({
       name: role,
-      active: usersMetrics[role]?.filter(item => item.status === 'ACTIVE').length,
-      inactive: usersMetrics[role]?.filter(item => item.status === 'INACTIVE').length,
-      pending: usersMetrics[role]?.filter(item => item.status === 'PENDING').length,
+      active: usersMetrics[role]?.filter((item) => item.status === "ACTIVE").length,
+      inactive: usersMetrics[role]?.filter((item) => item.status === "INACTIVE").length,
+      pending: usersMetrics[role]?.filter((item) => item.status === "PENDING").length,
     }));
     console.log({ data });
     return data;
@@ -79,7 +78,7 @@ export default function UsersDashboard() {
     const fetchAll = async () => {
       const users = await getUsersMetrics();
       setUsersMetrics(users);
-    }
+    };
 
     fetchAll();
   }, []);
