@@ -92,7 +92,7 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
     setDronesData(newDrones);
 
     const indexSelected = selectedRowKeys.findIndex(
-      (item) => record.id === item.id,
+      (item) => record.id === item,
     );
     if (indexSelected > -1) {
       const newSelectedRows = [...selectedRows];
@@ -115,6 +115,7 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
           newDronesData[indexSelected].flightPaths = selectedDrone.flightPaths;
         }
       });
+      console.log("data ", newDronesData)
       setDronesData(newDronesData);
     }
 
@@ -184,14 +185,32 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
   ];
 
   const handleNextStep = () => {
-    if (!selectedRowKeys.length) {
+    const drones = [...selectedRows];
+
+    console.log({drones});
+    
+    if (!drones.length) {
       message.warning('Nhóm drones tham gia không được để trống!');
       return;
     }
 
-    handleChangeData({ drones: convertDronesData(selectedRows) });
+    for (const drone of drones) {
+      console.log("drrone : " , drone)
+      const { payloads, flightPaths } = drone;
+      if (!payloads || !payloads.length) {
+      message.warning('Bạn chưa chọn payloads đính kèm drone!');
+        return;
+      }
+      if (!flightPaths || !flightPaths.length) {
+      message.warning('Bạn chưa chọn đường bay cho drone!');
+        return;
+      }
+    }
+
+    handleChangeData({ drones: convertDronesData(drones) });
     nextStep();
   };
+
 
   return (
     <StyleStep2>
