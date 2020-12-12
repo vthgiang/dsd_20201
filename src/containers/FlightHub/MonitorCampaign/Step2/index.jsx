@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSeparator, StyleTitle } from '../../../../themes/default';
-import StyleStep2 from './index.style';
-import { Button, Row, Table, message, notification, Select } from 'antd';
+import StyleStep2, { StyleSpinContainer } from './index.style';
+import { Button, Row, Table, message, notification, Select, Spin } from 'antd';
 import { StepBackwardOutlined, StepForwardOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { DATE_TIME_FORMAT } from '../../../../configs';
@@ -39,17 +39,22 @@ const flightRoutes = [
 
 const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [drones, setDrones] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [dronesData, setDronesData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { timeRange } = data;
 
   useEffect(() => {
     const fetchDronesData = async () => {
+      setLoading(true);
       const timeStart = formatMomentDateToDateTimeString(timeRange[0]);
       const timeEnd = formatMomentDateToDateTimeString(timeRange[1]);
       try {
         const resp = await droneApi.getDroneAvailable({ timeStart, timeEnd });
         console.log('resp ', resp.data);
-        setDrones(resp.data);
+        setDronesData(resp.data);
+
+        setLoading(false);
       } catch (error) {
         notification.error({
           message: 'Có lỗi xảy ra! Xin thử lại.',
@@ -59,36 +64,61 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
     fetchDronesData();
   }, []);
 
-  useEffect(() => {
-    const { drones = [] } = data;
-    setSelectedRowKeys(drones);
-  }, [data]);
-
   const handleChangeFlightRoute = (record, index) => (value) => {
-    // const newOtherGroupsData = [...otherGroupsData];
-    // newOtherGroupsData[index].priority = value;
-    // setOtherGroupsData(newOtherGroupsData);
+    console.log('selectedRowKeys ', selectedRowKeys);
+
+    const newDrones = [...dronesData];
+    newDrones[index].flightRoute = value;
+    setDronesData(newDrones);
 
     const indexSelected = selectedRowKeys.findIndex(
-      (item) => record.id === item.id,
+      (item) => record.id === item,
     );
     if (indexSelected > -1) {
-      const newSelectedRows = [...selectedRowKeys];
-      newSelectedRows[indexSelected].priority = value;
-      setSelectedRowKeys(newSelectedRows);
+      const newSelectedRows = [...selectedRows];
+      newSelectedRows[indexSelected].flightRoute = value;
+      setSelectedRows(newSelectedRows);
     }
   };
 
   const handleChangePayloads = (record, index) => (values) => {
+    const newDrones = [...dronesData];
+    newDrones[index].payloads = values;
+    setDronesData(newDrones);
+
     const indexSelected = selectedRowKeys.findIndex(
       (item) => record.id === item.id,
     );
     if (indexSelected > -1) {
-      const newSelectedRows = [...selectedRowKeys];
+      const newSelectedRows = [...selectedRows];
       newSelectedRows[indexSelected].payloads = values;
-      setSelectedRowKeys(newSelectedRows);
+      setSelectedRows(newSelectedRows);
     }
   };
+
+  useEffect(() => {
+    const { drones = [] } = data;
+    console.log('drones ', drones);
+    if (dronesData.length) {
+      const newDronesData = [...dronesData];
+      drones.forEach((selectedDrone) => {
+        const indexSelected = newDronesData.findIndex(
+          (drone) => drone.id === selectedDrone.id,
+        );
+        console.log('indexSelected ', indexSelected);
+        if (indexSelected !== -1) {
+          newDronesData[indexSelected].payloads = selectedDrone.payloads;
+          newDronesData[indexSelected].flightRoute = selectedDrone.flightRoute;
+        }
+      });
+      console.log('newDronesData ', newDronesData);
+      setDronesData(newDronesData);
+    }
+
+    const rowKeys = drones.map((drone) => drone.id);
+    setSelectedRows(drones);
+    setSelectedRowKeys(rowKeys);
+  }, [data, dronesData.length]);
 
   const columns = [
     { dataIndex: 'name', title: 'Tên drone', width: 'auto' },
@@ -111,7 +141,9 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
           <Select
             style={{ width: 150 }}
             mode="multiple"
+            value={data}
             onChange={handleChangePayloads(record, index)}
+            placeholder="Chọn payloads"
           >
             {payloads.map(({ id, name }) => (
               <Select.Option key={id.toString()} value={id}>
@@ -132,7 +164,9 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
         return (
           <Select
             style={{ width: 150 }}
+            value={data}
             onChange={handleChangeFlightRoute(record, index)}
+            placeholder="Chọn đường bay"
           >
             {flightRoutes.map(({ id, name }) => (
               <Select.Option key={id} value={id}>
@@ -145,19 +179,13 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
     },
   ];
 
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      setSelectedRowKeys(selectedRows);
-    },
-    selectedRowKeys: selectedRowKeys,
-  };
-
   const handleNextStep = () => {
     if (!selectedRowKeys.length) {
       message.warning('Nhóm drones tham gia không được để trống!');
       return;
     }
-    handleChangeData({ drones: selectedRowKeys });
+    console.log('selectedRows ', selectedRows);
+    handleChangeData({ drones: selectedRows });
     nextStep();
   };
 
@@ -170,16 +198,26 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
           moment(timeRange[1]).format(DATE_TIME_FORMAT)}
       </StyleTitle>
       <StyleSeparator />
-      <Table
-        rowSelection={{
-          type: 'checkbox',
-          ...rowSelection,
-        }}
-        rowKey="id"
-        selections={true}
-        columns={columns}
-        dataSource={drones}
-      />
+      {loading ? (
+        <StyleSpinContainer>
+          <Spin />
+        </StyleSpinContainer>
+      ) : (
+        <Table
+          rowKey="id"
+          rowSelection={{
+            type: 'checkbox',
+            onChange: (selectedRowKeys, selectedRows) => {
+              setSelectedRows(selectedRows);
+              setSelectedRowKeys(selectedRowKeys);
+            },
+            selectedRowKeys: selectedRowKeys,
+          }}
+          // selections={true}
+          columns={columns}
+          dataSource={dronesData}
+        />
+      )}
       <Row type="flex">
         <Button
           type="default"

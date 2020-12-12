@@ -11,6 +11,7 @@ import {
   Form,
   DatePicker,
   notification,
+  Spin,
 } from 'antd';
 import {
   DeleteOutlined,
@@ -20,7 +21,7 @@ import {
   PlusOutlined,
 } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
-import StyleListMonitorCampaign from './index.style';
+import StyleListMonitorCampaign, { StyleSpinContainer } from './index.style';
 import {
   StyleTitle,
   StyleSeparator,
@@ -134,13 +135,16 @@ const monitoredZones = [
 
 const ListMonitorCampaign = () => {
   const [listMonitorCampaignsData, setListMonitorCampaignsData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const history = useHistory();
 
   const fetchListMonitorCampaignsData = async (params) => {
     try {
+      setLoading(true);
       const resp = await monitorCampaignApi.getListMonitorCampaigns(params);
       setListMonitorCampaignsData(resp.data.result.monitorCampaigns);
+      setLoading(false);
     } catch (error) {
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại',
@@ -241,8 +245,8 @@ const ListMonitorCampaign = () => {
       sorter: (a, b) => 1,
       render: (data = []) => {
         return data.map((elem) => {
-          const { name, createAt } = elem.content;
-          return <div key={createAt}>{name}</div>;
+          const { name, createdAt } = elem.content;
+          return <div key={createdAt.toString()}>{name}</div>;
         });
       },
     },
@@ -434,14 +438,20 @@ const ListMonitorCampaign = () => {
       </StyleSearchForm>
 
       <StyleSeparator />
-      <StyleTable>
-        <Table
-          rowKey="_id"
-          columns={columns}
-          dataSource={listMonitorCampaignsData}
-          scroll={{ x: 1560 }}
-        />
-      </StyleTable>
+      {loading ? (
+        <StyleSpinContainer>
+          <Spin />
+        </StyleSpinContainer>
+      ) : (
+        <StyleTable>
+          <Table
+            rowKey="_id"
+            columns={columns}
+            dataSource={listMonitorCampaignsData}
+            scroll={{ x: 1560 }}
+          />
+        </StyleTable>
+      )}
     </StyleListMonitorCampaign>
   );
 };
