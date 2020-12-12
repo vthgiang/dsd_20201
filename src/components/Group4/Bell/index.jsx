@@ -75,9 +75,10 @@ const BellNotification = () => {
           renderItem={item => (
             <List.Item
               actions={[
-                <Button size="small" type="primary" style={{ background: "green" }} onClick={() => openMessage("Processing the incidents", "Processed the incidents succesfully", 2000)} > Confirm</Button>,
+                <Button size="small" type="primary" style={{ background: "#009933" }} onClick={() => openMessage("Processing the incidents", "Processed the incidents succesfully", 2000)} > Confirm</Button>,
                 <Button size="small" type="primary" onClick={() => openMessage("Declining the incidents", "Declined the incidents succesfully", 500)} danger>Decline</Button>
               ]}
+              //  extra={item.isNew && <Badge status="processing" style={{ marginLeft: 0, marginTop: 25 }} />}
               key={item._id}>
               <List.Item.Meta
                 avatar={

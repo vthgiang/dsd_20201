@@ -179,12 +179,12 @@ const MyList = () => {
   }
 
   return <div >
-    <Button variant="contained" color="primary" onClick={handleOnclickSubcribe}>
+    {/* <Button variant="contained" color="primary" onClick={handleOnclickSubcribe}>
       Subcribe notification
         </Button>
     <Button style={{ margin: 2 }} variant="contained" color="secondary" onClick={handleOnclickSendNotification}>
       Send notifications
-        </Button>
+        </Button> */}
     <div className={classes.title}>Danh sách cảnh báo</div>
     <List>
       {datas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(data => (
