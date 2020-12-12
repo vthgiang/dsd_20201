@@ -103,8 +103,7 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
 
   useEffect(() => {
     const { drones = [] } = data;
-    console.log('drones =>>>>>>>>>>> ', drones);
-    console.log('data =>>>>>>>>>>> ', data);
+
     if (dronesData.length) {
       const newDronesData = [...dronesData];
       drones.forEach((selectedDrone) => {

@@ -1,17 +1,15 @@
 import axiosInstance from './api';
 
 export const addLabelApi = async (data) => {
-  console.log("data", data);
-  
   const result = await axiosInstance({
     method: 'POST',
     url: '/api/labels',
-    data
+    data,
   });
 
   return {
     status: result.data.status,
-    result: result.data.result.otherLabel
+    result: result.data.result.otherLabel,
   };
   // return {
   //   status: 1,
@@ -35,8 +33,8 @@ export const getListLabelsApi = async () => {
 
   return {
     status: result.data.status,
-    result: result.data.result.labels
-  }
+    result: result.data.result.labels,
+  };
 
   // return {
   //   status: 1,
@@ -75,19 +73,15 @@ export const updateLabelApi = async (data) => {
   //   data
   // });
 
-  console.log("data", data);
-
   const result = await axiosInstance({
     method: 'PATCH',
     url: `/api/labels`,
-    data
+    data,
   });
-
-  console.log("result", result);
 
   return {
     status: result.data.status,
-    result: result.data.result.otherLabel
+    result: result.data.result.otherLabel,
   };
   // return {
   //   status: 1,
@@ -113,7 +107,7 @@ export const deleteLabelApi = async (_id) => {
   const result = await axiosInstance({
     method: 'DELETE',
     url: `/api/labels`,
-    data: {_id}
+    data: { _id },
   });
 
   return {

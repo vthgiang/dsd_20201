@@ -31,6 +31,7 @@ const Map = ({
 
   useEffect(() => {
     getMonitoredZone();
+    // eslint-disable-next-line
   }, []);
 
   const getMonitoredZone = async () => {
@@ -40,10 +41,8 @@ const Map = ({
     })
       .then((res) => {
         if (res.data) {
-          console.log('data', res.data.content);
           setMonitoredZonesData(res.data.content.zone);
           setMonitoredZonesDataInit(res.data.content.zone);
-          console.log(res.data.content.zone);
 
           //Khởi tạo render ban đầu
           if (res.data.content.zone) {
@@ -53,12 +52,10 @@ const Map = ({
             });
           }
 
-          console.log('monitoredZoneInit', monitoredZoneInit);
-
           // khởi tạo park nếu đã có sẵn
           if (monitoredZoneInit) {
             let zone = res.data.content.zone.find(
-              (element) => element._id == monitoredZoneInit,
+              (element) => element._id === monitoredZoneInit,
             );
             if (zone) {
               setPositionClick({
@@ -71,9 +68,7 @@ const Map = ({
           }
         }
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   const searchOnChange = (e) => {
@@ -87,6 +82,7 @@ const Map = ({
       if (textElement.includes(textValue)) {
         return element;
       }
+      return false;
     });
     setMonitoredZonesData(data);
   };
@@ -144,7 +140,6 @@ const Map = ({
             }
           />
         ))} */}
-      {console.log('monitoredZonesData', initLocation)}
 
       {monitoredZonesData &&
         monitoredZonesData.map((zone) => (

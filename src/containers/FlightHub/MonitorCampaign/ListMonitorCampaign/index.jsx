@@ -64,8 +64,6 @@ const ListMonitorCampaign = () => {
     fetchListMonitorCampaignsData();
   }, []);
 
-  console.log('listMonitorCampaignsData ', listMonitorCampaignsData);
-
   const handleSearch = () => {
     const newFieldValues = form.getFieldsValue();
     const params = convertFieldValuesToDataSubmit(newFieldValues);

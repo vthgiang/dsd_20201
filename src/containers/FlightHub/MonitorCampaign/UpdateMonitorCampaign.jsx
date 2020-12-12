@@ -18,7 +18,7 @@ const UpdateMonitorCampaign = () => {
     const fetchMonitorCampaignData = async () => {
       try {
         const resp = await monitorCampaignApi.getMonitorCampaign(id);
-
+        console.log('resp ', resp);
         setMonitorCampaignData(resp.data.result.monitorCampaign);
       } catch (error) {
         notification.error({

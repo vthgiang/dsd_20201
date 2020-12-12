@@ -11,7 +11,6 @@ const CreateMonitorCampaign = () => {
   };
 
   const createMonitorCampaign = async (data) => {
-    console.log('data ', data);
     try {
       await monitorCampaignApi.createMonitorCampaign(data);
 
