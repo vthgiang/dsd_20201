@@ -74,6 +74,7 @@ const ListLabels = () => {
       ) {
         return label;
       }
+      return null;
     });
 
     setListLabels(dataSearchResult);
