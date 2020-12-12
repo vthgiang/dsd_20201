@@ -63,7 +63,9 @@ export default function MonitorZoneDashboard() {
 
   return (
     <>
-      <h1>Thống kê khu vực giám sát theo tần suất sự cố</h1>
+      <h1>Miền giám sát</h1>
+      <div />
+      <h3>Thống kê khu vực giám sát theo tần suất sự cố</h3>
       {!areaFrequencyMetrics ? (
         <Spin />
       ) : (
@@ -71,7 +73,7 @@ export default function MonitorZoneDashboard() {
           {renderChart(chartAreaData, "#0088FE")}
         </Row>
       )}
-      <h1>Thống kê miền giám sát theo tần suất sự cố</h1>
+      <h3>Thống kê miền giám sát theo tần suất sự cố</h3>
       {!zoneFrequencyMetrics ? (
         <Spin />
       ) : (

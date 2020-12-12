@@ -38,6 +38,7 @@ import {
   getPayloadOverallMetrics,
 } from "../../services/statistics";
 import MonitorZoneDashboard from "./MonitorZoneDashboard";
+import LogDashboard from "./LogDashboard";
 
 const { TabPane } = Tabs;
 
@@ -388,87 +389,7 @@ function Dashboard() {
                 <div />
               </TabPane>
               <TabPane key="Tab 3" tab="Lịch sử hoạt động">
-                <h1>Lịch sử hoạt động của hệ thống</h1>
-                <Row>
-                  <Col span={12}>
-                    <h3>Thống kê hoạt động của hệ thống</h3>
-                    <div className="d-flex justify-content-around mb-4">
-                      <h3 className="align-self-center mb-1">Năm:</h3>
-                      <Space direction="vertical" className="align-self-center">
-                        <DatePicker onChange={onChange} picker="year" />
-                      </Space>
-                    </div>
-                    <ResponsiveContainer height={300} width="100%">
-                      <AreaChart
-                        data={dataChart3}
-                        margin={{
-                          top: 10, right: 30, left: 0, bottom: 0,
-                        }}
-                      >
-                        <defs>
-                          <linearGradient
-                            id="colorerror"
-                            x1="0"
-                            y1="0"
-                            x2="0"
-                            y2="1"
-                          >
-                            <stop
-                              offset="5%"
-                              stopColor="#8884d8"
-                              stopOpacity={0.8}
-                            />
-                            <stop
-                              offset="95%"
-                              stopColor="#8884d8"
-                              stopOpacity={0}
-                            />
-                          </linearGradient>
-                          <linearGradient
-                            id="colorpass"
-                            x1="0"
-                            y1="0"
-                            x2="0"
-                            y2="1"
-                          >
-                            <stop
-                              offset="5%"
-                              stopColor="#82ca9d"
-                              stopOpacity={0.8}
-                            />
-                            <stop
-                              offset="95%"
-                              stopColor="#82ca9d"
-                              stopOpacity={0}
-                            />
-                          </linearGradient>
-                        </defs>
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <Tooltip />
-                        <Area
-                          type="monotone"
-                          dataKey="error"
-                          stroke="#8884d8"
-                          fillOpacity={1}
-                          fill="url(#colorerror)"
-                        />
-                        <Area
-                          type="monotone"
-                          dataKey="pass"
-                          stroke="#82ca9d"
-                          fillOpacity={1}
-                          fill="url(#colorpass)"
-                        />
-                      </AreaChart>
-                    </ResponsiveContainer>
-                  </Col>
-                  <Col span={11} offset={1}>
-                    <h3>Hoạt động</h3>
-                    <Table dataSource={dataSource} columns={columns} />;
-                  </Col>
-                </Row>
+                <LogDashboard />
               </TabPane>
             </Tabs>
           </Card>
