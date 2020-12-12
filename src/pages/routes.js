@@ -1,6 +1,9 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-
+import DetailArea from '../components/Aera/DetailArea';
+import ManageArea from '../components/Aera/ManageArea';
+import Manage from '../components/SurveillanceDomain/Manage';
+import ManageEdit from '../components/SurveillanceDomain/ManageEdit';
 import Dashboard from './Dashboard';
 
 export const routes = [
@@ -64,6 +67,26 @@ export const routes = [
   {
     path: '/surveillance-domain',
     component: () => <div>Miền giám sát</div>,
+  },
+  {
+    path: '/surveillance-domain-area',
+    component: () => <div>Quản lý khu vực</div>,
+  },
+  {
+    path: '/surveillance-domain-manage/edit',
+    component: () => <ManageEdit />,
+  },
+  {
+    path: '/surveillance-domain-manage',
+    component: () => <Manage />,
+  },
+  {
+    path: '/surveillance-area',
+    component: () => <ManageArea />,
+  },
+  {
+    path: '/surveillance-area-detail',
+    component: () => <DetailArea />,
   },
   {
     path: '/handle-problem',

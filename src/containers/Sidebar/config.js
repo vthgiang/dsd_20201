@@ -84,6 +84,20 @@ export const sidebarMenu = [
     heading: 'Miền giám sát',
     icon: 'fas fa-crop-alt',
     route: '/surveillance-domain',
+    subMenu: [
+      {
+        key: 'SurveillanceDomainArea',
+        heading: 'Quản lý khu vực',
+        icon: 'fas fa-crop-alt',
+        route: '/surveillance-area',
+      },
+      {
+        key: 'SurveillanceDomainManage',
+        heading: 'Quản lý miền giám sát',
+        icon: 'fas fa-crop-alt',
+        route: '/surveillance-domain-manage',
+      },
+    ],
   },
   {
     key: 'HandleProblem',
