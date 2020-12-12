@@ -43,7 +43,6 @@ const Step5 = ({ prevStep, data, handleChangeData, handleSubmit }) => {
         ) {
           throw new Error('Máy chủ lỗi');
         }
-        console.log('resp.result ', resp.result);
         setLabelsData(resp.result);
       } catch (error) {
         notification.error({
@@ -58,8 +57,6 @@ const Step5 = ({ prevStep, data, handleChangeData, handleSubmit }) => {
     await handleSubmit(dataSubmit);
   };
 
-  console.log({data});
-
   const submitConfirm = (dataSubmit) => {
     const { name } = dataSubmit;
     Modal.confirm({
@@ -67,7 +64,8 @@ const Step5 = ({ prevStep, data, handleChangeData, handleSubmit }) => {
       icon: <ExclamationCircleOutlined />,
       content: (
         <span>
-          Bạn có muốn {data.description ? 'sửa' : 'tạo'} đợt giám sát <strong>{name}</strong>?
+          Bạn có muốn {data.description ? 'sửa' : 'tạo'} đợt giám sát{' '}
+          <strong>{name}</strong>?
         </span>
       ),
       okText: 'Đồng ý',

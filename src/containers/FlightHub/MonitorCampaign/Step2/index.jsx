@@ -51,7 +51,6 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
       const timeEnd = formatMomentDateToDateTimeString(timeRange[1]);
       try {
         const resp = await droneApi.getDroneAvailable({ timeStart, timeEnd });
-        console.log('resp ', resp.data);
         setDronesData(resp.data);
 
         setLoading(false);
@@ -65,8 +64,6 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
   }, []);
 
   const handleChangeFlightRoute = (record, index) => (value) => {
-    console.log('selectedRowKeys ', selectedRowKeys);
-
     const newDrones = [...dronesData];
     newDrones[index].flightRoute = value;
     setDronesData(newDrones);
@@ -98,20 +95,17 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
 
   useEffect(() => {
     const { drones = [] } = data;
-    console.log('drones ', drones);
     if (dronesData.length) {
       const newDronesData = [...dronesData];
       drones.forEach((selectedDrone) => {
         const indexSelected = newDronesData.findIndex(
           (drone) => drone.id === selectedDrone.id,
         );
-        console.log('indexSelected ', indexSelected);
         if (indexSelected !== -1) {
           newDronesData[indexSelected].payloads = selectedDrone.payloads;
           newDronesData[indexSelected].flightRoute = selectedDrone.flightRoute;
         }
       });
-      console.log('newDronesData ', newDronesData);
       setDronesData(newDronesData);
     }
 
@@ -184,7 +178,6 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
       message.warning('Nhóm drones tham gia không được để trống!');
       return;
     }
-    console.log('selectedRows ', selectedRows);
     handleChangeData({ drones: selectedRows });
     nextStep();
   };

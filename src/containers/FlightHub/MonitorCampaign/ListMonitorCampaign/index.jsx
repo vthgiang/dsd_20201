@@ -146,6 +146,7 @@ const ListMonitorCampaign = () => {
       setListMonitorCampaignsData(resp.data.result.monitorCampaigns);
       setLoading(false);
     } catch (error) {
+      if (error.response && error.response.status === 400) return;
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại',
       });
