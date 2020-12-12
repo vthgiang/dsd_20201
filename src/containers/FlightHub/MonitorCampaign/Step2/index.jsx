@@ -5,67 +5,75 @@ import { Button, Row, Table, message, notification, Select, Spin } from 'antd';
 import { StepBackwardOutlined, StepForwardOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { DATE_TIME_FORMAT } from '../../../../configs';
-import { droneApi } from '../../../../apis';
+import { droneApi, payloadApi } from '../../../../apis';
 import { formatMomentDateToDateTimeString } from '../services';
-
-const payloads = [
-  {
-    id: '3456787979',
-    name: 'payload1',
-  },
-  {
-    id: '369852147',
-    name: 'payload1',
-  },
-  {
-    id: '987456321',
-    name: 'payload1',
-  },
-];
-const flightRoutes = [
-  {
-    id: '3456787979',
-    name: 'flight Route 1',
-  },
-  {
-    id: '369852147',
-    name: 'flight Route 1',
-  },
-  {
-    id: '987456321',
-    name: 'flight Route 1',
-  },
-];
+import { convertDronesData } from './service';
 
 const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [dronesData, setDronesData] = useState([]);
+
+  const [payloadsData, setPayloadsData] = useState([]);
+  const [flightPathsData, setFlightPathsData] = useState([]);
+
   const [loading, setLoading] = useState(false);
   const { timeRange } = data;
 
+  const fetchDronesData = async (params) => {
+    setLoading(true);
+    try {
+      const resp = await droneApi.getDroneAvailable(params);
+      setDronesData(resp.data);
+
+      setLoading(false);
+    } catch (error) {
+      notification.error({
+        message: 'Có lỗi xảy ra! Xin thử lại.',
+      });
+    }
+  };
+
+  const fetchPayloadsData = async (params) => {
+    setLoading(true);
+    try {
+      const resp = await payloadApi.getAllPayload(params);
+      setPayloadsData(resp.data);
+
+      setLoading(false);
+    } catch (error) {
+      notification.error({
+        message: 'Có lỗi xảy ra! Xin thử lại.',
+      });
+    }
+  };
+
+  const fetchFlightPathsData = async (params) => {
+    setLoading(true);
+    try {
+      const resp = await droneApi.getAllPath(params);
+      setFlightPathsData(resp.data);
+
+      setLoading(false);
+    } catch (error) {
+      notification.error({
+        message: 'Có lỗi xảy ra! Xin thử lại.',
+      });
+    }
+  };
+
   useEffect(() => {
-    const fetchDronesData = async () => {
-      setLoading(true);
-      const timeStart = formatMomentDateToDateTimeString(timeRange[0]);
-      const timeEnd = formatMomentDateToDateTimeString(timeRange[1]);
-      try {
-        const resp = await droneApi.getDroneAvailable({ timeStart, timeEnd });
-        setDronesData(resp.data);
+    const timeStart = formatMomentDateToDateTimeString(timeRange[0]);
+    const timeEnd = formatMomentDateToDateTimeString(timeRange[1]);
+    const params = { timeStart, timeEnd };
+    fetchDronesData(params);
+    fetchPayloadsData();
+    fetchFlightPathsData();
+  }, [timeRange]);
 
-        setLoading(false);
-      } catch (error) {
-        notification.error({
-          message: 'Có lỗi xảy ra! Xin thử lại.',
-        });
-      }
-    };
-    fetchDronesData();
-  }, []);
-
-  const handleChangeFlightRoute = (record, index) => (value) => {
+  const handleChangeFlightPath = (record, index) => (values) => {
     const newDrones = [...dronesData];
-    newDrones[index].flightRoute = value;
+    newDrones[index].flightPaths = values;
     setDronesData(newDrones);
 
     const indexSelected = selectedRowKeys.findIndex(
@@ -73,7 +81,7 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
     );
     if (indexSelected > -1) {
       const newSelectedRows = [...selectedRows];
-      newSelectedRows[indexSelected].flightRoute = value;
+      newSelectedRows[indexSelected].flightPaths = values;
       setSelectedRows(newSelectedRows);
     }
   };
@@ -103,7 +111,7 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
         );
         if (indexSelected !== -1) {
           newDronesData[indexSelected].payloads = selectedDrone.payloads;
-          newDronesData[indexSelected].flightRoute = selectedDrone.flightRoute;
+          newDronesData[indexSelected].flightPaths = selectedDrone.flightPaths;
         }
       });
       setDronesData(newDronesData);
@@ -139,8 +147,8 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
             onChange={handleChangePayloads(record, index)}
             placeholder="Chọn payloads"
           >
-            {payloads.map(({ id, name }) => (
-              <Select.Option key={id.toString()} value={id}>
+            {payloadsData.map(({ _id, name }) => (
+              <Select.Option key={_id.toString()} value={_id}>
                 {name}
               </Select.Option>
             ))}
@@ -149,7 +157,7 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
       },
     },
     {
-      dataIndex: 'flightRoute',
+      dataIndex: 'flightPaths',
       title: 'Đường bay',
       width: '20%',
       align: 'center',
@@ -159,10 +167,11 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
           <Select
             style={{ width: 150 }}
             value={data}
-            onChange={handleChangeFlightRoute(record, index)}
+            mode="multiple"
+            onChange={handleChangeFlightPath(record, index)}
             placeholder="Chọn đường bay"
           >
-            {flightRoutes.map(({ id, name }) => (
+            {flightPathsData.map(({ id, name }) => (
               <Select.Option key={id} value={id}>
                 {name}
               </Select.Option>
@@ -178,7 +187,8 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
       message.warning('Nhóm drones tham gia không được để trống!');
       return;
     }
-    handleChangeData({ drones: selectedRows });
+
+    handleChangeData({ drones: convertDronesData(selectedRows) });
     nextStep();
   };
 

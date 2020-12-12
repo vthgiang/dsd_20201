@@ -149,6 +149,7 @@ const Map = ({
       {monitoredZonesData &&
         monitoredZonesData.map((zone) => (
           <Rectangle
+            key={zone._id}
             defaultBounds={
               new window.google.maps.LatLngBounds(
                 new window.google.maps.LatLng(

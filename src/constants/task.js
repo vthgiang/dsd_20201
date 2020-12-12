@@ -1,6 +1,6 @@
 export default {
-  'cháy rừng': 'cháy rừng',
-  'đê điều': 'đê điều',
-  'lưới điện': 'lưới điện',
-  'cây trồng': 'cây trồng',
+  forestFires: 'Cháy rừng',
+  dike: 'Đê điều',
+  highVoltageGrid: 'Điện',
+  tree: 'Cây trồng',
 };
