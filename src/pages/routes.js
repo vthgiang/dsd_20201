@@ -10,6 +10,10 @@ import CreateMonitorCampaignPage from './FlightHub/CreateMonitorCampaign';
 import UpdateMonitorCampaignPage from './FlightHub/UpdateMonitorCampaign';
 
 import ListLabelsPage from './FlightHub/Labels';
+import DetailArea from '../components/Aera/DetailArea';
+import ManageArea from '../components/Aera/ManageArea';
+import Manage from '../components/SurveillanceDomain/Manage';
+import ManageEdit from '../components/SurveillanceDomain/ManageEdit';
 import Dashboard from './Dashboard';
 import MyList from '../components/Group4/Notification';
 import DetailedNotification from '../components/Group4/DetailedNotification';
@@ -28,7 +32,7 @@ import LogStatistic from './LogStatistic';
 import LogUAV from './LogUAV';
 //Payload
 import ListPayload from './Payload/PayloadManagement/List';
-import ListTypePayload from "./Payload/PayloadType/List";
+import ListTypePayload from './Payload/PayloadType/List';
 import PayloadMaintenance from './Payload/PayloadMaintenance/List';
 import EditSchedule from './Payload/PayloadMaintenance/Edit';
 import AddSchedule from './Payload/PayloadMaintenance/Add';
@@ -36,17 +40,17 @@ import PayloadSetting from './Payload/PayloadSetting';
 //Payload  Statistic
 import PayloadStatistic from './Payload/PayloadStatistic';
 import PayloadStatisticFrequency from './Payload/PayloadStatistic/PayloadStatisticFrequency';
-import PayloadStatisticTime from "./Payload/PayloadStatistic/PayloadStatisticTime";
-import PayloadStatisticStatus from "./Payload/PayloadStatistic/PayloadStatisticStatus";
-import PayloadStatisticWorking from "./Payload/PayloadStatistic/PayloadStatisticWorking";
-import PayloadStatisticDroneFixing from "./Payload/PayloadStatistic/PayloadStatisticDroneFixing";
+import PayloadStatisticTime from './Payload/PayloadStatistic/PayloadStatisticTime';
+import PayloadStatisticStatus from './Payload/PayloadStatistic/PayloadStatisticStatus';
+import PayloadStatisticWorking from './Payload/PayloadStatistic/PayloadStatisticWorking';
+import PayloadStatisticDroneFixing from './Payload/PayloadStatistic/PayloadStatisticDroneFixing';
 import PayloadDroneHistory from './Payload/PayloadToDrone/List';
 import EditSignupPayloadDrone from './Payload/PayloadToDrone/Edit';
 import AddSignupPayloadDrone from './Payload/PayloadToDrone/Add';
 import DScard from './Payload/PayloadSDcard';
-import ImageVideo from "./ImageVideo";
-import Detail from "./ImageVideo/detail";
-import Stream from "./ImageVideo/stream";
+import ImageVideo from './ImageVideo';
+import Detail from './ImageVideo/detail';
+import Stream from './ImageVideo/stream';
 
 export const routes = [
   {
@@ -86,8 +90,8 @@ export const routes = [
     path: '/flight-hub-other-params',
     component: ListLabelsPage,
   },
-   //PAYLOAD
-   {
+  //PAYLOAD
+  {
     path: '/payloads',
     component: () => <div>PayloadManagement</div>,
   },
@@ -97,7 +101,7 @@ export const routes = [
   },
   {
     path: '/payload-dscard',
-    component: DScard
+    component: DScard,
   },
   {
     path: '/payload-type',
@@ -248,8 +252,26 @@ export const routes = [
     component: LogUAV,
   },
   {
-    path: '/surveillance-domain',
-    component: () => <div>Miền giám sát</div>,
+    path: '/surveillance-domain-area',
+    component: () => <div>Quản lý khu vực</div>,
+  },
+  {
+    path: '/surveillance-domain-manage/edit',
+    component: () => <ManageEdit />,
+    exact: true,
+  },
+  {
+    path: '/surveillance-domain-manage',
+    component: () => <Manage />,
+    exact: true,
+  },
+  {
+    path: '/surveillance-area',
+    component: () => <ManageArea />,
+  },
+  {
+    path: '/surveillance-area-detail',
+    component: () => <DetailArea />,
   },
   {
     path: '/handle-problem',
