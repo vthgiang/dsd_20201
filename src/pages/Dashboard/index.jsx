@@ -30,12 +30,14 @@ import DroneDashboard from "./DroneDashboard";
 import IncidentDashboard from "./IncidentDashboard";
 import UsersDashboard from "./UsersDashboard";
 import PayloadDashboard from "./PayloadDashboard";
+import FlightHubDashboard from "./FlightHubDashboard";
 import {
   getDroneOverallMetrics,
   getIncidentOverallMetrics,
   getUsersMetrics,
   getPayloadOverallMetrics,
 } from "../../services/statistics";
+import MonitorZoneDashboard from "./MonitorZoneDashboard";
 
 const { TabPane } = Tabs;
 
@@ -252,7 +254,7 @@ function Dashboard() {
       setIncidentMetrics(results[1]);
       setUsersMetrics(results[2]);
       setPayloadMetrics(results[3]);
-    }
+    };
 
     fetchAll();
   }, []);
@@ -374,10 +376,10 @@ function Dashboard() {
                 <div />
               </TabPane>
               <TabPane key="Đợt giám sát" tab="Đợt giám sát">
-                <div />
+                <FlightHubDashboard />
               </TabPane>
               <TabPane key="Miền giám sát" tab="Miền giám sát">
-                <div />
+                <MonitorZoneDashboard />
               </TabPane>
               <TabPane key="Đối tượng giám sát" tab="Đối tượng giám sát">
                 <div />
@@ -399,7 +401,9 @@ function Dashboard() {
                     <ResponsiveContainer height={300} width="100%">
                       <AreaChart
                         data={dataChart3}
-                        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                        margin={{
+                          top: 10, right: 30, left: 0, bottom: 0,
+                        }}
                       >
                         <defs>
                           <linearGradient

@@ -2,7 +2,6 @@ import React from "react";
 import {
   Row,
   Col,
-  Table,
   Spin,
 } from "antd";
 import {
@@ -20,6 +19,8 @@ import {
 } from "recharts";
 import { getPayloadDetailedMetrics } from "../../services/statistics";
 
+const RADIAN = Math.PI / 180;
+
 const renderCustomizedLabel = ({
   cx,
   cy,
@@ -27,7 +28,6 @@ const renderCustomizedLabel = ({
   innerRadius,
   outerRadius,
   percent,
-  index,
 }) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -50,8 +50,6 @@ const renderCustomizedLabel = ({
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#ff8279"];
 
-const RADIAN = Math.PI / 180;
-
 export default function PayloadDashboard() {
   const [payloadMetrics, setPayloadMetrics] = React.useState(null);
   const chartData = React.useMemo(() => {
@@ -61,17 +59,15 @@ export default function PayloadDashboard() {
       { name: "Đang hoạt động", value: payloadMetrics.working },
       { name: "Đang sạc", value: payloadMetrics.charging },
       { name: "Đang bảo trì", value: payloadMetrics.fixing },
-    ]
+    ];
   }, [payloadMetrics]);
   const lineChartData = React.useMemo(() => {
-    console.log({ payloadMetrics })
-    const getMonthData = (month) => {
-      return {
-        fixing: payloadMetrics?.fee?.fixing?.filter(item => (new Date(item.startedAt)).getMonth() === month).length || 0,
-        working: payloadMetrics?.fee?.working?.filter(item => (new Date(item.startedAt)).getMonth() === month).length || 0,
-      }
-    }
-    const data = Array.from(Array(12).keys()).map(month => ({
+    console.log({ payloadMetrics });
+    const getMonthData = (month) => ({
+      fixing: payloadMetrics?.fee?.fixing?.filter((item) => (new Date(item.startedAt)).getMonth() === month).length || 0,
+      working: payloadMetrics?.fee?.working?.filter((item) => (new Date(item.startedAt)).getMonth() === month).length || 0,
+    });
+    const data = Array.from(Array(12).keys()).map((month) => ({
       name: `Th${month + 1}`,
       ...getMonthData(month),
     }));
@@ -81,9 +77,9 @@ export default function PayloadDashboard() {
   React.useEffect(() => {
     const fetchAll = async () => {
       const payload = await getPayloadDetailedMetrics();
-      console.log({ payload })
+      console.log({ payload });
       setPayloadMetrics(payload);
-    }
+    };
 
     fetchAll();
   }, []);
