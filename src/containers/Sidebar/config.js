@@ -184,8 +184,28 @@ export const sidebarMenu = [
   },
   {
     key: 'UserManagement',
-    heading: 'Quản lý người dùng',
+    heading: 'Người dùng',
     icon: 'fas fa-user-circle',
     route: '/user-management',
+    subMenu: [
+      {
+        key: 'UserSetting',
+        heading: 'Quản lý người dùng',
+        icon: 'fa fa-users',
+        route: '/user',
+      },
+      {
+        key: 'DepartmentSetting',
+        heading: 'Quản lý phòng ban',
+        icon: 'fa fa-building',
+        route: '/department',
+      },
+      {
+        key: 'UserMetaSetting',
+        heading: 'Lịch sử người dùng',
+        icon: 'fa fa-building',
+        route: '/user-meta',
+      },
+    ],
   },
 ];

@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import ListUser from '../modules/user/components/listUser';
+import ListDepartment from '../modules/user/components/listDepartment';
+import ListUserMeta from '../modules/user/components/listUserMeta';
 
 import ListMonitorCampaignPage from './FlightHub/ListMonitorCampaign';
 import CreateMonitorCampaignPage from './FlightHub/CreateMonitorCampaign';
@@ -22,6 +26,7 @@ import LogObjMonitor from './LogObjMonitor';
 import LogRegion from './LogRegion';
 import LogStatistic from './LogStatistic';
 import LogUAV from './LogUAV';
+
 export const routes = [
   {
     path: '/dashboard',
@@ -154,15 +159,42 @@ export const routes = [
   },
   {
     path: '/user-management',
-    component: () => <div>Quản lý người dùng</div>,
+    component: ListUser,
+  },
+  {
+    path: '/user',
+    component: ListUser,
+  },
+  {
+    path: '/department',
+    component: ListDepartment,
+  },
+  {
+    path: '/user-meta',
+    component: ListUserMeta,
   },
 ];
 
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const isLogin = useSelector((state) => state.user.isLogin);
+
+  return (
+    // Show the component only when the user is logged in
+    // Otherwise, redirect the user to /signin page
+    <Route
+      {...rest}
+      render={(props) =>
+        isLogin ? <Component {...props} /> : <Redirect to="/login" />
+      }
+    />
+  );
+};
+
 export default () => (
-  <Switch>
+  <Fragment>
     {routes.map(({ path, exact = false, component: Component, ...rest }) => {
       return (
-        <Route
+        <PrivateRoute
           key={path}
           exact={exact}
           path={path}
@@ -171,6 +203,5 @@ export default () => (
         />
       );
     })}
-    <Redirect to="/" />
-  </Switch>
+  </Fragment>
 );
