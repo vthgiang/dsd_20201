@@ -47,11 +47,7 @@ const ListIncidents = () => {
   const [listTypeWork, setListTypeWork] = useState([]);
   const [typeWorkNew, setTypeWorkNew] = useState(null);
   const [listEmployeesNew, setListEmployeesNew] = useState([]);
-  const [childData, setChildData] = useState([]);
   const [idModalIncident, setIdModalIncident] = useState(null);
-  const [visibleModalDetailIncident, setVisibleModalDetailIncident] = useState(
-    false
-  );
 
   const { pathname } = useLocation();
   const codeIncidents = {
@@ -130,12 +126,12 @@ const ListIncidents = () => {
       dataIndex: "status",
       filters: [
         {
-          text: "In Progress",
-          value: "In Progress",
+          text: 'In Progress',
+          value: 'In Progress',
         },
         {
-          text: "Open",
-          value: "Open",
+          text: 'Open',
+          value: 'Open',
         },
       ],
       filterMultiple: false,
@@ -148,8 +144,8 @@ const ListIncidents = () => {
             ) : dataRecord.statusCode == 1 ? (
               <Badge status="processing" text={dataRecord.status} />
             ) : (
-              <Badge status="success" text={dataRecord.status} />
-            )}
+                  <Badge status="success" text={dataRecord.status} />
+                )}
           </div>
         );
       },
@@ -159,12 +155,12 @@ const ListIncidents = () => {
       dataIndex: "level",
       filters: [
         {
-          text: "Normal",
-          value: "Normal",
+          text: 'Normal',
+          value: 'Normal',
         },
         {
-          text: "Urgency",
-          value: "Urgency",
+          text: 'Urgency',
+          value: 'Urgency',
         },
       ],
       filterMultiple: false,
@@ -180,20 +176,20 @@ const ListIncidents = () => {
       dataIndex: "type",
       filters: [
         {
-          text: "Sự cố cháy rừng",
-          value: "Sự cố cháy rừng",
+          text: 'Sự cố cháy rừng',
+          value: 'Sự cố cháy rừng',
         },
         {
-          text: "Sự cố đê điều",
-          value: "Sự cố đê điều",
+          text: 'Sự cố đê điều',
+          value: 'Sự cố đê điều',
         },
         {
-          text: "Sự cố cây trồng",
-          value: "Sự cố cây trồng",
+          text: 'Sự cố cây trồng',
+          value: 'Sự cố cây trồng',
         },
         {
-          text: "Sự cố lưới điện cao thế",
-          value: "Sự cố lưới điện cao thế",
+          text: 'Sự cố lưới điện cao thế',
+          value: 'Sự cố lưới điện cao thế',
         },
       ],
       filterMultiple: false,
@@ -209,46 +205,16 @@ const ListIncidents = () => {
       key: "operation",
       width: "10%",
       render: (record) => (
-        <div style={{ textAlign: "center" }}>
-          <p>
+        <div style={{ textAlign: "left" }}>
+          {/* <span>
             <InfoCircleOutlined
               onClick={(value) => {
-                setLoadingModal(true);
-                setVisibleModalDetailIncident(true);
-                setChildData([]);
-                getInforIncident(record.id)
-                  .then((dataIncident) => {
-                    let listDetailChild = [];
-                    dataIncident.map((data) => {
-                      let listEmployees = "";
-                      if (data.task_type) {
-                        data.employees.map((person, index) => {
-                          if (index == 0) {
-                            listEmployees += person.full_name;
-                          } else {
-                            listEmployees += ", " + person.full_name;
-                          }
-                        });
-                        let childDataObject = {
-                          name: data.task_type.name,
-                          employees: listEmployees,
-                          description: data.task_type.description,
-                        };
-                        listDetailChild.push(childDataObject);
-                      }
-                    });
-                    setChildData(listDetailChild);
-                    setLoadingModal(false);
-                  })
-                  .catch((err) => {
-                    setLoadingModal(false);
-                  });
+                getInforIncidents(record);
               }}
               style={{ color: "blue", marginLeft: 5 }}
             />
-          </p>
-
-          <p style={record.statusCode == 0 ? {} : { display: "none" }}>
+          </span> */}
+          <span style={record.statusCode == 0 ? {} : { display: "none" }}>
             <Button
               type="primary"
               onClick={() => {
@@ -260,7 +226,7 @@ const ListIncidents = () => {
             >
               Tiến hành xử lý
             </Button>
-          </p>
+          </span>
         </div>
       ),
     },
@@ -395,34 +361,6 @@ const ListIncidents = () => {
 
   const EditableContext = React.createContext();
 
-  const childColumns = [
-    {
-      title: "Loại công việc xử lý",
-      dataIndex: "name",
-    },
-    {
-      title: "Nhân viên thực hiện",
-      dataIndex: "employees",
-    },
-    {
-      title: "Mô tả công việc",
-      dataIndex: "description",
-    },
-    {
-      title: "",
-      dataIndex: "operation",
-      render: (text, record) =>
-        record.creatNew ? (
-          <Popconfirm
-            title="Sure to delete?"
-            // onConfirm={() => handleDeleteRow(record.key)}
-          >
-            <a>Delete</a>
-          </Popconfirm>
-        ) : null,
-    },
-  ];
-
   const EditableRow = (index) => {
     // const [form] = Form.useForm();
     return (
@@ -437,7 +375,7 @@ const ListIncidents = () => {
 
   return (
     <div>
-      <div className="header" onClick={() => {}}>
+      <div className="header" onClick={() => { }}>
         Danh sách công việc xử lý sự cố
       </div>
       <div>
@@ -454,91 +392,91 @@ const ListIncidents = () => {
             pagination={{ defaultPageSize: 5 }}
             dataSource={filterTable == null ? dataIncidents : filterTable}
             size="middle"
-            // expandable={{
-            //   expandedRowRender: (record, index, indent, expand) => {
-            //     let childData = [];
-            //     const childColumns = [
-            //       {
-            //         title: "Loại công việc xử lý",
-            //         dataIndex: "name",
-            //       },
-            //       {
-            //         title: "Nhân viên thực hiện",
-            //         dataIndex: "employees",
-            //       },
-            //       {
-            //         title: "Mô tả công việc",
-            //         dataIndex: "description",
-            //       },
-            //       {
-            //         title: "",
-            //         dataIndex: "operation",
-            //         render: (text, record) =>
-            //           record.creatNew ? (
-            //             <Popconfirm
-            //               title="Sure to delete?"
-            //             // onConfirm={() => handleDeleteRow(record.key)}
-            //             >
-            //               <a>Delete</a>
-            //             </Popconfirm>
-            //           ) : null,
-            //       },
-            //     ];
-            //     if (expand && loadingChildTable == false) {
-            //       if (listChildDataRecord.length > 0) {
-            //         let child = listChildDataRecord.find(
-            //           (item) => item.id == record.id
-            //         );
-            //         // console.log("Asd213", listChildDataRecord);
+            expandable={{
+              expandedRowRender: (record, index, indent, expand) => {
+                let childData = [];
+                const childColumns = [
+                  {
+                    title: "Loại công việc xử lý",
+                    dataIndex: "name",
+                  },
+                  {
+                    title: "Nhân viên thực hiện",
+                    dataIndex: "employees",
+                  },
+                  {
+                    title: "Mô tả công việc",
+                    dataIndex: "description",
+                  },
+                  {
+                    title: "",
+                    dataIndex: "operation",
+                    render: (text, record) =>
+                      record.creatNew ? (
+                        <Popconfirm
+                          title="Sure to delete?"
+                        // onConfirm={() => handleDeleteRow(record.key)}
+                        >
+                          <a>Delete</a>
+                        </Popconfirm>
+                      ) : null,
+                  },
+                ];
+                if (expand && loadingChildTable == false) {
+                  if (listChildDataRecord.length > 0) {
+                    let child = listChildDataRecord.find(
+                      (item) => item.id == record.id
+                    );
+                    // console.log("Asd213", listChildDataRecord);
 
-            //         if (child) {
-            //           child.map((data) => {
-            //             let listEmployees = "";
-            //             if(data.task_type){
-            //               data.employees.map((person, index) => {
-            //                 if (index == 0) {
-            //                   listEmployees += person.full_name;
-            //                 } else {
-            //                   listEmployees += ", " + person.full_name;
-            //                 }
-            //               });
-            //               let childDataObject = {
-            //                 name: data.task_type.name,
-            //                 employees: listEmployees,
-            //                 description: data.task_type.description,
-            //               };
-            //               childData.push(childDataObject);
-            //               // console.log("dasd", childDataObject);
-            //             }
-            //           });
-            //         }
-            //       }
-            //     }
-            //     return (
-            //       <Spin spinning={loadingChildTable} tip="Loading...">
-            //         <Table
-            //           rowKey={(record) => record.id}
-            //           columns={childColumns}
-            //           dataSource={childData}
-            //           pagination={false}
-            //         />
-            //       </Spin>
-            //     );
-            //   },
-            //   onExpand: (expanded, record) => {
-            //     if (expanded) {
-            //       setLoadingChildTable(true);
-            //       getInforIncident(record.id).then((dataIncident) => {
-            //         dataIncident.id = record.id;
-            //         setListChildDataRecord([
-            //           ...listChildDataRecord,
-            //           dataIncident,
-            //         ]);
-            //       });
-            //     }
-            //   },
-            //   rowExpandable: (record) => record.name !== "Not Expandable",
-            // }}
+                    if (child) {
+                      child.map((data) => {
+                        let listEmployees = "";
+                        if(data.task_type){
+                          data.employees.map((person, index) => {
+                            if (index == 0) {
+                              listEmployees += person.full_name;
+                            } else {
+                              listEmployees += ", " + person.full_name;
+                            }
+                          });
+                          let childDataObject = {
+                            name: data.task_type.name,
+                            employees: listEmployees,
+                            description: data.task_type.description,
+                          };
+                          childData.push(childDataObject);
+                          // console.log("dasd", childDataObject);
+                        }
+                      });
+                    }
+                  }
+                }
+                return (
+                  <Spin spinning={loadingChildTable} tip="Loading...">
+                    <Table
+                      rowKey={(record) => record.id}
+                      columns={childColumns}
+                      dataSource={childData}
+                      pagination={false}
+                    />
+                  </Spin>
+                );
+              },
+              onExpand: (expanded, record) => {
+                if (expanded) {
+                  setLoadingChildTable(true);
+                  getInforIncident(record.id).then((dataIncident) => {
+                    dataIncident.id = record.id;
+                    setListChildDataRecord([
+                      ...listChildDataRecord,
+                      dataIncident,
+                    ]);
+                  });
+                }
+              },
+              rowExpandable: (record) => record.name !== "Not Expandable",
+            }}
           />
         </Spin>
       </div>
@@ -651,23 +589,6 @@ const ListIncidents = () => {
               </Button>
             </Form.Item>
           </Form>
-        </Spin>
-      </Modal>
-      <Modal
-        title={"Chi tiết công việc xử lý sự cố"}
-        visible={visibleModalDetailIncident}
-        onCancel={() => {
-          setVisibleModalDetailIncident(false);
-        }}
-        width={"60%"}
-        footer={null}
-      >
-        <Spin spinning={loadingModal} tip="Loading...">
-          <Table
-            rowKey={(record) => record.id}
-            columns={childColumns}
-            dataSource={childData}
-          />
         </Spin>
       </Modal>
     </div>

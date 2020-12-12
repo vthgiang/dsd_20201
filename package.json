@@ -2,7 +2,8 @@
   "name": "dsd-20201",
   "version": "1.0.0",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -11,12 +12,20 @@
     "antd": "^4.6.6",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-favicon": "^2.0.1",
+    "moment": "^2.29.1",
+    "path": "^0.12.7",
     "react": "16.9.0",
     "react-calendar": "^3.2.1",
+    "react-confirm-alert": "^2.6.2",
     "react-dom": "^16.13.1",
+    "react-highlight-words": "^0.16.0",
+    "react-player": "^2.7.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "validate-image-url": "^1.0.1"
   },
   "browserslist": {
     "production": [

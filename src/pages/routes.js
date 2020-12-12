@@ -69,6 +69,7 @@ export const routes = [
   {
     path: '/handle-problem',
     component: Incident,
+    exact: true,
   },
   {
     path: '/user-management',

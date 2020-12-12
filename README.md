@@ -1,2 +1,2 @@
-# dsd_20201
+# DSD_08
 Phát triển phần mềm phân tán 20201

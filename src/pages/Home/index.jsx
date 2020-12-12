@@ -23,7 +23,7 @@ const Home = () => {
             <HomeContent />
           </div>
         </Content>
-        <Footer className="footer">©2020 Designed by Group10</Footer>
+        <Footer className="footer" style={{bottom: 0}}>©2020 Designed by Group10</Footer>
       </Layout>
     </StyleHome>
   );

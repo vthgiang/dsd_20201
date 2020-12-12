@@ -8,7 +8,7 @@ import { IMAGES } from '../../constants';
 const { Title } = Typography;
 
 const HomeContent = ({ history }) => {
-  console.log({ history });
+  // console.log({ history });
   return (
     <StyleHomeContent>
       <Title level={2} className='title'>

@@ -13,7 +13,7 @@ yarn-error.log*
 yarn.lock
 
 # Env
-.env
+# .env
 
 #Lib
 node_modules/
