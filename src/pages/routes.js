@@ -26,6 +26,24 @@ import LogObjMonitor from './LogObjMonitor';
 import LogRegion from './LogRegion';
 import LogStatistic from './LogStatistic';
 import LogUAV from './LogUAV';
+//Payload
+import ListPayload from './Payload/PayloadManagement/List';
+import ListTypePayload from "./Payload/PayloadType/List";
+import PayloadMaintenance from './Payload/PayloadMaintenance/List';
+import EditSchedule from './Payload/PayloadMaintenance/Edit';
+import AddSchedule from './Payload/PayloadMaintenance/Add';
+import PayloadSetting from './Payload/PayloadSetting';
+//Payload  Statistic
+import PayloadStatistic from './Payload/PayloadStatistic';
+import PayloadStatisticFrequency from './Payload/PayloadStatistic/PayloadStatisticFrequency';
+import PayloadStatisticTime from "./Payload/PayloadStatistic/PayloadStatisticTime";
+import PayloadStatisticStatus from "./Payload/PayloadStatistic/PayloadStatisticStatus";
+import PayloadStatisticWorking from "./Payload/PayloadStatistic/PayloadStatisticWorking";
+import PayloadStatisticDroneFixing from "./Payload/PayloadStatistic/PayloadStatisticDroneFixing";
+import PayloadDroneHistory from './Payload/PayloadToDrone/List';
+import EditSignupPayloadDrone from './Payload/PayloadToDrone/Edit';
+import AddSignupPayloadDrone from './Payload/PayloadToDrone/Add';
+import DScard from './Payload/PayloadSDcard';
 
 export const routes = [
   {
@@ -65,10 +83,79 @@ export const routes = [
     path: '/flight-hub-other-params',
     component: ListLabelsPage,
   },
-  {
+   //PAYLOAD
+   {
     path: '/payloads',
     component: () => <div>PayloadManagement</div>,
   },
+  {
+    path: '/payload-management',
+    component: ListPayload,
+  },
+  {
+    path: '/payload-dscard',
+    component: DScard
+  },
+  {
+    path: '/payload-type',
+    component: ListTypePayload,
+  },
+
+  {
+    path: '/payload-drone',
+    component: PayloadDroneHistory,
+  },
+  {
+    path: '/edit-signup-payload-drone',
+    component: EditSignupPayloadDrone,
+  },
+  {
+    path: '/add-signup-payload-drone',
+    component: AddSignupPayloadDrone,
+  },
+  {
+    path: '/payload-configuration',
+    component: PayloadSetting,
+  },
+  /* {
+    path: '/payload-maintenance',
+    component: PayloadMaintenance,
+  }, */
+  /* {
+    path: '/edit-schedule',
+    component: EditSchedule,
+  },
+  {
+    path: '/add-schedule',
+    component: AddSchedule,
+  },
+ */
+  //Payload statistic
+  {
+    path: '/payload-statistic',
+    component: PayloadStatistic,
+  },
+  {
+    path: '/payload-statistic-type',
+    component: PayloadStatisticFrequency,
+  },
+  {
+    path: '/payload-statistic-time',
+    component: PayloadStatisticTime,
+  },
+  {
+    path: '/payload-statistic-work',
+    component: PayloadStatisticWorking,
+  },
+  {
+    path: '/payload-statistic-status',
+    component: PayloadStatisticStatus,
+  },
+  {
+    path: '/payload-statistic-fix',
+    component: PayloadStatisticDroneFixing,
+  },
+
   {
     path: '/metadata',
     component: () => <div>Meta Data</div>,
