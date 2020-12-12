@@ -11,5 +11,7 @@
         "react"
     ],
     "rules": {
+        "quotes": [2, "double", { "avoidEscape": true }],
+        "react/jsx-one-expression-per-line": "off"
     }
 }

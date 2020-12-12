@@ -1,3 +1,6 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/no-array-index-key */
 import React from "react";
 import {
   Row,
@@ -21,7 +24,6 @@ const renderCustomizedLabel = ({
   innerRadius,
   outerRadius,
   percent,
-  index,
 }) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -46,39 +48,6 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#ff8279"];
 
 const RADIAN = Math.PI / 180;
 
-const dataSource = [
-  {
-    key: "1",
-    name: "Admin",
-    age: "10:11:05 25-11-2020",
-    status: "error",
-  },
-  {
-    key: "2",
-    name: "John",
-    age: "10:11:05 25-11-2020",
-    status: "pass",
-  },
-  {
-    key: "3",
-    name: "John",
-    age: "10:11:05 25-11-2020",
-    status: "pass",
-  },
-  {
-    key: "4",
-    name: "John",
-    age: "10:11:05 25-11-2020",
-    status: "pass",
-  },
-  {
-    key: "5",
-    name: "John",
-    age: "10:11:05 25-11-2020",
-    status: "pass",
-  },
-];
-
 const columns = [
   {
     title: "Trạng thái",
@@ -93,7 +62,7 @@ const columns = [
   {
     title: "Hành động",
     key: "action",
-    render: (text, record) => (
+    render: () => (
       <a href="#">Chi tiết</a>
     ),
   },
@@ -109,7 +78,7 @@ export default function DroneDashboard() {
       { name: "Đang sạc", value: droneMetrics.charging },
       { name: "Đang bảo trì", value: droneMetrics.maintaining },
       { name: "Đã hỏng", value: droneMetrics.broken },
-    ]
+    ];
   }, [droneMetrics]);
   const tableData = React.useMemo(() => {
     if (!droneMetrics) return [];
@@ -119,14 +88,14 @@ export default function DroneDashboard() {
       { status: "Đang sạc", amount: droneMetrics.charging },
       { status: "Đang bảo trì", amount: droneMetrics.maintaining },
       { status: "Đã hỏng", amount: droneMetrics.broken },
-    ]
+    ];
   }, [droneMetrics]);
 
   React.useEffect(() => {
     const fetchAll = async () => {
       const drone = await getDroneDetailedMetrics();
       setDroneMetrics(drone);
-    }
+    };
 
     fetchAll();
   }, []);
