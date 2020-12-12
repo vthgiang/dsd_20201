@@ -1,15 +1,15 @@
-import React from "react";
-import { Form, Input, Button, Checkbox } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import StyleLoginForm from "./index.style";
-import { Typography } from "antd";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import { Form, Input, Button, Checkbox } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import StyleLoginForm from './index.style';
+import { Typography } from 'antd';
+import { withRouter } from 'react-router-dom';
 
 const { Title } = Typography;
 
 const LoginForm = ({ history }) => {
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    console.log('Received values of form: ', values);
   };
 
   return (
@@ -27,7 +27,7 @@ const LoginForm = ({ history }) => {
           rules={[
             {
               required: true,
-              message: "Please input your Username!",
+              message: 'Please input your Username!',
             },
           ]}
         >
@@ -41,7 +41,7 @@ const LoginForm = ({ history }) => {
           rules={[
             {
               required: true,
-              message: "Please input your Password!",
+              message: 'Please input your Password!',
             },
           ]}
         >
@@ -56,7 +56,10 @@ const LoginForm = ({ history }) => {
             <Checkbox>Lưu tài khoản</Checkbox>
           </Form.Item>
 
-          <a className='login-form-forgot' href='#'>
+          <a
+            className="login-form-forgot"
+            href="https://www.facebook.com/groups/1018941755224966"
+          >
             Quên mật khẩu
           </a>
         </Form.Item>
@@ -66,7 +69,7 @@ const LoginForm = ({ history }) => {
             type="primary"
             htmlType="submit"
             className="login-form-button"
-            onClick={() => history.push("/")}
+            onClick={() => history.push('/')}
           >
             Đăng nhập
           </Button>

@@ -1,12 +1,17 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import Dashboard from './Dashboard';
+import DashboardPage from './Dashboard';
+import ListMonitorCampaignPage from './FlightHub/ListMonitorCampaign';
+import CreateMonitorCampaignPage from './FlightHub/CreateMonitorCampaign';
+import UpdateMonitorCampaignPage from './FlightHub/UpdateMonitorCampaign';
+
+import ListLabelsPage from './FlightHub/Labels';
 
 export const routes = [
   {
     path: '/dashboard',
-    component: Dashboard,
+    component: DashboardPage,
     exact: true,
   },
   {
@@ -26,8 +31,20 @@ export const routes = [
     component: () => <div>Thống kê drone</div>,
   },
   {
-    path: '/flight-hub',
-    component: () => <div>Flight Hub</div>,
+    path: '/flight-hub-monitor-campaigns/create',
+    component: CreateMonitorCampaignPage,
+  },
+  {
+    path: '/flight-hub-monitor-campaigns/:id',
+    component: UpdateMonitorCampaignPage,
+  },
+  {
+    path: '/flight-hub-monitor-campaigns',
+    component: ListMonitorCampaignPage,
+  },
+  {
+    path: '/flight-hub-other-params',
+    component: ListLabelsPage,
   },
   {
     path: '/payloads',
@@ -88,6 +105,6 @@ export default () => (
         />
       );
     })}
-    <Redirect to='/' />
+    <Redirect to="/" />
   </Switch>
 );
