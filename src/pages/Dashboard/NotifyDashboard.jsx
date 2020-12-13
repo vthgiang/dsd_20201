@@ -59,9 +59,14 @@ export default function PayloadDashboard() {
     return [
       { name: "Cảnh báo đúng: ", value: notifyMetrics.all.isTrue },
       { name: "Cảnh báo sai: ", value: notifyMetrics.all.isFalse },
-      { name: "Tổng số: ", value: notifyMetrics.all.total },
     ]
   }, [notifyMetrics]);
+  const chartData2 = React.useMemo(() => {
+    if(!notifyMetrics) return [];
+    return [
+      { name: "Nomal: "}
+    ]
+  })
   const tableData = React.useMemo(() => {
     if (!notifyMetrics) return [];
     return [
@@ -122,6 +127,46 @@ export default function PayloadDashboard() {
         <Spin />
       ) : (
         <Row>
+          <Col span={10} offset={0} className="mt-5">
+            <h3 className="ml-5">Tổng quan</h3>
+            <ResponsiveContainer
+              height={300}
+              width={300}
+              className="alight-item-center mx-auto mt-5"
+            >
+              <PieChart>
+                <Pie
+                  data={chartData}
+                  cx={100}
+                  cy={100}
+                  labelLine={false}
+                  label={renderCustomizedLabel}
+                  outerRadius={100}
+                  fill="#8884d8"
+                  dataKey="value"
+                  margin={{ bottom: 10 }}
+                >
+                  {chartData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
+                  ))}
+                </Pie>
+                <Legend style={{ marginTop: 16 }} />
+              </PieChart>
+            </ResponsiveContainer>
+          </Col>
+          <Col span={12} offset={2} className="mt-5">
+            <h3 className="ml-1"> Số lượng thông báo theo trạng thái </h3>
+            <Table
+              className="mt-5"
+              dataSource={tableData}
+              columns={columns}
+              size="small"
+              bordered
+            />
+          </Col>
           <Col span={10} offset={0} className="mt-5">
             <h3 className="ml-5">Tổng quan</h3>
             <ResponsiveContainer
