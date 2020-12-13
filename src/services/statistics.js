@@ -246,4 +246,71 @@ export const getNotifyMetrics = async() => {
     console.error(error);
   }
   return null;
-}
+};
+
+export const getMonitoreObjectMetrics = async () => {
+  try {
+    const results = await Promise.all([
+      requestWithCache(
+        'getAllMonitoreObject',
+        () => Axios.get('https://dsd05-monitored-object.herokuapp.com/category-monitored-object', {
+          headers: {
+            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+            'project-type': 'CHAY_RUNG',
+          },
+        })
+      ),
+      requestWithCache(
+        'getObjectByLD',
+        () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=LUOI_DIEN', {
+          headers: {
+            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+            'project-type': 'CHAY_RUNG',
+          },
+        })
+      ),
+      requestWithCache(
+        'getObjectByCT',
+        () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=CAY_TRONG', {
+          headers: {
+            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+            'project-type': 'CHAY_RUNG',
+          },
+        })
+      ),
+      requestWithCache(
+        'getObjectByCR',
+        () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=CHAY_RUNG', {
+          headers: {
+            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+            'project-type': 'CHAY_RUNG',
+          },
+        })
+      ),
+      requestWithCache(
+        'getObjectByDD',
+        () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=DE_DIEU', {
+          headers: {
+            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+            'project-type': 'CHAY_RUNG',
+          },
+        })
+      ),
+    ])
+
+    const metrics = {};
+
+    metrics.all = {
+      total: results[0]?.data.content.length,
+      luoiDien: results[1]?.data.content.length,
+      cayTrong: results[2]?.data.content.length,
+      chayRung: results[3]?.data.content.length,
+      deDieu: results[4]?.data.content.length
+    };
+
+    console.log(metrics);
+    return metrics;
+  } catch (error) {
+    console.error(error);
+  }
+};
