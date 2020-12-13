@@ -242,3 +242,30 @@ export const getSystemLogMetrics = async () => {
   }
   return null;
 };
+
+export const getUserLogAllMetrics = async (startDate, endDate) => {
+  try {
+    const results = await Promise.all([
+      Axios.get(`http://it4883logging.herokuapp.com/api/user?MinDate=${startDate}&MaxDate=${endDate}&projectType=DE_DIEU`),
+      Axios.get(`http://it4883logging.herokuapp.com/api/user?MinDate=${startDate}&MaxDate=${endDate}&projectType=CHAY_RUNG`),
+      Axios.get(`http://it4883logging.herokuapp.com/api/user?MinDate=${startDate}&MaxDate=${endDate}&projectType=LUOI_DIEN`),
+      Axios.get(`http://it4883logging.herokuapp.com/api/user?MinDate=${startDate}&MaxDate=${endDate}&projectType=CAY_TRONG`),
+    ]);
+    const metrics = {};
+    if (results && results.length > 0) {
+      metrics.dyke = results[0].data.length;
+      metrics.fire = results[1].data.length;
+      metrics.electric = results[2].data.length;
+      metrics.tree = results[3].data.length;
+      return metrics;
+    }
+    metrics.dyke = 0;
+    metrics.fire = 0;
+    metrics.electric = 0;
+    metrics.tree = 0;
+    return metrics;
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+};

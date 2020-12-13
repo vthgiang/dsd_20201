@@ -1,18 +1,29 @@
+/* eslint-disable no-nested-ternary */
 import React from "react";
 import {
   Row,
   Col,
   Table,
   Spin,
+  DatePicker,
+  Button,
+  TimePicker,
 } from "antd";
 import {
   PieChart,
   Pie,
   Cell,
   Legend,
+  ResponsiveContainer,
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Bar,
+  Tooltip,
 } from "recharts";
 import moment from "moment";
-import { getSystemLogMetrics } from "../../services/statistics";
+import { getSystemLogMetrics, getUserLogAllMetrics } from "../../services/statistics";
 
 const columns = [
   {
@@ -69,10 +80,27 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#ff8279"];
 
 export default function LogDashboard() {
   const [systemLogMetrics, setSystemLogMetrics] = React.useState(null);
+  const [userLogMetrics, setUserLogMetrics] = React.useState(null);
+  const [startDate, setStartDate] = React.useState(moment());
+  const [endDate, setEndDate] = React.useState(moment());
+  const [startTime, setStartTime] = React.useState(moment());
+  const [endTime, setEndTime] = React.useState(moment());
+  const [isButtonFirstClicked, setIsButtonFirstClicked] = React.useState(false);
 
   const fetchSystemLog = async () => {
     const payload = await getSystemLogMetrics();
     setSystemLogMetrics(payload);
+  };
+
+  const fetchUserLog = async () => {
+    if (!isButtonFirstClicked) { setIsButtonFirstClicked(true); }
+    setUserLogMetrics(null);
+    const startDateFormatted = moment(startDate).format("YYYY-MM-DD");
+    const endDateFormatted = moment(endDate).format("YYYY-MM-DD");
+    const startTimeFormatted = moment(startTime).format("HH:mm:ss");
+    const endTimeFormatted = moment(endTime).format("HH:mm:ss");
+    const payload = await getUserLogAllMetrics(`${startDateFormatted} ${startTimeFormatted}`, `${endDateFormatted} ${endTimeFormatted}`);
+    setUserLogMetrics(payload);
   };
 
   const chartPieData = React.useMemo(() => {
@@ -93,6 +121,15 @@ export default function LogDashboard() {
       time: moment(item.timestamp).format("YYYY-MM-DD HH:mm:ss"),
     }));
   }, [systemLogMetrics]);
+  const chartBarUserData = React.useMemo(() => {
+    if (!userLogMetrics) return [];
+    return [
+      { name: "Đê điều", value: userLogMetrics.dyke },
+      { name: "Cháy rừng", value: userLogMetrics.fire },
+      { name: "Lưới điện", value: userLogMetrics.electric },
+      { name: "Cây trồng", value: userLogMetrics.tree },
+    ];
+  }, [userLogMetrics]);
   React.useEffect(() => {
     fetchSystemLog();
   }, []);
@@ -143,7 +180,41 @@ export default function LogDashboard() {
             </>
           )}
       </Row>
-
+      <h1>Lịch sử hoạt động người dùng</h1>
+      <Row>
+        <Col>
+          <div>Thời điểm bắt đầu</div>
+          <DatePicker value={startDate} onChange={setStartDate} style={{ marginBottom: "20px" }} />
+          <TimePicker value={startTime} onChange={setStartTime} style={{ marginBottom: "20px" }} />
+          <div>Thời điểm kết thúc</div>
+          <DatePicker value={endDate} onChange={setEndDate} style={{ marginBottom: "20px" }} />
+          <TimePicker value={endTime} onChange={setEndTime} style={{ marginBottom: "20px" }} />
+          <div />
+          <Button type="primary" onClick={fetchUserLog}>Tìm kiếm</Button>
+        </Col>
+        {isButtonFirstClicked ? (
+          !userLogMetrics ? (
+            <Spin />
+          )
+            : (
+              <>
+                <Col span={8} offset={2}>
+                  <BarChart
+                    width={400}
+                    height={300}
+                    data={chartBarUserData}
+                  >
+                    <CartesianGrid strokeDasharray="5 5" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="value" fill="#FF8042" label />
+                  </BarChart>
+                </Col>
+              </>
+            )
+        ) : <div />}
+      </Row>
     </>
   );
 }
