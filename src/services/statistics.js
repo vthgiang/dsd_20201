@@ -146,6 +146,7 @@ export const getPayloadDetailedMetrics = async () => {
         () => Axios.get('https://dsd06.herokuapp.com/api/payloadStat/feeWorking')
       ),
     ])
+    console.log(results);
     const metrics = {};
     metrics.working = results[0]?.data.filter((item) => item.status !== 'working').length;
     metrics.idle = results[0]?.data.filter((item) => item.status !== 'idle').length;
@@ -155,6 +156,91 @@ export const getPayloadDetailedMetrics = async () => {
       fixing: results[1].data,
       working: results[2].data,
     }
+    return metrics;
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+};
+
+export const getNotifyMetrics = async() => {
+  try {
+    const results = await Promise.all([
+      requestWithCache(
+        'getNotiIncitdentAll',
+        () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=14', {
+          headers: {
+            'api-token': '1fa6b94047ba20d998b44ff1a2c78bba',
+            'project-type': 'CHAY_RUNG',
+          },
+        })
+      ),
+      requestWithCache(
+        'getNotiIncitdentLD',
+        () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=10', {
+          headers: {
+            'api-token': '1fa6b94047ba20d998b44ff1a2c78bba',
+            'project-type': 'CHAY_RUNG',
+          },
+        })
+
+      ),
+      requestWithCache(
+        'getNotiIncitdentCT',
+        () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=10', {
+          headers: {
+            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+            'project-type': 'CHAY_RUNG',
+          },
+        })
+      ),
+      requestWithCache(
+        'getNotiIncitdentCR',
+        () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=10', {
+          headers: {
+            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+            'project-type': 'CHAY_RUNG',
+          },
+        })
+      ),
+      requestWithCache(
+        'getNotiIncitdentDD',
+        () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=10', {
+          headers: {
+            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+            'project-type': 'CHAY_RUNG',
+          },
+        })
+      ),
+    ])
+
+    const metrics = {};
+    console.log(results[0]?.data.data.trueNtf);
+    metrics.all = {
+      isTrue: results[0]?.data.data.trueNtf,
+      isFalse: results[0]?.data.data.falseNtf,
+      total: results[0]?.data.data.totalNtf
+    };
+    metrics.LD= {
+      isTrue: results[1]?.data.data.trueNtf,
+      isFalse: results[1]?.data.data.falseNtf,
+      total: results[1]?.data.data.totalNtf
+    };
+    metrics.CT = {
+      isTrue: results[2]?.data.data.trueNtf,
+      isFalse: results[2]?.data.data.falseNtf,
+      total: results[2]?.data.data.totalNtf
+    };
+    metrics.CR = {
+      isTrue: results[3]?.data.data.trueNtf,
+      isFalse: results[3]?.data.data.falseNtf,
+      total: results[3]?.data.data.totalNtf
+    };
+    metrics.DD = {
+      isTrue: results[4]?.data.data.trueNtf,
+      isFalse: results[4]?.data.data.falseNtf,
+      total: results[4]?.data.data.totalNtf
+    };
     return metrics;
   } catch (error) {
     console.error(error);

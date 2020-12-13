@@ -30,11 +30,13 @@ import DroneDashboard from "./DroneDashboard";
 import IncidentDashboard from "./IncidentDashboard";
 import UsersDashboard from "./UsersDashboard";
 import PayloadDashboard from "./PayloadDashboard";
+import NotifyDashboard from "./NotifyDashboard";
 import {
   getDroneOverallMetrics,
   getIncidentOverallMetrics,
   getUsersMetrics,
   getPayloadOverallMetrics,
+  getNotifyMetrics,
 } from "../../services/statistics";
 
 const { TabPane } = Tabs;
@@ -259,7 +261,7 @@ function Dashboard() {
 
   return (
     <div>
-      <Breadcrumb
+      {/* <Breadcrumb
         style={{
           marginBottom: 16,
           marginTop: 8,
@@ -269,7 +271,7 @@ function Dashboard() {
       >
         <Breadcrumb.Item>Báo cáo thống kê</Breadcrumb.Item>
         <Breadcrumb.Item>Tổng quan</Breadcrumb.Item>
-      </Breadcrumb>
+      </Breadcrumb> */}
       <Row
         justify="space-around"
         align="top"
@@ -277,75 +279,74 @@ function Dashboard() {
         style={{ alignItems: "stretch" }}
       >
         <Col span={6}>
-          <Card
-            className="u-shadow u-rounded border-primary border-top-0 border-right-0 border-bottom-0 u-border-medium"
+          <div
+            className="d-flex flex-column justify-content-center align-items-center"
             style={{ height: "100%" }}
           >
-            <h4>Drone</h4>
             {!droneMetrics ? (
               <Spin />
             ) : (
               <>
-                <div>Tổng: {droneMetrics.all}</div>
-                <div>Đang sử dụng: {droneMetrics.working}</div>
-                <div>Đang hỏng: {droneMetrics.broken}</div>
+                <h2 className="text-primary">{droneMetrics.working}/{droneMetrics.all}</h2>
               </>
             )}
-          </Card>
+            <h2 className="text-center text-primary">Drone</h2>
+          </div>
         </Col>
         <Col span={6}>
-          <Card
-            className="u-shadow u-rounded border-warning border-top-0 border-right-0 border-bottom-0 u-border-medium"
-            style={{ height: "100%" }}
+          <div
+            className="d-flex flex-column justify-content-center align-items-center"
+            style={{ height: "100%"}}
           >
-            <h4>Payload</h4>
             {!payloadMetrics ? (
               <Spin />
             ) : (
               <>
-                <div>Tổng: {payloadMetrics.all}</div>
-                <div>Đang sử dụng: {payloadMetrics.working}</div>
-                <div>Đang chờ: {payloadMetrics.idle}</div>
+                <h2 className="text-success">{payloadMetrics.working}/{payloadMetrics.all}</h2>
               </>
             )}
-          </Card>
+            <h2 className="text-success">Payload</h2>
+          </div>
         </Col>
         <Col span={6}>
-          <Card
-            className="u-shadow u-rounded border-danger border-top-0 border-right-0 border-bottom-0 u-border-medium"
-            style={{ height: "100%" }}
+          <div
+            className="d-flex flex-column justify-content-center align-items-center"
+            style={{ height: "100%"}}
           >
-            <h4>Sự cố</h4>
-            {!incidentMetrics ? (
-              <Spin />
-            ) : (
-              <>
-                <div>Tổng số sự cố: {incidentMetrics.all}</div>
-                <div>Đang khắc phục: {incidentMetrics.doing}</div>
-                <div>Đã xử lý: {incidentMetrics.done}</div>
-                <div>Đang chờ: {incidentMetrics.pending}</div>
-              </>
-            )}
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card
-            className="u-shadow u-rounded border-success border-top-0 border-right-0 border-bottom-0 u-border-medium"
-            style={{ height: "100%" }}
-          >
-            <h4>Người dùng</h4>
             {!usersMetrics ? (
               <Spin />
             ) : (
               <>
-                <div>Tổng: {usersMetrics.all}</div>
-                <div>Đang hoạt động: {usersMetrics.active}</div>
+                <h2 className="text-warning">{usersMetrics.active}/{usersMetrics.all}</h2>
+                {/* <div>Đang hoạt động: {usersMetrics.active}</div>
                 <div>Đang chờ: {usersMetrics.pending}</div>
-                <div>Đang không hoạt động: {usersMetrics.inactive}</div>
+                <div>Đang không hoạt động: {usersMetrics.inactive}</div> */}
               </>
             )}
-          </Card>
+            <h2 className="text-warning">Người dùng</h2>
+
+          </div>
         </Col>
+        <Col span={6}>
+          <div
+            className="d-flex flex-column justify-content-center align-items-center"
+            style={{ height: "220px", width: "220px" }}
+          >
+            {!incidentMetrics ? (
+              <Spin />
+            ) : (
+              <>
+                <h2 className="text-danger">{incidentMetrics.done}/{incidentMetrics.all}</h2>
+                {/* <div>Đang khắc phục: {incidentMetrics.doing}</div>
+                <div>Đã xử lý: {incidentMetrics.done}</div>
+                <div>Đang chờ: {incidentMetrics.pending}</div> */}
+              </>
+            )}
+            <h2 className="text-danger">Sự cố</h2>
+
+          </div>
+        </Col>
+
       </Row>
       <Row wrap={false} gutter={[16, 16]}>
         <Col span={24}>
@@ -368,7 +369,7 @@ function Dashboard() {
                 <UsersDashboard />
               </TabPane>
               <TabPane key="Cảnh báo" tab="Cảnh báo">
-                <div />
+                <NotifyDashboard />
               </TabPane>
               <TabPane key="Đợt giám sát" tab="Đợt giám sát">
                 <div>Thống kê số đợt giám sát theo tháng</div>
