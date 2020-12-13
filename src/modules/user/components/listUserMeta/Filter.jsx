@@ -10,13 +10,13 @@ const Filter = ({ filter, setFilter, setVisible }) => {
     const user = useSelector((state) => state.user.user);
     const [listUsers, setListUsers] = useState([]);
 
-    const fetchDepartments = async () => {
+    const fetchUsers = async () => {
         const res = await getAllUsers();
         setListUsers(res.result);
     };
 
     useEffect(() => {
-        fetchDepartments();
+        fetchUsers();
     }, []);
 
     const renderSelectStatus = () => (
@@ -91,7 +91,7 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
-            {listUsers.map((user, index) => {
+            {listUsers && listUsers.map((user, index) => {
                 return (
                     <Option key={index} value={user.id}>
                         {user.full_name}
@@ -113,7 +113,7 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
-            {listUsers.map((user, index) => {
+            {listUsers && listUsers.map((user, index) => {
                 return (
                     <Option key={index} value={user.id}>
                         {user.full_name}

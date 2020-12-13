@@ -117,7 +117,7 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
-            {listDepartments.map((type, index) => {
+            {listDepartments && listDepartments.map((type, index) => {
                 return (
                     <Option key={index} value={type.id}>
                         {type.name}
