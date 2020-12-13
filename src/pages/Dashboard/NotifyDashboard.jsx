@@ -107,9 +107,9 @@ export default function PayloadDashboard() {
 
   React.useEffect(() => {
     const fetchAll = async () => {
-      const payload = await getNotifyMetrics();
-      console.log({ payload })
-      setNotifyMetrics(payload);
+      const notifications = await getNotifyMetrics();
+      console.log({ notifications })
+      setNotifyMetrics(notifications);
     }
 
     fetchAll();

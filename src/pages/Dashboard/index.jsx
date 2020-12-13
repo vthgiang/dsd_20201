@@ -31,6 +31,7 @@ import IncidentDashboard from "./IncidentDashboard";
 import UsersDashboard from "./UsersDashboard";
 import PayloadDashboard from "./PayloadDashboard";
 import NotifyDashboard from "./NotifyDashboard";
+import MonitoreObjectDashboard from "./MonitoreObjectDashboard";
 import {
   getDroneOverallMetrics,
   getIncidentOverallMetrics,
@@ -379,7 +380,7 @@ function Dashboard() {
                 <div />
               </TabPane>
               <TabPane key="Đối tượng giám sát" tab="Đối tượng giám sát">
-                <div />
+                <MonitoreObjectDashboard />
               </TabPane>
               <TabPane key="Báo cáo" tab="Báo cáo">
                 <div />
