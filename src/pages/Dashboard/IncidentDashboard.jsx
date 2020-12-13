@@ -12,22 +12,19 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  BarChart
+  BarChart,
 } from "recharts";
 import { getIncidentDetailedMetrics } from "../../services/statistics";
-
 
 export default function IncidentDashboard() {
   const [incidentMetrics, setIncidentMetrics] = React.useState(null);
   const chartData = React.useMemo(() => {
     if (!incidentMetrics?.detailed) return [];
-    const getMonthData = (month) => {
-      return incidentMetrics.detailed.filter(item => (new Date(item.createdAt)).getMonth() === month);
-    }
-    const data = Array.from(Array(12).keys()).map(month => ({
+    const getMonthData = (month) => incidentMetrics.detailed.filter((item) => (new Date(item.createdAt)).getMonth() === month);
+    const data = Array.from(Array(12).keys()).map((month) => ({
       name: `Th${month + 1}`,
-      normal: getMonthData(month).filter(item => item.level.code === 0).length,
-      urgent: getMonthData(month).filter(item => item.level.code === 1).length,
+      normal: getMonthData(month).filter((item) => item.level.code === 0).length,
+      urgent: getMonthData(month).filter((item) => item.level.code === 1).length,
     }));
     return data;
   }, [incidentMetrics]);
@@ -36,7 +33,7 @@ export default function IncidentDashboard() {
     const fetchAll = async () => {
       const incident = await getIncidentDetailedMetrics();
       setIncidentMetrics(incident);
-    }
+    };
 
     fetchAll();
   }, []);

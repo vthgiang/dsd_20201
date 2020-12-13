@@ -1,10 +1,5 @@
-import React from "react";
-import {
-  Row,
-  Col,
-  Table,
-  Spin,
-} from "antd";
+import React from 'react';
+import { Row, Col, Table, Spin } from 'antd';
 import {
   Legend,
   ResponsiveContainer,
@@ -17,8 +12,10 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-} from "recharts";
-import { getPayloadDetailedMetrics } from "../../services/statistics";
+} from 'recharts';
+import { getPayloadDetailedMetrics } from '../../services/statistics';
+
+const RADIAN = Math.PI / 180;
 
 const renderCustomizedLabel = ({
   cx,
@@ -27,7 +24,6 @@ const renderCustomizedLabel = ({
   innerRadius,
   outerRadius,
   percent,
-  index,
 }) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -40,7 +36,7 @@ const renderCustomizedLabel = ({
       x={x}
       y={y}
       fill="white"
-      textAnchor={x > cx ? "start" : "end"}
+      textAnchor={x > cx ? 'start' : 'end'}
       dominantBaseline="central"
     >
       {`${(percent * 100).toFixed(0)}%`}
@@ -48,58 +44,58 @@ const renderCustomizedLabel = ({
   );
 };
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#ff8279"];
-
-const RADIAN = Math.PI / 180;
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#ff8279'];
 
 export default function PayloadDashboard() {
   const [payloadMetrics, setPayloadMetrics] = React.useState(null);
   const chartData = React.useMemo(() => {
     if (!payloadMetrics) return [];
     return [
-      { name: "Đang rảnh", value: payloadMetrics.idle },
-      { name: "Đang hoạt động", value: payloadMetrics.working },
-      { name: "Đang sạc", value: payloadMetrics.charging },
-      { name: "Đang bảo trì", value: payloadMetrics.fixing },
-    ]
+      { name: 'Đang rảnh', value: payloadMetrics.idle },
+      { name: 'Đang hoạt động', value: payloadMetrics.working },
+      { name: 'Đang sạc', value: payloadMetrics.charging },
+      { name: 'Đang bảo trì', value: payloadMetrics.fixing },
+    ];
   }, [payloadMetrics]);
   const tableData = React.useMemo(() => {
     if (!payloadMetrics) return [];
     return [
-      { status: "Đang rảnh", amount: payloadMetrics.idle },
-      { status: "Đang bay", amount: payloadMetrics.working },
-      { status: "Đang sạc", amount: payloadMetrics.charging },
-      { status: "Đang bảo trì", amount: payloadMetrics.fixing },
-    ]
+      { status: 'Đang rảnh', amount: payloadMetrics.idle },
+      { status: 'Đang bay', amount: payloadMetrics.working },
+      { status: 'Đang sạc', amount: payloadMetrics.charging },
+      { status: 'Đang bảo trì', amount: payloadMetrics.fixing },
+    ];
   }, [payloadMetrics]);
   const columns = [
     {
-      title: "Trạng thái",
-      dataIndex: "status",
-      key: "status",
+      title: 'Trạng thái',
+      dataIndex: 'status',
+      key: 'status',
     },
     {
-      title: "Số lượng",
-      dataIndex: "amount",
-      key: "amount",
+      title: 'Số lượng',
+      dataIndex: 'amount',
+      key: 'amount',
     },
     {
-      title: "Hành động",
-      key: "action",
-      render: (text, record) => (
-        <a href="#">Chi tiết</a>
-      ),
+      title: 'Hành động',
+      key: 'action',
+      render: (text, record) => <a href="#">Chi tiết</a>,
     },
   ];
   const lineChartData = React.useMemo(() => {
-    console.log({ payloadMetrics })
-    const getMonthData = (month) => {
-      return {
-        fixing: payloadMetrics?.fee?.fixing?.filter(item => (new Date(item.startedAt)).getMonth() === month).length || 0,
-        working: payloadMetrics?.fee?.working?.filter(item => (new Date(item.startedAt)).getMonth() === month).length || 0,
-      }
-    }
-    const data = Array.from(Array(12).keys()).map(month => ({
+    console.log({ payloadMetrics });
+    const getMonthData = (month) => ({
+      fixing:
+        payloadMetrics?.fee?.fixing?.filter(
+          (item) => new Date(item.startedAt).getMonth() === month,
+        ).length || 0,
+      working:
+        payloadMetrics?.fee?.working?.filter(
+          (item) => new Date(item.startedAt).getMonth() === month,
+        ).length || 0,
+    });
+    const data = Array.from(Array(12).keys()).map((month) => ({
       name: `Th${month + 1}`,
       ...getMonthData(month),
     }));
@@ -109,9 +105,9 @@ export default function PayloadDashboard() {
   React.useEffect(() => {
     const fetchAll = async () => {
       const payload = await getPayloadDetailedMetrics();
-      console.log({ payload })
+      console.log({ payload });
       setPayloadMetrics(payload);
-    }
+    };
 
     fetchAll();
   }, []);
@@ -171,7 +167,10 @@ export default function PayloadDashboard() {
               height={300}
               data={lineChartData}
               margin={{
-                top: 5, right: 30, left: 20, bottom: 5,
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
@@ -179,7 +178,12 @@ export default function PayloadDashboard() {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="fixing" stroke="#8884d8" activeDot={{ r: 8 }} />
+              <Line
+                type="monotone"
+                dataKey="fixing"
+                stroke="#8884d8"
+                activeDot={{ r: 8 }}
+              />
               <Line type="monotone" dataKey="working" stroke="#82ca9d" />
             </LineChart>
           </Col>
