@@ -1,26 +1,32 @@
-const TIMEOUT = 1000*60*5;
-// const TIMEOUT = 0;
+import {
+  configureStore,
+  getDefaultMiddleware,
+  combineReducers,
+} from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { reducer as userReducer } from "../modules/user/store";
 
-export const requestWithCache = async (key, promiseCreator) => {
-  const wrappedPromise = async () => {
-    const result = await promiseCreator();
-    localStorage.setItem(key, JSON.stringify({
-      data: result.data,
-      timestamp: Date.now(),
-    }));
-    return result;
-  }
-  const cached = localStorage.getItem(key);
-  if (cached) {
-    const parsed = JSON.parse(cached);
-    if (Date.now() - parsed.timestamp < TIMEOUT) {
-      console.log('Load from cache: ', parsed.data);
-      return { data: parsed.data };
-    } else {
-      localStorage.removeItem(key);
-      return await wrappedPromise();
-    }
-  } else {
-    return await wrappedPromise();
-  }
-}
+const persistConfig = {
+  key: "root",
+  storage: storage,
+  whitelist: ["user"],
+};
+
+const rootReducer = combineReducers({
+  user: userReducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+    immutableCheck: false,
+  }),
+});
+
+export const persistor = persistStore(store);
+
+export default store;

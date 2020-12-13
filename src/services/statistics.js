@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import Axios from "axios";
-import { requestWithCache } from "./index";
+import { requestWithCache } from "./utils";
 
 export const getDroneOverallMetrics = async () => {
   try {
