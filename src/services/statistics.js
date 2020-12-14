@@ -233,7 +233,7 @@ export const getNotifyMetrics = async () => {
       ),
       requestWithCache(
         'getNotiIncitdentCT',
-        () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=10', {
+        () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=11', {
           headers: {
             'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
             'project-type': 'CHAY_RUNG',
@@ -242,7 +242,7 @@ export const getNotifyMetrics = async () => {
       ),
       requestWithCache(
         'getNotiIncitdentCR',
-        () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=10', {
+        () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=12', {
           headers: {
             'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
             'project-type': 'CHAY_RUNG',
@@ -251,7 +251,7 @@ export const getNotifyMetrics = async () => {
       ),
       requestWithCache(
         'getNotiIncitdentDD',
-        () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=10', {
+        () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=13', {
           headers: {
             'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
             'project-type': 'CHAY_RUNG',

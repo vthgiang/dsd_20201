@@ -198,7 +198,7 @@ export default function PayloadDashboard() {
             </ResponsiveContainer>
           </Col>
           <Col span={12} offset={2} className="mt-5">
-            <h3 className="ml-1"> Số lượng thông báo theo trạng thái </h3>
+            <h3 className="ml-1"> Số lượng thông báo sự cố theo dự án</h3>
             <Table
               className="mt-5"
               dataSource={tableData}
