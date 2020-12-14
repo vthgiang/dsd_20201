@@ -41,7 +41,7 @@ const TypeTask = () => {
     const getData = () => {
         axios({
             method: "get",
-            url: process.env.REACT_APP_DOMAIN_API + "/task-type/listing",
+            url: URL_API + "/task-type/listing",
             // url: URL_API + "/report/listing",
             headers: {
                 "api-token": API_TOKEN,
@@ -154,7 +154,7 @@ const TypeTask = () => {
                     onClick: () => {
                         axios({
                             method: "delete",
-                            url: process.env.REACT_APP_DOMAIN_API + "/task-type/delete?id=" + record.id,
+                            url: URL_API + "/task-type/delete?id=" + record.id,
                             // url: URL_API + "/report/listing",
                             headers: {
                                 "api-token": API_TOKEN,
@@ -226,7 +226,7 @@ const TypeTask = () => {
         axios({
 
             method: "put",
-            url: process.env.REACT_APP_DOMAIN_API + `/task-type/update?id=${id}&name=${name}&description=${description}&employee_number=${employee_number}&prioritize=${prioritize}`,
+            url: URL_API + `/task-type/update?id=${id}&name=${name}&description=${description}&employee_number=${employee_number}&prioritize=${prioritize}`,
             // url: URL_API + "/report/listing",
             headers: {
                 "api-token": API_TOKEN,
@@ -256,7 +256,7 @@ const TypeTask = () => {
         axios({
 
             method: "post",
-            url: process.env.REACT_APP_DOMAIN_API + `/task-type/create`,
+            url: URL_API + `/task-type/create`,
             // url: URL_API + "/report/listing",
             headers: {
                 "api-token": API_TOKEN,

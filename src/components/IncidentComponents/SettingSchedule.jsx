@@ -14,6 +14,7 @@ import {
 import "../Styles/StyleSettingSchedule.css";
 import axios from "axios";
 import moment from "moment";
+import URL_API from "./url";
 const { Option } = Select;
 const SettingSchedule = () => {
   const [dataSettingSchedule, setDataSettingSchedule] = useState([]);
@@ -40,7 +41,7 @@ const SettingSchedule = () => {
   const getDataSetting = () => {
     axios({
       method: "get",
-      url: process.env.REACT_APP_DOMAIN_API + "/schedule-setting/listing",
+      url: URL_API + "/schedule-setting/listing",
       // url: URL_API + "/report/listing",
       headers: {
         "api-token": API_TOKEN,
@@ -72,7 +73,7 @@ const SettingSchedule = () => {
   const submitEditItem = (item) => {
     axios({
       method: "put",
-      url: process.env.REACT_APP_DOMAIN_API + "/schedule-setting/update",
+      url: URL_API + "/schedule-setting/update",
       // url: URL_API + "/report/listing",
       headers: {
         "api-token": API_TOKEN,
@@ -98,7 +99,7 @@ const SettingSchedule = () => {
     // setLoadingTable(true);
     // axios({
     //   method: "put",
-    //   url: process.env.REACT_APP_DOMAIN_API + "/schedule-setting/update",
+    //   url: URL_API + "/schedule-setting/update",
     //   // url: URL_API + "/report/listing",
     //   headers: {
     //     "api-token": API_TOKEN,
@@ -126,7 +127,7 @@ const SettingSchedule = () => {
     setLoadingTable(true);
     axios({
       method: "post",
-      url: process.env.REACT_APP_DOMAIN_API + "/schedule-setting/set",
+      url: URL_API + "/schedule-setting/set",
       // url: URL_API + "/report/listing",
       headers: {
         "api-token": API_TOKEN,

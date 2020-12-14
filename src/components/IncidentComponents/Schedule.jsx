@@ -46,7 +46,7 @@ const Schedule = () => {
     // );
     axios({
       method: "get",
-      url: process.env.REACT_APP_DOMAIN_API + "/schedule/detail-day",
+      url: URL_API + "/schedule/detail-day",
       // url: URL_API + "/report/listing",
       params: {
         day: curentDate.getDate(),
@@ -171,7 +171,7 @@ const Schedule = () => {
     setCurrentDate(value);
     axios({
       method: "get",
-      url: process.env.REACT_APP_DOMAIN_API + "/schedule/detail-day",
+      url: URL_API + "/schedule/detail-day",
       params: {
         day: value.getDate(),
         month: value.getMonth() + 1,

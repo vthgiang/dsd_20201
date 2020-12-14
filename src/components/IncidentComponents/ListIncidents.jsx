@@ -77,7 +77,7 @@ const ListIncidents = () => {
     setLoadingTable(true);
     axios({
       method: "get",
-      url: process.env.REACT_APP_DOMAIN_API + "/task/incident-listing",
+      url: URL_API + "/task/incident-listing",
       // url: URL_API + "/report/listing",
       headers: {
         "api-token": API_TOKEN,
@@ -270,7 +270,7 @@ const ListIncidents = () => {
     return new Promise((resolve, reject) => {
       axios({
         method: "get",
-        url: process.env.REACT_APP_DOMAIN_API + "/task/detail",
+        url: URL_API + "/task/detail",
         headers: {
           "api-token": API_TOKEN,
           "project-type": CURRENT_TYPE,
@@ -294,7 +294,7 @@ const ListIncidents = () => {
   const getListEmployees = () => {
     axios({
       method: "get",
-      url: process.env.REACT_APP_DOMAIN_API + "/task/employee-listing",
+      url: URL_API + "/task/employee-listing",
       headers: {
         "api-token": API_TOKEN,
         "project-type": CURRENT_TYPE,
@@ -316,7 +316,7 @@ const ListIncidents = () => {
   const getListWork = () => {
     axios({
       method: "get",
-      url: process.env.REACT_APP_DOMAIN_API + "/task-type/listing",
+      url: URL_API + "/task-type/listing",
       headers: {
         "api-token": API_TOKEN,
         "project-type": CURRENT_TYPE,
@@ -369,7 +369,7 @@ const ListIncidents = () => {
     });
     axios({
       method: "post",
-      url: process.env.REACT_APP_DOMAIN_API + "/task/handler",
+      url: URL_API + "/task/handler",
       // url: URL_API + "/report/listing",
       headers: {
         "api-token": API_TOKEN,

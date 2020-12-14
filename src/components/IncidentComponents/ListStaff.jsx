@@ -37,7 +37,7 @@ const ListStaff = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: process.env.REACT_APP_DOMAIN_API + "/employee/listing",
+      url: URL_API + "/employee/listing",
       // url: URL_API + "/report/listing",
       headers: {
         "api-token": API_TOKEN,

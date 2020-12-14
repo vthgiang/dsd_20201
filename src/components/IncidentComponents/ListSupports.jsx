@@ -36,7 +36,7 @@ const ListSupports = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: process.env.REACT_APP_DOMAIN_API + "/support/listing",
+      url: URL_API + "/support/listing",
       // url: URL_API + "/report/listing",
       headers: {
         "api-token": API_TOKEN,
