@@ -41,6 +41,14 @@ const data = [
 function FlightSchedule(props) {
     const [droneList, setDroneList] = useState(data);
 
+    /*
+    useEffect(() => {
+        // load list drone
+
+        // load flight schedule cua 12 drone dau
+    }, []);  
+     */
+
     const updateFlightSchedule = (drone) => {
         let index = 0;
         for(let i=0; i<droneList.length; i++){

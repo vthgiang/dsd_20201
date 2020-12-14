@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
-import { compose, withProps } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polyline } from "react-google-maps"
+import { compose, withProps } from "recompose";
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polyline, Circle } from "react-google-maps";
+import { IMAGES } from '../../constants';
 
 const MyMapComponent = compose(
   withProps({
@@ -37,6 +38,27 @@ const MyMapComponent = compose(
                 options={{strokeColor: "red", 
                 strokeOpacity: 1,
                 strokeWeight: 5}}
+            />
+            <Marker 
+                position={{ lat: 20.99933610536628, lng: 105.8229881666537 }}
+                icon={{
+                    url: IMAGES.poin,
+                    anchor: new window.google.maps.Point(5, 58),
+                    size: new window.google.maps.Size(32, 32)
+                }}
+            />
+            <Circle 
+                onClick={onClick}
+                center={{ lat: 20.99933610536628, lng: 105.8329881666537 }}
+                radius={20}
+                anchor= {new window.google.maps.Point(5, 58)}
+                options={{
+                    strokeColor: "#FF0000",
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: "#FF0000",
+                    fillOpacity: 1,
+                }}
             />
         </GoogleMap>
     )}

@@ -7,29 +7,33 @@ FlightPathList.propTypes = {
     
 };
 
-function FlightPathList({flightPaths, viewFlightPath}) {
+function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath}) {
 
     return (
         <Table striped bordered hover size="sm">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>STT</th>
                     <th>Tên đường bay</th>
                     <th>Độ cao</th>
-                    <th>Task</th>
-                    <th>Id kv giám sát</th>
+                    <th>Khu vực giám sát</th>
+                    <th>Miền giám sát</th>
                 </tr>
             </thead>
             <tbody>
-                {flightPaths.map((item) => (<tr key={item.id}>
-                    <td>{item.id}</td>
+                {flightPaths.map((item, index) => (<tr key={item.id}>
+                    <td>{index+1}</td>
                     <td>{item.name}</td>
                     <td>{item.heightFlight}</td>
-                    <td>{item.task}</td>
-                    <td>{item.idSupervisedArea}</td>
+                    <td>{item.monitoredAreaName}</td>
+                    <td>{item.monitoredZoneCode}</td>
                     <td><button className="btn-view" onClick={()=>viewFlightPath(item)}>
                         <i className="far fa-eye"></i>
-                    </button></td>
+                    </button>
+                    <button className="btn-delete" onClick={()=>handleDeleteFlightPath(item)}>
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    </td>
                 </tr>))}
             </tbody>
         </Table>

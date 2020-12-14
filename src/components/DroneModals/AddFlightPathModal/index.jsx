@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
+import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import FlightPathInput from '../FlightPathInput';
 import './FlightPathModal.css';
 import Map from '../Map';
 import PointInput from '../PointInput';
+import axios from 'axios';
 
 AddFlightPathModal.propTypes = {
     
@@ -15,38 +16,83 @@ function AddFlightPathModal(props) {
     const [name, setName] = useState('');
     const [height, setHeight] = useState('');
     const [task, setTask] = useState('');
-    const [monitoredArea, setMonitoredArea] = useState('');
-    
     const [timeCome, setTimeCome] = useState('');
     const [timeStop, setTimeStop] = useState('');
-    const [note, setNote] = useState('');
     
     const [newPoint, setNewPoint] = useState({});
-    const [flightPoint, setFlightPoint] = useState([]);
-    
+    const [flightPoints, setFlightPoints] = useState([]);
+    const [heightPoint, setHeightPoint] = useState('');
+    const [monitoredObjectId, setMonitoredObjectId] = useState('');
+
+    const [selectedArea, setSelectedArea] = useState(null);
+    const [selectedZone, setSelectedZone] = useState(null);
+    const [monitoredObjectList, setMonitoredObjectList] = useState([]);
+
     const [show, setShow] = useState(false);
     const toggle = () => setShow(!show);
 
-    const handleOkClick = () => {
-        if(!name || flightPoint.length===0 || !height) return;
-        let id = Math.trunc(Math.random()*2000);
-        let newFlightPath = {id ,name, height, task, monitoredArea, flightPoint};
-        // console.log(newFlightPath);
-        props.addFlightPath(newFlightPath);
-        reset();
-        toggle();
+    const [error, setError] = useState('');
+
+    useEffect(()=> {
+        if(!selectedZone) return;
+        axios.get(`https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-zone?monitoredZone=${selectedZone._id}`)
+            .then(response => {
+                // console.log("monitored Object")
+                // console.log(response)
+                const tmp = response.data.content.map(object => ({
+                    _id: object._id,
+                    name: object.name,
+                    lat: parseFloat(object.lat),
+                    lng: parseFloat(object.lng),
+                    height: object.height
+                }))
+                console.log("monitored object", tmp);
+                setMonitoredObjectList(tmp);
+            })
+            .catch(e => {
+                console.log(e)
+            });
+        }, [selectedZone]);
+        
+        const handleOkClick = () => {
+            // xử lý đồng ý thêm đường bay
+        if(!name || flightPoints.length===0 || !selectedZone) return setError('Bạn chưa nhập đủ thông tin');
+        // let id = Math.trunc(Math.random()*2000);
+        let newFlightPath = {name, flightPoints,
+            heightFlight :height,
+            idSupervisedArea: selectedZone._id //~~~~
+            // idSupervisedArea: selectedArea._id,
+            // monitoredAreaName: selectedArea.name,
+            // monitoredZoneId: selectedZone._id,
+            // monitoredZoneCode: selectedZone.code
+        };
+        console.log(newFlightPath);
+        axios.post('http://skyrone.cf:6789/flightPath/save', {newFlightPath})
+            .then(response => {
+                console.log(response)
+                // props.addFlightPath(newFlightPath);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            .finally(()=>{
+                reset();
+                toggle();
+            });
     }
 
     const addPoint = () => {
+        // thêm point vào pointPath
         if(!newPoint.locationLat) return;
         let point = {
             locationLat: newPoint.locationLat,
             locationLng: newPoint.locationLng,
             timeCome: timeCome,
             timeStop: timeStop,
-            note: note
+            flightHeight: heightPoint != '' ? heightPoint : 30,
+            idSupervisedObject: monitoredObjectId
         }
-        setFlightPoint([...flightPoint, point]);
+        setFlightPoints([...flightPoints, point]);
         resetPoint();
     }
     
@@ -54,15 +100,19 @@ function AddFlightPathModal(props) {
         setTimeCome('');
         setTimeStop('');
         setNewPoint({});
-        setNote('');
+        if(selectedZone) setHeightPoint(selectedZone.minHeight != undefined ? selectedZone.minHeight : '');
     }
 
     const reset = () => {
-        setMonitoredArea('');
         setName('');
         setTask('');
         setHeight('');
-        setFlightPoint([]);
+        setFlightPoints([]);
+        setSelectedArea(null);
+        setSelectedZone(null);
+        setMonitoredObjectList([]);
+        setMonitoredObjectId('');
+        setError('');
 
         resetPoint();
     }
@@ -84,33 +134,43 @@ function AddFlightPathModal(props) {
             </Modal.Header>
             <Modal.Body>
                 <Container>
-                    <Row>
-                        <FlightPathInput 
-                            name={name} setName={setName}
-                            height={height} setHeight={setHeight}
-                            task={task} setTask={setTask}
-                            monitoredArea={monitoredArea} setMonitoredArea={setMonitoredArea}
-                        />
-                    </Row>
+                    <FlightPathInput 
+                        name={name} setName={setName}
+                        height={height} setHeight={setHeight} 
+                        heightPoint={heightPoint} setHeightPoint={setHeightPoint}
+                        task={task} setTask={setTask}
+                        selectedArea={selectedArea} setSelectedArea={setSelectedArea}
+                        selectedZone={selectedZone} setSelectedZone={setSelectedZone}
+                    />
                     <Row>
                         <Col md={4}>
                             <PointInput 
                                 timeCome={timeCome} setTimeCome={setTimeCome}
                                 timeStop={timeStop} setTimeStop={setTimeStop}
-                                note={note} setNote={setNote}
-                                addPoint={addPoint}
+                                newPoint={newPoint} addPoint={addPoint}
+                                heightPoint={heightPoint} setHeightPoint={setHeightPoint}
+                                selectedZone={selectedZone}
                             />
                         </Col>
                         <Col md={8}>
                             <Map 
                                 newPoint={newPoint} setNewPoint={setNewPoint}
-                                flightPoint={newPoint.locationLat? [...flightPoint, newPoint] : flightPoint}
+                                flightPoints={newPoint.locationLat? [...flightPoints, newPoint] : flightPoints}
+                                selectedZone={selectedZone}
+                                monitoredObjectList={monitoredObjectList}
+                                setMonitoredObjectId={setMonitoredObjectId}
+                                setHeightPoint={setHeightPoint} heightPoint={heightPoint}
                             />
                         </Col>
                     </Row>
                 </Container>
             </Modal.Body>
             <Modal.Footer>
+                {error !== '' && (<Form.Group controlId="errorMessage">
+                    <Form.Text className="text-muted">
+                        {error}
+                    </Form.Text>
+                </Form.Group>)}
                 <Button variant="primary" onClick={handleOkClick}>
                     Save Changes
                 </Button>

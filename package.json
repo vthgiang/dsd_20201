@@ -20,13 +20,14 @@
     "react": "16.9.0",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
+    "react-google-maps": "^9.4.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
+    "react-select": "^3.1.1",
     "reactjs-popup": "latest",
     "redux": "^4.0.5",
     "styled-components": "^5.1.1",
-    "video-react": "0.14.0",
-    "react-google-maps": "^9.4.5"
+    "video-react": "0.14.0"
   },
   "browserslist": {
     "production": [

@@ -23,9 +23,9 @@ const MyMapComponent = compose(
 
     useEffect(()=>{
         if(flightPathView == null) return;
-        const {flightPoint} = flightPathView;
+        const {flightPoints} = flightPathView;
         var bounds = new window.google.maps.LatLngBounds();
-        for(let point of flightPoint){
+        for(let point of flightPoints){
             let tmp = new window.google.maps.LatLng(point.locationLat, point.locationLng);
             bounds.extend(tmp);
         }
@@ -39,7 +39,7 @@ const MyMapComponent = compose(
             defaultCenter={{ lat: 20.99933610536628, lng: 105.8329881666537 }}
             onClick={onClick}
         >
-            {flightPathView && <FlightPath flightPoints={flightPathView.flightPoint} />}
+            {flightPathView && <FlightPath flightPoints={flightPathView.flightPoints} />}
         </GoogleMap>
     )}
 )

@@ -8,6 +8,9 @@ const IMAGES = {
   highVoltageGrid: `${PUBLIC_URL}/images/high_voltage_grid.jpg`,
   dike: `${PUBLIC_URL}/images/dike.jpg`,
   forestFires: `${PUBLIC_URL}/images/forest_fires.jpg`,
+  point: `${PUBLIC_URL}/images/point.png`,
+  circle: `${PUBLIC_URL}/images/circle.svg`,
+  poin: `${PUBLIC_URL}/images/poin.png`,
 };
 
 export default IMAGES;

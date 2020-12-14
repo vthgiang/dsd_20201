@@ -19,6 +19,7 @@ function MarkerInfo({point}){
             <div>
               <p>Thời gian bay đến: {point.timeCome} phút</p>
               <p>Thời gian dừng: {point.timeStop} phút</p>
+              <p>Độ cao: {point.flightHeight == null ? 30 : point.flightHeight} mét</p>
             </div>
         </InfoWindow>}
     </Marker>;
