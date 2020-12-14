@@ -76,6 +76,7 @@ const LoginForm = () => {
                 localStorage.setItem("token", res.result.api_token);
                 localStorage.setItem("project-type", res.result.type);
                 setHeaders({ token: res.result.api_token });
+                setHeaders({ "project-type": res.result.type });
                 history.push("/home");
             } else {
                 setMessage(res.message);
