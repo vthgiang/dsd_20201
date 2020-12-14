@@ -1,15 +1,16 @@
-import React from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
-import { Breadcrumb, Row, Col, Card, Tabs, Spin } from 'antd';
-import QueryString from 'query-string';
 
-import DroneDashboard from './DroneDashboard';
-import IncidentDashboard from './IncidentDashboard';
-import UsersDashboard from './UsersDashboard';
-import PayloadDashboard from './PayloadDashboard';
-import NotifyDashboard from './NotifyDashboard';
-import MonitoreObjectDashboard from './MonitoreObjectDashboard';
-import FlightHubDashboard from './FlightHubDashboard';
+import React from "react";
+import { useLocation, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import {
+    Breadcrumb,
+    Row,
+    Col,
+    Card,
+    Tabs,
+    Spin,
+} from "antd";
+
 import {
   getDroneOverallMetrics,
   getIncidentOverallMetrics,
@@ -17,54 +18,63 @@ import {
   getPayloadOverallMetrics,
   getNotifyMetrics,
 } from '../../services/statistics';
+
+import QueryString from "query-string";
+import DroneDashboard from './DroneDashboard';
+import IncidentDashboard from './IncidentDashboard';
+import UsersDashboard from './UsersDashboard';
+import PayloadDashboard from './PayloadDashboard';
+import NotifyDashboard from './NotifyDashboard';
+import MonitoreObjectDashboard from './MonitoreObjectDashboard';
+import FlightHubDashboard from './FlightHubDashboard';
 import MonitorZoneDashboard from './MonitorZoneDashboard';
 import LogDashboard from './LogDashboard';
+
 
 const { TabPane } = Tabs;
 
 function Dashboard() {
-  const location = useLocation();
-  const history = useHistory();
-  const query = QueryString.parse(location);
-  const [activeTab, setActiveTab] = React.useState(query.tab);
-  const [droneMetrics, setDroneMetrics] = React.useState(null);
-  const [incidentMetrics, setIncidentMetrics] = React.useState(null);
-  const [usersMetrics, setUsersMetrics] = React.useState(null);
-  const [payloadMetrics, setPayloadMetrics] = React.useState(null);
+    // Role here to detect what to render
+    const role = useSelector((state) => state.user.role);
 
-  const onTabChange = React.useCallback(
-    (key) => {
-      history.push({
-        pathname: location.pathname,
-        search: QueryString.stringify({
-          ...query,
-          tab: key,
-        }),
-      });
-      setActiveTab(key);
-    },
-    [history, location],
-  );
+    const location = useLocation();
+    const history = useHistory();
+    const query = QueryString.parse(location);
+    const [activeTab, setActiveTab] = React.useState(query.tab);
+    const [droneMetrics, setDroneMetrics] = React.useState(null);
+    const [incidentMetrics, setIncidentMetrics] = React.useState(null);
+    const [usersMetrics, setUsersMetrics] = React.useState(null);
+    const [payloadMetrics, setPayloadMetrics] = React.useState(null);
 
-  React.useEffect(() => {
-    const fetchAll = async () => {
-      const results = await Promise.all([
-        getDroneOverallMetrics(),
-        getIncidentOverallMetrics(),
-        getUsersMetrics(),
-        getPayloadOverallMetrics(),
-      ]);
-      setDroneMetrics(results[0]);
-      setIncidentMetrics(results[1]);
-      setUsersMetrics(results[2]);
-      setPayloadMetrics(results[3]);
-    };
+    const onTabChange = React.useCallback((key) => {
+        history.push({
+            pathname: location.pathname,
+            search: QueryString.stringify({
+                ...query,
+                tab: key,
+            }),
+        });
+        setActiveTab(key);
+    }, [history, location]);
 
-    fetchAll();
-  }, []);
+    React.useEffect(() => {
+        const fetchAll = async () => {
+            const results = await Promise.all([
+                getDroneOverallMetrics(),
+                getIncidentOverallMetrics(),
+                getUsersMetrics(),
+                getPayloadOverallMetrics(),
+            ]);
+            setDroneMetrics(results[0]);
+            setIncidentMetrics(results[1]);
+            setUsersMetrics(results[2]);
+            setPayloadMetrics(results[3]);
+        };
+        fetchAll();
+    }, []);
 
-  return (
-    <div>
+    return (
+        <div>
       {/* <Breadcrumb
         style={{
           marginBottom: 16,
@@ -200,7 +210,7 @@ function Dashboard() {
         </Col>
       </Row>
     </div>
-  );
+    );
 }
 
 export default Dashboard;
