@@ -157,16 +157,32 @@ const DataTable = () => {
                                                 return (
                                                     <Button
                                                     variant="contained"
-                                                    color="secondary"
+                                                    color="darkslategrey"
                                                   >
                                                     Đặt lịch sạc
                                                   </Button>
                                                 )
                                                 } else if (drone.state == 1) {
-                                                return (
-                                                    <ModalFlight id={drone.idDrone} />
-                                                )
-                                                } else if (drone.state == 4) {
+                                                    return (
+                                                        <ModalFlight id={drone.idDrone} />
+                                                    )
+                                                } else if (drone.state == 2 || drone.state == 3) {
+                                                    return (
+                                                        <div>{new Intl.DateTimeFormat("vi-VE", {
+                                                            year: "numeric", month: "long", day: "2-digit", 
+                                                            hour: 'numeric', minute: 'numeric', second: 'numeric',
+                                                            hour12: true
+                                                          }).format(drone.timeStart)}
+                                                          <br></br>
+                                                          {new Intl.DateTimeFormat("vi-VE", {
+                                                            year: "numeric", month: "long", day: "2-digit", 
+                                                            hour: 'numeric', minute: 'numeric', second: 'numeric',
+                                                            hour12: true
+                                                          }).format(drone.timeEnd)}
+                                                          </div>
+                                                    )
+                                                }
+                                                else if (drone.state == 4) {
                                                 return (
                                                     <Button
                                                     variant="contained"

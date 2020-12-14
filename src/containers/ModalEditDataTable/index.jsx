@@ -8,6 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 import { Form, Input, Col, Row } from "antd";
 import React, { useEffect, useState, useMemo } from "react";
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -108,9 +109,11 @@ export default function TransitionsModal(props) {
     setMaxFlightSpeed(json.maxFlightSpeed);
     setMaxFlightTime(json.maxFlightTime);
     setBattery(json.rangeBattery);
-    console.log('name '+json.brand)
+    setUrlImage(json.urlImage);
   }
-  const [name, setName] = useState("NGOC ANH");
+
+  const [urlImage, setUrlImage] = useState();
+  const [name, setName] = useState("");
   const [brand, setBrand] = useState(drones.brand);
   const [color, setColor] = useState(drones.color);
   const [dimensions, setDimensions] = useState(drones.dimensions);
@@ -262,7 +265,18 @@ export default function TransitionsModal(props) {
                     onChange={event => setBattery(event.target.value)}
                   />
                 </Form.Item>
-
+                <Button
+                className={classes.input}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open(urlImage, "_blank")
+                    }}
+                  variant="contained"
+                  color="primary"
+                  startIcon={<VisibilityIcon />}
+                >
+                  Xem ảnh
+                </Button>
 
               </Col>
 
