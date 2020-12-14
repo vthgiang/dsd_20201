@@ -300,7 +300,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
   return (
     // Show the component only when the user is logged in
-    // Otherwise, redirect the user to /signin page
+    // Otherwise, redirect the user to /sign in page
     <Route
       {...rest}
       render={(props) =>
@@ -311,7 +311,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 };
 
 export default () => (
-  <Fragment>
+  <Switch>
     {routes.map(({ path, exact = false, component: Component, ...rest }) => {
       return (
         <PrivateRoute
@@ -323,5 +323,5 @@ export default () => (
         />
       );
     })}
-  </Fragment>
+  </Switch>
 );
