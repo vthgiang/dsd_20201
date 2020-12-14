@@ -1,6 +1,5 @@
 # Package-lock.json
 package-lock.json
-
 # Build
 build/
 
@@ -17,4 +16,5 @@ yarn.lock
 
 #Lib
 node_modules/
+.idea/
 

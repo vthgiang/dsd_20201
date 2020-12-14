@@ -4,13 +4,13 @@ import {
   StyleUserName,
   StyleUserProfileContainer,
 } from "./index.style";
-import { Popover, Avatar, Badge } from "antd";
 
-import { BellOutlined } from "@ant-design/icons";
+import { Row, Popover, Avatar, Badge } from "antd";
+import { BellOutlined, UserOutlined } from "@ant-design/icons";
+import BellNotification from '../../components/Group4/Bell';
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../modules/user/store";
 import { useHistory, useLocation } from "react-router-dom";
-import { Row } from "antd";
 import { userHost } from "../../modules/user/config/UserConfig";
 import ModalUser from "../../modules/user/components/screens/EditProfile";
 
@@ -60,14 +60,7 @@ const Navbar = () => {
   return (
     <Row type="flex" justify="end" align="middle" className="right-header">
       <StyleNavItem>
-        <Popover
-          placement="bottom"
-          title="Thông báo"
-          content={notification}
-          trigger="click"
-        >
-          <BellOutlined style={{ color: "gray", fontSize: 32 }} />
-        </Popover>
+        <BellNotification />
       </StyleNavItem>
 
       <StyleNavItem>
