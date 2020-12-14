@@ -119,6 +119,20 @@ export const sidebarMenu = [
     heading: 'Đối tượng giám sát',
     icon: 'fas fa-binoculars',
     route: '/supervised-object',
+    subMenu: [
+      {
+        key: 'CategoryMonitored',
+        heading: 'Quản lý danh mục',
+        icon: 'fa fa-bars',
+        route: '/category-monitored-object-management',
+      },
+      {
+        key: 'MonitoredObject',
+        heading: 'Quản lý đối tượng giám sát',
+        icon: 'fa fa-database',
+        route: '/monitored-object-management',
+      },
+    ],
   },
   {
     key: 'GeneralStatistic',
