@@ -1,5 +1,5 @@
 import React from 'react';
-import { Polyline, Poligon, Marker, InfoWindow } from 'react-google-maps';
+import { Polyline } from 'react-google-maps';
 import MarkerInfo from '../MarkerInfo';
 
 export default function FlightPath({flightPoints}){

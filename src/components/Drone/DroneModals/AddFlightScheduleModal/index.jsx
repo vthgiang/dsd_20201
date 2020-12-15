@@ -29,6 +29,12 @@ function AddFlightScheduleModal(props) {
         toggle();
     }
 
+    /*
+    useEffect(() => {
+      // load duong bay
+    } , []);
+    */
+
     return (
       <>
         <Button variant="primary" onClick={toggle}>
