@@ -12,14 +12,14 @@ import { getAllDepartments } from "../../store/services";
 const { Option } = Select;
 const { Search } = Input;
 
-const Filter = ({ filter, setFilter, setVisible }) => {
+const Filter = ({ filter, setFilter, setVisible, setMode }) => {
     const user = useSelector((state) => state.user.user);
     const [listDepartments, setListDepartments] = useState([]);
 
     const fetchDepartments = async () => {
         const res = await getAllDepartments();
         setListDepartments(res.result);
-    }
+    };
 
     useEffect(() => {
         fetchDepartments();
@@ -35,6 +35,9 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
+            <Option key={-1} value="Chưa xác định">
+                Chưa xác định
+            </Option>
             {statuses.map((status, index) => {
                 return (
                     <Option key={index} value={status.code}>
@@ -55,6 +58,9 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
+            <Option key={-1} value="Chưa xác định">
+                Chưa xác định
+            </Option>
             {roles.map((role, index) => {
                 return (
                     <Option key={index} value={role.code}>
@@ -75,6 +81,9 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
+            <Option key={-1} value="Chưa xác định">
+                Chưa xác định
+            </Option>
             {statusesActivation.map((status, index) => {
                 return (
                     <Option key={index} value={status.code}>
@@ -95,6 +104,9 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
+            <Option key={-1} value="Chưa xác định">
+                Chưa xác định
+            </Option>
             {types.map((type, index) => {
                 return (
                     <Option key={index} value={type.code}>
@@ -110,20 +122,26 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             showSearch
             optionFilterProp="children"
             className="select-box"
-            value={filter.department_id ? filter.department_id : "Chưa xác định"}
+            value={
+                filter.department_id ? filter.department_id : "Chưa xác định"
+            }
+            defaultValue="Chưa xác định"
             onChange={(value) =>
                 setFilter({ ...filter, department_id: value, page_id: 0 })
             }
-            defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
-        >
-            {listDepartments.map((type, index) => {
-                return (
-                    <Option key={index} value={type.id}>
-                        {type.name}
-                    </Option>
-                );
-            })}
+        >   
+            <Option key={-1} value="Chưa xác định">
+                Chưa xác định
+            </Option>
+            {listDepartments &&
+                listDepartments.map((type, index) => {
+                    return (
+                        <Option key={index} value={type.id}>
+                            {type.name}
+                        </Option>
+                    );
+                })}
         </Select>
     );
 
@@ -140,6 +158,11 @@ const Filter = ({ filter, setFilter, setVisible }) => {
         });
     };
 
+    const handleCreate = () => {
+        setVisible(true);
+        setMode("create");
+    }
+
     return (
         <Fragment>
             <Row gutter={[16, 16]}>
@@ -148,7 +171,7 @@ const Filter = ({ filter, setFilter, setVisible }) => {
                     <Button
                         block
                         type="primary"
-                        onClick={() => setVisible(true)}
+                        onClick={() => handleCreate()}
                         style={{ width: 200, float: "right" }}
                     >
                         <UserAddOutlined />
@@ -203,7 +226,6 @@ const Filter = ({ filter, setFilter, setVisible }) => {
                     </label>
                     {renderSelectStatusActivation()}
                 </Col>
-                
             </Row>
             <Row>
                 <Col span={2} style={{ display: "flex", margin: "0 auto" }}>
