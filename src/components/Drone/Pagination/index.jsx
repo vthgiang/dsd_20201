@@ -15,8 +15,9 @@ PaginationComponent.defaultProps = {
 }
 
 function PaginationComponent(props) {
+    const {pagination, pageChange} = props;
 
-    const {page, pageChange, totalPage} = props;
+    const {page, totalPage} = pagination;
     const handlePageChange = (newPage) => {
         if(!pageChange) return;
         pageChange(newPage)

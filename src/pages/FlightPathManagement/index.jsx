@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Map from '../../components/Map';
-import {flightPathsData} from './Data.example';
 import FlightPathList from '../../components/FlightPathList';
 import AddFlightPathModel from '../../components/DroneModals/AddFlightPathModal';
 import Pagination from '../../components/Drone/Pagination';
@@ -18,7 +17,7 @@ function FlightPathManagement(props) {
     // const [flightPaths, setFlightPaths] = useState(flightPathsData.slice(0, 10));
     const [flightPaths, setFlightPaths] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [pagination, setPagination] = useState({page: 1, totalPage: 1});
+    const [pagination, setPagination] = useState({page: 1, totalPage: 1, perPage: 8});
     const allFlightPath = useRef(null);
     
     const [reload, setReload] = useState(false);
@@ -32,10 +31,11 @@ function FlightPathManagement(props) {
                 console.log(response);
                 allFlightPath.current = response.data;
                 // lấy dữ liệu cho page hiện tại
-                setFlightPaths(allFlightPath.current.slice(0, 10));
+                setFlightPaths(allFlightPath.current.slice(0, pagination.perPage));
                 // tính lại tổng page
-                const totalPage = Math.ceil(allFlightPath.current.length/10);
-                if(totalPage != pagination.totalPage) setPagination({...pagination, totalPage});
+                const totalPage = Math.ceil(allFlightPath.current.length/pagination.perPage);
+                if(totalPage != pagination.totalPage) setPagination({...pagination, totalPage: totalPage});
+                console.log(totalPage)
                 // console.log(allFlightPath);
                 setLoading(false);
             })
@@ -47,8 +47,8 @@ function FlightPathManagement(props) {
     }, [reload]);
 
     const pageChange = (newPage) => {
-        const start = (newPage - 1)*10;
-        const newFlightPaths = flightPathsData.slice(start, start+10);
+        const start = (newPage - 1)*pagination.perPage;
+        const newFlightPaths = allFlightPath.current.slice(start, start+pagination.perPage);
         setFlightPaths(newFlightPaths);
         setPagination({...pagination, page: newPage});
     }
@@ -81,8 +81,8 @@ function FlightPathManagement(props) {
     return (
         <Container>
             <Row>
-                <Col><AddFlightPathModel addFlightPath={addFlightPath}/></Col>
-                <Col><Pagination/></Col>
+                <Col><AddFlightPathModel addFlightPath={addFlightPath} pageReload={pageReload}/></Col>
+                <Col><Pagination pagination={pagination} pageChange={pageChange}/></Col>
                 <Col>Tìm kiếm</Col>
             </Row>
             <br/>

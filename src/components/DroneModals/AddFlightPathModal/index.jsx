@@ -59,7 +59,7 @@ function AddFlightPathModal(props) {
         if(!name || flightPoints.length===0 || !selectedZone) return setError('Bạn chưa nhập đủ thông tin');
         // let id = Math.trunc(Math.random()*2000);
         let newFlightPath = {name, flightPoints,
-            heightFlight :height,
+            // heightFlight :height,
             idSupervisedArea: selectedZone._id //~~~~
             // idSupervisedArea: selectedArea._id,
             // monitoredAreaName: selectedArea.name,
@@ -67,10 +67,11 @@ function AddFlightPathModal(props) {
             // monitoredZoneCode: selectedZone.code
         };
         console.log(newFlightPath);
-        axios.post('http://skyrone.cf:6789/flightPath/save', {newFlightPath})
+        axios.post('http://skyrone.cf:6789/flightPath/save', newFlightPath)
             .then(response => {
                 console.log(response)
                 // props.addFlightPath(newFlightPath);
+                props.pageReload();
             })
             .catch(err => {
                 console.log(err);

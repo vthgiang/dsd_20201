@@ -15,21 +15,20 @@ function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath}) {
                 <tr>
                     <th>STT</th>
                     <th>Tên đường bay</th>
-                    <th>Độ cao</th>
                     <th>Khu vực giám sát</th>
                     <th>Miền giám sát</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 {flightPaths.map((item, index) => (<tr key={item.id}>
                     <td>{index+1}</td>
                     <td>{item.name}</td>
-                    <td>{item.heightFlight}</td>
                     <td>{item.monitoredAreaName}</td>
                     <td>{item.monitoredZoneCode}</td>
-                    <td><button className="btn-view" onClick={()=>viewFlightPath(item)}>
+                    <td className="td-action"><button className="btn-view" onClick={()=>viewFlightPath(item)}>
                         <i className="far fa-eye"></i>
-                    </button>
+                    </button>{"/"}
                     <button className="btn-delete" onClick={()=>handleDeleteFlightPath(item)}>
                         <i class="fas fa-trash-alt"></i>
                     </button>
