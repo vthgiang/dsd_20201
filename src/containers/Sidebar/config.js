@@ -122,7 +122,7 @@ export const sidebarMenu = [
     subMenu: [
       {
         key: 'CategoryMonitored',
-        heading: 'Quản lý danh mục đối tượng giám sát',
+        heading: 'Quản lý danh mục giám sát',
         icon: 'fa fa-bars',
         route: '/category-monitored-object-management',
       },
