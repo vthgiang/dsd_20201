@@ -73,11 +73,12 @@ const LoginForm = () => {
             if (res.status == "successful") {
                 dispatch(actions.setUserData(res.result));
                 dispatch(actions.setLogin(true));
+                dispatch(actions.setProjectType(res.result.type));
                 localStorage.setItem("token", res.result.api_token);
                 localStorage.setItem("project-type", res.result.type);
                 setHeaders({ token: res.result.api_token });
                 setHeaders({ "project-type": res.result.type });
-                history.push("/home");
+                history.push("/dashboard");
             } else {
                 setMessage(res.message);
             }

@@ -1,29 +1,52 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import StyleListDepartment from "./index.style";
-import {
-    Col,
-    Input,
-    Row,
-    Button,
-} from "antd";
+import { Col, Input, Row, Button, Select } from "antd";
 import { useSelector } from "react-redux";
 import { FolderAddOutlined } from "@ant-design/icons";
+import { types } from "../../config/UserConfig";
 
+const { Option } = Select;
 const { Search } = Input;
 
-const Filter = ({ filter, setFilter, setVisible }) => {
+const Filter = ({ filter, setFilter, setVisible, setMode }) => {
     const user = useSelector((state) => state.user.user);
 
+    const renderSelectType = () => (
+        <Select
+            className="select-box"
+            value={filter.type}
+            onChange={(value) =>
+                setFilter({ ...filter, type: value, page_id: 0 })
+            }
+            defaultValue="Chưa xác định"
+            style={{ width: "75%", marginLeft: 10 }}
+        >
+            <Option key={-1} value="Chưa xác định">
+                Chưa xác định
+            </Option>
+            {types.map((type, index) => {
+                return (
+                    <Option key={index} value={type.code}>
+                        {type.name}
+                    </Option>
+                );
+            })}
+        </Select>
+    );
     const handlResetFilter = () => {
         setFilter({
             page_id: 0,
             page_size: 20,
             role: "Chưa xác định",
             status: "Chưa xác định",
-            search: ""
+            search: "",
         });
     };
 
+    const handleCreate = () => {
+        setMode("create");
+        setVisible(true);
+    }
 
     return (
         <Fragment>
@@ -33,7 +56,7 @@ const Filter = ({ filter, setFilter, setVisible }) => {
                     <Button
                         block
                         type="primary"
-                        onClick={() => setVisible(true)}
+                        onClick={() => handleCreate()}
                         style={{ width: 200, float: "right" }}
                     >
                         <FolderAddOutlined />
@@ -54,6 +77,14 @@ const Filter = ({ filter, setFilter, setVisible }) => {
                         }
                     />
                 </Col>
+                {user.role == "SUPER_ADMIN" && (
+                    <Col span={7} style={{ display: "flex" }}>
+                        <label htmlFor="" style={{ width: "20%" }}>
+                            Dự án
+                        </label>
+                        {renderSelectType()}
+                    </Col>
+                )}
             </Row>
             <Row gutter={[16, 16]}>
                 <Col span={8}></Col>

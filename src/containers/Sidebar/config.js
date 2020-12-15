@@ -262,7 +262,7 @@ export const sidebarMenu = [
       {
         key: 'UserMetaSetting',
         heading: 'Lịch sử người dùng',
-        icon: 'fa fa-building',
+        icon: 'fa fa-history',
         route: '/user-meta',
       },
     ],

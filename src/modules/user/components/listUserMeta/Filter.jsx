@@ -91,13 +91,14 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
-            {listUsers && listUsers.map((user, index) => {
-                return (
-                    <Option key={index} value={user.id}>
-                        {user.full_name}
-                    </Option>
-                );
-            })}
+            {listUsers &&
+                listUsers.map((user, index) => {
+                    return (
+                        <Option key={index} value={user.id}>
+                            {user.full_name}
+                        </Option>
+                    );
+                })}
         </Select>
     );
 
@@ -113,13 +114,14 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
-            {listUsers && listUsers.map((user, index) => {
-                return (
-                    <Option key={index} value={user.id}>
-                        {user.full_name}
-                    </Option>
-                );
-            })}
+            {listUsers &&
+                listUsers.map((user, index) => {
+                    return (
+                        <Option key={index} value={user.id}>
+                            {user.full_name}
+                        </Option>
+                    );
+                })}
         </Select>
     );
 

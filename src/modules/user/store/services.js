@@ -106,6 +106,9 @@ export const getListDepartments = (filter) => {
     if (filter.search) {
         url += "&q_department=" + filter.search;
     };
+    if (filter.type && filter.type != "Chưa xác định") {
+        url += ",type=" + filter.type;
+    }
     return apiAxios.get(url).then((res) => {
         return res.data;
     }).catch((error) => {
