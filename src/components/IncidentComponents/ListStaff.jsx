@@ -182,7 +182,7 @@ const ListStaff = () => {
       key: "operation",
       render: (text, record) => (
         <div>
-          <InfoCircleOutlined
+          <InfoCircleOutlined data-toggle="tooltip" data-placement="top" title="Xem chi tiết"
             onClick={(value) => {
               getInforEmployee(record);
             }}

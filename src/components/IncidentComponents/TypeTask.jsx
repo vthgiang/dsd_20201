@@ -133,12 +133,12 @@ const TypeTask = () => {
             ),
         },
         {
-            title: "",
+            title: "Tác vụ",
             key: "operation",
             render: (record) => (
                 <div>
-                    <EditOutlined style={{ fontSize: 22, color: 'orange' }} onClick={(e) => editData(record)} />
-                    <DeleteOutlined style={{ fontSize: 22, color: 'red', marginLeft: 30 }} onClick={(e) => submit(record)} />
+                    <EditOutlined style={{ fontSize: 22, color: 'orange' }} onClick={(e) => editData(record)} data-toggle="tooltip" data-placement="top" title="Sửa công việc"/>
+                    <DeleteOutlined style={{ fontSize: 22, color: 'red', marginLeft: 30 }} onClick={(e) => submit(record)} data-toggle="tooltip" data-placement="top" title="Xóa công việc"/>
                 </div>
             ),
         },
@@ -254,7 +254,6 @@ const TypeTask = () => {
         let employee_number = dataEdit.employee_number
         let prioritize = dataEdit.prioritize == true ? 1 : 0
         axios({
-
             method: "post",
             url: URL_API + `/task-type/create`,
             // url: URL_API + "/report/listing",

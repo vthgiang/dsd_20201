@@ -205,13 +205,13 @@ const ListIncidents = () => {
       width: "20%",
     },
     {
-      title: "Action",
+      title: "Tác vụ",
       key: "operation",
       width: "10%",
       render: (record) => (
         <div style={{ textAlign: "center" }}>
           <p>
-            <InfoCircleOutlined
+            <InfoCircleOutlined data-toggle="tooltip" data-placement="top" title="Xem chi tiết"
               onClick={(value) => {
                 setLoadingModal(true);
                 setVisibleModalDetailIncident(true);

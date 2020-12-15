@@ -4,8 +4,9 @@ import { Table, Modal, Button, Input, Space, Spin } from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import validator from 'validate-image-url'
-import ReactPlayer from 'react-player'
+import validator from 'validate-image-url';
+import ReactPlayer from 'react-player';
+import { confirmAlert } from 'react-confirm-alert'; // Import
 import {
   CheckOutlined,
   CloseOutlined,
@@ -37,6 +38,10 @@ const ListReport = () => {
   const [currentImg, setCurrentImg] = useState();
 
   useEffect(() => {
+    getDataInit()
+  }, []);
+
+  const getDataInit = () => {
     axios({
       method: "get",
       url: URL_API + "/report/listing",
@@ -49,14 +54,14 @@ const ListReport = () => {
       .then(function (response) {
         //handle success
         console.log(response);
-        setLoadingTable(false);
         setDataReport(response.data.list);
+        setLoadingTable(false);
       })
       .catch(function (err) {
         //handle error
         console.log(err);
       });
-  }, []);
+  }
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
@@ -104,9 +109,9 @@ const ListReport = () => {
     onFilter: (value, record) =>
       record[dataIndex]
         ? record[dataIndex]
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase())
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
         : "",
     // onFilterDropdownVisibleChange: visible => {
     //   if (visible) {
@@ -122,8 +127,8 @@ const ListReport = () => {
           textToHighlight={text ? text.toString() : ""}
         />
       ) : (
-        text
-      ),
+          text
+        ),
   });
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -187,27 +192,6 @@ const ListReport = () => {
               style={{
                 width: 10,
                 height: 10,
-                backgroundColor: "red",
-                borderRadius: 5,
-              }}
-            ></div>
-            <p style={{ marginLeft: 10, fontSize: 18, marginTop: 10 }}>
-              {" "}
-              {record.status}
-            </p>
-          </div>
-        ) : record.status == "doing" ? (
-          <div
-            style={{
-              flexDirection: "row",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                width: 10,
-                height: 10,
                 backgroundColor: "orange",
                 borderRadius: 5,
               }}
@@ -217,7 +201,7 @@ const ListReport = () => {
               {record.status}
             </p>
           </div>
-        ) : (
+        ) : record.status == "accept" ? (
           <div
             style={{
               flexDirection: "row",
@@ -229,16 +213,37 @@ const ListReport = () => {
               style={{
                 width: 10,
                 height: 10,
-                backgroundColor: "greenyellow",
+                backgroundColor: "green",
                 borderRadius: 5,
               }}
             ></div>
             <p style={{ marginLeft: 10, fontSize: 18, marginTop: 10 }}>
               {" "}
-              {"done"}
+              {"Đã chấp nhận"}
             </p>
           </div>
-        ),
+        ) : (
+              <div
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <div
+                  style={{
+                    width: 10,
+                    height: 10,
+                    backgroundColor: "red",
+                    borderRadius: 5,
+                  }}
+                ></div>
+                <p style={{ marginLeft: 10, fontSize: 18, marginTop: 10 }}>
+                  {" "}
+                  {"Đã từ chối"}
+                </p>
+              </div>
+            ),
     },
     {
       title: "Loại sự cố",
@@ -280,18 +285,41 @@ const ListReport = () => {
     //   // ...getColumnSearchProps("updated_at"),
     // },
     {
-      title: "",
+      title: "Tác vụ",
       key: "operation",
-      render: (record) => (
-        <div>
-          <InfoCircleOutlined
-            onClick={(value) => {
-              getInforReport(record.image);
-            }}
-            style={{ color: "blue", marginLeft: 5 }}
-          />
-        </div>
-      ),
+      render: (text, record) => record.status == "waiting" ?
+        (
+          <div>
+            <InfoCircleOutlined data-toggle="tooltip" data-placement="top" title="Xem chi tiết"
+              onClick={(value) => {
+                getInforReport(record.image);
+              }}
+              style={{ color: "blue", marginLeft: 5, fontSize: 22, }}
+            />
+            <CheckOutlined data-toggle="tooltip" data-placement="top" title="Chấp nhận báo cáo"
+              onClick={(value) => { 
+                acceptReport(record);
+              }}
+              style={{ color: "green", marginLeft: 15, fontSize: 22, }}
+            />
+            <CloseOutlined data-toggle="tooltip" data-placement="top" title="Từ chối báo cáo"
+              onClick={(value) => {
+                rejectReport(record);
+              }}
+              style={{ color: "red", marginLeft: 15, fontSize: 22, }}
+            />
+          </div>
+        ) :
+        (
+          <div>
+             <InfoCircleOutlined data-toggle="tooltip" data-placement="top" title="Xem chi tiết"
+              onClick={(value) => {
+                getInforReport(record.image);
+              }}
+              style={{ color: "blue", marginLeft: 5, fontSize: 22, }}
+            />
+          </div>
+        ),
     },
   ];
 
@@ -309,18 +337,94 @@ const ListReport = () => {
     setVisibleModal(false);
   };
 
+
+  const acceptReport = (record) => {
+    confirmAlert({
+      title: 'Chấp nhận báo cáo',
+      message: 'Bạn chắc chắn muốn chấp nhận báo cáo?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            axios({
+              method: "post",
+              url: URL_API + `/report/accept?id=${record.id}`,
+              // url: URL_API + "/report/listing",
+              headers: {
+                "api-token": API_TOKEN,
+                "project-type": CURRENT_TYPE,
+              },
+            })
+              .then(function (response) {
+                //handle success
+                console.log(response);
+                setLoadingTable(true);
+                getDataInit();
+              })
+              .catch(function (err) {
+                //handle error
+                console.log("error nè", err);
+              });
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => { }
+        }
+      ]
+    });
+  }
+
+  const rejectReport = (record) => {
+    confirmAlert({
+      title: 'Từ chối báo cáo',
+      message: 'Bạn chắc chắn muốn từ chối báo cáo?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            axios({
+              method: "post",
+              url: URL_API + `/report/reject?id=${record.id}`,
+              // url: URL_API + "/report/listing",
+              headers: {
+                "api-token": API_TOKEN,
+                "project-type": CURRENT_TYPE,
+              },
+            })
+              .then(function (response) {
+                //handle success
+                console.log(response);
+                setLoadingTable(true);
+                getDataInit();
+              })
+              .catch(function (err) {
+                //handle error
+                console.log("error nè", err);
+              });
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => { }
+        }
+      ]
+    });
+  }
+
+
   return (
-    
+
     <div>
-      <div className="header" onClick={() => {}}>
+      <div className="header" onClick={() => { }}>
         Danh sách báo cáo kết quả xử lý sự cố
       </div>
       <Input.Search
-          style={{ margin: "0 0 10px 0" }}
-          placeholder="Search by..."
-          enterButton
-          onSearch={search}
-        />
+        style={{ margin: "0 0 10px 0" }}
+        placeholder="Search by..."
+        enterButton
+        onSearch={search}
+      />
       <div>
         <Spin spinning={loadingTable} tip="Loading...">
           <Table
