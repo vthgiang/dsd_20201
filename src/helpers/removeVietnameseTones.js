@@ -1,3 +1,5 @@
+// eslint-disable-line
+/*eslint no-undef: 0*/
 export const removeVietnameseTones = (str) => {
   str = str.toLowerCase();
   str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
