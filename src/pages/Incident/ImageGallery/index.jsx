@@ -118,7 +118,8 @@ const ImageGalley = (props) => {
                 ...values,
                 dueDate: moment(values.dueDate).format('YYYY-MM-DD'),
                 images: selectedImages,
-                type: "LUOI_DIEN"
+                type: "LUOI_DIEN",
+                location: 'HN'
             }))
             if(error) message.error('Đã có lỗi xảy ra!')
             message.success('Sự cố đã được tạo mới!')
@@ -190,9 +191,9 @@ const ImageGalley = (props) => {
                 <Form.Item label="DatePicker" name='dueDate' rules={[{ required: true, message: 'Vui lòng nhập thông tin!' }]}>
                     <DatePicker />
                 </Form.Item>
-                <Form.Item label="Vị trí" name='location' rules={[{ required: true, message: 'Vui lòng nhập thông tin!' }]}>
-                    <Input />
-                </Form.Item>
+                {/*<Form.Item label="Vị trí" name='location' rules={[{ required: true, message: 'Vui lòng nhập thông tin!' }]}>*/}
+                {/*    <Input />*/}
+                {/*</Form.Item>*/}
             </Form>
         </Modal>
     </div>
