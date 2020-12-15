@@ -192,21 +192,25 @@ export const routes = [
   {
     path: '/monitored-object-management/:option/:id',
     component: MonitoredObjectView,
+    exact: true
   },
   // create monitored Object
   {
     path: '/monitored-object-management/:option',
     component: MonitoredObjectCreate,
+    exact: true
   },
   //view List Monitored Object
   {
     path: '/monitored-object-management',
     component: MonitoredObject,
+    exact: true
   },
   //View Category Monitored
   {
     path: '/category-monitored-object-management',
     component: CategoryMonitored,
+    exact: true
   },
   {
     path: '/statistic',
