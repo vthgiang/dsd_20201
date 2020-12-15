@@ -8,6 +8,8 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import SaveIcon from '@material-ui/icons/Save';
 import { Form, Input, Col, Row } from "antd";
 import React, { useEffect, useState, useMemo } from "react";
+import ImageUploader from "react-images-upload";
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -21,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    overflow:'scroll',
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -66,7 +69,20 @@ export default function TransitionsModal(props) {
   const [maxFlightTime, setMaxFlightTime] = useState();
   const [rangeBattery, setBattery] = useState();
   
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState('');
+  
   const saveDrone = () => {
+    
+    // const fd = new FormData();
+    // fd.append('images', selectedImage, selectedImage.name)
+    // axios.post('https://luan-drive.cf/upload?token=111111&folder=images', fd)
+    //   .then(response => {
+    //     console.log(response);
+    //   })
+    //   .catch(err => console.log(err))
+    
+    
     let headers = new Headers();
 
     headers.append('Content-Type', 'application/json');
@@ -94,6 +110,7 @@ export default function TransitionsModal(props) {
         used: false
       })
     };
+
     fetch('http://skyrone.cf:6789/drone/save', requestOptions)
     .then(response => response.text())
     .then(contents =>  {
@@ -101,6 +118,12 @@ export default function TransitionsModal(props) {
       setOpen(false)})
     .catch(() => console.log("Can’t access " + 'http://skyrone.cf:6789/drone/getByCode/save' + " response. Blocked by browser?"))
       
+  }
+
+  function onDrop(picture) {
+    // xử lý khi chọn một ảnh
+    console.log(picture);
+    setSelectedImage(picture[0]);
   }
 
   return (
@@ -128,6 +151,17 @@ export default function TransitionsModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
+            <Row>
+              <ImageUploader
+                withIcon={false}
+                withPreview={true}
+                buttonText="Choose images"
+                onChange={onDrop}
+                imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+                maxFileSize={5242880}
+                simpleImage={true}
+              />
+            </Row>
             <Row >
               <Col>
                 <Form.Item className={classes.formItem}>
