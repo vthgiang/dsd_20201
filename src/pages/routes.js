@@ -15,6 +15,7 @@ import ManageArea from '../components/Aera/ManageArea';
 import Manage from '../components/SurveillanceDomain/Manage';
 import ManageEdit from '../components/SurveillanceDomain/ManageEdit';
 import Dashboard from './Dashboard';
+import Incident from './Incident';
 import MyList from '../components/Group4/Notification';
 import DetailedNotification from '../components/Group4/DetailedNotification';
 
@@ -52,7 +53,7 @@ import ImageVideo from './ImageVideo';
 import Detail from './ImageVideo/detail';
 import Stream from './ImageVideo/stream';
 // incident group 09
-import Incident from "./Incident/Incident";
+import IncidentGroup9 from "./Incident/Incident";
 import ImageGallery from "./Incident/ImageGallery";
 import VideoGallery from "./Incident/VideoGallery";
 import IncidentEdit from "./Incident/Incident/edit";
@@ -280,7 +281,8 @@ export const routes = [
   },
   {
     path: '/handle-problem',
-    component: () => <div>Xử lý sự cố</div>,
+    component: Incident,
+    exact: true,
   },
   {
     path: '/user-management',

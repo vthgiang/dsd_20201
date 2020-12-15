@@ -1,0 +1,14 @@
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* text-align: center; */
+}
+
+.flex-item-left {
+  flex: 25%;
+}
+
+.flex-item-right {
+  flex: 75%;
+  margin-left: 0%;
+}
