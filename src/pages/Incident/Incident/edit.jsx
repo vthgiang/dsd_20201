@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Tag, Select, Button, message, Descriptions} from "antd";
+import {Tag, Select, Button, message, Descriptions, Spin} from "antd";
 import moment from'moment'
 import _ from 'lodash'
 import {useParams} from 'react-router-dom'
@@ -14,6 +14,7 @@ const IncidentEdit = (props) => {
   const [incident, setIncident] = useState({})
   const [levels, setLevels] = useState([])
   const [status, setStatus] = useState([])
+  const [loading, setLoading] = useState(true)
   const users = [
     {value: '1', label: 'Dung Nguyen'},
     {value: '2', label: 'Viet Anh'},
@@ -26,15 +27,20 @@ const IncidentEdit = (props) => {
   }, []);
 
   const fetchData = async () => {
-    let [error, incident] = await to(incidentService().detail(id))
-    let [error1, _levels = []] = await to(incidentLevelService().index())
-    let [error2, _status = []] = await to(incidentStatusService().index())
-    if(error) message.error('Không thể trả về thông tin sự cố!')
-    if(error1) message.error('Không thể trả về danh sách mức độ sự cố!')
+    let [error, [incident = {}, _levels = [], _status = []]] = await to(Promise.all([
+      incidentService().detail(id),
+      incidentLevelService().index(),
+      incidentStatusService().index()
+    ]))
+    // let [error, incident] = await to(incidentServ,ice().detail(id))
+    // let [error1, _levels = []] = await to()
+    // let [error2, _status = []] = await to()
+    if(error) message.error('Có lỗi xảy ra!')
     let _images = (incident.images || []).map((item) => {return {...item, isSelected: false}})
     setIncident({...incident, images: _images} || {})
     setLevels(_levels)
     setStatus(_status)
+    setLoading(false)
     console.log('incident', incident)
   }
 
@@ -63,6 +69,7 @@ const IncidentEdit = (props) => {
 
   return (
       <div>
+        <Spin spinning={loading}>
         <Descriptions
             bordered
             layout="vertical"
@@ -103,7 +110,7 @@ const IncidentEdit = (props) => {
           </Descriptions.Item>
 
         </Descriptions>
-
+        </Spin>
 
       </div>
   )
