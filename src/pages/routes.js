@@ -57,11 +57,18 @@ import ImageGallery from "./Incident/ImageGallery";
 import VideoGallery from "./Incident/VideoGallery";
 import IncidentEdit from "./Incident/Incident/edit";
 
+//DE DIEU
+import HomeDeDieu from "./Home/DeDieu";
+
 export const routes = [
   {
     path: '/dashboard',
     component: Dashboard,
     exact: true,
+  },
+  {
+    path: '/dedieu',
+    component: HomeDeDieu,
   },
   {
     path: '/drones',
