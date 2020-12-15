@@ -4,6 +4,7 @@ import StyleHome from "./index.style";
 import HomeContent from "../../containers/HomeContent";
 import Navbar from "../../containers/Navbar";
 import Logo from "../../components/Logo";
+import { useSelector } from "react-redux";
 
 const { Header, Content, Footer } = Layout;
 
@@ -11,12 +12,14 @@ const Home = () => {
   useEffect(() => {
     document.title = "Home";
   }, []);
+  const isLogin = useSelector(state => state.user.isLogin);
+
   return (
     <StyleHome>
       <Layout className="layout">
         <Header className="header">
           <Logo></Logo>
-          <Navbar></Navbar>
+          {isLogin && <Navbar></Navbar>}
         </Header>
         <Content className="content">
           <div className="site-layout-content">
