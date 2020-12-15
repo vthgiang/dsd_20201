@@ -122,7 +122,7 @@ export const sidebarMenu = [
     subMenu: [
       {
         key: 'CategoryMonitored',
-        heading: 'Quản lý danh mục',
+        heading: 'Quản lý danh mục giám sát',
         icon: 'fa fa-bars',
         route: '/category-monitored-object-management',
       },
@@ -152,7 +152,7 @@ export const sidebarMenu = [
     icon: 'fas fa-file-signature',
     route: '/activity-log',
     subMenu: [
-      
+
       {
         key: 'LogDrone',
         heading: 'Lịch sử hoạt động của drone',
@@ -162,7 +162,7 @@ export const sidebarMenu = [
       {
         key: 'LogPayLoad',
         heading: 'Lịch sử hoạt động của PayLoad',
-     
+
         icon: 'fas fa-layer-group',
         route: '/log-payload',
       },
@@ -208,7 +208,7 @@ export const sidebarMenu = [
         icon: 'fas fa-toolbox',
         route: '/log-incident',
       },
-      
+
       {
         key: 'LogRegion',
         heading: 'Lịch sử hoạt động của miền giám sát',

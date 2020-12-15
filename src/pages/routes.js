@@ -51,6 +51,11 @@ import DScard from './Payload/PayloadSDcard';
 import ImageVideo from './ImageVideo';
 import Detail from './ImageVideo/detail';
 import Stream from './ImageVideo/stream';
+//monitored Object
+import CategoryMonitored from './MonitoredObject/Category/component';
+import MonitoredObject from './MonitoredObject/MonitoredObject/component';
+import MonitoredObjectCreate from './MonitoredObject/MonitoredObject/component/monitoredObjectCreate';
+import MonitoredObjectView from './MonitoredObject/MonitoredObject/component/MonitoredObjectView';
 
 export const routes = [
   {
@@ -182,6 +187,30 @@ export const routes = [
   {
     path: '/supervised-object',
     component: () => <div>Đối tượng giám sát</div>,
+  },
+  // view monitored Object
+  {
+    path: '/monitored-object-management/:option/:id',
+    component: MonitoredObjectView,
+    exact: true
+  },
+  // create monitored Object
+  {
+    path: '/monitored-object-management/:option',
+    component: MonitoredObjectCreate,
+    exact: true
+  },
+  //view List Monitored Object
+  {
+    path: '/monitored-object-management',
+    component: MonitoredObject,
+    exact: true
+  },
+  //View Category Monitored
+  {
+    path: '/category-monitored-object-management',
+    component: CategoryMonitored,
+    exact: true
   },
   {
     path: '/statistic',
