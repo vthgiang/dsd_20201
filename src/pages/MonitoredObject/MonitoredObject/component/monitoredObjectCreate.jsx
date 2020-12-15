@@ -10,7 +10,7 @@ import { MonitoredObjectActions } from "../redux/actions";
 
 const axios = require("axios");
 
-function MonitoredObjectCreate({ history }) {
+function MonitoredObjectView({ history }) {
   let { id, option } = useParams();
   const dispatch = useDispatch();
   const category = useSelector((state) => state.category);
@@ -132,7 +132,7 @@ function MonitoredObjectCreate({ history }) {
   };
 
   return (
-    <div >
+    <div>
       <div className="header-title mb-5">
         <h5 className="modal-title" id="exampleModalLongTitle">
           Thêm mới đối tượng giám sát
@@ -406,4 +406,4 @@ function MonitoredObjectCreate({ history }) {
     </div>
   );
 }
-export default MonitoredObjectCreate;
+export default MonitoredObjectView;

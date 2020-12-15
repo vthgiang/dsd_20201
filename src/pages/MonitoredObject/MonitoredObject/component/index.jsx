@@ -108,7 +108,7 @@ function AreaMonitored(props) {
     <Menu>
       <Menu.Item>
         <a
-          data-target="#modalCreateCatObject"
+          data-target="#modalCreate"
           title="Add area"
           onClick={() => handleAreaCreate()}
         >
