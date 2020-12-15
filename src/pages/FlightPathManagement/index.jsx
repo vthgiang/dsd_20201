@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import Map from '../../components/Map';
-import FlightPathList from '../../components/FlightPathList';
-import AddFlightPathModel from '../../components/DroneModals/AddFlightPathModal';
+import Map from '../../components/Drone/Map';
+import FlightPathList from '../../components/Drone/FlightPathList';
+import AddFlightPathModel from '../../components/Drone/DroneModals/AddFlightPathModal';
 import Pagination from '../../components/Drone/Pagination';
 import axios from 'axios';
 

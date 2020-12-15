@@ -9,8 +9,7 @@ PaginationComponent.propTypes = {
 };
 
 PaginationComponent.defaultProps = {
-    page: 1,
-    totalPage: 1,
+    pagination: {page: 1, totalPage: 1},
     pageChange: null
 }
 
