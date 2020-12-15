@@ -51,6 +51,11 @@ import DScard from './Payload/PayloadSDcard';
 import ImageVideo from './ImageVideo';
 import Detail from './ImageVideo/detail';
 import Stream from './ImageVideo/stream';
+// incident group 09
+import Incident from "./Incident/Incident";
+import ImageGallery from "./Incident/ImageGallery";
+import VideoGallery from "./Incident/VideoGallery";
+import IncidentEdit from "./Incident/Incident/edit";
 
 export const routes = [
   {
@@ -292,6 +297,27 @@ export const routes = [
   {
     path: '/user-meta',
     component: ListUserMeta,
+  },
+  {
+    path: "/incidents",
+    component: () => <Incident />,
+    exact: true
+  },
+  {
+    path: "/incidents/:id",
+    component: () => <IncidentEdit />,
+    exact: true
+
+  },
+  {
+    path: "/imageGallery",
+    component: () => <ImageGallery />,
+    exact: true
+  },
+  {
+    path: "/videoGallery",
+    component: () => <VideoGallery />,
+    exact: true
   },
 ];
 
