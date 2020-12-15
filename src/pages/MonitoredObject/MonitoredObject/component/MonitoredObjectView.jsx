@@ -257,9 +257,8 @@ function MonitoredObjectView({ history }) {
     <div>
       <div className="header-title mb-5">
         <h5 className="modal-title" id="exampleModalLongTitle">
-          {option === "add" && "Thêm mới đối tượng giám sát"}
           {option === "view" && "Xem chi tiết thông tin đối tượng giám sát"}
-          {option === "edit" && "Chỉnh sửa thông tin đối tượng giám sát"}
+          {option === "edit" && "Chỉnh sửa thông tin đối tượng giám sát"} 
         </h5>
       </div>
       <div className="content row">
