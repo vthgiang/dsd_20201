@@ -1,10 +1,7 @@
-import React from "react";
-import {
-  Row,
-  Col,
-  Table,
-  Spin,
-} from "antd";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import QueryString from 'query-string';
+import { Row, Col, Table, Spin } from 'antd';
 import {
   Legend,
   ResponsiveContainer,
@@ -17,8 +14,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-} from "recharts";
-import { getMonitoreObjectMetrics } from "../../services/statistics";
+} from 'recharts';
+import { getMonitoreObjectMetrics } from '../../services/statistics';
 
 const renderCustomizedLabel = ({
   cx,
@@ -40,7 +37,7 @@ const renderCustomizedLabel = ({
       x={x}
       y={y}
       fill="white"
-      textAnchor={x > cx ? "start" : "end"}
+      textAnchor={x > cx ? 'start' : 'end'}
       dominantBaseline="central"
     >
       {`${(percent * 100).toFixed(0)}%`}
@@ -48,48 +45,66 @@ const renderCustomizedLabel = ({
   );
 };
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#ff8279"];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#ff8279'];
 
 const RADIAN = Math.PI / 180;
 
 export default function PayloadDashboard() {
-  const [monitoreObjectMetrics, setMonitoreObjectMetrics] = React.useState(null);
+  const users = useSelector((state) => state.user.user);
+  const projectType = users.type;
+  const role = users.role;
+  console.log(users);
+  console.log(projectType);
+  const [monitoreObjectMetrics, setMonitoreObjectMetrics] = React.useState(
+    null,
+  );
   const chartData = React.useMemo(() => {
     if (!monitoreObjectMetrics) return [];
-    return [
-      { name: "Lưới điện: ", value: monitoreObjectMetrics.all.luoiDien },
-      { name: "Cây trồng: ", value: monitoreObjectMetrics.all.cayTrong },
-      { name: "Cháy rừng: ", value: monitoreObjectMetrics.all.chayRung },
-      { name: "Đê điều: ", value: monitoreObjectMetrics.all.deDieu },
+    if (role=="SUPER_ADMIN")
+      return [
+        { name: 'Lưới điện: ', value: monitoreObjectMetrics.all.luoiDien },
+        { name: 'Cây trồng: ', value: monitoreObjectMetrics.all.cayTrong },
+        { name: 'Cháy rừng: ', value: monitoreObjectMetrics.all.chayRung },
+        { name: 'Đê điều: ', value: monitoreObjectMetrics.all.deDieu },
+      ];
+    else return [
+      { name: 'Bình thường: ', value: monitoreObjectMetrics.all.nomal },
+      { name: 'Gặp sự cố mới: ', value: monitoreObjectMetrics.all.break },
+      { name: 'Đang sửa chữa: ', value: monitoreObjectMetrics.all.fixing },
     ]
   }, [monitoreObjectMetrics]);
   const tableData = React.useMemo(() => {
     if (!monitoreObjectMetrics) return [];
-    return [
-      { status: "Lưới điện: ", amount: monitoreObjectMetrics.all.luoiDien },
-      { status: "Cây trồng: ", amount: monitoreObjectMetrics.all.cayTrong },
-      { status: "Cháy rừng: ", amount: monitoreObjectMetrics.all.chayRung },
-      { status: "Đê điều: ", amount: monitoreObjectMetrics.all.deDieu },
-      { status: "Tổng số: ", amount: monitoreObjectMetrics.all.total },
+    if (role=='SUPER_ADMIN')
+      return [
+        { status: 'Lưới điện: ', amount: monitoreObjectMetrics.all.luoiDien },
+        { status: 'Cây trồng: ', amount: monitoreObjectMetrics.all.cayTrong },
+        { status: 'Cháy rừng: ', amount: monitoreObjectMetrics.all.chayRung },
+        { status: 'Đê điều: ', amount: monitoreObjectMetrics.all.deDieu },
+        { status: 'Tổng số: ', amount: monitoreObjectMetrics.all.total },
+      ];
+    else return [
+      { status: 'Bình thường: ', amount: monitoreObjectMetrics.all.nomal },
+      { status: 'Mới gặp sự cố: ', amount: monitoreObjectMetrics.all.break },
+      { status: 'Đang sửa chữa: ', amount: monitoreObjectMetrics.all.fixing },
+      { status: 'Tổng cộng: ', amount: monitoreObjectMetrics.all.total },
     ]
   }, [monitoreObjectMetrics]);
   const columns = [
     {
-      title: "Loại đối tượng giám sát",
-      dataIndex: "status",
-      key: "status",
+      title: 'Loại đối tượng giám sát',
+      dataIndex: 'status',
+      key: 'status',
     },
     {
-      title: "Số lượng",
-      dataIndex: "amount",
-      key: "amount",
+      title: 'Số lượng',
+      dataIndex: 'amount',
+      key: 'amount',
     },
     {
-      title: "Hành động",
-      key: "action",
-      render: (text, record) => (
-        <a href="#">Chi tiết</a>
-      ),
+      title: 'Hành động',
+      key: 'action',
+      render: (text, record) => <a href="#">Chi tiết</a>,
     },
   ];
 
@@ -110,10 +125,10 @@ export default function PayloadDashboard() {
 
   React.useEffect(() => {
     const fetchAll = async () => {
-      const monitorObject = await getMonitoreObjectMetrics();
-      console.log({ monitorObject })
+      const monitorObject = await getMonitoreObjectMetrics(projectType);
+      console.log({ monitorObject });
       setMonitoreObjectMetrics(monitorObject);
-    }
+    };
 
     fetchAll();
   }, []);

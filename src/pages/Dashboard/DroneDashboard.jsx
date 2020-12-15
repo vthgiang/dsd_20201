@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import {
   Row,
   Col,
@@ -66,6 +67,9 @@ const columns = [
 ];
 
 export default function DroneDashboard() {
+  const users = useSelector((state) => state.user.user);
+  const projectType = users.type;
+  const role = users.role;
   const [droneMetrics, setDroneMetrics] = React.useState(null);
   const chartData = React.useMemo(() => {
     if (!droneMetrics) return [];
@@ -90,7 +94,7 @@ export default function DroneDashboard() {
 
   React.useEffect(() => {
     const fetchAll = async () => {
-      const drone = await getDroneDetailedMetrics();
+      const drone = await getDroneDetailedMetrics(projectType);
       setDroneMetrics(drone);
     };
 

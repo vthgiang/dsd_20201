@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import {
   Row,
   Col,
@@ -53,6 +54,9 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#ff8279"];
 const RADIAN = Math.PI / 180;
 
 export default function PayloadDashboard() {
+  const users = useSelector((state) => state.user.user);
+  const projectType = users.type;
+  const role = users.role;
   const [notifyMetrics, setNotifyMetrics] = React.useState(null);
   const chartData = React.useMemo(() => {
     if (!notifyMetrics) return [];
@@ -112,7 +116,7 @@ export default function PayloadDashboard() {
 
   React.useEffect(() => {
     const fetchAll = async () => {
-      const notifications = await getNotifyMetrics();
+      const notifications = await getNotifyMetrics(projectType);
       console.log({ notifications })
       setNotifyMetrics(notifications);
     }

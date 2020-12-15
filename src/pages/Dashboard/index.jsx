@@ -36,6 +36,9 @@ const { TabPane } = Tabs;
 function Dashboard() {
     // Role here to detect what to render
     const role = useSelector((state) => state.user.role);
+    const projectType = useSelector((state) => state.user.projectType);
+    console.log(role);
+    console.log(projectType);
 
     const location = useLocation();
     const history = useHistory();
@@ -45,6 +48,7 @@ function Dashboard() {
     const [incidentMetrics, setIncidentMetrics] = React.useState(null);
     const [usersMetrics, setUsersMetrics] = React.useState(null);
     const [payloadMetrics, setPayloadMetrics] = React.useState(null);
+    const [notifyMetrics, setNotifyMetrics] = React.useState(null);
 
     const onTabChange = React.useCallback((key) => {
         history.push({
@@ -60,15 +64,17 @@ function Dashboard() {
     React.useEffect(() => {
         const fetchAll = async () => {
             const results = await Promise.all([
-                getDroneOverallMetrics(),
+                getDroneOverallMetrics(projectType),
                 getIncidentOverallMetrics(),
-                getUsersMetrics(),
+                getUsersMetrics(projectType),
                 getPayloadOverallMetrics(),
+                getNotifyMetrics(projectType),
             ]);
             setDroneMetrics(results[0]);
             setIncidentMetrics(results[1]);
             setUsersMetrics(results[2]);
             setPayloadMetrics(results[3]);
+            setNotifyMetrics(results[4]);
         };
         fetchAll();
     }, []);
@@ -172,37 +178,58 @@ function Dashboard() {
           <Card className="u-shadow u-rounded">
             <Tabs
               defaultActiveKey="Drone"
-              // activeKey={activeTab}
+              activeKey={activeTab}
               onChange={onTabChange}
             >
-              <TabPane key="Drone" tab="Drone">
-                <DroneDashboard />
-              </TabPane>
-              <TabPane key="Payload" tab="Payload">
-                <PayloadDashboard />
-              </TabPane>
+              {
+                role!='INCIDENT_STAFF' ?
+                <TabPane key="Drone" tab="Drone">
+                  <DroneDashboard />
+                </TabPane> 
+                
+                : null
+              }
+              {
+                role!='INCIDENT_STAFF' ?
+                <TabPane key="Payload" tab="Payload">
+                  <PayloadDashboard />
+                </TabPane> : null
+              }
+            
               <TabPane key="Tab 2" tab="Sự cố">
                 <IncidentDashboard />
               </TabPane>
-              <TabPane tab="Người sử dụng" key="Tab 4">
-                <UsersDashboard />
-              </TabPane>
-              <TabPane key="Cảnh báo" tab="Cảnh báo">
-                <NotifyDashboard />
-              </TabPane>
-              <TabPane key="Đợt giám sát" tab="Đợt giám sát">
+
+              {
+                role=='SUPER_ADMIN'||role=='ADMIN'||role=='MANAGER' ?
+                <TabPane tab="Người sử dụng" key="User">
+                  <UsersDashboard />
+                </TabPane> : null
+              }
+              
+              {
+                role=='SUPER_ADMIN'||role=='ADMIN'||role=='MANAGER' ?
+                <TabPane key="Notify" tab="Cảnh báo">
+                  <NotifyDashboard />
+                </TabPane> : null
+              }
+              <TabPane key="FlightHub" tab="Đợt giám sát">
                 <FlightHubDashboard />
               </TabPane>
-              <TabPane key="Miền giám sát" tab="Miền giám sát">
-                <MonitorZoneDashboard />
-              </TabPane>
-              <TabPane key="Đối tượng giám sát" tab="Đối tượng giám sát">
+              {
+                role!='INCIDENT_STAFF' ?
+                <TabPane key="MonitorZone" tab="Miền giám sát">
+                  <MonitorZoneDashboard />
+                </TabPane> : null
+              }
+              
+              <TabPane key="MonitorObject" tab="Đối tượng giám sát">
                 <MonitoreObjectDashboard />
               </TabPane>
-              <TabPane key="Báo cáo" tab="Báo cáo">
+              <TabPane key="Report" tab="Báo cáo">
                 <div />
               </TabPane>
-              <TabPane key="Tab 3" tab="Lịch sử hoạt động">
+              <TabPane key="Logs" tab="Lịch sử hoạt động">
                 <LogDashboard />
               </TabPane>
             </Tabs>
