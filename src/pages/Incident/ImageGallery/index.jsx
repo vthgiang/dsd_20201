@@ -8,7 +8,8 @@ import {
     Form,
     Select,
     DatePicker,
-    message
+    message,
+    Spin
 } from "antd";
 import Gallery from 'react-grid-gallery';
 import incidentLevelService from "../../../services/group09/incidentLevelService";
@@ -22,14 +23,14 @@ const ImageGalley = (props) => {
     const [visible, setVisible] = useState(false)
     const [confirmLoading, setConfirmLoading] = useState(false)
     const [form] = Form.useForm()
-    const [selectedIds, setSelectedIds] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetchLevels();
+        fetchData();
     }, [])
 
-    const fetchLevels = async () => {
-        console.log('fetch level')
+    const fetchData = async () => {
+        // setLoading(true)
         let [leverRes = {}, imagesRes = []] = await (Promise.all([
             incidentLevelService().index(),
             imageService().getImagesByMonitoredId({id: ''})
@@ -37,6 +38,7 @@ const ImageGalley = (props) => {
         console.log('images', imagesRes)
         console.log('leverRes', leverRes)
         levels = leverRes
+
         if(imagesRes.status == 200) {
             let _images = (imagesRes.result || []).map((item) => {
                 let createdAt = moment(item.createdAt).format('DD/MM/YYYY hh:mm:ss')
@@ -63,6 +65,8 @@ const ImageGalley = (props) => {
         } else {
             message.error(leverRes.message)
         }
+        setLoading(false)
+
 
     }
     const allImagesSelected = (_images) => {
@@ -114,7 +118,8 @@ const ImageGalley = (props) => {
                 ...values,
                 dueDate: moment(values.dueDate).format('YYYY-MM-DD'),
                 images: selectedImages,
-                type: "LUOI_DIEN"
+                type: "LUOI_DIEN",
+                location: 'HN'
             }))
             if(error) message.error('Đã có lỗi xảy ra!')
             message.success('Sự cố đã được tạo mới!')
@@ -135,10 +140,14 @@ const ImageGalley = (props) => {
     return <div>
         <Checkbox onChange={onClickSelectAll} checked={selectAllChecked}>Select All</Checkbox>
         <Button disabled={!getSelectedImages().length} type={'primary'} onClick={showModal}>Tạo sự cố</Button>
+
+
+
         <div style={{
             padding: "2px",
             color: "#666"
         }}>Selected images: {getSelectedImages().toString()}</div>
+        <Spin spinning={loading}>
         <div style={{
             display: "block",
             minHeight: "1px",
@@ -146,11 +155,14 @@ const ImageGalley = (props) => {
             border: "1px solid #ddd",
             overflow: "auto"
         }}>
+
             <Gallery
                 images={images}
                 onSelectImage={onSelectImage}
                 showLightboxThumbnails={true}/>
+
         </div>
+        </Spin>
         <Modal
             title="Title"
             visible={visible}
@@ -179,9 +191,9 @@ const ImageGalley = (props) => {
                 <Form.Item label="DatePicker" name='dueDate' rules={[{ required: true, message: 'Vui lòng nhập thông tin!' }]}>
                     <DatePicker />
                 </Form.Item>
-                <Form.Item label="Vị trí" name='location' rules={[{ required: true, message: 'Vui lòng nhập thông tin!' }]}>
-                    <Input />
-                </Form.Item>
+                {/*<Form.Item label="Vị trí" name='location' rules={[{ required: true, message: 'Vui lòng nhập thông tin!' }]}>*/}
+                {/*    <Input />*/}
+                {/*</Form.Item>*/}
             </Form>
         </Modal>
     </div>

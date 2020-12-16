@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Tag, Select, Button, message, Descriptions} from "antd";
+import {Tag, Select, Button, message, Descriptions, Spin} from "antd";
 import moment from'moment'
 import _ from 'lodash'
 import {useParams} from 'react-router-dom'
@@ -14,6 +14,9 @@ const IncidentEdit = (props) => {
   const [incident, setIncident] = useState({})
   const [levels, setLevels] = useState([])
   const [status, setStatus] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [latLng, setLatLng] = useState({})
+  console.log('latLng', latLng)
   const users = [
     {value: '1', label: 'Dung Nguyen'},
     {value: '2', label: 'Viet Anh'},
@@ -26,15 +29,23 @@ const IncidentEdit = (props) => {
   }, []);
 
   const fetchData = async () => {
-    let [error, incident] = await to(incidentService().detail(id))
-    let [error1, _levels = []] = await to(incidentLevelService().index())
-    let [error2, _status = []] = await to(incidentStatusService().index())
-    if(error) message.error('Không thể trả về thông tin sự cố!')
-    if(error1) message.error('Không thể trả về danh sách mức độ sự cố!')
+    let [error, [incident, _levels = [], _status = []]] = await to(Promise.all([
+      incidentService().detail(id),
+      incidentLevelService().index(),
+      incidentStatusService().index()
+    ]))
+    // let [error, incident] = await to(incidentServ,ice().detail(id))
+    // let [error1, _levels = []] = await to()
+    // let [error2, _status = []] = await to()
+    if(error) message.error('Có lỗi xảy ra!')
     let _images = (incident.images || []).map((item) => {return {...item, isSelected: false}})
+    let latLongs = (incident.images || []).map((item) => {return {lat: item.latitude, lng: item.longitude}})
+
     setIncident({...incident, images: _images} || {})
     setLevels(_levels)
     setStatus(_status)
+    setLatLng(getCenterFromDegrees(latLongs))
+    setLoading(false)
     console.log('incident', incident)
   }
 
@@ -60,9 +71,44 @@ const IncidentEdit = (props) => {
       default: return ''
     }
   }
+  const getCenterFromDegrees = (data) => {
+    // let data = [{lat:22.281610498720003,lng:70.77577162868579},{lat:22.28065743343672,lng:70.77624369747241},{lat:22.280860953131217,lng:70.77672113067706},{lat:22.281863655593973,lng:70.7762061465462}];
+    let num_coords = data.length;
+    let X = 0.0;
+    let Y = 0.0;
+    let Z = 0.0;
 
+    for(let i=0; i<num_coords; i++){
+      let lat = data[i].lat * Math.PI / 180;
+      let lon = data[i].lng * Math.PI / 180;
+      let a = Math.cos(lat) * Math.cos(lon);
+      let b = Math.cos(lat) * Math.sin(lon);
+      let c = Math.sin(lat);
+
+      X += a;
+      Y += b;
+      Z += c;
+    }
+
+    X /= num_coords;
+    Y /= num_coords;
+    Z /= num_coords;
+
+    let lon = Math.atan2(Y, X);
+    let hyp = Math.sqrt(X * X + Y * Y);
+    let lat = Math.atan2(Z, hyp);
+
+    let finalLat = lat * 180 / Math.PI;
+    let finalLng =  lon * 180 / Math.PI;
+
+    let finalArray = Array();
+    finalArray.push(finalLat);
+    finalArray.push(finalLng);
+    return {lat: finalLat, lng: finalLng};
+  }
   return (
       <div>
+        <Spin spinning={loading}>
         <Descriptions
             bordered
             layout="vertical"
@@ -97,13 +143,13 @@ const IncidentEdit = (props) => {
           <Descriptions.Item label="Vị trí" span={1}>
             {incident.location}
             <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.5756715163598!2d106.1600463149287!3d20.96954899517287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313598a919dd3821%3A0x5ba5e686fd49047!2zVHLhuqFtIMSRaeG7h24gY2FvIHRo4bq_IE5n4buNYyBMacOqbg!5e0!3m2!1sen!2s!4v1605663218115!5m2!1sen!2s"
+                src={`https://maps.google.com/maps?q=${latLng.lat}, ${latLng.lng}&z=15&output=embed`}
                 width="100%" height="450" frameBorder="0" style={{border: 0}} allowFullScreen="" aria-hidden="false"
                 tabIndex="0"></iframe>
           </Descriptions.Item>
 
         </Descriptions>
-
+        </Spin>
 
       </div>
   )

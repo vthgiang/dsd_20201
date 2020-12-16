@@ -47,8 +47,7 @@ class BaseService {
             token = localStorage.getItem("token");
             projectType = localStorage.getItem("project-type");
           }
-      
-        debugger
+
         let requestOptions = {
             method: method,
             headers: {
