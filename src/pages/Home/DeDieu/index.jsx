@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import to from "await-to-js";
-import {Button, Col, Form, message, Modal, Row, Select, Table, Tag} from "antd";
+import {Button, Col, Form, Input, message, Modal, Row, Select, Table, Tag, TimePicker} from "antd";
 import useBaseHook from "../../../hooks/BaseHooks";
 import incidentService from "../../../services/group09/incidentService";
 import incidentLevelService from "../../../services/group09/incidentLevelService";
@@ -92,7 +92,7 @@ const data = [
 
 
 let status = []
-const HomeDeDieu = () => {
+const HomeDeDieu = ({ history }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const { notify, getData } = useBaseHook();
@@ -252,22 +252,52 @@ const HomeDeDieu = () => {
                   Nhóm chức năng 5: Quản trị và các chức năng nâng cao               </Button>
               </Col>
             </Row>
-          {/*  <br/>*/}
-          {/*  <Row justify="space-around">*/}
-          {/*    <Col span={4}>*/}
-          {/*      <Form.Item label="Trạng thái" name="status">*/}
-          {/*        /!*<Select options={this.state.status} />*!/*/}
-          {/*      </Form.Item>*/}
-          {/*    </Col>*/}
-          {/*    <Col span={4}>*/}
-          {/*      <Button type="primary" htmlType="submit" icon={<SearchOutlined />}>*/}
-          {/*        Tìm kiếm*/}
-          {/*      </Button>*/}
-          {/*    </Col>*/}
-          {/*  </Row>*/}
+            <br/>
+            {/*<Row justify="space-around">*/}
+            {/*  <Col span={4}>*/}
+            {/*    <Form.Item label="Tìm theo trạng thái" name="status">*/}
+            {/*      <Select options='Đang xử lý' />*/}
+            {/*    </Form.Item>*/}
+            {/*  </Col>*/}
+            {/*  <Col span={4}>*/}
+            {/*    <Button type="primary" htmlType="submit" icon={<SearchOutlined />}>*/}
+            {/*      Tìm kiếm*/}
+            {/*    </Button>*/}
+            {/*  </Col>*/}
+            {/*</Row>*/}
           </Form>
+
           {/*<Button type="primary" className="buttontype" onClick={() => this.showModalAdd()} >Thêm</Button>*/}
-          {/*/!*<Table columns={columns} loading={loading} dataSource={incidents} loading={loading} />*!/*/}
+          <h2>Thống kê danh sách sự cố</h2>
+          <br/>
+          <Row>
+          <Col span={6}>
+            <Button type="primary" className="buttontype" onClick={() => history.push('/imageGallery')}>Tạo sự cố offline</Button>
+          </Col>
+          <Col span={6}>
+            <Button type="primary" className="buttontype" onClick={() => history.push('/videoGallery')}>Tạo sự cố từ stream</Button>
+          </Col>
+          </Row>
+          <br/>
+          <Row justify="space-around">
+            <Col span={6}>
+            <Form.Item label="Theo mức độ sự cố" name="reason">
+              <Input placeholder="Mức độ"></Input>
+            </Form.Item>
+          </Col>
+            <Col span={6}>
+              <Form.Item label="Theo vị trí" name="reason">
+                <Input placeholder="Vị trí"></Input>
+              </Form.Item>
+            </Col>
+            <Col span={6}>
+              <Form.Item label="Tìm theo thời gian" name='time'>
+                <TimePicker></TimePicker>
+              </Form.Item>
+            </Col>
+          </Row>
+          <br/>
+          <Table columns={columns} loading={loading} dataSource={incidents} loading={loading} />
         </div>
 
 
