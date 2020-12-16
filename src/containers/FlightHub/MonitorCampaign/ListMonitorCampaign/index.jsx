@@ -20,7 +20,11 @@ import {
   HistoryOutlined,
   PlusOutlined,
 } from '@ant-design/icons';
+<<<<<<< HEAD
 import { useHistory } from 'react-router-dom';
+=======
+import { useHistory, useLocation } from 'react-router-dom';
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 import StyleListMonitorCampaign, { StyleSpinContainer } from './index.style';
 import {
   StyleTitle,
@@ -46,6 +50,10 @@ const ListMonitorCampaign = () => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const history = useHistory();
+<<<<<<< HEAD
+=======
+  const location = useLocation();
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 
   const fetchListMonitorCampaignsData = async (params) => {
     try {
@@ -62,7 +70,11 @@ const ListMonitorCampaign = () => {
   };
   useEffect(() => {
     fetchListMonitorCampaignsData();
+<<<<<<< HEAD
   }, []);
+=======
+  }, [location]);
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 
   const handleSearch = () => {
     const newFieldValues = form.getFieldsValue();
@@ -130,6 +142,15 @@ const ListMonitorCampaign = () => {
       sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
+<<<<<<< HEAD
+=======
+      dataIndex: 'task',
+      title: 'Loại sự cố',
+      width: '15%',
+      sorter: (a, b) => a.name.localeCompare(b.name),
+    },
+    {
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
       dataIndex: 'startTime',
       width: '12.5%',
       title: 'Thời gian bắt đầu',

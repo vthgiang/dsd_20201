@@ -4,6 +4,45 @@ import { Link } from 'react-router-dom';
 
 export const problemTypes = ["Cháy rừng", "Lưới điện", "Đê điều", "Cây trồng"];
 
+<<<<<<< HEAD
+=======
+export const problemTypesKD = ["CHAY_RUNG", "LUOI_DIEN", "DE_DIEU", "CAY_TRONG"];
+
+export const problemColumns = [
+    {
+        title: "Tên sự cố",
+        dataIndex: "name"
+    },
+    {
+        title: "Ảnh",
+        dataIndex: "images",
+        render: images => <Image preview={false} src={images[0]?.link} />
+    },
+    {
+        title: "Video",
+        dataIndex: "videos",
+        render: videos => <video src={videos[0]?.link} />
+    },
+    {
+        title: "Mô tả",
+        dataIndex: "description"
+    },
+    {
+        title: "Loại sự cố",
+        dataIndex: "type",
+        render: type => <span>{type.name}</span>
+    },
+    {
+        title: 'Vị trí',
+        dataIndex: 'location',
+    },
+    {
+        title: 'Ngày xảy ra',
+        dataIndex: 'dueDate',
+    },
+]
+
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 export const columns = [
     {
         title: 'Mã',
@@ -34,6 +73,13 @@ export const columns = [
         dataIndex: 'latitude',
     },
     {
+<<<<<<< HEAD
+=======
+        title: 'Vị trí',
+        dataIndex: 'location',
+    },
+    {
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
         title: 'Loại sự cố',
         dataIndex: 'problemType'
     },

@@ -10,13 +10,21 @@ const Filter = ({ filter, setFilter, setVisible }) => {
     const user = useSelector((state) => state.user.user);
     const [listUsers, setListUsers] = useState([]);
 
+<<<<<<< HEAD
     const fetchDepartments = async () => {
+=======
+    const fetchUsers = async () => {
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
         const res = await getAllUsers();
         setListUsers(res.result);
     };
 
     useEffect(() => {
+<<<<<<< HEAD
         fetchDepartments();
+=======
+        fetchUsers();
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
     }, []);
 
     const renderSelectStatus = () => (
@@ -91,6 +99,7 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
+<<<<<<< HEAD
             {listUsers.map((user, index) => {
                 return (
                     <Option key={index} value={user.id}>
@@ -98,6 +107,16 @@ const Filter = ({ filter, setFilter, setVisible }) => {
                     </Option>
                 );
             })}
+=======
+            {listUsers &&
+                listUsers.map((user, index) => {
+                    return (
+                        <Option key={index} value={user.id}>
+                            {user.full_name}
+                        </Option>
+                    );
+                })}
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
         </Select>
     );
 
@@ -113,6 +132,7 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
+<<<<<<< HEAD
             {listUsers.map((user, index) => {
                 return (
                     <Option key={index} value={user.id}>
@@ -120,6 +140,16 @@ const Filter = ({ filter, setFilter, setVisible }) => {
                     </Option>
                 );
             })}
+=======
+            {listUsers &&
+                listUsers.map((user, index) => {
+                    return (
+                        <Option key={index} value={user.id}>
+                            {user.full_name}
+                        </Option>
+                    );
+                })}
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
         </Select>
     );
 

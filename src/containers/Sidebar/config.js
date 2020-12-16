@@ -112,8 +112,28 @@ export const sidebarMenu = [
     key: 'Problems',
     heading: 'Sự cố',
     icon: 'fas fa-times-octagon',
-    route: '/problems',
+    subMenu: [
+      {
+        key: 'Problems-list',
+        heading: 'Danh sách sự cố',
+        icon: 'fas fa-list',
+        route: '/incidents',
+      },
+      {
+        key: 'Propblems-imageGallery',
+        heading: 'Tạo offline',
+        icon: 'fas fa-images',
+        route: '/imageGallery',
+      },
+      {
+        key: 'Propblems-videoGallery',
+        heading: 'Tạo từ tream',
+        icon: 'fas fa-images',
+        route: '/videoGallery',
+      },
+    ],
   },
+
   {
     key: 'SupervisedObject',
     heading: 'Đối tượng giám sát',
@@ -138,7 +158,7 @@ export const sidebarMenu = [
     icon: 'fas fa-file-signature',
     route: '/activity-log',
     subMenu: [
-      
+
       {
         key: 'LogDrone',
         heading: 'Lịch sử hoạt động của drone',
@@ -148,7 +168,7 @@ export const sidebarMenu = [
       {
         key: 'LogPayLoad',
         heading: 'Lịch sử hoạt động của PayLoad',
-     
+
         icon: 'fas fa-layer-group',
         route: '/log-payload',
       },
@@ -194,7 +214,7 @@ export const sidebarMenu = [
         icon: 'fas fa-toolbox',
         route: '/log-incident',
       },
-      
+
       {
         key: 'LogRegion',
         heading: 'Lịch sử hoạt động của miền giám sát',
@@ -262,7 +282,7 @@ export const sidebarMenu = [
       {
         key: 'UserMetaSetting',
         heading: 'Lịch sử người dùng',
-        icon: 'fa fa-building',
+        icon: 'fa fa-history',
         route: '/user-meta',
       },
     ],
