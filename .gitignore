@@ -1,5 +1,9 @@
 # Package-lock.json
 package-lock.json
+
+# IDE
+.vscode
+
 # Build
 build/
 
