@@ -302,9 +302,10 @@ export const routes = [
   },
   {
     path: "/incidents",
-    component: () => <Incident />,
+    component: () => <IncidentGroup9 />,
     exact: true
   },
+  
   {
     path: "/incidents/:id",
     component: () => <IncidentEdit />,

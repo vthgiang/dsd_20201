@@ -196,12 +196,16 @@ const Incident = () => {
         incidentLevelService().index(),
         incidentStatusService().index()
       ]))
-      if(error) message.error('Không thể trả về danh sách sự cố!')
+      
+      if(error){
+        message.error('Không thể trả về danh sách sự cố!')
+        setLoading(false)
+        return;
+      }
       setIncidents(incidents.incidents || [])
       setLevels(_levels || [])
       setStatus(_status || [])
     setLoading(false)
-    console.log('incidents', incidents)
   }
   return <Table columns={columns} loading={loading} dataSource={incidents} loading={loading} />;
 };
