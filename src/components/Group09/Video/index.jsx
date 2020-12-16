@@ -58,7 +58,7 @@ const Video = React.forwardRef((props, ref) => {
         controls
         preload="auto"
         poster={poster}
-        ata-setup='{"fluid": true}'
+        data-setup='{"fluid": true}'
         {...props}
       >
         {sources.map((item, index) => (
