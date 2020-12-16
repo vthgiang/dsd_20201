@@ -58,6 +58,13 @@ class PayloadDroneHistory extends Component {
           listHistoriesHasPayload.push(history);
         }
       })
+      listHistoriesHasPayload = listHistoriesHasPayload.filter( x => x.payload != null)
+                for( var i = 0; i < listHistoriesHasPayload.length; i++){
+                  listHistoriesHasPayload[i].startedAt = listHistoriesHasPayload[i].startedAt.replace(/\:([0-9]+)(\.[0-9a-zA-Z]+)?$/g, ':$1').replace(/T/, ' ');
+          if(listHistoriesHasPayload[i].finishedAt != null){
+            listHistoriesHasPayload[i].finishedAt = listHistoriesHasPayload[i].finishedAt.replace(/\:([0-9]+)(\.[0-9a-zA-Z]+)?$/g, ':$1').replace(/T/, ' ');
+          }
+        }
 
       this.setState({listAllHistories: listHistoriesHasPayload});
     })
@@ -249,21 +256,25 @@ class PayloadDroneHistory extends Component {
     var dataSource = [{}];
     if (this.state.isGetAllHistoryPayload === true) {
       dataSource = 
-      this.state.listAllHistories.map(payloadDroneHistory =>
-        ({
+      this.state.listAllHistories.map(payloadDroneHistory => {
+        var finishedAtFromServer;
+      
+        return ({
             // droneId: payloadDroneHistory._id,
             droneName: this.state.droneName,
             payloadId: payloadDroneHistory.payload._id,
             payloadCode: payloadDroneHistory.payload.code,
             payloadName: payloadDroneHistory.payload.name,
-            startedAt: Moment(payloadDroneHistory.startedAt).format("YYYY-MM-DD hh:mm:ss"),
-            finishedAt: Moment(payloadDroneHistory.finishedAt).format("YYYY-MM-DD hh:mm:ss"),
+            startedAt: payloadDroneHistory.startedAt,
+            // startedAt: Moment(payloadDroneHistory.startedAt).format("YYYY-MM-DD hh:mm:ss"),
+            finishedAt: payloadDroneHistory.finishedAt,
             type: payloadDroneHistory.type,
             fee: payloadDroneHistory.fee,
             status: payloadDroneHistory.payload.status,
             memory: payloadDroneHistory.sdCardId.name + payloadDroneHistory.sdCardId.volume,
             reason: payloadDroneHistory.reason,
         })
+      }
       )
     } else {
       dataSource = 
