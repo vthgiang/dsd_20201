@@ -29,7 +29,7 @@ const BellNotification = () => {
 
   useEffect(() => {
     console.log(`total changed: ${total} - ${first}`);
-    if (!first) setInterval(() => fetchNewNotification(0, 0), 5000);
+    if (!first) setInterval(() => fetchNewNotification(0, 0), 10000);
   }, [total])
 
   useEffect(() => {
