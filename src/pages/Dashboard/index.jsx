@@ -14,7 +14,7 @@ import DroneDashboard from "./DroneDashboard";
 import IncidentDashboard from "./IncidentDashboard";
 import UsersDashboard from "./UsersDashboard";
 import PayloadDashboard from "./PayloadDashboard";
-import FlightHubDashboard from "./FlightHubDashboard";
+import FlightHubDashboard from "./flightHub/FlightHubDashboard";
 import {
     getDroneOverallMetrics,
     getIncidentOverallMetrics,
@@ -24,12 +24,15 @@ import {
 import MonitorZoneDashboard from "./MonitorZoneDashboard";
 import LogDashboard from "./LogDashboard";
 import { useSelector } from "react-redux";
+import FlightHubProjectTypeDashboard from "./flightHub/FlightHubProjectTypeDashboard";
 
 const { TabPane } = Tabs;
 
 function Dashboard() {
     // Role here to detect what to render
     const role = useSelector((state) => state.user.role);
+    const user = useSelector((state) => state.user);
+    console.log('USER DATA LOGIN: ', user);
 
     const location = useLocation();
     const history = useHistory();
@@ -172,33 +175,39 @@ function Dashboard() {
                             <TabPane key="Payload" tab="Payload">
                                 <PayloadDashboard />
                             </TabPane>
-                            <TabPane key="Tab 2" tab="Sự cố">
+                            <TabPane key="Incident" tab="Sự cố">
                                 <IncidentDashboard />
                             </TabPane>
-                            <TabPane tab="Người sử dụng" key="Tab 4">
+                            <TabPane key="User" tab="Người sử dụng">
                                 <UsersDashboard />
                             </TabPane>
-                            <TabPane key="Cảnh báo" tab="Cảnh báo">
+                            <TabPane key="Notification" tab="Cảnh báo">
                                 <div />
                             </TabPane>
-                            <TabPane key="Ảnh/Video" tab="Ảnh/Video">
+                            <TabPane key="Images/Videos" tab="Ảnh/Video">
                                 <div />
                             </TabPane>
-                            <TabPane key="Đợt giám sát" tab="Đợt giám sát">
-                                <FlightHubDashboard />
-                            </TabPane>
-                            <TabPane key="Miền giám sát" tab="Miền giám sát">
+                            {role === 'INCIDENT_STAFF' ? null : (
+                                <TabPane key="MonitoredCampaign" tab="Đợt giám sát">
+                                    {role === 'SUPER_ADMIN' ? <FlightHubDashboard /> : <FlightHubProjectTypeDashboard />}
+                                </TabPane>
+                            )}
+                            <TabPane key="MonitoredZone" tab="Miền giám sát">
                                 <MonitorZoneDashboard />
                             </TabPane>
-                            <TabPane key="Đối tượng giám sát" tab="Đối tượng giám sát">
+                            <TabPane key="MonitoredObject" tab="Đối tượng giám sát">
                                 <div />
                             </TabPane>
-                            <TabPane key="Báo cáo" tab="Báo cáo">
-                                <div />
-                            </TabPane>
-                            <TabPane key="Tab 3" tab="Lịch sử hoạt động">
-                                <LogDashboard />
-                            </TabPane>
+                            {role === 'SUPER_ADMIN' || role === 'ADMIN' || role === 'MANAGER' ? (
+                                <TabPane key="Report" tab="Báo cáo">
+                                    <div />
+                                </TabPane>
+                            ) : null}
+                            {role === 'SUPER_ADMIN' ? (
+                                <TabPane key="Log" tab="Lịch sử hoạt động">
+                                    <LogDashboard />
+                                </TabPane>
+                            ) : null}
                         </Tabs>
                     </Card>
                 </Col>
