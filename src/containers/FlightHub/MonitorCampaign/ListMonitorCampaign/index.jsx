@@ -20,7 +20,7 @@ import {
   HistoryOutlined,
   PlusOutlined,
 } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import StyleListMonitorCampaign, { StyleSpinContainer } from './index.style';
 import {
   StyleTitle,
@@ -46,6 +46,7 @@ const ListMonitorCampaign = () => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const history = useHistory();
+  const location = useLocation();
 
   const fetchListMonitorCampaignsData = async (params) => {
     try {
@@ -62,7 +63,7 @@ const ListMonitorCampaign = () => {
   };
   useEffect(() => {
     fetchListMonitorCampaignsData();
-  }, []);
+  }, [location]);
 
   const handleSearch = () => {
     const newFieldValues = form.getFieldsValue();
@@ -126,6 +127,12 @@ const ListMonitorCampaign = () => {
     {
       dataIndex: 'name',
       title: 'Tên đợt giám sát',
+      width: '15%',
+      sorter: (a, b) => a.name.localeCompare(b.name),
+    },
+    {
+      dataIndex: 'task',
+      title: 'Loại sự cố',
       width: '15%',
       sorter: (a, b) => a.name.localeCompare(b.name),
     },
