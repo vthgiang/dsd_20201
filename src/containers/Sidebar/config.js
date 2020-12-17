@@ -30,12 +30,6 @@ export const sidebarMenu = [
         route: '/flight-schedule',
       },
       {
-        key: 'FlySetting',
-        heading: 'Thiết lập đường bay',
-        icon: 'fa fa-user-chart',
-        route: '/fly-setting',
-      },
-      {
         key: 'DroneStatistic',
         heading: 'Thống kê drone',
         icon: 'fa fa-file-chart-line',

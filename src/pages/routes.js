@@ -30,11 +30,6 @@ export const routes = [
     component: TableDroneState,
   },
   {
-    path: '/fly-setting',
-    component: FlightPathDrone,
-  },
-  
-  {
     path: '/my-map-test',
     component: MapTest,
   },
