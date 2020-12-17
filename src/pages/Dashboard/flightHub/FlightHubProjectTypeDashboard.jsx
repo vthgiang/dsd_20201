@@ -39,6 +39,14 @@ const columns = [
         )
     },
     {
+        title: "Thời gian kết thúc",
+        dataIndex: "endTime",
+        key: "endTime",
+        render: (value) => (
+            moment(value).format("HH:mm DD/MM/YYYY")
+        )
+    },
+    {
         title: "Miền giám sát",
         dataIndex: "monitoredZone",
         key: "monitoredZone",
@@ -84,19 +92,19 @@ export default function FlightHubProjectTypeDashboard() {
         setFlightHubMetrics(payload);
     };
     const tableData = React.useMemo(() => {
-        if (!flightHubMetrics) return [];
+        if (!flightHubMetrics || isEmpty(flightHubMetrics)) return [];
         return flightHubMetrics;
     }, [flightHubMetrics]);
     const chartData = React.useMemo(() => {
-        if (!flightHubMetrics) return [];
+        if (!flightHubMetrics || isEmpty(flightHubMetrics)) return [];
         const metricsWithDaysArr = [];
         const deltaDays = Math.floor(moment.duration(endDate.diff(startDate)).asDays());
         const finalDeltaDays = deltaDays === 0 ? deltaDays : deltaDays + 1;
-        for (var i = 1, tempDay = startDate; i <= finalDeltaDays; i++) {
+        for (var i = 1, tempDay = startDate.clone(); i <= finalDeltaDays; i++) {
             const tempDayFormatted = tempDay.format("DD/MM");
             metricsWithDaysArr.push({
                 name: tempDayFormatted,
-                value: flightHubMetrics.filter(item => moment(item.startTime).format("DD/MM") === tempDayFormatted).length
+                value: flightHubMetrics.filter(item => moment(item.startTime).isSameOrBefore(tempDay) && moment(item.endTime).isSameOrAfter(tempDay)).length
             })
             tempDay.add(1, 'days')
         }
@@ -118,7 +126,7 @@ export default function FlightHubProjectTypeDashboard() {
                     <div />
                     <Button type="primary" onClick={fetchWithTime}>Tìm kiếm</Button>
                 </Col>
-                <Col span={19} offset={1}>
+                <Col span={18} offset={1}>
                     <h3>Biểu đồ thống kê đợt giám sát {startDateRender === endDateRender ?
                         startDateRender : `${startDateRender} - ${endDateRender}`}</h3>
                     {!flightHubMetrics ? <Spin /> :
@@ -133,9 +141,9 @@ export default function FlightHubProjectTypeDashboard() {
                                     >
                                         <CartesianGrid strokeDasharray="3 3" />
                                         <XAxis dataKey="name" />
-                                        <YAxis />
+                                        <YAxis allowDecimals={false} />
                                         <Tooltip />
-                                        <Bar dataKey="value" barSize={20} fill="#8884d8" />
+                                        <Bar dataKey="value" barSize={20} fill="#8884d8" label />
                                     </BarChart>
                                 </Col>
                             )}

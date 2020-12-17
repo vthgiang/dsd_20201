@@ -57,19 +57,19 @@ export const getIncidentOverallMetrics = async () => {
     return null;
 };
 
-export const getIncidentDetailedMetrics = async () => {
+export const getIncidentDetailedMetrics = async (projectType, apiToken) => {
     try {
         const results = await Promise.all([
             requestWithCache(
                 "getIncidentOverallMetrics",
-                () => Axios.get("https://distributed-dsd08.herokuapp.com/api/external/report-listing?type=LUOI_DIEN"),
+                () => Axios.get(`https://distributed-dsd08.herokuapp.com/api/external/report-listing?type=${projectType}`),
             ),
             requestWithCache(
                 "getIncidentDetailedMetrics",
                 () => Axios.get("https://distributed-dsd08.herokuapp.com/api/task/incident-listing", {
                     headers: {
-                        "api-token": "4c901bcdba9f440a2a7c31c0bcbd78ec",
-                        "project-type": "LUOI_DIEN",
+                        "api-token": apiToken,
+                        "project-type": projectType,
                     },
                 }),
             ),
@@ -204,6 +204,7 @@ export const getFlightHubProjectTypeMetrics = async (startDate, endDate, project
                     return {
                         name: monitorProjectTypeFoundItem.name,
                         startTime: monitorProjectTypeFoundItem.startTime,
+                        endTime: monitorProjectTypeFoundItem.endTime,
                         monitoredObjectsList: monitorProjectTypeFoundItem.monitoredObjects.map((item) => item.content.name),
                         dronesList: monitorProjectTypeFoundItem.drones.map((item) => item.name),
                         monitoredZone: monitorProjectTypeFoundItem.monitoredZone.name,

@@ -31,6 +31,8 @@ const { TabPane } = Tabs;
 function Dashboard() {
     // Role here to detect what to render
     const role = useSelector((state) => state.user.role);
+    const user = useSelector((state) => state.user);
+    console.log('USER DATA LOGIN: ', user);
 
     const location = useLocation();
     const history = useHistory();

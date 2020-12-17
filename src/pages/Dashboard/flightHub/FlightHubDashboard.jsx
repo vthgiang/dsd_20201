@@ -112,7 +112,7 @@ export default function FlightHubDashboard() {
                                     >
                                         <CartesianGrid strokeDasharray="5 5" />
                                         <XAxis dataKey="name" />
-                                        <YAxis />
+                                        <YAxis allowDecimals={false} />
                                         <Tooltip />
                                         <Bar dataKey="value" fill="#FF8042" label />
                                     </BarChart>
