@@ -1,9 +1,11 @@
 import React from 'react';
-import { Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Select } from 'antd';
+import {Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Select} from 'antd';
 import Highlighter from 'react-highlight-words';
-import { SearchOutlined } from '@ant-design/icons';
+import {SearchOutlined} from '@ant-design/icons';
+import {useSelector} from "react-redux";
+
 var axios = require('axios');
-const { RangePicker } = DatePicker;
+const {RangePicker} = DatePicker;
 const {Option} = Select;
 
 class DroneActivity extends React.Component {
@@ -23,7 +25,7 @@ class DroneActivity extends React.Component {
   };
 
   clearFilters = () => {
-    this.setState({ filteredInfo: null });
+    this.setState({filteredInfo: null});
   };
 
   clearAll = () => {
@@ -42,55 +44,55 @@ class DroneActivity extends React.Component {
     });
   };
   getColumnSearchProps = dataIndex => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={node => {
-            this.searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
-            Reset
-          </Button>
-        </Space>
-      </div>
+    filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
+        <div style={{padding: 8}}>
+          <Input
+              ref={node => {
+                this.searchInput = node;
+              }}
+              placeholder={`Search ${dataIndex}`}
+              value={selectedKeys[0]}
+              onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+              onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+              style={{width: 188, marginBottom: 8, display: 'block'}}
+          />
+          <Space>
+            <Button
+                type="primary"
+                onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+                icon={<SearchOutlined/>}
+                size="small"
+                style={{width: 90}}
+            >
+              Search
+            </Button>
+            <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{width: 90}}>
+              Reset
+            </Button>
+          </Space>
+        </div>
     ),
-    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    filterIcon: filtered => <SearchOutlined style={{color: filtered ? '#1890ff' : undefined}}/>,
     onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
-        : '',
+        record[dataIndex]
+            ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+            : '',
     onFilterDropdownVisibleChange: visible => {
       if (visible) {
         setTimeout(() => this.searchInput.select(), 100);
       }
     },
     render: text =>
-      this.state.searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-          searchWords={[this.state.searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ''}
-        />
-      ) : (
-        text
-      ),
+        this.state.searchedColumn === dataIndex ? (
+            <Highlighter
+                highlightStyle={{backgroundColor: '#ffc069', padding: 0}}
+                searchWords={[this.state.searchText]}
+                autoEscape
+                textToHighlight={text ? text.toString() : ''}
+            />
+        ) : (
+            text
+        ),
   });
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -103,18 +105,18 @@ class DroneActivity extends React.Component {
 
   handleReset = clearFilters => {
     clearFilters();
-    this.setState({ searchText: '' });
+    this.setState({searchText: ''});
   };
 
   render() {
-    
+
     const columns = [
       {
         title: 'Id',
         dataIndex: 'entityId',
         key: 'entityId',
         sorter: (a, b) => a.entityId - b.entityId,
-    
+
       },
       {
         title: 'Tên drone',
@@ -139,7 +141,7 @@ class DroneActivity extends React.Component {
         dataIndex: 'type',
         key: 'type',
         ...this.getColumnSearchProps('type'),
-        
+
       },
       {
         title: 'Mô tả',
@@ -151,9 +153,9 @@ class DroneActivity extends React.Component {
         title: 'Thời gian',
         dataIndex: 'timestamp',
         key: 'timestamp',
-        sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1: -1
+        sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1 : -1
       },
-      
+
       {
         title: 'Miền hoạt động',
         dataIndex: 'regionName',
@@ -174,9 +176,10 @@ class DroneActivity extends React.Component {
       },
     ];
     return (
-      <>
-        <Table columns={columns} dataSource={this.props.data} loading={this.props.loading} onChange={this.handleChange} />
-      </>
+        <>
+          <Table columns={columns} dataSource={this.props.data} loading={this.props.loading}
+                 onChange={this.handleChange}/>
+        </>
     );
   }
 }
@@ -205,36 +208,36 @@ class App extends React.Component {
     let fromDate = this.state.fromDate;
     let toDate = this.state.toDate;
     if (fromDate && toDate) {
-      url = 'https://it4883logging.herokuapp.com/api/drones?minDate=' + fromDate +'&maxDate=' + toDate +'&projectType=' + this.state.projectType;
+      url = 'https://it4883logging.herokuapp.com/api/drones?minDate=' + fromDate + '&maxDate=' + toDate + '&projectType=' + this.state.projectType;
     } else {
       url = 'https://it4883logging.herokuapp.com/api/drones?projectType=' + this.state.projectType;
     }
-     
+
     let config = {
       method: 'get',
       url: url,
       headers: {}
     };
     axios(config)
-      .then((response) => {
-        let logActivityData = response.data.map((data, index) => ({
-          key: index,
-          ...data
-        }));
-        logActivityData.forEach((logData) => {
-          for(let key in logData) {
-            if (logData[key] == null) logData[key] ='';
-          }
+        .then((response) => {
+          let logActivityData = response.data.map((data, index) => ({
+            key: index,
+            ...data
+          }));
+          logActivityData.forEach((logData) => {
+            for (let key in logData) {
+              if (logData[key] == null) logData[key] = '';
+            }
+          });
+          this.setState({logActivityData: logActivityData, isLoadedLogActivityData: true});
+        })
+        .catch(function (error) {
+          console.log(error);
         });
-        this.setState({ logActivityData: logActivityData, isLoadedLogActivityData: true });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   onRangePickerChange(dates, dateStrings) {
-    this.setState({isLoadedLogActivityData:false});
+    this.setState({isLoadedLogActivityData: false});
     let fromDate = "";
     let toDate = "";
 
@@ -244,63 +247,76 @@ class App extends React.Component {
     }
 
     this.setLogActivityData();
-    
+
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.setLogActivityData();
   }
+
   render() {
     return (
-      <>
-        <Col style={{ marginRight: '4%', marginTop: 20 }}>
-          <Card
-            hoverable
-            style={{ width: '100', marginLeft: 40 }}
-            cover={
-              <img
-                style={{ height: 400 }}
-                alt="example"
-                src="https://i.pinimg.com/originals/11/9d/e3/119de34b79d90fc7ee2c175525726741.jpg"
-              />
-            }
-          >
-            <h2>
-              Lịch sử hoạt động của drone
-            </h2>
-            <br />
-            <Form layout="inline" >
-              <Form.Item
-                label="Chọn khoảng thời gian"
-              >
-                <RangePicker format='DD/MM/YYYY' onChange={(dates, dateStrings) => this.onRangePickerChange(dates, dateStrings)} />
-              </Form.Item>
-              <Form.Item
-                label="Chọn loại dự án"
-              >
-                <Select defaultValue="de_dieu" style={{ width: 120 }} onChange={(value) => {this.setState({isLoadedLogActivityData:false});this.onProjectTypeChange(value); this.setLogActivityData()}}>
-                  <Option value="de_dieu">Đê điều</Option>
-                  <Option value="luoi_dien">Lưới điện</Option>
-                  <Option value="chay_rung">Cháy rừng</Option>
-                  <Option value="cay_trong">Cây trồng</Option>
-                </Select>
-              </Form.Item>
-            </Form>
-            <br />
+        <>
+          <Col style={{marginRight: '4%', marginTop: 20}}>
+            <Card
+                hoverable
+                style={{width: '100', marginLeft: 40}}
+                cover={
+                  <img
+                      style={{height: 400}}
+                      alt="example"
+                      src="https://i.pinimg.com/originals/11/9d/e3/119de34b79d90fc7ee2c175525726741.jpg"
+                  />
+                }
+            >
+              <h2>
+                Lịch sử hoạt động của drone
+              </h2>
+              <br/>
+              <Form layout="inline">
+                <Form.Item
+                    label="Chọn khoảng thời gian"
+                >
+                  <RangePicker format='DD/MM/YYYY'
+                               onChange={(dates, dateStrings) => this.onRangePickerChange(dates, dateStrings)}/>
+                </Form.Item>
+                <Form.Item
+                    label="Chọn loại dự án"
+                >
+                  <Select defaultValue="de_dieu" style={{width: 120}} onChange={(value) => {
+                    this.setState({isLoadedLogActivityData: false});
+                    this.onProjectTypeChange(value);
+                    this.setLogActivityData()
+                  }}>
+                    <Option value="de_dieu">Đê điều</Option>
+                    <Option value="luoi_dien">Lưới điện</Option>
+                    <Option value="chay_rung">Cháy rừng</Option>
+                    <Option value="cay_trong">Cây trồng</Option>
+                  </Select>
+                </Form.Item>
+              </Form>
+              <br/>
               <DroneActivity data={this.state.logActivityData} loading={!this.state.isLoadedLogActivityData}/>
-            
-          </Card>
-        </Col>
-      </>
+
+            </Card>
+          </Col>
+        </>
     );
   }
 }
+
 function LogDrone() {
-  return (
-    <>
-      <App />
-      <BackTop />
-    </>
-  );
+  const user = useSelector((state) => state.user.user);
+  if (user.role === "SUPER_ADMIN") {
+    return (
+        <>
+          <App/>
+          <BackTop/>
+        </>
+    );
+  } else {
+    return (<div>Không có quyền xem</div>);
+  }
 }
+
 export default LogDrone;
