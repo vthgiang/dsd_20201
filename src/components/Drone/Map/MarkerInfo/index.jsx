@@ -17,9 +17,9 @@ function MarkerInfo({point}){
         onClick={toggle}>
         {isOpen && <InfoWindow onCloseClick={toggle}>
             <div>
-              <p>Thời gian bay đến: {point.timeCome} phút</p>
-              <p>Thời gian dừng: {point.timeStop} phút</p>
-              <p>Độ cao: {point.flightHeight == null ? 30 : point.flightHeight} mét</p>
+              <span>Thời gian bay đến: {point.timeCome} phút</span><br/>
+              <span>Thời gian dừng: {point.timeStop} phút</span><br/>
+              <span>Độ cao: {point.flightHeight} m</span><br/>
             </div>
         </InfoWindow>}
     </Marker>;

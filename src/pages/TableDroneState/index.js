@@ -8,6 +8,8 @@ import ModalEditDataTable from '../../containers/ModalEditDataTable';
 import ModalAddDataTable from '../../containers/ModalAddDataTable'
 import styled from "styled-components";
 import ModalFlight from '../../containers/ModalFlight'
+import { Modal } from "@material-ui/core";
+import StateModal from "../../components/Drone/DroneModals/StateModal";
 const DataTable = () => {
 
     const Styles = styled.div`
@@ -95,6 +97,14 @@ const DataTable = () => {
         );
     }, [drones, currentPage, search, sorting, stateDrone]);
 
+    const handleSacPinClick = (drone) => {
+        console.log(drone);
+    }
+
+    const handleMaintainClick = (drone) => {
+        console.log(drone);
+    }
+    
     return (
 
         <>
@@ -155,12 +165,14 @@ const DataTable = () => {
                                         {(() => {
                                                 if (drone.state == 0) {
                                                 return (
-                                                    <Button
-                                                    variant="contained"
-                                                    color="darkslategrey"
-                                                  >
-                                                    Đặt lịch sạc
-                                                  </Button>
+                                                //     <Button
+                                                //     variant="contained"
+                                                //     color="darkslategrey"
+                                                //     onClick={() => handleSacPinClick(drone)}
+                                                //   >
+                                                //     Đặt lịch sạc
+                                                //   </Button>
+                                                <StateModal drone={drone} />
                                                 )
                                                 } else if (drone.state == 1) {
                                                     return (
@@ -184,12 +196,14 @@ const DataTable = () => {
                                                 }
                                                 else if (drone.state == 4) {
                                                 return (
-                                                    <Button
-                                                    variant="contained"
-                                                    color="secondary"
-                                                  >
-                                                    Đặt bảo trì
-                                                  </Button>
+                                                //     <Button
+                                                //     variant="contained"
+                                                //     color="secondary"
+                                                //     onClick={() => handleMaintainClick(drone)}
+                                                //   >
+                                                //     Đặt bảo trì
+                                                //   </Button>
+                                                <StateModal drone={drone}/>
                                                 ) 
                                                 }
                                             })()}

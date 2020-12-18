@@ -19,12 +19,14 @@ const MyMapComponent = compose(
         selectedZone,
         monitoredObjectList,
         setMonitoredObjectId,
-        setHeightPoint, heightPoint
+        setHeightPoint, heightPoint,
+        setSelectedObject
     } = props;
 
     function onClick(e){
         console.log(e.latLng.lat(), e.latLng.lng());
         setNewPoint({...newPoint, locationLat: e.latLng.lat(), locationLng: e.latLng.lng()});
+        setSelectedObject(null);
     }
 
     const handlePointClick = (index) => {
@@ -33,6 +35,8 @@ const MyMapComponent = compose(
         setNewPoint({...newPoint, locationLat: object.lat, locationLng: object.lng});
         if(object.height && object.height + 10 > heightPoint) setHeightPoint(object.height + 10);
         setMonitoredObjectId(object._id);
+        console.log(object);
+        setSelectedObject(object);
     }
 
     useEffect(()=> {
@@ -81,7 +85,7 @@ const MyMapComponent = compose(
                 onClick={()=>handlePointClick(index)}
                 key={index}
                 center={{ lat: object.lat, lng: object.lng }}
-                radius={20}
+                radius={30}
                 anchor= {new window.google.maps.Point(5, 58)}
                 options={{
                     strokeColor: "#FF0000",
