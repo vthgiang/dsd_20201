@@ -4,6 +4,9 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import ListUser from '../modules/user/components/listUser';
 import ListDepartment from '../modules/user/components/listDepartment';
 import ListUserMeta from '../modules/user/components/listUserMeta';
+import ListRole from '../modules/user/components/listRole';
+import ListPermission from '../modules/user/components/listPermission';
+import ListRolePermission from '../modules/user/components/listRolePermission';
 
 import ListMonitorCampaignPage from './FlightHub/ListMonitorCampaign';
 import CreateMonitorCampaignPage from './FlightHub/CreateMonitorCampaign';
@@ -342,7 +345,19 @@ export const routes = [
   {
     path: "/videoGallery",
     component: () => <VideoGallery />,
-    exact: true
+  },
+  {
+    exact: true,
+    path: '/role',
+    component: ListRole,
+  },
+  {
+    path: '/permission',
+    component: ListPermission,
+  },
+  {
+    path: '/role-permission',
+    component: ListRolePermission,
   },
 ];
 

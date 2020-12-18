@@ -1,29 +1,27 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
-import StyleListDepartment from "./index.style";
-import { Table, Space, Input, Modal, notification, Tag } from "antd";
-import { getListDepartments, deleteDepartment } from "../../store/services";
-import ModalDepartment from "./ModalDepartment";
-import { useSelector } from "react-redux";
+import StyleListRole from "./index.style";
+import { Table, Space, Modal, notification } from "antd";
+import { getListRoles, deleteRole } from "../../store/services";
+import ModalRole from "./ModalRole";
 import moment from "moment";
 import Filter from "./Filter";
 
-const ListDepartment = () => {
+const ListRole = () => {
     const [visible, setVisible] = useState(false);
     const [filter, setFilter] = useState({ page_size: 20, page_id: 0 });
-    const [listDepartment, setListDepartment] = useState([]);
+    const [listRole, setListRole] = useState([]);
     const [meta, setMeta] = useState([]);
-    const [departmentId, setDepartmentId] = useState("");
-    const user = useSelector((state) => state.user.user);
+    const [roleId, setRoleId] = useState("");
     const [mode, setMode] = useState("");
 
-    const fetchListDepartment = useCallback(async () => {
-        const res = await getListDepartments(filter);
+    const fetchListRole = useCallback(async () => {
+        const res = await getListRoles(filter);
         if (res.status === "successful") {
             setMeta(res.meta);
-            setListDepartment(res.result);
+            setListRole(res.result);
         } else {
             setMeta({ page_size: 20, page_id: 0 });
-            setListDepartment([]);
+            setListRole([]);
             notification.error({
                 message: "Lỗi",
                 description:
@@ -35,32 +33,32 @@ const ListDepartment = () => {
     }, [filter]);
 
     useEffect(() => {
-        fetchListDepartment();
-    }, [fetchListDepartment]);
+        fetchListRole();
+    }, [fetchListRole]);
 
     useEffect(() => {
         if (!visible) {
-            setDepartmentId("");
+            setRoleId("");
         }
     }, [visible]);
 
-    const handleDelete = async (department) => {
+    const handleDelete = async (role) => {
         Modal.confirm({
             title: "Xác nhận?",
-            content: "Bạn có thực sự muốn xóa phòng ban này",
+            content: "Bạn có thực sự muốn xóa chức vụ này",
             okText: "Xác nhận",
             cancelText: "Hủy",
             onOk() {
                 const res = new Promise((resolve, reject) => {
-                    resolve(deleteDepartment(department.id));
+                    resolve(deleteRole(role.id));
                 }).catch(() => console.log("Oops errors!"));
                 Promise.resolve(res).then((e) => {
                     if (e.status == "successful") {
                         notification.success({
                             message: "Thành công",
-                            description: "Xóa phòng ban thành công",
+                            description: "Xóa chức vụ thành công",
                         });
-                        fetchListDepartment();
+                        fetchListRole();
                     } else {
                         notification.error({
                             message: "Lỗi",
@@ -85,36 +83,14 @@ const ListDepartment = () => {
             render: (text, record) => <a onClick={() => handleView(record)}>{text}</a>,
         },
         { title: "Mô tả", dataIndex: "description", key: "description" },
+        { title: "Mã chức vụ", dataIndex: "code", key: "code" },
+        { title: "Xếp hạng", dataIndex: "ranking", key: "ranking" },
         {
             title: "Ngày tạo",
             dataIndex: "created_at",
             key: "created_at",
             render: (text) => <p>{moment(text).format("mm:hh DD-MM-YYYY")}</p>,
         },
-        user.role == "SUPER_ADMIN"
-            ? {
-                  title: "Dự án",
-                  key: "type",
-                  dataIndex: "type",
-                  width: "10%",
-                  render: (type) => (
-                      <Tag
-                          color={
-                              type == "CHAY_RUNG"
-                                  ? "red"
-                                  : type == "DE_DIEU"
-                                  ? "cyan"
-                                  : type == "CAY_TRONG"
-                                  ? "green"
-                                  : "purple"
-                          }
-                          key={type}
-                      >
-                          {type}
-                      </Tag>
-                  ),
-              }
-            : {},
         {
             title: "Hành động",
             key: "action",
@@ -139,17 +115,17 @@ const ListDepartment = () => {
     const handleEdit = (record) => {
         setVisible(true);
         setMode("update");
-        setDepartmentId(record.id);
+        setRoleId(record.id);
     };
 
     const handleView = (record) => {
         setVisible(true);
         setMode("detail");
-        setDepartmentId(record.id);
+        setRoleId(record.id);
     };
 
     return (
-        <StyleListDepartment>
+        <StyleListRole>
             <Filter
                 setFilter={setFilter}
                 setVisible={setVisible}
@@ -164,17 +140,17 @@ const ListDepartment = () => {
                     pageSize: meta.page_size,
                     onChange: changePagination,
                 }}
-                dataSource={listDepartment}
+                dataSource={listRole}
             />
-            <ModalDepartment
+            <ModalRole
                 mode={mode}
                 setMode={setMode}
                 visible={visible}
-                departmentId={departmentId}
+                roleId={roleId}
                 setVisible={setVisible}
-                fetchListDepartment={fetchListDepartment}
+                fetchListRole={fetchListRole}
             />
-        </StyleListDepartment>
+        </StyleListRole>
     );
 };
-export default ListDepartment;
+export default ListRole;
