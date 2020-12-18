@@ -1,29 +1,27 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
-import StyleListDepartment from "./index.style";
-import { Table, Space, Input, Modal, notification, Tag } from "antd";
-import { getListDepartments, deleteDepartment } from "../../store/services";
-import ModalDepartment from "./ModalDepartment";
-import { useSelector } from "react-redux";
+import StyleListPermission from "./index.style";
+import { Table, Space, Modal, notification } from "antd";
+import { getListPermissions, deletePermission } from "../../store/services";
+import ModalPermission from "./ModalPermission";
 import moment from "moment";
 import Filter from "./Filter";
 
-const ListDepartment = () => {
+const ListRole = () => {
     const [visible, setVisible] = useState(false);
     const [filter, setFilter] = useState({ page_size: 20, page_id: 0 });
-    const [listDepartment, setListDepartment] = useState([]);
+    const [listPermission, setListPermission] = useState([]);
     const [meta, setMeta] = useState([]);
-    const [departmentId, setDepartmentId] = useState("");
-    const user = useSelector((state) => state.user.user);
+    const [permissionId, setPermissionId] = useState("");
     const [mode, setMode] = useState("");
 
-    const fetchListDepartment = useCallback(async () => {
-        const res = await getListDepartments(filter);
+    const fetchListPermission = useCallback(async () => {
+        const res = await getListPermissions(filter);
         if (res.status === "successful") {
             setMeta(res.meta);
-            setListDepartment(res.result);
+            setListPermission(res.result);
         } else {
             setMeta({ page_size: 20, page_id: 0 });
-            setListDepartment([]);
+            setListPermission([]);
             notification.error({
                 message: "Lỗi",
                 description:
@@ -35,32 +33,32 @@ const ListDepartment = () => {
     }, [filter]);
 
     useEffect(() => {
-        fetchListDepartment();
-    }, [fetchListDepartment]);
+        fetchListPermission();
+    }, [fetchListPermission]);
 
     useEffect(() => {
         if (!visible) {
-            setDepartmentId("");
+            setPermissionId("");
         }
     }, [visible]);
 
-    const handleDelete = async (department) => {
+    const handleDelete = async (role) => {
         Modal.confirm({
             title: "Xác nhận?",
-            content: "Bạn có thực sự muốn xóa phòng ban này",
+            content: "Bạn có thực sự muốn xóa quyền này",
             okText: "Xác nhận",
             cancelText: "Hủy",
             onOk() {
                 const res = new Promise((resolve, reject) => {
-                    resolve(deleteDepartment(department.id));
+                    resolve(deletePermission(role.id));
                 }).catch(() => console.log("Oops errors!"));
                 Promise.resolve(res).then((e) => {
                     if (e.status == "successful") {
                         notification.success({
                             message: "Thành công",
-                            description: "Xóa phòng ban thành công",
+                            description: "Xóa quyền thành công",
                         });
-                        fetchListDepartment();
+                        fetchListPermission();
                     } else {
                         notification.error({
                             message: "Lỗi",
@@ -85,36 +83,13 @@ const ListDepartment = () => {
             render: (text, record) => <a onClick={() => handleView(record)}>{text}</a>,
         },
         { title: "Mô tả", dataIndex: "description", key: "description" },
+        { title: "Tài nguyên", dataIndex: "resource", key: "resource" },
         {
             title: "Ngày tạo",
             dataIndex: "created_at",
             key: "created_at",
             render: (text) => <p>{moment(text).format("mm:hh DD-MM-YYYY")}</p>,
         },
-        user.role == "SUPER_ADMIN"
-            ? {
-                  title: "Dự án",
-                  key: "type",
-                  dataIndex: "type",
-                  width: "10%",
-                  render: (type) => (
-                      <Tag
-                          color={
-                              type == "CHAY_RUNG"
-                                  ? "red"
-                                  : type == "DE_DIEU"
-                                  ? "cyan"
-                                  : type == "CAY_TRONG"
-                                  ? "green"
-                                  : "purple"
-                          }
-                          key={type}
-                      >
-                          {type}
-                      </Tag>
-                  ),
-              }
-            : {},
         {
             title: "Hành động",
             key: "action",
@@ -139,17 +114,17 @@ const ListDepartment = () => {
     const handleEdit = (record) => {
         setVisible(true);
         setMode("update");
-        setDepartmentId(record.id);
+        setPermissionId(record.id);
     };
 
     const handleView = (record) => {
         setVisible(true);
         setMode("detail");
-        setDepartmentId(record.id);
+        setPermissionId(record.id);
     };
 
     return (
-        <StyleListDepartment>
+        <StyleListPermission>
             <Filter
                 setFilter={setFilter}
                 setVisible={setVisible}
@@ -164,17 +139,17 @@ const ListDepartment = () => {
                     pageSize: meta.page_size,
                     onChange: changePagination,
                 }}
-                dataSource={listDepartment}
+                dataSource={listPermission}
             />
-            <ModalDepartment
+            <ModalPermission
                 mode={mode}
                 setMode={setMode}
                 visible={visible}
-                departmentId={departmentId}
+                permissionId={permissionId}
                 setVisible={setVisible}
-                fetchListDepartment={fetchListDepartment}
+                fetchListPermission={fetchListPermission}
             />
-        </StyleListDepartment>
+        </StyleListPermission>
     );
 };
-export default ListDepartment;
+export default ListRole;

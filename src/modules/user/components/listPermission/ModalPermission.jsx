@@ -1,19 +1,16 @@
 import { Form, Input, Modal, Row, notification, Select, DatePicker } from "antd";
-import { updateDepartment, createDepartment, getDepartment } from "../../store/services";
+import { getPermission, createPermission, updatePermission } from "../../store/services";
 import React, { useCallback, useEffect, useState } from "react";
-import { types } from "../../config/UserConfig";
-import { useSelector } from "react-redux";
 import moment from "moment";
 const { Option } = Select;
 
-const ModalDepartment = ({ departmentId, setVisible, visible, fetchListDepartment, mode, setMode }) => {
-    const [department, setDepartment] = useState({});
+const ModalPermission = ({ permissionId, setVisible, visible, fetchListPermission, mode, setMode }) => {
+    const [permission, setPermission] = useState({});
     const [message, setMessage] = useState({});
-    const loginUser = useSelector((state) => state.user.user);
     const [title, setTitle] = useState("");
     useEffect(() => {
         if (!visible) {
-            setDepartment({
+            setPermission({
                 type: "Chưa xác định",
             });
         }
@@ -21,48 +18,48 @@ const ModalDepartment = ({ departmentId, setVisible, visible, fetchListDepartmen
 
     useEffect(() => {
         if (mode == "create") {
-            setTitle("Thêm mới phòng ban");
+            setTitle("Thêm mới quyền");
         } else if (mode == "update") {
-            setTitle("Cập nhật phòng ban");
+            setTitle("Cập nhật quyền");
         } else {
-            setTitle("Thông tin phòng ban");
+            setTitle("Thông tin quyền");
         }
     }, [mode]);
 
-    const fetchDepartment = useCallback(async () => {
+    const fetchPermission = useCallback(async () => {
         try {
-            const res = await getDepartment(departmentId);
+            const res = await getPermission(permissionId);
             if (res.status === "successful") {
-                setDepartment(res.result);
+                setPermission(res.result);
             }
         } catch (error) {}
-    }, [departmentId]);
+    }, [permissionId]);
 
     useEffect(() => {
-        if (departmentId) {
-            fetchDepartment();
+        if (permissionId) {
+            fetchPermission();
         } else {
-            setDepartment({});
+            setPermission({});
         }
-    }, [fetchDepartment, setDepartment]);
+    }, [fetchPermission, setPermission]);
 
     const handleSave = async () => {
         var res = {};
         if (!validateData()) {
             return;
         }
-        const dataDepartment = buildDepartmentData();
+        const dataRole = buildUserData();
         var description = "";
-        if (departmentId && departmentId != "") {
-            dataDepartment.id = departmentId;
-            res = await updateDepartment(dataDepartment);
+        if (permissionId && permissionId != "") {
+            dataRole.id = permissionId;
+            res = await updatePermission(dataRole);
             description = "Cập nhật thành công!";
         } else {
-            res = await createDepartment(dataDepartment);
+            res = await createPermission(dataRole);
             description = "Tạo mới thành công!";
         }
         if (res.status === "successful") {
-            fetchListDepartment();
+            fetchListPermission();
             notification.success({
                 message: "Thành công",
                 description: description,
@@ -84,7 +81,7 @@ const ModalDepartment = ({ departmentId, setVisible, visible, fetchListDepartmen
 
     const validateData = useCallback(() => {
         var retval = true;
-        if (typeof department.name === "undefined" || department.name === "") {
+        if (typeof permission.name === "undefined" || permission.name === "") {
             retval = false;
             setMessage({
                 value: "Vui lòng nhập tên!",
@@ -93,7 +90,7 @@ const ModalDepartment = ({ departmentId, setVisible, visible, fetchListDepartmen
             });
             return retval;
         }
-        if (typeof department.description === "undefined" || department.description === "") {
+        if (typeof permission.description === "undefined" || permission.description === "") {
             retval = false;
             setMessage({
                 value: "Vui lòng nhập mô tả!",
@@ -102,45 +99,34 @@ const ModalDepartment = ({ departmentId, setVisible, visible, fetchListDepartmen
             });
             return retval;
         }
+        if (typeof permission.resource === "undefined" || permission.resource === "") {
+            retval = false;
+            setMessage({
+                value: "Vui lòng nhập tài nguyên!",
+                type: "error",
+                title: "Lỗi",
+            });
+            return retval;
+        }
         return retval;
     });
 
-    const buildDepartmentData = () => {
+    const buildUserData = () => {
         var data = {};
-        var columns = ["name", "description"];
+        var columns = ["name", "description", "resource"];
         columns.forEach((element) => {
-            if (department[element] && department[element] != "") {
-                data[element] = department[element];
+            if (permission[element] && permission[element] != "") {
+                data[element] = permission[element];
             }
         });
-        data.type = localStorage.getItem("project-type");
         return data;
     };
 
     const handleCloseModal = () => {
-        setDepartment({});
+        setPermission({});
         setMode("");
         setVisible(false);
     };
-
-    const renderSelectType = () => (
-        <Select
-            disabled={mode == "detail"}
-            className='select-box'
-            value={department?.type}
-            onChange={(value) => setDepartment({ ...department, type: value, page_id: 0 })}
-            defaultValue='Chưa xác định'
-            style={{ width: "100%", minWidth: 178 }}
-        >
-            {types.map((type, index) => {
-                return (
-                    <Option key={index} value={type.code}>
-                        {type.name}
-                    </Option>
-                );
-            })}
-        </Select>
-    );
 
     useEffect(() => {
         if (message && message != "") {
@@ -171,16 +157,16 @@ const ModalDepartment = ({ departmentId, setVisible, visible, fetchListDepartmen
                 <Row gutter={[16, 16]}>
                     <Form.Item name='name' style={{ width: "45%", marginRight: 10 }}>
                         <label htmlFor=''>
-                            Họ tên <span style={{ color: "red" }}>*</span>
+                            Tên <span style={{ color: "red" }}>*</span>
                         </label>
                         <Input
                             disabled={mode == "detail"}
                             className='input-box'
                             placeholder='Tên'
-                            value={department?.name}
+                            value={permission?.name}
                             onChange={(e) =>
-                                setDepartment({
-                                    ...department,
+                                setPermission({
+                                    ...permission,
                                     name: e.target.value,
                                 })
                             }
@@ -195,10 +181,10 @@ const ModalDepartment = ({ departmentId, setVisible, visible, fetchListDepartmen
                             className='input-box'
                             type='text'
                             placeholder='Mô tả'
-                            value={department?.description}
+                            value={permission?.description}
                             onChange={(e) =>
-                                setDepartment({
-                                    ...department,
+                                setPermission({
+                                    ...permission,
                                     description: e.target.value,
                                 })
                             }
@@ -206,21 +192,26 @@ const ModalDepartment = ({ departmentId, setVisible, visible, fetchListDepartmen
                     </Form.Item>
                 </Row>
                 <Row gutter={[16, 16]}>
+                    <Form.Item name='permission' style={{ width: "45%", marginRight: 10 }}>
+                        <label htmlFor=''>Mã quyền </label>
+                        <Input
+                            disabled={mode == "detail"}
+                            className='input-box'
+                            type='text'
+                            placeholder='Tài nguyên'
+                            value={permission?.resource}
+                            onChange={(e) =>
+                                setPermission({
+                                    ...permission,
+                                    resource: e.target.value,
+                                })
+                            }
+                        />
+                    </Form.Item>
                     {mode == "detail" && (
-                        <Form.Item name='role' style={{ width: "45%", marginRight: 10 }}>
+                        <Form.Item name='permission' style={{ width: "45%" }}>
                             <label htmlFor=''>Ngày tạo </label>
-                            <DatePicker
-                                disabled={mode == "detail"}
-                                value={department.created_at ? moment(department?.created_at, "YYYY-MM-DD") : ""}
-                                style={{ width: "100%" }}
-                                format={"YYYY-MM-DD"}
-                            />
-                        </Form.Item>
-                    )}
-                    {loginUser && loginUser.role == "SUPER_ADMIN" && (
-                        <Form.Item name='type'>
-                            <label htmlFor=''>Dự án </label>
-                            {renderSelectType()}
+                            <DatePicker disabled={mode == "detail"} value={permission.created_at ? moment(permission?.created_at, "YYYY-MM-DD") : ""} style={{ width: "100%" }} format={"YYYY-MM-DD"} />
                         </Form.Item>
                     )}
                 </Row>
@@ -229,4 +220,4 @@ const ModalDepartment = ({ departmentId, setVisible, visible, fetchListDepartmen
     );
 };
 
-export default ModalDepartment;
+export default ModalPermission;

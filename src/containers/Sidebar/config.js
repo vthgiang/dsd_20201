@@ -272,18 +272,42 @@ export const sidebarMenu = [
         heading: 'Quản lý người dùng',
         icon: 'fa fa-users',
         route: '/user',
+        resource: 'User.find'
       },
       {
         key: 'DepartmentSetting',
         heading: 'Quản lý phòng ban',
         icon: 'fa fa-building',
         route: '/department',
+        resource: 'Department.find'
       },
       {
         key: 'UserMetaSetting',
         heading: 'Lịch sử người dùng',
         icon: 'fa fa-history',
         route: '/user-meta',
+        resource: 'UserMeta.find'
+      },
+      {
+        key: 'RoleSetting',
+        heading: 'Quản lý chức vụ',
+        icon: 'fa fa-users-cog',
+        route: '/role',
+        resource: 'Role.system'
+      },
+      {
+        key: 'PermissionSetting',
+        heading: 'Quản lý quyền',
+        icon: 'fa fa-lock',
+        route: '/permission',
+        resource: 'Permission.system'
+      },
+      {
+        key: 'RolePermission',
+        heading: 'Phân quyền',
+        icon: 'fa fa-user-lock',
+        route: '/role-permission',
+        resource: 'RolePermission.system'
       },
     ],
   },
