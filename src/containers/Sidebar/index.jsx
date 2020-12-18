@@ -87,7 +87,7 @@ const Sidebar = ({ collapsed, toggle }) => {
   return (
     <Sider
       breakpoint="lg"
-      width={330}
+      width={250}
       collapsedWidth="80px"
       collapsible
       trigger={null}
