@@ -55,6 +55,7 @@ export default function UsersDashboard() {
   const users = useSelector((state) => state.user.user);
   const projectType = users.type;
   const role = users.role;
+  console.log(users)   
   const [usersMetrics, setUsersMetrics] = React.useState(null);
   const chartData = React.useMemo(() => {
     if (!usersMetrics) return [];
