@@ -4,6 +4,9 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import ListUser from '../modules/user/components/listUser';
 import ListDepartment from '../modules/user/components/listDepartment';
 import ListUserMeta from '../modules/user/components/listUserMeta';
+import ListRole from '../modules/user/components/listRole';
+import ListPermission from '../modules/user/components/listPermission';
+import ListRolePermission from '../modules/user/components/listRolePermission';
 
 import ListMonitorCampaignPage from './FlightHub/ListMonitorCampaign';
 import CreateMonitorCampaignPage from './FlightHub/CreateMonitorCampaign';
@@ -63,6 +66,15 @@ import ImageGallery from "./Incident/ImageGallery";
 import VideoGallery from "./Incident/VideoGallery";
 import IncidentEdit from "./Incident/Incident/edit";
 
+// dsd_01 drone
+import TableDrone from './TableDrone';
+import FlightPathDrone from './FLightPathDrone';
+import FlightPoint from './FlightPoint';
+import TableDroneState from './TableDroneState';
+import MapTest from './MapTest';
+import FlightPathManagement from './FlightPathManagement';
+import FlightSchedule from './FlightSchedule';
+
 export const routes = [
   {
     path: '/dashboard',
@@ -74,16 +86,29 @@ export const routes = [
     component: () => <div>DroneManagement</div>,
   },
   {
+    path: '/drone-list',
+    component: TableDrone,
+  },
+  {
     path: '/drone-state',
-    component: () => <div>Tình trạng drone</div>,
+    component: TableDroneState,
   },
   {
-    path: '/fly-setting',
-    component: () => <div>Thiết lập đường bay</div>,
+    path: '/my-map-test',
+    component: MapTest,
   },
   {
-    path: '/drone-statistic',
-    component: () => <div>Thống kê drone</div>,
+    path: '/flight-path',
+    component: FlightPathManagement,
+  },
+  // {
+  //   path: '/flight-schedule',
+  //   component: FlightSchedule,
+  // },
+
+  {
+    path: '/flight-point',
+    component: FlightPoint,
   },
   {
     path: '/flight-hub-monitor-campaigns/create',
@@ -331,9 +356,10 @@ export const routes = [
   },
   {
     path: "/incidents",
-    component: () => <Incident />,
+    component: () => <IncidentGroup9 />,
     exact: true
   },
+  
   {
     path: "/incidents/:id",
     component: () => <IncidentEdit />,
@@ -348,7 +374,19 @@ export const routes = [
   {
     path: "/videoGallery",
     component: () => <VideoGallery />,
-    exact: true
+  },
+  {
+    exact: true,
+    path: '/role',
+    component: ListRole,
+  },
+  {
+    path: '/permission',
+    component: ListPermission,
+  },
+  {
+    path: '/role-permission',
+    component: ListRolePermission,
   },
 ];
 

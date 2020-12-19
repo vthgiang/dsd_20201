@@ -1,0 +1,17 @@
+.btn-view{
+    border: none;
+    color: #08b64b;
+    background-color: transparent;
+}
+button.btn-view:focus {
+    border: none;
+    outline:0;  
+}
+button.btn-view:active {
+    border: none;
+    color: rgb(184, 163, 241);
+    outline:0;  
+}
+td.td-action {
+    display: flex;
+}
