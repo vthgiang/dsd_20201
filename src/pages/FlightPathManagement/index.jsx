@@ -1,16 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import Map from '../../components/Drone/Map';
 import FlightPathList from '../../components/Drone/FlightPathList';
 import AddFlightPathModel from '../../components/Drone/DroneModals/AddFlightPathModal';
 import Pagination from '../../components/Drone/Pagination';
 import Search from '../../components/Drone/Search';
 import axios from 'axios';
-
-FlightPathManagement.propTypes = {
-    
-};
 
 function FlightPathManagement(props) {
 
@@ -164,12 +159,57 @@ function FlightPathManagement(props) {
         axios.get(`http://skyrone.cf:6789/flightPath/delete/${flightPath.id}`)
             .then(response => {
                 console.log(response);
-                pageReload();
+                // pageReload();
+                if(response.status !== 200){
+                    console.log(response);
+                    alert("Có lỗi xảy ra, xóa thất bại"); 
+                }else{
+                    removeFlightPath(flightPath);
+                    updatePathFilter(flightPath);
+                    pageRefresh();
+                }
             })
             .catch(err => {
                 console.log(err)
-                alert(err)
+                alert("Có lỗi xảy ra, xóa thất bại");
             })
+    }
+
+    const removeFlightPath = (flightPath) => {
+        let index = 0;
+        for(let i=0; i<allFlightPath.current.length; i++){
+            if(flightPath.id === allFlightPath.current[i].id){
+                index = i;
+                break;
+            }
+        }
+        allFlightPath.current.splice(index, 1);
+        // console.log(allFlightPath.current.length, flightPathFilter.current.length);
+    }
+    const pageRefresh = () => {
+        let page = pagination.page;
+        if(page == pagination.totalPage){
+            const totalPage = Math.ceil(flightPathFilter.current.length/pagination.perPage);
+            // console.log(totalPage, page);
+            if(totalPage < pagination.totalPage && page != 1) {
+                page--;
+                setPagination(
+                    {...pagination, totalPage: totalPage, page: page}
+                );
+            }
+        }
+        pageChange(page);
+    }
+
+    const updatePathFilter = (flightPath) => {
+        let index = -1;
+        for(let i=0; i<flightPathFilter.current.length; i++){
+            if(flightPathFilter.current[i].id == flightPath.id){
+                index = i;
+                break;
+            }
+        }
+        if(index != -1) flightPathFilter.current.splice(index, 1);
     }
 
     const addFlightPath = (newFlightPath) => {
@@ -194,7 +234,7 @@ function FlightPathManagement(props) {
             <br/>
             <Row>
                 <Col md={6}>
-                    {loading ? <p>Loading...</p> : <FlightPathList 
+                    {loading ? <Spinner animation="border" variant="primary" /> : <FlightPathList 
                         flightPaths={flightPaths} 
                         viewFlightPath={viewFlightPath}
                         handleDeleteFlightPath={handleDeleteFlightPath}

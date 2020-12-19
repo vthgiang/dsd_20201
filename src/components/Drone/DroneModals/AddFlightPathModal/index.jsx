@@ -76,9 +76,13 @@ function AddFlightPathModal(props) {
         console.log(newFlightPath);
         axios.post('http://skyrone.cf:6789/flightPath/save', newFlightPath)
             .then(response => {
-                console.log(response)
+                console.log(response);
                 // props.addFlightPath(newFlightPath);
-                props.pageReload();
+                if(response.status != 200){
+                    alert(`Lỗi ${response.status}, thêm thất bại`);
+                }else{
+                    props.pageReload();
+                }
             })
             .catch(err => {
                 console.log(err);
