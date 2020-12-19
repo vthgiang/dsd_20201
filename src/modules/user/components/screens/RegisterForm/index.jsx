@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Input, Button, Checkbox, Select } from "antd";
 import StyleRegisterForm from "./index.style";
@@ -20,10 +20,18 @@ const RegisterForm = () => {
         email: "",
         password: "",
         repassword: "",
-        type: ""
+        type: "Chưa xác định",
     });
-    const projectType = useSelector(state => state.user.projectType);
     const [message, setMessage] = useState("");
+
+    useEffect(() => {
+        if (message && message !== "") {
+            const timer = setTimeout(() => {
+                setMessage("");
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [message]);
 
     const handleRegister = async () => {
         try {
@@ -36,7 +44,7 @@ const RegisterForm = () => {
                 email: userInfo.email,
                 password: userInfo.password,
                 repassword: userInfo.repassword,
-                type: projectType,
+                type: userInfo.type,
             };
             setMessage("");
             const res = await register(dataRegister);
@@ -64,10 +72,7 @@ const RegisterForm = () => {
             setMessage("Vui lòng nhập email!");
             return retval;
         }
-        if (
-            typeof userInfo.password === "undefined" ||
-            userInfo.password === ""
-        ) {
+        if (typeof userInfo.password === "undefined" || userInfo.password === "") {
             retval = false;
             setMessage("Vui lòng nhập mật khẩu!");
             return retval;
@@ -82,52 +87,63 @@ const RegisterForm = () => {
             setMessage("Xác nhận mật khẩu không đúng!");
             return retval;
         }
+        if (typeof userInfo.type === "undefined" || userInfo.type === "" || userInfo.type === "Chưa xác định") {
+            retval = false;
+            setMessage("Vui lòng chọn dự án!");
+            return retval;
+        }
         return retval;
     });
+
+    const renderSelectType = () => (
+        <Select
+            className='select-box'
+            value={userInfo.type}
+            onChange={(value) => setUserInfo({ ...userInfo, type: value })}
+            defaultValue='Chưa xác định'
+        >
+            {types.map((type, index) => {
+                return (
+                    <Option key={index} value={type.code}>
+                        {type.name}
+                    </Option>
+                );
+            })}
+        </Select>
+    );
 
     return (
         <StyleRegisterForm>
             <Title level={2}>Hệ thống giám sát bằng Drone</Title>
             <h2>Đăng ký</h2>
             <Form
-                name="normal_login"
+                name='normal_login'
                 initialValues={{
                     remember: true,
-                }}
-            >
-                <Form.Item name="name">
+                }}>
+                <Form.Item name='name'>
                     <Input
-                        prefix={
-                            <UserOutlined className="site-form-item-icon" />
-                        }
-                        type="text"
-                        placeholder="Họ tên"
+                        prefix={<UserOutlined className='site-form-item-icon' />}
+                        type='text'
+                        placeholder='Họ tên'
                         value={userInfo.full_name}
-                        onChange={(e) =>
-                            setUserInfo({ ...userInfo, full_name: e.target.value })
-                        }
+                        onChange={(e) => setUserInfo({ ...userInfo, full_name: e.target.value })}
                     />
                 </Form.Item>
-                <Form.Item name="email">
+                <Form.Item name='email'>
                     <Input
-                        prefix={
-                            <UserOutlined className="site-form-item-icon" />
-                        }
-                        type="email"
-                        placeholder="Email"
+                        prefix={<UserOutlined className='site-form-item-icon' />}
+                        type='email'
+                        placeholder='Email'
                         value={userInfo.email}
-                        onChange={(e) =>
-                            setUserInfo({ ...userInfo, email: e.target.value })
-                        }
+                        onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
                     />
                 </Form.Item>
-                <Form.Item name="password">
+                <Form.Item name='password'>
                     <Input
-                        prefix={
-                            <LockOutlined className="site-form-item-icon" />
-                        }
-                        type="password"
-                        placeholder="Mật khẩu"
+                        prefix={<LockOutlined className='site-form-item-icon' />}
+                        type='password'
+                        placeholder='Mật khẩu'
                         value={userInfo.password}
                         onChange={(e) =>
                             setUserInfo({
@@ -137,13 +153,11 @@ const RegisterForm = () => {
                         }
                     />
                 </Form.Item>
-                <Form.Item name="re-password">
+                <Form.Item name='re-password'>
                     <Input
-                        prefix={
-                            <LockOutlined className="site-form-item-icon" />
-                        }
-                        type="password"
-                        placeholder="Xác nhận mật khẩu"
+                        prefix={<LockOutlined className='site-form-item-icon' />}
+                        type='password'
+                        placeholder='Xác nhận mật khẩu'
                         value={userInfo.repassword}
                         onChange={(e) =>
                             setUserInfo({
@@ -153,28 +167,21 @@ const RegisterForm = () => {
                         }
                     />
                 </Form.Item>
-                {message && <p className="noti-message">{message}</p>}
                 <Form.Item>
-                    <a
-                        className="first-button"
-                        onClick={() => history.push("/login")}
-                    >
+                    <label htmlFor="">Dự án </label>
+                    {renderSelectType()}
+                </Form.Item>
+                {message && <p className='noti-message'>{message}</p>}
+                <Form.Item>
+                    <a className='first-button' onClick={() => history.push("/login")}>
                         Đăng nhập
                     </a>
-                    <a
-                        className="second-button"
-                        onClick={() => history.push("/forgot-password")}
-                    >
+                    <a className='second-button' onClick={() => history.push("/forgot-password")}>
                         Quên mật khẩu
                     </a>
                 </Form.Item>
                 <Form.Item>
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        className="login-form-button"
-                        onClick={handleRegister}
-                    >
+                    <Button type='primary' htmlType='submit' className='login-form-button' onClick={handleRegister}>
                         Đăng ký
                     </Button>
                 </Form.Item>
