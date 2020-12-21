@@ -44,7 +44,10 @@ const Map = ({
 
     await axios({
       method: 'GET',
-      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone`,
+      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone/incident`,
+      params: {
+        type: projectType,
+      },
       headers,
     })
       .then((res) => {
