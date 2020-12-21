@@ -35,20 +35,13 @@ const Map = ({
   }, []);
 
   const getMonitoredZone = async () => {
-    const token = localStorage.getItem('token');
-    const projectType = localStorage.getItem('project-type');
-    const headers = {
-      Authorization: `Bearer ${token}`,
-      projectType: projectType,
-    };
-
     await axios({
       method: 'GET',
-      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone/incident`,
-      params: {
-        type: projectType,
+      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone`,
+      headers: {
+        token: localStorage.getItem('token'),
+        projectType: localStorage.getItem('project-type'),
       },
-      headers,
     })
       .then((res) => {
         if (res.data) {
