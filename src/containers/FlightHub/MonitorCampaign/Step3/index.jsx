@@ -23,10 +23,18 @@ const Step3 = ({
   }, [data]);
 
   const getObjectData = (monitoredZone) => {
+    const token = localStorage.getItem('token');
+    const projectType = localStorage.getItem('project-type');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      projectType: projectType,
+    };
+
     axios({
       method: 'GET',
       url: `https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-zone`,
       params: { monitoredZone },
+      headers,
     })
       .then((res) => {
         if (res.data) {
