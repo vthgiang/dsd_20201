@@ -2,14 +2,13 @@ import { Form, Input, Modal, Row, Select, notification, DatePicker } from "antd"
 import { updateUser, createUser, getUser } from "../../store/services";
 import React, { useCallback, useEffect, useState } from "react";
 import UploadImage from "./UploadImage";
-import { roles, statuses, types } from "../../config/UserConfig";
+import { statuses, types } from "../../config/UserConfig";
 import moment from "moment";
 import { useSelector } from "react-redux";
-import { SettingOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
-const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode }) => {
+const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode, listDepartments, listRoles }) => {
     const [user, setUser] = useState({});
     const [imageUrl, setImageUrl] = useState("");
     const [message, setMessage] = useState("");
@@ -23,6 +22,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode }
                 status: "Chưa xác định",
                 role: "Chưa xác định",
                 type: "Chưa xác định",
+                department: "Chưa xác định",
             });
         }
     }, [visible]);
@@ -53,9 +53,9 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode }
         } else if (mode == "update") {
             setTitle("Cập nhật người dùng");
         } else {
-            setTitle("Thông tin người dùng");   
+            setTitle("Thông tin người dùng");
         }
-    }, [mode])
+    }, [mode]);
 
     const handleSave = async () => {
         var res = {};
@@ -82,7 +82,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode }
             fetchListUser();
         } else {
             var errorMessage = "";
-            if (res.message != "") {
+            if (res.message && res.message != "") {
                 errorMessage = res.message;
             } else {
                 errorMessage = res.result;
@@ -167,6 +167,17 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode }
                 data[element] = user[element];
             }
         });
+        if (user.department && user.department.id) {
+            data["department_id"] = user.department.id;
+        } else {
+            data["department_id"] = 0;
+        }
+        if (data['status'] == 'Chưa xác định') {
+            data['status'] = null;
+        }
+        if (data['role'] == 'Chưa xác định') {
+            data['role'] = null;
+        }
         data.type = localStorage.getItem("project-type");
         data.birthday = moment(user["birthday"]).format("YYYY-MM-DD 00:00:00");
         return data;
@@ -202,7 +213,13 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode }
     }, [message]);
 
     const renderSelectStatus = () => (
-        <Select disabled={mode == "detail"} className='select-box' value={user?.status} onChange={(value) => setUser({ ...user, status: value })} defaultValue='Chưa xác định' style={{ width: "100%" }}>
+        <Select
+            disabled={mode == "detail"}
+            className='select-box'
+            value={user?.status}
+            onChange={(value) => setUser({ ...user, status: value })}
+            defaultValue='Chưa xác định'
+            style={{ width: "100%" }}>
             {statuses.map((status, index) => {
                 return (
                     <Option key={index} value={status.code}>
@@ -220,7 +237,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode }
                     Quản trị hệ thống
                 </Option>
             )}
-            {roles.map((status, index) => {
+            {listRoles && listRoles.map((status, index) => {
                 return (
                     <Option key={index} value={status.code}>
                         {status.name}
@@ -230,8 +247,35 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode }
         </Select>
     );
 
+    const renderSelectDepartment = () => (
+        <Select
+            disabled={mode == "detail"}
+            className='select-box'
+            value={user && user.department ? user.department.id : "Chưa xác định"}
+            onChange={(value) => setUser({ ...user, department: value })}
+            defaultValue='Chưa xác định'
+            style={{ width: "100%" }}>
+            <Option key={-1} value='Chưa xác định'>
+                Chưa xác định
+            </Option>
+            {listDepartments && listDepartments.map((department, index) => {
+                return (
+                    <Option key={index} value={department.id}>
+                        {department.name}
+                    </Option>
+                );
+            })}
+        </Select>
+    );
+
     const renderSelectType = () => (
-        <Select disabled={mode == "detail"} className='select-box' value={user?.type} onChange={(value) => setUser({ ...user, type: value, page_id: 0 })} defaultValue='Chưa xác định' style={{ width: "100%", minWidth: 100 }}>
+        <Select
+            disabled={mode == "detail"}
+            className='select-box'
+            value={user?.type}
+            onChange={(value) => setUser({ ...user, type: value, page_id: 0 })}
+            defaultValue='Chưa xác định'
+            style={{ width: "100%", minWidth: 100 }}>
             {loginUser && loginUser.role == "SUPER_ADMIN" && (
                 <Option key={0} value='ALL_PROJECT'>
                     Tất cả
@@ -261,7 +305,14 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode }
                         <label htmlFor=''>
                             Tên đăng nhập <span style={{ color: "red" }}>*</span>
                         </label>
-                        <Input disabled={mode == "detail"} className='input-box' type='text' placeholder='Tên đăng nhập' value={user?.username} onChange={(e) => setUser({ ...user, username: e.target.value })} />
+                        <Input
+                            disabled={mode == "detail"}
+                            className='input-box'
+                            type='text'
+                            placeholder='Tên đăng nhập'
+                            value={user?.username}
+                            onChange={(e) => setUser({ ...user, username: e.target.value })}
+                        />
                     </Form.Item>
                 </Row>
                 <Row gutter={[16, 16]}>
@@ -319,7 +370,14 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode }
                 <Row gutter={[16, 16]}>
                     <Form.Item name='address' style={{ width: "45%", marginRight: 10 }}>
                         <label htmlFor=''>Address </label>
-                        <Input disabled={mode == "detail"} className='input-box' type='text' placeholder='Địa chỉ' value={user?.address} onChange={(e) => setUser({ ...user, address: e.target.value })} />
+                        <Input
+                            disabled={mode == "detail"}
+                            className='input-box'
+                            type='text'
+                            placeholder='Địa chỉ'
+                            value={user?.address}
+                            onChange={(e) => setUser({ ...user, address: e.target.value })}
+                        />
                     </Form.Item>
                     <Form.Item name='role' style={{ width: "45%" }}>
                         <label htmlFor=''>Ngày sinh </label>
@@ -347,14 +405,18 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode }
                         {renderSelectStatus()}
                     </Form.Item>
                 </Row>
-                {loginUser && loginUser.role == "SUPER_ADMIN" && (
-                    <Row gutter={[16, 16]}>
-                        <Form.Item name='type' style={{ margin: "0 auto" }}>
+                <Row gutter={[16, 16]}>
+                    <Form.Item name='role' style={{ width: "45%", marginRight: 10 }}>
+                        <label htmlFor=''>Phòng ban </label>
+                        {renderSelectDepartment()}
+                    </Form.Item>
+                    {loginUser && loginUser.role == "SUPER_ADMIN" && (
+                        <Form.Item name='type'>
                             <label htmlFor=''>Dự án </label>
                             {renderSelectType()}
                         </Form.Item>
-                    </Row>
-                )}
+                    )}
+                </Row>
                 <Row>
                     <Form.Item name='status' style={{ margin: "0 auto" }}>
                         <div style={{ marginBottom: 10 }}>

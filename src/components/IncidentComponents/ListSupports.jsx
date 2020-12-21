@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import "../Styles/StyleListIncidents.css";
-import { Table, Modal, Button, Input, Space, Spin } from "antd";
-import Highlighter from "react-highlight-words";
-import { SearchOutlined } from "@ant-design/icons";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import '../Styles/StyleListIncidents.css';
+import { Table, Modal, Button, Input, Space, Spin } from 'antd';
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined } from '@ant-design/icons';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import {
   CheckOutlined,
   CloseOutlined,
   InfoCircleOutlined,
-} from "@ant-design/icons";
-import axios from "axios";
-import URL_API from "./url";
+} from '@ant-design/icons';
+import axios from 'axios';
+import URL_API from './url';
 
 const ListSupports = () => {
   const [dataSupports, setDataSupports] = useState([]);
@@ -19,13 +19,13 @@ const ListSupports = () => {
   const [visibleModal, setVisibleModal] = useState(false);
   const { pathname } = useLocation();
   const codeIncidents = {
-    CHAY_RUNG: { id: "222222", name: "Sự cố  cháy rừng" },
-    DE_DIEU: { id: "111111", name: "Sự cố  đê điều" },
-    CAY_TRONG: { id: "333333", name: "Sự cố  cây trồng" },
-    LUOI_DIEN: { id: "000000", name: "Sự cố lưới điện trên cao" },
+    CHAY_RUNG: { id: '222222', name: 'Sự cố  cháy rừng' },
+    DE_DIEU: { id: '111111', name: 'Sự cố  đê điều' },
+    CAY_TRONG: { id: '333333', name: 'Sự cố  cây trồng' },
+    LUOI_DIEN: { id: '000000', name: 'Sự cố lưới điện trên cao' },
   };
-  const API_TOKEN = "4c901bcdba9f440a2a7c31c0bcbd78ec";
-  const CURRENT_TYPE = "LUOI_DIEN";
+  const API_TOKEN = '4c901bcdba9f440a2a7c31c0bcbd78ec';
+  const CURRENT_TYPE = 'LUOI_DIEN';
   const typeIncident = codeIncidents[CURRENT_TYPE];
 
   const [searchText, setSearchText] = useState();
@@ -35,12 +35,12 @@ const ListSupports = () => {
 
   useEffect(() => {
     axios({
-      method: "get",
-      url: URL_API + "/support/listing",
+      method: 'get',
+      url: URL_API + '/support/listing',
       // url: URL_API + "/report/listing",
       headers: {
-        "api-token": API_TOKEN,
-        "project-type": CURRENT_TYPE,
+        'api-token': API_TOKEN,
+        'project-type': CURRENT_TYPE,
       },
     })
       .then(function (response) {
@@ -73,7 +73,7 @@ const ListSupports = () => {
             setSelectedKeys(e.target.value ? [e.target.value] : [])
           }
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ width: 188, marginBottom: 8, display: "block" }}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
         />
         <Space>
           <Button
@@ -96,7 +96,7 @@ const ListSupports = () => {
       </div>
     ),
     filterIcon: (filtered) => (
-      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
+      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
     ),
     onFilter: (value, record) =>
       record[dataIndex]
@@ -104,7 +104,7 @@ const ListSupports = () => {
             .toString()
             .toLowerCase()
             .includes(value.toLowerCase())
-        : "",
+        : '',
     // onFilterDropdownVisibleChange: visible => {
     //   if (visible) {
     //     setTimeout(() => this.searchInput.select(), 100);
@@ -113,10 +113,10 @@ const ListSupports = () => {
     render: (text) =>
       searchedColumn === dataIndex ? (
         <Highlighter
-          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
           searchWords={[searchText]}
           autoEscape
-          textToHighlight={text ? text.toString() : ""}
+          textToHighlight={text ? text.toString() : ''}
         />
       ) : (
         text
@@ -131,7 +131,7 @@ const ListSupports = () => {
 
   const handleReset = (clearFilters) => {
     clearFilters();
-    setSearchText("");
+    setSearchText('');
   };
 
   const data = [
@@ -139,9 +139,9 @@ const ListSupports = () => {
       id: 1,
       employee_id: 102,
       incident_id: 4,
-      content: "Chúng tôi cần thêm 2 người",
-      status: "waiting",
-      type: "222222",
+      content: 'Chúng tôi cần thêm 2 người',
+      status: 'waiting',
+      type: '222222',
       created_at: null,
       updated_at: null,
     },
@@ -149,127 +149,127 @@ const ListSupports = () => {
 
   const columns = [
     {
-      title: "Mã nhân viên",
-      dataIndex: "employee_id",
+      title: 'Mã nhân viên',
+      dataIndex: 'employee_id',
       sorter: (a, b) => b.employee_id - a.employee_id,
-      sortDirections: ["descend"],
-      ...getColumnSearchProps("employee_id"),
+      sortDirections: ['descend'],
+      ...getColumnSearchProps('employee_id'),
     },
     {
-      title: "Mã sự cố",
-      dataIndex: "incident_id",
+      title: 'Mã sự cố',
+      dataIndex: 'incident_id',
       sorter: (a, b) => b.incident_id - a.incident_id,
-      sortDirections: ["descend"],
-      ...getColumnSearchProps("incident_id"),
+      sortDirections: ['descend'],
+      ...getColumnSearchProps('incident_id'),
     },
     {
-      title: "Nội dung xử lý sự cố",
-      dataIndex: "content",
-      ...getColumnSearchProps("content"),
+      title: 'Nội dung xử lý sự cố',
+      dataIndex: 'content',
+      ...getColumnSearchProps('content'),
     },
     {
-      title: "Trạng thái",
-      dataIndex: "status",
+      title: 'Trạng thái',
+      dataIndex: 'status',
       sorter: (a, b) => b.status.charCodeAt(0) - a.status.charCodeAt(0),
-      sortDirections: ["descend"],
-      ...getColumnSearchProps("status"),
+      sortDirections: ['descend'],
+      ...getColumnSearchProps('status'),
       render: (text, record) =>
-        record.status == "waiting" ? (
+        record.status == 'waiting' ? (
           <div
             style={{
-              flexDirection: "row",
-              display: "flex",
-              alignItems: "center",
+              flexDirection: 'row',
+              display: 'flex',
+              alignItems: 'center',
             }}
           >
             <div
               style={{
                 width: 10,
                 height: 10,
-                backgroundColor: "red",
+                backgroundColor: 'red',
                 borderRadius: 5,
               }}
             ></div>
             <p style={{ marginLeft: 10, fontSize: 18, marginTop: 10 }}>
-              {" "}
+              {' '}
               {record.status}
             </p>
           </div>
-        ) : record.status == "doing" ? (
+        ) : record.status == 'doing' ? (
           <div
             style={{
-              flexDirection: "row",
-              display: "flex",
-              alignItems: "center",
+              flexDirection: 'row',
+              display: 'flex',
+              alignItems: 'center',
             }}
           >
             <div
               style={{
                 width: 10,
                 height: 10,
-                backgroundColor: "orange",
+                backgroundColor: 'orange',
                 borderRadius: 5,
               }}
             ></div>
             <p style={{ marginLeft: 10, fontSize: 18, marginTop: 10 }}>
-              {" "}
+              {' '}
               {record.status}
             </p>
           </div>
         ) : (
           <div
             style={{
-              flexDirection: "row",
-              display: "flex",
-              alignItems: "center",
+              flexDirection: 'row',
+              display: 'flex',
+              alignItems: 'center',
             }}
           >
             <div
               style={{
                 width: 10,
                 height: 10,
-                backgroundColor: "greenyellow",
+                backgroundColor: 'greenyellow',
                 borderRadius: 5,
               }}
             ></div>
             <p style={{ marginLeft: 10, fontSize: 18, marginTop: 10 }}>
-              {" "}
-              {"done"}
+              {' '}
+              {'done'}
             </p>
           </div>
         ),
     },
     {
-      title: "Loại sự cố",
-      dataIndex: "type",
+      title: 'Loại sự cố',
+      dataIndex: 'type',
       render: (text, record) => <p>{codeIncidents[record.type].name}</p>,
       sorter: (a, b) => b.type.charCodeAt(0) - a.type.charCodeAt(0),
-      sortDirections: ["descend"],
+      sortDirections: ['descend'],
     },
     {
-      title: "Khởi tạo",
-      dataIndex: "created_at",
+      title: 'Khởi tạo',
+      dataIndex: 'created_at',
       sorter: (a, b) => b.created_at.charCodeAt(0) - a.created_at.charCodeAt(0),
-      sortDirections: ["descend"],
-      ...getColumnSearchProps("created_at"),
+      sortDirections: ['descend'],
+      ...getColumnSearchProps('created_at'),
     },
     {
-      title: "Cập nhật lần cuối",
-      dataIndex: "updated_at",
+      title: 'Cập nhật lần cuối',
+      dataIndex: 'updated_at',
       sorter: (a, b) => b.updated_at.charCodeAt(0) - a.updated_at.charCodeAt(0),
-      sortDirections: ["descend"],
-      ...getColumnSearchProps("updated_at"),
+      sortDirections: ['descend'],
+      ...getColumnSearchProps('updated_at'),
     },
     {
-      title: "",
-      key: "operation",
+      title: '',
+      key: 'operation',
       render: (record) => (
         <div>
           <InfoCircleOutlined
             onClick={(value) => {
               getInforSupport(record.image);
             }}
-            style={{ color: "blue", marginLeft: 5 }}
+            style={{ color: 'blue', marginLeft: 5 }}
           />
         </div>
       ),
@@ -282,11 +282,11 @@ const ListSupports = () => {
   };
 
   const handleOk = () => {
-    setCurrentImg("");
+    setCurrentImg('');
     setVisibleModal(false);
   };
   const handleCancel = () => {
-    setCurrentImg("");
+    setCurrentImg('');
     setVisibleModal(false);
   };
 

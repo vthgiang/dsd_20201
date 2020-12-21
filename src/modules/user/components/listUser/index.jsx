@@ -1,11 +1,12 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import StyleListUser from "./index.style";
 import { Table, Tag, Space, Modal, notification } from "antd";
-import { getListUsers, deleteUser } from "../../store/services";
+import { getListUsers, deleteUser, getAllRoles } from "../../store/services";
 import ModalUser from "./ModalUser";
 import { useSelector } from "react-redux";
 import { formatPhone } from "../../Utils/helper";
 import Filter from "./Filter";
+import { getAllDepartments } from "../../store/services";
 
 const ListUser = () => {
     const [visible, setVisible] = useState(false);
@@ -15,6 +16,28 @@ const ListUser = () => {
     const [userId, setUserId] = useState("");
     const user = useSelector((state) => state.user.user);
     const [mode, setMode] = useState("");
+
+    const [listDepartments, setListDepartments] = useState([]);
+
+    const fetchDepartments = async () => {
+        const res = await getAllDepartments();
+        setListDepartments(res.result);
+    };
+
+    useEffect(() => {
+        fetchDepartments();
+    }, []);
+
+    const [listRoles, setListRoles] = useState([]);
+
+    const fetchRoles = async () => {
+        const res = await getAllRoles();
+        setListRoles(res.result);
+    };
+
+    useEffect(() => {
+        fetchRoles();
+    }, []);
 
     const fetchListUser = useCallback(async () => {
         const res = await getListUsers(filter);
@@ -190,7 +213,7 @@ const ListUser = () => {
 
     return (
         <StyleListUser>
-            <Filter setFilter={setFilter} setVisible={setVisible} filter={filter} setMode={setMode} />
+            <Filter setFilter={setFilter} setVisible={setVisible} filter={filter} setMode={setMode} listDepartments={listDepartments} listRoles={listRoles} />
             <Table
                 rowKey='id'
                 columns={columns}
@@ -201,7 +224,7 @@ const ListUser = () => {
                 }}
                 dataSource={listUser}
             />
-            <ModalUser visible={visible} userId={userId} setVisible={setVisible} fetchListUser={fetchListUser} mode={mode} setMode={setMode} />
+            <ModalUser visible={visible} userId={userId} setVisible={setVisible} fetchListUser={fetchListUser} mode={mode} setMode={setMode} listDepartments={listDepartments} listRoles={listRoles} />
         </StyleListUser>
     );
 };
