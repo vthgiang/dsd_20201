@@ -199,14 +199,11 @@ class App extends React.Component {
   }
 
   onProjectTypeChange = (projectType) => {
-    console.log("hahahaha" + projectType)
     this.setState({projectType: projectType});
   }
 
-  setLogActivityData() {
+  setLogActivityData(fromDate, toDate) {
     let url = null;
-    let fromDate = this.state.fromDate;
-    let toDate = this.state.toDate;
     if (fromDate && toDate) {
       url = 'https://it4883logging.herokuapp.com/api/drones?minDate=' + fromDate + '&maxDate=' + toDate + '&projectType=' + this.state.projectType;
     } else {
@@ -236,17 +233,17 @@ class App extends React.Component {
         });
   }
 
-  onRangePickerChange(dates, dateStrings) {
-    this.setState({isLoadedLogActivityData: false});
+  async onRangePickerChange(dates, dateStrings) {
+    //this.setState({isLoadedLogActivityData: false});
     let fromDate = "";
     let toDate = "";
 
     if (dates) {
-      fromDate = dates[0].format('YYYY-MM-DDThh:mm:ss');
-      toDate = dates[1].format('YYYY-MM-DDThh:mm:ss');
+      fromDate = await dates[0].format('YYYY-MM-DDThh:mm:ss');
+      toDate = await dates[1].format('YYYY-MM-DDThh:mm:ss');
     }
-
-    this.setLogActivityData();
+    this.setState({isLoadedLogActivityData: false, fromDate: fromDate, toDate: toDate});
+    this.setLogActivityData(fromDate, toDate);
 
   }
 
@@ -307,16 +304,16 @@ class App extends React.Component {
 
 function LogDrone() {
   const user = useSelector((state) => state.user.user);
-  if (user.role === "SUPER_ADMIN") {
+  //if (user.role === "SUPER_ADMIN") {
     return (
         <>
           <App/>
           <BackTop/>
         </>
     );
-  } else {
-    return (<div>Không có quyền xem</div>);
-  }
+  // } else {
+  //   return (<div>Không có quyền xem</div>);
+  // }
 }
 
 export default LogDrone;
