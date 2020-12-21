@@ -129,7 +129,7 @@ const Map = ({
         onChange={searchOnChange}
         onSearch={submitSearch}
         enterButton
-        style={{ position: 'absolute', top: '10px', left: '10px', width: 250 }}
+        style={{ position: 'absolute', top: '10px', right: '10px', width: 250 }}
         value={searchText}
       />
       {/* {monitoredZonesData &&
