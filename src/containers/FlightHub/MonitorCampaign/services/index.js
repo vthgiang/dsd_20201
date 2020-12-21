@@ -20,8 +20,8 @@ export const convertDateToTimeRange = ({ startTime, endTime }) => {
 };
 
 export const convertInitialDataToFieldValues = (data) => {
+  
   const { startTime, endTime, monitoredZone, monitoredObjects } = data;
-  console.log("data", data);
   if (startTime && endTime) {
     const timeRange = convertDateToTimeRange({ startTime, endTime });
     data.timeRange = timeRange;
@@ -30,23 +30,15 @@ export const convertInitialDataToFieldValues = (data) => {
   }
 
   if (monitoredZone) {
-    console.log("data", data.monitoredZone._id);
-    data.monitoredZone = data.monitoredZone._id
+    data.monitoredZone = data.monitoredZone._id;
   }
 
   if (monitoredObjects) {
     data.monitoredObjects = data.monitoredObjects.map((element) => {
-      return element.content._id
-    })
+      return element.content._id;
+    });
   }
 
-  Object.keys(data).forEach((key) => {
-    if (Array.isArray(data[key]) && data[key][0] && data[key][0].id) {
-      data[key] = data[key].map((item) => item.id);
-    } else if (typeof data[key] === 'object' && data[key] && data[key].id) {
-      data[key] = data[key].id;
-    }
-  });
   return data;
 };
 

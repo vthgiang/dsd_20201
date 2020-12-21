@@ -23,6 +23,7 @@ const getMonitorCampaign = async (monitorCampaignId) => {
     method: 'GET',
     url: `/api/monitor-campaigns/${monitorCampaignId}`,
   });
+
   return result;
 };
 

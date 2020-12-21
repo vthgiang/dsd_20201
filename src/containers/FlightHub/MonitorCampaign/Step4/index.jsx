@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import StyleStep4 from './index.style';
-import { Button, Col, Form, Input, Select, Row, message, Modal } from 'antd';
+import { Button, Col, Form, Select, Row } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
 import { StepBackwardOutlined, StepForwardOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
+
 import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../../constants';
-const axios = require('axios');
 
 const { Option } = Select;
 

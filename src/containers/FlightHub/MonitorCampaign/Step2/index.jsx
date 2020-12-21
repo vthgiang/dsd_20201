@@ -1,88 +1,216 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSeparator, StyleTitle } from '../../../../themes/default';
-import StyleStep2 from './index.style';
-import { Button, Row, Table, message, notification } from 'antd';
+import StyleStep2, { StyleSpinContainer } from './index.style';
+import { Button, Row, Table, message, notification, Select, Spin } from 'antd';
 import { StepBackwardOutlined, StepForwardOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { DATE_TIME_FORMAT } from '../../../../configs';
-import { droneApi } from '../../../../apis';
+import { droneApi, payloadApi } from '../../../../apis';
 import { formatMomentDateToDateTimeString } from '../services';
-// const initData = [
-//   {
-//     key: '5349b4ddd2781d08c0981203',
-//     id: '5349b4ddd2781d08c0981203',
-//     name: 'Drone A',
-//     type: 'Loại 1',
-//     brandName: 'DJI',
-//   },
-//   {
-//     key: '5349b4ddd2781d08c0981102',
-//     id: '5349b4ddd2781d08c0981102',
-//     name: 'Drone B',
-//     type: 'Loại 2',
-//     brandName: 'DJI',
-//   },
-// ];
+import { convertDronesData } from './service';
 
 const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [drones, setDrones] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [dronesData, setDronesData] = useState([]);
+
+  const [payloadsData, setPayloadsData] = useState([]);
+  const [flightPathsData, setFlightPathsData] = useState([]);
+
+  const [loading, setLoading] = useState(false);
   const { timeRange } = data;
 
+  const fetchDronesData = async (params) => {
+    setLoading(true);
+    try {
+      const resp = await droneApi.getDroneAvailable(params);
+      setDronesData(resp.data);
+
+      setLoading(false);
+    } catch (error) {
+      notification.error({
+        message: 'Có lỗi xảy ra! Xin thử lại.',
+      });
+    }
+  };
+
+  const fetchPayloadsData = async (params) => {
+    setLoading(true);
+    try {
+      const resp = await payloadApi.getAllPayload(params);
+      setPayloadsData(resp.data);
+
+      setLoading(false);
+    } catch (error) {
+      notification.error({
+        message: 'Có lỗi xảy ra! Xin thử lại.',
+      });
+    }
+  };
+
+  const fetchFlightPathsData = async (params) => {
+    setLoading(true);
+    try {
+      const resp = await droneApi.getAllPath(params);
+      setFlightPathsData(resp.data);
+
+      setLoading(false);
+    } catch (error) {
+      notification.error({
+        message: 'Có lỗi xảy ra! Xin thử lại.',
+      });
+    }
+  };
+
   useEffect(() => {
-    const fetchDronesData = async () => {
-      const timeStart = formatMomentDateToDateTimeString(timeRange[0]);
-      const timeEnd = formatMomentDateToDateTimeString(timeRange[1]);
-      try {
-        const resp = await droneApi.getDroneAvailable({ timeStart, timeEnd });
-        console.log('resp ', resp.data);
-        setDrones(resp.data);
-      } catch (error) {
-        notification.error({
-          message: 'Có lỗi xảy ra! Xin thử lại.',
-        });
-      }
-    };
-    fetchDronesData();
-  }, []);
+    const timeStart = formatMomentDateToDateTimeString(timeRange[0]);
+    const timeEnd = formatMomentDateToDateTimeString(timeRange[1]);
+    const params = { timeStart, timeEnd };
+    fetchDronesData(params);
+    fetchPayloadsData();
+    fetchFlightPathsData();
+  }, [timeRange]);
+
+  const handleChangeFlightPath = (record, index) => (values) => {
+    const newDrones = [...dronesData];
+    newDrones[index].flightPaths = values;
+    setDronesData(newDrones);
+
+    const indexSelected = selectedRowKeys.findIndex(
+      (item) => record.id === item,
+    );
+    if (indexSelected > -1) {
+      const newSelectedRows = [...selectedRows];
+      newSelectedRows[indexSelected].flightPaths = values;
+      setSelectedRows(newSelectedRows);
+    }
+  };
+
+  const handleChangePayloads = (record, index) => (values) => {
+    const newDrones = [...dronesData];
+    newDrones[index].payloads = values;
+    setDronesData(newDrones);
+
+    const indexSelected = selectedRowKeys.findIndex(
+      (item) => record.id === item,
+    );
+    if (indexSelected > -1) {
+      const newSelectedRows = [...selectedRows];
+      newSelectedRows[indexSelected].payloads = values;
+      setSelectedRows(newSelectedRows);
+    }
+  };
 
   useEffect(() => {
     const { drones = [] } = data;
-    setSelectedRowKeys(drones);
-  }, [data]);
+
+    if (dronesData.length) {
+      const newDronesData = [...dronesData];
+      drones.forEach((selectedDrone) => {
+        const indexSelected = newDronesData.findIndex(
+          (drone) => drone.id === selectedDrone.id,
+        );
+        if (indexSelected !== -1) {
+          newDronesData[indexSelected].payloads = selectedDrone.payloads;
+          newDronesData[indexSelected].flightPaths = selectedDrone.flightPaths;
+        }
+      });
+      console.log("data ", newDronesData)
+      setDronesData(newDronesData);
+    }
+
+    const rowKeys = drones.map((drone) => drone.id);
+    setSelectedRows(drones);
+    setSelectedRowKeys(rowKeys);
+  }, [data, dronesData.length]);
 
   const columns = [
-    {
-      dataIndex: 'id',
-      title: 'Mã drone',
-      width: '15%',
-      align: 'center',
-    },
     { dataIndex: 'name', title: 'Tên drone', width: 'auto' },
-    { dataIndex: 'dimensions', title: 'Kích thước', width: '15%' },
+    { dataIndex: 'dimensions', title: 'Kịch thước', width: '15%' },
     { dataIndex: 'color', title: 'Màu', width: '15%' },
     {
       dataIndex: 'brand',
       title: 'Nhà sản xuất',
       width: '15%',
     },
+
+    {
+      dataIndex: 'payloads',
+      title: 'Payload',
+      width: '20%',
+      align: 'center',
+      editable: true,
+      render: (data, record, index) => {
+        return (
+          <Select
+            style={{ width: 150 }}
+            mode="multiple"
+            value={data}
+            onChange={handleChangePayloads(record, index)}
+            placeholder="Chọn payloads"
+          >
+            {payloadsData.map(({ _id, name }) => (
+              <Select.Option key={_id.toString()} value={_id}>
+                {name}
+              </Select.Option>
+            ))}
+          </Select>
+        );
+      },
+    },
+    {
+      dataIndex: 'flightPaths',
+      title: 'Đường bay',
+      width: '20%',
+      align: 'center',
+      editable: true,
+      render: (data, record, index) => {
+        return (
+          <Select
+            style={{ width: 150 }}
+            value={data}
+            mode="multiple"
+            onChange={handleChangeFlightPath(record, index)}
+            placeholder="Chọn đường bay"
+          >
+            {flightPathsData.map(({ id, name }) => (
+              <Select.Option key={id} value={id}>
+                {name}
+              </Select.Option>
+            ))}
+          </Select>
+        );
+      },
+    },
   ];
 
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      setSelectedRowKeys(selectedRowKeys);
-    },
-    selectedRowKeys: selectedRowKeys,
-  };
-
   const handleNextStep = () => {
-    if (!selectedRowKeys.length) {
+    const drones = [...selectedRows];
+
+    console.log({drones});
+    
+    if (!drones.length) {
       message.warning('Nhóm drones tham gia không được để trống!');
       return;
     }
-    handleChangeData({ drones: selectedRowKeys });
+
+    for (const drone of drones) {
+      console.log("drrone : " , drone)
+      const { payloads, flightPaths } = drone;
+      if (!payloads || !payloads.length) {
+      message.warning('Bạn chưa chọn payloads đính kèm drone!');
+        return;
+      }
+      if (!flightPaths || !flightPaths.length) {
+      message.warning('Bạn chưa chọn đường bay cho drone!');
+        return;
+      }
+    }
+
+    handleChangeData({ drones: convertDronesData(drones) });
     nextStep();
   };
+
 
   return (
     <StyleStep2>
@@ -93,16 +221,26 @@ const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
           moment(timeRange[1]).format(DATE_TIME_FORMAT)}
       </StyleTitle>
       <StyleSeparator />
-      <Table
-        rowSelection={{
-          type: 'checkbox',
-          ...rowSelection,
-        }}
-        rowKey="id"
-        selections={true}
-        columns={columns}
-        dataSource={drones}
-      />
+      {loading ? (
+        <StyleSpinContainer>
+          <Spin />
+        </StyleSpinContainer>
+      ) : (
+        <Table
+          rowKey="id"
+          rowSelection={{
+            type: 'checkbox',
+            onChange: (selectedRowKeys, selectedRows) => {
+              setSelectedRows(selectedRows);
+              setSelectedRowKeys(selectedRowKeys);
+            },
+            selectedRowKeys: selectedRowKeys,
+          }}
+          // selections={true}
+          columns={columns}
+          dataSource={dronesData}
+        />
+      )}
       <Row type="flex">
         <Button
           type="default"

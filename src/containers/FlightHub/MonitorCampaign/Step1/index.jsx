@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import StyleStep1 from './index.style';
-import { Button, Col, DatePicker, Form, Input, Row } from 'antd';
+import { Button, Col, DatePicker, Form, Input, Row, Select } from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
 import { DATE_TIME_FORMAT } from '../../../../configs';
 import { StepForwardOutlined } from '@ant-design/icons';
+import { TASK } from '../../../../constants';
 
 const { RangePicker } = DatePicker;
 
@@ -36,6 +37,7 @@ const Step1 = ({ nextStep, data, handleChangeData }) => {
         >
           <Input placeholder="VD: Đọt giám sát rừng phòng hộ quý 1"></Input>
         </Form.Item>
+
         <Form.Item
           name="timeRange"
           label="Thời gian"

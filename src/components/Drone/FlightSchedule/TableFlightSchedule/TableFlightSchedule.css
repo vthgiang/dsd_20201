@@ -1,0 +1,13 @@
+button.btn-delete {
+    /* font-size: 1.2rem; */
+    border: none;
+    color: rgb(99 3 3);
+    background-color: transparent;
+}
+button.btn-delete:focus {
+    border: none;
+    outline:0;  
+}
+button.btn-delete:active {
+    color: black;  
+}

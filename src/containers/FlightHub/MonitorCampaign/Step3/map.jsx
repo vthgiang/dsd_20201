@@ -8,7 +8,7 @@ import {
 } from 'react-google-maps';
 import { removeVietnameseTones } from '../../../../helpers/removeVietnameseTones';
 
-import { Input, Form } from 'antd';
+import { Input } from 'antd';
 import { HeatMapOutlined } from '@ant-design/icons';
 const axios = require('axios');
 const { Search } = Input;
@@ -31,19 +31,29 @@ const Map = ({
 
   useEffect(() => {
     getMonitoredZone();
+    // eslint-disable-next-line
   }, []);
 
   const getMonitoredZone = async () => {
+    const token = localStorage.getItem('token');
+    const projectType = localStorage.getItem('project-type');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      projectType: projectType,
+    };
+
     await axios({
       method: 'GET',
-      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone`,
+      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone/incident`,
+      params: {
+        type: projectType,
+      },
+      headers,
     })
       .then((res) => {
         if (res.data) {
-          console.log('data', res.data.content);
           setMonitoredZonesData(res.data.content.zone);
           setMonitoredZonesDataInit(res.data.content.zone);
-          console.log(res.data.content.zone);
 
           //Khởi tạo render ban đầu
           if (res.data.content.zone) {
@@ -53,12 +63,10 @@ const Map = ({
             });
           }
 
-          console.log('monitoredZoneInit', monitoredZoneInit);
-
           // khởi tạo park nếu đã có sẵn
           if (monitoredZoneInit) {
             let zone = res.data.content.zone.find(
-              (element) => element._id == monitoredZoneInit,
+              (element) => element._id === monitoredZoneInit,
             );
             if (zone) {
               setPositionClick({
@@ -71,9 +79,7 @@ const Map = ({
           }
         }
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   const searchOnChange = (e) => {
@@ -87,6 +93,7 @@ const Map = ({
       if (textElement.includes(textValue)) {
         return element;
       }
+      return false;
     });
     setMonitoredZonesData(data);
   };
@@ -144,11 +151,11 @@ const Map = ({
             }
           />
         ))} */}
-      {console.log('monitoredZonesData', initLocation)}
 
       {monitoredZonesData &&
         monitoredZonesData.map((zone) => (
           <Rectangle
+            key={zone._id}
             defaultBounds={
               new window.google.maps.LatLngBounds(
                 new window.google.maps.LatLng(

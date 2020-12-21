@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "antd";
 import StyleLayout from "./index.style";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
+import { useSelector } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 const { Content } = Layout;
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, history }) => {
   const [collapsed, setCollapsed] = useState(false);
 
   const toggle = () => {
     setCollapsed(!collapsed);
   };
+
+  const projectType = useSelector(state => state.user.projectType);
+
+  useEffect(() => {
+    if (!projectType) {
+      history.push("/home");
+    }
+  }, []);
 
   return (
     <StyleLayout>
@@ -26,4 +36,4 @@ const MainLayout = ({ children }) => {
   );
 };
 
-export default MainLayout;
+export default withRouter(MainLayout);
