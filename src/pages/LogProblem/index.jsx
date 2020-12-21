@@ -212,7 +212,9 @@ class App extends React.Component {
     } else {
       url = 'https://it4883logging.herokuapp.com/api/incident?projectType=' + this.state.projectType;
     }
-     
+    console.log(url);
+    console.log(fromDate);
+    console.log(toDate);
     let config = {
       method: 'get',
       url: url,
