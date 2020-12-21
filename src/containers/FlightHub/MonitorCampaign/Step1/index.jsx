@@ -37,24 +37,7 @@ const Step1 = ({ nextStep, data, handleChangeData }) => {
         >
           <Input placeholder="VD: Đọt giám sát rừng phòng hộ quý 1"></Input>
         </Form.Item>
-        <Form.Item
-          name="task"
-          label="Loại giám sát"
-          rules={[
-            {
-              type: 'string',
-              required: true,
-            },
-          ]}
-        >
-          <Select allowClear placeholder="Chọn loại giám sát">
-            {Object.keys(TASK).map((key) => (
-              <Select.Option key={TASK[key]} value={TASK[key]}>
-                {TASK[key]}
-              </Select.Option>
-            ))}
-          </Select>
-        </Form.Item>
+
         <Form.Item
           name="timeRange"
           label="Thời gian"
