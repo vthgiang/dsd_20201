@@ -10,6 +10,7 @@ import styled from "styled-components";
 import ModalFlight from '../../containers/ModalFlight'
 import { Modal } from "@material-ui/core";
 import StateModal from "../../components/Drone/DroneModals/StateModal";
+import StateDrone from "../../components/Drone/DroneModals/StateDrone";
 const DataTable = () => {
 
     const Styles = styled.div`
@@ -34,6 +35,7 @@ const DataTable = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
     const [sorting, setSorting] = useState({ field: "", order: "" });
+    const [numDrone, setNumDrone] = useState();
 
     const ITEMS_PER_PAGE = 20;
 
@@ -43,7 +45,7 @@ const DataTable = () => {
         { name: "Tình trạng", field: "message", sortable: true},
         { name: "______", field: "", sortable: false }
     ];
-    const [stateDrone, setStateDrone] = useState("0");
+    const [stateDrone, setStateDrone] = useState("0");  
     const getData = () => {
         showLoader();
 
@@ -71,7 +73,7 @@ const DataTable = () => {
                     comment => comment.message.includes(stateDrone));
             }
         }
-
+        setNumDrone(computedDrones.length);
         if (search) {
             computedDrones = computedDrones.filter(
                 comment =>
@@ -109,10 +111,10 @@ const DataTable = () => {
 
         <>
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-md-2">
                     <ModalAddDataTable />
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-3">
                     <Pagination
                         total={totalItems}
                         itemsPerPage={ITEMS_PER_PAGE}
@@ -120,7 +122,10 @@ const DataTable = () => {
                         onPageChange={page => setCurrentPage(page)}
                     />
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-2">
+                    <h4>{numDrone} drone</h4>
+                </div>
+                <div className="col-md-2">
                     <select value={stateDrone} 
                         onChange={event => setStateDrone(event.target.value)}>
                         <option value="0">Tất cả</option>
@@ -131,7 +136,7 @@ const DataTable = () => {
                         <option value="Hỏng">Hỏng</option>
                     </select>
                 </div>
-                <div className="col-md-2 d-flex flex-row-reverse">
+                <div className="col-md-3 d-flex flex-row-reverse">
                     <Search
                         onSearch={value => {
                             setSearch(value);
@@ -141,7 +146,6 @@ const DataTable = () => {
                 </div>
             </div>
             <Styles>
-            {loader}
                 <div className="row w-100">
                     <div className="col mb-3 col-12 text-center">
 
@@ -160,7 +164,9 @@ const DataTable = () => {
                                             {drone.idDrone}
                                         </th>
                                         <td>{drone.name}</td>
-                                        <td>{drone.message}</td>
+                                        <td> 
+                                            <StateDrone state={drone.state} />    
+                                        </td>
                                         <td>
                                         {(() => {
                                                 if (drone.state == 0) {
@@ -179,19 +185,29 @@ const DataTable = () => {
                                                         <ModalFlight id={drone.idDrone} />
                                                     )
                                                 } else if (drone.state == 2 || drone.state == 3) {
+
                                                     return (
-                                                        <div>{new Intl.DateTimeFormat("vi-VE", {
-                                                            year: "numeric", month: "long", day: "2-digit", 
-                                                            hour: 'numeric', minute: 'numeric', second: 'numeric',
-                                                            hour12: true
-                                                          }).format(drone.timeStart)}
-                                                          <br></br>
-                                                          {new Intl.DateTimeFormat("vi-VE", {
-                                                            year: "numeric", month: "long", day: "2-digit", 
-                                                            hour: 'numeric', minute: 'numeric', second: 'numeric',
-                                                            hour12: true
-                                                          }).format(drone.timeEnd)}
-                                                          </div>
+                                                        <tr>
+
+                                                            <td>
+                                                                <div>{new Intl.DateTimeFormat("vi-VE", {
+                                                                    year: "numeric", month: "long", day: "2-digit", 
+                                                                    hour: 'numeric', minute: 'numeric', second: 'numeric',
+                                                                    hour12: true
+                                                                }).format(drone.timeStart)}
+                                                                <br></br>
+                                                                {new Intl.DateTimeFormat("vi-VE", {
+                                                                    year: "numeric", month: "long", day: "2-digit", 
+                                                                    hour: 'numeric', minute: 'numeric', second: 'numeric',
+                                                                    hour12: true
+                                                                }).format(drone.timeEnd)}
+                                                                </div>
+                                                                
+                                                            </td>
+                                                            <td>
+                                                                    <h1>Btn thu hồi</h1>
+                                                            </td>
+                                                        </tr>
                                                     )
                                                 }
                                                 else if (drone.state == 4) {
@@ -213,9 +229,11 @@ const DataTable = () => {
                             </tbody>
                         </table>
                     </div>
+                    {loader}
                 </div>
                
             </Styles>
+            
         </>
     );
 };

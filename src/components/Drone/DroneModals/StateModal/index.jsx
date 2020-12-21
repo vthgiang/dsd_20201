@@ -1,38 +1,120 @@
 import React, {useState} from 'react';
 import {Button, Modal} from 'react-bootstrap'; 
+import { DATE_TIME_FORMAT } from '../../../../configs';
+import {
+    Row,
+    Input,
+    Col,
+    Table,
+    Space,
+    Select,
+    Form,
+    DatePicker,
+    notification,
+    Spin,
+  } from 'antd';
+  import StateDrone from '../StateDrone';
 
 export default function StateModal(props){
     const {drone} = props;
     const [show, setShow] = useState(false);
+    const [date, setDate] = useState();
+    const onChange = (value, dateString) => {
+        setDate(value);
+      }
+
+      const setDroneBroken = () => {
+
+        fetch(`http://skyrone.cf:6789/droneState/setDroneBroken/`+drone.idDrone)
+            .then(response => response.json())
+            .then(json => {
+            });
+         };
+      const save = () => {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        headers.append('Access-Control-Allow-Origin', '*');
+    
+        const requestOptions = {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify({ 
+            id : drone.idDrone,
+            maintenance : (drone.state === 0) ? true : false,
+            name : drone.name,
+            timeEnd : date[1],
+            timeStart : date[0]
+           
+          })
+        };
+        fetch('http://skyrone.cf:6789/droneMaintenance/save', requestOptions)
+        .then(response => response.text())
+        .then(contents =>  {
+          alert("Đã cập nhật thành công"); 
+          handleClose();
+          window.location.reload();
+        })
+    
+        .catch(() => console.log("Can’t access response. Blocked by browser?"))
+          
+      }
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-
-    const btn = {};
+    const { RangePicker } = DatePicker;
+    console.log("Drone"+drone);
+    const content = {};
     if(drone.state === 0){
-        btn.variant = 'secondary';
-        btn.name = "Đặt lịch sạc";
+        content.variant = 'secondary';
+        content.name = "Đặt lịch sạc";
     }else if(drone.state === 4){
-        btn.variant = 'danger';
-        btn.name = "ĐẶT bảo trì";
+        content.variant = 'danger';
+        content.name = "Đặt bảo trì";
     }
 
     return (
         <>
-        <Button variant={btn.variant} onClick={handleShow}>
-            {btn.name}
+        <Button variant={content.variant} onClick={handleShow}>
+            {content.name}
         </Button>
 
         <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Header>
+            <p>     
+                <StateDrone state={drone.state} />    
+            </p>
             </Modal.Header>
-            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+            <Modal.Body>
+                <p>ID: {drone.idDrone} </p>
+                <p>
+                    Tên drone : {drone.name}
+                </p>
+            <Form.Item
+                name="timeRange"
+                label="Đặt lịch"
+                labelCol={{ span: 5 }}
+                rules={[{ type: 'array' }]}
+              >
+                <RangePicker showTime 
+                 onChange={onChange} 
+                 format={DATE_TIME_FORMAT} />
+              </Form.Item>
+
+            </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={handleClose}>
-                    Save Changes
+                <Button variant='warning' onClick={save}>
+                     {content.name}
                 </Button>
+                {
+                    !(drone.state == 4) && (
+                        <Button variant='danger' onClick={setDroneBroken}>
+                             Đánh dấu hỏng
+                         </Button>
+                    )
+                }
+                
             </Modal.Footer>
         </Modal>
         </>

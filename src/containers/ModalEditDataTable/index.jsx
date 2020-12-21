@@ -9,9 +9,15 @@ import SaveIcon from '@material-ui/icons/Save';
 import { Form, Input, Col, Row } from "antd";
 import React, { useEffect, useState, useMemo } from "react";
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import Image from 'react-bootstrap/Image'
+import ImageUploader from "react-images-upload";
 
 const useStyles = makeStyles((theme) => ({
-
+  image: {
+    width: 300,
+    height: 300,
+    resizeMode: 'cover'
+  },
   input: {
     fontSize: 20,
   },
@@ -147,7 +153,8 @@ export default function TransitionsModal(props) {
         name: name,
         rangeBattery: rangeBattery,
         task: 0,
-        used: false
+        used: false,
+        urlImage: urlImage
       })
     };
     fetch('http://skyrone.cf:6789/drone/save', requestOptions)
@@ -158,7 +165,7 @@ export default function TransitionsModal(props) {
       window.location.reload();
     })
 
-    .catch(() => console.log("Can’t access " + 'http://skyrone.cf:6789/drone/save' + " response. Blocked by browser?"))
+    .catch(() => console.log("Can’t access response. Blocked by browser?"))
       
   }
 
@@ -188,15 +195,42 @@ export default function TransitionsModal(props) {
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Id# : {props.id} </h2>
             <Row >
-              <Col>
+            <Col>
                 <Form.Item className={classes.formItem}>
-                  <h4>Tên</h4>
+                  <h4>Tốc độ tối đa (m/phút)</h4>
                   <Input
-                    value={name}
+                    value={maxFlightSpeed}
                     className={classes.input}
-                    onChange={event => setName(event.target.value)}
+                    onChange={event => setMaxFlightSpeed(event.target.value)}
                   />
                 </Form.Item>
+                <Form.Item className={classes.formItem}>
+                  <h4>Thời gian bay (phút)</h4>
+                  <Input
+                    value={maxFlightTime}
+                    className={classes.input}
+                    onChange={event => setMaxFlightTime(event.target.value)}
+                  />
+                </Form.Item>
+                <Form.Item className={classes.formItem}>
+                  <h4>Trần bay (m)</h4>
+                  <Input
+                    value={maxFlightHeight}
+                    className={classes.input}
+                    onChange={event => setMaxFlightHeight(event.target.value)}
+                  />
+                </Form.Item>
+                <Form.Item className={classes.formItem}>
+                  <h4>Dung lượng pin (mAh)</h4>
+                  <Input
+                    value={rangeBattery}
+                    className={classes.input}
+                    onChange={event => setBattery(event.target.value)}
+                  />
+                </Form.Item>
+
+              </Col>
+              <Col>
                 <Form.Item className={classes.formItem}>
                   <h4>Nhãn Hiệu</h4>
                   <Input
@@ -231,55 +265,17 @@ export default function TransitionsModal(props) {
                   />
                 </Form.Item>
               </Col>
-
               <Col>
-                <Form.Item className={classes.formItem}>
-                  <h4>Tốc độ tối đa (m/phút)</h4>
+              <Form.Item className={classes.formItem}>
+                  <h4>Tên</h4>
                   <Input
-                    value={maxFlightSpeed}
+                    value={name}
                     className={classes.input}
-                    onChange={event => setMaxFlightSpeed(event.target.value)}
+                    onChange={event => setName(event.target.value)}
                   />
                 </Form.Item>
-                <Form.Item className={classes.formItem}>
-                  <h4>Thời gian bay (phút)</h4>
-                  <Input
-                    value={maxFlightTime}
-                    className={classes.input}
-                    onChange={event => setMaxFlightTime(event.target.value)}
-                  />
-                </Form.Item>
-                <Form.Item className={classes.formItem}>
-                  <h4>Trần bay (m)</h4>
-                  <Input
-                    value={maxFlightHeight}
-                    className={classes.input}
-                    onChange={event => setMaxFlightHeight(event.target.value)}
-                  />
-                </Form.Item>
-                <Form.Item className={classes.formItem}>
-                  <h4>Dung lượng pin (mAh)</h4>
-                  <Input
-                    value={rangeBattery}
-                    className={classes.input}
-                    onChange={event => setBattery(event.target.value)}
-                  />
-                </Form.Item>
-                <Button
-                className={classes.input}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.open(urlImage, "_blank")
-                    }}
-                  variant="contained"
-                  color="primary"
-                  startIcon={<VisibilityIcon />}
-                >
-                  Xem ảnh
-                </Button>
-
+               <Image className={classes.image} src={urlImage} rounded />
               </Col>
-
             </Row>
             <div className={classes.divButton}>
               <Button
