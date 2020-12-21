@@ -239,9 +239,13 @@ class App extends React.Component {
     let toDate = "";
 
     if (dates) {
-      fromDate = await dates[0].format('YYYY-MM-DDThh:mm:ss');
-      toDate = await dates[1].format('YYYY-MM-DDThh:mm:ss');
+      fromDate = await dates[0].format('YYYY-MM-DDT00:00:00');
+      toDate = await dates[1].format('YYYY-MM-DDT23:59:59');
     }
+    console.log("hahahaha")
+    console.log(dates)
+    console.log(fromDate)
+    console.log(toDate)
     this.setState({isLoadedLogActivityData: false, fromDate: fromDate, toDate: toDate});
     this.setLogActivityData(fromDate, toDate);
 
