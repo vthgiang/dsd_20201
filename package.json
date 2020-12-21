@@ -5,7 +5,7 @@
   "dependencies": {
     "@ant-design/charts": "^1.0.6",
     "@ant-design/icons": "^4.2.2",
-    "@fingerprintjs/fingerprintjs": "^3.0.3",
+    "@fingerprintjs/fingerprintjs": "^3.0.4",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.12",

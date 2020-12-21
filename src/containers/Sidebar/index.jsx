@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Layout, Menu, notification } from "antd";
-import { Link, useLocation, useHistory } from "react-router-dom";
-import { StyleSidebarMenu } from "./index.style";
-import Logo from "../../components/Logo";
-import { sidebarMenu } from "./config";
-import { getPermissionResource } from "../../modules/user/store/services";
+import React, { useEffect, useState } from 'react';
+import { Layout, Menu, notification } from 'antd';
+import { Link, useLocation, useHistory } from 'react-router-dom';
+import { StyleSidebarMenu } from './index.style';
+import Logo from '../../components/Logo';
+import { sidebarMenu } from './config';
+import { getPermissionResource } from '../../modules/user/store/services';
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 const Sidebar = ({ collapsed, toggle }) => {
-  const [key, setKey] = useState("Dashboard");
+  const [key, setKey] = useState('Dashboard');
   const { pathname } = useLocation();
   const history = useHistory();
 
   useEffect(() => {
-    const currentRoute = `/${pathname.split("/")[1]}`;
+    const currentRoute = `/${pathname.split('/')[1]}`;
     const getFirstRouteMounted = (menu) => {
       for (let idx = 0; idx < menu.length; idx++) {
         const menuItem = menu[idx];
@@ -38,12 +38,12 @@ const Sidebar = ({ collapsed, toggle }) => {
 
   const handleClickMenu = async (menuItem) => {
     const { key, heading, route, resource } = menuItem;
-    if (resource && resource !== "") {
+    if (resource && resource !== '') {
       const permission = await getPermissionResource(resource);
       if (permission.status == 'fail') {
         notification.error({
-          message: "Lỗi",
-          description: "Bạn không có quyền truy cập!"
+          message: 'Lỗi',
+          description: 'Bạn không có quyền truy cập!',
         });
         return;
       }
@@ -103,7 +103,7 @@ const Sidebar = ({ collapsed, toggle }) => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["Dashboard", key]}
+          defaultSelectedKeys={['Dashboard', key]}
           selectedKeys={key}
           triggerSubMenuAction="click"
         >
