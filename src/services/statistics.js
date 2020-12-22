@@ -298,3 +298,44 @@ export const getUserLogAllMetrics = async (startDate, endDate) => {
     }
     return null;
 };
+
+export const getReportsAllMetrics = async (apiToken) => {
+    try {
+        const results = await Promise.all([
+            requestWithCache(
+                "getReportsAllDykeMetrics",
+                () => Axios.get(`https://dsd07.herokuapp.com/api/user-reports`, {
+                    headers: {
+                        "api-token": apiToken,
+                        "project-type": 'ALL_PROJECT',
+                    },
+                }),
+            ),
+        ]);
+        return results[0]?.data.data;
+    } catch (error) {
+        console.error(error);
+    }
+    return null;
+};
+
+export const getReportsWithTypeMetrics = async (projectType, apiToken) => {
+    try {
+        const results = await Promise.all([
+            requestWithCache(
+                "getReportsWithTypeMetrics",
+                () => Axios.get(`https://dsd07.herokuapp.com/api/user-reports`, {
+                    headers: {
+                        "api-token": apiToken,
+                        "project-type": projectType,
+                    },
+                }),
+            ),
+        ]);
+        console.log(results[0]?.data.data)
+        return results[0]?.data.data;
+    } catch (error) {
+        console.error(error);
+    }
+    return null;
+};
