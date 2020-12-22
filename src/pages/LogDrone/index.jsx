@@ -9,7 +9,7 @@ var axios = require('axios');
 const {RangePicker} = DatePicker;
 const {Option} = Select;
 
-const App = () => {
+const App = (props) => {
   const user = useSelector(state => state.user.user);
 
   const [projectType, setProjectType] = useState(user.type.toLowerCase());
@@ -21,6 +21,9 @@ const App = () => {
   }, []);
 
   const fetchData = (fromDate, toDate) => {
+    console.log("hahahahahahaaaaaaaaaaaa")
+    console.log(props)
+    
     let url = null;
     if (fromDate && toDate && projectType === 'all_project') {  
       url = 'https://it4883logging.herokuapp.com/api/drones?minDate=' + fromDate +'&maxDate=' + toDate;
@@ -31,7 +34,7 @@ const App = () => {
     } else {
       url = 'https://it4883logging.herokuapp.com/api/drones?projectType=' + projectType;
     }
-     
+    if (props.regionId) url = url + "&regionId=" + props.regionId;
     let config = {
       method: 'get',
       url: url,
@@ -83,7 +86,7 @@ const App = () => {
           }
         >
           <h2>
-            Lịch sử hoạt động của payload
+            Lịch sử hoạt động của Drone
           </h2>
           <br />
           <Form layout="inline">

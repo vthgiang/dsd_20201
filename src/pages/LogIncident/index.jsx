@@ -9,7 +9,7 @@ var axios = require('axios');
 const { RangePicker } = DatePicker;
 const {Option} = Select;
 
-function App () {
+function App (props) {
 
   const user = useSelector(state => state.user.user);
 
@@ -32,6 +32,7 @@ function App () {
     } else {
       url = 'https://it4883logging.herokuapp.com/api/resolve-problem?projectType=' + projectType;
     }
+    if (props.regionId) url = url + "&regionId=" + props.regionId;
      
     let config = {
       method: 'get',
@@ -84,7 +85,7 @@ function App () {
           }
         >
           <h2>
-            Lịch sử hoạt động của payload
+            Lịch sử log sự cố
           </h2>
           <br />
           <Form layout="inline">

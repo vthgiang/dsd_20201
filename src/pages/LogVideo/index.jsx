@@ -84,7 +84,7 @@ function App () {
           }
         >
           <h2>
-            Lịch sử hoạt động của payload
+            Lịch sử log video
           </h2>
           <br />
           <Form layout="inline">

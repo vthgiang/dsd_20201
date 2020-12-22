@@ -84,7 +84,7 @@ function App () {
           }
         >
           <h2>
-            Lịch sử hoạt động của payload
+            Lịch sử báo cáo thống kê
           </h2>
           <br />
           <Form layout="inline">

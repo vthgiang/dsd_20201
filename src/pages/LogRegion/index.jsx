@@ -84,7 +84,7 @@ function App () {
           }
         >
           <h2>
-            Lịch sử hoạt động của payload
+            Lịch sử log miền hoạt động
           </h2>
           <br />
           <Form layout="inline">

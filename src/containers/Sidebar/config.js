@@ -159,6 +159,12 @@ export const sidebarMenu = [
     route: '/activity-log',
     subMenu: [
       {
+        key: 'LogDashboardPage',
+        heading: 'Dashboard lịch sử hoạt động',
+        icon: 'fas fa-history',
+        route: '/log-dash-board-page',
+      },
+      {
         key: 'LogDrone',
         heading: 'Drone',
         icon: 'fas fa-drone-alt',
@@ -186,7 +192,7 @@ export const sidebarMenu = [
       {
         key: 'LogVideo',
         heading: 'Video',
-        icon: 'fas fa-images',
+        icon: 'fas fa-film',
         route: '/log-video',
       },
       {
@@ -229,7 +235,7 @@ export const sidebarMenu = [
       {
         key: 'LogUAV',
         heading: 'Kết nối UAV',
-        icon: 'fas fa-images',
+        icon: 'fal fa-drone',
         route: '/log-uav',
       },
     ],
