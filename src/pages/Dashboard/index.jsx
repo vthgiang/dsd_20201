@@ -192,15 +192,18 @@ function Dashboard() {
                 : null
               }
               {
-                role!='INCIDENT_STAFF' ?
+                role!=='INCIDENT_STAFF' ?
                 <TabPane key="Payload" tab="Payload">
                   <PayloadDashboard />
                 </TabPane> : null
               }
-            
-              <TabPane key="Tab 2" tab="Sự cố">
-                <IncidentDashboard />
-              </TabPane>
+
+              {
+                role!=='ADMIN' ?
+                <TabPane key="Sự cố" tab="Sự cố">
+                  <IncidentDashboard />
+                </TabPane> : null
+              }
 
               {
                 role=='SUPER_ADMIN'||role=='ADMIN'||role=='MANAGER' ?

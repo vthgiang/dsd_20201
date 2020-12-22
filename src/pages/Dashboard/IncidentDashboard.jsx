@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import {
   Row,
   Col,
@@ -52,13 +53,17 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#ff8279'];
 
 export default function IncidentDashboard() {
   const [incidentMetrics, setIncidentMetrics] = React.useState(null);
+  const users = useSelector((state) => state.user.user);
+  const projectType = users.type;
+  const token = users.api_token;
+  // const role = users.role;
   const chartData = React.useMemo(() => {
     if (!incidentMetrics?.detailed) return [];
     const getMonthData = (month) => incidentMetrics.detailed.filter((item) => (new Date(item.createdAt)).getMonth() === month);
     const data = Array.from(Array(12).keys()).map((month) => ({
       name: `Th${month + 1}`,
-      normal: getMonthData(month).filter((item) => item.level.code === 0).length,
-      urgent: getMonthData(month).filter((item) => item.level.code === 1).length,
+      'Bình thường': getMonthData(month).filter((item) => item.level.code === 0).length,
+      'Khẩn cấp': getMonthData(month).filter((item) => item.level.code === 1).length,
     }));
     return data;
   }, [incidentMetrics]);
@@ -73,7 +78,7 @@ export default function IncidentDashboard() {
 
   React.useEffect(() => {
     const fetchAll = async () => {
-      const incident = await getIncidentDetailedMetrics();
+      const incident = await getIncidentDetailedMetrics(projectType, token);
       setIncidentMetrics(incident);
     };
 
@@ -87,30 +92,8 @@ export default function IncidentDashboard() {
         <Spin />
       ) : (
         <Row>
-          <Col span="12">
-            <h3>Danh sách sự cố theo tháng</h3>
-            <ResponsiveContainer height={300} width="100%">
-              <BarChart
-                width={500}
-                height={300}
-                data={chartData}
-                margin={{
-                  top: 20, right: 30, left: 20, bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="normal" stackId="a" fill="#91d5ff" />
-                <Bar dataKey="urgent" stackId="a" fill="#ff7875" />
-              </BarChart>
-            </ResponsiveContainer>
-          </Col>
-          <Col span={11} offset={1}></Col>
-          <Col span={12}>
-            <h3>Xử lí sự cố</h3>
+          <Col span={12} className="mt-5">
+            <h3 className="ml-5">Tổng quan xử lí sự cố</h3>
             <ResponsiveContainer
               height={300}
               width={300}
@@ -139,7 +122,7 @@ export default function IncidentDashboard() {
               </PieChart>
             </ResponsiveContainer>
           </Col>
-          <Col span={11} offset={1}>
+          <Col span={11} offset={1} className="mt-5">
             <h3>Tiến độ xử lý sự cố</h3>
             <h6>Sự cố:</h6>
             <div>Tổng số sự cố: {incidentMetrics.overall?.created_tasks_total?.created_total}</div>
@@ -154,6 +137,27 @@ export default function IncidentDashboard() {
             <div>Đã gửi: {incidentMetrics.overall?.result_reports_total?.sent_total}</div>
             <div>Đã duyệt: {incidentMetrics.overall?.result_reports_total?.accepted_total}</div>
             <div>Đã bị từ chối: {incidentMetrics.overall?.result_reports_total?.accepted_total}</div>
+          </Col>
+          <Col span="22" className="mt-5">
+            <h3 className="ml-5 mb-5">Danh sách sự cố theo tháng</h3>
+            <ResponsiveContainer height={600} width="100%">
+              <BarChart
+                width={800}
+                height={600}
+                data={chartData}
+                margin={{
+                  top: 20, right: 30, left: 20, bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="Bình thường" stackId="a" fill="#91d5ff" />
+                <Bar dataKey='Khẩn cấp' stackId="a" fill="#ff7875" />
+              </BarChart>
+            </ResponsiveContainer>
           </Col>
         </Row>
       )}

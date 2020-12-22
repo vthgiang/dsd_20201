@@ -60,29 +60,24 @@ export default function PayloadDashboard() {
   );
   const chartData = React.useMemo(() => {
     if (!monitoreObjectMetrics) return [];
-    if (role=="SUPER_ADMIN")
-      return [
-        { name: 'Lưới điện: ', value: monitoreObjectMetrics.all.luoiDien },
-        { name: 'Cây trồng: ', value: monitoreObjectMetrics.all.cayTrong },
-        { name: 'Cháy rừng: ', value: monitoreObjectMetrics.all.chayRung },
-        { name: 'Đê điều: ', value: monitoreObjectMetrics.all.deDieu },
-      ];
-    else return [
+    return [
       { name: 'Bình thường: ', value: monitoreObjectMetrics.all.nomal },
       { name: 'Gặp sự cố mới: ', value: monitoreObjectMetrics.all.break },
       { name: 'Đang sửa chữa: ', value: monitoreObjectMetrics.all.fixing },
     ]
   }, [monitoreObjectMetrics]);
+  const chartData2 = React.useMemo(() => {
+    if (!monitoreObjectMetrics) return [];
+    if (role!="SUPER_ADMIN") return [];
+    return [
+      { name: 'Lưới điện: ', value: monitoreObjectMetrics.all.luoiDien },
+      { name: 'Cây trồng: ', value: monitoreObjectMetrics.all.cayTrong },
+      { name: 'Cháy rừng: ', value: monitoreObjectMetrics.all.chayRung },
+      { name: 'Đê điều: ', value: monitoreObjectMetrics.all.deDieu },
+    ];
+  }, [monitoreObjectMetrics]);
   const tableData = React.useMemo(() => {
     if (!monitoreObjectMetrics) return [];
-    if (role=='SUPER_ADMIN')
-      return [
-        { status: 'Lưới điện: ', amount: monitoreObjectMetrics.all.luoiDien },
-        { status: 'Cây trồng: ', amount: monitoreObjectMetrics.all.cayTrong },
-        { status: 'Cháy rừng: ', amount: monitoreObjectMetrics.all.chayRung },
-        { status: 'Đê điều: ', amount: monitoreObjectMetrics.all.deDieu },
-        { status: 'Tổng số: ', amount: monitoreObjectMetrics.all.total },
-      ];
     else return [
       { status: 'Bình thường: ', amount: monitoreObjectMetrics.all.nomal },
       { status: 'Mới gặp sự cố: ', amount: monitoreObjectMetrics.all.break },
@@ -90,6 +85,20 @@ export default function PayloadDashboard() {
       { status: 'Tổng cộng: ', amount: monitoreObjectMetrics.all.total },
     ]
   }, [monitoreObjectMetrics]);
+
+  const tableData2 = React.useMemo(() => {
+    if (!monitoreObjectMetrics) return [];
+    if (role!='SUPER_ADMIN') return[];
+    return [
+      { status: 'Lưới điện: ', amount: monitoreObjectMetrics.all.luoiDien },
+      { status: 'Cây trồng: ', amount: monitoreObjectMetrics.all.cayTrong },
+      { status: 'Cháy rừng: ', amount: monitoreObjectMetrics.all.chayRung },
+      { status: 'Đê điều: ', amount: monitoreObjectMetrics.all.deDieu },
+      { status: 'Tổng số: ', amount: monitoreObjectMetrics.all.total },
+    ];
+  }, [monitoreObjectMetrics]);
+
+
   const columns = [
     {
       title: 'Loại đối tượng giám sát',
@@ -107,21 +116,6 @@ export default function PayloadDashboard() {
       render: (text, record) => <a href="#">Chi tiết</a>,
     },
   ];
-
-  // const lineChartData = React.useMemo(() => {
-  //   console.log({ notifyMetrics })
-  //   const getMonthData = (month) => {
-  //     return {
-  //       fixing: payloadMetrics?.fee?.fixing?.filter(item => (new Date(item.startedAt)).getMonth() === month).length || 0,
-  //       working: payloadMetrics?.fee?.working?.filter(item => (new Date(item.startedAt)).getMonth() === month).length || 0,
-  //     }
-  //   }
-  //   const data = Array.from(Array(12).keys()).map(month => ({
-  //     name: `Th${month + 1}`,
-  //     ...getMonthData(month),
-  //   }));
-  //   return data;
-  // }, [payloadMetrics]);
 
   React.useEffect(() => {
     const fetchAll = async () => {
@@ -180,26 +174,53 @@ export default function PayloadDashboard() {
               bordered
             />
           </Col>
-          {/* <Col span={12} className="mt-5">
-            <h3 className="ml-5">Chi phí hoạt động và sửa chữa</h3>
-            <LineChart
-              className="mt-5"
-              width={500}
-              height={300}
-              data={lineChartData}
-              margin={{
-                top: 5, right: 30, left: 20, bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line type="monotone" dataKey="fixing" stroke="#8884d8" activeDot={{ r: 8 }} />
-              <Line type="monotone" dataKey="working" stroke="#82ca9d" />
-            </LineChart>
-          </Col> */}
+          {
+            role=='SUPER_ADMIN' ? 
+            <Col span={10} offset={0} className="mt-5">
+              <h3 className="ml-5">Lượng đối tượng giám sát theo dự án</h3>
+              <ResponsiveContainer
+                height={300}
+                width={300}
+                className="alight-item-center mx-auto mt-5"
+              >
+                <PieChart>
+                  <Pie
+                    data={chartData2}
+                    cx={100}
+                    cy={100}
+                    labelLine={false}
+                    label={renderCustomizedLabel}
+                    outerRadius={100}
+                    fill="#8884d8"
+                    dataKey="value"
+                    margin={{ bottom: 10 }}
+                  >
+                    {chartData2.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                  <Legend style={{ marginTop: 16 }} />
+                </PieChart>
+              </ResponsiveContainer>
+            </Col> : null
+          }
+          {
+            role=='SUPER_ADMIN' ? 
+            <Col span={12} offset={2} className="mt-5">
+              <h3 className="ml-1"> Số lượng đối tượng giám sát theo dự ánán </h3>
+              <Table
+                className="mt-5"
+                dataSource={tableData2}
+                columns={columns}
+                size="small"
+                bordered
+              />
+            </Col> : null
+          }
+
         </Row>
       )}
     </>

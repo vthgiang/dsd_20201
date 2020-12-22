@@ -1,5 +1,6 @@
 import React from 'react';
-import { Row, Col, Table, Spin } from 'antd';
+import { Row, Col, Table, Spin, DatePicker, Space, Button } from 'antd';
+import moment from 'moment';
 import {
   Legend,
   ResponsiveContainer,
@@ -48,6 +49,16 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#ff8279'];
 
 export default function PayloadDashboard() {
   const [payloadMetrics, setPayloadMetrics] = React.useState(null);
+  const [year, setYear] = React.useState(moment());
+  console.log(year);
+
+  const fetchYear = async () => {
+    setPayloadMetrics(null);
+    const payload = await getPayloadDetailedMetrics();
+    console.log({ payload });
+    setPayloadMetrics(payload);
+  };
+
   const chartData = React.useMemo(() => {
     if (!payloadMetrics) return [];
     return [
@@ -84,15 +95,21 @@ export default function PayloadDashboard() {
     },
   ];
   const lineChartData = React.useMemo(() => {
-    console.log({ payloadMetrics });
+    const sellectYear = year.format('YYYY');
+    console.log(sellectYear);
+
     const getMonthData = (month) => ({
       fixing:
         payloadMetrics?.fee?.fixing?.filter(
-          (item) => new Date(item.startedAt).getMonth() === month,
+          (item) =>
+            new Date(item.startedAt).getMonth() == month &&
+            new Date(item.startedAt).getFullYear() == sellectYear,
         ).length || 0,
       working:
         payloadMetrics?.fee?.working?.filter(
-          (item) => new Date(item.startedAt).getMonth() === month,
+          (item) =>
+            new Date(item.startedAt).getMonth() === month &&
+            new Date(item.startedAt).getFullYear() == sellectYear,
         ).length || 0,
     });
     const data = Array.from(Array(12).keys()).map((month) => ({
@@ -101,6 +118,8 @@ export default function PayloadDashboard() {
     }));
     return data;
   }, [payloadMetrics]);
+
+  const yearFormat = 'YYYY';
 
   React.useEffect(() => {
     const fetchAll = async () => {
@@ -159,12 +178,24 @@ export default function PayloadDashboard() {
               bordered
             />
           </Col>
-          <Col span={12} className="mt-5">
+          <Col span={20} className="mt-5">
             <h3 className="ml-5">Chi phí hoạt động và sửa chữa</h3>
+            <h4 className="ml-5 mt-3 mb-1">Năm: </h4>
+            <DatePicker
+              value={year}
+              onChange={setYear}
+              picker="year"
+              className="ml-5"
+            />
+            <br />
+            <Button type="primary" className="mt-3 ml-5" onClick={fetchYear}>
+              Duyệt
+            </Button>
+            <Button href="http://" className={"ml-3 btn-success"}>Chi tiết</Button>
             <LineChart
               className="mt-5"
-              width={500}
-              height={300}
+              width={1000}
+              height={600}
               data={lineChartData}
               margin={{
                 top: 5,
