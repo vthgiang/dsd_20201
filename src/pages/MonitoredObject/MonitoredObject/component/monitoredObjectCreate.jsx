@@ -38,14 +38,17 @@ function MonitoredObjectView({ history }) {
   const [currentMonitoredZone, setCurrentMonitoredZone] = useState(null);
   const [datazoneAll, setDataZoneAll] = useState([]);
 
+ 
   const getZoneAll = async () => {
     await axios({
       method: "GET",
-      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone?page=0`,
+      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone?page=0`,       
     })
       .then((res) => {
         if (res.data) {
           setDataZoneAll(res.data.content.zone);
+          localStorage.getItem('token');
+          console.log('token');
         }
       })
       .catch((err) => {
