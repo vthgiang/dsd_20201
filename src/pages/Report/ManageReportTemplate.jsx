@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Select, Modal, Spin, Button, Table, Space, Input, Tag } from 'antd';
+import { DeleteFilled } from '@ant-design/icons';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
@@ -250,6 +251,13 @@ export default function ManageReportTemplate() {
     }));
   }
 
+  const onRowDelete = (sectionId) => {
+    setModalData((modalData) => ({
+      ...modalData,
+      sections: modalData.sections.filter((section) => section.id !== sectionId),
+    }));
+  }
+
   // a little function to help us with reordering the result
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -287,6 +295,8 @@ export default function ManageReportTemplate() {
 
     // change background colour if dragging
     background: isDragging ? "#dddddd" : "#eeeeee",
+    display: 'flex',
+    justifyContent: 'space-between',
 
     // styles we need to apply on draggables
     ...draggableStyle
@@ -495,7 +505,7 @@ export default function ManageReportTemplate() {
                           {...provided.dragHandleProps}
                           style={getItemStyle(
                             snapshot.isDragging,
-                            provided.draggableProps.style
+                            provided.draggableProps.style,
                           )}
                         >
                           <Space wrap>
@@ -511,6 +521,9 @@ export default function ManageReportTemplate() {
                             </Select>
                             {section.type && SectionTypeRenderer[section.type]?.(section)}
                           </Space>
+                          <div>
+                            <Button danger type="text" shape="circle" icon={<DeleteFilled />} onClick={() => onRowDelete(section.id)} />
+                          </div>
                         </div>
                       )}
                     </Draggable>
