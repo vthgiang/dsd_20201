@@ -15,7 +15,6 @@ const CreateMonitorCampaign = () => {
   persist = JSON.parse(persist.user);
   const { user } = persist;
   const { id } = user;
-  console.log('persist:root ', persist);
 
   const createMonitorCampaign = async (data) => {
     try {
@@ -29,7 +28,7 @@ const CreateMonitorCampaign = () => {
         refLinkView: `${FRONT_END_URL}flight-hub-monitor-campaigns/${monitorCampaignId}`,
         content: 'Tạo đợt giám sát thành công',
         level: 1,
-        ntfType: 1,
+        ntfType: 4,
         refType: 9,
       };
       const createdNotification = await notificationApi.createNotification(
