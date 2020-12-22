@@ -34,7 +34,6 @@ const CreateMonitorCampaign = () => {
       const createdNotification = await notificationApi.createNotification(
         notificationData,
       );
-      console.log('createdNotification ', createdNotification);
 
       notification.success({
         message: 'Tạo thành công!',
