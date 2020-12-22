@@ -35,7 +35,7 @@ const Step1 = ({ nextStep, data, handleChangeData }) => {
           label="Tên đợt giám sát"
           rules={[{ type: 'string', required: true }]}
         >
-          <Input placeholder="VD: Đọt giám sát rừng phòng hộ quý 1"></Input>
+          <Input placeholder="VD: Đợt giám sát rừng phòng hộ quý 1"></Input>
         </Form.Item>
 
         <Form.Item
