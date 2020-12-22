@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import to from "await-to-js";
-import {Button, Col, Form, Input, message, Modal, Row, Select, Table, Tag, TimePicker} from "antd";
+import {Button, Col, Form, Input, message, Modal, Row, Select, Table, Tag, TimePicker, Menu} from "antd";
+import { EyeOutlined, BarChartOutlined, StockOutlined, AppstoreAddOutlined, SettingOutlined } from '@ant-design/icons'
 import useBaseHook from "../../../hooks/BaseHooks";
 import incidentService from "../../../services/group09/incidentService";
 import incidentLevelService from "../../../services/group09/incidentLevelService";
@@ -9,7 +10,8 @@ import moment from "moment";
 import {SearchOutlined} from "@ant-design/icons";
 import StyleList from "../../Payload/PayloadManagement/List/index.style";
 
-let levels = []
+let levels = [];
+const { SubMenu } = Menu;
 
 
 const data = [
@@ -93,6 +95,7 @@ const data = [
 
 let status = []
 const HomeDeDieu = ({ history }) => {
+
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const { notify, getData } = useBaseHook();
@@ -203,71 +206,52 @@ const HomeDeDieu = ({ history }) => {
       setLevels(_levels || [])
       setStatus(_status || [])
     setLoading(false)
-    console.log('incidents', incidents)
   }
+
   return(
 
       <StyleList>
+        <Menu  mode="horizontal">
+          <Menu.Item key="ncn1" icon={<EyeOutlined />}>
+            <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+              Nhóm chức năng 1
+              <br/>
+              Theo dõi giám sát sự cố
+            </a>
+          </Menu.Item>
+          <Menu.Item key="ncn2" icon={<BarChartOutlined />}>
+            <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+              Nhóm chức năng 2
+              <br/>
+              Dữ liệu, tra cứu, thống kê
+            </a>
+          </Menu.Item>
+          <Menu.Item key="ncn3" icon={<StockOutlined />}>
+            <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+              Nhóm chức năng 3
+              <br/>
+              Phân tích phát hiện sự cố
+            </a>
+          </Menu.Item>
+          <Menu.Item key="ncn4" icon={<AppstoreAddOutlined />}>
+            <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+              Nhóm chức năng 4
+              <br/>
+                Quản lý, điều khiển UAV
+            </a>
+          </Menu.Item>
+          <Menu.Item key="ncn5" icon={<SettingOutlined />}>
+            <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+              Nhóm chức năng 5
+              <br/>
+              Quản trị và nâng cao
+            </a>
+          </Menu.Item>
+        </Menu>
         <div>
-          <h2>Theo dõi phát hiện sự cố ĐÊ ĐIỀU</h2>
-          <br />
-          <Form
-              layout="horizontal"
-              className="searchtype" onFinish={(values) => this.searchPayload(values)}
-          >
-            <Row justify="space-around">
-              <Col span={14}>
-                <Button type="primary" htmlType="submit" >
-                  Nhóm chức năng 1: Theo dõi, giám sát hiện trạng, điều phối
-                  và theo dõi kết quả thực hiện xử lý sự cố
-                </Button>
-              </Col>
-            </Row>
-            <br/>
-            <Row justify="space-around">
-              <Col span={15}>
-                <Button type="primary" htmlType="submit" >
-                  Nhóm chức năng 2: Lưu trữ dữ liệu, tra cứu, thống kê và báo cáo sự cố và các thông tin xử lý sự cố liên quan
-                </Button>
-              </Col>
-            </Row>
-            <br/>
-            <Row justify="space-around">
-              <Col span={8}>
-                <Button type="primary" htmlType="submit" >
-                  Nhóm chức năng 3: Phân tích, tự động phát hiện sự cố                </Button>
-              </Col>
-            </Row>
-            <br/>
-            <Row justify="space-around">
-              <Col span={14}>
-                <Button type="primary" htmlType="submit" >
-                  Nhóm chức năng 4: Kết nối dữ liệu từ UAV, quản lý, điều khiển và theo dõi hoạt động của các UAV                    </Button>
-              </Col>
-            </Row>
-            <br/>
-            <Row justify="space-around">
-              <Col span={8}>
-                <Button type="primary" htmlType="submit" >
-                  Nhóm chức năng 5: Quản trị và các chức năng nâng cao               </Button>
-              </Col>
-            </Row>
-            <br/>
-            {/*<Row justify="space-around">*/}
-            {/*  <Col span={4}>*/}
-            {/*    <Form.Item label="Tìm theo trạng thái" name="status">*/}
-            {/*      <Select options='Đang xử lý' />*/}
-            {/*    </Form.Item>*/}
-            {/*  </Col>*/}
-            {/*  <Col span={4}>*/}
-            {/*    <Button type="primary" htmlType="submit" icon={<SearchOutlined />}>*/}
-            {/*      Tìm kiếm*/}
-            {/*    </Button>*/}
-            {/*  </Col>*/}
-            {/*</Row>*/}
-          </Form>
-
-          {/*<Button type="primary" className="buttontype" onClick={() => this.showModalAdd()} >Thêm</Button>*/}
+          <br/>
+          {/*<h2>Theo dõi phát hiện sự cố ĐÊ ĐIỀU</h2>*/}
+          {/*<br />*/}
           <h2>Thống kê danh sách sự cố</h2>
           <br/>
           <Row>
