@@ -97,7 +97,7 @@ const Incident = () => {
   const [status, setStatus] = useState([]);
   const columns = [
     {
-      name: 'Tên sự cố',
+      title: 'Tên sự cố',
       dataIndex: 'name',
       key: 'name',
       width: '20%',
@@ -204,7 +204,10 @@ const Incident = () => {
         incidentStatusService().index(),
       ]),
     );
-    if (error) message.error('Không thể trả về danh sách sự cố!');
+    if (error){
+      message.error('Không thể trả về danh sách sự cố!');
+      return
+    }
     setIncidents(incidents.incidents || []);
     setLevels(_levels || []);
     setStatus(_status || []);

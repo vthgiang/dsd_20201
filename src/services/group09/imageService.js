@@ -45,9 +45,13 @@ class Service extends Base {
     id = id || '5fc68aef1b9ae0001765e821'
     const url = `https://it4483team2.herokuapp.com/api/records/monitored/images/${id}`
 
-    const response = await fetch(url, {
+    const [error, response] = await to(fetch(url, {
       method: 'GET',
-    });
+    }));
+    if(error){
+      alert("API của nhóm video/hình ảnh đang lỗi!");
+      return
+    }
     return response.json();
   };
 }
