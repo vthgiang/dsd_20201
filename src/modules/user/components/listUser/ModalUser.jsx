@@ -244,6 +244,8 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode, 
 
     const renderSelectDepartment = () => (
         <Select
+            showSearch
+            optionFilterProp='children'
             disabled={mode == "detail"}
             className='select-box'
             value={user && user.department ? user.department.id : "Chưa xác định"}
