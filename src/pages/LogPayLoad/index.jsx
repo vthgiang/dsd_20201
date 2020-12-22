@@ -22,10 +22,14 @@ function App () {
 
   const fetchData = (fromDate, toDate) => {
     let url = null;
-    if (fromDate && toDate) {
-      url = 'https://it4883logging.herokuapp.com/api/payload?minDate=' + fromDate +'&maxDate=' + toDate +'&projectType=' + projectType;
+    if (fromDate && toDate && projectType === 'all_project') {	
+    	url = 'https://it4883logging.herokuapp.com/api/payload?minDate=' + fromDate +'&maxDate=' + toDate;
+    } else if (fromDate && toDate && projectType !== 'all_project') {
+    	url = 'https://it4883logging.herokuapp.com/api/payload?minDate=' + fromDate +'&maxDate=' + toDate +'&projectType=' + projectType;
+    } else if (projectType === 'all_project') {
+    	url = 'https://it4883logging.herokuapp.com/api/payload?projectType=de_dieu';
     } else {
-      url = 'https://it4883logging.herokuapp.com/api/payload?projectType=' + projectType;
+    	url = 'https://it4883logging.herokuapp.com/api/payload?projectType=' + projectType;
     }
      
     let config = {
@@ -60,6 +64,10 @@ function App () {
     else await fetchData();
   }
 
+  const onProjectTypeChange = (projectType) => {
+    setProjectType(projectType);
+  }
+
   return (
     <>
       <Col style={{ marginRight: '4%', marginTop: 20 }}>
@@ -84,6 +92,22 @@ function App () {
             >
               <RangePicker format='DD/MM/YYYY' onChange={(dates, dateStrings) => onRangePickerChange(dates, dateStrings)} />
             </Form.Item>
+            {user.role === 'SUPER_ADMIN' ? 
+            	<Form.Item label="Chọn loại dự án">
+	              <Select defaultValue="de_dieu" style={{width: 120}} onChange={(value) => {
+	                setIsLoadedLogActivity(false);
+	                onProjectTypeChange(value);
+	                fetchData();
+	              }}>
+	                <Option value="de_dieu">Đê điều</Option>
+	                <Option value="luoi_dien">Lưới điện</Option>
+	                <Option value="chay_rung">Cháy rừng</Option>
+	                <Option value="cay_trong">Cây trồng</Option>
+	              </Select>
+	            </Form.Item>
+	            : <></>
+        	}
+            	
           </Form>
           <br />
             <PayloadActivity data={logActivityData} loading={!isLoadedLogActivityData}/>

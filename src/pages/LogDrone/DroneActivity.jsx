@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Select } from 'antd';
+import {Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Select} from 'antd';
 import Highlighter from 'react-highlight-words';
-import { SearchOutlined } from '@ant-design/icons';
+import {SearchOutlined} from '@ant-design/icons';
 
-const PayloadActivity = (props) => {
-
+const DroneActivity = (props) => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const [filteredInfo, setFilteredInfo] = useState(null);
@@ -87,6 +86,7 @@ const PayloadActivity = (props) => {
     clearFilters();
     setSearchText('');
   };
+
   const columns = [
     {
       title: 'Id',
@@ -96,29 +96,29 @@ const PayloadActivity = (props) => {
 
     },
     {
-      title: 'Tên payload',
+      title: 'Tên drone',
       dataIndex: 'name',
       key: 'name',
       ...getColumnSearchProps('name'),
     },
     {
-      title: 'Trạng thái payload',
-      dataIndex: 'state',
-      key: 'state',
-      ...getColumnSearchProps('state'),
+      title: 'Kinh độ',
+      dataIndex: 'longitude',
+      key: 'longitude',
+      ...getColumnSearchProps('longitude'),
     },
     {
-      title: 'Id drone chứa payload',
-      dataIndex: 'droneId',
-      key: 'droneId',
-      ...getColumnSearchProps('droneId'),
+      title: 'Vĩ độ',
+      dataIndex: 'latitude',
+      key: 'latitude',
+      ...getColumnSearchProps('latitude'),
     },
     {
       title: 'Hành động',
       dataIndex: 'type',
       key: 'type',
       ...getColumnSearchProps('type'),
-      
+
     },
     {
       title: 'Mô tả',
@@ -130,9 +130,21 @@ const PayloadActivity = (props) => {
       title: 'Thời gian',
       dataIndex: 'timestamp',
       key: 'timestamp',
-      sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1: -1
+      sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1 : -1
     },
-    
+
+    {
+      title: 'Miền hoạt động',
+      dataIndex: 'regionName',
+      key: 'regionName',
+      ...getColumnSearchProps('regionName'),
+    },
+    {
+      title: 'Mã miền',
+      dataIndex: 'regionId',
+      key: 'regionId',
+      ...getColumnSearchProps('regionId'),
+    },
     {
       title: 'Id người thực hiện',
       dataIndex: 'authorId',
@@ -140,11 +152,12 @@ const PayloadActivity = (props) => {
       ...getColumnSearchProps('authorId'),
     },
   ];
-  return(
+  
+  return (
     <>
-      <Table columns={columns} dataSource={props.data} loading={props.loading} onChange={handleChange} />
+      <Table columns={columns} dataSource={props.data} loading={props.loading} onChange={handleChange}/>
     </>
-  )
+  );
 }
 
-export default PayloadActivity;
+export default DroneActivity;
