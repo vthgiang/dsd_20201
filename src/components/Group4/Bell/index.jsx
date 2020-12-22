@@ -21,6 +21,7 @@ const BellNotification = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     newNotifications.forEach(item => { item.isNew = true })
@@ -33,7 +34,7 @@ const BellNotification = () => {
   }, [total])
 
   useEffect(() => {
-    loadData(0, 5);
+    loadData(0,5);
   }, [])
 
   const openMessage = (loading, loaded, timeout) => {
@@ -105,11 +106,12 @@ const BellNotification = () => {
     var user = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user);
     var config = {
       method: 'get',
-      url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf_no_token',
+      url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf_type',
       params: {
         index: start,
         count: to,
-        userID: user.id
+        userID: user.user.id,
+        type: 15
       }
     };
     return config;
@@ -139,7 +141,7 @@ const BellNotification = () => {
       });
   }
 
-  const loadData = (start, to) => {
+  const loadData = async (start, to) => {
     console.log(`${index} -- ${count}`)
     var config = getConfig(start, to);
     axios(config)

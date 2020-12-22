@@ -19,6 +19,7 @@ import SimpleRating from '../Rating';
 import { ListItemStyle } from './index.style';
 import FilterDropdown from '../Dropdown';
 import { Row, Col } from 'antd';
+import { set } from 'local-storage';
 
 
 function LastSeen({ date }) {
@@ -108,33 +109,43 @@ const MyList = () => {
   const [index, setIndex] = useState(0);
   const [count, setCount] = useState(5);
   const [total, setTotal] = useState(0);
+  const [type, setType] = useState(15);
+  const [first, setFirst] = useState(true);
   const classes = useStyles();
   const history = useHistory();
 
   useEffect(() => {
+    loadData(index, count);
+  }, [index, count])
 
+  
+
+  const getConfig = (start, to) => {
     var user = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user);
     var config = {
       method: 'get',
-      url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf_no_token',
+      url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf_type',
       params: {
-        index: index,
-        count: count,
-        userID: user.user.id
+        index: start,
+        count: to,
+        userID: user.user.id,
+        type: 15
       }
     };
+    return config;
+  }
 
+  const loadData = async (start, to) => {
+    console.log(`${index} -- ${count}`)
+    var config = getConfig(start, to);
     axios(config)
       .then(function (response) {
         setDatas(datas.concat(response.data.data.notifications));
-        setTotal(response.data.data.total);
-        console.log(datas.length);
       })
       .catch(function (error) {
         console.log(error);
       });
-
-  }, [index, count])
+  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

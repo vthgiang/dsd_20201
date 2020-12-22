@@ -4,14 +4,10 @@ import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import { ref } from '../config4';
 
 const FilterDropDown = () => {
-    const handleButtonClick = (e) => {
-        message.info('Click on left button.');
-        console.log('click left button', e);
-    }
-      
+
     const handleMenuClick = (e) => {
-        message.info('Click on menu item.');
-        console.log('click', e);
+      message.info('Click on menu item.');
+      console.log('click', e);
     }
       
     const menu = (
