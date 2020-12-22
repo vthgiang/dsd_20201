@@ -99,10 +99,13 @@ const DataTable = () => {
 
         <>
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-md-2">
                     <ModalAddDataTable />
                 </div>
-                <div className="col-md-5">
+                <div className="col-md-2">
+                    <h4>{drones.length} drone</h4>
+                </div>
+                <div className="col-md-4">
                     <Pagination
                         total={totalItems}
                         itemsPerPage={ITEMS_PER_PAGE}
@@ -120,7 +123,6 @@ const DataTable = () => {
                 </div>
             </div>
             <Styles>
-            {loader}
                 <div className="row w-100">
                     <div className="col mb-3 col-12 text-center">
 
@@ -155,8 +157,8 @@ const DataTable = () => {
                             </tbody>
                         </table>
                     </div>
+                    {loader}
                 </div>
-               
             </Styles>
         </>
     );

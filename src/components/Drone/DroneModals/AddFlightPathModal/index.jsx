@@ -23,10 +23,12 @@ function AddFlightPathModal(props) {
     const [flightPoints, setFlightPoints] = useState([]);
     const [heightPoint, setHeightPoint] = useState('');
     const [monitoredObjectId, setMonitoredObjectId] = useState('');
+    const [selectedObject, setSelectedObject] = useState(null);
 
     const [selectedArea, setSelectedArea] = useState(null);
     const [selectedZone, setSelectedZone] = useState(null);
     const [monitoredObjectList, setMonitoredObjectList] = useState([]);
+    const [monitoredObjectListLoading, setMonitoredObjectListLoading] = useState(false);
 
     const [show, setShow] = useState(false);
     const toggle = () => setShow(!show);
@@ -34,7 +36,9 @@ function AddFlightPathModal(props) {
     const [error, setError] = useState('');
 
     useEffect(()=> {
+        // load đối tượng giám sát tương ứng với miền
         if(!selectedZone) return;
+        setMonitoredObjectListLoading(true);
         axios.get(`https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-zone?monitoredZone=${selectedZone._id}`)
             .then(response => {
                 // console.log("monitored Object")
@@ -51,11 +55,14 @@ function AddFlightPathModal(props) {
             })
             .catch(e => {
                 console.log(e)
+            })
+            .finally(() => {
+                setMonitoredObjectListLoading(false);
             });
         }, [selectedZone]);
         
-        const handleOkClick = () => {
-            // xử lý đồng ý thêm đường bay
+    const handleOkClick = () => {
+        // xử lý đồng ý thêm đường bay
         if(!name || flightPoints.length===0 || !selectedZone) return setError('Bạn chưa nhập đủ thông tin');
         // let id = Math.trunc(Math.random()*2000);
         let newFlightPath = {name, flightPoints,
@@ -69,9 +76,13 @@ function AddFlightPathModal(props) {
         console.log(newFlightPath);
         axios.post('http://skyrone.cf:6789/flightPath/save', newFlightPath)
             .then(response => {
-                console.log(response)
+                console.log(response);
                 // props.addFlightPath(newFlightPath);
-                props.pageReload();
+                if(response.status != 200){
+                    alert(`Lỗi ${response.status}, thêm thất bại`);
+                }else{
+                    props.pageReload();
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -101,6 +112,7 @@ function AddFlightPathModal(props) {
         setTimeCome('');
         setTimeStop('');
         setNewPoint({});
+        setSelectedObject(null);
         if(selectedZone) setHeightPoint(selectedZone.minHeight != undefined ? selectedZone.minHeight : '');
     }
 
@@ -142,16 +154,25 @@ function AddFlightPathModal(props) {
                         task={task} setTask={setTask}
                         selectedArea={selectedArea} setSelectedArea={setSelectedArea}
                         selectedZone={selectedZone} setSelectedZone={setSelectedZone}
+                        resetPoint={resetPoint}
                     />
                     <Row>
                         <Col md={4}>
-                            <PointInput 
+                            {monitoredObjectListLoading && <p>Loading...</p>}
+                            {!monitoredObjectListLoading && newPoint.locationLat && <PointInput 
                                 timeCome={timeCome} setTimeCome={setTimeCome}
                                 timeStop={timeStop} setTimeStop={setTimeStop}
                                 newPoint={newPoint} addPoint={addPoint}
                                 heightPoint={heightPoint} setHeightPoint={setHeightPoint}
-                                selectedZone={selectedZone}
-                            />
+                                selectedZone={selectedZone} 
+                                selectedObject={selectedObject}
+                            />}
+                            {!monitoredObjectListLoading && !newPoint.locationLat && 
+                            selectedZone != null && <p style={{color: 'green'}}>
+                                Chọn một điểm trên bản đồ
+                            </p>}
+                            {!monitoredObjectListLoading && !newPoint.locationLat && 
+                            selectedZone == null && <p>Nothing</p>}
                         </Col>
                         <Col md={8}>
                             <Map 
@@ -161,6 +182,7 @@ function AddFlightPathModal(props) {
                                 monitoredObjectList={monitoredObjectList}
                                 setMonitoredObjectId={setMonitoredObjectId}
                                 setHeightPoint={setHeightPoint} heightPoint={heightPoint}
+                                setSelectedObject={setSelectedObject}
                             />
                         </Col>
                     </Row>
@@ -169,7 +191,7 @@ function AddFlightPathModal(props) {
             <Modal.Footer>
                 {error !== '' && (<Form.Group controlId="errorMessage">
                     <Form.Text className="text-muted">
-                        {error}
+                        <span className='error-message'>{error}</span>
                     </Form.Text>
                 </Form.Group>)}
                 <Button variant="primary" onClick={handleOkClick}>

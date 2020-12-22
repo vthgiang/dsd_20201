@@ -20,6 +20,8 @@ const Step1 = ({ nextStep, data, handleChangeData }) => {
   const onFinish = (values) => {
     handleChangeData(values);
     nextStep();
+    console.log(form);
+    console.log(data);
   };
 
   return (
