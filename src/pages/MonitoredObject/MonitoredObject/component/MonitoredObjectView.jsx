@@ -319,9 +319,6 @@ function MonitoredObjectView({ history }) {
                   <option value="CHAY_RUNG">Cháy rừng</option>
                   <option value="LUOI_DIEN">Lưới điện</option>
                   <option value="CAY_TRONG">Cây trồng</option>
-                  {!monitoredObject.type && (
-                    <option value="">Chưa có giá trị</option>
-                  )}
                 </select>
               </div>
             </div>
