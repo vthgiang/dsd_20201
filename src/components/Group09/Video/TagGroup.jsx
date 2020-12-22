@@ -1,25 +1,24 @@
-import { Tag, Input, Tooltip, AutoComplete } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
-import incidentTagService from "../../../services/group09/incidentTagService";
-import React from "react";
-import to from "await-to-js"
+import { Tag, Input, Tooltip, AutoComplete } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import incidentTagService from '../../../services/group09/incidentTagService';
+import React from 'react';
+import to from 'await-to-js';
 
 class EditableTagGroup extends React.Component {
-
   state = {
     tags: this.props.defaultValue || [],
     options: [],
     inputVisible: false,
-    inputValue: "",
+    inputValue: '',
     editInputIndex: -1,
-    editInputValue: "",
+    editInputValue: '',
   };
-    async componentDidMount() {
-        let [error2, res = []] = await to(incidentTagService().index());
-        if(!error2){
-            let options =res.map(item => ({value: item.name}))
-            this.setState({options: options});
-        }
+  async componentDidMount() {
+    let [error2, res = []] = await to(incidentTagService().index());
+    if (!error2) {
+      let options = res.map((item) => ({ value: item.name }));
+      this.setState({ options: options });
+    }
   }
   handleClose = (removedTag) => {
     const tags = this.state.tags.filter((tag) => tag !== removedTag);
@@ -35,8 +34,8 @@ class EditableTagGroup extends React.Component {
   };
 
   getTags = () => {
-      return this.state.tags;
-  }
+    return this.state.tags;
+  };
 
   handleInputConfirm = () => {
     const { inputValue } = this.state;
@@ -44,11 +43,11 @@ class EditableTagGroup extends React.Component {
     if (inputValue && tags.indexOf(inputValue) === -1) {
       tags = [...tags, inputValue];
     }
-    
+
     this.setState({
       tags,
       inputVisible: false,
-      inputValue: "",
+      inputValue: '',
     });
   };
 
@@ -64,7 +63,7 @@ class EditableTagGroup extends React.Component {
       return {
         tags: newTags,
         editInputIndex: -1,
-        editInputValue: "",
+        editInputValue: '',
       };
     });
   };
@@ -78,11 +77,7 @@ class EditableTagGroup extends React.Component {
   };
 
   render() {
-    const {
-      tags,
-      inputVisible,
-      inputValue
-    } = this.state;
+    const { tags, inputVisible, inputValue } = this.state;
     return (
       <>
         {tags.map((tag, index) => {
@@ -102,7 +97,7 @@ class EditableTagGroup extends React.Component {
                       { editInputIndex: index, editInputValue: tag },
                       () => {
                         this.editInput.focus();
-                      }
+                      },
                     );
                     e.preventDefault();
                   }
@@ -140,7 +135,7 @@ class EditableTagGroup extends React.Component {
               onSearch={this.handleInputConfirm}
               size="small"
               laceholder="Nhập tag sự cố"
-              enterButton={"Thêm"}
+              enterButton={'Thêm'}
             />
           </AutoComplete>
         )}

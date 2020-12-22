@@ -17,6 +17,7 @@ const Map = ({
   onChangeLocation,
   onChangeMonitoredZone,
   monitoredZoneInit,
+  setLoadingMonitoredZone,
 }) => {
   const [monitoredZonesDataInit, setMonitoredZonesDataInit] = useState(null);
   const [monitoredZonesData, setMonitoredZonesData] = useState(null);
@@ -35,14 +36,20 @@ const Map = ({
   }, []);
 
   const getMonitoredZone = async () => {
+    setLoadingMonitoredZone(true);
     await axios({
       method: 'GET',
       url: `https://monitoredzoneserver.herokuapp.com/monitoredzone`,
+      headers: {
+        token: localStorage.getItem('token'),
+        projectType: localStorage.getItem('project-type'),
+      },
     })
       .then((res) => {
         if (res.data) {
           setMonitoredZonesData(res.data.content.zone);
           setMonitoredZonesDataInit(res.data.content.zone);
+          setLoadingMonitoredZone(false); //Set loading spin
 
           //Khởi tạo render ban đầu
           if (res.data.content.zone) {
@@ -68,7 +75,9 @@ const Map = ({
           }
         }
       })
-      .catch((err) => {});
+      .catch((err) => {
+        setLoadingMonitoredZone(false);
+      });
   };
 
   const searchOnChange = (e) => {
@@ -120,7 +129,7 @@ const Map = ({
         onChange={searchOnChange}
         onSearch={submitSearch}
         enterButton
-        style={{ position: 'absolute', top: '10px', left: '10px', width: 250 }}
+        style={{ position: 'absolute', top: '10px', right: '55px', width: 250 }}
         value={searchText}
       />
       {/* {monitoredZonesData &&
