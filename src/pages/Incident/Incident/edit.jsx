@@ -71,7 +71,7 @@ const IncidentEdit = (props) => {
         bordered
         layout="vertical"
         title="Chi tiết sự cố"
-        extra={<Button type="primary">Xử lý sự cố</Button>}
+        extra={<Button type="primary" href="/handle-problem">Xử lý sự cố</Button>}
       >
         <Descriptions.Item label="Tên sự cố">{incident.name}</Descriptions.Item>
         <Descriptions.Item label="Hạn dự kiến">
@@ -115,7 +115,7 @@ const IncidentEdit = (props) => {
             allowFullScreen=""
             aria-hidden="false"
             tabIndex="0"
-          ></iframe>
+          />
         </Descriptions.Item>
       </Descriptions>
     </div>
