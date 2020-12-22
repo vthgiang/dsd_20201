@@ -1,14 +1,24 @@
+<<<<<<< HEAD
 import { Col, Image, Row } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import { problemTypes } from './config';
+=======
+import { Col, Image, Row, Table } from 'antd';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
+import styled from 'styled-components';
+import { problemColumns, problemTypesKD, problemTypes } from './config';
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 
 function Detail() {
     const { params } = useRouteMatch();
 
     const [imageVideo, setImageVideo] = useState({});
+<<<<<<< HEAD
 
     useEffect(() => {
         axios({
@@ -21,6 +31,60 @@ function Detail() {
     }, [])
 
     console.log({ imageVideo });
+=======
+    const [imageVideoRelated, setImageVideoRelated] = useState([]);
+    const [problems, setProblems] = useState([]);
+
+    const renderDescription = (description) => {
+        if (description) {
+            const arr = description?.split(" ");
+            const objId = arr.pop();
+
+            return <div>{arr.join(" ")} <Link to="#">{objId}</Link></div>;
+        }
+        return null;
+    }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const res1 = await axios({
+                method: "GET",
+                url: `https://it4483team2.herokuapp.com/api/records/${params.id}`
+            });
+
+
+            const res2 = await axios({
+                method: "GET",
+                url: `https://it4483team2.herokuapp.com/api/records/monitored/images/${res1.data.monitoredObjectId}`
+            });
+
+
+            const res3 = await axios({
+                method: "POST",
+                url: `https://it4483.cf/api/incidents/search`,
+                headers: {
+                    "api-token": localStorage.getItem("token"),
+                    "project-type": localStorage.getItem("project-type")
+                },
+                data: {
+                    imageIds: [
+                        res1.data.id
+                    ]
+                }
+            })
+
+            console.log({ res3 });
+
+
+
+            setImageVideo(res1.data);
+            setImageVideoRelated(res2.data.result);
+            setProblems(res3.data.incidents);
+        }
+
+        fetchData();
+    }, [])
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 
     return <Container>
         <Title>Thông tin chi tiết</Title>
@@ -56,7 +120,19 @@ function Detail() {
                             <strong>Mô tả:</strong>
                         </Col>
                         <Col md={20}>
+<<<<<<< HEAD
                             <span>{imageVideo.description}</span>
+=======
+                            <span>{renderDescription(imageVideo.description)}</span>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={4}>
+                            <strong>Đối tượng:</strong>
+                        </Col>
+                        <Col md={20}>
+                            <Link to="#">{imageVideo.monitoredObjectId}</Link>
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
                         </Col>
                     </Row>
                     <Row>
@@ -64,7 +140,11 @@ function Detail() {
                             <strong>Loại dữ liệu:</strong>
                         </Col>
                         <Col md={20}>
+<<<<<<< HEAD
                             <span>{imageVideo.type === 0 ? "Image" : "Video"}</span>
+=======
+                            <span>{imageVideo.type === 0 ? "Ảnh" : "Video"}</span>
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
                         </Col>
                     </Row>
                     <Row>
@@ -102,9 +182,44 @@ function Detail() {
                 </Info>
             </Col>
         </Row>
+<<<<<<< HEAD
     </Container >;
 }
 
+=======
+
+        <Title><p>
+            <span>{imageVideo.type === 0 ? "Ảnh" : "Video"} liên quan</span>
+        </p></Title>
+        <Row gutter={[24, 24]}>
+            {imageVideoRelated.map((item, index) => {
+                console.log({ item });
+                return <Col md={4}>
+                    <Image
+                        style={{
+                            cursor: "pointer"
+                        }}
+                        key={index}
+                        src={item.link}
+                        preview={false}
+                        onClick={() => setImageVideo(item)}
+                    />
+                </Col>
+            })}
+        </Row>
+
+        <Title><p style={{ margin: 0 }}>
+            <span>Các sự cố</span>
+        </p></Title>
+        <TableCustom columns={problemColumns} dataSource={problems} onChange={() => { }} pagination />
+    </Container >;
+}
+
+const TableCustom = styled(Table)`
+
+`;
+
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 const Container = styled.div`
     width: 100%;
     height: 100%;
@@ -113,6 +228,26 @@ const Container = styled.div`
 const Title = styled.h1`
     font-size: 40px;
     text-align: center;
+<<<<<<< HEAD
+=======
+
+    p {
+        text-align: left;
+      
+        span {
+            display: inline-block;
+            font-size: 25px;
+            margin-top: 30px;
+            width: auto;
+    
+            &:after{
+                display: block;
+                content: "";
+                border-bottom: 2px solid #ccc;
+            }
+        }
+    }
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 `;
 
 const Info = styled.div`

@@ -55,10 +55,23 @@ const ModalUser = ({ userId, setVisible, visible }) => {
         if (res.status === "successful") {
             handleCloseModal();
         } else {
+<<<<<<< HEAD
             setMessage({
                 value: res.message,
                 type: "error",
                 title: "Lỗi"
+=======
+            var errorMessage = "";
+            if (res.message != "") {
+                errorMessage = res.message;
+            } else {
+                errorMessage = res.result;
+            }
+            setMessage({
+                value: errorMessage,
+                type: "error",
+                title: "Lỗi",
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             });
         }
     };
@@ -69,6 +82,7 @@ const ModalUser = ({ userId, setVisible, visible }) => {
 
     useEffect(() => {
         if (message && message != "") {
+<<<<<<< HEAD
             if (message.type == 'error') {
                 notification.error({
                     message: message.title,
@@ -86,6 +100,25 @@ const ModalUser = ({ userId, setVisible, visible }) => {
                     message: message.title,
                     description: message.value
                 })
+=======
+            if (message.type == "error") {
+                notification.error({
+                    message: message.title,
+                    description: message.value,
+                });
+            }
+            if (message.type == "warning") {
+                notification.warning({
+                    message: message.title,
+                    description: message.value,
+                });
+            }
+            if (message.type == "success") {
+                notification.success({
+                    message: message.title,
+                    description: message.value,
+                });
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             }
         }
     }, [message]);
@@ -97,7 +130,11 @@ const ModalUser = ({ userId, setVisible, visible }) => {
             setMessage({
                 value: "Vui lòng nhập họ tên!",
                 type: "error",
+<<<<<<< HEAD
                 title: "Lỗi"
+=======
+                title: "Lỗi",
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             });
             return retval;
         }
@@ -106,7 +143,11 @@ const ModalUser = ({ userId, setVisible, visible }) => {
             setMessage({
                 value: "Vui lòng nhập tên đăng nhập!",
                 type: "error",
+<<<<<<< HEAD
                 title: "Lỗi"
+=======
+                title: "Lỗi",
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             });
             return retval;
         }
@@ -115,7 +156,11 @@ const ModalUser = ({ userId, setVisible, visible }) => {
             setMessage({
                 value: "Vui lòng nhập email!",
                 type: "error",
+<<<<<<< HEAD
                 title: "Lỗi"
+=======
+                title: "Lỗi",
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             });
             return retval;
         }
@@ -124,6 +169,7 @@ const ModalUser = ({ userId, setVisible, visible }) => {
 
     const buildUserData = () => {
         var data = {};
+<<<<<<< HEAD
         var columns = [
             "full_name",
             "username",
@@ -132,6 +178,9 @@ const ModalUser = ({ userId, setVisible, visible }) => {
             "avatar",
             "address",
         ];
+=======
+        var columns = ["full_name", "username", "email", "phone", "avatar", "address"];
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
         columns.forEach((element) => {
             if (user[element] && user[element] != "") {
                 data[element] = user[element];
@@ -147,6 +196,7 @@ const ModalUser = ({ userId, setVisible, visible }) => {
     };
 
     return (
+<<<<<<< HEAD
         <Modal
             visible={visible}
             title="Sửa thông tin cá nhân"
@@ -244,6 +294,47 @@ const ModalUser = ({ userId, setVisible, visible }) => {
                                     ? moment(user?.birthday, "YYYY-MM-DD")
                                     : ""
                             }
+=======
+        <Modal visible={visible} title='Sửa thông tin cá nhân' onOk={handleSave} onCancel={handleCloseModal} okText='Lưu' cancelText='Hủy'>
+            <Form>
+                <Row gutter={[16, 16]}>
+                    <Form.Item name='name' style={{ width: "45%", marginRight: 10 }}>
+                        <label htmlFor=''>
+                            Họ tên <span style={{ color: "red" }}>*</span>
+                        </label>
+                        <Input className='input-box' placeholder='Tên' value={user?.full_name} onChange={(e) => setUser({ ...user, full_name: e.target.value })} />
+                    </Form.Item>
+                    <Form.Item name='username' style={{ width: "45%" }}>
+                        <label htmlFor=''>
+                            Tên đăng nhập <span style={{ color: "red" }}>*</span>
+                        </label>
+                        <Input className='input-box' type='text' placeholder='Tên đăng nhập' value={user?.username} onChange={(e) => setUser({ ...user, username: e.target.value })} />
+                    </Form.Item>
+                </Row>
+                <Row gutter={[16, 16]}>
+                    <Form.Item name='email' style={{ width: "45%", marginRight: 10 }}>
+                        <label htmlFor=''>
+                            Email <span style={{ color: "red" }}>*</span>
+                        </label>
+                        <Input className='input-box' type='email' placeholder='Email' value={user?.email} onChange={(e) => setUser({ ...user, email: e.target.value })} />
+                    </Form.Item>
+                    <Form.Item name='phone' style={{ width: "45%" }}>
+                        <label htmlFor=''>
+                            Sdt <span style={{ color: "red" }}>*</span>
+                        </label>
+                        <Input className='input-box' placeholder='Số điện thoại' value={user?.phone} onChange={(e) => setUser({ ...user, phone: e.target.value })} />
+                    </Form.Item>
+                </Row>
+                <Row gutter={[16, 16]}>
+                    <Form.Item name='address' style={{ width: "45%", marginRight: 10 }}>
+                        <label htmlFor=''>Address </label>
+                        <Input className='input-box' type='text' placeholder='Địa chỉ' value={user?.address} onChange={(e) => setUser({ ...user, address: e.target.value })} />
+                    </Form.Item>
+                    <Form.Item name='role' style={{ width: "45%" }}>
+                        <label htmlFor=''>Ngày sinh </label>
+                        <DatePicker
+                            value={user.birthday ? moment(user?.birthday, "YYYY-MM-DD") : ""}
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
                             onChange={(date) =>
                                 setUser({
                                     ...user,
@@ -256,6 +347,7 @@ const ModalUser = ({ userId, setVisible, visible }) => {
                     </Form.Item>
                 </Row>
                 <Row>
+<<<<<<< HEAD
                     <Form.Item name="status" style={{ margin: "0 auto" }}>
                         <label htmlFor="">Avatar </label>
                         <UploadImage
@@ -264,6 +356,13 @@ const ModalUser = ({ userId, setVisible, visible }) => {
                             }
                             setImageUrl={setImageUrl}
                         />
+=======
+                    <Form.Item name='status' style={{ margin: "0 auto" }}>
+                        <div style={{ marginBottom: 10 }}>
+                            <label htmlFor=''>Avatar </label>
+                        </div>
+                        <UploadImage imageUrl={imageUrl ? imageUrl : `media/users/blank.png`} setImageUrl={setImageUrl} />
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
                     </Form.Item>
                 </Row>
             </Form>

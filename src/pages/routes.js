@@ -15,6 +15,10 @@ import ManageArea from '../components/Aera/ManageArea';
 import Manage from '../components/SurveillanceDomain/Manage';
 import ManageEdit from '../components/SurveillanceDomain/ManageEdit';
 import Dashboard from './Dashboard';
+<<<<<<< HEAD
+=======
+import Incident from './Incident';
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 import MyList from '../components/Group4/Notification';
 import DetailedNotification from '../components/Group4/DetailedNotification';
 
@@ -51,6 +55,14 @@ import DScard from './Payload/PayloadSDcard';
 import ImageVideo from './ImageVideo';
 import Detail from './ImageVideo/detail';
 import Stream from './ImageVideo/stream';
+<<<<<<< HEAD
+=======
+// incident group 09
+import IncidentGroup9 from "./Incident/Incident";
+import ImageGallery from "./Incident/ImageGallery";
+import VideoGallery from "./Incident/VideoGallery";
+import IncidentEdit from "./Incident/Incident/edit";
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 
 export const routes = [
   {
@@ -77,12 +89,21 @@ export const routes = [
   {
     path: '/flight-hub-monitor-campaigns/create',
     component: CreateMonitorCampaignPage,
+<<<<<<< HEAD
   },
   {
     path: '/flight-hub-monitor-campaigns/:id',
     component: UpdateMonitorCampaignPage,
   },
   {
+=======
+  },
+  {
+    path: '/flight-hub-monitor-campaigns/:id',
+    component: UpdateMonitorCampaignPage,
+  },
+  {
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
     path: '/flight-hub-monitor-campaigns',
     component: ListMonitorCampaignPage,
   },
@@ -275,7 +296,8 @@ export const routes = [
   },
   {
     path: '/handle-problem',
-    component: () => <div>Xử lý sự cố</div>,
+    component: Incident,
+    exact: true,
   },
   {
     path: '/user-management',
@@ -292,6 +314,30 @@ export const routes = [
   {
     path: '/user-meta',
     component: ListUserMeta,
+<<<<<<< HEAD
+=======
+  },
+  {
+    path: "/incidents",
+    component: () => <Incident />,
+    exact: true
+  },
+  {
+    path: "/incidents/:id",
+    component: () => <IncidentEdit />,
+    exact: true
+
+  },
+  {
+    path: "/imageGallery",
+    component: () => <ImageGallery />,
+    exact: true
+  },
+  {
+    path: "/videoGallery",
+    component: () => <VideoGallery />,
+    exact: true
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
   },
 ];
 
@@ -300,7 +346,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
   return (
     // Show the component only when the user is logged in
+<<<<<<< HEAD
     // Otherwise, redirect the user to /signin page
+=======
+    // Otherwise, redirect the user to /sign in page
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
     <Route
       {...rest}
       render={(props) =>
@@ -323,5 +373,9 @@ export default () => (
         />
       );
     })}
+<<<<<<< HEAD
   </Fragment>
+=======
+  </Switch>
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 );

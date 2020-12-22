@@ -12,14 +12,22 @@ import { getAllDepartments } from "../../store/services";
 const { Option } = Select;
 const { Search } = Input;
 
+<<<<<<< HEAD
 const Filter = ({ filter, setFilter, setVisible }) => {
+=======
+const Filter = ({ filter, setFilter, setVisible, setMode }) => {
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
     const user = useSelector((state) => state.user.user);
     const [listDepartments, setListDepartments] = useState([]);
 
     const fetchDepartments = async () => {
         const res = await getAllDepartments();
         setListDepartments(res.result);
+<<<<<<< HEAD
     }
+=======
+    };
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 
     useEffect(() => {
         fetchDepartments();
@@ -35,6 +43,12 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
+<<<<<<< HEAD
+=======
+            <Option key={-1} value="Chưa xác định">
+                Chưa xác định
+            </Option>
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             {statuses.map((status, index) => {
                 return (
                     <Option key={index} value={status.code}>
@@ -55,6 +69,12 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
+<<<<<<< HEAD
+=======
+            <Option key={-1} value="Chưa xác định">
+                Chưa xác định
+            </Option>
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             {roles.map((role, index) => {
                 return (
                     <Option key={index} value={role.code}>
@@ -75,6 +95,12 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
+<<<<<<< HEAD
+=======
+            <Option key={-1} value="Chưa xác định">
+                Chưa xác định
+            </Option>
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             {statusesActivation.map((status, index) => {
                 return (
                     <Option key={index} value={status.code}>
@@ -95,6 +121,12 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             defaultValue="Chưa xác định"
             style={{ width: "75%", marginLeft: 10 }}
         >
+<<<<<<< HEAD
+=======
+            <Option key={-1} value="Chưa xác định">
+                Chưa xác định
+            </Option>
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             {types.map((type, index) => {
                 return (
                     <Option key={index} value={type.code}>
@@ -110,6 +142,7 @@ const Filter = ({ filter, setFilter, setVisible }) => {
             showSearch
             optionFilterProp="children"
             className="select-box"
+<<<<<<< HEAD
             value={filter.department_id ? filter.department_id : "Chưa xác định"}
             onChange={(value) =>
                 setFilter({ ...filter, department_id: value, page_id: 0 })
@@ -124,6 +157,28 @@ const Filter = ({ filter, setFilter, setVisible }) => {
                     </Option>
                 );
             })}
+=======
+            value={
+                filter.department_id ? filter.department_id : "Chưa xác định"
+            }
+            defaultValue="Chưa xác định"
+            onChange={(value) =>
+                setFilter({ ...filter, department_id: value, page_id: 0 })
+            }
+            style={{ width: "75%", marginLeft: 10 }}
+        >   
+            <Option key={-1} value="Chưa xác định">
+                Chưa xác định
+            </Option>
+            {listDepartments &&
+                listDepartments.map((type, index) => {
+                    return (
+                        <Option key={index} value={type.id}>
+                            {type.name}
+                        </Option>
+                    );
+                })}
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
         </Select>
     );
 
@@ -140,6 +195,14 @@ const Filter = ({ filter, setFilter, setVisible }) => {
         });
     };
 
+<<<<<<< HEAD
+=======
+    const handleCreate = () => {
+        setVisible(true);
+        setMode("create");
+    }
+
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
     return (
         <Fragment>
             <Row gutter={[16, 16]}>
@@ -148,7 +211,11 @@ const Filter = ({ filter, setFilter, setVisible }) => {
                     <Button
                         block
                         type="primary"
+<<<<<<< HEAD
                         onClick={() => setVisible(true)}
+=======
+                        onClick={() => handleCreate()}
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
                         style={{ width: 200, float: "right" }}
                     >
                         <UserAddOutlined />
@@ -203,7 +270,10 @@ const Filter = ({ filter, setFilter, setVisible }) => {
                     </label>
                     {renderSelectStatusActivation()}
                 </Col>
+<<<<<<< HEAD
                 
+=======
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             </Row>
             <Row>
                 <Col span={2} style={{ display: "flex", margin: "0 auto" }}>

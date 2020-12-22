@@ -73,10 +73,19 @@ const LoginForm = () => {
             if (res.status == "successful") {
                 dispatch(actions.setUserData(res.result));
                 dispatch(actions.setLogin(true));
+<<<<<<< HEAD
                 localStorage.setItem("token", res.result.api_token);
                 localStorage.setItem("project-type", res.result.type);
                 setHeaders({ token: res.result.api_token });
                 history.push("/home");
+=======
+                dispatch(actions.setProjectType(res.result.type));
+                localStorage.setItem("token", res.result.api_token);
+                localStorage.setItem("project-type", res.result.type);
+                setHeaders({ token: res.result.api_token });
+                setHeaders({ "project-type": res.result.type });
+                history.push("/dashboard");
+>>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             } else {
                 setMessage(res.message);
             }

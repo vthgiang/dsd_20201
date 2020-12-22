@@ -1,0 +1,62 @@
+.actionButtonItem {
+  cursor: pointer;
+}
+.choosenItem {
+  /* background: #1890ff;
+  opacity: 0.4; */
+}
+
+.listSettingSchedule
+  .ant-table-thead
+  > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+  > td,
+.ant-table-tbody
+  > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+  > td,
+.ant-table-thead
+  > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+  > td,
+.ant-table-tbody
+  > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+  > td {
+  /* background: #1890ff; */
+}
+
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td {
+  padding: 8px 8px;
+  overflow-wrap: break-word;
+}
+.listSettingSchedule .ant-table-thead {
+  display: none;
+}
+.button-save {
+  margin-top: 20px;
+}
+.ant-picker.ant-picker-disabled {
+  background: #ffffff;
+  border-color: #d9d9d9;
+  cursor: not-allowed;
+}
+.ant-picker-input > input[disabled] {
+  background: #ffffff;
+}
+.ant-picker-input > input[disabled] {
+  color: black;
+  background-color: #ffffff;
+  cursor: not-allowed;
+  opacity: 1;
+}
+.ant-checkbox-disabled .ant-checkbox-inner {
+  background-color: #ffffff;
+  border-color: #d9d9d9 !important;
+}
+.ant-checkbox-disabled + span {
+  color: #000000;
+  cursor: not-allowed;
+}
+.ant-select-disabled.ant-select-multiple .ant-select-selection-item {
+  color: #000000;
+  border-color: #d9d9d9;
+  cursor: not-allowed;
+}
