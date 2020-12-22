@@ -12,6 +12,7 @@ import { Modal } from "@material-ui/core";
 import StateModal from "../../components/Drone/DroneModals/StateModal";
 import StateDrone from "../../components/Drone/DroneModals/StateDrone";
 import GetBackDrone from "../../components/Drone/DroneModals/GetBackDrone";
+import Checkbox from '@material-ui/core/Checkbox';
 const DataTable = () => {
 
     const Styles = styled.div`
@@ -41,8 +42,9 @@ const DataTable = () => {
     const ITEMS_PER_PAGE = 20;
 
     const headers = [
+        { name: "______", field: "", sortable: false },
         { name: "Id#", field: "idDrone", sortable: true },
-        { name: "Tên", field: "name", sortable: true },
+        { name: "Tên", field: "name", sortable: false },
         { name: "Tình trạng", field: "message", sortable: true},
         { name: "______", field: "", sortable: false }
     ];
@@ -100,13 +102,23 @@ const DataTable = () => {
         );
     }, [drones, currentPage, search, sorting, stateDrone]);
 
-    const handleSacPinClick = (drone) => {
-        console.log(drone);
-    }
+    const [listIdDrone, setListIdDrone] = useState([])
 
-    const handleMaintainClick = (drone) => {
-        console.log(drone);
-    }
+    const handleChangeCheckBox = (event) => {
+        // if (event.target.checked) {
+        //     setListIdDrone([...listIdDrone, event.target.name])
+        //     console.log("array : "+listIdDrone)
+        // } else {
+        //     var array = [...listIdDrone];
+        //     var index = listIdDrone.indexOf(event.target.name);
+        //     if (index !== -1) {
+        //         array.splice(index, 1);
+        //         setListIdDrone(array)
+        //         console.log("array : "+listIdDrone)
+        //       }
+        // }
+        
+      };
     
     return (
 
@@ -115,7 +127,7 @@ const DataTable = () => {
                 <div className="col-md-3">
                     <h4>{numDrone} drone</h4>
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-3">
                     <select value={stateDrone} 
                         onChange={event => setStateDrone(event.target.value)}>
                         <option value="0">Tất cả</option>
@@ -126,14 +138,16 @@ const DataTable = () => {
                         <option value="Hỏng">Hỏng</option>
                     </select>
                 </div>
-                
-                <div className="col-md-5 d-flex flex-row-reverse">
+                <div className="col-md-3">
                 <Search
                         onSearch={value => {
                             setSearch(value);
                             setCurrentPage(1);
                         }}
                     />
+                </div>
+                <div className="col-md-3 d-flex flex-row-reverse">
+                     <ModalAddDataTable />
                 </div>
             </div>
             <div>
@@ -160,8 +174,16 @@ const DataTable = () => {
                                 {dronesData.map(drone => (
                                     <tr>
                                         <th scope="row" key={drone.idDrone}>
-                                            {drone.idDrone}
+                                        <Checkbox
+                                            onChange={handleChangeCheckBox}
+                                            color="primary"
+                                            name={drone.idDrone}
+                                            inputProps={{ 'aria-label': 'secondary checkbox' }}
+                                         />
                                         </th>
+                                        <td>
+                                              {drone.idDrone}
+                                        </td>
                                         <td>{drone.name}</td>
                                         <td> 
                                             <StateDrone state={drone.state} />    

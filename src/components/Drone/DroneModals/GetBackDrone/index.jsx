@@ -20,7 +20,6 @@ export default function GetBackDrone(props){
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    console.log("Drone"+drone);
     const content = {};
     if(drone.state === 0){
         content.variant = 'secondary';
