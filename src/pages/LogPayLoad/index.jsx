@@ -13,17 +13,14 @@ function App () {
   const user = useSelector(state => state.user.user);
 
   const [projectType, setProjectType] = useState(user.type.toLowerCase());
-  const [fromDate, setFromDate] = useState(null);
-  const [toDate, setToDate] = useState(null);
   const [logActivityData, setLogActivityData] = useState(null);
   const [isLoadedLogActivityData, setIsLoadedLogActivity] = useState(false);
 
   useEffect(() => {
     fetchData();
-    onRangePickerChange();
   }, []);
 
-  const fetchData = () => {
+  const fetchData = (fromDate, toDate) => {
     let url = null;
     if (fromDate && toDate) {
       url = 'https://it4883logging.herokuapp.com/api/payload?minDate=' + fromDate +'&maxDate=' + toDate +'&projectType=' + projectType;
@@ -49,7 +46,6 @@ function App () {
           }
         });
         setLogActivityData(logActivityData);
-        console.log(logActivityData);
         setIsLoadedLogActivity(true);
       })
       .catch(function (error) {
@@ -57,17 +53,11 @@ function App () {
       });
   }
 
-  const onRangePickerChange = (dates, dateStrings) => {
+  const onRangePickerChange = async (dates, dateStrings) => {
     setIsLoadedLogActivity(false);
-    setFromDate('');
-    setToDate('');
-
-    if(dates) {
-		setFromDate(dates[0].format('YYYY-MM-DDThh:mm:ss'));
-		setToDate(dates[1].format('YYYY-MM-DDThh:mm:ss'));
-    }
-
-    fetchData();
+    if (dates) 
+    	await fetchData(dates[0].format('YYYY-MM-DDT00:00:00'), dates[1].format('YYYY-MM-DDT23:59:59'));
+    else await fetchData();
   }
 
   return (
