@@ -1,10 +1,6 @@
-import React from "react";
+import React from 'react';
 import { useSelector } from 'react-redux';
-import {
-  Row,
-  Col,
-  Spin,
-} from "antd";
+import { Row, Col, Spin } from 'antd';
 import {
   Bar,
   XAxis,
@@ -16,9 +12,9 @@ import {
   BarChart,
   PieChart,
   Pie,
-  Cell
-} from "recharts";
-import { getIncidentDetailedMetrics } from "../../services/statistics";
+  Cell,
+} from 'recharts';
+import { getIncidentDetailedMetrics } from '../../services/statistics';
 
 const RADIAN = Math.PI / 180;
 
@@ -59,20 +55,34 @@ export default function IncidentDashboard() {
   // const role = users.role;
   const chartData = React.useMemo(() => {
     if (!incidentMetrics?.detailed) return [];
-    const getMonthData = (month) => incidentMetrics.detailed.filter((item) => (new Date(item.createdAt)).getMonth() === month);
+    const getMonthData = (month) =>
+      incidentMetrics.detailed.filter(
+        (item) => new Date(item.createdAt).getMonth() === month,
+      );
     const data = Array.from(Array(12).keys()).map((month) => ({
       name: `Th${month + 1}`,
-      'Bình thường': getMonthData(month).filter((item) => item.level.code === 0).length,
-      'Khẩn cấp': getMonthData(month).filter((item) => item.level.code === 1).length,
+      'Bình thường': getMonthData(month).filter((item) => item.level.code === 0)
+        .length,
+      'Khẩn cấp': getMonthData(month).filter((item) => item.level.code === 1)
+        .length,
     }));
     return data;
   }, [incidentMetrics]);
   const chartData2 = React.useMemo(() => {
     if (!incidentMetrics) return [];
     return [
-      { name: "Đang xử lí", value: incidentMetrics.overall?.created_tasks_total?.doing_total},
-      { name: "Đã xử lí", value: incidentMetrics.overall?.created_tasks_total?.done_total },
-      { name: "Chưa xử lí", value: incidentMetrics.overall?.created_tasks_total?.pending_total },
+      {
+        name: 'Đang xử lí',
+        value: incidentMetrics.overall?.created_tasks_total?.doing_total,
+      },
+      {
+        name: 'Đã xử lí',
+        value: incidentMetrics.overall?.created_tasks_total?.done_total,
+      },
+      {
+        name: 'Chưa xử lí',
+        value: incidentMetrics.overall?.created_tasks_total?.pending_total,
+      },
     ];
   }, [incidentMetrics]);
 
@@ -125,18 +135,42 @@ export default function IncidentDashboard() {
           <Col span={11} offset={1} className="mt-5">
             <h3>Tiến độ xử lý sự cố</h3>
             <h6>Sự cố:</h6>
-            <div>Tổng số sự cố: {incidentMetrics.overall?.created_tasks_total?.created_total}</div>
-            <div>Đang khắc phục: {incidentMetrics.overall?.created_tasks_total?.doing_total}</div>
-            <div>Đã xử lý: {incidentMetrics.overall?.created_tasks_total?.done_total}</div>
-            <div>Đang chờ: {incidentMetrics.overall?.created_tasks_total?.pending_total}</div>
+            <div>
+              Tổng số sự cố:{' '}
+              {incidentMetrics.overall?.created_tasks_total?.created_total}
+            </div>
+            <div>
+              Đang khắc phục:{' '}
+              {incidentMetrics.overall?.created_tasks_total?.doing_total}
+            </div>
+            <div>
+              Đã xử lý:{' '}
+              {incidentMetrics.overall?.created_tasks_total?.done_total}
+            </div>
+            <div>
+              Đang chờ:{' '}
+              {incidentMetrics.overall?.created_tasks_total?.pending_total}
+            </div>
             <br />
             <h6>Nhân viên xử lý:</h6>
-            <div>Số nhân viên đang xử lý: {incidentMetrics.overall?.joined_employees_total?.joined_total}</div>
+            <div>
+              Số nhân viên đang xử lý:{' '}
+              {incidentMetrics.overall?.joined_employees_total?.joined_total}
+            </div>
             <br />
             <h6>Báo cáo:</h6>
-            <div>Đã gửi: {incidentMetrics.overall?.result_reports_total?.sent_total}</div>
-            <div>Đã duyệt: {incidentMetrics.overall?.result_reports_total?.accepted_total}</div>
-            <div>Đã bị từ chối: {incidentMetrics.overall?.result_reports_total?.accepted_total}</div>
+            <div>
+              Đã gửi:{' '}
+              {incidentMetrics.overall?.result_reports_total?.sent_total}
+            </div>
+            <div>
+              Đã duyệt:{' '}
+              {incidentMetrics.overall?.result_reports_total?.accepted_total}
+            </div>
+            <div>
+              Đã bị từ chối:{' '}
+              {incidentMetrics.overall?.result_reports_total?.accepted_total}
+            </div>
           </Col>
           <Col span="22" className="mt-5">
             <h3 className="ml-5 mb-5">Danh sách sự cố theo tháng</h3>
@@ -146,7 +180,10 @@ export default function IncidentDashboard() {
                 height={600}
                 data={chartData}
                 margin={{
-                  top: 20, right: 30, left: 20, bottom: 5,
+                  top: 20,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
                 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
@@ -155,7 +192,7 @@ export default function IncidentDashboard() {
                 <Tooltip />
                 <Legend />
                 <Bar dataKey="Bình thường" stackId="a" fill="#91d5ff" />
-                <Bar dataKey='Khẩn cấp' stackId="a" fill="#ff7875" />
+                <Bar dataKey="Khẩn cấp" stackId="a" fill="#ff7875" />
               </BarChart>
             </ResponsiveContainer>
           </Col>

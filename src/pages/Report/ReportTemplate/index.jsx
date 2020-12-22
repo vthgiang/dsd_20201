@@ -3,11 +3,7 @@ import { Card, Spin } from 'antd';
 import Axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-import { TemplateSectionType } from '../../../constants/report';
-import PredefinedSection from './PredefinedSection';
-import TextSection from './TextSection';
-import TextKeySection from './TextKeySection';
-import TableSection from './TableSection';
+import ReportRenderer from './ReportRenderer';
 
 const processDataFromAPI = (data) => {
   if (data.sections && Array.isArray(data.sections)) {
@@ -67,53 +63,15 @@ export default function ReportTemplate({
     setReport(currentTemplate);
   }, [currentTemplate]);
 
-  const renderSection = (section) => {
-    if (!section?.type) return null;
-    switch (section.type) {
-      case TemplateSectionType.PREDEFINED_SECTION: {
-        return (
-          <PredefinedSection
-            section={section}
-            onSectionChange={onSectionChange}
-          />
-        );
-      }
-      case TemplateSectionType.TEXT: {
-        return (
-          <TextSection
-            section={section}
-          />
-        );
-      }
-      case TemplateSectionType.TEXT_KEY: {
-        return (
-          <TextKeySection
-            section={section}
-            onSectionChange={onSectionChange}
-          />
-        );
-      }
-      case TemplateSectionType.TABLE: {
-        return (
-          <TableSection
-            section={section}
-            onSectionChange={onSectionChange}
-          />
-        );
-      }
-      default: {
-        return null;
-      }
-    }
-  };
-
   return (
     <Card className="u-shadow u-rounded u-reportCard">
       {!currentTemplate && <Spin size="large" />}
       {currentTemplate?.sections && (
-        <div className="u-reportContainer">
-          {currentTemplate.sections.map((section) => renderSection(section))}
-        </div>
+        <ReportRenderer
+          sections={currentTemplate.sections}
+          formatted={false}
+          onSectionChange={onSectionChange}
+        />
       )}
     </Card>
   );
