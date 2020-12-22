@@ -47,6 +47,7 @@ const VideoGalley = (props) => {
 
   return (
     <div>
+      <Title style = {{color: "red"}} level={5}>Màn này chưa xong vì nhóm Video/Hình ảnh chưa làm được phần stream video!!!</Title>
       <Row gutter={32}>
         <Col xs={24} md={18}>
           <Video ref={videoRef} incidents={incidents} />
@@ -62,6 +63,7 @@ const VideoGalley = (props) => {
         <Col xs={24} md={18}>
           <Divider orientation="left" plain>
             <Title level={5}>Danh sách video sự cố</Title>
+            
           </Divider>
           <VideoList incidents={incidents} onChangeTags={onChangeTags} />
         </Col>

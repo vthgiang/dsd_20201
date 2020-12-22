@@ -32,6 +32,7 @@ class BaseService {
         url,
         method,
         data,
+        isExternalServer = false,
         options
     } = {}) => {
         if (["GET", "DELETE"].includes(method)) {
@@ -53,12 +54,15 @@ class BaseService {
             headers: {
                 'Content-Type': 'application/json',
                 'project-type': projectType,
-                'api-token': token
+                'api-token': token,
+                'token': token,
             },
             ...options
         };
-        const BASE_URL = "https://it4483.cf";
-
+        let BASE_URL = "https://it4483.cf";
+        if(isExternalServer){
+            BASE_URL = "";
+        }
         const result = await fetch(BASE_URL + url, requestOptions)
         return await this.handleResponse(result)
     }
