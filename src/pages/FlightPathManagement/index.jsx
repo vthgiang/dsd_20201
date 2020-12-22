@@ -6,6 +6,7 @@ import AddFlightPathModel from '../../components/Drone/DroneModals/AddFlightPath
 import Pagination from '../../components/Drone/Pagination';
 import Search from '../../components/Drone/Search';
 import axios from 'axios';
+import {getToken, getProjectType, getRole} from '../../components/Drone/Common/info';
 
 function FlightPathManagement(props) {
 
@@ -71,53 +72,86 @@ function FlightPathManagement(props) {
             setPagination({...pagination, totalPage: totalPage, page: 1});
         }
     }
-    // useEffect(()=>{
-    //     // load data
-    //     setLoading(true);
-    //     axios.get('http://skyrone.cf:6789/flightPath/getAllPath')
-    //         .then(response => {
-    //             console.log("flight path list:", response);
-    //             allFlightPath.current = response.data;
-    //             // lấy dữ liệu cho page hiện tại
-    //             setFlightPaths(allFlightPath.current.slice(0, pagination.perPage));
-    //             // tính lại tổng page
-    //             const totalPage = Math.ceil(allFlightPath.current.length/pagination.perPage);
-    //             if(totalPage != pagination.totalPage) setPagination({...pagination, totalPage: totalPage});
-    //             // console.log(totalPage)
-    //             console.log('all flight path list',allFlightPath);
-    //             setLoading(false);
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //             setLoading(false);
-    //         });
-    //     //set cac thu
-    // }, [reload]);
 
     useEffect(()=> {
+        // console.log(getRole());
+        // console.log(getToken());
+        // console.log(getProjectType());
         const loadFlightPath = async () => {
+            const token = getToken();
+            const projectType = getProjectType();
+            const headers = {'token': token,'projecttype': projectType};
             let { data }= await axios.get('http://skyrone.cf:6789/flightPath/getAllPath');
+            const remove = [];
             data = await Promise.all(data.map(item => {
                 return new Promise( async(resolve, reject) => {
                     try{	
                         if(!item.idSupervisedArea) resolve({...item, monitoredZoneName: 'EMPTY'});
-                        console.log(item.idSupervisedArea)
-                        let result = await axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone/zoneinfo/${item.idSupervisedArea}`)
-                        // console.log('result load monitoredZone: ', result);
-                        let newItem = {...item, monitoredZoneName: result.data.content.zone.name, monitoredAreaId: result.data.content.zone.area}
+                        // console.log(item.idSupervisedArea)
+                        let result = await axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone/zoneinfo/${item.idSupervisedArea}`,{
+                            headers: headers
+                        })
+                        // if(!result.success) remove.push(item); // ko thuộc nghiệp vụ hiện tại
+                        console.log('result load monitoredZone: ', result);
+                        let newItem = {...item, 
+                            monitoredZoneName: result.data.content.zone.name, 
+                            monitoredAreaId: result.data.content.zone.area,
+                            zone: {
+                                id: result.data.content.zone._id,
+                                minHeight: result.data.content.zone.minHeight, 
+                                maxHeight: result.data.content.zone.maxHeight,
+                                name: result.data.content.zone.name,
+                                startPoint: {
+                                    lat: result.data.content.zone.startPoint.latitude,
+                                    lng: result.data.content.zone.startPoint.longitude
+                                },
+                                endPoint: {
+                                    lat: result.data.content.zone.endPoint.latitude,
+                                    lng: result.data.content.zone.endPoint.longitude
+                                }
+                            }
+                        }
                         resolve(newItem);
                     }catch(err){
+                        remove.push(item);
                         console.log(err);
                         resolve({...item, monitoredZoneName: 'EMPTY'});	
                     }
                 })
             }))
+            console.log('remove:', remove);
+            // xoá đường bay ko phải nghiệp vụ hiện tại
+            data = data.filter(item => {
+                for(let x of remove){
+                    if(x.id === item.id)
+                        return false;
+                }
+                return true;
+            });
+
             data = await Promise.all(data.map(item => {
                 return new Promise( async (resolve, reject) => {
                     try{	
                         if(!item.monitoredAreaId) resolve({...item, monitoredAreaName: 'EMPTY'});
-                        let result = await axios.get(`https://monitoredzoneserver.herokuapp.com/area/areainfo/${item.monitoredAreaId}`);
-                        let newItem = {...item, monitoredAreaName: result.data.content.area.name};
+                        let result = await axios.get(`https://monitoredzoneserver.herokuapp.com/area/areainfo/${item.monitoredAreaId}`,{
+                            headers: headers
+                        });
+                        console.log('response load area:', result)
+                        let newItem = {...item, 
+                            monitoredAreaName: result.data.content.area.name,
+                            area: {
+                                name: result.data.content.area.name,
+                                id: result.data.content.area._id,
+                                startPoint: {
+                                    lat: result.data.content.area.startPoint.latitude,
+                                    lng: result.data.content.area.startPoint.longitude
+                                },
+                                endPoint: {
+                                    lat: result.data.content.area.endPoint.latitude,
+                                    lng: result.data.content.area.endPoint.longitude
+                                }
+                            }
+                        };
                         resolve(newItem);
                     }catch(err){
                         console.log(err);
@@ -125,6 +159,7 @@ function FlightPathManagement(props) {
                     }
                 })
             }))
+            console.log('all Flight Path: ', data)
             allFlightPath.current = data;
             flightPathFilter.current = allFlightPath.current;
             // lấy dữ liệu cho page hiện tại
@@ -239,6 +274,7 @@ function FlightPathManagement(props) {
                         viewFlightPath={viewFlightPath}
                         handleDeleteFlightPath={handleDeleteFlightPath}
                         baseIndex={(pagination.page-1)*pagination.perPage}
+                        pageReload={pageReload}
                     />}
                 </Col>
                 <Col md={6}>

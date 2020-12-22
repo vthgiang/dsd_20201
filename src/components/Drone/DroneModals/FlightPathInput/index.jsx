@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import Select from 'react-select';
 import axios from 'axios';
+import { getToken, getProjectType } from '../../Common/info';
 
 FlightPathInput.propTypes = {
     
@@ -49,8 +50,11 @@ function FlightPathInput(props) {
         // load mien giam sat
         console.log("load zone");
         if(!selectedArea) return;
+        const token = getToken();
+        const projectType = getProjectType();
+        const headers = {'token': token,'projecttype': projectType};
         setZoneLoading(true);
-        axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone/area/${selectedArea._id}`)
+        axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone/area/${selectedArea._id}`, {headers: headers})
             .then(response => {
                 const tmp = response.data.content.zone.map(zone => ({
                     _id: zone._id,

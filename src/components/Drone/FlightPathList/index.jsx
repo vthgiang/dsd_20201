@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'react-bootstrap';
 import "./FlightPathList.css";
+import EditFlightPathModal from '../DroneModals/EditFlightPathModal';
 
 FlightPathList.propTypes = {
     
 };
 
-function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath, baseIndex}) {
+function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath, baseIndex, pageReload}) {
 
     return (
         <Table striped bordered hover size="sm">
@@ -31,7 +32,8 @@ function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath, ba
                     </button>{"/"}
                     <button className="btn-delete" onClick={()=>handleDeleteFlightPath(item)}>
                         <i class="fas fa-trash-alt"></i>
-                    </button>
+                    </button>{"/"}
+                    <EditFlightPathModal flightPath={item} pageReload={pageReload}/>
                     </td>
                 </tr>))}
             </tbody>
