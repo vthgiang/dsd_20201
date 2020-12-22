@@ -162,22 +162,9 @@ export default class RegionActivity extends React.Component {
         dataIndex: 'action',
         key: 'action',
         render: (text, row) => {
-          const content = (
-            <div>
-              <h4>Chọn hành động trên miền hoạt động {row.name}: </h4>
-              <Space direction="vertical">
-                <ModalShowApp regionId={row.entityId} regionName={row.name} actionType='log_drone' />
-                <ModalShowApp regionId={row.entityId} regionName={row.name} actionType='log_user' />
-                <ModalShowApp regionId={row.entityId} regionName={row.name} actionType='log_problem' />
-                <ModalShowApp regionId={row.entityId} regionName={row.name} actionType='log_obj_monitor' />
-                <ModalShowApp regionId={row.entityId} regionName={row.name} actionType='log_warn' />
-                <ModalShowApp regionId={row.entityId} regionName={row.name} actionType='log_problem_resolve' />
-              </Space>
-              
-            </div>
-          );
+          
           return(<div>
-            <PopoverShowApp content={content} regionName={row.name} />
+            <PopoverShowApp regionName={row.name} regionId={row.entityId} />
           </div>
             
           )
@@ -210,7 +197,7 @@ const ModalShowApp = (props) => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button type="primary" onClick= {() =>{showModal(); props.hidePopover()}}>
         {props.actionType === 'log_drone' && 'Xem các drone'}
         {props.actionType === 'log_user' && 'Xem các user'}
         {props.actionType === 'log_problem' && 'Xem các sự cố xảy ra'}
@@ -248,11 +235,24 @@ class PopoverShowApp extends React.Component {
   };
 
   render() {
-    
+    const content = (
+      <div>
+        <h4>Chọn hành động trên miền hoạt động {this.props.name}: </h4>
+        <Space direction="vertical">
+          <ModalShowApp regionId={this.props.regionId} regionName={this.props.regionName} hidePopover={this.hide} actionType='log_drone' />
+          <ModalShowApp regionId={this.props.regionId} regionName={this.props.regionName} hidePopover={this.hide} actionType='log_user' />
+          <ModalShowApp regionId={this.props.regionId} regionName={this.props.regionName} hidePopover={this.hide} actionType='log_problem' />
+          <ModalShowApp regionId={this.props.regionId} regionName={this.props.regionName} hidePopover={this.hide} actionType='log_obj_monitor' />
+          <ModalShowApp regionId={this.props.regionId} regionName={this.props.regionName} hidePopover={this.hide} actionType='log_warn' />
+          <ModalShowApp regionId={this.props.regionId} regionName={this.props.regionName} hidePopover={this.hide} actionType='log_problem_resolve' />
+        </Space>
+        
+      </div>
+    )
     return (
       <Popover
         style={{ width: 500 }}
-        content={ <div>{this.props.content} <a onClick={this.hide}>Close</a></div>}
+        content={ <div>{content} <a onClick={this.hide}>Close</a></div>}
         title={"Miền hoạt động " + this.props.regionName}
         trigger="hover"
         visible={this.state.visible}

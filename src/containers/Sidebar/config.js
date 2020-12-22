@@ -159,12 +159,6 @@ export const sidebarMenu = [
     route: '/activity-log',
     subMenu: [
       {
-        key: 'LogDashboardPage',
-        heading: 'Dashboard lịch sử hoạt động',
-        icon: 'fas fa-history',
-        route: '/log-dash-board-page',
-      },
-      {
         key: 'LogDrone',
         heading: 'Drone',
         icon: 'fas fa-drone-alt',
