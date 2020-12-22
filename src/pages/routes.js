@@ -64,7 +64,7 @@ import FlightPathDrone from './FLightPathDrone';
 import FlightPoint from './FlightPoint';
 import TableDroneState from './TableDroneState';
 import MapTest from './MapTest';
-import FlightPathManagement from './FlightPathManagement';
+import FlightPath from './FlightPath';
 import FlightSchedule from './FlightSchedule';
 
 export const routes = [
@@ -91,7 +91,7 @@ export const routes = [
   },
   {
     path: '/flight-path',
-    component: FlightPathManagement,
+    component: FlightPath,
   },
   // {
   //   path: '/flight-schedule',

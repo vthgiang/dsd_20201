@@ -8,7 +8,7 @@ import Search from '../../components/Drone/Search';
 import axios from 'axios';
 import {getToken, getProjectType, getRole} from '../../components/Drone/Common/info';
 
-function FlightPathManagement(props) {
+function FlightPath(props) {
 
     const [flightPathView, setFlightPathView] = useState(null);
     // const [flightPaths, setFlightPaths] = useState(flightPathsData.slice(0, 10));
@@ -91,7 +91,6 @@ function FlightPathManagement(props) {
                         let result = await axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone/zoneinfo/${item.idSupervisedArea}`,{
                             headers: headers
                         })
-                        // if(!result.success) remove.push(item); // ko thuộc nghiệp vụ hiện tại
                         console.log('result load monitoredZone: ', result);
                         let newItem = {...item, 
                             monitoredZoneName: result.data.content.zone.name, 
@@ -285,7 +284,7 @@ function FlightPathManagement(props) {
     );
 }
 
-export default FlightPathManagement;
+export default FlightPath;
 
 function removeVietnameseTones(str) {
     str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
