@@ -25,6 +25,8 @@ import MonitorZoneDashboard from "./MonitorZoneDashboard";
 import LogDashboard from "./LogDashboard";
 import { useSelector } from "react-redux";
 import FlightHubProjectTypeDashboard from "./flightHub/FlightHubProjectTypeDashboard";
+import ReportDashboard from "./report/ReportDashboard";
+import ReportDashboardProjectType from "./report/ReportDashboardProjectType"
 
 const { TabPane } = Tabs;
 
@@ -200,7 +202,7 @@ function Dashboard() {
                             </TabPane>
                             {role === 'SUPER_ADMIN' || role === 'ADMIN' || role === 'MANAGER' ? (
                                 <TabPane key="Report" tab="Báo cáo">
-                                    <div />
+                                    {role === 'SUPER_ADMIN' ? <ReportDashboard /> : <ReportDashboardProjectType />}
                                 </TabPane>
                             ) : null}
                             {role === 'SUPER_ADMIN' ? (

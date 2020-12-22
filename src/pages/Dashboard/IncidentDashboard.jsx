@@ -19,7 +19,7 @@ import { useSelector } from "react-redux";
 
 export default function IncidentDashboard() {
     const user = useSelector(state => state.user);
-    const { api_token, type } = user;
+    const { api_token, type } = user.user;
     const [incidentMetrics, setIncidentMetrics] = React.useState(null);
     const chartData = React.useMemo(() => {
         if (!incidentMetrics?.detailed) return [];
