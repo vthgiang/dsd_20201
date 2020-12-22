@@ -31,9 +31,9 @@ const CreateMonitorCampaign = () => {
         ntfType: 4,
         refType: 9,
       };
-      const createdNotification = await notificationApi.createNotification(
-        notificationData,
-      );
+      // const createdNotification = await notificationApi.createNotification(
+      //   notificationData,
+      // );
 
       notification.success({
         message: 'Tạo thành công!',
