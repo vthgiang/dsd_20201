@@ -118,20 +118,11 @@ class ManageEdit extends React.PureComponent {
         },
 
         {
-          title: 'Thời gian bắt đầu',
-          render: val => <p>{val.timeStart}</p>
+          title: 'Chiều cao trung bình',
+          render: val => <p>{val.averageHeight}</p>
         },
         {
-          title: 'Thời gian kết thúc',
-          render: val => <p>{val.timeEnd}</p>
-        },
-        {
-          title: 'Chiều cao',
-          key: 'heightFlight',
-          dataIndex: 'heightFlight',
-        },
-        {
-          title: '',
+          title: 'Chi tiết',
           render: val => (
             <Button type="primary" style={{ marginRight: 10 }}
               onClick={() => this.showDetail(val)}>
@@ -380,9 +371,9 @@ class ManageEdit extends React.PureComponent {
                   <td>
                     <Select defaultValue={this.state.newdomain.priority + ''} name="priority" placeholder="Độ ưu tiên" style={{ width: 200 }}
                       onChange={this.toggleActivePriority("Active!")}>
-                      <Option value="1">Cao </Option>
-                      <Option value="2">Thấp</Option>
-                      <Option value="3">Trung bình</Option>
+                      <Option value="0">Cao </Option>
+                      <Option value="1">Thấp</Option>
+                      <Option value="2">Trung bình</Option>
                     </Select>
                   </td>
                 </tr>

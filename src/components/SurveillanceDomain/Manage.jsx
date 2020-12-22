@@ -75,7 +75,18 @@ class Manage extends React.Component {
                         this.editDomain(val._id)
                     }}>{val.code}</a>
                 },
-                
+                {
+                    title: 'Độ ưu tiên',
+                    render: val => {
+                        if(val.priority == 0) {
+                            return 'Cao';
+                        } else if(val.priority == 1) {
+                            return 'Thấp';
+                        } else {
+                            return 'Trung bình';
+                        }
+                    }
+                },
                 {
                     title: 'Tên miền',
                     render: val => <p>{val.name}</p>
@@ -138,10 +149,17 @@ class Manage extends React.Component {
             chooseArea: [],
             zoneByArea: [],
             projectType: [],
+            search: {
+                name: '',
+                priority: '',
+                area: '',
+            },
+            listDomainTmp: [],
         };
         this.onChange = this.onChange.bind(this);
         this.editDomain = this.editDomain.bind(this);
         this._handleChange = this._handleChange.bind(this);
+        this.searchName = this.searchName.bind(this);
     }
     
     delayedShowMarker = () => {
@@ -231,12 +249,21 @@ class Manage extends React.Component {
     }
     
     getAllZone() {
-        axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone?pageSize=1000`)
+        let token = localStorage.getItem('token');
+        let projecttype = localStorage.getItem('project-type');
+        axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone?pageSize=1000`,{
+                headers: {
+                    token: token,
+                    projecttype: projecttype
+                }
+            })
             .then(res => {
                 let loading = false;
                 this.setState({loading});
                 const listDomain = res.data.content.zone;
+                const listDomainTmp = res.data.content.zone;
                 this.setState({listDomain});
+                this.setState({listDomainTmp});
             })
             .catch(error => console.log(error));
         
@@ -353,6 +380,58 @@ class Manage extends React.Component {
         });
     }
     
+    searchPriority = priority => async (value) => {
+        this.setState(prevState => {
+            let search = Object.assign({}, prevState.search);
+            search.priority = value;
+            return {search};
+        });
+        let domains;
+        if(value && value.length > 0) {
+            domains = this.state.listDomain.filter(domain => {
+                return domain.priority == value;
+            });
+            
+        } else {
+            domains = this.state.listDomain;
+        }
+        this.setState(prevState => {
+            let listDomainTmp;
+            listDomainTmp = domains;
+            return {listDomainTmp};
+        });
+    }
+    
+    searchArea = area => async (value) => {
+        this.setState(prevState => {
+            let search = Object.assign({}, prevState.search);
+            search.area = value;
+            return {search};
+        });
+        let domains;
+        if(value && value.length > 0) {
+            domains = this.state.listDomain.filter(domain => {
+                return domain.area == value;
+            });
+        } else {
+            domains = this.state.listDomain;
+        }
+        this.setState(prevState => {
+            let listDomainTmp;
+            listDomainTmp = domains;
+            return {listDomainTmp};
+        });
+    }
+    
+    searchName(e) {
+        let value = e.target.value;
+        this.setState(prevState => {
+            let search = Object.assign({}, prevState.search);
+            search.content = value;
+            return {search};
+        })
+    }
+    
     toggleActive = name => async (value) => {
         let chooseArea = [];
         this.setState(prevState => {
@@ -399,11 +478,6 @@ class Manage extends React.Component {
                     let incident = projectType.find(obj => obj.code === incidentType);
                     this.setState({projectType});
                     this.setState({incident});
-                    // this.setState(prevState => {
-                    //     let create = Object.assign({}, prevState.create);
-                    //     create.data["incidentType"] = incident.id;
-                    //     return {create};
-                    // });
                 })
                 .catch(error => console.log(error));
         });
@@ -415,18 +489,20 @@ class Manage extends React.Component {
                 <div className="filter">
                     <Row>
                         <Col span={4}>
-                            <Input style={{width: 150}} placeholder="Search" prefix={<SearchOutlined/>}/>
+                            <Input name='content' onChange={this.searchName} style={{width: 150}} placeholder="Search" prefix={<SearchOutlined/>}/>
                         </Col>
                         <Col span={4}>
-                            <Select placeholder="Độ ưu tiên" style={{width: 150}}>
-                                <Option value="1">Cao </Option>
-                                <Option value="2">Thấp</Option>
-                                <Option value="3">Trung bình</Option>
+                            <Select name='priority' placeholder="Độ ưu tiên" style={{width: 150}} onChange={this.searchPriority("Active!")}>
+                                <Option>Tất cả</Option>
+                                <Option value="0">Cao </Option>
+                                <Option value="1">Thấp</Option>
+                                <Option value="2">Trung bình</Option>
                             </Select>
                         </Col>
                         <Col span={5}>
-                            <Select name="_id" placeholder="Khu vực" style={{width: 200}}
-                                    onChange={this.toggleActive("Active!")}>
+                            <Select name="area" placeholder="Khu vực" style={{width: 200}}
+                                    onChange={this.searchArea("Active!")}>
+                                <Option>Tất cả</Option>
                                 {this.state.listArea.map(area => {
                                     return <Option value={area._id}>{area.name}</Option>
                                 })}
@@ -486,9 +562,9 @@ class Manage extends React.Component {
                                         <td>
                                             <Select name="priority" placeholder="Độ ưu tiên" style={{width: 200}}
                                                     onChange={this.toggleActivePriority("Active!")}>
-                                                <Option value="1">Cao </Option>
-                                                <Option value="2">Thấp</Option>
-                                                <Option value="3">Trung bình</Option>
+                                                <Option value="0">Cao </Option>
+                                                <Option value="1">Thấp</Option>
+                                                <Option value="2">Trung bình</Option>
                                             </Select>
                                         </td>
                                     </tr>
@@ -538,7 +614,7 @@ class Manage extends React.Component {
                                 </Space>
                             </div>
                         ) : (
-                            <Table columns={this.state.columns} dataSource={this.state.listDomain} rowKey="key"/>
+                            <Table columns={this.state.columns} dataSource={this.state.listDomainTmp} rowKey="key"/>
                         )
                     }
                 </div>
