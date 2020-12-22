@@ -49,14 +49,14 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#ff8279'];
 
 export default function PayloadDashboard() {
   const [payloadMetrics, setPayloadMetrics] = React.useState(null);
+  const [feeMetrics, setFeeMetrics] = React.useState(null);
   const [year, setYear] = React.useState(moment());
   console.log(year);
 
   const fetchYear = async () => {
-    setPayloadMetrics(null);
-    const payload = await getPayloadDetailedMetrics();
-    console.log({ payload });
-    setPayloadMetrics(payload);
+    setFeeMetrics(null);
+    const payloads = await getPayloadDetailedMetrics();
+    setFeeMetrics(payloads);
   };
 
   const chartData = React.useMemo(() => {
@@ -96,17 +96,16 @@ export default function PayloadDashboard() {
   ];
   const lineChartData = React.useMemo(() => {
     const sellectYear = year.format('YYYY');
-    console.log(sellectYear);
 
     const getMonthData = (month) => ({
       fixing:
-        payloadMetrics?.fee?.fixing?.filter(
+        feeMetrics?.fee?.fixing?.filter(
           (item) =>
             new Date(item.startedAt).getMonth() == month &&
             new Date(item.startedAt).getFullYear() == sellectYear,
         ).length || 0,
       working:
-        payloadMetrics?.fee?.working?.filter(
+        feeMetrics?.fee?.working?.filter(
           (item) =>
             new Date(item.startedAt).getMonth() === month &&
             new Date(item.startedAt).getFullYear() == sellectYear,
@@ -117,15 +116,15 @@ export default function PayloadDashboard() {
       ...getMonthData(month),
     }));
     return data;
-  }, [payloadMetrics]);
+  }, [feeMetrics]);
 
   const yearFormat = 'YYYY';
 
   React.useEffect(() => {
     const fetchAll = async () => {
       const payload = await getPayloadDetailedMetrics();
-      console.log({ payload });
       setPayloadMetrics(payload);
+      setFeeMetrics(payload);
     };
 
     fetchAll();
@@ -191,7 +190,9 @@ export default function PayloadDashboard() {
             <Button type="primary" className="mt-3 ml-5" onClick={fetchYear}>
               Duyệt
             </Button>
-            <Button href="http://" className={"ml-3 btn-success"}>Chi tiết</Button>
+            <Button href="http://" className={'ml-3 btn-success'}>
+              Chi tiết
+            </Button>
             <LineChart
               className="mt-5"
               width={1000}
