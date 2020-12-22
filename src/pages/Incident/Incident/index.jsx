@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import to from 'await-to-js';
 import { message, Table, Tag } from 'antd';
 import useBaseHook from '../../../hooks/BaseHooks';
@@ -6,86 +6,6 @@ import incidentService from '../../../services/group09/incidentService';
 import incidentLevelService from '../../../services/group09/incidentLevelService';
 import incidentStatusService from '../../../services/group09/incidentStatusService';
 import moment from 'moment';
-
-let levels = [];
-
-const data = [
-  {
-    title: 'Trộm thanh giằng cột tại lưới điện cao thế THANH HÓA',
-    description:
-      ' Đội đường dây chi nhánh phát hiện kẻ gian tháo trộm thanh giằng cột với số lượng lớn (56 thanh)',
-    reporter: 'Nguyễn Dung',
-    assignee: 'Việt Anh',
-    status: 'open',
-    level: 'normal',
-    startAt: '',
-    dueDate: '',
-    loggedTime: 0,
-    createdBy: 'Hệ thống',
-  },
-  {
-    title: 'Thả diều gây sự cố lưới điện',
-    description:
-      'Điển hình, lúc 14h55’ ngày 15/4, tại khoảng cột 435/37, đường dây 471E58 của thôn Đắc Tà Vầng, xã Đắc Tôi, huyện Nam Giang, diều của người dân quanh khu vực thả lên bị đứt dây và vướng vào lưới điện, gây sự cố đường dây cấp điện một phần khu vực huyện.',
-    reporter: 'Nguyễn Dung',
-    assignee: 'Việt Anh',
-    status: 'inProcess',
-    level: 'urgency',
-    startAt: '',
-    dueDate: '',
-    loggedTime: '4h',
-    createdBy: 'Luân Phùng',
-  },
-  {
-    title: 'Cây đổ vào chạm biến áp trên quốc lộ 32 km16',
-    description:
-      'Lúc 14h55’ ngày 15/4, tại khoảng cột 435/37, đường dây 471E58 của thôn Đắc Tà Vầng, xã Đắc Tôi, huyện Nam Giang, diều của người dân quanh khu vực thả lên bị đứt dây và vướng vào lưới điện, gây sự cố đường dây cấp điện một phần khu vực huyện.',
-    reporter: 'Nguyễn Dung',
-    assignee: 'Việt Anh',
-    status: 'inProcess',
-    level: 'urgency',
-    startAt: '',
-    dueDate: '',
-    loggedTime: '4h',
-    createdBy: 'Dung Nguyễn',
-  },
-  {
-    title: 'Trộm thanh giằng cột tại lưới điện cao thế THANH HÓA',
-    description:
-      ' Đội đường dây chi nhánh phát hiện kẻ gian tháo trộm thanh giằng cột với số lượng lớn (56 thanh)',
-    reporter: 'Nguyễn Dung',
-    assignee: 'Việt Anh',
-    status: 'open',
-    level: 'normal',
-    startAt: '',
-    dueDate: '',
-    loggedTime: 0,
-  },
-  {
-    title: 'Thả diều gây sự cố lưới điện',
-    description:
-      'Điển hình, lúc 14h55’ ngày 15/4, tại khoảng cột 435/37, đường dây 471E58 của thôn Đắc Tà Vầng, xã Đắc Tôi, huyện Nam Giang, diều của người dân quanh khu vực thả lên bị đứt dây và vướng vào lưới điện, gây sự cố đường dây cấp điện một phần khu vực huyện.',
-    reporter: 'Nguyễn Dung',
-    assignee: 'Việt Anh',
-    status: 'inProcess',
-    level: 'urgency',
-    startAt: '',
-    dueDate: '',
-    loggedTime: '4h',
-  },
-  {
-    title: 'Cây đổ vào Trạm điện cao thế Ngọc Liên',
-    description:
-      'Điển hình, lúc 14h55’ ngày 15/4, tại khoảng cột 435/37, đường dây 471E58 của thôn Đắc Tà Vầng, xã Đắc Tôi, huyện Nam Giang, diều của người dân quanh khu vực thả lên bị đứt dây và vướng vào lưới điện, gây sự cố đường dây cấp điện một phần khu vực huyện.',
-    reporter: 'Nguyễn Dung',
-    assignee: 'Việt Anh',
-    status: 'inProcess',
-    level: 'urgency',
-    startAt: '',
-    dueDate: '',
-    loggedTime: '4h',
-  },
-];
 
 let status = [];
 const Incident = () => {
