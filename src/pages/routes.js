@@ -61,10 +61,10 @@ import MonitoredObject from './MonitoredObject/MonitoredObject/component';
 import MonitoredObjectCreate from './MonitoredObject/MonitoredObject/component/monitoredObjectCreate';
 import MonitoredObjectView from './MonitoredObject/MonitoredObject/component/MonitoredObjectView';
 // incident group 09
-import IncidentGroup9 from "./Incident/Incident";
-import ImageGallery from "./Incident/ImageGallery";
-import VideoGallery from "./Incident/VideoGallery";
-import IncidentEdit from "./Incident/Incident/edit";
+import IncidentGroup9 from './Incident/Incident';
+import ImageGallery from './Incident/ImageGallery';
+import VideoGallery from './Incident/VideoGallery';
+import IncidentEdit from './Incident/Incident/edit';
 
 // dsd_01 drone
 import TableDrone from './TableDrone';
@@ -74,6 +74,7 @@ import TableDroneState from './TableDroneState';
 import MapTest from './MapTest';
 import FlightPathManagement from './FlightPathManagement';
 import FlightSchedule from './FlightSchedule';
+import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
 
 export const routes = [
   {
@@ -115,13 +116,18 @@ export const routes = [
     component: CreateMonitorCampaignPage,
   },
   {
-    path: '/flight-hub-monitor-campaigns/:id',
+    path: '/flight-hub-monitor-campaigns/update/:id',
     component: UpdateMonitorCampaignPage,
+  },
+  {
+    path: '/flight-hub-monitor-campaigns/:id',
+    component: DetailMonitorCampaignPage,
   },
   {
     path: '/flight-hub-monitor-campaigns',
     component: ListMonitorCampaignPage,
   },
+
   {
     path: '/flight-hub-other-params',
     component: ListLabelsPage,
@@ -223,25 +229,25 @@ export const routes = [
   {
     path: '/monitored-object-management/:option/:id',
     component: MonitoredObjectView,
-    exact: true
+    exact: true,
   },
   // create monitored Object
   {
     path: '/monitored-object-management/:option',
     component: MonitoredObjectCreate,
-    exact: true
+    exact: true,
   },
   //view List Monitored Object
   {
     path: '/monitored-object-management',
     component: MonitoredObject,
-    exact: true
+    exact: true,
   },
   //View Category Monitored
   {
     path: '/category-monitored-object-management',
     component: CategoryMonitored,
-    exact: true
+    exact: true,
   },
   {
     path: '/statistic',
@@ -355,24 +361,23 @@ export const routes = [
     component: ListUserMeta,
   },
   {
-    path: "/incidents",
+    path: '/incidents',
     component: () => <IncidentGroup9 />,
-    exact: true
+    exact: true,
   },
-  
-  {
-    path: "/incidents/:id",
-    component: () => <IncidentEdit />,
-    exact: true
 
+  {
+    path: '/incidents/:id',
+    component: () => <IncidentEdit />,
+    exact: true,
   },
   {
-    path: "/imageGallery",
+    path: '/imageGallery',
     component: () => <ImageGallery />,
-    exact: true
+    exact: true,
   },
   {
-    path: "/videoGallery",
+    path: '/videoGallery',
     component: () => <VideoGallery />,
   },
   {
