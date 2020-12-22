@@ -1,12 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Spin } from 'antd';
 import Axios from 'axios';
 
-import { TemplateSectionType } from '../../../constants/report';
-import PredefinedSection from './PredefinedSection';
-import TextSection from './TextSection';
-import TextKeySection from './TextKeySection';
-import TableSection from './TableSection';
+import ReportRenderer from './ReportRenderer';
 
 export default function ReportViewer({
   reportId,
@@ -31,46 +27,6 @@ export default function ReportViewer({
       });
   }, [reportId]);
 
-  const renderSection = (section) => {
-    if (!section?.type) return null;
-    switch (section.type) {
-      case TemplateSectionType.PREDEFINED_SECTION: {
-        return (
-          <PredefinedSection
-            section={section}
-            formatted={true}
-          />
-        );
-      }
-      case TemplateSectionType.TEXT: {
-        return (
-          <TextSection
-            section={section}
-          />
-        );
-      }
-      case TemplateSectionType.TEXT_KEY: {
-        return (
-          <TextKeySection
-            section={section}
-            formatted={true}
-          />
-        );
-      }
-      case TemplateSectionType.TABLE: {
-        return (
-          <TableSection
-            section={section}
-            formatted={true}
-          />
-        );
-      }
-      default: {
-        return null;
-      }
-    }
-  };
-
   return (
     <Card className="u-shadow u-rounded u-reportCard">
       {!currentReport && <Spin size="large" />}
@@ -78,9 +34,10 @@ export default function ReportViewer({
         <h3>Bạn đang xem báo cáo: <span>{`${currentReport.name}`}</span></h3>
       )}
       {currentReport?.sections && (
-        <div className="u-reportContainer">
-          {currentReport.sections.map((section) => renderSection(section))}
-        </div>
+        <ReportRenderer
+          sections={currentReport.sections}
+          formatted={true}
+        />
       )}
     </Card>
   );
