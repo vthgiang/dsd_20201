@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
-import { Row, Col, Typography, Divider } from "antd";
-import Video from "../../../components/Group09/Video";
-import Form from "../../../components/Group09/Video/Form";
-import VideoList from "../../../components/Group09/Video/VideoList";
+import React, { useState, useRef } from 'react';
+import { Row, Col, Typography, Divider } from 'antd';
+import Video from '../../../components/Group09/Video';
+import Form from '../../../components/Group09/Video/Form';
+import VideoList from '../../../components/Group09/Video/VideoList';
 const { Title } = Typography;
 let incidents = [];
 
@@ -17,7 +17,7 @@ const VideoGalley = (props) => {
     incidents.push({
       time: currentTime.toFixed(2),
       isFinish: false,
-      text: "",
+      text: '',
       tags: [],
       duration: 1,
       overlayText: "I'm new",
@@ -43,10 +43,11 @@ const VideoGalley = (props) => {
     incidents = _incidents;
     setMakersByIncidents(incidents);
     setReload(!reload);
-  }
+  };
 
   return (
     <div>
+      <Title style = {{color: "red"}} level={5}>Màn này chưa xong vì nhóm Video/Hình ảnh chưa làm được phần stream video!!!</Title>
       <Row gutter={32}>
         <Col xs={24} md={18}>
           <Video ref={videoRef} incidents={incidents} />
@@ -62,12 +63,11 @@ const VideoGalley = (props) => {
         <Col xs={24} md={18}>
           <Divider orientation="left" plain>
             <Title level={5}>Danh sách video sự cố</Title>
+            
           </Divider>
-          <VideoList incidents={incidents} onChangeTags = {onChangeTags}/>
+          <VideoList incidents={incidents} onChangeTags={onChangeTags} />
         </Col>
       </Row>
-
-      
     </div>
   );
 };

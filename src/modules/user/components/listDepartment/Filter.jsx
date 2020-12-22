@@ -1,21 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useState } from "react";
-import StyleListDepartment from "./index.style";
-<<<<<<< HEAD
-import {
-    Col,
-    Input,
-    Row,
-    Button,
-} from "antd";
-import { useSelector } from "react-redux";
-import { FolderAddOutlined } from "@ant-design/icons";
-
-const { Search } = Input;
-
-const Filter = ({ filter, setFilter, setVisible }) => {
-    const user = useSelector((state) => state.user.user);
-
-=======
+import React, { Fragment } from "react";
 import { Col, Input, Row, Button, Select } from "antd";
 import { useSelector } from "react-redux";
 import { FolderAddOutlined } from "@ant-design/icons";
@@ -49,19 +32,12 @@ const Filter = ({ filter, setFilter, setVisible, setMode }) => {
             })}
         </Select>
     );
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
     const handlResetFilter = () => {
         setFilter({
             page_id: 0,
             page_size: 20,
             role: "Chưa xác định",
             status: "Chưa xác định",
-<<<<<<< HEAD
-            search: ""
-        });
-    };
-
-=======
             search: "",
         });
     };
@@ -70,7 +46,6 @@ const Filter = ({ filter, setFilter, setVisible, setMode }) => {
         setMode("create");
         setVisible(true);
     }
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 
     return (
         <Fragment>
@@ -80,11 +55,7 @@ const Filter = ({ filter, setFilter, setVisible, setMode }) => {
                     <Button
                         block
                         type="primary"
-<<<<<<< HEAD
-                        onClick={() => setVisible(true)}
-=======
                         onClick={() => handleCreate()}
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
                         style={{ width: 200, float: "right" }}
                     >
                         <FolderAddOutlined />
@@ -105,8 +76,6 @@ const Filter = ({ filter, setFilter, setVisible, setMode }) => {
                         }
                     />
                 </Col>
-<<<<<<< HEAD
-=======
                 {user.role == "SUPER_ADMIN" && (
                     <Col span={7} style={{ display: "flex" }}>
                         <label htmlFor="" style={{ width: "20%" }}>
@@ -115,7 +84,6 @@ const Filter = ({ filter, setFilter, setVisible, setMode }) => {
                         {renderSelectType()}
                     </Col>
                 )}
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             </Row>
             <Row gutter={[16, 16]}>
                 <Col span={8}></Col>

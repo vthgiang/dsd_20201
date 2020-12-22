@@ -1,22 +1,12 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import StyleListUser from "./index.style";
-<<<<<<< HEAD
-import {
-    Table,
-    Tag,
-    Space,
-    Modal,
-    notification,
-} from "antd";
-import { getListUsers, deleteUser, getAllDepartments } from "../../store/services";
-=======
 import { Table, Tag, Space, Modal, notification } from "antd";
-import { getListUsers, deleteUser } from "../../store/services";
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
+import { getListUsers, deleteUser, getAllRoles } from "../../store/services";
 import ModalUser from "./ModalUser";
 import { useSelector } from "react-redux";
 import { formatPhone } from "../../Utils/helper";
 import Filter from "./Filter";
+import { getAllDepartments } from "../../store/services";
 
 const ListUser = () => {
     const [visible, setVisible] = useState(false);
@@ -25,10 +15,29 @@ const ListUser = () => {
     const [meta, setMeta] = useState([]);
     const [userId, setUserId] = useState("");
     const user = useSelector((state) => state.user.user);
-<<<<<<< HEAD
-=======
     const [mode, setMode] = useState("");
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
+
+    const [listDepartments, setListDepartments] = useState([]);
+
+    const fetchDepartments = async () => {
+        const res = await getAllDepartments();
+        setListDepartments(res.result);
+    };
+
+    useEffect(() => {
+        fetchDepartments();
+    }, []);
+
+    const [listRoles, setListRoles] = useState([]);
+
+    const fetchRoles = async () => {
+        const res = await getAllRoles();
+        setListRoles(res.result);
+    };
+
+    useEffect(() => {
+        fetchRoles();
+    }, []);
 
     const fetchListUser = useCallback(async () => {
         const res = await getListUsers(filter);
@@ -40,14 +49,7 @@ const ListUser = () => {
             setListUser([]);
             notification.error({
                 message: "Lỗi",
-<<<<<<< HEAD
-                description:
-                    res.message && res.message !== ""
-                        ? res.message
-                        : "Có lỗi. Vui lòng thử lại!",
-=======
                 description: res.message && res.message !== "" ? res.message : "Có lỗi. Vui lòng thử lại!",
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             });
         }
     }, [filter, user]);
@@ -94,21 +96,13 @@ const ListUser = () => {
     const columns = [
         {
             title: "#",
-<<<<<<< HEAD
-            render: (text, record, index) => <a>{index + 1}</a>,
-=======
             render: (text, record, index) => <a onClick={() => handleView(record)}>{index + 1}</a>,
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
         },
         {
             title: "Tên",
             dataIndex: "full_name",
             key: "full_name",
-<<<<<<< HEAD
-            render: (text) => <a>{text}</a>,
-=======
             render: (text, record) => <a onClick={() => handleView(record)}>{text}</a>,
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
         },
         {
             title: "Email",
@@ -136,20 +130,7 @@ const ListUser = () => {
             key: "status",
             dataIndex: "status",
             render: (status) => (
-<<<<<<< HEAD
-                <Tag
-                    color={
-                        status == "ACTIVE"
-                            ? "success"
-                            : status == "PENDING"
-                            ? "geekblue"
-                            : "red"
-                    }
-                    key={status}
-                >
-=======
                 <Tag color={status == "ACTIVE" ? "success" : status == "PENDING" ? "geekblue" : "red"} key={status}>
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
                     {status}
                 </Tag>
             ),
@@ -169,18 +150,11 @@ const ListUser = () => {
                             ? "orange"
                             : role == "DRONE_STAFF"
                             ? "purple"
-<<<<<<< HEAD
-                            : "cyan"
-                    }
-                    key={role}
-                >
-=======
                             : role == "INCIDENT_STAFF"
                             ? "cyan"
                             : "magenta"
                     }
                     key={role}>
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
                     {role}
                 </Tag>
             ),
@@ -189,34 +163,6 @@ const ListUser = () => {
             title: "Phòng ban",
             key: "department",
             dataIndex: "department",
-<<<<<<< HEAD
-            render: (department) => (
-                <div>{department ? department.name : ""}</div>
-            ),
-        },
-        (user.role == "SUPER_ADMIN" ? {
-            title: "Dự án",
-            key: "type",
-            dataIndex: "type",
-            width: "10%",
-            render: (type) => (
-                <Tag
-                    color={
-                        type == "CHAY_RUNG"
-                            ? "red"
-                            : type == "DE_DIEU"
-                            ? "cyan"
-                            : type == "CAY_TRONG"
-                            ? "green"
-                            : "purple"
-                    }
-                    key={type}
-                >
-                    {type}
-                </Tag>
-            ),
-        } : {}),
-=======
             render: (department) => <div>{department ? department.name : ""}</div>,
         },
         user.role == "SUPER_ADMIN"
@@ -232,23 +178,15 @@ const ListUser = () => {
                   ),
               }
             : {},
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
         {
             title: "Hành động",
             key: "action",
             render: (text, record) => (
                 <Fragment>
-<<<<<<< HEAD
-                    <Space size="middle" style={{ marginRight: 10 }}>
-                        <a onClick={() => handleEdit(record)}>Sửa</a>
-                    </Space>
-                    <Space size="middle">
-=======
                     <Space size='middle' style={{ marginRight: 10 }}>
                         <a onClick={() => handleEdit(record)}>Sửa</a>
                     </Space>
                     <Space size='middle'>
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
                         <a onClick={() => handleDelete(record)}>Xóa</a>
                     </Space>
                 </Fragment>
@@ -263,8 +201,6 @@ const ListUser = () => {
 
     const handleEdit = (record) => {
         setVisible(true);
-<<<<<<< HEAD
-=======
         setMode("update");
         setUserId(record.id);
     };
@@ -272,21 +208,14 @@ const ListUser = () => {
     const handleView = (record) => {
         setVisible(true);
         setMode("detail");
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
         setUserId(record.id);
     };
 
     return (
         <StyleListUser>
-<<<<<<< HEAD
-            <Filter setFilter={setFilter} setVisible={setVisible} filter={filter}/>
-            <Table
-                rowKey="id"
-=======
-            <Filter setFilter={setFilter} setVisible={setVisible} filter={filter} setMode={setMode} />
+            <Filter setFilter={setFilter} setVisible={setVisible} filter={filter} setMode={setMode} listDepartments={listDepartments} listRoles={listRoles} />
             <Table
                 rowKey='id'
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
                 columns={columns}
                 pagination={{
                     total: meta.total_count,
@@ -295,16 +224,7 @@ const ListUser = () => {
                 }}
                 dataSource={listUser}
             />
-<<<<<<< HEAD
-            <ModalUser
-                visible={visible}
-                userId={userId}
-                setVisible={setVisible}
-                fetchListUser={fetchListUser}
-            />
-=======
-            <ModalUser visible={visible} userId={userId} setVisible={setVisible} fetchListUser={fetchListUser} mode={mode} setMode={setMode} />
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
+            <ModalUser visible={visible} userId={userId} setVisible={setVisible} fetchListUser={fetchListUser} mode={mode} setMode={setMode} listDepartments={listDepartments} listRoles={listRoles} />
         </StyleListUser>
     );
 };

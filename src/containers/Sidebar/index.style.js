@@ -1,10 +1,14 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyleSidebarMenu = styled.div`
   .ant-menu-item {
     display: flex;
     align-items: center;
     padding: 0 20px !important;
+
+    .anticon {
+      margin-right: 0;
+    }
   }
   .ant-menu-submenu {
     .ant-menu-submenu-title {

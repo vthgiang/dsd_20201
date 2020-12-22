@@ -1,37 +1,14 @@
-<<<<<<< HEAD
-import { Col, Image, Row } from 'antd';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
-import styled from 'styled-components';
-import { problemTypes } from './config';
-=======
 import { Col, Image, Row, Table } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import { problemColumns, problemTypesKD, problemTypes } from './config';
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 
 function Detail() {
     const { params } = useRouteMatch();
 
     const [imageVideo, setImageVideo] = useState({});
-<<<<<<< HEAD
-
-    useEffect(() => {
-        axios({
-            method: "GET",
-            url: `https://it4483team2.herokuapp.com/api/records/${params.id}`
-        }).then(({ data }) => {
-            console.log({ data });
-            setImageVideo(data)
-        })
-    }, [])
-
-    console.log({ imageVideo });
-=======
     const [imageVideoRelated, setImageVideoRelated] = useState([]);
     const [problems, setProblems] = useState([]);
 
@@ -84,7 +61,6 @@ function Detail() {
 
         fetchData();
     }, [])
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 
     return <Container>
         <Title>Thông tin chi tiết</Title>
@@ -120,9 +96,6 @@ function Detail() {
                             <strong>Mô tả:</strong>
                         </Col>
                         <Col md={20}>
-<<<<<<< HEAD
-                            <span>{imageVideo.description}</span>
-=======
                             <span>{renderDescription(imageVideo.description)}</span>
                         </Col>
                     </Row>
@@ -132,7 +105,6 @@ function Detail() {
                         </Col>
                         <Col md={20}>
                             <Link to="#">{imageVideo.monitoredObjectId}</Link>
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
                         </Col>
                     </Row>
                     <Row>
@@ -140,11 +112,7 @@ function Detail() {
                             <strong>Loại dữ liệu:</strong>
                         </Col>
                         <Col md={20}>
-<<<<<<< HEAD
-                            <span>{imageVideo.type === 0 ? "Image" : "Video"}</span>
-=======
                             <span>{imageVideo.type === 0 ? "Ảnh" : "Video"}</span>
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
                         </Col>
                     </Row>
                     <Row>
@@ -182,11 +150,6 @@ function Detail() {
                 </Info>
             </Col>
         </Row>
-<<<<<<< HEAD
-    </Container >;
-}
-
-=======
 
         <Title><p>
             <span>{imageVideo.type === 0 ? "Ảnh" : "Video"} liên quan</span>
@@ -219,7 +182,6 @@ const TableCustom = styled(Table)`
 
 `;
 
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 const Container = styled.div`
     width: 100%;
     height: 100%;
@@ -228,8 +190,6 @@ const Container = styled.div`
 const Title = styled.h1`
     font-size: 40px;
     text-align: center;
-<<<<<<< HEAD
-=======
 
     p {
         text-align: left;
@@ -247,7 +207,6 @@ const Title = styled.h1`
             }
         }
     }
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 `;
 
 const Info = styled.div`

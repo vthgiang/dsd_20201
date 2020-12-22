@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 
 export const problemTypes = ["Cháy rừng", "Lưới điện", "Đê điều", "Cây trồng"];
 
-<<<<<<< HEAD
-=======
 export const problemTypesKD = ["CHAY_RUNG", "LUOI_DIEN", "DE_DIEU", "CAY_TRONG"];
 
 export const problemColumns = [
@@ -42,7 +40,6 @@ export const problemColumns = [
     },
 ]
 
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 export const columns = [
     {
         title: 'Mã',
@@ -73,13 +70,10 @@ export const columns = [
         dataIndex: 'latitude',
     },
     {
-<<<<<<< HEAD
-=======
         title: 'Vị trí',
         dataIndex: 'location',
     },
     {
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
         title: 'Loại sự cố',
         dataIndex: 'problemType'
     },

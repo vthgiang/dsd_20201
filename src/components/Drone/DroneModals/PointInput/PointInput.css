@@ -1,0 +1,12 @@
+.border-blue{
+    border: 1px solid rgb(82, 133, 243);
+}
+.color-height{
+    color:rgb(1, 105, 17);
+}
+.color-name{
+    color:rgb(46, 109, 245);
+}
+.error-message{
+    color: red;
+}

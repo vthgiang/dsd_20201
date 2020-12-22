@@ -15,30 +15,6 @@ export const statuses = [
     },
 ];
 
-export const roles = [
-    {
-        name: "Quản trị viên",
-        code: "ADMIN",
-    },
-    {
-        name: "Quản lý",
-        code: "MANAGER",
-    },
-    {
-        name: "Người giám sát",
-        code: "SUPERVISOR",
-    },
-    {
-        name: "Nhân viên sự cố",
-        code: "INCIDENT_STAFF",
-    },
-    {
-        name: "Nhân viên drone",
-        code: "DRONE_STAFF",
-    },
-   
-];
-
 export const types = [
     {
         name: "Sự cố cháy rừng",

@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-<<<<<<< HEAD
-import { Typography, Table, Progress, DatePicker, Space, TimePicker, Select, Image } from 'antd'
-=======
 import { Typography, Table, Progress, DatePicker, Space, TimePicker, Select, Image, Button, Input } from 'antd'
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 
 import { columns, data, problemTypes } from './config';
 import axios from 'axios';
@@ -18,10 +14,7 @@ function ImageVideo() {
         createdAt: null,
         problemType: null,
     })
-<<<<<<< HEAD
-=======
     const [searchString, setSearchString] = useState();
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 
     const onChangeDate = (date, dateString) => {
         console.log(date, dateString);
@@ -33,8 +26,6 @@ function ImageVideo() {
         setFilterFields({ ...filterFields, problemType })
     };
 
-<<<<<<< HEAD
-=======
     const handleSearch = () => {
         axios({
             method: "POST",
@@ -64,7 +55,6 @@ function ImageVideo() {
             })));
         })
     };
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 
     useEffect(() => {
         axios({
@@ -88,12 +78,8 @@ function ImageVideo() {
                     /> :
                     i.link,
                 type: i.type === 0 ? "Image" : "Video",
-<<<<<<< HEAD
-                problemType: problemTypes[i.problemType]
-=======
                 problemType: problemTypes[i.problemType],
                 location: <a target="_blank" href={`https://www.google.com/maps/place/${i.latitude},${i.longitude}`} >Xem trên bản đồ</a >
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             })));
         })
     }, [])
@@ -119,12 +105,8 @@ function ImageVideo() {
                     /> :
                     i.link,
                 type: i.type === 0 ? "Image" : "Video",
-<<<<<<< HEAD
-                problemType: problemTypes[i.problemType]
-=======
                 problemType: problemTypes[i.problemType],
                 location: <a target="_blank" href={`https://www.google.com/maps/place/${i.latitude},${i.longitude}`} >Xem trên bản đồ</a >
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             }));
 
             const isFiltered = Object.values(filterFields).every(i => [null, undefined, ""].includes(i))
@@ -166,15 +148,6 @@ function ImageVideo() {
                         {[0, 1, 2, 3].map(problemType => <Option value={problemType}>{problemTypes[problemType]}</Option>)}
                     </Select>
                 </Space>
-<<<<<<< HEAD
-            </SpaceCustom>
-            <Table columns={columns} dataSource={imageVideos} onChange={() => { }} pagination />
-        </Container>
-    )
-}
-
-const Container = styled.div``;
-=======
                 <Space direction="horizontal">
                     <Input
                         placeholder="Nhập tên tìm kiếm"
@@ -191,7 +164,6 @@ const Container = styled.div``;
 
 const Container = styled.div`
 `;
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 
 const TitleCustom = styled(Title)`
     text-align: center;
@@ -202,11 +174,8 @@ const SpaceCustom = styled(Space)`
     margin-bottom: 10px;
 `;
 
-<<<<<<< HEAD
-=======
 const TableCustom = styled(Table)`
     overflow-x: scroll;
 `;
 
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 export default ImageVideo;

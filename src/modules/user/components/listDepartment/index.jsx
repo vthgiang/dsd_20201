@@ -1,16 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import StyleListDepartment from "./index.style";
-<<<<<<< HEAD
-import {
-    Table,
-    Space,
-    Input,
-    Modal,
-    notification,
-} from "antd";
-=======
 import { Table, Space, Input, Modal, notification, Tag } from "antd";
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 import { getListDepartments, deleteDepartment } from "../../store/services";
 import ModalDepartment from "./ModalDepartment";
 import { useSelector } from "react-redux";
@@ -24,10 +14,7 @@ const ListDepartment = () => {
     const [meta, setMeta] = useState([]);
     const [departmentId, setDepartmentId] = useState("");
     const user = useSelector((state) => state.user.user);
-<<<<<<< HEAD
-=======
     const [mode, setMode] = useState("");
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 
     const fetchListDepartment = useCallback(async () => {
         const res = await getListDepartments(filter);
@@ -45,7 +32,7 @@ const ListDepartment = () => {
                         : "Có lỗi. Vui lòng thử lại!",
             });
         }
-    }, [filter, user]);
+    }, [filter]);
 
     useEffect(() => {
         fetchListDepartment();
@@ -57,7 +44,7 @@ const ListDepartment = () => {
         }
     }, [visible]);
 
-    const handleDelete = async (user) => {
+    const handleDelete = async (department) => {
         Modal.confirm({
             title: "Xác nhận?",
             content: "Bạn có thực sự muốn xóa phòng ban này",
@@ -65,7 +52,7 @@ const ListDepartment = () => {
             cancelText: "Hủy",
             onOk() {
                 const res = new Promise((resolve, reject) => {
-                    resolve(deleteDepartment(user.id));
+                    resolve(deleteDepartment(department.id));
                 }).catch(() => console.log("Oops errors!"));
                 Promise.resolve(res).then((e) => {
                     if (e.status == "successful") {
@@ -89,21 +76,13 @@ const ListDepartment = () => {
     const columns = [
         {
             title: "#",
-<<<<<<< HEAD
-            render: (text, record, index) => <a>{index + 1}</a>,
-=======
             render: (text, record, index) => <a onClick={() => handleView(record)}>{index + 1}</a>,
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
         },
         {
             title: "Tên",
             dataIndex: "name",
             key: "name",
-<<<<<<< HEAD
-            render: (text) => <a>{text}</a>,
-=======
             render: (text, record) => <a onClick={() => handleView(record)}>{text}</a>,
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
         },
         { title: "Mô tả", dataIndex: "description", key: "description" },
         {
@@ -112,8 +91,6 @@ const ListDepartment = () => {
             key: "created_at",
             render: (text) => <p>{moment(text).format("mm:hh DD-MM-YYYY")}</p>,
         },
-<<<<<<< HEAD
-=======
         user.role == "SUPER_ADMIN"
             ? {
                   title: "Dự án",
@@ -138,7 +115,6 @@ const ListDepartment = () => {
                   ),
               }
             : {},
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
         {
             title: "Hành động",
             key: "action",
@@ -162,8 +138,6 @@ const ListDepartment = () => {
 
     const handleEdit = (record) => {
         setVisible(true);
-<<<<<<< HEAD
-=======
         setMode("update");
         setDepartmentId(record.id);
     };
@@ -171,22 +145,17 @@ const ListDepartment = () => {
     const handleView = (record) => {
         setVisible(true);
         setMode("detail");
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
         setDepartmentId(record.id);
     };
 
     return (
         <StyleListDepartment>
-<<<<<<< HEAD
-            <Filter setFilter={setFilter} setVisible={setVisible} filter={filter} />
-=======
             <Filter
                 setFilter={setFilter}
                 setVisible={setVisible}
                 filter={filter}
                 setMode={setMode}
             />
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             <Table
                 rowKey="id"
                 columns={columns}
@@ -198,11 +167,8 @@ const ListDepartment = () => {
                 dataSource={listDepartment}
             />
             <ModalDepartment
-<<<<<<< HEAD
-=======
                 mode={mode}
                 setMode={setMode}
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
                 visible={visible}
                 departmentId={departmentId}
                 setVisible={setVisible}

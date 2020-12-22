@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import "../Styles/StyleListIncidents.css";
-import { Table, Modal, Button, Input, Space, message } from "antd";
-import Highlighter from "react-highlight-words";
-import { SearchOutlined } from "@ant-design/icons";
-import { Link, useLocation, useHistory } from "react-router-dom";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from 'react';
+import '../Styles/StyleListIncidents.css';
+import { Table, Modal, Button, Input, Space, message } from 'antd';
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined } from '@ant-design/icons';
+import { Link, useLocation, useHistory } from 'react-router-dom';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import {
   Form,
   List,
@@ -15,15 +15,15 @@ import {
   Dropdown,
   Popconfirm,
   Select,
-} from "antd";
+} from 'antd';
 import {
   CheckOutlined,
   CloseOutlined,
   InfoCircleOutlined,
   DownOutlined,
-} from "@ant-design/icons";
-import axios from "axios";
-import URL_API from "./url";
+} from '@ant-design/icons';
+import axios from 'axios';
+import URL_API from './url';
 // import URL_API from "./url";
 
 const menu = (
@@ -50,18 +50,18 @@ const ListIncidents = () => {
   const [childData, setChildData] = useState([]);
   const [idModalIncident, setIdModalIncident] = useState(null);
   const [visibleModalDetailIncident, setVisibleModalDetailIncident] = useState(
-    false
+    false,
   );
 
   const { pathname } = useLocation();
   const codeIncidents = {
-    CHAY_RUNG: { id: "222222", name: "Sự cố  cháy rừng" },
-    DE_DIEU: { id: "111111", name: "Sự cố  đê điều" },
-    CAY_TRONG: { id: "333333", name: "Sự cố  cây trồng" },
-    LUOI_DIEN: { id: "000000", name: "Sự cố lưới điện trên cao" },
+    CHAY_RUNG: { id: '222222', name: 'Sự cố  cháy rừng' },
+    DE_DIEU: { id: '111111', name: 'Sự cố  đê điều' },
+    CAY_TRONG: { id: '333333', name: 'Sự cố  cây trồng' },
+    LUOI_DIEN: { id: '000000', name: 'Sự cố lưới điện trên cao' },
   };
-  const API_TOKEN = "4c901bcdba9f440a2a7c31c0bcbd78ec";
-  const CURRENT_TYPE = "LUOI_DIEN";
+  const API_TOKEN = '4c901bcdba9f440a2a7c31c0bcbd78ec';
+  const CURRENT_TYPE = 'LUOI_DIEN';
   const typeIncident = codeIncidents[CURRENT_TYPE];
 
   const [searchText, setSearchText] = useState();
@@ -76,12 +76,12 @@ const ListIncidents = () => {
   const getDataIncidents = () => {
     setLoadingTable(true);
     axios({
-      method: "get",
-      url: URL_API + "/task/incident-listing",
+      method: 'get',
+      url: URL_API + '/task/incident-listing',
       // url: URL_API + "/report/listing",
       headers: {
-        "api-token": API_TOKEN,
-        "project-type": CURRENT_TYPE,
+        'api-token': API_TOKEN,
+        'project-type': CURRENT_TYPE,
       },
     })
       .then(function (response) {
@@ -117,25 +117,25 @@ const ListIncidents = () => {
 
   const handleReset = (clearFilters) => {
     clearFilters();
-    setSearchText("");
+    setSearchText('');
   };
 
   const columns = [
     {
-      title: "Tên sự cố",
-      dataIndex: "name",
+      title: 'Tên sự cố',
+      dataIndex: 'name',
     },
     {
-      title: "Trạng thái",
-      dataIndex: "status",
+      title: 'Trạng thái',
+      dataIndex: 'status',
       filters: [
         {
-          text: "In Progress",
-          value: "In Progress",
+          text: 'In Progress',
+          value: 'In Progress',
         },
         {
-          text: "Open",
-          value: "Open",
+          text: 'Open',
+          value: 'Open',
         },
       ],
       filterMultiple: false,
@@ -155,63 +155,66 @@ const ListIncidents = () => {
       },
     },
     {
-      title: "Mức độ",
-      dataIndex: "level",
+      title: 'Mức độ',
+      dataIndex: 'level',
       filters: [
         {
-          text: "Normal",
-          value: "Normal",
+          text: 'Normal',
+          value: 'Normal',
         },
         {
-          text: "Urgency",
-          value: "Urgency",
+          text: 'Urgency',
+          value: 'Urgency',
         },
       ],
       filterMultiple: false,
       onFilter: (value, record) => record.level.indexOf(value) === 0,
     },
     {
-      title: "Địa điểm",
-      dataIndex: "location",
-      width: "15%",
+      title: 'Địa điểm',
+      dataIndex: 'location',
+      width: '15%',
     },
     {
-      title: "Loại",
-      dataIndex: "type",
+      title: 'Loại',
+      dataIndex: 'type',
       filters: [
         {
-          text: "Sự cố cháy rừng",
-          value: "Sự cố cháy rừng",
+          text: 'Sự cố cháy rừng',
+          value: 'Sự cố cháy rừng',
         },
         {
-          text: "Sự cố đê điều",
-          value: "Sự cố đê điều",
+          text: 'Sự cố đê điều',
+          value: 'Sự cố đê điều',
         },
         {
-          text: "Sự cố cây trồng",
-          value: "Sự cố cây trồng",
+          text: 'Sự cố cây trồng',
+          value: 'Sự cố cây trồng',
         },
         {
-          text: "Sự cố lưới điện cao thế",
-          value: "Sự cố lưới điện cao thế",
+          text: 'Sự cố lưới điện cao thế',
+          value: 'Sự cố lưới điện cao thế',
         },
       ],
       filterMultiple: false,
       onFilter: (value, record) => record.type.indexOf(value) === 0,
     },
     {
-      title: "Mô tả",
-      dataIndex: "description",
-      width: "20%",
+      title: 'Mô tả',
+      dataIndex: 'description',
+      width: '20%',
     },
     {
-      title: "Tác vụ",
-      key: "operation",
-      width: "10%",
+      title: 'Tác vụ',
+      key: 'operation',
+      width: '10%',
       render: (record) => (
-        <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: 'center' }}>
           <p>
-            <InfoCircleOutlined data-toggle="tooltip" data-placement="top" title="Xem chi tiết"
+            <InfoCircleOutlined
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Xem chi tiết"
               onClick={(value) => {
                 setLoadingModal(true);
                 setVisibleModalDetailIncident(true);
@@ -220,13 +223,13 @@ const ListIncidents = () => {
                   .then((dataIncident) => {
                     let listDetailChild = [];
                     dataIncident.map((data) => {
-                      let listEmployees = "";
+                      let listEmployees = '';
                       if (data.task_type) {
                         data.employees.map((person, index) => {
                           if (index == 0) {
                             listEmployees += person.full_name;
                           } else {
-                            listEmployees += ", " + person.full_name;
+                            listEmployees += ', ' + person.full_name;
                           }
                         });
                         let childDataObject = {
@@ -244,11 +247,11 @@ const ListIncidents = () => {
                     setLoadingModal(false);
                   });
               }}
-              style={{ color: "blue", marginLeft: 5 }}
+              style={{ color: 'blue', marginLeft: 5 }}
             />
           </p>
 
-          <p style={record.statusCode == 0 ? {} : { display: "none" }}>
+          <p style={record.statusCode == 0 ? {} : { display: 'none' }}>
             <Button
               type="primary"
               onClick={() => {
@@ -269,11 +272,11 @@ const ListIncidents = () => {
   const getInforIncident = (idIncident) => {
     return new Promise((resolve, reject) => {
       axios({
-        method: "get",
-        url: URL_API + "/task/detail",
+        method: 'get',
+        url: URL_API + '/task/detail',
         headers: {
-          "api-token": API_TOKEN,
-          "project-type": CURRENT_TYPE,
+          'api-token': API_TOKEN,
+          'project-type': CURRENT_TYPE,
         },
         params: { incident_id: idIncident },
       })
@@ -293,11 +296,11 @@ const ListIncidents = () => {
 
   const getListEmployees = () => {
     axios({
-      method: "get",
-      url: URL_API + "/task/employee-listing",
+      method: 'get',
+      url: URL_API + '/task/employee-listing',
       headers: {
-        "api-token": API_TOKEN,
-        "project-type": CURRENT_TYPE,
+        'api-token': API_TOKEN,
+        'project-type': CURRENT_TYPE,
       },
     })
       .then(function (response) {
@@ -315,11 +318,11 @@ const ListIncidents = () => {
 
   const getListWork = () => {
     axios({
-      method: "get",
-      url: URL_API + "/task-type/listing",
+      method: 'get',
+      url: URL_API + '/task-type/listing',
       headers: {
-        "api-token": API_TOKEN,
-        "project-type": CURRENT_TYPE,
+        'api-token': API_TOKEN,
+        'project-type': CURRENT_TYPE,
       },
     })
       .then(function (response) {
@@ -348,32 +351,32 @@ const ListIncidents = () => {
       Object.keys(o).some((k) => {
         // console.log(String(o[k]).toLowerCase() + " - " + value.toLowerCase());
         return (
-          k !== "incident_id" &&
+          k !== 'incident_id' &&
           String(o[k]).normalize().toLowerCase().includes(value.toLowerCase())
         );
-      })
+      }),
     );
     setFilterTable(filterTable);
   };
 
   const submitCreateNewChildWork = (value) => {
     setLoadingModal(true);
-    let list = "";
+    let list = '';
     value.listNewWorks.map((childWork, index) => {
       if (index == 0) {
-        list = childWork.typeWork + "," + childWork.listEmployee.toString();
+        list = childWork.typeWork + ',' + childWork.listEmployee.toString();
       } else {
         list +=
-          ";" + childWork.typeWork + "," + childWork.listEmployee.toString();
+          ';' + childWork.typeWork + ',' + childWork.listEmployee.toString();
       }
     });
     axios({
-      method: "post",
-      url: URL_API + "/task/handler",
+      method: 'post',
+      url: URL_API + '/task/handler',
       // url: URL_API + "/report/listing",
       headers: {
-        "api-token": API_TOKEN,
-        "project-type": CURRENT_TYPE,
+        'api-token': API_TOKEN,
+        'project-type': CURRENT_TYPE,
       },
       data: {
         incident_id: idModalIncident,
@@ -397,20 +400,20 @@ const ListIncidents = () => {
 
   const childColumns = [
     {
-      title: "Loại công việc xử lý",
-      dataIndex: "name",
+      title: 'Loại công việc xử lý',
+      dataIndex: 'name',
     },
     {
-      title: "Nhân viên thực hiện",
-      dataIndex: "employees",
+      title: 'Nhân viên thực hiện',
+      dataIndex: 'employees',
     },
     {
-      title: "Mô tả công việc",
-      dataIndex: "description",
+      title: 'Mô tả công việc',
+      dataIndex: 'description',
     },
     {
-      title: "",
-      dataIndex: "operation",
+      title: '',
+      dataIndex: 'operation',
       render: (text, record) =>
         record.creatNew ? (
           <Popconfirm
@@ -442,7 +445,7 @@ const ListIncidents = () => {
       </div>
       <div>
         <Input.Search
-          style={{ margin: "0 0 10px 0" }}
+          style={{ margin: '0 0 10px 0' }}
           placeholder="Search by..."
           enterButton
           onSearch={search}
@@ -543,7 +546,7 @@ const ListIncidents = () => {
         </Spin>
       </div>
       <Modal
-        title={"Thêm công việc xử lý"}
+        title={'Thêm công việc xử lý'}
         visible={visibleModal}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -589,15 +592,15 @@ const ListIncidents = () => {
                   {fields.map((field) => (
                     <Space
                       key={field.key}
-                      style={{ display: "flex", marginBottom: 8 }}
+                      style={{ display: 'flex', marginBottom: 8 }}
                       align="baseline"
                     >
                       <Form.Item
                         {...field}
-                        name={[field.name, "typeWork"]}
-                        fieldKey={[field.fieldKey, "typeWork"]}
+                        name={[field.name, 'typeWork']}
+                        fieldKey={[field.fieldKey, 'typeWork']}
                         rules={[
-                          { required: true, message: "Thiếu loại công việc" },
+                          { required: true, message: 'Thiếu loại công việc' },
                         ]}
                       >
                         <Select
@@ -612,10 +615,10 @@ const ListIncidents = () => {
                       </Form.Item>
                       <Form.Item
                         {...field}
-                        name={[field.name, "listEmployee"]}
-                        fieldKey={[field.fieldKey, "listEmployee"]}
+                        name={[field.name, 'listEmployee']}
+                        fieldKey={[field.fieldKey, 'listEmployee']}
                         rules={[
-                          { required: true, message: "Thiếu tên nhân viên" },
+                          { required: true, message: 'Thiếu tên nhân viên' },
                         ]}
                       >
                         <Select
@@ -654,12 +657,12 @@ const ListIncidents = () => {
         </Spin>
       </Modal>
       <Modal
-        title={"Chi tiết công việc xử lý sự cố"}
+        title={'Chi tiết công việc xử lý sự cố'}
         visible={visibleModalDetailIncident}
         onCancel={() => {
           setVisibleModalDetailIncident(false);
         }}
-        width={"60%"}
+        width={'60%'}
         footer={null}
       >
         <Spin spinning={loadingModal} tip="Loading...">

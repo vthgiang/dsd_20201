@@ -6,10 +6,7 @@ import { useSelector } from "react-redux";
 import Filter from "./Filter";
 import { getByField } from "../../Utils/helper";
 import { names } from "../../config/UserMetaConfig";
-<<<<<<< HEAD
-=======
 import moment from "moment";
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
 
 const ListUserMeta = () => {
     const [filter, setFilter] = useState({ page_size: 20, page_id: 0 });
@@ -69,8 +66,6 @@ const ListUserMeta = () => {
             render: (user) => <p>{user ? user.full_name : ""}</p>,
         },
         {
-<<<<<<< HEAD
-=======
             title: "Ngày tạo",
             dataIndex: "created_at",
             key: "created_at",
@@ -101,7 +96,6 @@ const ListUserMeta = () => {
               }
             : {},
         {
->>>>>>> ec42d30b3f687750451212cd3b1c9ca794be8f5e
             title: "Trạng thái",
             key: "status",
             dataIndex: "status",
