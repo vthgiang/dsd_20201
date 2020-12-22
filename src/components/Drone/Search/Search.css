@@ -1,0 +1,7 @@
+.search__select {
+    background-color: transparent;
+    border: none;
+}
+.search__select:focus {
+    outline: none;
+}

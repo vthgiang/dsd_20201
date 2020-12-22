@@ -74,50 +74,56 @@ export default function TransitionsModal(props) {
   
   const saveDrone = () => {
     
-    // const fd = new FormData();
-    // fd.append('images', selectedImage, selectedImage.name)
-    // axios.post('https://luan-drive.cf/upload?token=111111&folder=images', fd)
-    //   .then(response => {
-    //     console.log(response);
-    //   })
-    //   .catch(err => console.log(err))
+    const fd = new FormData();
+    fd.append('file', selectedImage, selectedImage.name)
+    let url = 'https://luan-drive.cf/upload?token=111111&folder=images';
+    axios.post(url, fd)
+        .then(res => {
+          console.log(res.data.image_id);
+          if (res.data.image_id != null) {
+            setImageUrl("https://drive.google.com/uc?id="+res.data.image_id);
+
+            let headers = new Headers();
+
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');
+        
+            headers.append('Access-Control-Allow-Origin', '*');
+        
+            const requestOptions = {
+              method: 'POST',
+              headers: headers,
+              body: JSON.stringify({ 
+                brand: brand,
+                code: props.code,
+                color: color,
+                dimensions: dimensions,
+                id: props.id,
+                idLog: 0,
+                maxFlightHeight: maxFlightHeight,
+                maxFlightRange: maxFlightRange,
+                maxFlightSpeed: maxFlightSpeed,
+                maxFlightTime: maxFlightTime,
+                name: name,
+                rangeBattery: rangeBattery,
+                task: 0,
+                used: false,
+                urlImage: "https://drive.google.com/uc?id="+res.data.image_id
+              })
+            };
+        
+            fetch('http://skyrone.cf:6789/drone/save', requestOptions)
+            .then(response => response.text())
+            .then(contents =>  {
+              alert("Đã lưu thành công"); 
+              setOpen(false)})
+            .catch(() => console.log("Can’t access " + 'http://skyrone.cf:6789/drone/getByCode/save' + " response. Blocked by browser?"))
+              
+          }
+         
+        })
+        .catch(err => console.log(err))
     
-    
-    let headers = new Headers();
-
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-
-    headers.append('Access-Control-Allow-Origin', '*');
-
-    const requestOptions = {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify({ 
-        brand: brand,
-        code: props.code,
-        color: color,
-        dimensions: dimensions,
-        id: props.id,
-        idLog: 0,
-        maxFlightHeight: maxFlightHeight,
-        maxFlightRange: maxFlightRange,
-        maxFlightSpeed: maxFlightSpeed,
-        maxFlightTime: maxFlightTime,
-        name: name,
-        rangeBattery: rangeBattery,
-        task: 0,
-        used: false
-      })
-    };
-
-    fetch('http://skyrone.cf:6789/drone/save', requestOptions)
-    .then(response => response.text())
-    .then(contents =>  {
-      alert("Đã lưu thành công"); 
-      setOpen(false)})
-    .catch(() => console.log("Can’t access " + 'http://skyrone.cf:6789/drone/getByCode/save' + " response. Blocked by browser?"))
-      
   }
 
   function onDrop(picture) {

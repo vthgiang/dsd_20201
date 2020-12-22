@@ -13,7 +13,8 @@ function FlightPathInput(props) {
     const {
         name, setName, height, setHeight, heightPoint, setHeightPoint, 
         selectedArea, setSelectedArea,
-        selectedZone, setSelectedZone
+        selectedZone, setSelectedZone,
+        resetPoint
     } = props;
     
     // list khu vuc giam sat
@@ -53,12 +54,12 @@ function FlightPathInput(props) {
             .then(response => {
                 const tmp = response.data.content.zone.map(zone => ({
                     _id: zone._id,
-                    name: zone.code,
+                    name: zone.name,
                     startPoint: zone.startPoint,
                     endPoint: zone.endPoint,
                     maxHeight: zone.maxHeight,
                     minHeight: zone.minHeight,
-                    label: zone.code,
+                    label: zone.name,
                     value: zone._id
                 }))
                 console.log("mien giam sat",tmp);
@@ -80,6 +81,7 @@ function FlightPathInput(props) {
         setSelectedZone(selectedOption);
         console.log('heightPoint', heightPoint);
         setHeightPoint(selectedOption.minHeight);
+        resetPoint();
     }
 
     return (

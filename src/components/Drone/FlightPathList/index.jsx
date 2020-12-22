@@ -7,7 +7,7 @@ FlightPathList.propTypes = {
     
 };
 
-function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath}) {
+function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath, baseIndex}) {
 
     return (
         <Table striped bordered hover size="sm">
@@ -22,10 +22,10 @@ function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath}) {
             </thead>
             <tbody>
                 {flightPaths.map((item, index) => (<tr key={item.id}>
-                    <td>{index+1}</td>
+                    <td>{baseIndex + index + 1}</td>
                     <td>{item.name}</td>
                     <td>{item.monitoredAreaName}</td>
-                    <td>{item.monitoredZoneCode}</td>
+                    <td>{item.monitoredZoneName}</td>
                     <td className="td-action"><button className="btn-view" onClick={()=>viewFlightPath(item)}>
                         <i className="far fa-eye"></i>
                     </button>{"/"}
