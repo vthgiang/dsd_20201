@@ -5,6 +5,7 @@ import useBaseHook from "../../../hooks/BaseHooks";
 import incidentService from "../../../services/group09/incidentService";
 import incidentLevelService from "../../../services/group09/incidentLevelService";
 import incidentStatusService from "../../../services/group09/incidentStatusService";
+import { Menu } from 'antd';
 import moment from "moment";
 import {SearchOutlined} from "@ant-design/icons";
 import StyleList from "../../Payload/PayloadManagement/List/index.style";
@@ -276,6 +277,9 @@ const HomeDeDieu = ({ history }) => {
           </Col>
           <Col span={6}>
             <Button type="primary" className="buttontype" onClick={() => history.push('/videoGallery')}>Tạo sự cố từ stream</Button>
+          </Col>
+          <Col span={6}>
+            <Button type="primary" className="buttontype" onClick={() => history.push('/sucodedieu-statistics')}>Thông kê sự cố</Button>
           </Col>
           </Row>
           <br/>

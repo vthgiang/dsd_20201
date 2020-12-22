@@ -65,7 +65,7 @@ export const sidebarMenu = [
       },
       {
         key: 'PayloadSDcard',
-        heading: 'DSCard Payload',
+        heading: 'SDCard Payload',
         icon: 'fa fa-tools',
         route: '/payload-dscard',
       },
