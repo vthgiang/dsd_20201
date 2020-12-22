@@ -17,6 +17,8 @@ import {
 import { ref } from '../config4';
 import SimpleRating from '../Rating';
 import { ListItemStyle } from './index.style';
+import FilterDropdown from '../Dropdown';
+import { Row, Col } from 'antd';
 
 
 function LastSeen({ date }) {
@@ -110,17 +112,15 @@ const MyList = () => {
   const history = useHistory();
 
   useEffect(() => {
+
+    var user = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user);
     var config = {
       method: 'get',
-      url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf',
-      headers: {
-        'Content-Type': 'application/json',
-        'api-token': '1fa6b94047ba20d998b44ff1a2c78bba',
-        'project-type': 'CHAY_RUNG'
-      },
+      url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf_no_token',
       params: {
         index: index,
-        count: count
+        count: count,
+        userID: user.user.id
       }
     };
 
@@ -185,7 +185,10 @@ const MyList = () => {
     <Button style={{ margin: 2 }} variant="contained" color="secondary" onClick={handleOnclickSendNotification}>
       Send notifications
         </Button> */}
-    <div className={classes.title}>Danh sách cảnh báo</div>
+    <Row>
+      <Col span={20}><div className={classes.title}>Danh sách cảnh báo</div></Col>
+      <Col span={4}><FilterDropdown /></Col>
+    </Row>
     <List>
       {datas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(data => (
         <ListItemStyle className={classes.item} onClick={() => handleClick(data._id)}>

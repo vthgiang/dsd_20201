@@ -102,17 +102,14 @@ const BellNotification = () => {
 
 
   const getConfig = (start, to) => {
+    var user = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user);
     var config = {
       method: 'get',
-      url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf',
-      headers: {
-        'Content-Type': 'application/json',
-        'api-token': '1fa6b94047ba20d998b44ff1a2c78bba',
-        'project-type': 'CHAY_RUNG'
-      },
+      url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf_no_token',
       params: {
         index: start,
-        count: to
+        count: to,
+        userID: user.id
       }
     };
     return config;
