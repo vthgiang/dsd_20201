@@ -11,6 +11,8 @@ import ModalFlight from '../../containers/ModalFlight'
 import { Modal } from "@material-ui/core";
 import StateModal from "../../components/Drone/DroneModals/StateModal";
 import StateDrone from "../../components/Drone/DroneModals/StateDrone";
+import GetBackDrone from "../../components/Drone/DroneModals/GetBackDrone";
+import Checkbox from '@material-ui/core/Checkbox';
 const DataTable = () => {
 
     const Styles = styled.div`
@@ -40,8 +42,9 @@ const DataTable = () => {
     const ITEMS_PER_PAGE = 20;
 
     const headers = [
+        { name: "______", field: "", sortable: false },
         { name: "Id#", field: "idDrone", sortable: true },
-        { name: "Tên", field: "name", sortable: true },
+        { name: "Tên", field: "name", sortable: false },
         { name: "Tình trạng", field: "message", sortable: true},
         { name: "______", field: "", sortable: false }
     ];
@@ -99,33 +102,32 @@ const DataTable = () => {
         );
     }, [drones, currentPage, search, sorting, stateDrone]);
 
-    const handleSacPinClick = (drone) => {
-        console.log(drone);
-    }
+    const [listIdDrone, setListIdDrone] = useState([])
 
-    const handleMaintainClick = (drone) => {
-        console.log(drone);
-    }
+    const handleChangeCheckBox = (event) => {
+        // if (event.target.checked) {
+        //     setListIdDrone([...listIdDrone, event.target.name])
+        //     console.log("array : "+listIdDrone)
+        // } else {
+        //     var array = [...listIdDrone];
+        //     var index = listIdDrone.indexOf(event.target.name);
+        //     if (index !== -1) {
+        //         array.splice(index, 1);
+        //         setListIdDrone(array)
+        //         console.log("array : "+listIdDrone)
+        //       }
+        // }
+        
+      };
     
     return (
 
         <>
             <div className="row">
-                <div className="col-md-2">
-                    <ModalAddDataTable />
-                </div>
                 <div className="col-md-3">
-                    <Pagination
-                        total={totalItems}
-                        itemsPerPage={ITEMS_PER_PAGE}
-                        currentPage={currentPage}
-                        onPageChange={page => setCurrentPage(page)}
-                    />
-                </div>
-                <div className="col-md-2">
                     <h4>{numDrone} drone</h4>
                 </div>
-                <div className="col-md-2">
+                <div className="col-md-3">
                     <select value={stateDrone} 
                         onChange={event => setStateDrone(event.target.value)}>
                         <option value="0">Tất cả</option>
@@ -136,14 +138,25 @@ const DataTable = () => {
                         <option value="Hỏng">Hỏng</option>
                     </select>
                 </div>
-                <div className="col-md-3 d-flex flex-row-reverse">
-                    <Search
+                <div className="col-md-3">
+                <Search
                         onSearch={value => {
                             setSearch(value);
                             setCurrentPage(1);
                         }}
                     />
                 </div>
+                <div className="col-md-3 d-flex flex-row-reverse">
+                     <ModalAddDataTable />
+                </div>
+            </div>
+            <div>
+                    <Pagination
+                        total={totalItems}
+                        itemsPerPage={ITEMS_PER_PAGE}
+                        currentPage={currentPage}
+                        onPageChange={page => setCurrentPage(page)}
+                    />
             </div>
             <Styles>
                 <div className="row w-100">
@@ -161,8 +174,16 @@ const DataTable = () => {
                                 {dronesData.map(drone => (
                                     <tr>
                                         <th scope="row" key={drone.idDrone}>
-                                            {drone.idDrone}
+                                        <Checkbox
+                                            onChange={handleChangeCheckBox}
+                                            color="primary"
+                                            name={drone.idDrone}
+                                            inputProps={{ 'aria-label': 'secondary checkbox' }}
+                                         />
                                         </th>
+                                        <td>
+                                              {drone.idDrone}
+                                        </td>
                                         <td>{drone.name}</td>
                                         <td> 
                                             <StateDrone state={drone.state} />    
@@ -171,14 +192,7 @@ const DataTable = () => {
                                         {(() => {
                                                 if (drone.state == 0) {
                                                 return (
-                                                //     <Button
-                                                //     variant="contained"
-                                                //     color="darkslategrey"
-                                                //     onClick={() => handleSacPinClick(drone)}
-                                                //   >
-                                                //     Đặt lịch sạc
-                                                //   </Button>
-                                                <StateModal drone={drone} />
+                                                     <StateModal drone={drone} />
                                                 )
                                                 } else if (drone.state == 1) {
                                                     return (
@@ -205,21 +219,18 @@ const DataTable = () => {
                                                                 
                                                             </td>
                                                             <td>
-                                                                    <h1>Btn thu hồi</h1>
+                                                                <div>
+                                                                <GetBackDrone drone={drone} />
+                                                                </div>
+                                                         
+                                                                
                                                             </td>
                                                         </tr>
                                                     )
                                                 }
                                                 else if (drone.state == 4) {
                                                 return (
-                                                //     <Button
-                                                //     variant="contained"
-                                                //     color="secondary"
-                                                //     onClick={() => handleMaintainClick(drone)}
-                                                //   >
-                                                //     Đặt bảo trì
-                                                //   </Button>
-                                                <StateModal drone={drone}/>
+                                                    <StateModal drone={drone}/>
                                                 ) 
                                                 }
                                             })()}

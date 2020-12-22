@@ -28,8 +28,11 @@ export default function StateModal(props){
         fetch(`http://skyrone.cf:6789/droneState/setDroneBroken/`+drone.idDrone)
             .then(response => response.json())
             .then(json => {
+              alert("Đã cập nhật thành công"); 
+              handleClose();
+              window.location.reload();
             });
-         };
+      };
       const save = () => {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
