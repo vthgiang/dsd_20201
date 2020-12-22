@@ -24,12 +24,6 @@ export const sidebarMenu = [
         route: '/flight-path',
       },
       {
-        key: 'FlightSchedule',
-        heading: 'Lịch bay',
-        icon: 'far fa-calendar-alt',
-        route: '/flight-schedule',
-      },
-      {
         key: 'DroneStatistic',
         heading: 'Thống kê drone',
         icon: 'fa fa-file-chart-line',
