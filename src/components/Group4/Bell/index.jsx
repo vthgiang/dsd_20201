@@ -22,20 +22,27 @@ const BellNotification = () => {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
+  const [user, setUser] = useState(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user));
 
   useEffect(() => {
-    newNotifications.forEach(item => { item.isNew = true })
-    setNotifications(newNotifications.concat(notifications));
+    newNotifications.forEach(item => { 
+      item.isNew = true;
+      if (!notifications.includes(item)){
+        setNotifications([item, ...notifications])
+      }
+    })
   }, [newNotifications])
 
   useEffect(() => {
-    console.log(`total changed: ${total} - ${first}`);
-    if (!first) setInterval(() => fetchNewNotification(0, 0), 10000);
+    if (!first) setInterval(() => fetchNewNotification(0, 0), 5000);
   }, [total])
 
   useEffect(() => {
-    loadData(0,5);
-  }, [])
+    if (user.user.id)
+      loadData(0, 5);
+    else
+      setUser(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user))
+  }, [user])
 
   const openMessage = (loading, loaded, timeout) => {
     const key = 'updatable';
@@ -52,12 +59,10 @@ const BellNotification = () => {
   const handleInfiniteOnLoad = () => {
     setLoading(true);
     if (notifications.length > 20) {
-      message.warning('Infinite List loaded all');
       setHasMore(false);
       setLoading(false);
       return;
     }
-    console.log(`${hasMore} -- ${loading}`)
     loadData(index, count);
   }
 
@@ -103,7 +108,7 @@ const BellNotification = () => {
 
 
   const getConfig = (start, to) => {
-    var user = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user);
+    // var user = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user);
     var config = {
       method: 'get',
       url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf_type',
@@ -118,7 +123,7 @@ const BellNotification = () => {
   }
 
   const fetchNewNotification = (start, to) => {
-    console.log("fetching notifications;")
+    console.log("fetching notifications")
     var config = getConfig(start, to);
     axios(config)
       .then(function (response) {
@@ -128,6 +133,7 @@ const BellNotification = () => {
           setDiff(newTotal - total);
           axios(getConfig(0, newTotal - total))
             .then(function (response) {
+              console.log(`new Notifications`, response.data.data.notifications);
               setNewNotifications(response.data.data.notifications);
             })
             .catch(function (error) {

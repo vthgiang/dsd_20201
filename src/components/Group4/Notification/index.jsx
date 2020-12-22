@@ -116,9 +116,7 @@ const MyList = () => {
 
   useEffect(() => {
     loadData(index, count);
-  }, [index, count])
-
-  
+  }, [index, count, type])
 
   const getConfig = (start, to) => {
     var user = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user);
@@ -129,18 +127,22 @@ const MyList = () => {
         index: start,
         count: to,
         userID: user.user.id,
-        type: 15
+        type: type
       }
     };
     return config;
   }
 
   const loadData = async (start, to) => {
-    console.log(`${index} -- ${count}`)
     var config = getConfig(start, to);
     axios(config)
       .then(function (response) {
-        setDatas(datas.concat(response.data.data.notifications));
+        if (index === 0) {
+          setDatas(response.data.data.notifications)
+        } else {
+          setDatas([...datas, ...response.data.data.notifications]);
+        }
+        setTotal(response.data.data.total)
       })
       .catch(function (error) {
         console.log(error);
@@ -149,8 +151,8 @@ const MyList = () => {
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
-    setIndex(index + count);
-    console.log(`index: ${index} -- count: ${count}`)
+    if (newPage > page)
+      setIndex(count * newPage)
   }
 
   const handleClick = (id) => {
@@ -189,6 +191,12 @@ const MyList = () => {
     })
   }
 
+  const reset = (type, index) => {
+    setType(type);
+    setIndex(index)
+    setPage(0)
+  }
+
   return <div >
     {/* <Button variant="contained" color="primary" onClick={handleOnclickSubcribe}>
       Subcribe notification
@@ -198,10 +206,10 @@ const MyList = () => {
         </Button> */}
     <Row>
       <Col span={20}><div className={classes.title}>Danh sách cảnh báo</div></Col>
-      <Col span={4}><FilterDropdown /></Col>
+      <Col span={4}><FilterDropdown reset={reset} /></Col>
     </Row>
     <List>
-      {datas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(data => (
+      {datas.slice(page * 5, page * 5 + rowsPerPage).map(data => (
         <ListItemStyle className={classes.item} onClick={() => handleClick(data._id)}>
           <ListItemAvatar className="name">
             <Avatar src={ref.prop[data.ref._type].img} className={classes.avatar} variant="rounded">

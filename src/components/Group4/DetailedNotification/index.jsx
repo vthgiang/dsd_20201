@@ -84,13 +84,16 @@ const DetailedNotification = () => {
   };
 
   useEffect(() => {
+    var user = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user);
+    console.log(`token: ${localStorage.getItem("token")}`)
+    console.log(`project-type: ${localStorage.getItem("project-type")}`)
     var config = {
       method: 'get',
       url: 'https://it4483-dsd04.herokuapp.com/get_ntf',
       headers: {
-        'Content-Type': 'application/json',
-        'api-token': '1fa6b94047ba20d998b44ff1a2c78bba',
-        'project-type': 'CHAY_RUNG'
+        "Content-Type": "application/json",
+        "api-token": localStorage.getItem("token"),
+        "project-type": localStorage.getItem("project-type")
       },
       params: { "idNtf": id }
     };
