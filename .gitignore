@@ -2,6 +2,7 @@
 package-lock.json
 # Build
 build/
+.vscode
 
 # Logs
 logs

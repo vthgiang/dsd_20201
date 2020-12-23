@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import {
   Row,
   Col,
@@ -51,6 +52,10 @@ const renderCustomizedLabel = ({
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#ff8279"];
 
 export default function UsersDashboard() {
+  const users = useSelector((state) => state.user.user);
+  const projectType = users.type;
+  const role = users.role;
+  console.log(users)   
   const [usersMetrics, setUsersMetrics] = React.useState(null);
   const chartData = React.useMemo(() => {
     if (!usersMetrics) return [];
@@ -76,7 +81,7 @@ export default function UsersDashboard() {
 
   React.useEffect(() => {
     const fetchAll = async () => {
-      const users = await getUsersMetrics();
+      const users = await getUsersMetrics(projectType);
       setUsersMetrics(users);
     };
 
