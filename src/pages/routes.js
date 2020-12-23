@@ -34,6 +34,7 @@ import LogObjMonitor from './LogObjMonitor';
 import LogRegion from './LogRegion';
 import LogStatistic from './LogStatistic';
 import LogUAV from './LogUAV';
+import LogDashboardPage from './LogTreeProject';
 //Payload
 import ListPayload from './Payload/PayloadManagement/List';
 import ListTypePayload from './Payload/PayloadType/List';
@@ -316,6 +317,10 @@ export const routes = [
   {
     path: '/log-uav',
     component: LogUAV,
+  },
+  {
+    path: '/log-dash-board-page',
+    component: LogDashboardPage,
   },
   {
     path: '/surveillance-domain-area',
