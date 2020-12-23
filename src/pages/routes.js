@@ -4,6 +4,9 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import ListUser from '../modules/user/components/listUser';
 import ListDepartment from '../modules/user/components/listDepartment';
 import ListUserMeta from '../modules/user/components/listUserMeta';
+import ListRole from '../modules/user/components/listRole';
+import ListPermission from '../modules/user/components/listPermission';
+import ListRolePermission from '../modules/user/components/listRolePermission';
 
 import ListMonitorCampaignPage from './FlightHub/ListMonitorCampaign';
 import CreateMonitorCampaignPage from './FlightHub/CreateMonitorCampaign';
@@ -23,6 +26,7 @@ import StatisticUser from './Statistic/User';
 import CreateReport from './Report/CreateReport';
 import ViewReport from './Report/ViewReport';
 import ManageReportTemplate from './Report/ManageReportTemplate';
+import Incident from './Incident';
 import MyList from '../components/Group4/Notification';
 import DetailedNotification from '../components/Group4/DetailedNotification';
 
@@ -38,6 +42,7 @@ import LogObjMonitor from './LogObjMonitor';
 import LogRegion from './LogRegion';
 import LogStatistic from './LogStatistic';
 import LogUAV from './LogUAV';
+import LogDashboardPage from './LogTreeProject';
 //Payload
 import ListPayload from './Payload/PayloadManagement/List';
 import ListTypePayload from './Payload/PayloadType/List';
@@ -59,6 +64,26 @@ import DScard from './Payload/PayloadSDcard';
 import ImageVideo from './ImageVideo';
 import Detail from './ImageVideo/detail';
 import Stream from './ImageVideo/stream';
+//monitored Object Group 05
+import CategoryMonitored from './MonitoredObject/Category/component';
+import MonitoredObject from './MonitoredObject/MonitoredObject/component';
+import MonitoredObjectCreate from './MonitoredObject/MonitoredObject/component/monitoredObjectCreate';
+import MonitoredObjectView from './MonitoredObject/MonitoredObject/component/MonitoredObjectView';
+// incident group 09
+import IncidentGroup9 from './Incident/Incident';
+import ImageGallery from './Incident/ImageGallery';
+import VideoGallery from './Incident/VideoGallery';
+import IncidentEdit from './Incident/Incident/edit';
+
+// dsd_01 drone
+import TableDrone from './TableDrone';
+import FlightPathDrone from './FLightPathDrone';
+import FlightPoint from './FlightPoint';
+import TableDroneState from './TableDroneState';
+import MapTest from './MapTest';
+import FlightPathManagement from './FlightPathManagement';
+import FlightSchedule from './FlightSchedule';
+import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
 
 export const routes = [
   {
@@ -71,29 +96,51 @@ export const routes = [
     component: () => <div>DroneManagement</div>,
   },
   {
-    path: '/drone-state',
-    component: () => <div>Tình trạng drone</div>,
+    path: '/drone-list',
+    component: TableDrone,
   },
   {
-    path: '/fly-setting',
-    component: () => <div>Thiết lập đường bay</div>,
+    path: '/drone-state',
+    component: TableDroneState,
+  },
+  {
+    path: '/my-map-test',
+    component: MapTest,
   },
   {
     path: '/drone-statistic',
     component: StatisticDrone,
   },
   {
+    path: '/flight-path',
+    component: FlightPathManagement,
+  },
+  // {
+  //   path: '/flight-schedule',
+  //   component: FlightSchedule,
+  // },
+
+  {
+    path: '/flight-point',
+    component: FlightPoint,
+  },
+  {
     path: '/flight-hub-monitor-campaigns/create',
     component: CreateMonitorCampaignPage,
   },
   {
-    path: '/flight-hub-monitor-campaigns/:id',
+    path: '/flight-hub-monitor-campaigns/update/:id',
     component: UpdateMonitorCampaignPage,
+  },
+  {
+    path: '/flight-hub-monitor-campaigns/:id',
+    component: DetailMonitorCampaignPage,
   },
   {
     path: '/flight-hub-monitor-campaigns',
     component: ListMonitorCampaignPage,
   },
+
   {
     path: '/flight-hub-other-params',
     component: ListLabelsPage,
@@ -190,6 +237,30 @@ export const routes = [
   {
     path: '/supervised-object',
     component: () => <div>Đối tượng giám sát</div>,
+  },
+  // view monitored Object
+  {
+    path: '/monitored-object-management/:option/:id',
+    component: MonitoredObjectView,
+    exact: true,
+  },
+  // create monitored Object
+  {
+    path: '/monitored-object-management/:option',
+    component: MonitoredObjectCreate,
+    exact: true,
+  },
+  //view List Monitored Object
+  {
+    path: '/monitored-object-management',
+    component: MonitoredObject,
+    exact: true,
+  },
+  //View Category Monitored
+  {
+    path: '/category-monitored-object-management',
+    component: CategoryMonitored,
+    exact: true,
   },
   {
     path: '/statistic',
@@ -296,6 +367,10 @@ export const routes = [
     component: LogUAV,
   },
   {
+    path: '/log-dash-board-page',
+    component: LogDashboardPage,
+  },
+  {
     path: '/surveillance-domain-area',
     component: () => <div>Quản lý khu vực</div>,
   },
@@ -319,7 +394,8 @@ export const routes = [
   },
   {
     path: '/handle-problem',
-    component: () => <div>Xử lý sự cố</div>,
+    component: Incident,
+    exact: true,
   },
   {
     path: '/user-management',
@@ -337,6 +413,39 @@ export const routes = [
     path: '/user-meta',
     component: ListUserMeta,
   },
+  {
+    path: '/incidents',
+    component: () => <IncidentGroup9 />,
+    exact: true,
+  },
+
+  {
+    path: '/incidents/:id',
+    component: () => <IncidentEdit />,
+    exact: true,
+  },
+  {
+    path: '/imageGallery',
+    component: () => <ImageGallery />,
+    exact: true,
+  },
+  {
+    path: '/videoGallery',
+    component: () => <VideoGallery />,
+  },
+  {
+    exact: true,
+    path: '/role',
+    component: ListRole,
+  },
+  {
+    path: '/permission',
+    component: ListPermission,
+  },
+  {
+    path: '/role-permission',
+    component: ListRolePermission,
+  },
 ];
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -344,7 +453,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
   return (
     // Show the component only when the user is logged in
-    // Otherwise, redirect the user to /signin page
+    // Otherwise, redirect the user to /sign in page
     <Route
       {...rest}
       render={(props) =>
@@ -355,7 +464,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 };
 
 export default () => (
-  <Fragment>
+  <Switch>
     {routes.map(({ path, exact = false, component: Component, ...rest }) => {
       return (
         <PrivateRoute
@@ -367,5 +476,5 @@ export default () => (
         />
       );
     })}
-  </Fragment>
+  </Switch>
 );

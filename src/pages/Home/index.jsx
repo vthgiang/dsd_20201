@@ -16,22 +16,22 @@ const Home = () => {
     }, []);
     const isLogin = useSelector(state => state.user.isLogin);
 
-    return (
-        <StyleHome>
-            <Layout className="layout">
-                <Header className="header">
-                    <Logo></Logo>
-                    {isLogin && <Navbar></Navbar>}
-                </Header>
-                <Content className="content">
-                    <div className="site-layout-content">
-                        <HomeContent />
-                    </div>
-                </Content>
-                <Footer className="footer">©2020 Designed by Group10</Footer>
-            </Layout>
-        </StyleHome>
-    );
+  return (
+    <StyleHome>
+      <Layout className="layout">
+        <Header className="header">
+          <Logo></Logo>
+          {isLogin && <Navbar></Navbar>}
+        </Header>
+        <Content className="content">
+          <div className="site-layout-content">
+            <HomeContent />
+          </div>
+        </Content>
+        <Footer className="footer" style={{bottom: 0}}>©2020 Designed by Group10</Footer>
+      </Layout>
+    </StyleHome>
+  );
 };
 
 export default Home;

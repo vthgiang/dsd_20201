@@ -5,6 +5,10 @@ export const StyleSidebarMenu = styled.div`
     display: flex;
     align-items: center;
     padding: 0 20px !important;
+
+    .anticon {
+      margin-right: 0;
+    }
   }
   .ant-menu-submenu {
     .ant-menu-submenu-title {
