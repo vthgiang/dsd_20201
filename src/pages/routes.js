@@ -18,11 +18,6 @@ import ManageArea from '../components/Aera/ManageArea';
 import Manage from '../components/SurveillanceDomain/Manage';
 import ManageEdit from '../components/SurveillanceDomain/ManageEdit';
 import Dashboard from './Dashboard';
-import StatisticDashboard from './Statistic/Dashboard';
-import StatisticDrone from './Statistic/Drone';
-import StatisticPayload from './Statistic/Payload';
-import StatisticProblem from './Statistic/Problem';
-import StatisticUser from './Statistic/User';
 import CreateReport from './Report/CreateReport';
 import ViewReport from './Report/ViewReport';
 import ManageReportTemplate from './Report/ManageReportTemplate';
@@ -106,10 +101,6 @@ export const routes = [
   {
     path: '/my-map-test',
     component: MapTest,
-  },
-  {
-    path: '/drone-statistic',
-    component: StatisticDrone,
   },
   {
     path: '/flight-path',
@@ -261,30 +252,6 @@ export const routes = [
     path: '/category-monitored-object-management',
     component: CategoryMonitored,
     exact: true,
-  },
-  {
-    path: '/statistic',
-    component: () => <div>Thống kê</div>,
-  },
-  {
-    path: '/dashboard-statistic',
-    component: StatisticDashboard,
-  },
-  {
-    path: '/drone-statistic',
-    component: StatisticDrone,
-  },
-  {
-    path: '/payload-statistic',
-    component: StatisticPayload,
-  },
-  {
-    path: '/trouble-statistic',
-    component: StatisticProblem,
-  },
-  {
-    path: '/user-statistic',
-    component: StatisticUser,
   },
   {
     path: '/report',

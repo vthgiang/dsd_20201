@@ -245,6 +245,4 @@ function Dashboard() {
   );
 }
 
-export default function App() {
-  return (<ControlledTabs />)
-};
+export default Dashboard;
