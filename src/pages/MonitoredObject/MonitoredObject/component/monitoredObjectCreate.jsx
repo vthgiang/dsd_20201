@@ -41,17 +41,12 @@ function MonitoredObjectView({ history }) {
  
   const getZoneAll = async () => {
     await axios({
-<<<<<<< HEAD
-      method: "GET",
-      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone?page=0`,       
-=======
       method: 'GET',
       url: `https://monitoredzoneserver.herokuapp.com/monitoredzone`,
       headers: {
         token: localStorage.getItem('token'),
         projectType: localStorage.getItem('project-type'),
       },
->>>>>>> e1e0309126596ce9735981e7b74aa60de6738201
     })
       .then((res) => {
         if (res.data) {
