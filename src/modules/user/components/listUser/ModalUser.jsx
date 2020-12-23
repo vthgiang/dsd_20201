@@ -232,11 +232,6 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode, 
 
     const renderSelectRole = () => (
         <Select disabled={mode == "detail"} className='select-box' value={user?.role} onChange={(value) => setUser({ ...user, role: value })} defaultValue='Chưa xác định' style={{ width: "100%" }}>
-            {loginUser && loginUser.role == "SUPER_ADMIN" && (
-                <Option key={0} value='SUPER_ADMIN'>
-                    Quản trị hệ thống
-                </Option>
-            )}
             {listRoles && listRoles.map((status, index) => {
                 return (
                     <Option key={index} value={status.code}>
@@ -249,6 +244,8 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode, 
 
     const renderSelectDepartment = () => (
         <Select
+            showSearch
+            optionFilterProp='children'
             disabled={mode == "detail"}
             className='select-box'
             value={user && user.department ? user.department.id : "Chưa xác định"}

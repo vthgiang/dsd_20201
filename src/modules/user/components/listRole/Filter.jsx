@@ -47,6 +47,7 @@ const Filter = ({ filter, setFilter, setVisible, setMode }) => {
                                 page_id: 0,
                             })
                         }
+                        value={filter.search}
                     />
                 </Col>
             </Row>
