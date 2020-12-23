@@ -18,6 +18,8 @@ const Filter = ({ filter, setFilter, listPermissions, listRoles }) => {
 
     const renderSelectRole = () => (
         <Select
+            showSearch
+            optionFilterProp='children'
             className='select-box'
             value={filter ? filter.role_id : "Chưa xác định"}
             onChange={(value) => setFilter({ ...filter, role_id: value })}
@@ -38,6 +40,8 @@ const Filter = ({ filter, setFilter, listPermissions, listRoles }) => {
 
     const renderSelectPermission = () => (
         <Select
+            showSearch
+            optionFilterProp='children'
             className='select-box'
             value={filter ? filter.permission_id : "Chưa xác định"}
             onChange={(value) => setFilter({ ...filter, permission_id: value })}

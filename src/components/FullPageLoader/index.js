@@ -1,10 +1,10 @@
 import React from "react";
-import Spinner from "../../resources/images/setting-loader.gif";
+import Spinner from "../../resources/images/loaderrube.gif";
 
 const FullPageLoader = () => {
     return (
-        <div className="fp-container" style={{align: 'center'}}>
-            <img src={Spinner} className="fp-loader" alt="loading" />
+        <div style={{align: 'center'}}>
+            <img src={Spinner} style={{align: 'center', width: "80vw"}} className="fp-loader" alt="loading" />
         </div>
     );
 };

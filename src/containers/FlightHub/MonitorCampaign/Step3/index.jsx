@@ -6,7 +6,6 @@ import {
   Form,
   Select,
   Row,
-  message,
   Spin,
   notification,
 } from 'antd';

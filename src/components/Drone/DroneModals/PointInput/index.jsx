@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form } from 'react-bootstrap';
+import './PointInput.css'
 
 PointInput.propTypes = {
     
@@ -13,7 +14,9 @@ function PointInput(props) {
         timeStop, setTimeStop,
         addPoint, newPoint,
         heightPoint, selectedZone,
-        setHeightPoint
+        setHeightPoint,
+        selectedObject,
+        monitoredObjectListLoading
     } = props;
 
     const [error, setError] = useState('');
@@ -52,9 +55,18 @@ function PointInput(props) {
                 </Form.Label>
                 <Form.Control type="number" onChange={(e)=>setHeightPoint(e.target.value)}  value={heightPoint} placeholder="m" />
             </Form.Group>
+            {selectedObject != null && (<Form.Group controlId="monitoredObject">
+                <Form.Text className="text-muted">
+                    <div className='border-blue'>
+                        <h6>Đối tượng giám sát</h6>
+                        <span className='color-name'>Tên: {selectedObject.name}</span><br/>
+                        <span className='color-height'>Độ cao: {selectedObject.height != null ? (selectedObject.height + " m") : "empty"}</span>
+                    </div>
+                </Form.Text>
+            </Form.Group>)}
             {error !== '' && (<Form.Group controlId="errorMessage">
                 <Form.Text className="text-muted">
-                    {error}
+                    <span className='error-message'>{error}</span>
                 </Form.Text>
             </Form.Group>)}
             <Button onClick={handleOkClick}>OK</Button>
