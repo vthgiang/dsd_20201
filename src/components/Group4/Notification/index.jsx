@@ -198,12 +198,12 @@ const MyList = () => {
   }
 
   return <div >
-    {/* <Button variant="contained" color="primary" onClick={handleOnclickSubcribe}>
+    <Button variant="contained" color="primary" onClick={handleOnclickSubcribe}>
       Subcribe notification
         </Button>
     <Button style={{ margin: 2 }} variant="contained" color="secondary" onClick={handleOnclickSendNotification}>
       Send notifications
-        </Button> */}
+        </Button>
     <Row>
       <Col span={20}><div className={classes.title}>Danh sách cảnh báo</div></Col>
       <Col span={4}><FilterDropdown reset={reset} /></Col>

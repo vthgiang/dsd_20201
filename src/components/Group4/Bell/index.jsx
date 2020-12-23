@@ -6,6 +6,13 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { ref } from '../config4';
 import { StyleListNotification } from './index.style';
 import { useHistory } from "react-router-dom";
+import {
+  createNotificationSubscription,
+  initializePushNotifications,
+  isPushNotificationSupported,
+  registerServiceWorker,
+  sendSubscriptionToPushServer
+} from '../../../services/pushNotifications';
 
 var axios = require('axios');
 
@@ -38,11 +45,34 @@ const BellNotification = () => {
   }, [total])
 
   useEffect(() => {
-    if (user.user.id)
+    if (user.user.id){
       loadData(0, 5);
+      subcribe();
+    }
     else
       setUser(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user))
+
   }, [user])
+
+
+  const subcribe = () => {
+    console.log("clicked to send subcription")
+    if (isPushNotificationSupported()) {
+      initializePushNotifications().then(result => {
+        if (result === "granted") {
+          console.log("start registering sw")
+          registerServiceWorker();
+          createNotificationSubscription().then(subscription => {
+            sendSubscriptionToPushServer({
+              subscription: subscription,
+              project_type: localStorage.getItem("project-type"),
+              userID: user.user.id
+            })
+          });
+        }
+      })
+    }
+  }
 
   const openMessage = (loading, loaded, timeout) => {
     const key = 'updatable';

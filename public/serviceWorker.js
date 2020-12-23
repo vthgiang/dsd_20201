@@ -11,12 +11,8 @@ function receivePushNotification(event) {
     actions: [{ action: "Detail", title: "View", icon: "https://via.placeholder.com/128/ff0000" }]
   };
   event.waitUntil(self.registration.showNotification(title, options));
-  const client = clients.get(event.clientId);
-  client.postMessage({
-    data: url,
-    text: text,
-    image: image,
-  });
+  var total = localStorage.getItem("total");
+  
 }
 
 function openPushNotification(event) {
