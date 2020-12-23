@@ -8,7 +8,7 @@ import incidentLevelService from "../../../services/group09/incidentLevelService
 import incidentStatusService from "../../../services/group09/incidentStatusService";
 import moment from "moment";
 import {SearchOutlined} from "@ant-design/icons";
-import StyleList from "../../Payload/PayloadManagement/List/index.style";
+import StyleList from "../index.style";
 
 let levels = [];
 const { SubMenu } = Menu;
@@ -209,39 +209,38 @@ const HomeDeDieu = ({ history }) => {
   }
 
   return(
-
       <StyleList>
         <Menu  mode="horizontal">
           <Menu.Item key="ncn1" icon={<EyeOutlined />}>
-            <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+            <a className="margin-left-24" href="https://ant.design" target="_blank" rel="noopener noreferrer">
               Nhóm chức năng 1
               <br/>
               Theo dõi giám sát sự cố
             </a>
           </Menu.Item>
           <Menu.Item key="ncn2" icon={<BarChartOutlined />}>
-            <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+            <a className="margin-left-24" href="https://ant.design" target="_blank" rel="noopener noreferrer">
               Nhóm chức năng 2
               <br/>
               Dữ liệu, tra cứu, thống kê
             </a>
           </Menu.Item>
           <Menu.Item key="ncn3" icon={<StockOutlined />}>
-            <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+            <a className="margin-left-24" href="https://ant.design" target="_blank" rel="noopener noreferrer">
               Nhóm chức năng 3
               <br/>
               Phân tích phát hiện sự cố
             </a>
           </Menu.Item>
           <Menu.Item key="ncn4" icon={<AppstoreAddOutlined />}>
-            <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+            <a className="margin-left-24" href="https://ant.design" target="_blank" rel="noopener noreferrer">
               Nhóm chức năng 4
               <br/>
                 Quản lý, điều khiển UAV
             </a>
           </Menu.Item>
           <Menu.Item key="ncn5" icon={<SettingOutlined />}>
-            <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+            <a className="margin-left-24" href="https://ant.design" target="_blank" rel="noopener noreferrer">
               Nhóm chức năng 5
               <br/>
               Quản trị và nâng cao
