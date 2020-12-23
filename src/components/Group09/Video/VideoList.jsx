@@ -83,7 +83,7 @@ const VideoList = ({ incidents = [], onChangeTags }) => {
     setFilteredVideo(incidents);
   }, [incidents]);
   return (
-    <div>
+    <div style = {{height: "500px"}}>
       <Row>
         <Col span={4}>
           <Button
