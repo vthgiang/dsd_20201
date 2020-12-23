@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 const SimpleRating = (props) => {
   const classes = useStyles();
   const { level } = props;
-  console.log(`level: ${level}`);
   return (
     <Box component="fieldset" mb={3} borderColor="transparent" className={classes.boxContainer} >
       <Grid

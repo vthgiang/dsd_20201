@@ -1,5 +1,5 @@
 const pushServerPublicKey = "BL-eBn1GmJUsvUaBuiretJuPyWuyiJqyazFBHEcZchR6EKGdVQE2axsaBD-oPj_Y_Q7upi5GuChjHiLfDJbQquY";
-const host = process.env.PUSH_SERVER_URL || "https://dsd-pushnotification-server.herokuapp.com"
+const host = process.env.PUSH_SERVER_URL || "https://it4483-dsd04.herokuapp.com"
 //const host = process.env.PUSH_SERVER_URL || "http://localhost:5000"
 // post function
 function post(path, body) {
