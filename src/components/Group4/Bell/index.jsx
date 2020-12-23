@@ -31,18 +31,18 @@ const BellNotification = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user));
 
-  useEffect(() => {
-    newNotifications.forEach(item => { 
-      item.isNew = true;
-      if (!notifications.includes(item)){
-        setNotifications([item, ...notifications])
-      }
-    })
-  }, [newNotifications])
+  // useEffect(() => {
+  //   newNotifications.forEach(item => { 
+  //     item.isNew = true;
+  //     if (!notifications.includes(item)){
+  //       setNotifications([item, ...notifications])
+  //     }
+  //   })
+  // }, [newNotifications])
 
-  useEffect(() => {
-    if (!first) setInterval(() => fetchNewNotification(0, 0), 5000);
-  }, [total])
+  // useEffect(() => {
+  //   // if (!first) setInterval(() => fetchNewNotification(0, 0), 5000);
+  // }, [total])
 
   useEffect(() => {
     if (user.user.id){
