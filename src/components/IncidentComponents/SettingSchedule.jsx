@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Table,
   Button,
@@ -10,11 +10,11 @@ import {
   Calendar,
   DatePicker,
   message,
-} from "antd";
-import "../Styles/StyleSettingSchedule.css";
-import axios from "axios";
-import moment from "moment";
-import URL_API from "./url";
+} from 'antd';
+import '../Styles/StyleSettingSchedule.css';
+import axios from 'axios';
+import moment from 'moment';
+import URL_API from './url';
 const { Option } = Select;
 const SettingSchedule = () => {
   const [dataSettingSchedule, setDataSettingSchedule] = useState([]);
@@ -29,23 +29,23 @@ const SettingSchedule = () => {
   const [checkboxSundayEdit, setCheckboxSundayEdit] = useState(false);
   const [listDayoffEdit, setListDayoffEdit] = useState([]);
 
-  const API_TOKEN = "4c901bcdba9f440a2a7c31c0bcbd78ec";
-  const CURRENT_TYPE = "LUOI_DIEN";
+  const API_TOKEN = '4c901bcdba9f440a2a7c31c0bcbd78ec';
+  const CURRENT_TYPE = 'LUOI_DIEN';
   const childrenDay = [];
   for (let i = 1; i <= 31; i++) {
     childrenDay.push(<Option key={i}>{i}</Option>);
   }
   const customFormat = (value) => {
-    return `Tháng ${value.format("MM/YYYY")}`;
+    return `Tháng ${value.format('MM/YYYY')}`;
   };
   const getDataSetting = () => {
     axios({
-      method: "get",
-      url: URL_API + "/schedule-setting/listing",
+      method: 'get',
+      url: URL_API + '/schedule-setting/listing',
       // url: URL_API + "/report/listing",
       headers: {
-        "api-token": API_TOKEN,
-        "project-type": CURRENT_TYPE,
+        'api-token': API_TOKEN,
+        'project-type': CURRENT_TYPE,
       },
     })
       .then(function (response) {
@@ -54,7 +54,7 @@ const SettingSchedule = () => {
         // setDataIncidents(response.data[0].tasks);
         response.data.map((item) => {
           if (item.off_days) {
-            let listOffDays = item.off_days.split(",");
+            let listOffDays = item.off_days.split(',');
             item.off_days = listOffDays;
           }
         });
@@ -72,12 +72,12 @@ const SettingSchedule = () => {
   };
   const submitEditItem = (item) => {
     axios({
-      method: "put",
-      url: URL_API + "/schedule-setting/update",
+      method: 'put',
+      url: URL_API + '/schedule-setting/update',
       // url: URL_API + "/report/listing",
       headers: {
-        "api-token": API_TOKEN,
-        "project-type": CURRENT_TYPE,
+        'api-token': API_TOKEN,
+        'project-type': CURRENT_TYPE,
       },
       params: {
         id: item.id,
@@ -122,16 +122,16 @@ const SettingSchedule = () => {
     //   });
   };
   const createNewItem = () => {
-    let month = valueDateEdit.split("/")[0];
-    let year = valueDateEdit.split("/")[1];
+    let month = valueDateEdit.split('/')[0];
+    let year = valueDateEdit.split('/')[1];
     setLoadingTable(true);
     axios({
-      method: "post",
-      url: URL_API + "/schedule-setting/set",
+      method: 'post',
+      url: URL_API + '/schedule-setting/set',
       // url: URL_API + "/report/listing",
       headers: {
-        "api-token": API_TOKEN,
-        "project-type": CURRENT_TYPE,
+        'api-token': API_TOKEN,
+        'project-type': CURRENT_TYPE,
       },
       data: {
         month: month,
@@ -162,13 +162,13 @@ const SettingSchedule = () => {
   const EditableCell = (itemBeforeEdit, onChange) => {
     return (
       <div className="itemSettingSelected">
-        <div style={{ display: "none" }}>Đang sửa bản ghi</div>
+        <div style={{ display: 'none' }}>Đang sửa bản ghi</div>
         <span>
           <DatePicker
             ref={refDatePickerEdit}
-            defaultValue={moment(valueDateEdit, "MM/YYYY")}
+            defaultValue={moment(valueDateEdit, 'MM/YYYY')}
             onChange={(date, dateString) => {
-              setValueDateEdit(moment(date).format("MM/YYYY"));
+              setValueDateEdit(moment(date).format('MM/YYYY'));
             }}
             picker="month"
             format={customFormat}
@@ -203,7 +203,7 @@ const SettingSchedule = () => {
               setListDayoffEdit(value);
             }}
             style={{ width: 200 }}
-            placeholder={"Ngày nghỉ trong tuần"}
+            placeholder={'Ngày nghỉ trong tuần'}
             defaultValue={listDayoffEdit ? listDayoffEdit : null}
           >
             {childrenDay}
@@ -223,7 +223,7 @@ const SettingSchedule = () => {
       target.isEditing = true;
       setIdItemEditing(idItem);
       setDataSettingSchedule(newData);
-      setValueDateEdit(target.month + "/" + target.year);
+      setValueDateEdit(target.month + '/' + target.year);
       setCheckboxSaturdayEdit(target.off_saturday);
       setCheckboxSundayEdit(target.off_sunday);
       setListDayoffEdit(target.off_days);
@@ -246,7 +246,7 @@ const SettingSchedule = () => {
   const columns = [
     {
       title: null,
-      dataIndex: "name",
+      dataIndex: 'name',
       render: (valueRow, item) => {
         return item.id && item.isEditing == true ? (
           EditableCell(item)
@@ -259,7 +259,7 @@ const SettingSchedule = () => {
           >
             <span>
               <DatePicker
-                defaultValue={moment(item.month + "/" + item.year, "MM/YYYY")}
+                defaultValue={moment(item.month + '/' + item.year, 'MM/YYYY')}
                 onChange={null}
                 picker="month"
                 format={customFormat}
@@ -280,7 +280,7 @@ const SettingSchedule = () => {
                 mode="multiple"
                 // onChange={{}}
                 style={{ width: 200 }}
-                placeholder={"Ngày nghỉ trong tuần"}
+                placeholder={'Ngày nghỉ trong tuần'}
                 defaultValue={item.off_days ? item.off_days : null}
                 disabled
               >
@@ -291,8 +291,8 @@ const SettingSchedule = () => {
               className="actionButtonItem"
               style={
                 item.selected == true
-                  ? { float: "right", marginRight: 5 }
-                  : { display: "none" }
+                  ? { float: 'right', marginRight: 5 }
+                  : { display: 'none' }
               }
               onClick={() => {
                 removeItem();
@@ -300,11 +300,11 @@ const SettingSchedule = () => {
             >
               Xóa
             </span>
-            <span style={item.selected == true ? {} : { display: "none" }}>
-              <span style={{ float: "right", marginRight: 5 }}> | </span>
+            <span style={item.selected == true ? {} : { display: 'none' }}>
+              <span style={{ float: 'right', marginRight: 5 }}> | </span>
               <span
                 className="actionButtonItem"
-                style={{ float: "right", marginRight: 5 }}
+                style={{ float: 'right', marginRight: 5 }}
                 onClick={() => {
                   starteditingItem(item.id);
                 }}
@@ -319,7 +319,7 @@ const SettingSchedule = () => {
             <span>
               <DatePicker
                 onChange={(date, dateString) => {
-                  setValueDateEdit(moment(date).format("MM/YYYY"));
+                  setValueDateEdit(moment(date).format('MM/YYYY'));
                 }}
                 picker="month"
                 format={customFormat}
@@ -351,7 +351,7 @@ const SettingSchedule = () => {
                   setListDayoffEdit(value);
                 }}
                 style={{ width: 200 }}
-                placeholder={"Ngày nghỉ trong tuần"}
+                placeholder={'Ngày nghỉ trong tuần'}
               >
                 {childrenDay}
               </Select>
@@ -364,7 +364,7 @@ const SettingSchedule = () => {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>Cấu hình lịch làm việc</h1>
+      <h1 style={{ textAlign: 'center' }}>Cấu hình lịch làm việc</h1>
       <div className="listSettingSchedule">
         <Spin spinning={loadingTable} tip="Loading...">
           <Table
@@ -383,7 +383,7 @@ const SettingSchedule = () => {
             rowClassName={(item) => {
               if (item.id == itemSelected) {
                 item.selected = true;
-                return "choosenItem";
+                return 'choosenItem';
               } else {
                 item.selected = false;
                 return null;
@@ -396,7 +396,7 @@ const SettingSchedule = () => {
           <div className="button-save">
             <Button
               type="primary"
-              style={{ float: "right", right: 30, width: 100 }}
+              style={{ float: 'right', right: 30, width: 100 }}
               disabled={creatingNewItem || idItemEditing ? false : true}
               onClick={() => {
                 if (idItemEditing) {
@@ -411,7 +411,7 @@ const SettingSchedule = () => {
             {creatingNewItem || idItemEditing ? (
               <Button
                 type="primary"
-                style={{ float: "right", right: 45, width: 100 }}
+                style={{ float: 'right', right: 45, width: 100 }}
                 disabled={creatingNewItem || idItemEditing ? false : true}
                 onClick={() => {
                   // if (idItemTokenEditing == null) {
@@ -451,7 +451,7 @@ const SettingSchedule = () => {
             ) : (
               <Button
                 type="primary"
-                style={{ float: "right", right: 45, width: 100 }}
+                style={{ float: 'right', right: 45, width: 100 }}
                 disabled={creatingNewItem || idItemEditing ? true : false}
                 onClick={() => {
                   dataSettingSchedule.map((item) => {

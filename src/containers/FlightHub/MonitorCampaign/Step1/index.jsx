@@ -15,9 +15,13 @@ const Step1 = ({ nextStep, data, handleChangeData }) => {
     form.setFieldsValue(data);
   }, [data, form]);
 
+  const projectType = localStorage.getItem('project-type');
+
   const onFinish = (values) => {
     handleChangeData(values);
     nextStep();
+    console.log(form);
+    console.log(data);
   };
 
   return (
@@ -35,26 +39,32 @@ const Step1 = ({ nextStep, data, handleChangeData }) => {
           label="Tên đợt giám sát"
           rules={[{ type: 'string', required: true }]}
         >
-          <Input placeholder="VD: Đọt giám sát rừng phòng hộ quý 1"></Input>
+          <Input placeholder="VD: Đợt giám sát rừng phòng hộ quý 1"></Input>
         </Form.Item>
-        <Form.Item
-          name="task"
-          label="Loại giám sát"
-          rules={[
-            {
-              type: 'string',
-              required: true,
-            },
-          ]}
-        >
-          <Select allowClear placeholder="Chọn loại giám sát">
-            {Object.keys(TASK).map((key) => (
-              <Select.Option key={TASK[key]} value={TASK[key]}>
-                {TASK[key]}
-              </Select.Option>
-            ))}
-          </Select>
-        </Form.Item>
+
+        {projectType === 'ALL_PROJECT' && (
+          <Form.Item
+            name="task"
+            label="Loại sự cố"
+            rules={[
+              {
+                type: 'string',
+                required: true,
+              },
+            ]}
+          >
+            <Select allowClear placeholder="Chọn loại sự cố">
+              {Object.keys(TASK).map((key) => {
+                return (
+                  <Select.Option key={key} value={TASK[key]}>
+                    {TASK[key]}
+                  </Select.Option>
+                );
+              })}
+            </Select>
+          </Form.Item>
+        )}
+
         <Form.Item
           name="timeRange"
           label="Thời gian"

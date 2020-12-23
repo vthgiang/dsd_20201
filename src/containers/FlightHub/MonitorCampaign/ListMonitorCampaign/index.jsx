@@ -19,6 +19,7 @@ import {
   ExclamationCircleOutlined,
   HistoryOutlined,
   PlusOutlined,
+  InfoOutlined 
 } from '@ant-design/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 import StyleListMonitorCampaign, { StyleSpinContainer } from './index.style';
@@ -77,8 +78,14 @@ const ListMonitorCampaign = () => {
 
   const goToUpdateMonitorCampaign = (item) => () => {
     const { _id } = item;
+    history.push(`/flight-hub-monitor-campaigns/update/${_id}`);
+  };
+
+  const goToDetailMonitorCampaign = (item) => () => {
+    const { _id } = item;
     history.push(`/flight-hub-monitor-campaigns/${_id}`);
   };
+
 
   const goToCreate = () => {
     history.push(`/flight-hub-monitor-campaigns/create`);
@@ -159,7 +166,7 @@ const ListMonitorCampaign = () => {
       sorter: (a, b) => 1,
       render: (data = []) => {
         return data.map((elem) => {
-          const { name, createdAt } = elem.content;
+          const { name, createdAt } = elem;
           return <div key={createdAt.toString()}>{name}</div>;
         });
       },
@@ -204,6 +211,13 @@ const ListMonitorCampaign = () => {
       render: (data, record, index) => {
         return (
           <Space size={4}>
+            <Button
+              size="small"
+              type="primary"
+              onClick={goToDetailMonitorCampaign(record)}
+            >
+              Chi tiết
+            </Button>
             <Button
               icon={<EditOutlined />}
               size="small"
