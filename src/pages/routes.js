@@ -65,6 +65,7 @@ import IncidentGroup9 from "./Incident/Incident";
 import ImageGallery from "./Incident/ImageGallery";
 import VideoGallery from "./Incident/VideoGallery";
 import IncidentEdit from "./Incident/Incident/edit";
+import dedieuthongke from "./Payload/StatisticDedieu";
 
 // dsd_01 drone
 import TableDrone from './TableDrone';
@@ -164,8 +165,8 @@ export const routes = [
     component: AddSignupPayloadDrone,
   },
   {
-    path: '/payload-configuration',
-    component: PayloadSetting,
+    path: '/sucodedieu-statistics',
+    component: dedieuthongke,
   },
   /* {
     path: '/payload-maintenance',
@@ -204,6 +205,10 @@ export const routes = [
   {
     path: '/payload-statistic-fix',
     component: PayloadStatisticDroneFixing,
+  },
+  {
+    path: '/payload-configuration',
+    component: PayloadSetting,
   },
 
   {
