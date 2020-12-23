@@ -8,12 +8,12 @@ export const STEPS = [
   { title: 'Bước 1', description: 'Tên đợt giám sát', content: Step1 },
   {
     title: 'Bước 2',
-    description: 'Chọn dạnh sách drone tham gia',
+    description: 'Chọn đối tượng và miền giám sát',
     content: Step2,
   },
   {
     title: 'Bước 3',
-    description: 'Chọn đối tượng và miền giám sát',
+    description: 'Chọn dạnh sách drone tham gia',
     content: Step3,
   },
   { title: 'Bước 4', description: 'Cấu hình lưu trữ', content: Step4 },

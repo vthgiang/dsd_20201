@@ -525,6 +525,7 @@ class Manage extends React.Component {
   }
 
   render() {
+    const { name = '' } = this.state.incident || {};
     return (
       <div className="main">
         <div className="filter">
@@ -584,7 +585,7 @@ class Manage extends React.Component {
                 <table className="table table-hover table-responsive table-borderless">
                   <tr>
                     <th style={{ width: '50%' }}>Loại sự cố</th>
-                    <td>{this.state.incident && this.state.incident.name}</td>
+                    <td>{name}</td>
                   </tr>
                   <tr>
                     <th style={{ width: '50%' }}>Khu vực giám sát</th>
