@@ -82,6 +82,11 @@ import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
 
 export const routes = [
   {
+    path: '/',
+    component: Dashboard,
+    exact: true,
+  },
+  {
     path: '/dashboard',
     component: Dashboard,
     exact: true,
