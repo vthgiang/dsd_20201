@@ -6,7 +6,6 @@ import useBaseHook from "../../../hooks/BaseHooks";
 import incidentService from "../../../services/group09/incidentService";
 import incidentLevelService from "../../../services/group09/incidentLevelService";
 import incidentStatusService from "../../../services/group09/incidentStatusService";
-import { Menu } from 'antd';
 import moment from "moment";
 import {SearchOutlined} from "@ant-design/icons";
 import StyleList from "../index.style";
