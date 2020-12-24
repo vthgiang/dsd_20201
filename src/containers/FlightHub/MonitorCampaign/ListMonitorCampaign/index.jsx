@@ -185,7 +185,7 @@ const ListMonitorCampaign = () => {
       width: '7.5%',
       align: 'center',
       sorter: (a, b) => a.mechanism.localeCompare(b.mechanism),
-      render: (data) => <span>{data === 'auto' ? 'Tự động' : 'Thủ công'}</span>,
+      render: (data) => <span>{data === 'AUTO' ? 'Tự động' : 'Thủ công'}</span>,
     },
     {
       dataIndex: 'metadataType',
