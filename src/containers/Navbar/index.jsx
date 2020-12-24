@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   StyleNavItem,
   StyleUserName,
@@ -13,6 +13,8 @@ import { actions } from "../../modules/user/store";
 import { useHistory, useLocation } from "react-router-dom";
 import { userHost } from "../../modules/user/config/UserConfig";
 import ModalUser from "../../modules/user/components/screens/EditProfile";
+
+import { useUserState } from '../../hooks/useUserState';
 
 const Navbar = () => {
   const dispatch = useDispatch();

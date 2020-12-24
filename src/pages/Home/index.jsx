@@ -9,10 +9,12 @@ import { useSelector } from "react-redux";
 const { Header, Content, Footer } = Layout;
 
 const Home = () => {
-  useEffect(() => {
-    document.title = "Home";
-  }, []);
-  const isLogin = useSelector(state => state.user.isLogin);
+    const user = useSelector((state) => state.user);
+    console.log('USER DATA LOGIN: ', user);
+    useEffect(() => {
+        document.title = "Home";
+    }, []);
+    const isLogin = useSelector(state => state.user.isLogin);
 
   return (
     <StyleHome>

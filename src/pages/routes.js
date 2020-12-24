@@ -18,6 +18,9 @@ import ManageArea from '../components/Aera/ManageArea';
 import Manage from '../components/SurveillanceDomain/Manage';
 import ManageEdit from '../components/SurveillanceDomain/ManageEdit';
 import Dashboard from './Dashboard';
+import CreateReport from './Report/CreateReport';
+import ViewReport from './Report/ViewReport';
+import ManageReportTemplate from './Report/ManageReportTemplate';
 import Incident from './Incident';
 import MyList from '../components/Group4/Notification';
 import DetailedNotification from '../components/Group4/DetailedNotification';
@@ -78,6 +81,11 @@ import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
 
 
 export const routes = [
+  {
+    path: '/',
+    component: Dashboard,
+    exact: true,
+  },
   {
     path: '/dashboard',
     component: Dashboard,
@@ -251,8 +259,20 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/statistic',
-    component: () => <div>Báo cáo thống kê</div>,
+    path: '/report',
+    component: () => <div>Thống kê</div>,
+  },
+  {
+    path: '/create-report',
+    component: CreateReport,
+  },
+  {
+    path: '/view-report',
+    component: ViewReport,
+  },
+  {
+    path: '/manage-report-template',
+    component: ManageReportTemplate,
   },
   {
     path: '/problems',

@@ -10,10 +10,12 @@ import { removeVietnameseTones } from '../../../../helpers/removeVietnameseTones
 
 import { Input } from 'antd';
 import { HeatMapOutlined } from '@ant-design/icons';
+import convertTaskToProjectType from './service';
 const axios = require('axios');
 const { Search } = Input;
 
 const Map = ({
+  task,
   onChangeLocation,
   onChangeMonitoredZone,
   monitoredZoneInit,
@@ -37,13 +39,23 @@ const Map = ({
 
   const getMonitoredZone = async () => {
     setLoadingMonitoredZone(true);
+    const projectType = localStorage.getItem('project-type');
+
+    let type;
+    if (projectType === 'ALL_PROJECT') {
+      type = convertTaskToProjectType(task);
+    } else {
+      type = projectType;
+    }
+
     await axios({
       method: 'GET',
-      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone`,
+      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone/incident`,
       headers: {
         token: localStorage.getItem('token'),
-        projectType: localStorage.getItem('project-type'),
+        projectType,
       },
+      params: { type },
     })
       .then((res) => {
         if (res.data) {
