@@ -15,3 +15,17 @@ button.btn-view:active {
 td.td-action {
     display: flex;
 }
+button.btn-edit{
+    border: none;
+    color: #542ff7;
+    background-color: transparent;
+}
+button.btn-edit:focus {
+    border: none;
+    outline:0;  
+}
+button.btn-edit:active {
+    border: none;
+    color: rgb(184, 163, 241);
+    outline:0;  
+}

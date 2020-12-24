@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'react-bootstrap';
 import "./FlightPathList.css";
+import EditFlightPathModal from '../DroneModals/EditFlightPathModal';
 
 FlightPathList.propTypes = {
     
 };
 
-function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath}) {
+function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath, baseIndex, pageReload}) {
 
     return (
         <Table striped bordered hover size="sm">
@@ -22,16 +23,17 @@ function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath}) {
             </thead>
             <tbody>
                 {flightPaths.map((item, index) => (<tr key={item.id}>
-                    <td>{index+1}</td>
+                    <td>{baseIndex + index + 1}</td>
                     <td>{item.name}</td>
                     <td>{item.monitoredAreaName}</td>
-                    <td>{item.monitoredZoneCode}</td>
+                    <td>{item.monitoredZoneName}</td>
                     <td className="td-action"><button className="btn-view" onClick={()=>viewFlightPath(item)}>
                         <i className="far fa-eye"></i>
                     </button>{"/"}
                     <button className="btn-delete" onClick={()=>handleDeleteFlightPath(item)}>
                         <i class="fas fa-trash-alt"></i>
-                    </button>
+                    </button>{"/"}
+                    <EditFlightPathModal flightPath={item} pageReload={pageReload}/>
                     </td>
                 </tr>))}
             </tbody>
