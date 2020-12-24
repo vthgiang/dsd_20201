@@ -13,21 +13,27 @@ export const sidebarMenu = [
     subMenu: [
       {
         key: 'DroneState',
-        heading: 'Tình trạng drone',
+        heading: 'Danh sách drone',
         icon: 'fal fa-monitor-heart-rate',
-        route: '/drone-state',
+        route: '/drone-list',
       },
       {
-        key: 'FlySetting',
-        heading: 'Thiết lập đường bay',
-        icon: 'fa fa-user-chart',
-        route: '/fly-setting',
+        key: 'FlightPathManagement',
+        heading: 'Quản lý đường bay',
+        icon: 'fas fa-route',
+        route: '/flight-path',
+      },
+      {
+        key: 'FlightSchedule',
+        heading: 'Lịch bay',
+        icon: 'far fa-calendar-alt',
+        route: '/flight-schedule',
       },
       {
         key: 'DroneStatistic',
         heading: 'Thống kê drone',
         icon: 'fa fa-file-chart-line',
-        route: '/drone-statistic',
+        route: '/drone-state',
       },
     ],
   },
@@ -286,18 +292,42 @@ export const sidebarMenu = [
         heading: 'Quản lý người dùng',
         icon: 'fa fa-users',
         route: '/user',
+        resource: 'User.find'
       },
       {
         key: 'DepartmentSetting',
         heading: 'Quản lý phòng ban',
         icon: 'fa fa-building',
         route: '/department',
+        resource: 'Department.find'
       },
       {
         key: 'UserMetaSetting',
         heading: 'Lịch sử người dùng',
         icon: 'fa fa-history',
         route: '/user-meta',
+        resource: 'UserMeta.find'
+      },
+      {
+        key: 'RoleSetting',
+        heading: 'Quản lý chức vụ',
+        icon: 'fa fa-users-cog',
+        route: '/role',
+        resource: 'Role.system'
+      },
+      {
+        key: 'PermissionSetting',
+        heading: 'Quản lý quyền',
+        icon: 'fa fa-lock',
+        route: '/permission',
+        resource: 'Permission.system'
+      },
+      {
+        key: 'RolePermission',
+        heading: 'Phân quyền',
+        icon: 'fa fa-user-lock',
+        route: '/role-permission',
+        resource: 'RolePermission.system'
       },
     ],
   },

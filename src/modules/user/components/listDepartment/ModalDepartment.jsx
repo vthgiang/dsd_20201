@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import moment from "moment";
 const { Option } = Select;
 
-const ModalUser = ({ departmentId, setVisible, visible, fetchListDepartment, mode, setMode }) => {
+const ModalDepartment = ({ departmentId, setVisible, visible, fetchListDepartment, mode, setMode }) => {
     const [department, setDepartment] = useState({});
     const [message, setMessage] = useState({});
     const loginUser = useSelector((state) => state.user.user);
@@ -51,7 +51,7 @@ const ModalUser = ({ departmentId, setVisible, visible, fetchListDepartment, mod
         if (!validateData()) {
             return;
         }
-        const dataDepartment = buildUserData();
+        const dataDepartment = buildDepartmentData();
         var description = "";
         if (departmentId && departmentId != "") {
             dataDepartment.id = departmentId;
@@ -69,9 +69,15 @@ const ModalUser = ({ departmentId, setVisible, visible, fetchListDepartment, mod
             });
             handleCloseModal();
         } else {
+            var errorMessage = "";
+            if (res.message && res.message != "") {
+                errorMessage = res.message;
+            } else {
+                errorMessage = res.result;
+            }
             notification.error({
-                message: "Lỗi",
-                description: res.message,
+                message: "",
+                description: errorMessage,
             });
         }
     };
@@ -99,7 +105,7 @@ const ModalUser = ({ departmentId, setVisible, visible, fetchListDepartment, mod
         return retval;
     });
 
-    const buildUserData = () => {
+    const buildDepartmentData = () => {
         var data = {};
         var columns = ["name", "description"];
         columns.forEach((element) => {
@@ -223,4 +229,4 @@ const ModalUser = ({ departmentId, setVisible, visible, fetchListDepartment, mod
     );
 };
 
-export default ModalUser;
+export default ModalDepartment;

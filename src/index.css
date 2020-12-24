@@ -45,6 +45,11 @@ body {
   font-size: 1.25em !important;
 }
 
+.sticky-column {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0
+}
 .pin {
   width: 15px;
   height: 15px;

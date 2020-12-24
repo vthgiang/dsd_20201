@@ -31,7 +31,7 @@ function CatMonitorCreate({ value, handleChange, setCatMonitored, option }) {
   return (
     <div
       className="modal fade"
-      id="modalCreateCatObject"
+      id="modalCreate"
       tabIndex="-1"
       role="dialog"
       aria-labelledby="exampleModalLongTitle"
