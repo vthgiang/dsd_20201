@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { compose, withProps } from "recompose";
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polyline, Circle } from "react-google-maps";
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polyline, Circle, InfoWindow } from "react-google-maps";
 import { IMAGES } from '../../constants';
 
 const MyMapComponent = compose(
@@ -60,6 +60,13 @@ const MyMapComponent = compose(
                     fillOpacity: 1,
                 }}
             />
+            <InfoWindow
+                position={{ lat: 20.89933610536628, lng: 105.9329881666537 }}
+            >
+                <div>
+                    <p>loading...</p>
+                </div>
+            </InfoWindow>
         </GoogleMap>
     )}
 )

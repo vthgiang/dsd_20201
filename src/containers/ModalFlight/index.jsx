@@ -55,9 +55,7 @@ export default function TransitionsModal(props) {
       .then(response => response.json())
       .then(json => {
         setDrones(json.data);
-        console.log(json.data);
         setOpen(true);
-        initFormData(json.data);
       });
   };
 
@@ -66,45 +64,11 @@ export default function TransitionsModal(props) {
       
   };
 
-  const handleChangeInput = (val) => {
-    return val;
-  }
-
   const handleClose = () => {
     setOpen(false);
   };
-  const delteDrone = () => {
-    fetch("http://skyrone.cf:6789/drone/delete/" + props.id)
-      .then(response => response.json())
-      .then(json => {
-        setDrones(json);
-        alert("Đã xóa thành công")
-        setOpen(false);
-        window.location.reload();
-      });
-  };
-  const initFormData = (json) => {
 
-    setName(json.name);
-    setBrand(json.brand);
-    setColor(json.color);
-    setDimensions(json.dimensions);
-    setMaxFlightHeight(json.maxFlightHeight);
-    setMaxFlightRange(json.maxFlightRange);
-    setMaxFlightSpeed(json.maxFlightSpeed);
-    setMaxFlightTime(json.maxFlightTime);
-    setBattery(json.rangeBattery);
-    console.log('name '+json.brand)
-  }
-  const [name, setName] = useState("NGOC ANH");
-  const [brand, setBrand] = useState(drones.brand);
-  const [color, setColor] = useState(drones.color);
-  const [dimensions, setDimensions] = useState(drones.dimensions);
-  const [maxFlightHeight, setMaxFlightHeight] = useState(drones.maxFlightHeight);
-  const [maxFlightRange, setMaxFlightRange] = useState(drones.maxFlightRange);
-  const [maxFlightSpeed, setMaxFlightSpeed] = useState(drones.maxFlightSpeed);
-  const [maxFlightTime, setMaxFlightTime] = useState(drones.maxFlightTime);
-  const [rangeBattery, setBattery] = useState(drones.rangeBattery);
+
 
   return (
     <div>
@@ -131,27 +95,12 @@ export default function TransitionsModal(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Id# : {props.id} </h2>
-            <Row >
-              <Col>
-              <h3 id="transition-modal-title">Tọa độ Lat :  {drones.locationLat}</h3>
-              </Col>
-              <Col>
-              <h3 id="transition-modal-title">Tọa độ Lng :  {drones.locationLng}</h3>
-              </Col>
-            </Row>
+            <h3 id="transition-modal-title">Tọa độ Lat :  {drones.locationLat}</h3>
+            <h3 id="transition-modal-title">Tọa độ Lng :  {drones.locationLng}</h3>
             <h3 id="transition-modal-title">Độ cao (m) :  {drones.heightFlight}</h3>
             {/* <h3 id="transition-modal-title">Thời gian đã bay :  {drones.time}</h3> */}
-            <h3 id="transition-modal-title">Tốc độ bay :  {drones.speed}</h3>
-            <h3 id="transition-modal-title">Phần trăm pin :  {drones.percentBattery}</h3>
-            <div className={classes.divButton}>
-              <Button
-                variant="contained"
-                color="secondary"
-                className={classes.button}
-              >
-               Thu Hồi 
-              </Button>
-             </div>
+            <h3 id="transition-modal-title">Tốc độ bay :  {drones.speed} m/phút</h3>
+            <h3 id="transition-modal-title">Phần trăm pin :  {drones.percentBattery} %</h3>
           </div>
         </Fade>
       </Modal>
