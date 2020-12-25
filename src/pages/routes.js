@@ -18,6 +18,9 @@ import ManageArea from '../components/Aera/ManageArea';
 import Manage from '../components/SurveillanceDomain/Manage';
 import ManageEdit from '../components/SurveillanceDomain/ManageEdit';
 import Dashboard from './Dashboard';
+import CreateReport from './Report/CreateReport';
+import ViewReport from './Report/ViewReport';
+import ManageReportTemplate from './Report/ManageReportTemplate';
 import Incident from './Incident';
 import MyList from '../components/Group4/Notification';
 import DetailedNotification from '../components/Group4/DetailedNotification';
@@ -62,11 +65,10 @@ import MonitoredObject from './MonitoredObject/MonitoredObject/component';
 import MonitoredObjectCreate from './MonitoredObject/MonitoredObject/component/monitoredObjectCreate';
 import MonitoredObjectView from './MonitoredObject/MonitoredObject/component/MonitoredObjectView';
 // incident group 09
-import IncidentGroup9 from './Incident/Incident';
-import ImageGallery from './Incident/ImageGallery';
-import VideoGallery from './Incident/VideoGallery';
-import IncidentEdit from './Incident/Incident/edit';
-
+import IncidentGroup9 from "./Incident/Incident";
+import ImageGallery from "./Incident/ImageGallery";
+import VideoGallery from "./Incident/VideoGallery";
+import IncidentEdit from "./Incident/Incident/edit";
 // dsd_01 drone
 import TableDrone from './TableDrone';
 import FlightPathDrone from './FLightPathDrone';
@@ -77,7 +79,13 @@ import FlightPathManagement from './FlightPathManagement';
 import FlightSchedule from './FlightSchedule';
 import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
 
+
 export const routes = [
+  {
+    path: '/',
+    component: Dashboard,
+    exact: true,
+  },
   {
     path: '/dashboard',
     component: Dashboard,
@@ -251,8 +259,20 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/statistic',
-    component: () => <div>Báo cáo thống kê</div>,
+    path: '/report',
+    component: () => <div>Thống kê</div>,
+  },
+  {
+    path: '/create-report',
+    component: CreateReport,
+  },
+  {
+    path: '/view-report',
+    component: ViewReport,
+  },
+  {
+    path: '/manage-report-template',
+    component: ManageReportTemplate,
   },
   {
     path: '/problems',

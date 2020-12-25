@@ -155,10 +155,30 @@ export const sidebarMenu = [
     ],
   },
   {
-    key: 'GeneralStatistic',
-    heading: 'Báo cáo thống kê',
-    icon: 'fas fa-chart-line',
-    route: '/statistic',
+    key: 'GeneralReport',
+    heading: 'Báo cáo',
+    icon: 'fas fa-book',
+    route: '/report',
+    subMenu: [
+      {
+        key: 'CreateReport',
+        heading: 'Tạo báo cáo',
+        icon: 'fas fa-drone-alt',
+        route: '/create-report',
+      },
+      {
+        key: 'ViewReport',
+        heading: 'Xem báo cáo',
+        icon: 'fas fa-drone-alt',
+        route: '/view-report',
+      },
+      {
+        key: 'ManageReportTemplate',
+        heading: 'Quản lý mẫu báo cáo',
+        icon: 'fas fa-drone-alt',
+        route: '/manage-report-template',
+      },
+    ],
   },
   {
     key: 'Warning',

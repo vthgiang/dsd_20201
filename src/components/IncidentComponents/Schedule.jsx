@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import '../Styles/StyleListIncidents.css';
-import { Table, Modal, Button, Input, Space, Spin } from 'antd';
-import Highlighter from 'react-highlight-words';
-import { SearchOutlined } from '@ant-design/icons';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import "../Styles/StyleListIncidents.css";
+import { Table, Modal, Button, Input, Space, Spin } from "antd";
+import Highlighter from "react-highlight-words";
+import { SearchOutlined } from "@ant-design/icons";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import {
   CheckOutlined,
   CloseOutlined,
   InfoCircleOutlined,
-} from '@ant-design/icons';
-import axios from 'axios';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+} from "@ant-design/icons";
+import axios from "axios";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 // import URL_API from "./url";
-import '../Styles/StyleSchedule.css';
-import URL_API from './url';
+import "../Styles/StyleSchedule.css";
+import URL_API from "./url";
 
 const Schedule = () => {
   const [dataWorkings, setDataWorking] = useState([]);
@@ -33,10 +33,10 @@ const Schedule = () => {
 
   const { pathname } = useLocation();
   const codeIncidents = {
-    fire: '222222',
-    dike: '111111',
-    tree: '333333',
-    highVoltageGrid: '000000',
+    fire: "222222",
+    dike: "111111",
+    tree: "333333",
+    highVoltageGrid: "000000",
   };
   useEffect(() => {
     // console.log(
@@ -45,8 +45,8 @@ const Schedule = () => {
     //   curentDate.getFullYear()
     // );
     axios({
-      method: 'get',
-      url: URL_API + '/schedule/detail-day',
+      method: "get",
+      url: URL_API + "/schedule/detail-day",
       // url: URL_API + "/report/listing",
       params: {
         day: curentDate.getDate(),
@@ -74,49 +74,49 @@ const Schedule = () => {
       confirm,
       clearFilters,
     }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          // ref={node => {
-          //   this.searchInput = node;
-          // }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
+        <div style={{ padding: 8 }}>
+          <Input
+            // ref={node => {
+            //   this.searchInput = node;
+            // }}
+            placeholder={`Search ${dataIndex}`}
+            value={selectedKeys[0]}
+            onChange={(e) =>
+              setSelectedKeys(e.target.value ? [e.target.value] : [])
+            }
+            onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            style={{ width: 188, marginBottom: 8, display: "block" }}
+          />
+          <Space>
+            <Button
+              type="primary"
+              onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+              icon={<SearchOutlined />}
+              size="small"
+              style={{ width: 90 }}
+            >
+              Search
           </Button>
-          <Button
-            onClick={() => handleReset(clearFilters)}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Reset
+            <Button
+              onClick={() => handleReset(clearFilters)}
+              size="small"
+              style={{ width: 90 }}
+            >
+              Reset
           </Button>
-        </Space>
-      </div>
-    ),
+          </Space>
+        </div>
+      ),
     filterIcon: (filtered) => (
-      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
+      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
     ),
     onFilter: (value, record) =>
       record[dataIndex]
         ? record[dataIndex]
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase())
-        : '',
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
+        : "",
     // onFilterDropdownVisibleChange: visible => {
     //   if (visible) {
     //     setTimeout(() => this.searchInput.select(), 100);
@@ -125,14 +125,14 @@ const Schedule = () => {
     render: (text) =>
       searchedColumn === dataIndex ? (
         <Highlighter
-          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
           searchWords={[searchText]}
           autoEscape
-          textToHighlight={text ? text.toString() : ''}
+          textToHighlight={text ? text.toString() : ""}
         />
       ) : (
-        text
-      ),
+          text
+        ),
   });
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -143,35 +143,35 @@ const Schedule = () => {
 
   const handleReset = (clearFilters) => {
     clearFilters();
-    setSearchText('');
+    setSearchText("");
   };
 
   const columns = [
     {
-      title: 'Mã nhân viên',
-      dataIndex: 'employee_id',
+      title: "Mã nhân viên",
+      dataIndex: "employee_id",
       sorter: (a, b) => b.employee_id - a.employee_id,
-      sortDirections: ['descend'],
-      ...getColumnSearchProps('employee_id'),
+      sortDirections: ["descend"],
+      ...getColumnSearchProps("employee_id"),
     },
     {
-      title: 'Tên nhân viên',
-      dataIndex: 'name',
+      title: "Tên nhân viên",
+      dataIndex: "name",
       sorter: (a, b) => b.name.charCodeAt(0) - a.name.charCodeAt(0),
-      sortDirections: ['descend'],
-      ...getColumnSearchProps('name'),
+      sortDirections: ["descend"],
+      ...getColumnSearchProps("name"),
     },
   ];
 
   const getListWork = (value, event) => {
     // console.log(value);
     setLoadingTable(true);
-    setInputManv('');
-    setInputTennv('');
+    setInputManv("");
+    setInputTennv("");
     setCurrentDate(value);
     axios({
-      method: 'get',
-      url: URL_API + '/schedule/detail-day',
+      method: "get",
+      url: URL_API + "/schedule/detail-day",
       params: {
         day: value.getDate(),
         month: value.getMonth() + 1,
@@ -191,6 +191,7 @@ const Schedule = () => {
       });
   };
 
+
   return (
     <div class="flex-container">
       <div class="flex-item-left">
@@ -201,10 +202,9 @@ const Schedule = () => {
         />
       </div>
       <div class="flex-item-right">
-        <div class="header" onClick={() => {}}>
-          {`Lịch làm việc ngày ${curentDate.getDate()} tháng ${
-            curentDate.getMonth() + 1
-          } năm ${curentDate.getFullYear()}`}
+        <div class="header" onClick={() => { }}>
+          {`Lịch làm việc ngày ${curentDate.getDate()} tháng ${curentDate.getMonth() + 1
+            } năm ${curentDate.getFullYear()}`}
         </div>
         <div>
           <Spin spinning={loadingTable} tip="Loading...">

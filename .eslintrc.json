@@ -1,0 +1,21 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb"
+  ],
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "avoidEscape": true,
+    "allowTemplateLiterals": true,
+    "react/jsx-one-expression-per-line": "off",
+    "react/no-array-index-key": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "max-len": "off"
+  }
+}

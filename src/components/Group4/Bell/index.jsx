@@ -6,6 +6,13 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { ref } from '../config4';
 import { StyleListNotification } from './index.style';
 import { useHistory } from "react-router-dom";
+import {
+  createNotificationSubscription,
+  initializePushNotifications,
+  isPushNotificationSupported,
+  registerServiceWorker,
+  sendSubscriptionToPushServer
+} from '../../../services/pushNotifications';
 
 var axios = require('axios');
 
@@ -21,20 +28,51 @@ const BellNotification = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
+  const [user, setUser] = useState(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user));
+
+  // useEffect(() => {
+  //   newNotifications.forEach(item => { 
+  //     item.isNew = true;
+  //     if (!notifications.includes(item)){
+  //       setNotifications([item, ...notifications])
+  //     }
+  //   })
+  // }, [newNotifications])
+
+  // useEffect(() => {
+  //   // if (!first) setInterval(() => fetchNewNotification(0, 0), 5000);
+  // }, [total])
 
   useEffect(() => {
-    newNotifications.forEach(item => { item.isNew = true })
-    setNotifications(newNotifications.concat(notifications));
-  }, [newNotifications])
+    if (user.user.id){
+      loadData(0, 5);
+      subcribe();
+    }
+    else
+      setUser(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user))
 
-  useEffect(() => {
-    console.log(`total changed: ${total} - ${first}`);
-    if (!first) setInterval(() => fetchNewNotification(0, 0), 5000);
-  }, [total])
+  }, [user])
 
-  useEffect(() => {
-    loadData(0, 5);
-  }, [])
+
+  const subcribe = () => {
+    console.log("clicked to send subcription")
+    if (isPushNotificationSupported()) {
+      initializePushNotifications().then(result => {
+        if (result === "granted") {
+          console.log("start registering sw")
+          registerServiceWorker();
+          createNotificationSubscription().then(subscription => {
+            sendSubscriptionToPushServer({
+              subscription: subscription,
+              project_type: localStorage.getItem("project-type"),
+              userID: user.user.id
+            })
+          });
+        }
+      })
+    }
+  }
 
   const openMessage = (loading, loaded, timeout) => {
     const key = 'updatable';
@@ -51,12 +89,10 @@ const BellNotification = () => {
   const handleInfiniteOnLoad = () => {
     setLoading(true);
     if (notifications.length > 20) {
-      message.warning('Infinite List loaded all');
       setHasMore(false);
       setLoading(false);
       return;
     }
-    console.log(`${hasMore} -- ${loading}`)
     loadData(index, count);
   }
 
@@ -102,24 +138,22 @@ const BellNotification = () => {
 
 
   const getConfig = (start, to) => {
+    // var user = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user);
     var config = {
       method: 'get',
-      url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf',
-      headers: {
-        'Content-Type': 'application/json',
-        'api-token': '1fa6b94047ba20d998b44ff1a2c78bba',
-        'project-type': 'CHAY_RUNG'
-      },
+      url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf_type',
       params: {
         index: start,
-        count: to
+        count: to,
+        userID: user.user.id,
+        type: 15
       }
     };
     return config;
   }
 
   const fetchNewNotification = (start, to) => {
-    console.log("fetching notifications;")
+    console.log("fetching notifications")
     var config = getConfig(start, to);
     axios(config)
       .then(function (response) {
@@ -129,6 +163,7 @@ const BellNotification = () => {
           setDiff(newTotal - total);
           axios(getConfig(0, newTotal - total))
             .then(function (response) {
+              console.log(`new Notifications`, response.data.data.notifications);
               setNewNotifications(response.data.data.notifications);
             })
             .catch(function (error) {
@@ -142,7 +177,7 @@ const BellNotification = () => {
       });
   }
 
-  const loadData = (start, to) => {
+  const loadData = async (start, to) => {
     console.log(`${index} -- ${count}`)
     var config = getConfig(start, to);
     axios(config)
