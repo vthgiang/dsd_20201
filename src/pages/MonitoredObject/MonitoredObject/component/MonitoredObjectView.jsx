@@ -42,7 +42,7 @@ function MonitoredObjectView({ history }) {
   const getZoneAll = async () => {
     await axios({
       method: 'GET',
-      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone?page=0`,
+      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone`,
       headers: {
         token: localStorage.getItem('token'),
         projectType: localStorage.getItem('project-type'),
@@ -91,9 +91,9 @@ function MonitoredObjectView({ history }) {
               monitoredZone: res.data.content.monitoredZone,
             });
           }
-          if (res.data.content.monitoredZone) {
-            getDetailZoneById(res.data.content.monitoredZone);
-          }
+          // if (res.data.content.monitoredZone) {
+          //   getDetailZoneById(res.data.content.monitoredZone);
+          // }
         })
         .catch((err) => {
           console.log(err);
@@ -159,13 +159,14 @@ function MonitoredObjectView({ history }) {
   };
   const getDetailZoneById = async (payload) => {
     if (payload) {
+      debugger
       await axios({
         method: 'GET',
         url: `https://monitoredzoneserver.herokuapp.com/monitoredzone/zoneinfo/${payload}`,
-        // headers: {
-        //   token: localStorage.getItem('token'),
-        //   projectType: localStorage.getItem('project-type'),
-        // },
+        headers: {
+          token: localStorage.getItem('token'),
+          projectType: localStorage.getItem('project-type'),
+        },
       })
         .then((res) => {
           if (res.data) {
@@ -211,16 +212,16 @@ function MonitoredObjectView({ history }) {
     }));
   };
   const handleCreateMonitoredObject = () => {
-    if (
-      currentMonitoredZone &&
-      (monitoredObject.height < currentMonitoredZone.minHeight ||
-        monitoredObject.height > currentMonitoredZone.maxHeight)
-    ) {
-      alert(
-        `Chọn chiều cao cho đối tượng trong khoảng giá trị từ ${currentMonitoredZone.minHeight} - ${currentMonitoredZone.maxHeight}`,
-      );
-      return;
-    }
+    // if (
+    //   currentMonitoredZone &&
+    //   (monitoredObject.height < currentMonitoredZone.minHeight ||
+    //     monitoredObject.height > currentMonitoredZone.maxHeight)
+    // ) {
+    //   alert(
+    //     `Chọn chiều cao cho đối tượng trong khoảng giá trị từ ${currentMonitoredZone.minHeight} - ${currentMonitoredZone.maxHeight}`,
+    //   );
+    //   return;
+    // }
 
     if (monitoredObject._id) {
       dispatch(
@@ -265,7 +266,7 @@ function MonitoredObjectView({ history }) {
   };
 
   const getCoodinate = (zone) => {
-    setCurrentMonitoredZone(zone);
+    // setCurrentMonitoredZone(zone);
   };
   const onChangeMonitoredZone = (id) => {
     setMonitoredObject((prev) => ({
@@ -590,13 +591,13 @@ function MonitoredObjectView({ history }) {
                 value={monitoredObject.height}
                 onChange={handleChange}
               />
-              {currentMonitoredZone && (
+              {/* {currentMonitoredZone && (
                 <p className="mt-2">
                   Chọn chiều cao cho đối tượng trong khoảng giá trị từ{' '}
                   {currentMonitoredZone.minHeight} -{' '}
                   {currentMonitoredZone.maxHeight}
                 </p>
-              )}
+              )} */}
             </div>
           </div>
         </div>
