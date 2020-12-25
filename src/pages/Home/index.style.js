@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StyleHome = styled.div`
   .header {
@@ -25,9 +25,5 @@ const StyleHome = styled.div`
     float: right;
     margin: 16px 0 16px 24px;
   }
-  .margin-left-24 {
-  padding-left: 10px;
-  }
-  
 `;
 export default StyleHome;
