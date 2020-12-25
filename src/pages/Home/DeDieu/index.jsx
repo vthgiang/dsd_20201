@@ -226,7 +226,7 @@ const HomeDeDieu = ({ history }) => {
             </a>
           </Menu.Item>
           <Menu.Item key="ncn3" icon={<StockOutlined />}>
-            <a className="margin-left-24" href="https://ant.design" target="_blank" rel="noopener noreferrer">
+            <a className="margin-left-24" onClick={() => history.push('/dedieu')} target="_blank" rel="noopener noreferrer">
               Nhóm chức năng 3
               <br/>
               Phân tích phát hiện sự cố
