@@ -36,6 +36,20 @@ export const sidebarMenu = [
     heading: 'Flight hub',
     icon: 'fab fa-hubspot',
     route: '/flight-hub',
+    subMenu: [
+      {
+        key: 'MonitorCampaign',
+        heading: 'Quản lý đợt giám sát',
+        icon: 'fal fa-camera-alt',
+        route: '/flight-hub-monitor-campaigns',
+      },
+      {
+        key: 'OtherParams',
+        heading: 'Nhãn đính kèm',
+        icon: 'fa fa-puzzle-piece',
+        route: '/flight-hub-other-params',
+      },
+    ],
   },
   {
     key: 'Payloads',
