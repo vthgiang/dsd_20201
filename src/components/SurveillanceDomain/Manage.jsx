@@ -519,6 +519,8 @@ class Manage extends React.Component {
     }
 
     render() {
+
+        const { name = '' } = this.state.incident || {};
         return (
             <div className="main">
                 <div className="filter">
@@ -565,9 +567,7 @@ class Manage extends React.Component {
                                     <tr>
                                         <th style={{width: '50%'}}>Loại sự cố</th>
                                         <td>
-                                            {
-                                                this.state.incident.name
-                                            }
+                                            {name}
                                         </td>
                                     </tr>
                                     <tr>
