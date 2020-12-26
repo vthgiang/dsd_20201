@@ -25,6 +25,8 @@ const initialState = {
   isObjectSuccess: false,
   isObjectFailure: false,
   objectMessages: "",
+  isDeleteMonitored: false,
+  idMonitoredCreate: "",
 };
 
 export function monitoredObjects(state = initialState, action) {
@@ -67,6 +69,7 @@ export function monitoredObjects(state = initialState, action) {
         ...state,
         list: [...state.list, action.payload],
         listPaginate: [...state.listPaginate, action.payload],
+        idMonitoredCreate: action.payload,
       };
     case MonitoredObjectConstants.OBJECT_SUCCESS:
       return {
@@ -98,6 +101,7 @@ export function monitoredObjects(state = initialState, action) {
       // );
       return {
         ...state,
+        isDeleteMonitored: action.payload,
       };
     case MonitoredObjectConstants.OBJECT_FAILURE:
       return {

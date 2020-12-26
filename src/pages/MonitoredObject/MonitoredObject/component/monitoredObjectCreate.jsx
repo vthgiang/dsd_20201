@@ -1,60 +1,81 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import WrappedMap from './map';
-import { useParams } from 'react-router-dom';
-import SuccessNotification from './SuccessNotification';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import WrappedMap from "./map";
+import { useParams } from "react-router-dom";
+import SuccessNotification from "./SuccessNotification";
 
-import { CategoryActions } from '../../Category/redux/actions';
-import { MonitoredObjectConstants } from '../redux/constants';
-import { MonitoredObjectActions } from '../redux/actions';
+import { CategoryActions } from "../../Category/redux/actions";
+import { MonitoredObjectConstants } from "../redux/constants";
+import { MonitoredObjectActions } from "../redux/actions";
 
-const axios = require('axios');
+const axios = require("axios");
 
 function MonitoredObjectView({ history }) {
   let { id, option } = useParams();
   const dispatch = useDispatch();
   const category = useSelector((state) => state.category);
   const monitoredObjects = useSelector((state) => state.monitoredObjects);
-  const { isObjectSuccess, isObjectFailure, objectMessages } = monitoredObjects;
+  const {
+    isObjectSuccess,
+    isObjectFailure,
+    objectMessages,
+    idMonitoredCreate,
+  } = monitoredObjects;
   const [monitoredObject, setMonitoredObject] = useState({
-    code: '',
-    name: '',
+    code: "",
+    name: "",
     status: 1,
-    description: '',
+    description: "",
     managementUnit: null,
     category: null,
     areaMonitored: null,
-    parent: '',
-    lat: '', //Vĩ độ
-    lng: '', //Kinh độ
-    height: '',
+    parent: "",
+    lat: "", //Vĩ độ
+    lng: "", //Kinh độ
+    height: "",
     drones: null,
     images: null,
     videos: null,
-    monitoredZone: '',
-    type: '',
+    monitoredZone: "",
   });
-  const [formatStyle, setFormatStyle] = useState('');
+  const [formatStyle, setFormatStyle] = useState("");
   const [currentMonitoredZone, setCurrentMonitoredZone] = useState(null);
   const [datazoneAll, setDataZoneAll] = useState([]);
 
- 
   const getZoneAll = async () => {
     await axios({
-      method: 'GET',
+      method: "GET",
       url: `https://monitoredzoneserver.herokuapp.com/monitoredzone`,
       headers: {
-        token: localStorage.getItem('token'),
-        projectType: localStorage.getItem('project-type'),
+        token: localStorage.getItem("token"),
+        projectType: localStorage.getItem("project-type"),
       },
     })
       .then((res) => {
         if (res.data) {
           setDataZoneAll(res.data.content.zone);
-          localStorage.getItem('token');
-          console.log('token');
+          localStorage.getItem("token");
         }
       })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const postLogMonitorObjectAdd = async () => {
+    await axios({
+      method: "POST",
+      url: `http://it4883logging.herokuapp.com/api/monitor-object/add`,
+      data: {
+        regionId: monitoredObject.monitoredZone,
+        entityId: idMonitoredCreate._id,
+        description: "add monitor object",
+        authorId: "",
+        projectType: localStorage.getItem("project-type"),
+        state: "",
+        name: monitoredObject.name,
+      },
+    })
+      .then((res) => {})
       .catch((err) => {
         console.log(err);
       });
@@ -66,12 +87,14 @@ function MonitoredObjectView({ history }) {
   }, []);
   useEffect(() => {
     if (isObjectFailure) {
-      setFormatStyle('btn btn-danger');
-      window.$('#modalSuccessNotification').modal('show');
+      setFormatStyle("btn btn-danger");
+      window.$("#modalSuccessNotification").modal("show");
     }
     if (isObjectSuccess) {
-      setFormatStyle('btn btn-success');
-      window.$('#modalSuccessNotification').modal('show');
+      //gọi log khi tạo đối tượng giám sát thành công
+      postLogMonitorObjectAdd();
+      setFormatStyle("btn btn-success");
+      window.$("#modalSuccessNotification").modal("show");
     }
     dispatch({
       type: MonitoredObjectConstants.OBJECT_FAILURE,
@@ -96,33 +119,34 @@ function MonitoredObjectView({ history }) {
         monitoredObject.height > currentMonitoredZone.maxHeight)
     ) {
       alert(
-        `Chọn chiều cao cho đối tượng trong khoảng giá trị từ ${currentMonitoredZone.minHeight} - ${currentMonitoredZone.maxHeight}`,
+        `Chọn chiều cao cho đối tượng trong khoảng giá trị từ ${currentMonitoredZone.minHeight} - ${currentMonitoredZone.maxHeight}`
       );
       return;
     }
     dispatch(
       MonitoredObjectActions.createMonitoredObject({
         ...monitoredObject,
+        type: localStorage.getItem("project-type"),
         areaMonitored: null,
         managementUnit: null,
         images: null,
         videos: null,
-        status: monitoredObject.status === '' ? '1' : monitoredObject.status,
-      }),
+        status: monitoredObject.status === "" ? "1" : monitoredObject.status,
+      })
     );
     setMonitoredObject({
-      code: '',
-      name: '',
+      code: "",
+      name: "",
       status: 1,
-      description: '',
+      description: "",
       managementUnit: null,
-      category: '',
+      category: "",
       areaMonitored: null,
-      parent: '',
-      lat: '', //Vĩ độ
-      lng: '', //Kinh độ
-      height: '',
-      drones: '',
+      parent: "",
+      lat: "", //Vĩ độ
+      lng: "", //Kinh độ
+      height: "",
+      drones: "",
       images: null,
       videos: null,
     });
@@ -140,33 +164,17 @@ function MonitoredObjectView({ history }) {
 
   return (
     <div>
-      <div className="header-title mb-5">
-        <h5 className="modal-title" id="exampleModalLongTitle">
+      <div className="header-title mb-3">
+        <h5
+          className="modal-title mt-3 mb-3"
+          style={{ fontSize: "25px", textAlign: "center" }}
+        >
           Thêm mới đối tượng giám sát
         </h5>
       </div>
       <div className="content row d-flex justify-content-center">
         <div className="col-9">
           <form>
-            <div className="form-group row">
-              <label
-                htmlFor="inputAreaNumber"
-                className="col-sm-2 col-form-label"
-              >
-                Mã đối tượng
-              </label>
-              <div className="col-sm-10">
-                <input
-                  disabled={option === 'view'}
-                  className="form-control"
-                  id="inputAreaNumber"
-                  placeholder="Mã đối tượng"
-                  name="code"
-                  value={monitoredObject.code}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
             <div className="form-group row">
               <label
                 htmlFor="inputAreaName"
@@ -176,7 +184,7 @@ function MonitoredObjectView({ history }) {
               </label>
               <div className="col-sm-10">
                 <input
-                  disabled={option === 'view'}
+                  disabled={option === "view"}
                   className="form-control"
                   id="inputAreaName"
                   placeholder="Tên đối tượng"
@@ -188,34 +196,14 @@ function MonitoredObjectView({ history }) {
             </div>
             <div className="form-group row">
               <label htmlFor="inputStatus" className="col-sm-2 col-form-label">
-                Loại đối tượng
-              </label>
-              <div className="col-sm-10">
-                <select
-                  disabled={option === 'view'}
-                  className="custom-select"
-                  name="type"
-                  value={monitoredObject.type || ''}
-                  onChange={handleChange}
-                >
-                  <option disabled>Chọn loại đối tượng </option>
-                  <option value="DE_DIEU">Đê điều</option>
-                  <option value="CHAY_RUNG">Cháy rừng</option>
-                  <option value="LUOI_DIEN">Lưới điện</option>
-                  <option value="CAY_TRONG">Cây trồng</option>
-                </select>
-              </div>
-            </div>
-            <div className="form-group row">
-              <label htmlFor="inputStatus" className="col-sm-2 col-form-label">
                 Trạng thái
               </label>
               <div className="col-sm-10">
                 <select
-                  disabled={option === 'view'}
+                  disabled={option === "view"}
                   className="custom-select"
                   name="status"
-                  value={monitoredObject.status || 'null'}
+                  value={monitoredObject.status || "null"}
                   onChange={handleChange}
                 >
                   <option disabled>Chọn trạng thái</option>
@@ -234,7 +222,7 @@ function MonitoredObjectView({ history }) {
               </label>
               <div className="col-sm-10">
                 <input
-                  disabled={option === 'view'}
+                  disabled={option === "view"}
                   className="form-control"
                   id="inputAreaName"
                   placeholder="Mô tả cho đối tượng"
@@ -251,10 +239,10 @@ function MonitoredObjectView({ history }) {
               </label>
               <div className="col-sm-10">
                 <select
-                  disabled={option === 'view'}
+                  disabled={option === "view"}
                   className="custom-select"
                   name="category"
-                  value={monitoredObject.category || ''}
+                  value={monitoredObject.category || ""}
                   onChange={handleChange}
                 >
                   <option disabled>Chọn danh mục</option>
@@ -277,7 +265,7 @@ function MonitoredObjectView({ history }) {
               </label>
               <div className="col-sm-10">
                 <select
-                  disabled={option === 'view'}
+                  disabled={option === "view"}
                   className="custom-select"
                   name="parent"
                   value={monitoredObject.parent}
@@ -313,7 +301,7 @@ function MonitoredObjectView({ history }) {
                 </p>
               ) : (
                 <p className="d-flex m-0 justify-content-center align-items-center">
-                  Chưa có giá trị{' '}
+                  Chưa có giá trị{" "}
                 </p>
               )}
             </div>
@@ -351,7 +339,7 @@ function MonitoredObjectView({ history }) {
             </label>
             <div className="col-sm-10">
               <input
-                disabled={option === 'view'}
+                disabled={option === "view"}
                 className="form-control"
                 placeholder="Chiều cao đối tượng"
                 name="height"
@@ -360,8 +348,8 @@ function MonitoredObjectView({ history }) {
               />
               {currentMonitoredZone && (
                 <p className="mt-2">
-                  Chọn chiều cao cho đối tượng trong khoảng giá trị từ{' '}
-                  {currentMonitoredZone.minHeight} -{' '}
+                  Chọn chiều cao cho đối tượng trong khoảng giá trị từ{" "}
+                  {currentMonitoredZone.minHeight} -{" "}
                   {currentMonitoredZone.maxHeight}
                 </p>
               )}
