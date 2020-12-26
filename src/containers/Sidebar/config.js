@@ -6,24 +6,6 @@ export const sidebarMenu = [
     route: '/dashboard',
   },
   {
-key:'DSD_05_De_Dieu',
-heading:'DSD_05_De_Dieu',
-route:'/DSD_05_De_Dieu',
-subMenu:[
-  {
-key:'Task1',
-heading:'Task1',
-route:'/Task1',
-},
-{
-  key:'Task5',
-  heading:'Task5',
-  route:'/Task5',
-
-}
-],
-  },
-  {
     key: 'Drones',
     heading: 'Điều khiển drone',
     icon: 'fas fa-drone-alt',
