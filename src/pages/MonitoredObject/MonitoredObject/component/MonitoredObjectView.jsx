@@ -38,6 +38,7 @@ function MonitoredObjectView({ history }) {
   const [arrImages, setArrImages] = useState([]);
   const [currentMonitoredZone, setCurrentMonitoredZone] = useState(null);
   const [datazoneAll, setDataZoneAll] = useState([]);
+  const [listArea, setListArea] = useState([]);
 
   const getZoneAll = async () => {
     await axios({
@@ -199,11 +200,20 @@ function MonitoredObjectView({ history }) {
         console.log(err);
       });
   };
+  const getArea = async () => {
+    axios
+      .get(`https://monitoredzoneserver.herokuapp.com/area?pageSize=1000`)
+      .then((res) => {
+        setListArea(res.data.content.monitoredArea);
+      })
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
     dispatch(CategoryActions.getAllCategories());
     dispatch(MonitoredObjectActions.getAllMonitoredObjects());
     getZoneAll();
+    getArea();
     getDetailMonitoredObject();
     // getImagesMonitored();
     // getVideoMonitored();
@@ -262,6 +272,7 @@ function MonitoredObjectView({ history }) {
       dispatch(
         MonitoredObjectActions.createMonitoredObject({
           ...monitoredObject,
+          code: "2",
           areaMonitored: null,
           managementUnit: null,
           images: null,
@@ -446,6 +457,31 @@ function MonitoredObjectView({ history }) {
                 </select>
               </div>
             </div>
+            <div className="form-group row">
+              <label htmlFor="inputStatus" className="col-sm-2 col-form-label">
+                Khu vực giám sát
+              </label>
+              <div className="col-sm-10">
+                <select
+                  disabled={option === "view"}
+                  className="custom-select"
+                  name="areaMonitored"
+                  value={monitoredObject.areaMonitored}
+                  onChange={handleChange}
+                >
+                  <option disabled>Chọn khu vực giám sát</option>
+                  {!monitoredObject.areaMonitored && (
+                    <option value="">Chưa có giá trị</option>
+                  )}
+                  {listArea &&
+                    listArea.map((item, index) => (
+                      <option value={item._id} key={index}>
+                        {item.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            </div>
           </form>
         </div>
         <div className="col-6">
@@ -612,7 +648,7 @@ function MonitoredObjectView({ history }) {
         <div className="col-8">
           {monitoredObject.monitoredZone && (
             <WrappedMap
-              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCV09KQtrmzDnyXYeC_UzB-HAwMKytXRpE"
+              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA15qz81pHiNfVEV3eeniSNhAu64SsJKgU"
               loadingElement={<div style={{ height: `100%` }} />}
               containerElement={<div style={{ height: `95vh` }} />}
               mapElement={<div style={{ height: `100%` }} />}

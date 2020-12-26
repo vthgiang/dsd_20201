@@ -41,6 +41,7 @@ function MonitoredObjectView({ history }) {
   const [formatStyle, setFormatStyle] = useState("");
   const [currentMonitoredZone, setCurrentMonitoredZone] = useState(null);
   const [datazoneAll, setDataZoneAll] = useState([]);
+  const [listArea, setListArea] = useState([]);
 
   const getZoneAll = async () => {
     await axios({
@@ -60,6 +61,14 @@ function MonitoredObjectView({ history }) {
       .catch((err) => {
         console.log(err);
       });
+  };
+  const getArea = async () => {
+    axios
+      .get(`https://monitoredzoneserver.herokuapp.com/area?pageSize=1000`)
+      .then((res) => {
+        setListArea(res.data.content.monitoredArea);
+      })
+      .catch((error) => console.log(error));
   };
   const postLogMonitorObjectAdd = async () => {
     await axios({
@@ -84,6 +93,7 @@ function MonitoredObjectView({ history }) {
     dispatch(CategoryActions.getAllCategories());
     dispatch(MonitoredObjectActions.getAllMonitoredObjects());
     getZoneAll();
+    getArea();
   }, []);
   useEffect(() => {
     if (isObjectFailure) {
@@ -126,6 +136,7 @@ function MonitoredObjectView({ history }) {
     dispatch(
       MonitoredObjectActions.createMonitoredObject({
         ...monitoredObject,
+        code: "1",
         type: localStorage.getItem("project-type"),
         areaMonitored: null,
         managementUnit: null,
@@ -285,91 +296,119 @@ function MonitoredObjectView({ history }) {
                 </select>
               </div>
             </div>
+            <div className="form-group row">
+              <label htmlFor="inputStatus" className="col-sm-2 col-form-label">
+                Khu vực giám sát
+              </label>
+              <div className="col-sm-10">
+                <select
+                  disabled={option === "view"}
+                  className="custom-select"
+                  name="areaMonitored"
+                  value={monitoredObject.areaMonitored}
+                  onChange={handleChange}
+                >
+                  <option disabled>Chọn khu vực giám sát</option>
+                  {!monitoredObject.areaMonitored && (
+                    <option value="">Chưa có giá trị</option>
+                  )}
+                  {listArea &&
+                    listArea.map((item, index) => (
+                      <option value={item._id} key={index}>
+                        {item.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            </div>
           </form>
         </div>
       </div>
-      <div className="row mt-5 mb-3">
-        <div className="col-4">
-          <div className="form-group row">
-            <label className="col-sm-2 col-form-label">Tọa độ</label>
-            <div className="col-sm-10 d-flex">
-              {!!monitoredObject.lat || !!monitoredObject.lng ? (
-                <p className="d-flex m-0 justify-content-center align-items-center">
-                  Kinh độ: {monitoredObject.lng}
-                  <br />
-                  Vĩ độ: {monitoredObject.lat}
-                </p>
-              ) : (
-                <p className="d-flex m-0 justify-content-center align-items-center">
-                  Chưa có giá trị{" "}
-                </p>
-              )}
+      {monitoredObject.areaMonitored && (
+        <div className="row mt-5 mb-3">
+          <div className="col-4">
+            <div className="form-group row">
+              <label className="col-sm-2 col-form-label">Tọa độ</label>
+              <div className="col-sm-10 d-flex">
+                {!!monitoredObject.lat || !!monitoredObject.lng ? (
+                  <p className="d-flex m-0 justify-content-center align-items-center">
+                    Kinh độ: {monitoredObject.lng}
+                    <br />
+                    Vĩ độ: {monitoredObject.lat}
+                  </p>
+                ) : (
+                  <p className="d-flex m-0 justify-content-center align-items-center">
+                    Chưa có giá trị{" "}
+                  </p>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="form-group row">
-            <label
-              htmlFor="inputAreaNumber"
-              className="col-sm-2 col-form-label"
-            >
-              Miền giám sát
-            </label>
-            <div className="col-sm-10">
-              <select
-                disabled
-                className="custom-select"
-                name="monitoredZone"
-                value={monitoredObject.monitoredZone}
-                onChange={handleChange}
+            <div className="form-group row">
+              <label
+                htmlFor="inputAreaNumber"
+                className="col-sm-2 col-form-label"
               >
-                {datazoneAll &&
-                  datazoneAll.map((item, index) => (
-                    <option value={item._id} key={index}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
+                Miền giám sát
+              </label>
+              <div className="col-sm-10">
+                <select
+                  disabled
+                  className="custom-select"
+                  name="monitoredZone"
+                  value={monitoredObject.monitoredZone}
+                  onChange={handleChange}
+                >
+                  {datazoneAll &&
+                    datazoneAll.map((item, index) => (
+                      <option value={item._id} key={index}>
+                        {item.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            </div>
+            <div className="form-group row">
+              <label
+                htmlFor="inputAreaNumber"
+                className="col-sm-2 col-form-label"
+              >
+                Chiều cao đối tượng
+              </label>
+              <div className="col-sm-10">
+                <input
+                  disabled={option === "view"}
+                  className="form-control"
+                  placeholder="Chiều cao đối tượng"
+                  name="height"
+                  value={monitoredObject.height}
+                  onChange={handleChange}
+                />
+                {currentMonitoredZone && (
+                  <p className="mt-2">
+                    Chọn chiều cao cho đối tượng trong khoảng giá trị từ{" "}
+                    {currentMonitoredZone.minHeight} -{" "}
+                    {currentMonitoredZone.maxHeight}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
-          <div className="form-group row">
-            <label
-              htmlFor="inputAreaNumber"
-              className="col-sm-2 col-form-label"
-            >
-              Chiều cao đối tượng
-            </label>
-            <div className="col-sm-10">
-              <input
-                disabled={option === "view"}
-                className="form-control"
-                placeholder="Chiều cao đối tượng"
-                name="height"
-                value={monitoredObject.height}
-                onChange={handleChange}
-              />
-              {currentMonitoredZone && (
-                <p className="mt-2">
-                  Chọn chiều cao cho đối tượng trong khoảng giá trị từ{" "}
-                  {currentMonitoredZone.minHeight} -{" "}
-                  {currentMonitoredZone.maxHeight}
-                </p>
-              )}
-            </div>
+          <div className="col-8">
+            <WrappedMap
+              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA15qz81pHiNfVEV3eeniSNhAu64SsJKgU"
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `95vh` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+              onChangeMonitoredZone={onChangeMonitoredZone}
+              getCoodinate={(zone) => getCoodinate(zone)}
+              monitoredObject={monitoredObject}
+              setMonitoredObject={setMonitoredObject}
+              option={option}
+            />
           </div>
         </div>
-        <div className="col-8">
-          <WrappedMap
-            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCV09KQtrmzDnyXYeC_UzB-HAwMKytXRpE"
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `95vh` }} />}
-            mapElement={<div style={{ height: `100%` }} />}
-            onChangeMonitoredZone={onChangeMonitoredZone}
-            getCoodinate={(zone) => getCoodinate(zone)}
-            monitoredObject={monitoredObject}
-            setMonitoredObject={setMonitoredObject}
-            option={option}
-          />
-        </div>
-      </div>
+      )}
+
       <div className="footer d-flex justify-content-end">
         <button
           type="button"
