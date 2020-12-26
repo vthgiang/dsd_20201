@@ -17,5 +17,8 @@ const StyleLayout = styled.div`
     min-height: calc(100vh - 64px);
     padding: 12px 24px;
   }
+  .margin-left-12 {
+  margin-left: 12px
+  }
 `;
 export default StyleLayout;

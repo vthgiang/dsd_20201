@@ -30,32 +30,30 @@ function Stream() {
         const fetchData = async () => {
             const { data } = await axios({
                 method: "GET",
-                url: "http://skyrone.cf:6789/droneState/getAllDroneActive",
-                // params: {
-                //     timeStart: new Date(Date.now()),
-                //     timeEnd: new Date(Date.now() + 60000),
-                // }
+                url: "http://skyrone.cf:6789/droneState/getAllDroneActive"
             });
 
             const res = await axios({
                 method: "GET",
-                url: `http://skyrone.cf:6789/drone/getById/${data[0].idDrone}`
+                url: `http://skyrone.cf:6789/droneState/getParameterFlightRealTime/${data[0].idDrone}`
             })
 
+            console.log({ res });
+
             setDrones(data.map(drone => ({ ...drone, urlStream: urlStreams[Math.floor(Math.random() * urlStreams.length)] })));
-            setCurrentDrone({ ...data[0], urlStream: urlStreams[Math.floor(Math.random() * urlStreams.length)], ...res.data })
+            setCurrentDrone({ ...data[0], urlStream: urlStreams[Math.floor(Math.random() * urlStreams.length)], ...res.data.data })
         }
 
         fetchData();
     }, [])
 
-    const fetchCurrentDrone = async idDrone => {
+    const fetchCurrentDrone = async drone => {
         const res = await axios({
             method: "GET",
-            url: `http://skyrone.cf:6789/drone/getById/${idDrone}`
+            url: `http://skyrone.cf:6789/droneState/getParameterFlightRealTime/${drone.idDrone}`
         })
 
-        setCurrentDrone({ ...res.data, urlStream: urlStreams[Math.floor(Math.random() * urlStreams.length)] })
+        setCurrentDrone({ ...res.data.data, urlStream: urlStreams[Math.floor(Math.random() * urlStreams.length)], ...drone })
     }
 
     return <Container>
@@ -65,19 +63,16 @@ function Stream() {
 
                 <Row>
                     <Col md={12}>
-                        <strong>Drone Id:</strong> <span>{currentDrone.id}</span>
+                        <strong>Drone Id:</strong> <span>{currentDrone.idDrone}</span>
                     </Col>
                     <Col md={12}>
-                        <strong>Pin:</strong> <span>{currentDrone.rangeBattery}</span>
+                        <strong>Pin:</strong> <span>{currentDrone.percentBattery}%</span>
                     </Col>
                     <Col md={12}>
-                        <strong>Tốc độ:</strong> <span>{currentDrone.maxFlightSpeed}</span>
+                        <strong>Tốc độ:</strong> <span>{currentDrone.speed}km/h</span>
                     </Col>
                     <Col md={12}>
-                        <strong>Độ cao:</strong> <span>{currentDrone.maxFlightHeight}</span>
-                    </Col>
-                    <Col md={12}>
-                        <strong>Độ cao:</strong> <span>{currentDrone.maxFlightHeight}</span>
+                        <strong>Độ cao:</strong> <span>{currentDrone.heightFlight}m</span>
                     </Col>
                 </Row>
 
@@ -99,7 +94,7 @@ function Stream() {
                 <List
                     bordered
                     dataSource={drones}
-                    renderItem={drone => <ItemCustom onClick={() => fetchCurrentDrone(drone.idDrone)}>
+                    renderItem={drone => <ItemCustom onClick={() => fetchCurrentDrone(drone)}>
                         <h1>{drone.name}</h1>
                         <p>{drone.used ? <Tag color="green">Active</Tag> : <Tag color="red">Not Active</Tag>}</p>
                     </ItemCustom>}
