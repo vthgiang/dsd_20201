@@ -37,6 +37,11 @@ body {
   font-size: 1em !important;
 }
 
+.ant-btn {
+  display: flex !important;
+  align-items: center !important;
+}
+
 .ant-menu-item .collapsed {
   margin-left: 7.5px !important;
 }
@@ -49,7 +54,7 @@ body {
 }
 
 .u-shadow {
-  box-shadow: 0 2px 8px rgba(0,0,0,.16);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
 }
 
 /* border */
@@ -58,7 +63,8 @@ body {
   border-radius: 4px;
 }
 
-.u-rounded-md,.u-rounded {
+.u-rounded-md,
+.u-rounded {
   border-radius: 8px;
 }
 
@@ -82,7 +88,6 @@ body {
   border-width: 5px;
 }
 
-
 .u-rounded {
   border-radius: 8px;
 }
@@ -93,9 +98,6 @@ body {
 
 .u-fontBold {
   font-weight: bold;
-}
-
-.u-reportCard {
 }
 
 .u-reportContainer {
