@@ -38,7 +38,7 @@ body {
 }
 
 .ant-btn {
-  display: flex !important;
+  display: inline-flex !important;
   align-items: center !important;
 }
 
