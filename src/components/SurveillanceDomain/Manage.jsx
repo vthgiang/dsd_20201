@@ -68,6 +68,9 @@ class Manage extends React.Component {
             listDomain: [],
             openModalAdd: false,
             openModalDelete: false,
+            token: localStorage.getItem('token'),
+            projecttype: localStorage.getItem('project-type'),
+            user: {},
             columns: [
                 {
                     title: 'Mã miền',
@@ -114,7 +117,7 @@ class Manage extends React.Component {
                 },
                 {
                     title: '',
-                    render: val => (
+                    render: val => (this.state.user.role === 'ADMIN' || this.state.user.role === 'SUPER_ADMIN') && (
                         <Button type="primary" danger icon={<DeleteOutlined/>} style={{marginRight: 10}}
                                 onClick={() => this.deleteZone(val)}>
                             Xóa
@@ -139,7 +142,7 @@ class Manage extends React.Component {
                     },
                     "priority": '',
                     "description": "",
-                    "code": "MGS" + (Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000),
+                    "code": "ZONE" + (Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000),
                     "level": 1,
                     "maxHeight": "",
                     "minHeight": "",
@@ -226,7 +229,7 @@ class Manage extends React.Component {
     setStatusModalAdd(openModalAdd) {
         this.setState(prevState => {
             let create = Object.assign({}, prevState.create);
-            create.data["code"] = "MGS" + (Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000);
+            create.data["code"] = "ZONE" + (Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000);
             return {create};
         })
         this.setState({openModalAdd});
@@ -237,7 +240,9 @@ class Manage extends React.Component {
         let dataCreate = this.state.create;
         axios.post(`https://monitoredzoneserver.herokuapp.com/monitoredzone/area`, dataCreate, {
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    token: this.state.token,
+                    projecttype: this.state.projecttype
                 }
             })
             .then(res => {
@@ -272,7 +277,12 @@ class Manage extends React.Component {
     deleteZone(zone) {
         let id = zone._id;
         if (window.confirm(`Bạn muốn xóa miền : ${zone.name}? `)) {
-            axios.delete(`https://monitoredzoneserver.herokuapp.com/monitoredzone/${id}`)
+            axios.delete(`https://monitoredzoneserver.herokuapp.com/monitoredzone/${id}`,{
+                    headers: {
+                        token: this.state.token,
+                        projecttype: this.state.projecttype
+                    }
+                })
                 .then(res => {
                     if (res.data.success) {
                         this.getAllZone();
@@ -285,7 +295,12 @@ class Manage extends React.Component {
     }
     
     getArea() {
-        axios.get(`https://monitoredzoneserver.herokuapp.com/area?pageSize=1000`)
+        axios.get(`https://monitoredzoneserver.herokuapp.com/area?pageSize=1000`, {
+                headers: {
+                    token: this.state.token,
+                    projecttype: this.state.projecttype
+                }
+            })
             .then(res => {
                 const listArea = res.data.content.monitoredArea;
                 this.setState({listArea});
@@ -303,6 +318,10 @@ class Manage extends React.Component {
     }
     
     componentDidMount() {
+        let persist = JSON.parse(localStorage.getItem('persist:root'));
+        persist = JSON.parse(persist.user);
+        const { user } = persist;
+        this.setState({user: user});
         this.delayedShowMarker();
         this.getIncident();
         this.getArea();
@@ -363,7 +382,12 @@ class Manage extends React.Component {
     
     async getZonebyArea(idArea) {
         return new Promise((resolve, reject) => {
-            axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone/area/${idArea}`)
+            axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone/area/${idArea}`, {
+                    headers: {
+                        token: this.state.token,
+                        projecttype: this.state.projecttype
+                    }
+                })
                 .then(res => {
                     const zoneByArea = res.data.content.zone;
                     resolve(zoneByArea);
@@ -395,6 +419,12 @@ class Manage extends React.Component {
         } else {
             domains = this.state.listDomain;
         }
+        if(this.state.search.area && this.state.search.area.length > 0) {
+            domains = domains.filter(domain => {
+                console.log(domain,this.state.search.area);
+                return (domain.area == this.state.search.area);
+            });
+        }
         this.setState(prevState => {
             let listDomainTmp;
             listDomainTmp = domains;
@@ -411,10 +441,15 @@ class Manage extends React.Component {
         let domains;
         if(value && value.length > 0) {
             domains = this.state.listDomain.filter(domain => {
-                return domain.area == value;
+                return (domain.area == value);
             });
         } else {
             domains = this.state.listDomain;
+        }
+        if(this.state.search.priority && this.state.search.priority.length > 0) {
+            domains = domains.filter(domain => {
+                return (domain.priority == this.state.search.priority);
+            });
         }
         this.setState(prevState => {
             let listDomainTmp;
@@ -488,9 +523,9 @@ class Manage extends React.Component {
             <div className="main">
                 <div className="filter">
                     <Row>
-                        <Col span={4}>
-                            <Input name='content' onChange={this.searchName} style={{width: 150}} placeholder="Search" prefix={<SearchOutlined/>}/>
-                        </Col>
+                        {/*<Col span={4}>*/}
+                        {/*    <Input name='content' onChange={this.searchName} style={{width: 150}} placeholder="Search" prefix={<SearchOutlined/>}/>*/}
+                        {/*</Col>*/}
                         <Col span={4}>
                             <Select name='priority' placeholder="Độ ưu tiên" style={{width: 150}} onChange={this.searchPriority("Active!")}>
                                 <Option>Tất cả</Option>
@@ -509,10 +544,14 @@ class Manage extends React.Component {
                             </Select>
                         </Col>
                         <Col span={6}>
-                            <Button type="primary" icon={<FolderAddOutlined/>}
-                                    onClick={() => this.setStatusModalAdd(true)}>
-                                Thêm mới
-                            </Button>
+                            {
+                                (this.state.user.role === 'ADMIN' || this.state.user.role === 'SUPER_ADMIN') && (
+                                    <Button type="primary" icon={<FolderAddOutlined/>}
+                                            onClick={() => this.setStatusModalAdd(true)}>
+                                        Thêm mới
+                                    </Button>
+                                )
+                            }
                             <Modal
                                 title="Thêm mới miền giám sát"
                                 visible={this.state.openModalAdd}
