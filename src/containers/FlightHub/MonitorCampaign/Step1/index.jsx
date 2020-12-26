@@ -20,8 +20,6 @@ const Step1 = ({ nextStep, data, handleChangeData }) => {
   const onFinish = (values) => {
     handleChangeData(values);
     nextStep();
-    console.log(form);
-    console.log(data);
   };
 
   return (
@@ -29,31 +27,28 @@ const Step1 = ({ nextStep, data, handleChangeData }) => {
       <Form
         {...LAYOUT}
         form={form}
-        name="flight-hub-name"
+        name='flight-hub-name'
         onFinish={onFinish}
         validateMessages={VALIDATE_MESSAGES}
-        initialValues={data}
-      >
+        initialValues={data}>
         <Form.Item
-          name="name"
-          label="Tên đợt giám sát"
-          rules={[{ type: 'string', required: true }]}
-        >
-          <Input placeholder="VD: Đợt giám sát rừng phòng hộ quý 1"></Input>
+          name='name'
+          label='Tên đợt giám sát'
+          rules={[{ type: 'string', required: true }]}>
+          <Input placeholder='VD: Đợt giám sát rừng phòng hộ quý 1'></Input>
         </Form.Item>
 
         {projectType === 'ALL_PROJECT' && (
           <Form.Item
-            name="task"
-            label="Loại sự cố"
+            name='task'
+            label='Loại sự cố'
             rules={[
               {
                 type: 'string',
                 required: true,
               },
-            ]}
-          >
-            <Select allowClear placeholder="Chọn loại sự cố">
+            ]}>
+            <Select allowClear placeholder='Chọn loại sự cố'>
               {Object.keys(TASK).map((key) => {
                 return (
                   <Select.Option key={key} value={TASK[key]}>
@@ -66,15 +61,14 @@ const Step1 = ({ nextStep, data, handleChangeData }) => {
         )}
 
         <Form.Item
-          name="timeRange"
-          label="Thời gian"
+          name='timeRange'
+          label='Thời gian'
           rules={[
             {
               type: 'array',
               required: true,
             },
-          ]}
-        >
+          ]}>
           <RangePicker showTime format={DATE_TIME_FORMAT} />
         </Form.Item>
 
@@ -82,9 +76,8 @@ const Step1 = ({ nextStep, data, handleChangeData }) => {
           <Row>
             <Button
               icon={<StepForwardOutlined />}
-              type="primary"
-              htmlType="submit"
-            >
+              type='primary'
+              htmlType='submit'>
               Tiếp theo
             </Button>
           </Row>
