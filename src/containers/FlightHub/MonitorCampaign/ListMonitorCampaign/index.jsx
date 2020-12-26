@@ -351,20 +351,16 @@ const ListMonitorCampaign = () => {
       </StyleSearchForm>
 
       <StyleSeparator />
-      {loading ? (
-        <StyleSpinContainer>
-          <Spin />
-        </StyleSpinContainer>
-      ) : (
         <StyleTable>
           <Table
+          loading={loading}
             rowKey='_id'
             columns={columns}
             dataSource={listMonitorCampaignsData}
             scroll={{ x: 1560 }}
           />
         </StyleTable>
-      )}
+
     </StyleListMonitorCampaign>
   );
 };

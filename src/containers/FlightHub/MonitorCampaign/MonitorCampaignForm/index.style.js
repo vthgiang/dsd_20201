@@ -19,3 +19,11 @@ export const StyleIconBack = styled.div`
   margin-bottom: 12px;
   margin-right: 7.5px;
 `;
+
+export const StyleSpinContainer = styled.div`
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Steps } from 'antd';
+import { Row, Steps, Spin } from 'antd';
 import { StyleTitle } from '../../../../themes/default';
 import StyleMonitorCampaignForm, {
   StyleContent,
@@ -8,10 +8,11 @@ import StyleMonitorCampaignForm, {
 import { STEPS } from '../config';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import { StyleSpinContainer } from './index.style';
 
 const { Step } = Steps;
 
-const MonitorCampaignForm = ({ initialData, title, handleSubmit }) => {
+const MonitorCampaignForm = ({ initialData, title, handleSubmit, loading }) => {
   const history = useHistory();
   const [current, setCurrent] = React.useState(0);
   const [data, setData] = useState({});
@@ -36,6 +37,12 @@ const MonitorCampaignForm = ({ initialData, title, handleSubmit }) => {
 
   const renderContent = () => {
     const Component = STEPS[current].content;
+    if (loading)
+      return (
+        <StyleSpinContainer>
+          <Spin />
+        </StyleSpinContainer>
+      );
     return (
       <Component
         nextStep={nextStep}
@@ -52,7 +59,7 @@ const MonitorCampaignForm = ({ initialData, title, handleSubmit }) => {
   };
   return (
     <StyleMonitorCampaignForm>
-      <Row type="flex" align="middle">
+      <Row type='flex' align='middle'>
         <StyleIconBack>
           <ArrowLeftOutlined size={32} onClick={goBack} />
         </StyleIconBack>
