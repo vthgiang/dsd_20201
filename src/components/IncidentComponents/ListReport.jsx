@@ -54,7 +54,6 @@ const ListReport = () => {
     })
       .then(function (response) {
         //handle success
-        console.log(response);
         setDataReport(response.data.list);
         setLoadingTable(false);
       })
@@ -368,7 +367,6 @@ const ListReport = () => {
             })
               .then(function (response) {
                 //handle success
-                console.log(response);
                 setLoadingTable(true);
                 getDataInit();
               })
@@ -405,7 +403,6 @@ const ListReport = () => {
             })
               .then(function (response) {
                 //handle success
-                console.log(response);
                 setLoadingTable(true);
                 getDataInit();
               })

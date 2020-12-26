@@ -46,7 +46,6 @@ const ListSupports = () => {
     })
       .then(function (response) {
         //handle success
-        console.log(response);
         setLoadingTable(false);
         setDataSupports(response.data.list);
       })
