@@ -7,6 +7,7 @@ import {
   InfoWindow,
   Rectangle,
 } from "react-google-maps";
+import { removeVietnameseTones } from "../../../../helpers/removeVietnameseTones";
 
 import { Input } from "antd";
 import { HeatMapOutlined } from "@ant-design/icons";
@@ -94,8 +95,8 @@ const Map = ({
 
   const submitSearch = (value) => {
     let data = monitoredZonesDataInit.filter((element) => {
-      let textElement = element.name;
-      let textValue = value;
+      let textElement = removeVietnameseTones(element.name);
+      let textValue = removeVietnameseTones(value);
       if (textElement.includes(textValue)) {
         return element;
       }
