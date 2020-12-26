@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import { problemColumns, problemTypesKD, problemTypes } from './config';
+import { Carousel } from 'antd';
 
 const { Text } = Typography;
 
@@ -15,7 +16,14 @@ function Detail() {
     const [problems, setProblems] = useState([]);
     const [monitoredObjects, setMonitoredObjects] = useState([]);
     const [currentMonitoredObject, setCurrentMonitoredObject] = useState({});
-
+    const contentStyle = {
+        height: '450px',
+        color: '#fff',
+        lineHeight: '160px',
+        textAlign: 'center',
+        background: '#364d79',
+      };
+      
     const renderDescription = (description) => {
         if (description) {
             const arr = description?.split(" ");
@@ -224,9 +232,28 @@ function Detail() {
                 />
             </div>
         </div>
-        <Row gutter={[24, 24]}>
+        <Carousel >
+        {imageVideoRelated.map((item, index) => {
+                return <div>
+                        <h3 style={contentStyle}>
+                        {item.type === 0 ? <Image
+                        style={{
+                            cursor: "pointer"
+                        }}
+                        key={index}
+                        src={item.link}
+                        preview={false}
+                        onClick={() => setImageVideo(item)}
+                    /> : <video src={item.link} style={{ width: "100%" }} onClick={() => setImageVideo(item)} />}
+
+                        </h3>
+                        </div>
+    
+            })}
+        </Carousel>
+
+        {/* <Row gutter={[24, 24]}>
             {imageVideoRelated.map((item, index) => {
-                console.log({ item });
                 return <Col md={4}>
                     {item.type === 0 ? <Image
                         style={{
@@ -239,7 +266,7 @@ function Detail() {
                     /> : <video src={item.link} style={{ width: "100%" }} onClick={() => setImageVideo(item)} />}
                 </Col>
             })}
-        </Row>
+        </Row> */}
 
         <Title><p style={{ margin: 0 }}>
             <span>Các sự cố</span>

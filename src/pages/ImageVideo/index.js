@@ -16,7 +16,9 @@ function ImageVideo() {
     })
     const [searchString, setSearchString] = useState("");
     const [monitoredObjects, setMonitoredObjects] = useState([]);
+    const [droneObjects, setDroneObjects] = useState([]);
     const [currentMonitoredObject, setCurrentMonitoredObject] = useState({});
+    const [droneId, setDroneId] = useState();
 
     const onChangeDate = (date, dateString) => {
         console.log(date, dateString);
@@ -46,7 +48,6 @@ function ImageVideo() {
                 problemType: filterFields.problemType,
             }
         }).then(({ data }) => {
-            console.log(data);
             setImageVideos(data.result.map((i, index) => ({
                 ...i,
                 link: i.type === 0 ?
@@ -71,6 +72,10 @@ function ImageVideo() {
         setCurrentMonitoredObject(monitoredObjects.find(i => i._id === monitorObjectId));
     };
 
+    const onChangeDrone = droneId => {
+        setDroneId(droneObjects.find(i => i._id === droneId));
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             // const res = await axios({
@@ -90,10 +95,20 @@ function ImageVideo() {
                 data: {}
             })
 
+            const res2 = await axios({
+                method: "GET",
+                url: "http://skyrone.cf:6789/drone/getAll",
+                params: {},
+                data: {}
+            })
+
             const res1Data = res1.data.content.splice(0, 10).map(i => ({ ...i, value: i._id, label: i.name }));
+            const res2Data = res2.data.map(i => ({ ...i, value: i.id, label: i.name }));
 
             setMonitoredObjects(res1Data);
             setCurrentMonitoredObject(res1Data[0]);
+            setDroneObjects(res2Data);
+            setDroneId(res2Data[0]);
 
             // setImageVideos(res.data.result.map((i, index) => ({
             //     ...i,
@@ -146,6 +161,13 @@ function ImageVideo() {
                         <Button type="primary" onClick={handleSearch}>Tìm kiếm</Button>
                     </Space>
                 </SpaceCustom>
+                <Select
+                    value={droneId}
+                    labelInValue={true} style={{ minWidth: 100 }}
+                    placeholder="Drone giám sát"
+                    onChange={onChangeDrone}
+                    options={droneObjects.filter((item)=>{imageVideos.findIndex((e)=>e.droneId==item.id)})}
+                />
                 <Select
                     value={currentMonitoredObject}
                     labelInValue={true} style={{ minWidth: 100 }}
