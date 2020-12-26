@@ -137,15 +137,14 @@ const Map = ({
   return (
     <GoogleMap
       defaultZoom={option !== "create" ? 14 : 12}
-      // defaultCenter={
-      //   option !== "create"
-      //     ? {
-      //         lat: parseFloat(monitoredObject.lat),
-      //         lng: parseFloat(monitoredObject.lng),
-      //       }
-      //     : initLocation
-      // }
-      defaultCenter={initLocation}
+      defaultCenter={
+        option !== "create" && monitoredObject.lat
+          ? {
+              lat: parseFloat(monitoredObject.lat),
+              lng: parseFloat(monitoredObject.lng),
+            }
+          : initLocation
+      }
     >
       <Search
         placeholder="Nhập vào miền giám sát"

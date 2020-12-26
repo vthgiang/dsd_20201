@@ -151,7 +151,7 @@ route:'/Task1',
       },
     ],
   },
-  
+
   {
     key: 'SupervisedObject',
     heading: 'Đối tượng giám sát',
