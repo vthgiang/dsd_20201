@@ -78,7 +78,6 @@ import MapTest from './MapTest';
 import FlightPathManagement from './FlightPathManagement';
 import FlightSchedule from './FlightSchedule';
 import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
-import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
 
 //DE DIEU
 import HomeDeDieu from "./Home/DeDieu";
