@@ -133,7 +133,7 @@ export const sidebarMenu = [
       },
     ],
   },
-  
+
   {
     key: 'SupervisedObject',
     heading: 'Đối tượng giám sát',

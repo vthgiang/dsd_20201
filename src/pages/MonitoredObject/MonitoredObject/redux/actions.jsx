@@ -134,7 +134,7 @@ function deleteManyMonitoredObjects(arrayId) {
       .then((res) => {
         dispatch({
           type: MonitoredObjectConstants.DELETE_MONITORED_SUCCESS,
-          payload: res.data.content,
+          payload: true,
         });
         dispatch({
           type: MonitoredObjectConstants.OBJECT_SUCCESS,

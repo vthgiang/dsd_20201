@@ -65,11 +65,10 @@ import MonitoredObject from './MonitoredObject/MonitoredObject/component';
 import MonitoredObjectCreate from './MonitoredObject/MonitoredObject/component/monitoredObjectCreate';
 import MonitoredObjectView from './MonitoredObject/MonitoredObject/component/MonitoredObjectView';
 // incident group 09
-import IncidentGroup9 from './Incident/Incident';
-import ImageGallery from './Incident/ImageGallery';
-import VideoGallery from './Incident/VideoGallery';
-import IncidentEdit from './Incident/Incident/edit';
-
+import IncidentGroup9 from "./Incident/Incident";
+import ImageGallery from "./Incident/ImageGallery";
+import VideoGallery from "./Incident/VideoGallery";
+import IncidentEdit from "./Incident/Incident/edit";
 // dsd_01 drone
 import TableDrone from './TableDrone';
 import FlightPathDrone from './FLightPathDrone';
