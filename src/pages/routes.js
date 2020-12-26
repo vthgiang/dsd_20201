@@ -78,12 +78,21 @@ import MapTest from './MapTest';
 import FlightPathManagement from './FlightPathManagement';
 import FlightSchedule from './FlightSchedule';
 import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
+import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
+
+//DE DIEU
+import HomeDeDieu from "./Home/DeDieu";
+import StatisticDeDieu from './Dashboard/IncidentDashboard'
 
 export const routes = [
   {
     path: '/',
     component: Dashboard,
     exact: true,
+  },
+  {
+    path: '/dedieu',
+    component: HomeDeDieu,
   },
   {
     path: '/dashboard',
@@ -173,6 +182,10 @@ export const routes = [
   {
     path: '/payload-configuration',
     component: PayloadSetting,
+  },
+  {
+    path: '/sucodedieu-statistics',
+    component: StatisticDeDieu,
   },
   /* {
     path: '/payload-maintenance',
@@ -385,23 +398,24 @@ export const routes = [
     component: ListUserMeta,
   },
   {
-    path: '/incidents',
+    path: "/incidents",
     component: () => <IncidentGroup9 />,
-    exact: true,
+    exact: true
   },
-
+  
   {
-    path: '/incidents/:id',
+    path: "/incidents/:id",
     component: () => <IncidentEdit />,
-    exact: true,
+    exact: true
+
   },
   {
-    path: '/imageGallery',
+    path: "/imageGallery",
     component: () => <ImageGallery />,
-    exact: true,
+    exact: true
   },
   {
-    path: '/videoGallery',
+    path: "/videoGallery",
     component: () => <VideoGallery />,
   },
   {

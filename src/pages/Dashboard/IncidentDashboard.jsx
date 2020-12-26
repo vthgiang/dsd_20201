@@ -97,7 +97,7 @@ export default function IncidentDashboard() {
 
   return (
     <>
-      <h1>Thống kê sự cố</h1>
+      <h2>Thống kê sự cố</h2>
       {!incidentMetrics ? (
         <Spin />
       ) : (
