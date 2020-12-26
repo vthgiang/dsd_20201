@@ -19,7 +19,7 @@ import {
   ExclamationCircleOutlined,
   HistoryOutlined,
   PlusOutlined,
-  InfoOutlined 
+  InfoOutlined,
 } from '@ant-design/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 import StyleListMonitorCampaign, { StyleSpinContainer } from './index.style';
@@ -38,6 +38,7 @@ import { DATE_TIME_FORMAT } from '../../../../configs';
 import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../../constants';
 
 import { monitorCampaignApi } from '../../../../apis';
+import debounce from '../../../../utils/debounce';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -49,7 +50,7 @@ const ListMonitorCampaign = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const fetchListMonitorCampaignsData = async (params) => {
+  const fetchListMonitorCampaignsData = async (params = {}) => {
     try {
       setLoading(true);
       const resp = await monitorCampaignApi.getListMonitorCampaigns(params);
@@ -69,11 +70,12 @@ const ListMonitorCampaign = () => {
   const handleSearch = () => {
     const newFieldValues = form.getFieldsValue();
     const params = convertFieldValuesToDataSubmit(newFieldValues);
-    fetchListMonitorCampaignsData(params);
+    debounce(fetchListMonitorCampaignsData)(params);
   };
 
   const onResetFieldValues = () => {
     form.resetFields();
+    debounce(fetchListMonitorCampaignsData)();
   };
 
   const goToUpdateMonitorCampaign = (item) => () => {
@@ -85,7 +87,6 @@ const ListMonitorCampaign = () => {
     const { _id } = item;
     history.push(`/flight-hub-monitor-campaigns/${_id}`);
   };
-
 
   const goToCreate = () => {
     history.push(`/flight-hub-monitor-campaigns/create`);
@@ -129,7 +130,7 @@ const ListMonitorCampaign = () => {
       title: 'Mã đợt giám sát',
       width: '7.5%',
       align: 'center',
-      sorter: (a, b) => a.id.localeCompare(b.id),
+      // sorter: (a, b) => a._id.localeCompare(b._id),
     },
     {
       dataIndex: 'name',
@@ -141,7 +142,7 @@ const ListMonitorCampaign = () => {
       dataIndex: 'task',
       title: 'Loại sự cố',
       width: '15%',
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      sorter: (a, b) => a.task.localeCompare(b.task),
     },
     {
       dataIndex: 'startTime',
@@ -156,7 +157,7 @@ const ListMonitorCampaign = () => {
       width: '12.5%',
       title: 'Thời gian kết thúc',
       align: 'center',
-      sorter: (a, b) => moment(a.startTime).diff(moment(b.startTime)),
+      sorter: (a, b) => moment(a.endTime).diff(moment(b.endTime)),
       render: formatMomentDateToDateTimeString,
     },
     {
@@ -184,7 +185,7 @@ const ListMonitorCampaign = () => {
       width: '7.5%',
       align: 'center',
       sorter: (a, b) => a.mechanism.localeCompare(b.mechanism),
-      render: (data) => <span>{data === 'auto' ? 'Tự động' : 'Thủ công'}</span>,
+      render: (data) => <span>{data === 'AUTO' ? 'Tự động' : 'Thủ công'}</span>,
     },
     {
       dataIndex: 'metadataType',
@@ -212,25 +213,22 @@ const ListMonitorCampaign = () => {
         return (
           <Space size={4}>
             <Button
-              size="small"
-              type="primary"
-              onClick={goToDetailMonitorCampaign(record)}
-            >
+              size='small'
+              type='primary'
+              onClick={goToDetailMonitorCampaign(record)}>
               Chi tiết
             </Button>
             <Button
               icon={<EditOutlined />}
-              size="small"
-              onClick={goToUpdateMonitorCampaign(record)}
-            >
+              size='small'
+              onClick={goToUpdateMonitorCampaign(record)}>
               Sửa
             </Button>
             <Button
               icon={<DeleteOutlined />}
-              type="danger"
-              size="small"
-              onClick={deleteConfirm(record, index)}
-            >
+              type='danger'
+              size='small'
+              onClick={deleteConfirm(record, index)}>
               Xóa
             </Button>
           </Space>
@@ -243,13 +241,12 @@ const ListMonitorCampaign = () => {
     <StyleListMonitorCampaign>
       <StyleTitle>Danh sách đợt giám sát</StyleTitle>
 
-      <Row type="flex" justify="end" align="middle">
+      <Row type='flex' justify='end' align='middle'>
         <Button
           icon={<PlusOutlined />}
-          type="primary"
-          size="middle"
-          onClick={goToCreate}
-        >
+          type='primary'
+          size='middle'
+          onClick={goToCreate}>
           Tạo đợt giám sát
         </Button>
       </Row>
@@ -259,31 +256,21 @@ const ListMonitorCampaign = () => {
       <StyleSearchForm>
         <Form
           form={form}
-          layout="horizontal"
+          layout='horizontal'
           labelCol={{ span: 10 }}
           wrapperCol={{ span: 13 }}
-          labelAlign="left"
+          labelAlign='left'
           onValuesChange={handleSearch}
-          size="small"
+          size='small'
           // initialValues={initialValues}
         >
           <Row>
             <Col span={8}>
               <Form.Item
-                name="id"
-                label="Mã đợt giám sát"
-                rules={[{ type: 'string' }]}
-              >
-                <Input placeholder="VD: MC01" />
-              </Form.Item>
-            </Col>
-            <Col span={8}>
-              <Form.Item
-                name="name"
-                label="Tên đợt giám sát"
-                rules={[{ type: 'string' }]}
-              >
-                <Input placeholder="Nhập tên đợt giám sát" />
+                name='name'
+                label='Tên đợt giám sát'
+                rules={[{ type: 'string' }]}>
+                <Input placeholder='Nhập tên đợt giám sát' />
               </Form.Item>
             </Col>
 
@@ -312,8 +299,8 @@ const ListMonitorCampaign = () => {
             </Col> */}
 
             <Col span={8}>
-              <Form.Item name="mechanism" label="Chế độ điều khiển">
-                <Select allowClear placeholder="Tự động/Thủ công">
+              <Form.Item name='mechanism' label='Chế độ điều khiển'>
+                <Select allowClear placeholder='Tự động/Thủ công'>
                   <Option value={MECHANISM.AUTO}>Tự động</Option>
                   <Option value={MECHANISM.MANUALLY}>Thủ công</Option>
                 </Select>
@@ -321,16 +308,16 @@ const ListMonitorCampaign = () => {
             </Col>
 
             <Col span={8}>
-              <Form.Item name="metadataType" label="Dạng dữ liệu">
-                <Select allowClear placeholder="Video/Ảnh">
+              <Form.Item name='metadataType' label='Dạng dữ liệu'>
+                <Select allowClear placeholder='Video/Ảnh'>
                   <Option value={METADATA_TYPES.VIDEO}>Video</Option>
                   <Option value={METADATA_TYPES.PHOTO}>Ảnh</Option>
                 </Select>
               </Form.Item>
             </Col>
             <Col span={8}>
-              <Form.Item name="resolution" label="Độ phân giải">
-                <Select allowClear placeholder="Chọn độ phân giải">
+              <Form.Item name='resolution' label='Độ phân giải'>
+                <Select allowClear placeholder='Chọn độ phân giải'>
                   <Option value={RESOLUTION['480p']}>480p</Option>
                   <Option value={RESOLUTION['720p']}>720p</Option>
                   <Option value={RESOLUTION['1080p']}>1080p</Option>
@@ -340,23 +327,21 @@ const ListMonitorCampaign = () => {
 
             <Col span={16}>
               <Form.Item
-                name="timeRange"
-                label="Thời gian"
+                name='timeRange'
+                label='Thời gian'
                 labelCol={{ span: 5 }}
-                rules={[{ type: 'array' }]}
-              >
+                rules={[{ type: 'array' }]}>
                 <RangePicker showTime format={DATE_TIME_FORMAT} />
               </Form.Item>
             </Col>
           </Row>
           <Col span={8} offset={16}>
             <Col span={13} offset={10}>
-              <Row type="flex" justify="end">
+              <Row type='flex' justify='end'>
                 <Button
-                  size="middle"
+                  size='middle'
                   icon={<HistoryOutlined />}
-                  onClick={onResetFieldValues}
-                >
+                  onClick={onResetFieldValues}>
                   Đặt lại
                 </Button>
               </Row>
@@ -366,20 +351,16 @@ const ListMonitorCampaign = () => {
       </StyleSearchForm>
 
       <StyleSeparator />
-      {loading ? (
-        <StyleSpinContainer>
-          <Spin />
-        </StyleSpinContainer>
-      ) : (
         <StyleTable>
           <Table
-            rowKey="_id"
+          loading={loading}
+            rowKey='_id'
             columns={columns}
             dataSource={listMonitorCampaignsData}
             scroll={{ x: 1560 }}
           />
         </StyleTable>
-      )}
+
     </StyleListMonitorCampaign>
   );
 };

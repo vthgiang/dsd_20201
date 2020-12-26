@@ -107,13 +107,12 @@ const ModalDepartment = ({ departmentId, setVisible, visible, fetchListDepartmen
 
     const buildDepartmentData = () => {
         var data = {};
-        var columns = ["name", "description"];
+        var columns = ["name", "description", "type"];
         columns.forEach((element) => {
             if (department[element] && department[element] != "") {
                 data[element] = department[element];
             }
         });
-        data.type = localStorage.getItem("project-type");
         return data;
     };
 

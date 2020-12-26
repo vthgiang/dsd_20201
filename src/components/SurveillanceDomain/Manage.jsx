@@ -1,62 +1,62 @@
 import React from 'react';
-import {compose, withProps} from "recompose"
+import { compose, withProps } from 'recompose';
 import 'antd/dist/antd.css';
-import {Table, Col, Row, Input, Select, Button, Modal} from 'antd';
-import {SearchOutlined, DeleteOutlined, FolderAddOutlined} from '@ant-design/icons';
-import {Spin, Space} from 'antd';
-import {withRouter} from 'react-router';
+import { Table, Col, Row, Input, Select, Button, Modal } from 'antd';
+import {
+  SearchOutlined,
+  DeleteOutlined,
+  FolderAddOutlined,
+} from '@ant-design/icons';
+import { Spin, Space } from 'antd';
+import { withRouter } from 'react-router';
 import axios from 'axios';
 import {
-    withGoogleMap,
-    withScriptjs,
-    GoogleMap,
-    Polygon,
-} from "react-google-maps";
+  withGoogleMap,
+  withScriptjs,
+  GoogleMap,
+  Polygon,
+} from 'react-google-maps';
 
-const {Option} = Select;
+const { Option } = Select;
 
 const MyMapComponent = compose(
-    withProps({
-        googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA15qz81pHiNfVEV3eeniSNhAu64SsJKgU",
-        loadingElement: <div style={{height: `100%`}}/>,
-        containerElement: <div style={{height: `400px`}}/>,
-        mapElement: <div style={{height: `100%`}}/>,
-    }),
-    withScriptjs,
-    withGoogleMap
-)((props) =>
-    <GoogleMap
-        defaultZoom={12}
-        defaultCenter={{lat: 21.0245, lng: 105.84117}}
-    >
-        
-        {props.chooseArea.map((area, index) => {
-            return (
-                <Polygon
-                    path={area}
-                    key={index}
-                    editable={true}
-                    onClick={props.onMarkerClick}
-                    options={{
-                        strokeColor: "#FF0000",
-                        strokeWeight: 1,
-                    }}
-                >
-                </Polygon>
-            );
-        })}
+  withProps({
+    googleMapURL:
+      'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA15qz81pHiNfVEV3eeniSNhAu64SsJKgU',
+    loadingElement: <div style={{ height: `100%` }} />,
+    containerElement: <div style={{ height: `400px` }} />,
+    mapElement: <div style={{ height: `100%` }} />,
+  }),
+  withScriptjs,
+  withGoogleMap,
+)((props) => (
+  <GoogleMap defaultZoom={12} defaultCenter={{ lat: 21.0245, lng: 105.84117 }}>
+    {props.chooseArea.map((area, index) => {
+      return (
         <Polygon
-            path={props.triangleCoords}
-            onClick={props.onMarkerClick}
-            key={1}
-            editable={true}
-            options={{
-                strokeColor: "#0000FF",
-                strokeWeight: 1,
-            }}
-        />
-    </GoogleMap>
-)
+          path={area}
+          key={index}
+          editable={true}
+          onClick={props.onMarkerClick}
+          options={{
+            strokeColor: '#FF0000',
+            strokeWeight: 1,
+          }}
+        ></Polygon>
+      );
+    })}
+    <Polygon
+      path={props.triangleCoords}
+      onClick={props.onMarkerClick}
+      key={1}
+      editable={true}
+      options={{
+        strokeColor: '#0000FF',
+        strokeWeight: 1,
+      }}
+    />
+  </GoogleMap>
+));
 
 class Manage extends React.Component {
     constructor(props) {
@@ -98,7 +98,7 @@ class Manage extends React.Component {
                     title: 'Chiều cao tối thiểu',
                     render: val => <p>{val.minHeight}</p>
                 },
-                
+
                 {
                     title: 'Chiều cao tối đa',
                     render: val => <p>{val.maxHeight}</p>
@@ -164,13 +164,13 @@ class Manage extends React.Component {
         this._handleChange = this._handleChange.bind(this);
         this.searchName = this.searchName.bind(this);
     }
-    
+
     delayedShowMarker = () => {
         setTimeout(() => {
             this.setState({isMarkerShown: true})
         }, 3000)
     }
-    
+
     handleMarkerClick = (e) => {
         //get kinh do vi do khi click ban do
         let lat = e.latLng.lat();
@@ -178,7 +178,7 @@ class Manage extends React.Component {
         // check xem co ton tai startPoint va endPoint
         let latStartPoint = this.state.create.data.startPoint.latitude;
         let latEndPoint = this.state.create.data.endPoint.latitude;
-        
+
         if (!latStartPoint) {
             this.setState(prevState => {
                 let create = Object.assign({}, prevState.create);
@@ -215,7 +215,7 @@ class Manage extends React.Component {
         this.setState({isMarkerShown: false});
         this.delayedShowMarker();
     }
-    
+
     _handleChange(e) {
         let key = e.target.name;
         let value = e.target.value;
@@ -225,7 +225,7 @@ class Manage extends React.Component {
             return {create};
         })
     }
-    
+
     setStatusModalAdd(openModalAdd) {
         this.setState(prevState => {
             let create = Object.assign({}, prevState.create);
@@ -234,7 +234,7 @@ class Manage extends React.Component {
         })
         this.setState({openModalAdd});
     }
-    
+
     createDomain() {
         this.setStatusModalAdd(false);
         let dataCreate = this.state.create;
@@ -252,7 +252,7 @@ class Manage extends React.Component {
             })
             .catch(error => console.log(error));
     }
-    
+
     getAllZone() {
         let token = localStorage.getItem('token');
         let projecttype = localStorage.getItem('project-type');
@@ -271,9 +271,9 @@ class Manage extends React.Component {
                 this.setState({listDomainTmp});
             })
             .catch(error => console.log(error));
-        
+
     }
-    
+
     deleteZone(zone) {
         let id = zone._id;
         if (window.confirm(`Bạn muốn xóa miền : ${zone.name}? `)) {
@@ -290,10 +290,10 @@ class Manage extends React.Component {
                 })
                 .catch(error => console.log(error));
         } else {
-        
+
         }
     }
-    
+
     getArea() {
         axios.get(`https://monitoredzoneserver.herokuapp.com/area?pageSize=1000`, {
                 headers: {
@@ -307,7 +307,7 @@ class Manage extends React.Component {
             })
             .catch(error => console.log(error));
     }
-    
+
     getNameArea(id) {
         let area = this.state.listArea.find(area => area._id === id);
         if (area) {
@@ -316,7 +316,7 @@ class Manage extends React.Component {
             return id;
         }
     }
-    
+
     componentDidMount() {
         let persist = JSON.parse(localStorage.getItem('persist:root'));
         persist = JSON.parse(persist.user);
@@ -327,8 +327,8 @@ class Manage extends React.Component {
         this.getArea();
         this.getAllZone();
     }
-    
-    
+
+
     onChange(e) {
         let val = e.target['data-key'];
         let status = e.target.checked;
@@ -347,7 +347,7 @@ class Manage extends React.Component {
             }
         }
     }
-    
+
     async editDomain(id) {
         let domain = this.state.listDomain.find(domain => domain._id === id);
         domain.nameArea = this.getNameArea(domain.area);
@@ -358,7 +358,7 @@ class Manage extends React.Component {
                 return elm;
             }
         });
-        
+
         this.props.history.push({
             pathname: '/surveillance-domain-manage/edit',
             state: {
@@ -368,7 +368,7 @@ class Manage extends React.Component {
             }
         });
     }
-    
+
     async getMonitoredObjectByZone(zoneId) {
         return new Promise((resolve, reject) => {
             axios.get(`https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-zone?monitoredZone=${zoneId}`)
@@ -379,7 +379,7 @@ class Manage extends React.Component {
                 .catch(error => console.log(error));
         });
     }
-    
+
     async getZonebyArea(idArea) {
         return new Promise((resolve, reject) => {
             axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone/area/${idArea}`, {
@@ -395,7 +395,7 @@ class Manage extends React.Component {
                 .catch(error => console.log(error));
         });
     }
-    
+
     toggleActivePriority = name => async (value) => {
         this.setState(prevState => {
             let create = Object.assign({}, prevState.create);
@@ -403,7 +403,7 @@ class Manage extends React.Component {
             return {create};
         });
     }
-    
+
     searchPriority = priority => async (value) => {
         this.setState(prevState => {
             let search = Object.assign({}, prevState.search);
@@ -415,7 +415,7 @@ class Manage extends React.Component {
             domains = this.state.listDomain.filter(domain => {
                 return domain.priority == value;
             });
-            
+
         } else {
             domains = this.state.listDomain;
         }
@@ -431,7 +431,7 @@ class Manage extends React.Component {
             return {listDomainTmp};
         });
     }
-    
+
     searchArea = area => async (value) => {
         this.setState(prevState => {
             let search = Object.assign({}, prevState.search);
@@ -457,7 +457,7 @@ class Manage extends React.Component {
             return {listDomainTmp};
         });
     }
-    
+
     searchName(e) {
         let value = e.target.value;
         this.setState(prevState => {
@@ -466,7 +466,7 @@ class Manage extends React.Component {
             return {search};
         })
     }
-    
+
     toggleActive = name => async (value) => {
         let chooseArea = [];
         this.setState(prevState => {
@@ -474,7 +474,7 @@ class Manage extends React.Component {
             create._id = value;
             return {create};
         });
-        
+
         let zoneByArea = await this.getZonebyArea(value);
         let area = this.state.listArea.find(area => area._id === value);
         if (area) {
@@ -499,7 +499,7 @@ class Manage extends React.Component {
         }
         this.setState({chooseArea});
     }
-    
+
     getIncident() {
         return new Promise((resolve, reject) => {
             axios.get(`https://distributed.de-lalcool.com/api/projectType`, {
@@ -517,7 +517,7 @@ class Manage extends React.Component {
                 .catch(error => console.log(error));
         });
     }
-    
+
     render() {
         return (
             <div className="main">

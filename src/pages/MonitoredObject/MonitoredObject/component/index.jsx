@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { withTranslate } from 'react-redux-multilingual';
-import MultiSelect from 'react-multi-select-component';
-import AreaMonitorImport from './areaMonitoredImport';
-import Modals from './modal';
-import { Menu, Dropdown, Button } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
-import { MonitoredObjectActions } from '../redux/actions';
-import Pagination from '@material-ui/lab/Pagination';
-import SuccessNotification from './SuccessNotification';
-import { MonitoredObjectConstants } from '../redux/constants';
+import React, { useEffect, useState } from "react";
+import { withTranslate } from "react-redux-multilingual";
+import MultiSelect from "react-multi-select-component";
+import AreaMonitorImport from "./areaMonitoredImport";
+import Modals from "./modal";
+import { Menu, Dropdown, Button } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { MonitoredObjectActions } from "../redux/actions";
+import Pagination from "@material-ui/lab/Pagination";
+import SuccessNotification from "./SuccessNotification";
+import { MonitoredObjectConstants } from "../redux/constants";
+const axios = require("axios");
 
 function AreaMonitored(props) {
   const { history } = props;
@@ -20,21 +21,41 @@ function AreaMonitored(props) {
     isObjectSuccess,
     isObjectFailure,
     objectMessages,
+    isDeleteMonitored,
   } = monitoredObjects;
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 5,
   });
   const { page, limit } = pagination;
-  const [formatStyle, setFormatStyle] = useState('');
+  const [formatStyle, setFormatStyle] = useState("");
   const [selected, setSelected] = useState([]);
   const [selectItemDelete, setSelectItemDelete] = useState({});
   const [itemSearch, setItemSearch] = useState({
-    code: '',
-    name: '',
+    code: "",
+    name: "",
     status: [],
   });
 
+  const postLogMonitorObjectDelete = async () => {
+    await axios({
+      method: "POST",
+      url: `http://it4883logging.herokuapp.com/api/monitor-object/delete`,
+      data: {
+        regionId: selectItemDelete.monitoredZone,
+        entityId: selectItemDelete._id,
+        description: "delete monitor object",
+        authorId: "",
+        projectType: localStorage.getItem("project-type"),
+        state: "",
+        name: selectItemDelete.name,
+      },
+    })
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     dispatch(MonitoredObjectActions.getAllMonitoredObjects({ page, limit }));
   }, [page]);
@@ -48,14 +69,25 @@ function AreaMonitored(props) {
   }, [selected]);
   useEffect(() => {
     if (isObjectFailure) {
-      setFormatStyle('btn btn-danger');
-      window.$('#modalSuccessNotification').modal('show');
+      setFormatStyle("btn btn-danger");
+      window.$("#modalSuccessNotification").modal("show");
     }
     if (isObjectSuccess) {
-      setFormatStyle('btn btn-success');
-      window.$('#modalSuccessNotification').modal('show');
+      setFormatStyle("btn btn-success");
+      window.$("#modalSuccessNotification").modal("show");
       dispatch(MonitoredObjectActions.getAllMonitoredObjects({ page, limit }));
     }
+    if (isDeleteMonitored) {
+      //gọi log khi xóa đối tượng giám sát
+      postLogMonitorObjectDelete();
+      setFormatStyle("btn btn-success");
+      window.$("#modalSuccessNotification").modal("show");
+      dispatch(MonitoredObjectActions.getAllMonitoredObjects({ page, limit }));
+    }
+    dispatch({
+      type: MonitoredObjectConstants.DELETE_MONITORED_SUCCESS,
+      payload: false,
+    });
     dispatch({
       type: MonitoredObjectConstants.OBJECT_FAILURE,
       payload: false,
@@ -72,7 +104,7 @@ function AreaMonitored(props) {
         ...itemSearch,
         page: page,
         limit: limit,
-      }),
+      })
     );
   };
   const onChangePagination = (event, value) => {
@@ -97,12 +129,12 @@ function AreaMonitored(props) {
     });
   };
   const handleAreaImport = () => {
-    window.$('#modalImport').modal('show');
+    window.$("#modalImport").modal("show");
   };
 
   const handleMonitoredDelete = (item) => {
     setSelectItemDelete(item);
-    window.$('#modal').modal('show');
+    window.$("#modal").modal("show");
   };
   const menu = (
     <Menu>
@@ -133,7 +165,7 @@ function AreaMonitored(props) {
         <h3>Quản lý đối tượng giám sát</h3>
       </div>
       <div className="box-body">
-        <div style={{ marginLeft: '90%' }}>
+        <div style={{ marginLeft: "90%" }}>
           <Dropdown overlay={menu} placement="bottomLeft" arrow>
             <Button
               type="button"
@@ -144,9 +176,9 @@ function AreaMonitored(props) {
             </Button>
           </Dropdown>
         </div>
-        <div className="form-inline" style={{ margin: '15px' }}>
-          <div className="form-group" style={{ marginRight: '30px' }}>
-            <label className="form-control-static" style={{ margin: '10px' }}>
+        <div className="form-inline" style={{ margin: "15px" }}>
+          <div className="form-group" style={{ marginRight: "30px" }}>
+            <label className="form-control-static" style={{ margin: "10px" }}>
               <b>Mã đối tượng</b>
             </label>
             <input
@@ -166,7 +198,7 @@ function AreaMonitored(props) {
             />
           </div>
           <div className="form-group">
-            <label className="form-control-static" style={{ margin: '10px' }}>
+            <label className="form-control-static" style={{ margin: "10px" }}>
               <b>Tên đối tượng</b>
             </label>
             <input
@@ -186,18 +218,18 @@ function AreaMonitored(props) {
             />
           </div>
         </div>
-        <div className="form-inline" style={{ margin: '15px' }}>
-          <div className="form-group" style={{ marginRight: '15px' }}>
-            <label className="form-control-static" style={{ margin: '10px' }}>
+        <div className="form-inline" style={{ margin: "15px" }}>
+          <div className="form-group" style={{ marginRight: "15px" }}>
+            <label className="form-control-static" style={{ margin: "10px" }}>
               <b>Trạng thái</b>
             </label>
             <MultiSelect
               id={`select-multi-status`}
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               options={[
-                { label: 'Bình thường', value: '1' },
-                { label: 'Đã hỏng', value: '2' },
-                { label: 'Đang được sửa chữa', value: '3' },
+                { label: "Bình thường", value: "1" },
+                { label: "Đã hỏng", value: "2" },
+                { label: "Đang được sửa chữa", value: "3" },
               ]}
               value={selected}
               onChange={setSelected}
@@ -218,7 +250,6 @@ function AreaMonitored(props) {
           <thead>
             <tr>
               <th>STT</th>
-              <th>Mã đối tượng</th>
               <th>Tên đối tượng</th>
               <th>Trạng thái</th>
               <th>Mô tả</th>
@@ -233,19 +264,18 @@ function AreaMonitored(props) {
               listPaginate.map((item, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{item.code}</td>
                   <td>{item.name}</td>
-                  <td style={{ color: 'green' }}>
-                    {item.status === 1 ? 'Bình thường' : 'Đang được sửa chữa'}
+                  <td style={{ color: "green" }}>
+                    {item.status === 1 ? "Bình thường" : "Đang được sửa chữa"}
                   </td>
                   <td>{item.description}</td>
                   <td>
-                    {!!item.category ? item.category.name : 'Chưa có giá trị'}
+                    {!!item.category ? item.category.name : "Chưa có giá trị"}
                   </td>
                   <td>
                     {!!item.areaMonitored
                       ? item.areaMonitored.name
-                      : 'Chưa có giá trị'}
+                      : "Chưa có giá trị"}
                   </td>
                   <td>
                     <a

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StyleLayout = styled.div`
   .trigger {
@@ -16,6 +16,9 @@ const StyleLayout = styled.div`
     background: white;
     min-height: calc(100vh - 64px);
     padding: 12px 24px;
+  }
+  .margin-left-12 {
+  margin-left: 12px
   }
 `;
 export default StyleLayout;

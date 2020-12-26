@@ -74,7 +74,7 @@ function AreaMonitored(props) {
     }));
   };
   const handleCatCreate = () => {
-    window.$('#modalCreate').modal('show');
+    window.$('#modalCreateCatObject').modal('show');
     setOption('add');
   };
   const handleCatImport = () => {
@@ -93,12 +93,12 @@ function AreaMonitored(props) {
   const handleACatView = (item) => {
     setCatMonitored(item);
     setOption('view');
-    window.$('#modalCreate').modal('show');
+    window.$('#modalCreateCatObject').modal('show');
   };
   const handleCatEdit = (item) => {
     setCatMonitored(item);
     setOption('edit');
-    window.$('#modalCreate').modal('show');
+    window.$('#modalCreateCatObject').modal('show');
   };
   const handleCatDelete = (item) => {
     setCatMonitored(item);
@@ -108,7 +108,7 @@ function AreaMonitored(props) {
     <Menu>
       <Menu.Item>
         <a
-          data-target="#modalCreate"
+          data-target="#modalCreateCatObject"
           title="Add area"
           onClick={handleCatCreate}
         >

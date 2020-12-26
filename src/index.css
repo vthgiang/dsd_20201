@@ -37,6 +37,11 @@ body {
   font-size: 1em !important;
 }
 
+.ant-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
 .ant-menu-item .collapsed {
   margin-left: 7.5px !important;
 }
@@ -46,6 +51,69 @@ body {
 
 .ant-modal-title {
   font-size: 1.25em !important;
+}
+
+.u-shadow {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+}
+
+/* border */
+
+.u-rounded-sm {
+  border-radius: 4px;
+}
+
+.u-rounded-md,
+.u-rounded {
+  border-radius: 8px;
+}
+
+.u-rounded-lg {
+  border-radius: 16px;
+}
+
+.u-border {
+  border: 1px solid black;
+}
+
+.u-border-primary {
+  border-color: blue;
+}
+
+.u-border-negative {
+  border-color: red;
+}
+
+.u-border-medium {
+  border-width: 5px;
+}
+
+.u-rounded {
+  border-radius: 8px;
+}
+
+.u-textCenter {
+  text-align: center;
+}
+
+.u-fontBold {
+  font-weight: bold;
+}
+
+.u-reportContainer {
+  border: 3px double black;
+  padding: 32px;
+  font-family: serif;
+  font-size: 16px;
+}
+
+.u-formatHeader {
+  font-size: 24px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  padding: 0 32px;
+  margin-bottom: 32px;
 }
 
 .sticky-column {

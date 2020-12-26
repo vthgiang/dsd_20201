@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import WrappedMap from "./map";
 import { useParams } from "react-router-dom";
 import SuccessNotification from "./SuccessNotification";
+import { Image } from "antd";
 
 import { CategoryActions } from "../../Category/redux/actions";
 import { MonitoredObjectConstants } from "../redux/constants";
@@ -15,6 +16,7 @@ function MonitoredObjectView({ history }) {
   const dispatch = useDispatch();
   const category = useSelector((state) => state.category);
   const monitoredObjects = useSelector((state) => state.monitoredObjects);
+  const user = useSelector((state) => state.user.user);
   const { isObjectSuccess, isObjectFailure, objectMessages } = monitoredObjects;
   const [monitoredObject, setMonitoredObject] = useState({
     code: "",
@@ -35,14 +37,18 @@ function MonitoredObjectView({ history }) {
     monitoredZone: "",
   });
   const [formatStyle, setFormatStyle] = useState("");
-  const [arrImages, setArrImages] = useState([]);
   const [currentMonitoredZone, setCurrentMonitoredZone] = useState(null);
   const [datazoneAll, setDataZoneAll] = useState([]);
+  const [listArea, setListArea] = useState([]);
 
   const getZoneAll = async () => {
     await axios({
       method: "GET",
-      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone?page=0`,
+      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone`,
+      headers: {
+        token: localStorage.getItem("token"),
+        projectType: localStorage.getItem("project-type"),
+      },
     })
       .then((res) => {
         if (res.data) {
@@ -58,6 +64,10 @@ function MonitoredObjectView({ history }) {
       await axios({
         method: "GET",
         url: `https://dsd05-monitored-object.herokuapp.com/monitored-object/detail-monitored-object/${id}`,
+        headers: {
+          token: localStorage.getItem("token"),
+          projectType: localStorage.getItem("project-type"),
+        },
       })
         .then((res) => {
           if (res.data) {
@@ -78,12 +88,17 @@ function MonitoredObjectView({ history }) {
               lng: res.data.content.lng, //Kinh độ
               height: res.data.content.height,
               drones: res.data.content.drones,
-              images: res.data.content.images,
-              videos: res.data.content.videos,
               monitoredZone: res.data.content.monitoredZone,
             });
+            getImagesMonitored();
+            getVideoMonitored();
           }
-          getDetailZoneById(res.data.content.monitoredZone);
+          if (
+            res.data.content.monitoredZone &&
+            res.data.content.monitoredZone.length > 0
+          ) {
+            getDetailZoneById(res.data.content.monitoredZone);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -98,21 +113,10 @@ function MonitoredObjectView({ history }) {
       })
         .then((res) => {
           if (res.data) {
-            // res.data.result &&
-            //   res.data.result.map((item) => arrImages.push(item.link));
-            // console.log(arrImages);
-            // setTimeout(
-            //   setMonitoredObject((prev) => ({
-            //     ...prev,
-            //     images: arrImages,
-            //   })),
-            //   1000
-            // );
-            setArrImages([
-              "https://picsum.photos/id/1018/1000/600/",
-              "https://picsum.photos/id/1015/1000/600/",
-              "https://picsum.photos/id/1019/1000/600/",
-            ]);
+            setMonitoredObject((prev) => ({
+              ...prev,
+              images: res.data.result,
+            }));
           }
         })
         .catch((err) => {
@@ -144,6 +148,10 @@ function MonitoredObjectView({ history }) {
       await axios({
         method: "GET",
         url: `https://monitoredzoneserver.herokuapp.com/monitoredzone/zoneinfo/${payload}`,
+        headers: {
+          token: localStorage.getItem("token"),
+          projectType: localStorage.getItem("project-type"),
+        },
       })
         .then((res) => {
           if (res.data) {
@@ -155,13 +163,40 @@ function MonitoredObjectView({ history }) {
         });
     }
   };
+  const postLogMonitorObjectEdit = async () => {
+    await axios({
+      method: "POST",
+      url: `http://it4883logging.herokuapp.com/api/monitor-object/edit`,
+      data: {
+        regionId: monitoredObject.monitoredZone,
+        entityId: monitoredObject._id,
+        description: "edit monitor object",
+        authorId: "",
+        projectType: localStorage.getItem("project-type"),
+        state: "",
+        name: monitoredObject.name,
+      },
+    })
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getArea = async () => {
+    axios
+      .get(`https://monitoredzoneserver.herokuapp.com/area?pageSize=1000`)
+      .then((res) => {
+        setListArea(res.data.content.monitoredArea);
+      })
+      .catch((error) => console.log(error));
+  };
+
   useEffect(() => {
     dispatch(CategoryActions.getAllCategories());
     dispatch(MonitoredObjectActions.getAllMonitoredObjects());
     getZoneAll();
+    getArea();
     getDetailMonitoredObject();
-    getImagesMonitored();
-    getVideoMonitored();
   }, []);
   useEffect(() => {
     if (isObjectFailure) {
@@ -169,6 +204,8 @@ function MonitoredObjectView({ history }) {
       window.$("#modalSuccessNotification").modal("show");
     }
     if (isObjectSuccess) {
+      //gọi log khi edit monitored object thành công
+      postLogMonitorObjectEdit();
       setFormatStyle("btn btn-success");
       window.$("#modalSuccessNotification").modal("show");
     }
@@ -189,16 +226,16 @@ function MonitoredObjectView({ history }) {
     }));
   };
   const handleCreateMonitoredObject = () => {
-    if (
-      currentMonitoredZone &&
-      (monitoredObject.height < currentMonitoredZone.minHeight ||
-        monitoredObject.height > currentMonitoredZone.maxHeight)
-    ) {
-      alert(
-        `Chọn chiều cao cho đối tượng trong khoảng giá trị từ ${currentMonitoredZone.minHeight} - ${currentMonitoredZone.maxHeight}`
-      );
-      return;
-    }
+    // if (
+    //   currentMonitoredZone &&
+    //   (monitoredObject.height < currentMonitoredZone.minHeight ||
+    //     monitoredObject.height > currentMonitoredZone.maxHeight)
+    // ) {
+    //   alert(
+    //     `Chọn chiều cao cho đối tượng trong khoảng giá trị từ ${currentMonitoredZone.minHeight} - ${currentMonitoredZone.maxHeight}`,
+    //   );
+    //   return;
+    // }
 
     if (monitoredObject._id) {
       dispatch(
@@ -215,6 +252,7 @@ function MonitoredObjectView({ history }) {
       dispatch(
         MonitoredObjectActions.createMonitoredObject({
           ...monitoredObject,
+          code: "2",
           areaMonitored: null,
           managementUnit: null,
           images: null,
@@ -243,7 +281,7 @@ function MonitoredObjectView({ history }) {
   };
 
   const getCoodinate = (zone) => {
-    setCurrentMonitoredZone(zone);
+    // setCurrentMonitoredZone(zone);
   };
   const onChangeMonitoredZone = (id) => {
     setMonitoredObject((prev) => ({
@@ -256,33 +294,17 @@ function MonitoredObjectView({ history }) {
   return (
     <div>
       <div className="header-title mb-5">
-        <h5 className="modal-title" id="exampleModalLongTitle">
+        <h5
+          className="modal-title mt-3 mb-3"
+          style={{ fontSize: "25px", textAlign: "center" }}
+        >
           {option === "view" && "Xem chi tiết thông tin đối tượng giám sát"}
-          {option === "edit" && "Chỉnh sửa thông tin đối tượng giám sát"} 
+          {option === "edit" && "Chỉnh sửa thông tin đối tượng giám sát"}
         </h5>
       </div>
       <div className="content row">
         <div className="col-6">
           <form>
-            <div className="form-group row">
-              <label
-                htmlFor="inputAreaNumber"
-                className="col-sm-2 col-form-label"
-              >
-                Mã đối tượng
-              </label>
-              <div className="col-sm-10">
-                <input
-                  disabled={option === "view"}
-                  className="form-control"
-                  id="inputAreaNumber"
-                  placeholder="Mã đối tượng"
-                  name="code"
-                  value={monitoredObject.code}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
             <div className="form-group row">
               <label
                 htmlFor="inputAreaName"
@@ -319,9 +341,6 @@ function MonitoredObjectView({ history }) {
                   <option value="CHAY_RUNG">Cháy rừng</option>
                   <option value="LUOI_DIEN">Lưới điện</option>
                   <option value="CAY_TRONG">Cây trồng</option>
-                  {!monitoredObject.type && (
-                    <option value="">Chưa có giá trị</option>
-                  )}
                 </select>
               </div>
             </div>
@@ -418,6 +437,31 @@ function MonitoredObjectView({ history }) {
                 </select>
               </div>
             </div>
+            <div className="form-group row">
+              <label htmlFor="inputStatus" className="col-sm-2 col-form-label">
+                Khu vực giám sát
+              </label>
+              <div className="col-sm-10">
+                <select
+                  disabled={option === "view"}
+                  className="custom-select"
+                  name="areaMonitored"
+                  value={monitoredObject.areaMonitored}
+                  onChange={handleChange}
+                >
+                  <option disabled>Chọn khu vực giám sát</option>
+                  {!monitoredObject.areaMonitored && (
+                    <option value="">Chưa có giá trị</option>
+                  )}
+                  {listArea &&
+                    listArea.map((item, index) => (
+                      <option value={item._id} key={index}>
+                        {item.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            </div>
           </form>
         </div>
         <div className="col-6">
@@ -429,39 +473,52 @@ function MonitoredObjectView({ history }) {
               <div
                 id="carousel-example-2"
                 className="carousel slide carousel-fade z-depth-1-half"
-                data-ride="false"
+                data-ride="carousel"
+                style={{ height: "300px", background: "#8e8080" }}
               >
                 <ol className="carousel-indicators">
-                  {arrImages.map((item, index) => (
-                    <li
-                      data-target="#carousel-example-2"
-                      data-slide-to={index}
-                      className={indexImage === index ? "active" : ""}
-                      key={index}
-                    ></li>
-                  ))}
+                  {monitoredObject.images &&
+                    monitoredObject.images.length > 0 &&
+                    monitoredObject.images.map((item, index) => (
+                      <li
+                        data-target="#carousel-example-2"
+                        data-slide-to={index}
+                        className={indexImage === index ? "active" : ""}
+                        key={index}
+                      ></li>
+                    ))}
                 </ol>
                 <div className="carousel-inner" role="listbox">
-                  {arrImages.map((item, index) => (
-                    <div
-                      className={
-                        indexImage === index
-                          ? "carousel-item active"
-                          : "carousel-item"
-                      }
-                      key={index}
-                    >
-                      <div className="view">
-                        <img
-                          className="d-block w-100"
-                          src={item}
-                          alt="First slide"
-                          height={300}
-                        />
-                        <div className="mask rgba-black-light"></div>
+                  {monitoredObject.images &&
+                    monitoredObject.images.length > 0 &&
+                    monitoredObject.images.map((item, index) => (
+                      <div
+                        className={
+                          indexImage === index
+                            ? "carousel-item active"
+                            : "carousel-item"
+                        }
+                        key={index}
+                      >
+                        <div className="view">
+                          <Image
+                            style={{
+                              cursor: "pointer",
+                            }}
+                            src={item.link}
+                            preview={false}
+                            alt={item.title}
+                          />
+                          {/* <img
+                            className="d-block w-100"
+                            src={item.link}
+                            alt="First slide"
+                            height={300}
+                          /> */}
+                          <div className="mask rgba-black-light"></div>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
                 <a
                   className="carousel-control-prev"
@@ -497,6 +554,7 @@ function MonitoredObjectView({ history }) {
             <div className="col-sm-10 ">
               <ul className="d-flex p-0 m-0" style={{ overflow: "auto" }}>
                 {monitoredObject.videos &&
+                  monitoredObject.videos.length > 0 &&
                   monitoredObject.videos.map((item, index) => (
                     <li
                       className="mr-3"
@@ -520,7 +578,9 @@ function MonitoredObjectView({ history }) {
             <div className="col-sm-10 d-flex">
               {!!monitoredObject.lat || !!monitoredObject.lng ? (
                 <p className="d-flex m-0 justify-content-center align-items-center">
-                  Kinh độ: {monitoredObject.lng}<br />Vĩ độ: {monitoredObject.lat}
+                  Kinh độ: {monitoredObject.lng}
+                  <br />
+                  Vĩ độ: {monitoredObject.lat}
                 </p>
               ) : (
                 <p className="d-flex m-0 justify-content-center align-items-center">
@@ -569,20 +629,20 @@ function MonitoredObjectView({ history }) {
                 value={monitoredObject.height}
                 onChange={handleChange}
               />
-              {currentMonitoredZone && (
+              {/* {currentMonitoredZone && (
                 <p className="mt-2">
                   Chọn chiều cao cho đối tượng trong khoảng giá trị từ{" "}
                   {currentMonitoredZone.minHeight} -{" "}
                   {currentMonitoredZone.maxHeight}
                 </p>
-              )}
+              )} */}
             </div>
           </div>
         </div>
         <div className="col-8">
           {monitoredObject.monitoredZone && (
             <WrappedMap
-              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCV09KQtrmzDnyXYeC_UzB-HAwMKytXRpE"
+              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA15qz81pHiNfVEV3eeniSNhAu64SsJKgU"
               loadingElement={<div style={{ height: `100%` }} />}
               containerElement={<div style={{ height: `95vh` }} />}
               mapElement={<div style={{ height: `100%` }} />}

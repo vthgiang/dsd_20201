@@ -30,8 +30,9 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode, 
     const fetchUser = useCallback(async () => {
         try {
             const res = await getUser(userId);
+            console.log("res", res);
             if (res.status === "successful") {
-                setUser(res.result);
+                setUser({ ...res.result, ...(res.result.department && { department: res.result.department.id }) });
                 if (res.result && res.result.avatar) {
                     setImageUrl(res.result.avatar);
                 }
@@ -167,19 +168,27 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode, 
                 data[element] = user[element];
             }
         });
-        if (user.department && user.department.id) {
-            data["department_id"] = user.department.id;
+        if (user.department) {
+            data["department_id"] = user.department;
         } else {
             data["department_id"] = 0;
         }
-        if (data['status'] == 'Chưa xác định') {
-            data['status'] = null;
+        if (data["status"] == "Chưa xác định") {
+            data["status"] = null;
         }
-        if (data['role'] == 'Chưa xác định') {
-            data['role'] = null;
+        if (data["role"] == "Chưa xác định") {
+            data["role"] = null;
         }
-        data.type = localStorage.getItem("project-type");
-        data.birthday = moment(user["birthday"]).format("YYYY-MM-DD 00:00:00");
+        if (!user["birthday"] || user['birthday'] == "") {
+            data["birthday"] = null;
+        } else {
+            data['birthday'] = moment(user["birthday"]).format("YYYY-MM-DD 00:00:00");
+        }
+        if (loginUser.role != "SUPER_ADMIN") {
+            data.type = localStorage.getItem("project-type");
+        } else {
+            data.type = user.type;
+        }
         return data;
     };
 
@@ -232,39 +241,35 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode, 
 
     const renderSelectRole = () => (
         <Select disabled={mode == "detail"} className='select-box' value={user?.role} onChange={(value) => setUser({ ...user, role: value })} defaultValue='Chưa xác định' style={{ width: "100%" }}>
-            {loginUser && loginUser.role == "SUPER_ADMIN" && (
-                <Option key={0} value='SUPER_ADMIN'>
-                    Quản trị hệ thống
-                </Option>
-            )}
-            {listRoles && listRoles.map((status, index) => {
-                return (
-                    <Option key={index} value={status.code}>
-                        {status.name}
-                    </Option>
-                );
-            })}
+            {listRoles &&
+                listRoles.map((status, index) => {
+                    return (
+                        <Option key={index} value={status.code}>
+                            {status.name}
+                        </Option>
+                    );
+                })}
         </Select>
     );
 
     const renderSelectDepartment = () => (
         <Select
+            showSearch
+            optionFilterProp='children'
             disabled={mode == "detail"}
             className='select-box'
-            value={user && user.department ? user.department.id : "Chưa xác định"}
+            value={user && user.department ? user.department : "Chưa xác định"}
             onChange={(value) => setUser({ ...user, department: value })}
             defaultValue='Chưa xác định'
             style={{ width: "100%" }}>
-            <Option key={-1} value='Chưa xác định'>
-                Chưa xác định
-            </Option>
-            {listDepartments && listDepartments.map((department, index) => {
-                return (
-                    <Option key={index} value={department.id}>
-                        {department.name}
-                    </Option>
-                );
-            })}
+            {listDepartments &&
+                listDepartments.map((department, index) => {
+                    return (
+                        <Option key={index} value={department.id}>
+                            {department.name}
+                        </Option>
+                    );
+                })}
         </Select>
     );
 
@@ -273,7 +278,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode, 
             disabled={mode == "detail"}
             className='select-box'
             value={user?.type}
-            onChange={(value) => setUser({ ...user, type: value, page_id: 0 })}
+            onChange={(value) => setUser({ ...user, type: value })}
             defaultValue='Chưa xác định'
             style={{ width: "100%", minWidth: 100 }}>
             {loginUser && loginUser.role == "SUPER_ADMIN" && (
@@ -411,7 +416,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode, 
                         {renderSelectDepartment()}
                     </Form.Item>
                     {loginUser && loginUser.role == "SUPER_ADMIN" && (
-                        <Form.Item name='type'>
+                        <Form.Item name='type' style={{ width: "45%" }}>
                             <label htmlFor=''>Dự án </label>
                             {renderSelectType()}
                         </Form.Item>

@@ -7,6 +7,7 @@ import {
   InfoWindow,
   Rectangle,
 } from "react-google-maps";
+import { removeVietnameseTones } from "../../../../helpers/removeVietnameseTones";
 
 import { Input } from "antd";
 import { HeatMapOutlined } from "@ant-design/icons";
@@ -40,7 +41,9 @@ const Map = ({
         lat: parseFloat(monitoredObject.lat),
         lng: parseFloat(monitoredObject.lng),
       });
-      setSelectedMonitoredZone(monitoredObject.monitoredZone);
+      if (monitoredObject.monitoredZone.length > 0) {
+        setSelectedMonitoredZone(monitoredObject.monitoredZone);
+      }
     }
   }, []);
 
@@ -48,6 +51,10 @@ const Map = ({
     await axios({
       method: "GET",
       url: `https://monitoredzoneserver.herokuapp.com/monitoredzone`,
+      headers: {
+        token: localStorage.getItem("token"),
+        projectType: localStorage.getItem("project-type"),
+      },
     })
       .then((res) => {
         if (res.data) {
@@ -88,8 +95,8 @@ const Map = ({
 
   const submitSearch = (value) => {
     let data = monitoredZonesDataInit.filter((element) => {
-      let textElement = element.name;
-      let textValue = value;
+      let textElement = removeVietnameseTones(element.name);
+      let textValue = removeVietnameseTones(value);
       if (textElement.includes(textValue)) {
         return element;
       }
@@ -132,7 +139,7 @@ const Map = ({
     <GoogleMap
       defaultZoom={option !== "create" ? 14 : 12}
       defaultCenter={
-        option !== "create"
+        option !== "create" && monitoredObject.lat
           ? {
               lat: parseFloat(monitoredObject.lat),
               lng: parseFloat(monitoredObject.lng),

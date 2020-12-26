@@ -154,6 +154,7 @@ const Filter = ({ filter, setFilter, setVisible }) => {
                                 page_id: 0,
                             })
                         }
+                        value={filter.search}
                     />
                 </Col>
                 <Col span={7} style={{ display: "flex" }}>
