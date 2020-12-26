@@ -16,6 +16,7 @@ function MonitoredObjectView({ history }) {
   const dispatch = useDispatch();
   const category = useSelector((state) => state.category);
   const monitoredObjects = useSelector((state) => state.monitoredObjects);
+  const user = useSelector((state) => state.user.user);
   const { isObjectSuccess, isObjectFailure, objectMessages } = monitoredObjects;
   const [monitoredObject, setMonitoredObject] = useState({
     code: "",
