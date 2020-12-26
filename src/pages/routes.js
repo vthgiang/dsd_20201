@@ -78,6 +78,9 @@ import MapTest from './MapTest';
 import FlightPathManagement from './FlightPathManagement';
 import FlightSchedule from './FlightSchedule';
 import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
+import component from './MonitoredObject/MonitoredObject/component';
+import Task1 from './DSD_05_De_Dieu/Task1';
+import Task5 from './DSD_05_De_Dieu/Task5';
 
 
 export const routes = [
@@ -91,6 +94,26 @@ export const routes = [
     component: Dashboard,
     exact: true,
   },
+//DSD_05_De_Dieu
+  {
+    path:'/DSD_05_De_Dieu',
+    component:()=> <div>DSD_05_De_Dieu</div>,
+  },
+  {
+    path:'/Task1',
+    component: Task1,
+    exact: true,
+  },
+  {
+    path:'/Task5',
+    component: Task5,
+    exact: true,
+  },
+
+
+
+
+
   {
     path: '/drones',
     component: () => <div>DroneManagement</div>,
