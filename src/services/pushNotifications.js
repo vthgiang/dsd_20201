@@ -1,6 +1,9 @@
 const pushServerPublicKey = "BL-eBn1GmJUsvUaBuiretJuPyWuyiJqyazFBHEcZchR6EKGdVQE2axsaBD-oPj_Y_Q7upi5GuChjHiLfDJbQquY";
-const host = process.env.PUSH_SERVER_URL || "https://it4483-dsd04.herokuapp.com"
-//const host = process.env.PUSH_SERVER_URL || "http://localhost:5000"
+// const host = process.env.PUSH_SERVER_URL || "https://it4483-dsd04.herokuapp.com"
+const host = process.env.PUSH_SERVER_URL || "http://localhost:5000"
+
+var isSubscribed = false;
+
 // post function
 function post(path, body) {
   console.log(JSON.stringify(body));
@@ -36,26 +39,38 @@ function initializePushNotifications() {
 
 
 // register service worker file to listen push event from server
-function registerServiceWorker() {
-  navigator.serviceWorker.register("serviceWorker.js");
+async function registerServiceWorker() {
+  await navigator.serviceWorker.register("serviceWorker.js")
 }
 
 
 // using the registered service worker creates a push notification subscription and returns it
-function createNotificationSubscription() {
+async function createNotificationSubscription() {
+
   console.log("creating subscription");
   //wait for service worker installation to be ready, and then
   return navigator.serviceWorker.ready.then(function (serviceWorker) {
-    // subscribe and return the subscription
-    return serviceWorker.pushManager
-      .subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(pushServerPublicKey)
-      })
-      .then(function (subscription) {
-        console.log("User is subscribed.", subscription);
-        return subscription;
-      });
+    return serviceWorker.pushManager.getSubscription()
+    .then(async (subscription) => {
+      isSubscribed = !(subscription === null);
+      if (isSubscribed) {
+        console.log('User IS subscribed.');
+        return null
+      } else {
+        console.log('User is NOT subscribed.');
+        // subscribe and return the subscription
+        await navigator.serviceWorker.ready;
+        return serviceWorker.pushManager
+        .subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(pushServerPublicKey)
+        })
+        .then(function (subscription) {
+          console.log(subscription)
+          return subscription;
+        });
+      }
+  });
   });
 }
 
@@ -80,21 +95,19 @@ function urlBase64ToUint8Array(base64String) {
 function sendSubscriptionToPushServer(body) {
   post("/subscribe", body).then(function (response) {
     const { subscriptionId, code, message } = response;
-    if (!message) {
+    console.log(`response: `, response)
+    if (code == 200) {
       alert("Subcribe to receive notification successfully");
     } else {
       alert(message)
     }
-    console.log(`subscriptionId: ${subscriptionId}`);
-    console.log(`return code: ${code}`);
-    console.log(`message: ${message}`);
   });
 }
 
 
 // request push server to push to all clients have project_type (eg. CHAY_RUNG)
 function sendPushNotification(body) {
-  post("/push_notification", body).then(function (response) {
+  post("/push-notification", body).then(function (response) {
     const { code, message } = response;
     console.log(`return code: ${code}`);
     console.log(`message: ${message}`);

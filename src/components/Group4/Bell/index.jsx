@@ -58,16 +58,20 @@ const BellNotification = () => {
   const subcribe = () => {
     console.log("clicked to send subcription")
     if (isPushNotificationSupported()) {
-      initializePushNotifications().then(result => {
+      initializePushNotifications().then(async (result) => {
         if (result === "granted") {
           console.log("start registering sw")
-          registerServiceWorker();
+          await registerServiceWorker();
           createNotificationSubscription().then(subscription => {
+          console.log(`sending subcription to server`);
+          console.log(subscription)
+          if (subscription){
             sendSubscriptionToPushServer({
               subscription: subscription,
               project_type: localStorage.getItem("project-type"),
               userID: user.user.id
             })
+          }
           });
         }
       })
@@ -154,27 +158,8 @@ const BellNotification = () => {
 
   const fetchNewNotification = (start, to) => {
     console.log("fetching notifications")
-    var config = getConfig(start, to);
-    axios(config)
-      .then(function (response) {
-        const newTotal = response.data.data.total;
-        if (newTotal !== total) {
-          setTotal(response.data.data.total);
-          setDiff(newTotal - total);
-          axios(getConfig(0, newTotal - total))
-            .then(function (response) {
-              console.log(`new Notifications`, response.data.data.notifications);
-              setNewNotifications(response.data.data.notifications);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        }
-
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    
+    
   }
 
   const loadData = async (start, to) => {
