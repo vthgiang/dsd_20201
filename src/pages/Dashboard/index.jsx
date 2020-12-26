@@ -1,7 +1,14 @@
-import React from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import React, { useState, useEffect } from "react";
 
-const Dashboard = () => {
-  return <div>Dashboard</div>;
+function ControlledTabs() {
+  const [key, setKey] = useState('home');
+
+  return (
+   <div>dash board</div>
+  );
+}
+
+export default function App() {
+    return (<ControlledTabs />)
 };
-
-export default Dashboard;

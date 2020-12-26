@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import StyleStep3 from './index.style';
-import { Button, Col, Form, Select, Row } from 'antd';
+import StyleStep3, { StyleSpinContainer } from './index.style';
+import {
+  Button,
+  Col,
+  Form,
+  Select,
+  Row,
+  Spin,
+  notification,
+} from 'antd';
 import { VALIDATE_MESSAGES, LAYOUT } from '../config';
 import WrappedMap from './map';
 import { FormOutlined, StepBackwardOutlined } from '@ant-design/icons';
@@ -17,24 +25,39 @@ const Step3 = ({
 }) => {
   const [form] = Form.useForm();
   const [objectData, setObjectData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (data && data.monitoredZone) getObjectData(data.monitoredZone);
   }, [data]);
 
   const getObjectData = (monitoredZone) => {
+    setLoading(true);
+    const token = localStorage.getItem('token');
+    const projectType = localStorage.getItem('project-type');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      projectType: projectType,
+    };
+
     axios({
       method: 'GET',
       url: `https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-zone`,
       params: { monitoredZone },
+      headers,
     })
       .then((res) => {
         if (res.data) {
           setObjectData(res.data.content);
+          setLoading(false);
         }
       })
-      .catch((err) => {
+      .catch((error) => {
         // console.log(err);
+        setLoading(false);
+        notification.error({
+          message: 'Có lỗi xảy ra! Xin thử lại.',
+        });
       });
   };
 
@@ -61,14 +84,25 @@ const Step3 = ({
   const onChangeMonitoredZone = (zoneId) => {
     let formData = data ? data : {};
     formData.monitoredZone = zoneId;
-    formData.monitoredObject = [];
+    formData.monitoredObjects = [];
     form.setFieldsValue(formData);
     //Gọi các đối tượng trong miền
     getObjectData([zoneId]);
   };
 
+  const setLoadingMonitoredZone = (status) => {
+    setLoading(status);
+  };
+
   return (
     <StyleStep3>
+      {loading ? (
+        <div style={{ position: 'fixed', top: '45%', left: '35%' }}>
+          <Spin />
+        </div>
+      ) : (
+        ''
+      )}
       <Form
         {...LAYOUT}
         form={form}
@@ -84,12 +118,14 @@ const Step3 = ({
         >
           <WrappedMap
             monitoredObjects={monitoredObjects}
-            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCV09KQtrmzDnyXYeC_UzB-HAwMKytXRpE"
+            // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCV09KQtrmzDnyXYeC_UzB-HAwMKytXRpE"
+            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA15qz81pHiNfVEV3eeniSNhAu64SsJKgU"
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `400px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
             onChangeMonitoredZone={onChangeMonitoredZone}
             monitoredZoneInit={data ? data.monitoredZone : undefined}
+            setLoadingMonitoredZone={setLoadingMonitoredZone}
           />
         </Form.Item>
 

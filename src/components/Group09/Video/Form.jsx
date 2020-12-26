@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
-import { Form, Input, Button } from "antd";
-import TagGroup from "./TagGroup";
-import useBaseHook from "../../../hooks/BaseHooks";
+import React, { useState, useRef } from 'react';
+import { Form, Input, Button } from 'antd';
+import TagGroup from './TagGroup';
+import useBaseHook from '../../../hooks/BaseHooks';
 const formItemLayout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 20 },
@@ -11,7 +11,7 @@ const buttonItemLayout = {
 };
 
 const VideoForm = ({ onStartIncident, onStopIncident }) => {
-    const { notify, getData } = useBaseHook();
+  const { notify, getData } = useBaseHook();
   const [form] = Form.useForm();
   let tagRef = useRef();
   const [start, setStart] = useState(true);
@@ -21,9 +21,9 @@ const VideoForm = ({ onStartIncident, onStopIncident }) => {
   };
   const onStop = () => {
     let tags = tagRef.getTags() || [];
-    if(!tags.length){
-        notify("Bạn chưa gán nhãn cho sự cố", "", "error");
-        return;
+    if (!tags.length) {
+      notify('Bạn chưa gán nhãn cho sự cố', '', 'error');
+      return;
     }
     onStopIncident(tags);
     setStart(true);
@@ -33,11 +33,11 @@ const VideoForm = ({ onStartIncident, onStopIncident }) => {
     <>
       <Form
         {...formItemLayout}
-        layout={"horizontal"}
+        layout={'horizontal'}
         form={form}
         // initialValues={{ layout: formLayout }}
       >
-        <div style={{ marginTop: "16px" }}>
+        <div style={{ marginTop: '16px' }}>
           <Form.Item>
             {start ? (
               <Button type="primary" onClick={onStart}>
