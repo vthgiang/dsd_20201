@@ -28,18 +28,26 @@ export const convertInitialDataToFieldValues = (data) => {
     delete data.endTime;
   }
 
-  if (monitoredZone) {
-    data.monitoredZone = data.monitoredZone._id;
+  if (monitoredZone && monitoredZone._id) {
+    data.monitoredZone = monitoredZone._id;
   }
 
   if (monitoredObjects) {
-    data.monitoredObjects = data.monitoredObjects.map((element) => {
-      return element._id;
+    data.monitoredObjects = monitoredObjects.map((element) => {
+      if (element._id) {
+        return element._id;
+      } else return element;
     });
   }
 
   if (labels) {
-    data.labels = labels.map((label) => label._id);
+    data.labels = labels.map((label) => {
+      if (label._id) {
+        return label._id;
+      } else {
+        return label
+      }
+    });
   }
 
   return data;
