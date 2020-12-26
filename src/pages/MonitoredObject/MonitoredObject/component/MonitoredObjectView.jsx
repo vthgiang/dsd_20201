@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import WrappedMap from "./map";
 import { useParams } from "react-router-dom";
 import SuccessNotification from "./SuccessNotification";
+import { Image } from "antd";
 
 import { CategoryActions } from "../../Category/redux/actions";
 import { MonitoredObjectConstants } from "../redux/constants";
@@ -35,7 +36,6 @@ function MonitoredObjectView({ history }) {
     monitoredZone: "",
   });
   const [formatStyle, setFormatStyle] = useState("");
-  const [arrImages, setArrImages] = useState([]);
   const [currentMonitoredZone, setCurrentMonitoredZone] = useState(null);
   const [datazoneAll, setDataZoneAll] = useState([]);
   const [listArea, setListArea] = useState([]);
@@ -87,10 +87,10 @@ function MonitoredObjectView({ history }) {
               lng: res.data.content.lng, //Kinh độ
               height: res.data.content.height,
               drones: res.data.content.drones,
-              images: res.data.content.images,
-              videos: res.data.content.videos,
               monitoredZone: res.data.content.monitoredZone,
             });
+            getImagesMonitored();
+            getVideoMonitored();
           }
           if (
             res.data.content.monitoredZone &&
@@ -109,28 +109,13 @@ function MonitoredObjectView({ history }) {
       await axios({
         method: "GET",
         url: `https://it4483team2.herokuapp.com/api/records/monitored/images/${id}`,
-        // headers: {
-        //   token: localStorage.getItem('token'),
-        //   projectType: localStorage.getItem('project-type'),
-        // },
       })
         .then((res) => {
           if (res.data) {
-            // res.data.result &&
-            //   res.data.result.map((item) => arrImages.push(item.link));
-            // console.log(arrImages);
-            // setTimeout(
-            //   setMonitoredObject((prev) => ({
-            //     ...prev,
-            //     images: arrImages,
-            //   })),
-            //   1000
-            // );
-            setArrImages([
-              "https://picsum.photos/id/1018/1000/600/",
-              "https://picsum.photos/id/1015/1000/600/",
-              "https://picsum.photos/id/1019/1000/600/",
-            ]);
+            setMonitoredObject((prev) => ({
+              ...prev,
+              images: res.data.result,
+            }));
           }
         })
         .catch((err) => {
@@ -143,10 +128,6 @@ function MonitoredObjectView({ history }) {
       await axios({
         method: "GET",
         url: `https://it4483team2.herokuapp.com/api/records/monitored/videos/${id}`,
-        // headers: {
-        //   token: localStorage.getItem('token'),
-        //   projectType: localStorage.getItem('project-type'),
-        // },
       })
         .then((res) => {
           if (res.data) {
@@ -215,8 +196,6 @@ function MonitoredObjectView({ history }) {
     getZoneAll();
     getArea();
     getDetailMonitoredObject();
-    // getImagesMonitored();
-    // getVideoMonitored();
   }, []);
   useEffect(() => {
     if (isObjectFailure) {
@@ -493,39 +472,52 @@ function MonitoredObjectView({ history }) {
               <div
                 id="carousel-example-2"
                 className="carousel slide carousel-fade z-depth-1-half"
-                data-ride="false"
+                data-ride="carousel"
+                style={{ height: "300px", background: "#8e8080" }}
               >
                 <ol className="carousel-indicators">
-                  {arrImages.map((item, index) => (
-                    <li
-                      data-target="#carousel-example-2"
-                      data-slide-to={index}
-                      className={indexImage === index ? "active" : ""}
-                      key={index}
-                    ></li>
-                  ))}
+                  {monitoredObject.images &&
+                    monitoredObject.images.length > 0 &&
+                    monitoredObject.images.map((item, index) => (
+                      <li
+                        data-target="#carousel-example-2"
+                        data-slide-to={index}
+                        className={indexImage === index ? "active" : ""}
+                        key={index}
+                      ></li>
+                    ))}
                 </ol>
                 <div className="carousel-inner" role="listbox">
-                  {arrImages.map((item, index) => (
-                    <div
-                      className={
-                        indexImage === index
-                          ? "carousel-item active"
-                          : "carousel-item"
-                      }
-                      key={index}
-                    >
-                      <div className="view">
-                        <img
-                          className="d-block w-100"
-                          src={item}
-                          alt="First slide"
-                          height={300}
-                        />
-                        <div className="mask rgba-black-light"></div>
+                  {monitoredObject.images &&
+                    monitoredObject.images.length > 0 &&
+                    monitoredObject.images.map((item, index) => (
+                      <div
+                        className={
+                          indexImage === index
+                            ? "carousel-item active"
+                            : "carousel-item"
+                        }
+                        key={index}
+                      >
+                        <div className="view">
+                          <Image
+                            style={{
+                              cursor: "pointer",
+                            }}
+                            src={item.link}
+                            preview={false}
+                            alt={item.title}
+                          />
+                          {/* <img
+                            className="d-block w-100"
+                            src={item.link}
+                            alt="First slide"
+                            height={300}
+                          /> */}
+                          <div className="mask rgba-black-light"></div>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
                 <a
                   className="carousel-control-prev"
@@ -561,6 +553,7 @@ function MonitoredObjectView({ history }) {
             <div className="col-sm-10 ">
               <ul className="d-flex p-0 m-0" style={{ overflow: "auto" }}>
                 {monitoredObject.videos &&
+                  monitoredObject.videos.length > 0 &&
                   monitoredObject.videos.map((item, index) => (
                     <li
                       className="mr-3"
