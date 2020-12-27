@@ -59,12 +59,14 @@ export default function TransitionsModal(props) {
       .then(json => {
         console.log(json.data);
         
-        getFlightPath()
-          .then(flightPath => {
-            json.data.flightPath = flightPath;
-            setDrones(json.data);
-            setOpen(true);
-          })
+        setDrones(json.data);
+        setOpen(true);
+        // getFlightPath()
+        //   .then(flightPath => {
+        //     json.data.flightPath = flightPath;
+        //     setDrones(json.data);
+        //     setOpen(true);
+        //   })
       });
   };
 

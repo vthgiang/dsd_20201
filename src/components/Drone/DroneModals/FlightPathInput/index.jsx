@@ -100,7 +100,7 @@ function FlightPathInput(props) {
 
                 <Form.Group controlId="speed">
                     <Form.Label>Vận tốc bay</Form.Label>
-                    <Form.Control type="number" min="1" max="100" onChange={(e)=>setSpeed(e.target.value)} value={speed} placeholder="m/s" />
+                    <Form.Control type="number" min="1" max="100" onChange={(e)=>setSpeed(e.target.value)} value={speed} placeholder="mét/phút" />
                 </Form.Group>
             </Col>
         </Row>
