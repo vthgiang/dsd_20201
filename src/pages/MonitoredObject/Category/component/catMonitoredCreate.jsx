@@ -1,6 +1,6 @@
-import React from 'react';
-import { CategoryActions } from '../redux/actions';
-import { useDispatch } from 'react-redux';
+import React from "react";
+import { CategoryActions } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
 function CatMonitorCreate({ value, handleChange, setCatMonitored, option }) {
   const dispatch = useDispatch();
@@ -8,7 +8,7 @@ function CatMonitorCreate({ value, handleChange, setCatMonitored, option }) {
     if (!!value._id) {
       dispatch(
         CategoryActions.editCategory(value._id, {
-          code: value.code,
+          code: "1",
           name: value.name,
           description: value.description,
         }),
@@ -16,7 +16,7 @@ function CatMonitorCreate({ value, handleChange, setCatMonitored, option }) {
     } else {
       dispatch(
         CategoryActions.createCategory({
-          code: value.code,
+          code: "1",
           name: value.name,
           description: value.description,
         }),
@@ -56,25 +56,6 @@ function CatMonitorCreate({ value, handleChange, setCatMonitored, option }) {
           </div>
           <div className="modal-body">
             <form>
-              <div className="form-group row">
-                <label
-                  htmlFor="inputAreaNumber"
-                  className="col-sm-2 col-form-label"
-                >
-                  Mã danh mục
-                </label>
-                <div className="col-sm-10">
-                  <input
-                    disabled={option === 'view'}
-                    className="form-control"
-                    id="inputAreaNumber"
-                    placeholder="Mã danh mục"
-                    name="code"
-                    value={value.code}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
               <div className="form-group row">
                 <label
                   htmlFor="inputAreaName"

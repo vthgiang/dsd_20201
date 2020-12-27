@@ -180,26 +180,6 @@ function AreaMonitored(props) {
           </Dropdown>
         </div>
         <div className="form-inline" style={{ margin: "15px" }}>
-          <div className="form-group" style={{ marginRight: "30px" }}>
-            <label className="form-control-static" style={{ margin: "10px" }}>
-              <b>Mã đối tượng</b>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name="code"
-              value={itemSearch.code}
-              onChange={(e) => {
-                e.persist();
-                setItemSearch((prev) => ({
-                  ...prev,
-                  code: e.target.value,
-                }));
-              }}
-              placeholder="Mã đối tượng"
-              autoComplete="off"
-            />
-          </div>
           <div className="form-group">
             <label className="form-control-static" style={{ margin: "10px" }}>
               <b>Tên đối tượng</b>
@@ -220,8 +200,6 @@ function AreaMonitored(props) {
               autoComplete="off"
             />
           </div>
-        </div>
-        <div className="form-inline" style={{ margin: "15px" }}>
           <div className="form-group" style={{ marginRight: "15px" }}>
             <label className="form-control-static" style={{ margin: "10px" }}>
               <b>Trạng thái</b>
