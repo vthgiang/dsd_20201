@@ -82,6 +82,7 @@ import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
 //DE DIEU
 import HomeDeDieu from "./Home/DeDieu";
 import StatisticDeDieu from './Dashboard/IncidentDashboard'
+import Task5 from './Home/DeDieu/Task5/index'
 
 export const routes = [
   {
@@ -92,6 +93,10 @@ export const routes = [
   {
     path: '/dedieu',
     component: HomeDeDieu,
+  },
+  {
+    path: '/dedieu-ncn5',
+    component: Task5,
   },
   {
     path: '/dashboard',
