@@ -35,7 +35,6 @@ const Map = ({
   });
 
   useEffect(() => {
-    getMonitoredZone();
     if (option !== "create") {
       setInitLocation({
         lat: parseFloat(monitoredObject.lat),
@@ -46,11 +45,16 @@ const Map = ({
       }
     }
   }, []);
+  useEffect(() => {
+    if (monitoredObject.areaMonitored) {
+      getMonitoredZone();
+    }
+  }, [monitoredObject.areaMonitored]);
 
   const getMonitoredZone = async () => {
     await axios({
       method: "GET",
-      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone`,
+      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone/area/${monitoredObject.areaMonitored}`,
       headers: {
         token: localStorage.getItem("token"),
         projectType: localStorage.getItem("project-type"),

@@ -26,7 +26,7 @@ function MonitoredObjectView({ history }) {
     description: "",
     managementUnit: null,
     category: null,
-    areaMonitored: null,
+    areaMonitored: "",
     parent: "",
     lat: "", //Vĩ độ
     lng: "", //Kinh độ
@@ -89,6 +89,7 @@ function MonitoredObjectView({ history }) {
               height: res.data.content.height,
               drones: res.data.content.drones,
               monitoredZone: res.data.content.monitoredZone,
+              areaMonitored: res.data.content.areaMonitored,
             });
             getImagesMonitored();
             getVideoMonitored();
@@ -253,7 +254,7 @@ function MonitoredObjectView({ history }) {
       description: "",
       managementUnit: null,
       category: "",
-      areaMonitored: null,
+      areaMonitored: "",
       parent: "",
       type: "",
       lat: "", //Vĩ độ
@@ -276,6 +277,7 @@ function MonitoredObjectView({ history }) {
   };
 
   let indexImage = 0;
+  console.log("aaaa", monitoredObject);
   return (
     <div>
       <div className="header-title mb-5">
@@ -341,13 +343,12 @@ function MonitoredObjectView({ history }) {
                   value={monitoredObject.status || "null"}
                   onChange={handleChange}
                 >
-                  <option disabled>Chọn trạng thái</option>
+                  <option value="" disabled>
+                    Chưa có giá trị
+                  </option>
                   <option value="1">Bình thường</option>
                   <option value="2">Đã hỏng</option>
                   <option value="3">Đang được sửa chữa</option>
-                  {!monitoredObject.status && (
-                    <option value="">Chưa có giá trị</option>
-                  )}
                 </select>
               </div>
             </div>
@@ -382,10 +383,9 @@ function MonitoredObjectView({ history }) {
                   value={monitoredObject.category || ""}
                   onChange={handleChange}
                 >
-                  <option disabled>Chọn danh mục</option>
-                  {!monitoredObject.category && (
-                    <option value="">Chưa có giá trị</option>
-                  )}
+                  <option value="" disabled>
+                    Chưa có giá trị
+                  </option>
                   {category &&
                     category.list &&
                     category.list.map((item, index) => (
@@ -408,10 +408,9 @@ function MonitoredObjectView({ history }) {
                   value={monitoredObject.parent}
                   onChange={handleChange}
                 >
-                  <option disabled>Chọn đối tượng</option>
-                  {!monitoredObject.parent && (
-                    <option value="">Chưa có giá trị</option>
-                  )}
+                  <option value="" disabled>
+                    Chưa có giá trị
+                  </option>
                   {monitoredObject &&
                     monitoredObjects.list &&
                     monitoredObjects.list.map((item, index) => (
@@ -434,10 +433,9 @@ function MonitoredObjectView({ history }) {
                   value={monitoredObject.areaMonitored}
                   onChange={handleChange}
                 >
-                  <option disabled>Chọn khu vực giám sát</option>
-                  {!monitoredObject.areaMonitored && (
-                    <option value="">Chưa có giá trị</option>
-                  )}
+                  <option value="" disabled>
+                    Chưa có giá trị
+                  </option>
                   {listArea &&
                     listArea.map((item, index) => (
                       <option value={item._id} key={index}>
@@ -589,6 +587,9 @@ function MonitoredObjectView({ history }) {
                 value={monitoredObject.monitoredZone}
                 onChange={handleChange}
               >
+                <option value="" disabled>
+                  Chưa có giá trị
+                </option>
                 {datazoneAll &&
                   datazoneAll.map((item, index) => (
                     <option value={item._id} key={index}>
