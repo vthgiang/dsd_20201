@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyleListUser = styled.div`
+const StyleListDepartment = styled.div`
     .input-box {
         border-radius: 5px;
     }
@@ -8,4 +8,4 @@ const StyleListUser = styled.div`
         border-radius: 5px;
     }
 `;
-export default StyleListUser;
+export default StyleListDepartment;

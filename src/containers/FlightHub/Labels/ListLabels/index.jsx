@@ -18,7 +18,10 @@ import {
   ExclamationCircleOutlined,
   PlusOutlined,
 } from '@ant-design/icons';
-import StyleListLabels, { StyledTable } from './index.style';
+import StyleListLabels, {
+  StyledTable,
+  StyleSpinContainer,
+} from './index.style';
 import AddLabel from '../AddLabel';
 import UpdateLabel from '../UpdateLabel';
 
@@ -251,7 +254,9 @@ const ListLabels = () => {
         </Button>
       </Row>
       {loading ? (
-        <Spin />
+        <StyleSpinContainer>
+          <Spin />
+        </StyleSpinContainer>
       ) : (
         <StyledTable>
           <Table columns={columns} dataSource={listLabels} />

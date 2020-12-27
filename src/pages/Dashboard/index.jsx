@@ -101,12 +101,12 @@ function Dashboard() {
             {!droneMetrics ? (
               <Spin />
             ) : (
-              <>
-                <h2 className="text-primary">
-                  {droneMetrics.working}/{droneMetrics.all}
-                </h2>
-              </>
-            )}
+                <>
+                  <h2 className="text-primary">
+                    {droneMetrics.working}/{droneMetrics.all}
+                  </h2>
+                </>
+              )}
             <h2 className="text-center text-primary">Drone</h2>
           </div>
         </Col>
@@ -118,12 +118,12 @@ function Dashboard() {
             {!payloadMetrics ? (
               <Spin />
             ) : (
-              <>
-                <h2 className="text-success">
-                  {payloadMetrics.working}/{payloadMetrics.all}
-                </h2>
-              </>
-            )}
+                <>
+                  <h2 className="text-success">
+                    {payloadMetrics.working}/{payloadMetrics.all}
+                  </h2>
+                </>
+              )}
             <h2 className="text-success">Payload</h2>
           </div>
         </Col>
@@ -135,15 +135,15 @@ function Dashboard() {
             {!usersMetrics ? (
               <Spin />
             ) : (
-              <>
-                <h2 className="text-warning">
-                  {usersMetrics.active}/{usersMetrics.all}
-                </h2>
-                {/* <div>Đang hoạt động: {usersMetrics.active}</div>
+                <>
+                  <h2 className="text-warning">
+                    {usersMetrics.active}/{usersMetrics.all}
+                  </h2>
+                  {/* <div>Đang hoạt động: {usersMetrics.active}</div>
               <div>Đang chờ: {usersMetrics.pending}</div>
               <div>Đang không hoạt động: {usersMetrics.inactive}</div> */}
-              </>
-            )}
+                </>
+              )}
             <h2 className="text-warning">Người dùng</h2>
           </div>
         </Col>
@@ -155,15 +155,15 @@ function Dashboard() {
             {!incidentMetrics ? (
               <Spin />
             ) : (
-              <>
-                <h2 className="text-danger">
-                  {incidentMetrics.done}/{incidentMetrics.all}
-                </h2>
-                {/* <div>Đang khắc phục: {incidentMetrics.doing}</div>
+                <>
+                  <h2 className="text-danger">
+                    {incidentMetrics.done}/{incidentMetrics.all}
+                  </h2>
+                  {/* <div>Đang khắc phục: {incidentMetrics.doing}</div>
               <div>Đã xử lý: {incidentMetrics.done}</div>
               <div>Đang chờ: {incidentMetrics.pending}</div> */}
-              </>
-            )}
+                </>
+              )}
             <h2 className="text-danger">Sự cố</h2>
           </div>
         </Col>
@@ -209,8 +209,8 @@ function Dashboard() {
                   {role === 'SUPER_ADMIN' ? (
                     <FlightHubDashboard />
                   ) : (
-                    <FlightHubProjectTypeDashboard />
-                  )}
+                      <FlightHubProjectTypeDashboard />
+                    )}
                 </TabPane>
               )}
 
@@ -222,16 +222,16 @@ function Dashboard() {
                 <MonitoreObjectDashboard />
               </TabPane>
               {role === 'SUPER_ADMIN' ||
-              role === 'ADMIN' ||
-              role === 'MANAGER' ? (
-                <TabPane key="Report" tab="Báo cáo">
-                  {role === 'SUPER_ADMIN' ? (
-                    <ReportDashboard />
-                  ) : (
-                    <ReportDashboardProjectType />
-                  )}
-                </TabPane>
-              ) : null}
+                role === 'ADMIN' ||
+                role === 'MANAGER' ? (
+                  <TabPane key="Report" tab="Báo cáo">
+                    {role === 'SUPER_ADMIN' ? (
+                      <ReportDashboard />
+                    ) : (
+                        <ReportDashboardProjectType />
+                      )}
+                  </TabPane>
+                ) : null}
               {role === 'SUPER_ADMIN' ? (
                 <TabPane key="Log" tab="Lịch sử hoạt động">
                   <LogDashboard />
