@@ -1,8 +1,12 @@
 import React from "react";
 import { CategoryActions } from "../redux/actions";
 import { useDispatch } from "react-redux";
+import { useSelector } from 'react-redux';
 
 function CatMonitorCreate({ value, handleChange, setCatMonitored, option }) {
+  const user = useSelector((state) => state.user.user);
+  const projectType = user.type;
+  const role = user.role;
   const dispatch = useDispatch();
   const handleChangeCatMonitored = () => {
     if (!!value._id) {
@@ -75,6 +79,30 @@ function CatMonitorCreate({ value, handleChange, setCatMonitored, option }) {
                   />
                 </div>
               </div>
+              {role === 'SUPER_ADMIN' ? (
+                <div className="form-group row">
+                  <label htmlFor="projecttype" className="col-sm-2 col-form-label">
+                    Loại
+                  </label>
+                  <div className="col-sm-10">
+                <select
+                  disabled={option === "view"}
+                  className="custom-select"
+                  name="type"
+                  
+                >
+                  <option value="" disabled>
+                    Chọn loại
+                  </option>
+                  <option value="DE_DIEU">Đê Điều</option>
+                  <option value="CHAY_RUNG">Cháy rừng</option>
+                  <option value="LUOI_DIEN">Lưới điện</option>
+                  <option value="CAY_TRONG">Cây trồng</option>
+                </select>
+              </div>
+                </div>
+              ) : null}
+             
               <div className="form-group row">
                 <label
                   htmlFor="inputDescription"

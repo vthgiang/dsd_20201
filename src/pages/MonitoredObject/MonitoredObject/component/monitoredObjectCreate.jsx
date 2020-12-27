@@ -10,9 +10,11 @@ import { MonitoredObjectActions } from "../redux/actions";
 import CreateArea from "./CreateArea";
 import { FolderAddOutlined } from "@ant-design/icons";
 import { Button } from "antd";
+import { prototype } from "javascript-time-ago";
 const axios = require("axios");
 
 function MonitoredObjectView({ history }) {
+
   let { id, option } = useParams();
   const dispatch = useDispatch();
   const category = useSelector((state) => state.category);
@@ -274,6 +276,7 @@ function MonitoredObjectView({ history }) {
                 </select>
               </div>
             </div>
+         
             <div className="form-group row">
               <label
                 htmlFor="inputAreaName"
