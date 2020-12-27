@@ -9,9 +9,8 @@ export const MonitoredObjectServices = {
 };
 
 function getAllMonitoredObjects(params) {
-  const project_type = localStorage.getItem("project-type");
   return sendRequest({
-    url: `https://dsd05-monitored-object.herokuapp.com/monitored-object//get-object-by-type?type=${project_type}`,
+    url: `https://dsd05-monitored-object.herokuapp.com/monitored-object`,
     method: "GET",
     params,
   });

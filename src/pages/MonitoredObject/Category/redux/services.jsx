@@ -8,9 +8,8 @@ export const CategoryServices = {
 };
 
 function getAllCategories(params) {
-  const project_type = localStorage.getItem("project-type");
   return sendRequest({
-    url: `https://dsd05-monitored-object.herokuapp.com/category-monitored-object/category-by-type?type=${project_type}`,
+    url: `https://dsd05-monitored-object.herokuapp.com/category-monitored-object`,
     method: "GET",
     params,
   });

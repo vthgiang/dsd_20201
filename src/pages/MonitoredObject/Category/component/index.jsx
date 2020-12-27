@@ -39,7 +39,13 @@ function AreaMonitored(props) {
     description: '',
   });
   useEffect(() => {
-    dispatch(CategoryActions.getAllCategories({ page, limit }));
+    dispatch(
+      CategoryActions.getAllCategories({
+        page,
+        limit,
+        projectType: localStorage.getItem("project-type"),
+      })
+    );
   }, [page]);
   useEffect(() => {}, [listPaginate]);
 
