@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 function CatMonitorCreate({ value, handleChange, setCatMonitored, option }) {
   const user = useSelector((state) => state.user.user);
-  const projectType = user.type;
   const role = user.role;
   const dispatch = useDispatch();
   const handleChangeCatMonitored = () => {

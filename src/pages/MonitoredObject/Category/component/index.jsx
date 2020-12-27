@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CatMonitorCreate from './catMonitoredCreate';
 import Modals from './modal';
-import AreaMonitorImport from './areaMonitoredImport';
 import { Menu, Dropdown, Button } from 'antd';
 import Pagination from '@material-ui/lab/Pagination';
 import { CategoryActions } from '../redux/actions';
@@ -246,8 +245,7 @@ function AreaMonitored(props) {
         option={option}
       />
 
-      {/* Modal Import */}
-      <AreaMonitorImport />
+     
       {/* Modal */}
       <Modals value={catMonitored} setCatMonitored={setCatMonitored} />
       <SuccessNotification formatStyle={formatStyle} messages={messages} />

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { withTranslate } from "react-redux-multilingual";
 import MultiSelect from "react-multi-select-component";
-import AreaMonitorImport from "./areaMonitoredImport";
 import Modals from "./modal";
 import { Menu, Dropdown, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -294,8 +293,6 @@ function AreaMonitored(props) {
         />
         ;
       </div>
-      {/* Modal Import */}
-      <AreaMonitorImport />
       {/* Modal Delete */}
       <Modals value={selectItemDelete} />
       <SuccessNotification
