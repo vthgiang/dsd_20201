@@ -34,15 +34,15 @@ function Task5() {
           <ListRole />
         </TabPane>
       )}
-      {role == "ADMIN" ? (
+     
         <TabPane tab="Quản lý quyền" key="4">
           <ListPermission />
         </TabPane>
-      ) : (
+      {/* ) : (
         <TabPane tab="Quản lý quyền" key="4" disabled>
           <ListPermission />
         </TabPane>
-      )}
+      )} */}
       {role == "ADMIN" ? (
         <TabPane tab="Phân quyền" key="5">
           <ListRolePermission />
