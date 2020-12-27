@@ -1,4 +1,4 @@
-import { sendRequest } from '../../../../helpers/sendRequest';
+import { sendRequest } from "../../../../helpers/sendRequest";
 
 export const MonitoredObjectServices = {
   getAllMonitoredObjects,
@@ -9,9 +9,10 @@ export const MonitoredObjectServices = {
 };
 
 function getAllMonitoredObjects(params) {
+  const project_type = localStorage.getItem("project-type");
   return sendRequest({
-    url: 'https://dsd05-monitored-object.herokuapp.com/monitored-object',
-    method: 'GET',
+    url: `https://dsd05-monitored-object.herokuapp.com/monitored-object//get-object-by-type?type=${project_type}`,
+    method: "GET",
     params,
   });
 }

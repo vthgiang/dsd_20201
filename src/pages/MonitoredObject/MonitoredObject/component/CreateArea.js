@@ -120,7 +120,6 @@ function CreateArea({ setStatusModalAdd, openModalAdd, create, setCreate, listAr
     }
 
     const handleMarkerClick = (e) => {
-        debugger
         //get kinh do vi do khi click ban do
         let lat = e.latLng.lat();
         let lng = e.latLng.lng();
