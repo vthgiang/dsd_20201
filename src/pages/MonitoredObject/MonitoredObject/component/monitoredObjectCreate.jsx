@@ -298,7 +298,7 @@ function MonitoredObjectView({ history }) {
             </div>
             <div className="form-group row">
               <label htmlFor="inputStatus" className="col-sm-2 col-form-label">
-                Danh mục
+                Đối tượng liên kết
               </label>
               <div className="col-sm-10">
                 <select
@@ -314,31 +314,6 @@ function MonitoredObjectView({ history }) {
                   {category &&
                     category.list &&
                     category.list.map((item, index) => (
-                      <option value={item._id} key={index}>
-                        {item.name}
-                      </option>
-                    ))}
-                </select>
-              </div>
-            </div>
-            <div className="form-group row">
-              <label htmlFor="inputStatus" className="col-sm-2 col-form-label">
-                Đối tượng chính
-              </label>
-              <div className="col-sm-10">
-                <select
-                  disabled={option === "view"}
-                  className="custom-select"
-                  name="parent"
-                  value={monitoredObject.parent}
-                  onChange={handleChange}
-                >
-                  <option value="" disabled>
-                    Chọn đối tượng
-                  </option>
-                  {monitoredObject &&
-                    monitoredObjects.list &&
-                    monitoredObjects.list.map((item, index) => (
                       <option value={item._id} key={index}>
                         {item.name}
                       </option>
