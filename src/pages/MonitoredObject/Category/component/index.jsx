@@ -140,7 +140,7 @@ function AreaMonitored(props) {
             <Button
               type="button"
               className="btn btn-success"
-              style={{ borderRadius: 4, width: 90.64, height: 36 }}
+              style={{ borderRadius: 4, height: 36 }}
             >
               Thêm mới
             </Button>
