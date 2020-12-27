@@ -19,8 +19,6 @@ var axios = require('axios');
 const BellNotification = () => {
 
   const history = useHistory();
-  const [total, setTotal] = useState(0);
-  const [first, setFirst] = useState(true);
   const [diff, setDiff] = useState(0);
   const count = 5;
   const [index, setIndex] = useState(0);
@@ -45,63 +43,60 @@ const BellNotification = () => {
 
 
   // a simple function to open the indexedDB
-function openIndexDB(indexedDB, v = 1) {
-  const req = indexedDB.open("my-db", v);
-  return new Promise((resolve, reject) => {
-    req.onupgradeneeded = e => {
-      const thisDB = e.target.result;
-      if (!thisDB.objectStoreNames.contains("pushes")) {
-        const pushesOS = thisDB.createObjectStore("pushes", { keyPath: "key" });
-        pushesOS.createIndex("payload", "payload", { unique: false });
-      }
-    };
-    req.onsuccess = e => resolve(e.target.result);
-    req.onerror = error => reject(error);
-  });
-}
+  const openIndexDB = (indexedDB, v = 1) => {
+    const req = indexedDB.open("my-db", v);
+    return new Promise((resolve, reject) => {
+      req.onupgradeneeded = e => {
+        const thisDB = e.target.result;
+        if (!thisDB.objectStoreNames.contains("pushes")) {
+          const pushesOS = thisDB.createObjectStore("pushes", { keyPath: "key" });
+          pushesOS.createIndex("payload", "payload", { unique: false });
+        }
+      };
+      req.onsuccess = e => resolve(e.target.result);
+      req.onerror = error => reject(error);
+    });
+  }
 
 // a function go get all the pushes from indexedDB instance
-function getPushes(db) {
-  return new Promise((resolve, reject) => {
-    const transaction = db.transaction(["pushes"], "readwrite");
-    const store = transaction.objectStore("pushes");
-    const req = store.get("newNotification");
+  const getPushes = (db) => {
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(["pushes"], "readwrite");
+      const store = transaction.objectStore("pushes");
+      const req = store.get("newNotification");
 
-    req.onerror = e => reject(e);
-    req.onsuccess = e => resolve(e);
-  });
-}
+      req.onerror = e => reject(e);
+      req.onsuccess = e => resolve(e);
+    });
+  }
 
-// a function go get all the pushes from indexedDB instance
-function deletePushes(db) {
-  return new Promise((resolve, reject) => {
-    const transaction = db.transaction(["pushes"], "readwrite");
-    const store = transaction.objectStore("pushes");
-    const req = store.delete("newNotification");
-    req.onerror = e => reject(e);
-    req.onsuccess = e => resolve(e);
-  });
-}
+  // a function go get all the pushes from indexedDB instance
+  const deletePushes = (db) => {
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(["pushes"], "readwrite");
+      const store = transaction.objectStore("pushes");
+      const req = store.delete("newNotification");
+      req.onerror = e => reject(e);
+      req.onsuccess = e => resolve(e);
+    });
+  }
 
 // update the UI with data from indexedDB
-function updateOutputFromIndexedDB() {  
+const updateOutputFromIndexedDB = () => {  
   openIndexDB(window.indexedDB)
     .then(db => getPushes(db))
     .then(event => {
       const item = event.target.result;
-      console.log(`new notification: `, item)
+      if (item) console.log(`new notification: `, item)
       if (item){ 
         setDiff(1)
-        const newNtf = [item.payload, ...notifications];
-        console.log(newNtf);
-        console.log("ntf: ", notifications);
         setNotifications([item.payload, ...notifications])
         openIndexDB(window.indexedDB).then(
           db => {
             deletePushes(db).then(
-              console.log("deleted newNotification from indexed DB")
+              // console.log("deleted newNotification from indexed DB")
             ).catch(
-              console.log("cannot delete newNotification")
+              // console.log("cannot delete newNotification")
             )
           }
         )
@@ -119,7 +114,7 @@ function updateOutputFromIndexedDB() {
           await registerServiceWorker();
           createNotificationSubscription().then(subscription => {
           console.log(`sending subcription to server`);
-          console.log(subscription)
+          // console.log(subscription)
           if (subscription){
             sendSubscriptionToPushServer({
               subscription: subscription,
@@ -155,14 +150,16 @@ function updateOutputFromIndexedDB() {
     loadData(index, count);
   }
 
-  const notification = () => (
-    <StyleListNotification>
+  const notification = () => {
+    // setDiff(0);
+    return ( <StyleListNotification>
       <InfiniteScroll
         initialLoad={false}
         pageStart={0}
         loadMore={handleInfiniteOnLoad}
         hasMore={!loading && hasMore}
         useWindow={false}
+        onClick={() => setDiff(0)}
       >
         <List
           itemLayout="vertical"
@@ -193,7 +190,7 @@ function updateOutputFromIndexedDB() {
         </List>
       </InfiniteScroll >
     </StyleListNotification >
-  );
+  );}
 
 
   const getConfig = (start, to) => {
@@ -213,12 +210,10 @@ function updateOutputFromIndexedDB() {
 
 
   const loadData = async (start, to) => {
-    console.log(`${index} -- ${count}`)
+    // console.log(`${index} -- ${count}`)
     var config = getConfig(start, to);
     axios(config)
       .then(function (response) {
-        setFirst(false);
-        setTotal(response.data.data.total);
         setNotifications([...notifications, ...response.data.data.notifications]);
         setIndex(index + to);
         setLoading(false);

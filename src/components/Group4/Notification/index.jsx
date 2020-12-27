@@ -18,7 +18,7 @@ import { ref } from '../config4';
 import SimpleRating from '../Rating';
 import { ListItemStyle } from './index.style';
 import FilterDropdown from '../Dropdown';
-import { Row, Col } from 'antd';
+import { Row, Col, Spin } from 'antd';
 import { set } from 'local-storage';
 
 
@@ -110,7 +110,7 @@ const MyList = () => {
   const [count, setCount] = useState(5);
   const [total, setTotal] = useState(0);
   const [type, setType] = useState(15);
-  const [first, setFirst] = useState(true);
+  const [loading, setLoading] = useState(true);
   const classes = useStyles();
   const history = useHistory();
 
@@ -137,12 +137,9 @@ const MyList = () => {
     var config = getConfig(start, to);
     axios(config)
       .then(function (response) {
-        if (index === 0) {
-          setDatas(response.data.data.notifications)
-        } else {
-          setDatas([...datas, ...response.data.data.notifications]);
-        }
+        setDatas([...datas, ...response.data.data.notifications]);
         setTotal(response.data.data.total)
+        setLoading(false)
       })
       .catch(function (error) {
         console.log(error);
@@ -166,7 +163,8 @@ const MyList = () => {
     setPage(0)
   }
 
-  return <div >
+  const content = () => (
+    <div >
     <Row>
       <Col span={20}><div className={classes.title}>Danh sách cảnh báo</div></Col>
       <Col span={4}><FilterDropdown reset={reset} /></Col>
@@ -191,6 +189,14 @@ const MyList = () => {
       page={page}
       onChangePage={handleChangePage}
     />
+  </div>
+  )
+
+  return <div >
+    {loading
+        ? <Spin size="large" style={{marginTop: 300}} spinning={loading} delay={500}> </Spin> 
+        : content() 
+    }
   </div>
 
 }

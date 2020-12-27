@@ -8,7 +8,6 @@ function receivePushNotification(event) {
     key: "newNotification",
     payload: payload
   }
-  // window.localStorage.setItem("newNotfication", JSON.stringify(payload))
 
   const options = {
     data: "url",
@@ -66,7 +65,6 @@ function addPush(db, item) {
 
 self.addEventListener("push", receivePushNotification);
 self.addEventListener("notificationclick", openPushNotification);
-
 self.addEventListener('activate', function(event) {
   event.waitUntil(
     caches.keys().then(function(cacheNames) {

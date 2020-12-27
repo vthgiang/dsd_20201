@@ -10,8 +10,7 @@ import { Tooltip } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { PROJECT_TYPE_MAP_TITLE, ref } from '../config4';
-import { Button, notification } from 'antd';
-import { type } from 'os';
+import { Button, notification, Spin } from 'antd';
 
 var axios = require('axios');
 
@@ -68,6 +67,7 @@ const DetailedNotification = () => {
   const classes = useStyles();
   const [notificationDetail, setNotificationDetail] = useState([]);
   const [status, setStatus] = useState(false);
+  const [loading, setLoading] = useState(true);
 
 
   const onVerify = () => {
@@ -99,6 +99,7 @@ const DetailedNotification = () => {
     };
     axios(config).then(function (response) {
       setNotificationDetail(response.data.data);
+      setLoading(false);
       console.log(response.data);
     }).catch(function (error) {
       console.log(error);
@@ -106,51 +107,62 @@ const DetailedNotification = () => {
 
   }, [])
 
-  console.log(`notificationDetail: ${notificationDetail}`);
-
-  return (
-    <div className={classes.root}>
-      <div className={classes.header}>Thông tin cảnh báo chi tiết</div>
-      <Paper className={classes.paper}>
-        <Grid container spacing={2}>
-          <Grid item>
-            <ButtonBase className={classes.image}>
-              {notificationDetail.ref && <img className={classes.image} alt="complex" src={ref.prop[notificationDetail.ref._type].img} />}
-            </ButtonBase>
-          </Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs>
-                <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="center"
-                >
-                  {notificationDetail.project_type && <Typography gutterBottom variant="h4" className={classes.title} >{PROJECT_TYPE_MAP_TITLE[notificationDetail.project_type]}</Typography>}
-                  <Tooltip title={status ? "verified" : "unverified"}>
-                    <CheckCircleTwoTone twoToneColor={status ? "#52c41a" : "#8c8c8c"} style={{ fontSize: 32, marginLeft: 8, marginBottom: 10, cursor: "pointer" }} onClick={onVerify} />
-                  </Tooltip>
-                </Grid>
-                <GridDetailed title={"ID Sự cố:"} content={notificationDetail._id}></GridDetailed>
-                <Grid container spacing={3}>
-                  <Grid item sm={3} xs={12}>
-                    <Typography className={classes.gridDescription, classes.title}>Mức độ:</Typography>
+  const content = () => (
+    <div>
+        <div className={classes.root}>
+        <div className={classes.header}>Thông tin cảnh báo chi tiết</div>
+        <Paper className={classes.paper}>
+          <Grid container spacing={2}>
+            <Grid item>
+              <ButtonBase className={classes.image}>
+                {notificationDetail.ref && <img className={classes.image} alt="complex" src={ref.prop[notificationDetail.ref._type].img} />}
+              </ButtonBase>
+            </Grid>
+            <Grid item xs={12} sm container>
+              <Grid item xs container direction="column" spacing={2}>
+                <Grid item xs>
+                  <Grid
+                    container
+                    direction="row"
+                    justify="flex-start"
+                    alignItems="center"
+                  >
+                    {notificationDetail.project_type && <Typography gutterBottom variant="h4" className={classes.title} >{PROJECT_TYPE_MAP_TITLE[notificationDetail.project_type]}</Typography>}
+                    <Tooltip title={status ? "verified" : "unverified"}>
+                      <CheckCircleTwoTone twoToneColor={status ? "#52c41a" : "#8c8c8c"} style={{ fontSize: 32, marginLeft: 8, marginBottom: 10, cursor: "pointer" }} onClick={onVerify} />
+                    </Tooltip>
                   </Grid>
-                  <Grid item sm={9} xs={12}>
-                    <Rating name="read-only" value={notificationDetail.level || 0} readOnly style={{ color: "red" }} />
+                  <GridDetailed title={"ID Sự cố:"} content={notificationDetail._id}></GridDetailed>
+                  <Grid container spacing={3}>
+                    <Grid item sm={3} xs={12}>
+                      <Typography className={classes.gridDescription, classes.title}>Mức độ:</Typography>
+                    </Grid>
+                    <Grid item sm={9} xs={12}>
+                      <Rating name="read-only" value={notificationDetail.level || 0} readOnly style={{ color: "red" }} />
+                    </Grid>
                   </Grid>
+                  <GridDetailed title={"Mô tả:"} content={notificationDetail.content}></GridDetailed>
+                  {notificationDetail.fromUser && <GridDetailed title={"From user:"} content={notificationDetail.fromUser._id}></GridDetailed>}
+                  <GridDetailed title={"created At:"} content={notificationDetail.createdAt}></GridDetailed>
+                  {notificationDetail.ref && <GridDetailed title={"Ref Link:"} content={notificationDetail.ref._link} link={true}></GridDetailed>}
                 </Grid>
-                <GridDetailed title={"Mô tả:"} content={notificationDetail.content}></GridDetailed>
-                {notificationDetail.fromUser && <GridDetailed title={"From user:"} content={notificationDetail.fromUser._id}></GridDetailed>}
-                <GridDetailed title={"created At:"} content={notificationDetail.createdAt}></GridDetailed>
-                {notificationDetail.ref && <GridDetailed title={"Ref Link:"} content={notificationDetail.ref._link} link={true}></GridDetailed>}
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Paper>
+        </Paper>
+        </div>
     </div>
+  )
+
+  return (
+    <div>
+      {loading
+        ? <Spin size="large" style={{marginTop: 300}} spinning={loading} delay={500}> </Spin> 
+        : content() 
+      }
+      
+    </div>
+
   );
 
 }
