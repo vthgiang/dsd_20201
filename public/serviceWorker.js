@@ -47,11 +47,38 @@ function addPush(db, item) {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction(["pushes"],"readwrite");
     const store = transaction.objectStore("pushes");
-    const req = store.add(item);
-    req.onerror = e => reject(e);
-    req.onsuccess = e => resolve(e);
+    var request = store.get("newNotification");
+    request.onerror = function(event) {
+      console.log(`newNotification is not in DB`)
+      store.add(item)
+    };
+    request.onsuccess = function(event) {
+      var requestUpdate = store.put(item);
+      requestUpdate.onerror = function(event) {
+        console.log("update failed")
+      };
+      requestUpdate.onsuccess = function(event) {
+        console.log("update successfully")
+      };
+    };
   })
 }
 
 self.addEventListener("push", receivePushNotification);
 self.addEventListener("notificationclick", openPushNotification);
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.filter(function(cacheName) {
+          // Return true if you want to remove this cache,
+          // but remember that caches are shared across
+          // the whole origin
+        }).map(function(cacheName) {
+          return caches.delete(cacheName);
+        })
+      );
+    })
+  );
+});

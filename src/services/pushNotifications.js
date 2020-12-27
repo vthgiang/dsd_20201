@@ -1,6 +1,6 @@
 const pushServerPublicKey = "BL-eBn1GmJUsvUaBuiretJuPyWuyiJqyazFBHEcZchR6EKGdVQE2axsaBD-oPj_Y_Q7upi5GuChjHiLfDJbQquY";
-// const host = process.env.PUSH_SERVER_URL || "https://it4483-dsd04.herokuapp.com"
-const host = process.env.PUSH_SERVER_URL || "http://localhost:5000"
+const host = process.env.PUSH_SERVER_URL || "https://it4483-dsd04.herokuapp.com"
+// const host = process.env.PUSH_SERVER_URL || "http://localhost:5000"
 
 var isSubscribed = false;
 
@@ -45,32 +45,21 @@ async function registerServiceWorker() {
 
 
 // using the registered service worker creates a push notification subscription and returns it
-async function createNotificationSubscription() {
-
+// using the registered service worker creates a push notification subscription and returns it
+function createNotificationSubscription() {
   console.log("creating subscription");
   //wait for service worker installation to be ready, and then
   return navigator.serviceWorker.ready.then(function (serviceWorker) {
-    return serviceWorker.pushManager.getSubscription()
-    .then(async (subscription) => {
-      isSubscribed = !(subscription === null);
-      if (isSubscribed) {
-        console.log('User IS subscribed.');
-        return null
-      } else {
-        console.log('User is NOT subscribed.');
-        // subscribe and return the subscription
-        await navigator.serviceWorker.ready;
-        return serviceWorker.pushManager
-        .subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(pushServerPublicKey)
-        })
-        .then(function (subscription) {
-          console.log(subscription)
-          return subscription;
-        });
-      }
-  });
+    // subscribe and return the subscription
+    return serviceWorker.pushManager
+      .subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(pushServerPublicKey)
+      })
+      .then(function (subscription) {
+        console.log("User is subscribed.", subscription);
+        return subscription;
+      });
   });
 }
 

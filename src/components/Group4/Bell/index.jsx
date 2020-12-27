@@ -20,7 +20,6 @@ const BellNotification = () => {
 
   const history = useHistory();
   const [total, setTotal] = useState(0);
-  const [newNotifications, setNewNotifications] = useState([]);
   const [first, setFirst] = useState(true);
   const [diff, setDiff] = useState(0);
   const count = 5;
@@ -28,21 +27,11 @@ const BellNotification = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user));
 
-  // useEffect(() => {
-  //   newNotifications.forEach(item => { 
-  //     item.isNew = true;
-  //     if (!notifications.includes(item)){
-  //       setNotifications([item, ...notifications])
-  //     }
-  //   })
-  // }, [newNotifications])
-
-  // useEffect(() => {
-  //   // if (!first) setInterval(() => fetchNewNotification(0, 0), 5000);
-  // }, [total])
+  useEffect(() => {
+    setInterval(() => updateOutputFromIndexedDB(), 5000);
+  })
 
   useEffect(() => {
     if (user.user.id){
@@ -53,6 +42,72 @@ const BellNotification = () => {
       setUser(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user))
 
   }, [user])
+
+
+  // a simple function to open the indexedDB
+function openIndexDB(indexedDB, v = 1) {
+  const req = indexedDB.open("my-db", v);
+  return new Promise((resolve, reject) => {
+    req.onupgradeneeded = e => {
+      const thisDB = e.target.result;
+      if (!thisDB.objectStoreNames.contains("pushes")) {
+        const pushesOS = thisDB.createObjectStore("pushes", { keyPath: "key" });
+        pushesOS.createIndex("payload", "payload", { unique: false });
+      }
+    };
+    req.onsuccess = e => resolve(e.target.result);
+    req.onerror = error => reject(error);
+  });
+}
+
+// a function go get all the pushes from indexedDB instance
+function getPushes(db) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(["pushes"], "readwrite");
+    const store = transaction.objectStore("pushes");
+    const req = store.get("newNotification");
+
+    req.onerror = e => reject(e);
+    req.onsuccess = e => resolve(e);
+  });
+}
+
+// a function go get all the pushes from indexedDB instance
+function deletePushes(db) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(["pushes"], "readwrite");
+    const store = transaction.objectStore("pushes");
+    const req = store.delete("newNotification");
+    req.onerror = e => reject(e);
+    req.onsuccess = e => resolve(e);
+  });
+}
+
+// update the UI with data from indexedDB
+function updateOutputFromIndexedDB() {  
+  openIndexDB(window.indexedDB)
+    .then(db => getPushes(db))
+    .then(event => {
+      const item = event.target.result;
+      console.log(`new notification: `, item)
+      if (item){ 
+        setDiff(1)
+        const newNtf = [item.payload, ...notifications];
+        console.log(newNtf);
+        console.log("ntf: ", notifications);
+        setNotifications([item.payload, ...notifications])
+        openIndexDB(window.indexedDB).then(
+          db => {
+            deletePushes(db).then(
+              console.log("deleted newNotification from indexed DB")
+            ).catch(
+              console.log("cannot delete newNotification")
+            )
+          }
+        )
+      };
+    });
+}
 
 
   const subcribe = () => {
@@ -156,11 +211,6 @@ const BellNotification = () => {
     return config;
   }
 
-  const fetchNewNotification = (start, to) => {
-    console.log("fetching notifications")
-    
-    
-  }
 
   const loadData = async (start, to) => {
     console.log(`${index} -- ${count}`)
@@ -169,7 +219,7 @@ const BellNotification = () => {
       .then(function (response) {
         setFirst(false);
         setTotal(response.data.data.total);
-        setNotifications(notifications.concat(response.data.data.notifications));
+        setNotifications([...notifications, ...response.data.data.notifications]);
         setIndex(index + to);
         setLoading(false);
       })
