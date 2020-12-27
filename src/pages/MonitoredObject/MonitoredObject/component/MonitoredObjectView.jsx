@@ -8,6 +8,9 @@ import { Image } from "antd";
 import { CategoryActions } from "../../Category/redux/actions";
 import { MonitoredObjectConstants } from "../redux/constants";
 import { MonitoredObjectActions } from "../redux/actions";
+import CreateArea from "./CreateArea";
+import { FolderAddOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 
 const axios = require("axios");
 
@@ -26,7 +29,7 @@ function MonitoredObjectView({ history }) {
     description: "",
     managementUnit: null,
     category: null,
-    areaMonitored: null,
+    areaMonitored: "",
     parent: "",
     lat: "", //Vĩ độ
     lng: "", //Kinh độ
@@ -40,7 +43,55 @@ function MonitoredObjectView({ history }) {
   const [currentMonitoredZone, setCurrentMonitoredZone] = useState(null);
   const [datazoneAll, setDataZoneAll] = useState([]);
   const [listArea, setListArea] = useState([]);
-
+  const [dataZoneArea, setDataZoneArea] = useState([]);
+  const [create, setCreate] = useState({
+    _id: "",
+    data: {
+      incidentType: localStorage.getItem("project-type"),
+      name: "",
+      startPoint: {
+        longitude: "",
+        latitude: "",
+      },
+      endPoint: {
+        longitude: "",
+        latitude: "",
+      },
+      priority: "",
+      description: "",
+      code: "ZONE" + (Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000),
+      level: 1,
+      maxHeight: "",
+      minHeight: "",
+    },
+  });
+  const [openModalAdd, setOpenModalAdd] = useState(false);
+  const setStatusModalAdd = (openModalAdd) => {
+    setCreate((prev) => ({
+      ...prev,
+      data: {
+        ...create.data,
+        code: "ZONE" + (Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000),
+      },
+    }));
+    setOpenModalAdd(openModalAdd);
+  };
+  const getZonebyArea = async (idArea) => {
+    await axios
+      .get(
+        `https://monitoredzoneserver.herokuapp.com/monitoredzone/area/${idArea}`,
+        {
+          headers: {
+            token: localStorage.getItem("token"),
+            projectType: localStorage.getItem("project-type"),
+          },
+        }
+      )
+      .then((res) => {
+        setDataZoneArea(res.data.content.zone);
+      })
+      .catch((error) => console.log(error));
+  };
   const getZoneAll = async () => {
     await axios({
       method: "GET",
@@ -89,6 +140,7 @@ function MonitoredObjectView({ history }) {
               height: res.data.content.height,
               drones: res.data.content.drones,
               monitoredZone: res.data.content.monitoredZone,
+              areaMonitored: res.data.content.areaMonitored,
             });
             getImagesMonitored();
             getVideoMonitored();
@@ -253,7 +305,7 @@ function MonitoredObjectView({ history }) {
       description: "",
       managementUnit: null,
       category: "",
-      areaMonitored: null,
+      areaMonitored: "",
       parent: "",
       type: "",
       lat: "", //Vĩ độ
@@ -318,7 +370,7 @@ function MonitoredObjectView({ history }) {
                   disabled={option === "view"}
                   className="custom-select"
                   name="type"
-                  value={monitoredObject.type || ""}
+                  value={monitoredObject.type}
                   onChange={handleChange}
                 >
                   <option disabled>Chọn loại đối tượng </option>
@@ -341,13 +393,12 @@ function MonitoredObjectView({ history }) {
                   value={monitoredObject.status || "null"}
                   onChange={handleChange}
                 >
-                  <option disabled>Chọn trạng thái</option>
+                  <option value="" disabled>
+                    Chưa có giá trị
+                  </option>
                   <option value="1">Bình thường</option>
                   <option value="2">Đã hỏng</option>
                   <option value="3">Đang được sửa chữa</option>
-                  {!monitoredObject.status && (
-                    <option value="">Chưa có giá trị</option>
-                  )}
                 </select>
               </div>
             </div>
@@ -372,7 +423,7 @@ function MonitoredObjectView({ history }) {
             </div>
             <div className="form-group row">
               <label htmlFor="inputStatus" className="col-sm-2 col-form-label">
-                Danh mục
+                Đối tượng liên kết
               </label>
               <div className="col-sm-10">
                 <select
@@ -382,39 +433,12 @@ function MonitoredObjectView({ history }) {
                   value={monitoredObject.category || ""}
                   onChange={handleChange}
                 >
-                  <option disabled>Chọn danh mục</option>
-                  {!monitoredObject.category && (
-                    <option value="">Chưa có giá trị</option>
-                  )}
+                  <option value="" disabled>
+                    Chưa có giá trị
+                  </option>
                   {category &&
                     category.list &&
                     category.list.map((item, index) => (
-                      <option value={item._id} key={index}>
-                        {item.name}
-                      </option>
-                    ))}
-                </select>
-              </div>
-            </div>
-            <div className="form-group row">
-              <label htmlFor="inputStatus" className="col-sm-2 col-form-label">
-                Đối tượng chính
-              </label>
-              <div className="col-sm-10">
-                <select
-                  disabled={option === "view"}
-                  className="custom-select"
-                  name="parent"
-                  value={monitoredObject.parent}
-                  onChange={handleChange}
-                >
-                  <option disabled>Chọn đối tượng</option>
-                  {!monitoredObject.parent && (
-                    <option value="">Chưa có giá trị</option>
-                  )}
-                  {monitoredObject &&
-                    monitoredObjects.list &&
-                    monitoredObjects.list.map((item, index) => (
                       <option value={item._id} key={index}>
                         {item.name}
                       </option>
@@ -432,12 +456,22 @@ function MonitoredObjectView({ history }) {
                   className="custom-select"
                   name="areaMonitored"
                   value={monitoredObject.areaMonitored}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    e.persist();
+                    let index = listArea.findIndex(
+                      (item) => item._id === e.target.value
+                    );
+                    getZonebyArea(e.target.value);
+                    setMonitoredObject((formState) => ({
+                      ...formState,
+                      areaMonitored: e.target.value,
+                      nameAreaMonitored: listArea[index].name,
+                    }));
+                  }}
                 >
-                  <option disabled>Chọn khu vực giám sát</option>
-                  {!monitoredObject.areaMonitored && (
-                    <option value="">Chưa có giá trị</option>
-                  )}
+                  <option value="" disabled>
+                    Chưa có giá trị
+                  </option>
                   {listArea &&
                     listArea.map((item, index) => (
                       <option value={item._id} key={index}>
@@ -589,6 +623,9 @@ function MonitoredObjectView({ history }) {
                 value={monitoredObject.monitoredZone}
                 onChange={handleChange}
               >
+                <option value="" disabled>
+                  Chưa có giá trị
+                </option>
                 {datazoneAll &&
                   datazoneAll.map((item, index) => (
                     <option value={item._id} key={index}>
@@ -614,17 +651,31 @@ function MonitoredObjectView({ history }) {
                 value={monitoredObject.height}
                 onChange={handleChange}
               />
-              {/* {currentMonitoredZone && (
+              {currentMonitoredZone && (
                 <p className="mt-2">
                   Chọn chiều cao cho đối tượng trong khoảng giá trị từ{" "}
                   {currentMonitoredZone.minHeight} -{" "}
                   {currentMonitoredZone.maxHeight}
                 </p>
-              )} */}
+              )}
             </div>
           </div>
         </div>
         <div className="col-8">
+          {dataZoneArea.length === 0 && monitoredObject.areaMonitored && (
+            <div className="content row d-flex justify-content-center mb-5">
+              <h4>Không có miền nào thuộc khu vực này </h4>
+              <Button
+                type="primary"
+                icon={<FolderAddOutlined />}
+                onClick={() => setStatusModalAdd(true)}
+                className="ml-3"
+              >
+                Thêm mới miền giám sát
+              </Button>
+            </div>
+          )}
+
           {monitoredObject.monitoredZone && (
             <WrappedMap
               googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA15qz81pHiNfVEV3eeniSNhAu64SsJKgU"
@@ -669,6 +720,15 @@ function MonitoredObjectView({ history }) {
         history={history}
         formatStyle={formatStyle}
         messages={objectMessages}
+      />
+      <CreateArea
+        setStatusModalAdd={setStatusModalAdd}
+        create={create}
+        setCreate={setCreate}
+        openModalAdd={openModalAdd}
+        listArea={listArea}
+        setDataZoneArea={setDataZoneArea}
+        dataZoneArea={dataZoneArea}
       />
     </div>
   );
