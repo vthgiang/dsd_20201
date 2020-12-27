@@ -143,6 +143,8 @@ export default function DroneDashboard() {
     fetchAll();
   }, []);
 
+  console.log({ droneMetrics })
+
   return (
     <>
       <h1>Drone</h1>
