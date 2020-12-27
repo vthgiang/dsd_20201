@@ -42,18 +42,18 @@ function PointInput(props) {
         <>
             <Form.Group controlId="timeCome">
                 <Form.Label>Thời gian bay đến</Form.Label>
-                <Form.Control type="number" value={timeCome} onChange={(e)=>setTimeCome(e.target.value)} placeholder="phút" />
+                <Form.Control type="number" min="1" value={timeCome} onChange={(e)=>setTimeCome(e.target.value)} placeholder="phút" />
             </Form.Group>
 
             <Form.Group controlId="timeStop">
                 <Form.Label>Thời gian dừng</Form.Label>
-                <Form.Control type="number" onChange={(e)=>setTimeStop(e.target.value)} value={timeStop} placeholder="phút" />
+                <Form.Control type="number" min="1" onChange={(e)=>setTimeStop(e.target.value)} value={timeStop} placeholder="phút" />
             </Form.Group>
             <Form.Group controlId="heightPoint">
                 <Form.Label>
                     Độ cao {selectedZone != null && `(${selectedZone.minHeight}~${selectedZone.maxHeight})`}
                 </Form.Label>
-                <Form.Control type="number" onChange={(e)=>setHeightPoint(e.target.value)}  value={heightPoint} placeholder="m" />
+                <Form.Control type="number" min="0" onChange={(e)=>setHeightPoint(e.target.value)}  value={heightPoint} placeholder="m" />
             </Form.Group>
             {selectedObject != null && (<Form.Group controlId="monitoredObject">
                 <Form.Text className="text-muted">

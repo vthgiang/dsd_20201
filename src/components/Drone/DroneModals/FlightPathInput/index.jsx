@@ -15,7 +15,8 @@ function FlightPathInput(props) {
         name, setName, height, setHeight, heightPoint, setHeightPoint, 
         selectedArea, setSelectedArea,
         selectedZone, setSelectedZone,
-        resetPoint
+        resetPoint,
+        speed, setSpeed
     } = props;
     
     // list khu vuc giam sat
@@ -97,10 +98,10 @@ function FlightPathInput(props) {
                     <Form.Control type="text" value={name} onChange={(e)=>setName(e.target.value)} placeholder="Nhập tên đường bay" />
                 </Form.Group>
 
-                {/* <Form.Group controlId="heightFlight">
-                    <Form.Label>Độ cao khi bay</Form.Label>
-                    <Form.Control type="number" onChange={(e)=>setHeight(e.target.value)} value={height} placeholder="m" />
-                </Form.Group> */}
+                <Form.Group controlId="speed">
+                    <Form.Label>Vận tốc bay</Form.Label>
+                    <Form.Control type="number" min="1" max="100" onChange={(e)=>setSpeed(e.target.value)} value={speed} placeholder="m/s" />
+                </Form.Group>
             </Col>
         </Row>
         <Row>

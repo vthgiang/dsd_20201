@@ -30,6 +30,8 @@ function AddFlightPathModal(props) {
     const [monitoredObjectList, setMonitoredObjectList] = useState([]);
     const [monitoredObjectListLoading, setMonitoredObjectListLoading] = useState(false);
 
+    const [speed, setSpeed] = useState('');
+
     const [show, setShow] = useState(false);
     const toggle = () => setShow(!show);
 
@@ -65,7 +67,7 @@ function AddFlightPathModal(props) {
         // xử lý đồng ý thêm đường bay
         if(!name || flightPoints.length===0 || !selectedZone) return setError('Bạn chưa nhập đủ thông tin');
         // let id = Math.trunc(Math.random()*2000);
-        let newFlightPath = {name, flightPoints,
+        let newFlightPath = {name, flightPoints, speed,
             // heightFlight :height,
             idSupervisedArea: selectedZone._id //~~~~
             // idSupervisedArea: selectedArea._id,
@@ -129,7 +131,7 @@ function AddFlightPathModal(props) {
         setMonitoredObjectList([]);
         setMonitoredObjectId('');
         setError('');
-
+        setSpeed('');
         resetPoint();
     }
 
@@ -158,6 +160,7 @@ function AddFlightPathModal(props) {
                         selectedArea={selectedArea} setSelectedArea={setSelectedArea}
                         selectedZone={selectedZone} setSelectedZone={setSelectedZone}
                         resetPoint={resetPoint}
+                        speed={speed} setSpeed={setSpeed}
                     />
                     <Row>
                         <Col md={4}>
