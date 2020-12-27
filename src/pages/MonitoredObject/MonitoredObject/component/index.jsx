@@ -226,7 +226,7 @@ function AreaMonitored(props) {
               <th>Tên đối tượng</th>
               <th>Trạng thái</th>
               <th>Mô tả</th>
-              <th>Thuộc danh mục</th>
+              <th>Đối tượng liên kết</th>
               <th>Thuộc khu vực</th>
               <th>Hành động</th>
             </tr>
