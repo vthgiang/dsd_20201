@@ -27,8 +27,9 @@ const ListStaff = () => {
     CAY_TRONG: { id: "333333", name: "Sự cố  cây trồng" },
     LUOI_DIEN: { id: "000000", name: "Sự cố lưới điện trên cao" },
   };
-  const API_TOKEN = "4c901bcdba9f440a2a7c31c0bcbd78ec";
-  const CURRENT_TYPE = "LUOI_DIEN";
+  const API_TOKEN =
+    localStorage.getItem('token') || '4c901bcdba9f440a2a7c31c0bcbd78ec';
+  const CURRENT_TYPE = localStorage.getItem('project-type') || 'LUOI_DIEN';
   const typeIncident = codeIncidents[CURRENT_TYPE];
 
   const [searchText, setSearchText] = useState()
@@ -46,9 +47,7 @@ const ListStaff = () => {
     })
       .then(function (response) {
         //handle success
-        console.log(response)
         setLoadingTable(false)
-        console.log(response.data.list)
         setDataAPI(response.data.list)
         // let data = [];
         // response.data.list.map((item) => {
@@ -216,12 +215,22 @@ const ListStaff = () => {
       </div>
       <div>
         <Spin spinning={loadingTable} tip="Loading...">
-          <Table
+          {
+            dataAPI?
+            <Table
             rowKey={(record) => record.employee.id}
             columns={columns}
             dataSource={dataAPI}
             size="middle"
           />
+          : <Table
+          rowKey={(record) => record.employee.id}
+          columns={columns}
+          dataSource={[]}
+          size="middle"
+        />
+          }
+         
         </Spin>
       </div>
       <Modal

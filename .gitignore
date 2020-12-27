@@ -6,6 +6,7 @@ package-lock.json
 
 # Build
 build/
+.vscode
 
 # Logs
 logs
@@ -22,3 +23,5 @@ yarn.lock
 node_modules/
 .idea/
 
+/package.json
+/package-lock.json

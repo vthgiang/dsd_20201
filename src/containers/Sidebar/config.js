@@ -133,18 +133,52 @@ export const sidebarMenu = [
       },
     ],
   },
-  
+
   {
     key: 'SupervisedObject',
     heading: 'Đối tượng giám sát',
     icon: 'fas fa-binoculars',
     route: '/supervised-object',
+    subMenu: [
+      {
+        key: 'CategoryMonitored',
+        heading: 'Quản lý danh mục giám sát',
+        icon: 'fa fa-bars',
+        route: '/category-monitored-object-management',
+      },
+      {
+        key: 'MonitoredObject',
+        heading: 'Quản lý đối tượng giám sát',
+        icon: 'fa fa-database',
+        route: '/monitored-object-management',
+      },
+    ],
   },
   {
-    key: 'GeneralStatistic',
-    heading: 'Báo cáo thống kê',
-    icon: 'fas fa-chart-line',
-    route: '/statistic',
+    key: 'GeneralReport',
+    heading: 'Báo cáo',
+    icon: 'fas fa-book',
+    route: '/report',
+    subMenu: [
+      {
+        key: 'CreateReport',
+        heading: 'Tạo báo cáo',
+        icon: 'fas fa-drone-alt',
+        route: '/create-report',
+      },
+      {
+        key: 'ViewReport',
+        heading: 'Xem báo cáo',
+        icon: 'fas fa-drone-alt',
+        route: '/view-report',
+      },
+      {
+        key: 'ManageReportTemplate',
+        heading: 'Quản lý mẫu báo cáo',
+        icon: 'fas fa-drone-alt',
+        route: '/manage-report-template',
+      },
+    ],
   },
   {
     key: 'Warning',
@@ -158,79 +192,79 @@ export const sidebarMenu = [
     icon: 'fas fa-file-signature',
     route: '/activity-log',
     subMenu: [
-      
+
       {
         key: 'LogDrone',
-        heading: 'Lịch sử hoạt động của drone',
+        heading: 'Drone',
         icon: 'fas fa-drone-alt',
         route: '/log-drone',
       },
       {
         key: 'LogPayLoad',
-        heading: 'Lịch sử hoạt động của PayLoad',
-     
+        heading: 'PayLoad',
+
         icon: 'fas fa-layer-group',
         route: '/log-payload',
       },
       {
         key: 'LogUser',
-        heading: 'Lịch sử hoạt động người dùng',
+        heading: 'User',
         icon: 'fas fa-user-circle',
         route: '/log-user',
       },
       {
         key: 'LogImage',
-        heading: 'Lịch sử lưu trữ hình ảnh',
+        heading: 'Image',
         icon: 'fas fa-images',
         route: '/log-image',
       },
       {
         key: 'LogVideo',
-        heading: 'Lịch sử lưu trữ video',
-        icon: 'fas fa-images',
+        heading: 'Video',
+        icon: 'fas fa-film',
         route: '/log-video',
       },
       {
         key: 'LogProblem',
-        heading: 'Lịch sử sự cố',
+        heading: 'Sự cố',
         icon: 'fas fa-toolbox',
         route: '/log-problem',
       },
       {
         key: 'LogObjMonitor',
-        heading: 'Lịch sử hoạt động của đối tượng giám sát',
+        heading: 'Đối tượng giám sát',
         icon: 'fas fa-binoculars',
         route: '/log-objmonitor',
       },
       {
         key: 'LogWarn',
-        heading: 'Lịch sử cảnh báo',
+        heading: 'Cảnh báo',
         icon: 'far fa-bell',
         route: '/log-warn',
       },
       {
         key: 'LogIncident',
-        heading: 'Lịch sử xử lý sự cố',
+        heading: 'Xử lý sự cố',
         icon: 'fas fa-toolbox',
         route: '/log-incident',
       },
-      
+
       {
         key: 'LogRegion',
-        heading: 'Lịch sử hoạt động của miền giám sát',
+        heading: 'Miền giám sát',
         icon: 'fas fa-crop-alt',
         route: '/log-region',
       },
       {
         key: 'LogStatistic',
-        heading: 'Lịch sử báo cáo, thống kê',
+        heading: 'Báo cáo, thống kê',
         icon: 'fa fa-file-chart-line',
         route: '/log-statistic',
       },
       {
         key: 'LogUAV',
-        heading: 'Lịch sử kết nối UAV',
-        icon: 'fas fa-images',
+        heading: 'Kết nối UAV',
+        icon: 'fal fa-drone',
         route: '/log-uav',
       },
     ],
@@ -272,18 +306,42 @@ export const sidebarMenu = [
         heading: 'Quản lý người dùng',
         icon: 'fa fa-users',
         route: '/user',
+        resource: 'User.find'
       },
       {
         key: 'DepartmentSetting',
         heading: 'Quản lý phòng ban',
         icon: 'fa fa-building',
         route: '/department',
+        resource: 'Department.find'
       },
       {
         key: 'UserMetaSetting',
         heading: 'Lịch sử người dùng',
         icon: 'fa fa-history',
         route: '/user-meta',
+        resource: 'UserMeta.find'
+      },
+      {
+        key: 'RoleSetting',
+        heading: 'Quản lý chức vụ',
+        icon: 'fa fa-users-cog',
+        route: '/role',
+        resource: 'Role.system'
+      },
+      {
+        key: 'PermissionSetting',
+        heading: 'Quản lý quyền',
+        icon: 'fa fa-lock',
+        route: '/permission',
+        resource: 'Permission.system'
+      },
+      {
+        key: 'RolePermission',
+        heading: 'Phân quyền',
+        icon: 'fa fa-user-lock',
+        route: '/role-permission',
+        resource: 'RolePermission.system'
       },
     ],
   },

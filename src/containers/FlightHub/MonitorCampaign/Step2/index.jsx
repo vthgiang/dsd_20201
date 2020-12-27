@@ -1,263 +1,157 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSeparator, StyleTitle } from '../../../../themes/default';
 import StyleStep2, { StyleSpinContainer } from './index.style';
-import { Button, Row, Table, message, notification, Select, Spin } from 'antd';
-import { StepBackwardOutlined, StepForwardOutlined } from '@ant-design/icons';
-import moment from 'moment';
-import { DATE_TIME_FORMAT } from '../../../../configs';
-import { droneApi, payloadApi } from '../../../../apis';
-import { formatMomentDateToDateTimeString } from '../services';
-import { convertDronesData } from './service';
+import { Button, Col, Form, Select, Row, Spin, notification } from 'antd';
+import { VALIDATE_MESSAGES, LAYOUT } from '../config';
+import WrappedMap from './map';
+import { FormOutlined, StepBackwardOutlined } from '@ant-design/icons';
+const axios = require('axios');
 
-const Step2 = ({ nextStep, prevStep, handleChangeData, data }) => {
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [selectedRows, setSelectedRows] = useState([]);
-  const [dronesData, setDronesData] = useState([]);
+const { Option } = Select;
 
-  const [payloadsData, setPayloadsData] = useState([]);
-  const [flightPathsData, setFlightPathsData] = useState([]);
-
+const Step2 = ({
+  nextStep,
+  prevStep,
+  data,
+  handleChangeData,
+  monitoredObjects,
+}) => {
+  const [form] = Form.useForm();
+  const [objectData, setObjectData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { timeRange } = data;
-
-  const fetchDronesData = async (params) => {
-    setLoading(true);
-    try {
-      const resp = await droneApi.getDroneAvailable(params);
-      setDronesData(resp.data);
-
-      setLoading(false);
-    } catch (error) {
-      notification.error({
-        message: 'Có lỗi xảy ra! Xin thử lại.',
-      });
-    }
-  };
-
-  const fetchPayloadsData = async (params) => {
-    setLoading(true);
-    try {
-      const resp = await payloadApi.getAllPayload(params);
-      setPayloadsData(resp.data);
-
-      setLoading(false);
-    } catch (error) {
-      notification.error({
-        message: 'Có lỗi xảy ra! Xin thử lại.',
-      });
-    }
-  };
-
-  const fetchFlightPathsData = async (params) => {
-    setLoading(true);
-    try {
-      const resp = await droneApi.getAllPath(params);
-      setFlightPathsData(resp.data);
-
-      setLoading(false);
-    } catch (error) {
-      notification.error({
-        message: 'Có lỗi xảy ra! Xin thử lại.',
-      });
-    }
-  };
 
   useEffect(() => {
-    const timeStart = formatMomentDateToDateTimeString(timeRange[0]);
-    const timeEnd = formatMomentDateToDateTimeString(timeRange[1]);
-    const params = { timeStart, timeEnd };
-    fetchDronesData(params);
-    fetchPayloadsData();
-    fetchFlightPathsData();
-  }, [timeRange]);
+    if (data && data.monitoredZone) getObjectData(data.monitoredZone);
+  }, [data]);
 
-  const handleChangeFlightPath = (record, index) => (values) => {
-    const newDrones = [...dronesData];
-    newDrones[index].flightPaths = values;
-    setDronesData(newDrones);
+  const getObjectData = (monitoredZone) => {
+    setLoading(true);
+    const token = localStorage.getItem('token');
+    const projectType = localStorage.getItem('project-type');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      projectType: projectType,
+    };
 
-    const indexSelected = selectedRowKeys.findIndex(
-      (item) => record.id === item,
-    );
-    if (indexSelected > -1) {
-      const newSelectedRows = [...selectedRows];
-      newSelectedRows[indexSelected].flightPaths = values;
-      setSelectedRows(newSelectedRows);
-    }
-  };
-
-  const handleChangePayloads = (record, index) => (values) => {
-    const newDrones = [...dronesData];
-    newDrones[index].payloads = values;
-    setDronesData(newDrones);
-
-    const indexSelected = selectedRowKeys.findIndex(
-      (item) => record.id === item,
-    );
-    if (indexSelected > -1) {
-      const newSelectedRows = [...selectedRows];
-      newSelectedRows[indexSelected].payloads = values;
-      setSelectedRows(newSelectedRows);
-    }
-  };
-
-  useEffect(() => {
-    const { drones = [] } = data;
-
-    if (dronesData.length) {
-      const newDronesData = [...dronesData];
-      drones.forEach((selectedDrone) => {
-        const indexSelected = newDronesData.findIndex(
-          (drone) => drone.id === selectedDrone.id,
-        );
-        if (indexSelected !== -1) {
-          newDronesData[indexSelected].payloads = selectedDrone.payloads;
-          newDronesData[indexSelected].flightPaths = selectedDrone.flightPaths;
+    axios({
+      method: 'GET',
+      url: `https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-zone`,
+      params: { monitoredZone },
+      headers,
+    })
+      .then((res) => {
+        if (res.data) {
+          setObjectData(res.data.content);
+          setLoading(false);
         }
+      })
+      .catch((error) => {
+        // console.log(err);
+        setLoading(false);
+        notification.error({
+          message: 'Có lỗi xảy ra! Xin thử lại.',
+        });
       });
-      console.log("data ", newDronesData)
-      setDronesData(newDronesData);
-    }
+  };
 
-    const rowKeys = drones.map((drone) => drone.id);
-    setSelectedRows(drones);
-    setSelectedRowKeys(rowKeys);
-  }, [data, dronesData.length]);
+  useEffect(() => {
+    form.setFieldsValue(data);
+  }, [data, form]);
 
-  const columns = [
-    { dataIndex: 'name', title: 'Tên drone', width: 'auto' },
-    { dataIndex: 'dimensions', title: 'Kịch thước', width: '15%' },
-    { dataIndex: 'color', title: 'Màu', width: '15%' },
-    {
-      dataIndex: 'brand',
-      title: 'Nhà sản xuất',
-      width: '15%',
-    },
+  const getObjectOptions = () => {
+    const options = objectData.map((item) => {
+      return (
+        <Option key={item._id} value={item._id}>
+          {item.name}
+        </Option>
+      );
+    });
+    return options;
+  };
 
-    {
-      dataIndex: 'payloads',
-      title: 'Payload',
-      width: '20%',
-      align: 'center',
-      editable: true,
-      render: (data, record, index) => {
-        return (
-          <Select
-            style={{ width: 150 }}
-            mode="multiple"
-            value={data}
-            onChange={handleChangePayloads(record, index)}
-            placeholder="Chọn payloads"
-          >
-            {payloadsData.map(({ _id, name }) => (
-              <Select.Option key={_id.toString()} value={_id}>
-                {name}
-              </Select.Option>
-            ))}
-          </Select>
-        );
-      },
-    },
-    {
-      dataIndex: 'flightPaths',
-      title: 'Đường bay',
-      width: '20%',
-      align: 'center',
-      editable: true,
-      render: (data, record, index) => {
-        return (
-          <Select
-            style={{ width: 150 }}
-            value={data}
-            mode="multiple"
-            onChange={handleChangeFlightPath(record, index)}
-            placeholder="Chọn đường bay"
-          >
-            {flightPathsData.map(({ id, name }) => (
-              <Select.Option key={id} value={id}>
-                {name}
-              </Select.Option>
-            ))}
-          </Select>
-        );
-      },
-    },
-  ];
-
-  const handleNextStep = () => {
-    const drones = [...selectedRows];
-
-    console.log({drones});
-    
-    if (!drones.length) {
-      message.warning('Nhóm drones tham gia không được để trống!');
-      return;
-    }
-
-    for (const drone of drones) {
-      console.log("drrone : " , drone)
-      const { payloads, flightPaths } = drone;
-      if (!payloads || !payloads.length) {
-      message.warning('Bạn chưa chọn payloads đính kèm drone!');
-        return;
-      }
-      if (!flightPaths || !flightPaths.length) {
-      message.warning('Bạn chưa chọn đường bay cho drone!');
-        return;
-      }
-    }
-
-    handleChangeData({ drones: convertDronesData(drones) });
+  const onFinish = (values) => {
+    handleChangeData(values);
     nextStep();
   };
 
+  const onChangeMonitoredZone = (zoneId) => {
+    let formData = data ? data : {};
+    formData.monitoredZone = zoneId;
+    formData.monitoredObjects = [];
+    form.setFieldsValue(formData);
+    //Gọi các đối tượng trong miền
+    getObjectData([zoneId]);
+  };
+
+  const setLoadingMonitoredZone = (status) => {
+    setLoading(status);
+  };
 
   return (
     <StyleStep2>
-      <StyleTitle>
-        {'Danh sách drone sẵn sàng từ ' +
-          moment(timeRange[0]).format(DATE_TIME_FORMAT) +
-          ' đến ' +
-          moment(timeRange[1]).format(DATE_TIME_FORMAT)}
-      </StyleTitle>
-      <StyleSeparator />
       {loading ? (
-        <StyleSpinContainer>
+        <div style={{ position: 'fixed', top: '45%', left: '35%' }}>
           <Spin />
-        </StyleSpinContainer>
+        </div>
       ) : (
-        <Table
-          rowKey="id"
-          rowSelection={{
-            type: 'checkbox',
-            onChange: (selectedRowKeys, selectedRows) => {
-              setSelectedRows(selectedRows);
-              setSelectedRowKeys(selectedRowKeys);
-            },
-            selectedRowKeys: selectedRowKeys,
-          }}
-          // selections={true}
-          columns={columns}
-          dataSource={dronesData}
-        />
+        ''
       )}
-      <Row type="flex">
-        <Button
-          type="default"
-          icon={<StepBackwardOutlined />}
-          onClick={prevStep}
+      <Form
+        {...LAYOUT}
+        form={form}
+        name="flight-hub-object"
+        onFinish={onFinish}
+        validateMessages={VALIDATE_MESSAGES}
+        initialValues={data}
+      >
+        <Form.Item
+          name="monitoredZone"
+          label="Miền giám sát"
+          rules={[{ type: 'string', required: true }]}
         >
-          Quay lại
-        </Button>
-        &ensp;
-        <Button
-          type="primary"
-          icon={<StepForwardOutlined />}
-          onClick={handleNextStep}
+          <WrappedMap
+            task={data.task}
+            monitoredObjects={monitoredObjects}
+            // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCV09KQtrmzDnyXYeC_UzB-HAwMKytXRpE"
+            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA15qz81pHiNfVEV3eeniSNhAu64SsJKgU"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `400px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+            onChangeMonitoredZone={onChangeMonitoredZone}
+            monitoredZoneInit={data ? data.monitoredZone : undefined}
+            setLoadingMonitoredZone={setLoadingMonitoredZone}
+          />
+        </Form.Item>
+
+        <Form.Item
+          name="monitoredObjects"
+          label="Đối tượng giám sát"
+          rules={[{ type: 'array', required: true }]}
         >
-          Tiếp theo
-        </Button>
-      </Row>
+          <Select
+            mode="multiple"
+            showSearch
+            placeholder="Chọn đối tượng giám sát"
+          >
+            {getObjectOptions()}
+          </Select>
+        </Form.Item>
+
+        <Col offset={6}>
+          <Row type="flex">
+            <Button
+              type="default"
+              icon={<StepBackwardOutlined />}
+              onClick={prevStep}
+            >
+              Quay lại
+            </Button>
+            &ensp;
+            <Button type="primary" icon={<FormOutlined />} htmlType="submit">
+              Tiếp theo
+            </Button>
+          </Row>
+        </Col>
+      </Form>
     </StyleStep2>
   );
 };

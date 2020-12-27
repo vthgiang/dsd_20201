@@ -18,7 +18,10 @@ import {
   ExclamationCircleOutlined,
   PlusOutlined,
 } from '@ant-design/icons';
-import StyleListLabels, { StyledTable } from './index.style';
+import StyleListLabels, {
+  StyledTable,
+  StyleSpinContainer,
+} from './index.style';
 import AddLabel from '../AddLabel';
 import UpdateLabel from '../UpdateLabel';
 
@@ -105,7 +108,7 @@ const ListLabels = () => {
   const updateLabel = (label) => {
     const { _id } = label;
     const updatedListLabels = listLabels.map((element) =>
-      element._id === _id ? label : element,
+      element._id === _id ? label : element
     );
 
     setListLabels(updatedListLabels);
@@ -191,13 +194,12 @@ const ListLabels = () => {
       align: 'center',
       render: (data, record) => {
         return (
-          <Row type="flex" gutter={[8, 8]} justify="center" align="middle">
+          <Row type='flex' gutter={[8, 8]} justify='center' align='middle'>
             <Col>
               <Button
                 icon={<EditOutlined />}
-                size="small"
-                onClick={showModalUpdate(record)}
-              >
+                size='small'
+                onClick={showModalUpdate(record)}>
                 Cập nhật
               </Button>
             </Col>
@@ -205,9 +207,8 @@ const ListLabels = () => {
               <Button
                 icon={<DeleteOutlined />}
                 danger
-                size="small"
-                onClick={() => deleteConfirm(record)}
-              >
+                size='small'
+                onClick={() => deleteConfirm(record)}>
                 Xóa
               </Button>
             </Col>
@@ -234,29 +235,25 @@ const ListLabels = () => {
 
       <h3>Danh sách nhãn</h3>
 
-      <Row type="flex" justify="space-between" align="middle">
+      <Row type='flex' justify='space-between' align='middle'>
         <Col span={8}>
           <Search
-            placeholder="Tìm tên nhãn, mô tả..."
+            placeholder='Tìm tên nhãn, mô tả...'
             onSearch={handleSearch}
             enterButton
           />
         </Col>
         <Button
-          type="primary"
+          type='primary'
           icon={<PlusOutlined />}
-          onClick={showModalCreate}
-        >
+          onClick={showModalCreate}>
           Thêm nhãn
         </Button>
       </Row>
-      {loading ? (
-        <Spin />
-      ) : (
-        <StyledTable>
-          <Table columns={columns} dataSource={listLabels} />
-        </StyledTable>
-      )}
+
+      <StyledTable>
+        <Table loading={loading} columns={columns} dataSource={listLabels} />
+      </StyledTable>
     </StyleListLabels>
   );
 };

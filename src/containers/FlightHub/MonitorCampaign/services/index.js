@@ -20,26 +20,36 @@ export const convertDateToTimeRange = ({ startTime, endTime }) => {
 };
 
 export const convertInitialDataToFieldValues = (data) => {
-  
-  const { startTime, endTime, monitoredZone, monitoredObjects } = data;
+  const fields = { ...data };
+  const {
+    startTime,
+    endTime,
+    monitoredZone,
+    monitoredObjects,
+    labels,
+  } = fields;
   if (startTime && endTime) {
     const timeRange = convertDateToTimeRange({ startTime, endTime });
-    data.timeRange = timeRange;
-    delete data.startTime;
-    delete data.endTime;
+    fields.timeRange = timeRange;
+    delete fields.startTime;
+    delete fields.endTime;
   }
 
   if (monitoredZone) {
-    data.monitoredZone = data.monitoredZone._id;
+    fields.monitoredZone = fields.monitoredZone._id;
   }
 
   if (monitoredObjects) {
-    data.monitoredObjects = data.monitoredObjects.map((element) => {
-      return element.content._id;
+    fields.monitoredObjects = fields.monitoredObjects.map((element) => {
+      return element._id || element;
     });
   }
 
-  return data;
+  if (labels) {
+    fields.labels = labels.map((label) => label._id || label);
+  }
+
+  return fields;
 };
 
 export const convertFieldValuesToDataSubmit = (fieldValues) => {
@@ -51,6 +61,7 @@ export const convertFieldValuesToDataSubmit = (fieldValues) => {
     dataSubmit = { ...dataSubmit, ...timeRangeDate };
     delete dataSubmit.timeRange;
   }
+
   return dataSubmit;
 };
 
