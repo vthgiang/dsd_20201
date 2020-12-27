@@ -43,7 +43,7 @@ function AreaMonitored(props) {
       CategoryActions.getAllCategories({
         page,
         limit,
-        projectType: localStorage.getItem("project-type"),
+        type: localStorage.getItem("project-type"),
       })
     );
   }, [page]);
@@ -57,7 +57,11 @@ function AreaMonitored(props) {
     if (isCatSuccess) {
       setFormatStyle('btn btn-success');
       window.$('#modalSuccessNotification').modal('show');
-      dispatch(CategoryActions.getAllCategories({ page, limit }));
+      dispatch(CategoryActions.getAllCategories({ 
+        page, 
+        limit,
+        type: localStorage.getItem("project-type"),
+       }));
     }
     dispatch({
       type: CategoryConstants.CAT_MONITORED_FAILURE,
@@ -95,6 +99,7 @@ function AreaMonitored(props) {
         ...itemSearch,
         page: page,
         limit: limit,
+        type: localStorage.getItem("project-type"),
       }),
     );
   };

@@ -370,7 +370,7 @@ function MonitoredObjectView({ history }) {
                   disabled={option === "view"}
                   className="custom-select"
                   name="type"
-                  value={monitoredObject.type || ""}
+                  value={monitoredObject.type}
                   onChange={handleChange}
                 >
                   <option disabled>Chọn loại đối tượng </option>

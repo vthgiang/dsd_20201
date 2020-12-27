@@ -64,7 +64,7 @@ function AreaMonitored(props) {
       MonitoredObjectActions.getAllMonitoredObjects({
         page,
         limit,
-        projectType: localStorage.getItem("project-type"),
+        type: localStorage.getItem("project-type"),
       })
     );
   }, [page]);
@@ -113,6 +113,7 @@ function AreaMonitored(props) {
         ...itemSearch,
         page: page,
         limit: limit,
+        type: localStorage.getItem("project-type"),
       })
     );
   };
