@@ -60,7 +60,13 @@ function AreaMonitored(props) {
       });
   };
   useEffect(() => {
-    dispatch(MonitoredObjectActions.getAllMonitoredObjects({ page, limit }));
+    dispatch(
+      MonitoredObjectActions.getAllMonitoredObjects({
+        page,
+        limit,
+        projectType: localStorage.getItem("project-type"),
+      })
+    );
   }, [page]);
   useEffect(() => {
     let arr = [];
@@ -131,9 +137,6 @@ function AreaMonitored(props) {
       pathname: `/monitored-object-management/view/${item._id}`,
     });
   };
-  const handleAreaImport = () => {
-    window.$("#modalImport").modal("show");
-  };
 
   const handleMonitoredDelete = (item) => {
     setSelectItemDelete(item);
@@ -150,7 +153,6 @@ function AreaMonitored(props) {
           Thêm bằng tay
         </a>
       </Menu.Item>
-      
     </Menu>
   );
 
