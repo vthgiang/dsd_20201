@@ -18,6 +18,7 @@ function AreaMonitored(props) {
     isError,
     messages,
     isCatSuccess,
+    isLoading,
   } = category;
   const [pagination, setPagination] = useState({
     page: 1,
@@ -238,6 +239,13 @@ function AreaMonitored(props) {
               ))}
             {!!listPaginate && listPaginate.length === 0 && (
               <tr>Không có dữ liệu</tr>
+            )}
+            {isLoading && (
+              <tr style={{ margin: "15px auto" }}>
+                <td colSpan="7">
+                  <Spin size="large" />
+                </td>
+              </tr>
             )}
           </tbody>
         </table>

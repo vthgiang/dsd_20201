@@ -9,6 +9,8 @@ import { MonitoredObjectActions } from "../redux/actions";
 import Pagination from "@material-ui/lab/Pagination";
 import SuccessNotification from "./SuccessNotification";
 import { MonitoredObjectConstants } from "../redux/constants";
+import { Spin } from "antd";
+
 const axios = require("axios");
 
 function AreaMonitored(props) {
@@ -22,6 +24,7 @@ function AreaMonitored(props) {
     isObjectFailure,
     objectMessages,
     isDeleteMonitored,
+    isLoading,
   } = monitoredObjects;
   const [pagination, setPagination] = useState({
     page: 1,
@@ -299,8 +302,15 @@ function AreaMonitored(props) {
                   </td>
                 </tr>
               ))}
-            {!!listPaginate && listPaginate.length === 0 && (
+            {!isLoading && listPaginate && listPaginate.length === 0 && (
               <tr>Không có dữ liệu</tr>
+            )}
+            {isLoading && (
+              <tr style={{ margin: "15px auto" }}>
+                <td colSpan="7">
+                  <Spin size="large" />
+                </td>
+              </tr>
             )}
           </tbody>
         </table>
