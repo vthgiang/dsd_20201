@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
-import { Form, Input, Col, Row } from "antd";
+import { Form, Input, Col, Row, InputNumber } from "antd";
 import React, { useEffect, useState, useMemo } from "react";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Image from 'react-bootstrap/Image'
@@ -198,34 +198,35 @@ export default function TransitionsModal(props) {
             <Col>
                 <Form.Item className={classes.formItem}>
                   <h4>Tốc độ tối đa (m/phút)</h4>
-                  <Input
+                  <InputNumber size="large" min={1} 
                     value={maxFlightSpeed}
                     className={classes.input}
-                    onChange={event => setMaxFlightSpeed(event.target.value)}
+                    onChange={event => setMaxFlightSpeed(event)}
                   />
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Thời gian bay (phút)</h4>
-                  <Input
+                  <InputNumber size="large" min={1} 
                     value={maxFlightTime}
                     className={classes.input}
-                    onChange={event => setMaxFlightTime(event.target.value)}
+                    onChange={event => setMaxFlightTime(event)}
                   />
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Trần bay (m)</h4>
-                  <Input
+                  <InputNumber size="large" min={1} 
                     value={maxFlightHeight}
                     className={classes.input}
-                    onChange={event => setMaxFlightHeight(event.target.value)}
+                    onChange={event => setMaxFlightHeight(event)}
                   />
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Dung lượng pin (mAh)</h4>
-                  <Input
+                  <InputNumber size="large" min={1} style={{ width: '80%' }}
+                    size="large"
                     value={rangeBattery}
                     className={classes.input}
-                    onChange={event => setBattery(event.target.value)}
+                    onChange={event => setBattery(event)}
                   />
                 </Form.Item>
 
@@ -258,10 +259,10 @@ export default function TransitionsModal(props) {
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Giới hạn tầm bay (m)</h4>
-                  <Input
+                  <InputNumber size="large" min={1} 
                     value={maxFlightRange}
                     className={classes.input}
-                    onChange={event => setMaxFlightRange(event.target.value)}
+                    onChange={event => setMaxFlightRange(event)}
                   />
                 </Form.Item>
               </Col>

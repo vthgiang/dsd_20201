@@ -24,16 +24,19 @@ function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath, ba
             <tbody>
                 {flightPaths.map((item, index) => (<tr key={item.id}>
                     <td>{baseIndex + index + 1}</td>
-                    <td>{item.name}</td>
+                    <td>
+                        <div className="view-flight-path" 
+                        onClick={()=>viewFlightPath(item)}>
+                            {item.name}
+                        </div>
+                    </td>
                     <td>{item.monitoredAreaName}</td>
                     <td>{item.monitoredZoneName}</td>
-                    <td className="td-action"><button className="btn-view" onClick={()=>viewFlightPath(item)}>
-                        <i className="far fa-eye"></i>
-                    </button>{"/"}
-                    <button className="btn-delete" onClick={()=>handleDeleteFlightPath(item)}>
-                        <i class="fas fa-trash-alt"></i>
-                    </button>{"/"}
-                    <EditFlightPathModal flightPath={item} pageReload={pageReload}/>
+                    <td className="td-action">
+                        <EditFlightPathModal flightPath={item} pageReload={pageReload}/>{'/'}
+                        <button className="btn-delete" onClick={()=>handleDeleteFlightPath(item)}>
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </td>
                 </tr>))}
             </tbody>

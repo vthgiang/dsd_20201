@@ -5,7 +5,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import StateDrone from '../StateDrone';
 
 export default function GetBackDrone(props){
-    const {drone} = props;
+    const {drone, onReload} = props;
     const [show, setShow] = useState(false);
 
 
@@ -13,6 +13,8 @@ export default function GetBackDrone(props){
       fetch(`http://skyrone.cf:6789/droneMaintenance/getBackDrone/`+drone.idDrone)
       .then(response => response.json())
       .then(json => {
+        handleClose();
+        onReload();
       });
         
     }

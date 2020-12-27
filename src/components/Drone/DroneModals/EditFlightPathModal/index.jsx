@@ -50,7 +50,7 @@ function EditFlightPathModal(props) {
     }, [selectedPoint])
 
     useEffect(()=> {
-
+        const {flightPoints} = flightPath; 
         const monitoredZone = flightPath.idSupervisedArea;
         // load đối tượng giám sát tương ứng với miền
         setMonitoredObjectListLoading(true);
@@ -64,6 +64,16 @@ function EditFlightPathModal(props) {
                     height: object.height
                 }))
                 console.log("monitored object", tmp);
+                
+                for(let point of flightPoints){ // gán object tương ứng với point
+                    for(let obj of tmp){
+                        if(point.idSupervisedObject == obj._id) {
+                            point.object = obj;
+                            break;
+                        }
+                    }
+                }
+                console.log("flights point",flightPoints);
                 setMonitoredObjectList(tmp);
             })
             .catch(e => {
@@ -75,6 +85,9 @@ function EditFlightPathModal(props) {
         }, []);
     
     const updatePoint = () => {
+        const {zone} = flightPath;
+        if(!timeCome || !timeStop || !heightPoint) return setError("Bạn chưa nhập đử tham số");
+        
         for(let i = 0; i < flightPoints.length; i++){
             if(flightPoints[i].locationLat == selectedPoint.locationLat && 
                 flightPoints[i].locationLng == selectedPoint.locationLng){
@@ -87,8 +100,7 @@ function EditFlightPathModal(props) {
                     },
                     ...flightPoints.slice(i+1)
                 ]);
-                // console.log(...flightPoints.slice(0, i));
-                // console.log(...flightPoints.slice(i+1));
+                setError('');
                 setPointChange(false);
                 console.log('updated point');
             }
@@ -189,6 +201,7 @@ function EditFlightPathModal(props) {
                                 updatePoint={updatePoint}
                                 setPointChange={setPointChange}
                                 pointChange={pointChange}
+                                selectedPoint={selectedPoint}
                             />}
                         </Col>
                         <Col md={8}>

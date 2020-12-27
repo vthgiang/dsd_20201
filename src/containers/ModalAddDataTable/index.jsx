@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import SaveIcon from '@material-ui/icons/Save';
-import { Form, Input, Col, Row } from "antd";
+import { Form, Input, Col, Row,  InputNumber } from "antd";
 import React, { useEffect, useState, useMemo } from "react";
 import ImageUploader from "react-images-upload";
 import axios from 'axios';
@@ -59,21 +59,45 @@ export default function TransitionsModal(props) {
 
 
 
-  const [name, setName] = useState();
-  const [brand, setBrand] = useState();
-  const [color, setColor] = useState();
-  const [dimensions, setDimensions] = useState();
-  const [maxFlightHeight, setMaxFlightHeight] = useState();
-  const [maxFlightRange, setMaxFlightRange] = useState();
-  const [maxFlightSpeed, setMaxFlightSpeed] = useState();
-  const [maxFlightTime, setMaxFlightTime] = useState();
-  const [rangeBattery, setBattery] = useState();
+  const [name, setName] = useState("");
+  const [brand, setBrand] = useState("");
+  const [color, setColor] = useState("");
+  const [dimensions, setDimensions] = useState("");
+  const [maxFlightHeight, setMaxFlightHeight] = useState(0);
+  const [maxFlightRange, setMaxFlightRange] = useState(0);
+  const [maxFlightSpeed, setMaxFlightSpeed] = useState(0);
+  const [maxFlightTime, setMaxFlightTime] = useState(0);
+  const [rangeBattery, setBattery] = useState(0);
   
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
+  const [alert, setAlert] = useState(false);
+ 
+  const isFloat = (n) => {
+    if (Number(n) === n) {
+      if (n > 0) return true;
+    }
+    return false;
+  }
+  
+  const isValidate = useMemo(() => {
+
+    if (name.length < 1 || brand.length < 1 || color.length < 1 || dimensions. length < 1 ||selectedImage === null 
+        || !isFloat(maxFlightHeight) ||  !isFloat(maxFlightRange) ||  !isFloat(maxFlightSpeed) ||  !isFloat(maxFlightTime) ||  !isFloat(rangeBattery)
+        ) {
+          return false;
+    } 
+    return true;
+   
+  
+}, [name, brand, color, dimensions, maxFlightHeight, maxFlightRange, maxFlightSpeed, maxFlightTime, rangeBattery, selectedImage]);
   
   const saveDrone = () => {
-    
+    if (!isValidate) {
+      setAlert(true);
+      return;
+    } 
+    setAlert(false);
     const fd = new FormData();
     fd.append('file', selectedImage, selectedImage.name)
     let url = 'https://luan-drive.cf/upload?token=111111&folder=images';
@@ -115,15 +139,20 @@ export default function TransitionsModal(props) {
             fetch('http://skyrone.cf:6789/drone/save', requestOptions)
             .then(response => response.text())
             .then(contents =>  {
-              alert("Đã lưu thành công"); 
-              setOpen(false)})
-            .catch(() => console.log("Can’t access " + 'http://skyrone.cf:6789/drone/getByCode/save' + " response. Blocked by browser?"))
+              alert("Đã cập nhật thành công"); 
+              setOpen(false);
+              window.location.reload();
+              })
+            .catch(() => {
+              console.log("Can’t access " + 'http://skyrone.cf:6789/drone/getByCode/save' + " response. Blocked by browser?")
+              setOpen(false);
+              window.location.reload();
+            })
               
           }
          
         })
         .catch(err => console.log(err))
-    
   }
 
   function onDrop(picture) {
@@ -201,9 +230,9 @@ export default function TransitionsModal(props) {
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Giới hạn tầm bay (m)</h4>
-                  <Input
+                  <InputNumber min={1}
                     className={classes.input}
-                    onChange={event => setMaxFlightRange(event.target.value)}
+                    onChange={event => setMaxFlightRange(event)}
                   />
                 </Form.Item>
               </Col>
@@ -211,30 +240,30 @@ export default function TransitionsModal(props) {
               <Col>
                 <Form.Item className={classes.formItem}>
                   <h4>Tốc độ tối đa (m/phút)</h4>
-                  <Input
+                  <InputNumber min={1} 
                     className={classes.input}
-                    onChange={event => setMaxFlightSpeed(event.target.value)}
+                    onChange={event => setMaxFlightSpeed(event)}
                   />
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Thời gian bay (phút)</h4>
-                  <Input
+                  <InputNumber min={1} 
                     className={classes.input}
-                    onChange={event => setMaxFlightTime(event.target.value)}
+                    onChange={event => setMaxFlightTime(event)}
                   />
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Trần bay (m)</h4>
-                  <Input
+                  <InputNumber min={1} 
                     className={classes.input}
-                    onChange={event => setMaxFlightHeight(event.target.value)}
+                    onChange={event => setMaxFlightHeight(event)}
                   />
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Dung lượng pin (mAh)</h4>
-                  <Input
+                  <InputNumber min={1} 
                     className={classes.input}
-                    onChange={event => setBattery(event.target.value)}
+                    onChange={event => setBattery(event)}
                   />
                 </Form.Item>
 
@@ -243,6 +272,9 @@ export default function TransitionsModal(props) {
 
             </Row>
             <div className={classes.divButton}>
+              {(alert) && (
+                <p>*Hãy điền đầy đủ và đúng trường thông tin</p>
+              )}
               <Button
                 onClick={saveDrone}
                 variant="contained"

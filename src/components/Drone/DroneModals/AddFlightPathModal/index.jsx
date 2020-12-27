@@ -96,13 +96,15 @@ function AddFlightPathModal(props) {
     const addPoint = () => {
         // thêm point vào pointPath
         if(!newPoint.locationLat) return;
+        let objectId = '';
+        if(selectedObject) objectId = selectedObject._id;
         let point = {
             locationLat: newPoint.locationLat,
             locationLng: newPoint.locationLng,
             timeCome: timeCome,
             timeStop: timeStop,
             flightHeight: heightPoint != '' ? heightPoint : 30,
-            idSupervisedObject: monitoredObjectId
+            idSupervisedObject: objectId
         }
         setFlightPoints([...flightPoints, point]);
         resetPoint();
@@ -113,6 +115,7 @@ function AddFlightPathModal(props) {
         setTimeStop('');
         setNewPoint({});
         setSelectedObject(null);
+        setMonitoredObjectId('');
         if(selectedZone) setHeightPoint(selectedZone.minHeight != undefined ? selectedZone.minHeight : '');
     }
 
