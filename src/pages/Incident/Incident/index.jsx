@@ -1,26 +1,99 @@
 import React, { useEffect, useState } from 'react';
 import to from 'await-to-js';
-import { message, Table, Tag } from 'antd';
+import { message, Table, Tag, Input, Space, Button } from 'antd';
 import incidentService from '../../../services/group09/incidentService';
 import userService from '../../../services/group09/userService';
 import incidentLevelService from '../../../services/group09/incidentLevelService';
 import incidentStatusService from '../../../services/group09/incidentStatusService';
 import moment from 'moment';
 import _ from "lodash";
-
+import { SearchOutlined } from '@ant-design/icons';
 const Incident = () => {
   const [loading, setLoading] = useState(true);
   const [incidents, setIncidents] = useState([]);
   const [users, setUsers] = useState({})
   const [levels, setLevels] = useState([]);
   const [status, setStatus] = useState([]);
+  const [searchText, setSearchText] = useState('')
+  const [searchedColumn, setSearchedColumn] = useState('')
+  let searchInput = null
+  const getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+              ref={node => {
+                searchInput = node;
+              }}
+              placeholder={`Search ${dataIndex}`}
+              value={selectedKeys[0]}
+              onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+              onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+              style={{ width: 188, marginBottom: 8, display: 'block' }}
+          />
+          <Space>
+            <Button
+                type="primary"
+                onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                icon={<SearchOutlined />}
+                size="small"
+                style={{ width: 90 }}
+            >
+              Search
+            </Button>
+            <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+              Reset
+            </Button>
+          </Space>
+        </div>
+    ),
+    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilter: (value, record) =>
+        record[dataIndex]
+            ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+            : '',
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        setTimeout(() => searchInput.select(), 100);
+      }
+    },
+    // render: text =>
+    //     searchedColumn === dataIndex ? (
+    //         <Highlighter
+    //             highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+    //             searchWords={[searchText]}
+    //             autoEscape
+    //             textToHighlight={text ? text.toString() : ''}
+    //         />
+    //     ) : (
+    //         text
+    //     ),
+  });
+
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText(selectedKeys[0])
+    setSearchedColumn(dataIndex)
+  };
+
+  const handleReset = clearFilters => {
+    clearFilters();
+    setSearchText('')
+  };
+
   const columns = [
+    {
+      title: 'STT',
+      dataIndex: 'index',
+      key: 'index',
+      ...getColumnSearchProps('name')
+    },
     {
       title: 'Tên sự cố',
       dataIndex: 'name',
       key: 'name',
       width: '20%',
       render: (text, record) => <a href={`/incidents/${record._id}`}>{text}</a>,
+      ...getColumnSearchProps('name')
     },
     {
       title: 'Mô tả',
@@ -125,7 +198,7 @@ const Incident = () => {
       message.error('Không thể trả về danh sách sự cố!');
       return
     }
-    let _incidents = _.get(incidents, "incidents", []);
+    let _incidents = _.get(incidents, "incidents", []).map((i, index) => {return {...i, index}})
     
     setIncidents(_incidents);
     setLevels(_levels || []);
@@ -139,7 +212,6 @@ const Incident = () => {
       columns={columns}
       loading={loading}
       dataSource={incidents}
-      loading={loading}
     />
   );
 };
