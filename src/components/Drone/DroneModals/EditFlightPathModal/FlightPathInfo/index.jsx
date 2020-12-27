@@ -7,7 +7,7 @@ FlightPathInfo.propTypes = {
 };
 
 function FlightPathInfo(props) {
-    const {name, setName, monitoredZoneName, monitoredAreaName} = props;
+    const {name, setName, monitoredZoneName, monitoredAreaName, speed, setSpeed} = props;
     return (
         <>
         <Row>
@@ -15,6 +15,10 @@ function FlightPathInfo(props) {
                 <Form.Group controlId="flightPathName">
                     <Form.Label>Tên đường bay</Form.Label>
                     <Form.Control type="text" placeholder="" value={name} onChange={e => setName(e.target.value)}/>
+                </Form.Group>
+                <Form.Group controlId="speed">
+                    <Form.Label>Vận tốc bay</Form.Label>
+                    <Form.Control type="number" min="1" max="100" onChange={(e)=>setSpeed(e.target.value)} value={speed} placeholder="m/s" />
                 </Form.Group>
             </Col>
         </Row>

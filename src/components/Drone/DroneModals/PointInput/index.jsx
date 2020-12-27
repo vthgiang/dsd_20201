@@ -10,20 +10,25 @@ PointInput.propTypes = {
 function PointInput(props) {
 
     const {
-        timeCome, setTimeCome, 
+        // timeCome, setTimeCome, 
         timeStop, setTimeStop,
         addPoint, newPoint,
         heightPoint, selectedZone,
         setHeightPoint,
         selectedObject,
-        monitoredObjectListLoading
+        monitoredObjectListLoading,
+        flightHeightDown, setFlightHeightDown
     } = props;
 
     const [error, setError] = useState('');
 
     const handleOkClick = () => {
-        if(timeCome == '' || timeStop == '') {
+        if(timeStop == '' || !flightHeightDown) {
             setError('bạn chưa nhập đủ thông tin');
+            return;
+        }
+        if(flightHeightDown >= heightPoint || flightHeightDown < 0){
+            setError('Độ cao hạ xuống không hợp lệ');
             return;
         }
         if(selectedZone && (heightPoint < selectedZone.minHeight || heightPoint > selectedZone.maxHeight)){
@@ -31,7 +36,7 @@ function PointInput(props) {
             return;
         }
         if(!newPoint.locationLat){
-            setError('Ok cái gì vậy');
+            setError('Bạn chưa chọn tọa độ');
             return;
         }
         addPoint();
@@ -40,20 +45,26 @@ function PointInput(props) {
 
     return (
         <>
-            <Form.Group controlId="timeCome">
+            {/* <Form.Group controlId="timeCome">
                 <Form.Label>Thời gian bay đến</Form.Label>
-                <Form.Control type="number" value={timeCome} onChange={(e)=>setTimeCome(e.target.value)} placeholder="phút" />
-            </Form.Group>
+                <Form.Control type="number" min="1" value={timeCome} onChange={(e)=>setTimeCome(e.target.value)} placeholder="phút" />
+            </Form.Group> */}
 
             <Form.Group controlId="timeStop">
                 <Form.Label>Thời gian dừng</Form.Label>
-                <Form.Control type="number" onChange={(e)=>setTimeStop(e.target.value)} value={timeStop} placeholder="phút" />
+                <Form.Control type="number" min="1" onChange={(e)=>setTimeStop(e.target.value)} value={timeStop} placeholder="phút" />
             </Form.Group>
             <Form.Group controlId="heightPoint">
                 <Form.Label>
                     Độ cao {selectedZone != null && `(${selectedZone.minHeight}~${selectedZone.maxHeight})`}
                 </Form.Label>
-                <Form.Control type="number" onChange={(e)=>setHeightPoint(e.target.value)}  value={heightPoint} placeholder="m" />
+                <Form.Control type="number" min="0" onChange={(e)=>setHeightPoint(e.target.value)}  value={heightPoint} placeholder="m" />
+            </Form.Group>
+            <Form.Group controlId="heightDown">
+                <Form.Label>
+                    Độ cao hạ xuống
+                </Form.Label>
+                <Form.Control type="number" min="0" onChange={(e)=>setFlightHeightDown(e.target.value)}  value={flightHeightDown} placeholder="m" />
             </Form.Group>
             {selectedObject != null && (<Form.Group controlId="monitoredObject">
                 <Form.Text className="text-muted">

@@ -158,7 +158,7 @@ function FlightPath(props) {
                     }
                 })
             }))
-            console.log('all Flight Path: ', data)
+            // console.log('all Flight Path: ', data)
             allFlightPath.current = data;
             flightPathFilter.current = allFlightPath.current;
             // lấy dữ liệu cho page hiện tại
@@ -167,7 +167,7 @@ function FlightPath(props) {
             // tính lại tổng page
             const totalPage = Math.ceil(allFlightPath.current.length/pagination.perPage);
             if(totalPage != pagination.totalPage) setPagination({...pagination, totalPage: totalPage});
-            console.log(totalPage)
+            // console.log(totalPage)
             // console.log(allFlightPath);
             setLoading(false);
         }
