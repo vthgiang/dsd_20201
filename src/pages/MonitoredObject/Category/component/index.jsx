@@ -8,6 +8,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import { CategoryActions } from '../redux/actions';
 import { CategoryConstants } from '../redux/constants';
 import SuccessNotification from './SuccessNotification';
+import { Spin } from "antd";
 
 function AreaMonitored(props) {
   const dispatch = useDispatch();
@@ -237,7 +238,7 @@ function AreaMonitored(props) {
                   </td>
                 </tr>
               ))}
-            {!!listPaginate && listPaginate.length === 0 && (
+            {!isLoading && !!listPaginate && listPaginate.length === 0 && (
               <tr>Không có dữ liệu</tr>
             )}
             {isLoading && (
