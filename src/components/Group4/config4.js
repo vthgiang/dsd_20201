@@ -27,7 +27,7 @@ const ref = {
         7: {name: 'Miền giám sát', value: 7, img: `${PUBLIC_URL}/images/area.png`, icon: 'fas fa-crop-alt'},
         8: {name: 'Công việc xử lý sự cố', value: 8, img: `${PUBLIC_URL}/images/incident.jpg`,icon: 'fas fa-toolbox'},
         9: {name: 'Flighthub', value: 9, img: `${PUBLIC_URL}/images/flighthub.jpg`, icon: 'fab fa-hubspot'},
-        10: {name: 'Sư cố lưới điện', value: 10, img: `${PUBLIC_URL}/images/dike.jpg`, icon: 'fas fa-bolt'},
+        10: {name: 'Sư cố lưới điện', value: 10, img: `${PUBLIC_URL}/images/high_voltage_grid.jpg`, icon: 'fas fa-bolt'},
         11: {name: 'Sư cố cây trồng', value: 11, img: `${PUBLIC_URL}/images/tree.jpg`, icon: 'fas fa-tree'},
         12: {name: 'Sư cố cháy rừng', value: 12, img: `${PUBLIC_URL}/images/forest_fires.jpg`, icon: 'fas fa-fire'},
         13: {name: 'Sư cố đê điều', value: 13, img: `${PUBLIC_URL}/images/dike.jpg`, icon: 'fas fa-disease'},
