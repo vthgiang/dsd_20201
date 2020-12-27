@@ -9,6 +9,8 @@ import { MonitoredObjectActions } from "../redux/actions";
 import Pagination from "@material-ui/lab/Pagination";
 import SuccessNotification from "./SuccessNotification";
 import { MonitoredObjectConstants } from "../redux/constants";
+import { Spin } from "antd";
+
 const axios = require("axios");
 
 function AreaMonitored(props) {
@@ -22,6 +24,7 @@ function AreaMonitored(props) {
     isObjectFailure,
     objectMessages,
     isDeleteMonitored,
+    isLoading,
   } = monitoredObjects;
   const [pagination, setPagination] = useState({
     page: 1,
@@ -177,26 +180,6 @@ function AreaMonitored(props) {
           </Dropdown>
         </div>
         <div className="form-inline" style={{ margin: "15px" }}>
-          <div className="form-group" style={{ marginRight: "30px" }}>
-            <label className="form-control-static" style={{ margin: "10px" }}>
-              <b>Mã đối tượng</b>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name="code"
-              value={itemSearch.code}
-              onChange={(e) => {
-                e.persist();
-                setItemSearch((prev) => ({
-                  ...prev,
-                  code: e.target.value,
-                }));
-              }}
-              placeholder="Mã đối tượng"
-              autoComplete="off"
-            />
-          </div>
           <div className="form-group">
             <label className="form-control-static" style={{ margin: "10px" }}>
               <b>Tên đối tượng</b>
@@ -217,8 +200,6 @@ function AreaMonitored(props) {
               autoComplete="off"
             />
           </div>
-        </div>
-        <div className="form-inline" style={{ margin: "15px" }}>
           <div className="form-group" style={{ marginRight: "15px" }}>
             <label className="form-control-static" style={{ margin: "10px" }}>
               <b>Trạng thái</b>
@@ -299,8 +280,15 @@ function AreaMonitored(props) {
                   </td>
                 </tr>
               ))}
-            {!!listPaginate && listPaginate.length === 0 && (
+            {!isLoading && listPaginate && listPaginate.length === 0 && (
               <tr>Không có dữ liệu</tr>
+            )}
+            {isLoading && (
+              <tr style={{ margin: "15px auto" }}>
+                <td colSpan="7">
+                  <Spin size="large" />
+                </td>
+              </tr>
             )}
           </tbody>
         </table>

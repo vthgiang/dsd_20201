@@ -139,7 +139,6 @@ function MonitoredObjectView({ history }) {
         ...monitoredObject,
         code: "1",
         type: localStorage.getItem("project-type"),
-        areaMonitored: null,
         managementUnit: null,
         images: null,
         videos: null,

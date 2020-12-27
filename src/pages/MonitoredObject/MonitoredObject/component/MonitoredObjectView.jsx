@@ -237,30 +237,15 @@ function MonitoredObjectView({ history }) {
     //   return;
     // }
 
-    if (monitoredObject._id) {
-      dispatch(
-        MonitoredObjectActions.editMonitoredObject(monitoredObject._id, {
-          ...monitoredObject,
-          areaMonitored: null,
-          managementUnit: null,
-          images: null,
-          videos: null,
-          status: monitoredObject.status === "" ? "1" : monitoredObject.status,
-        })
-      );
-    } else {
-      dispatch(
-        MonitoredObjectActions.createMonitoredObject({
-          ...monitoredObject,
-          code: "2",
-          areaMonitored: null,
-          managementUnit: null,
-          images: null,
-          videos: null,
-          status: monitoredObject.status === "" ? "1" : monitoredObject.status,
-        })
-      );
-    }
+    dispatch(
+      MonitoredObjectActions.editMonitoredObject(monitoredObject._id, {
+        ...monitoredObject,
+        managementUnit: null,
+        images: null,
+        videos: null,
+        status: monitoredObject.status === "" ? "1" : monitoredObject.status,
+      })
+    );
     setMonitoredObject({
       code: "",
       name: "",

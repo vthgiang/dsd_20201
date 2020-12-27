@@ -8,6 +8,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import { CategoryActions } from '../redux/actions';
 import { CategoryConstants } from '../redux/constants';
 import SuccessNotification from './SuccessNotification';
+import { Spin } from "antd";
 
 function AreaMonitored(props) {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function AreaMonitored(props) {
     isError,
     messages,
     isCatSuccess,
+    isLoading,
   } = category;
   const [pagination, setPagination] = useState({
     page: 1,
@@ -143,29 +145,9 @@ function AreaMonitored(props) {
             </Button>
           </Dropdown>
         </div>
-        <div className="form-inline" style={{ margin: '15px' }}>
-          <div className="form-group" style={{ marginRight: '30px' }}>
-            <label className="form-control-static" style={{ margin: '10px' }}>
-              <b>Mã danh mục</b>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name="code"
-              value={itemSearch.code}
-              onChange={(e) => {
-                e.persist();
-                setItemSearch((prev) => ({
-                  ...prev,
-                  code: e.target.value,
-                }));
-              }}
-              placeholder="Mã danh mục"
-              autoComplete="off"
-            />
-          </div>
+        <div className="form-inline" style={{ margin: "15px" }}>
           <div className="form-group">
-            <label className="form-control-static" style={{ margin: '10px' }}>
+            <label className="form-control-static" style={{ margin: "10px" }}>
               <b>Tên danh mục</b>
             </label>
             <input
@@ -184,7 +166,7 @@ function AreaMonitored(props) {
               autoComplete="off"
             />
           </div>
-          <div className="form-group">
+          <div className="form-group ml-3">
             <button
               type="button"
               className="btn btn-success"
@@ -199,7 +181,6 @@ function AreaMonitored(props) {
           <thead>
             <tr>
               <th>STT</th>
-              <th>Mã danh mục</th>
               <th>Tên danh mục</th>
               <th>Mô tả</th>
               <th>Hành động</th>
@@ -211,7 +192,6 @@ function AreaMonitored(props) {
               listPaginate.map((item, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{item.code}</td>
                   <td>{item.name}</td>
                   <td>{item.description}</td>
                   <td>
@@ -236,8 +216,15 @@ function AreaMonitored(props) {
                   </td>
                 </tr>
               ))}
-            {!!listPaginate && listPaginate.length === 0 && (
+            {!isLoading && !!listPaginate && listPaginate.length === 0 && (
               <tr>Không có dữ liệu</tr>
+            )}
+            {isLoading && (
+              <tr style={{ margin: "15px auto" }}>
+                <td colSpan="7">
+                  <Spin size="large" />
+                </td>
+              </tr>
             )}
           </tbody>
         </table>
