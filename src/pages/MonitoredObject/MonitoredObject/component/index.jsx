@@ -150,15 +150,7 @@ function AreaMonitored(props) {
           Thêm bằng tay
         </a>
       </Menu.Item>
-      <Menu.Item>
-        <a
-          data-target="#modalImport"
-          title="ImportForm"
-          onClick={() => handleAreaImport()}
-        >
-          Import File
-        </a>
-      </Menu.Item>
+      
     </Menu>
   );
 

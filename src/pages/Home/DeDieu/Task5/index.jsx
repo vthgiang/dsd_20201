@@ -25,19 +25,25 @@ function Task5() {
       <TabPane tab="Quản lý phòng ban" key="2">
         <ListDepartment/>
       </TabPane>
-      <TabPane tab="Quản lý chức vụ" key="3">
-        <ListRole />
-      </TabPane>
-      {/* {role == "SUPER_ADMIN" && (
+     {/* // {role == "ADMIN" ? ( */}
+        <TabPane tab="Quản lý chức vụ" key="3">
+          <ListRole />
+        </TabPane>
+      {/* ) : (
+        <TabPane tab="Quản lý chức vụ" key="3" disabled>
+          <ListRole />
+        </TabPane>
+      )} */}
+     
         <TabPane tab="Quản lý quyền" key="4">
           <ListPermission />
         </TabPane>
-      )}
-      {role == "SUPER_ADMIN" && (
+     
+    
         <TabPane tab="Phân quyền" key="5">
           <ListRolePermission />
         </TabPane>
-      )} */}
+    
     </Tabs>
   );
 }
