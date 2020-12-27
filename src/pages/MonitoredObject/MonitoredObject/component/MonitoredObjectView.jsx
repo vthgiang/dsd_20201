@@ -8,6 +8,9 @@ import { Image } from "antd";
 import { CategoryActions } from "../../Category/redux/actions";
 import { MonitoredObjectConstants } from "../redux/constants";
 import { MonitoredObjectActions } from "../redux/actions";
+import CreateArea from "./CreateArea";
+import { FolderAddOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 
 const axios = require("axios");
 
@@ -40,7 +43,55 @@ function MonitoredObjectView({ history }) {
   const [currentMonitoredZone, setCurrentMonitoredZone] = useState(null);
   const [datazoneAll, setDataZoneAll] = useState([]);
   const [listArea, setListArea] = useState([]);
-
+  const [dataZoneArea, setDataZoneArea] = useState([]);
+  const [create, setCreate] = useState({
+    _id: "",
+    data: {
+      incidentType: localStorage.getItem("project-type"),
+      name: "",
+      startPoint: {
+        longitude: "",
+        latitude: "",
+      },
+      endPoint: {
+        longitude: "",
+        latitude: "",
+      },
+      priority: "",
+      description: "",
+      code: "ZONE" + (Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000),
+      level: 1,
+      maxHeight: "",
+      minHeight: "",
+    },
+  });
+  const [openModalAdd, setOpenModalAdd] = useState(false);
+  const setStatusModalAdd = (openModalAdd) => {
+    setCreate((prev) => ({
+      ...prev,
+      data: {
+        ...create.data,
+        code: "ZONE" + (Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000),
+      },
+    }));
+    setOpenModalAdd(openModalAdd);
+  };
+  const getZonebyArea = async (idArea) => {
+    await axios
+      .get(
+        `https://monitoredzoneserver.herokuapp.com/monitoredzone/area/${idArea}`,
+        {
+          headers: {
+            token: localStorage.getItem("token"),
+            projectType: localStorage.getItem("project-type"),
+          },
+        }
+      )
+      .then((res) => {
+        setDataZoneArea(res.data.content.zone);
+      })
+      .catch((error) => console.log(error));
+  };
   const getZoneAll = async () => {
     await axios({
       method: "GET",
@@ -277,7 +328,6 @@ function MonitoredObjectView({ history }) {
   };
 
   let indexImage = 0;
-  console.log("aaaa", monitoredObject);
   return (
     <div>
       <div className="header-title mb-5">
@@ -431,7 +481,18 @@ function MonitoredObjectView({ history }) {
                   className="custom-select"
                   name="areaMonitored"
                   value={monitoredObject.areaMonitored}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    e.persist();
+                    let index = listArea.findIndex(
+                      (item) => item._id === e.target.value
+                    );
+                    getZonebyArea(e.target.value);
+                    setMonitoredObject((formState) => ({
+                      ...formState,
+                      areaMonitored: e.target.value,
+                      nameAreaMonitored: listArea[index].name,
+                    }));
+                  }}
                 >
                   <option value="" disabled>
                     Chưa có giá trị
@@ -626,6 +687,20 @@ function MonitoredObjectView({ history }) {
           </div>
         </div>
         <div className="col-8">
+          {dataZoneArea.length === 0 && monitoredObject.areaMonitored && (
+            <div className="content row d-flex justify-content-center mb-5">
+              <h4>Không có miền nào thuộc khu vực này </h4>
+              <Button
+                type="primary"
+                icon={<FolderAddOutlined />}
+                onClick={() => setStatusModalAdd(true)}
+                className="ml-3"
+              >
+                Thêm mới miền giám sát
+              </Button>
+            </div>
+          )}
+
           {monitoredObject.monitoredZone && (
             <WrappedMap
               googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA15qz81pHiNfVEV3eeniSNhAu64SsJKgU"
@@ -670,6 +745,15 @@ function MonitoredObjectView({ history }) {
         history={history}
         formatStyle={formatStyle}
         messages={objectMessages}
+      />
+      <CreateArea
+        setStatusModalAdd={setStatusModalAdd}
+        create={create}
+        setCreate={setCreate}
+        openModalAdd={openModalAdd}
+        listArea={listArea}
+        setDataZoneArea={setDataZoneArea}
+        dataZoneArea={dataZoneArea}
       />
     </div>
   );
