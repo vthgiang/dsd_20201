@@ -244,8 +244,8 @@ function MonitoredObjectView({ history }) {
   };
 
   useEffect(() => {
-    dispatch(CategoryActions.getAllCategories());
-    dispatch(MonitoredObjectActions.getAllMonitoredObjects());
+    dispatch(CategoryActions.getAllCategories({type:localStorage.getItem("project-type")}));
+    dispatch(MonitoredObjectActions.getAllMonitoredObjects({type:localStorage.getItem("project-type")}));
     getZoneAll();
     getArea();
     getDetailMonitoredObject();
