@@ -17,7 +17,7 @@ const images = {
 
 const host = "https://it4483-dsd04.herokuapp.com"
 var ntfID;
-var token, project_type;
+var token, project_type, user;
 // const host =  "http://localhost:5000"
 
 // post function
@@ -58,17 +58,23 @@ async function receivePushNotification(event) {
     // console.log(token)
   })
 
+  await openIndexDB(self.indexedDB)
+  .then( db => getPushes(db, "user")) 
+  .then(res => {
+    user = res.target.result.payload;
+    console.log(user)
+  })
+
   const { content, ref, _id } = payload;
   ntfID = _id;
+  const actions = [{ action: "Detail", title: "View"}]
+  if (["ADMIN", "SUPERADMIN"].includes(user.user.role)) actions.push( { action: "Verify", title: "Verify"})
   const options = {
     data: ref._link,
     icon: images[ref._type].img,
     body: content,
     requireInteraction: true,
-    actions: [
-      { action: "Detail", title: "View"},
-      { action: "Verify", title: "Verify"},
-    ]
+    actions: actions
   };
   event.waitUntil(self.registration.showNotification("Thông báo mới", options));
   event.waitUntil(openIndexDB(self.indexedDB)
@@ -96,7 +102,7 @@ function openPushNotification(event) {
           method: "POST"
         }).then(response => {
           console.log(`response: `, response)
-          if (response.code === 1000) event.waitUntil(self.registration.showNotification("Verify successfully"));
+          if (response.code === 1000) self.registration.showNotification("Verify successfully");
         }).catch(err => {
           console.log(err)
         })

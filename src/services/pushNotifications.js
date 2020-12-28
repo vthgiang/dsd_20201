@@ -60,7 +60,6 @@ function createNotificationSubscription() {
       console.log("User is subscribed.", subscription);
       return subscription;
     }).catch(err => {
-      if (err.message === "Registration failed - storage error") localStorage.removeItem("persist:root");
       console.log(err);
     });
     

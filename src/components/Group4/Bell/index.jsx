@@ -30,12 +30,13 @@ const BellNotification = () => {
   useEffect(() => {
     setInterval(() => updateOutputFromIndexedDB(), 5000);
     openIndexDB(window.indexedDB)
-    .then(db => {
-      addPush(db, { key: "token", payload: localStorage.getItem("token")})
-      addPush(db, { key: "project-type", payload: localStorage.getItem("project-type")})
-    }).catch(err => {
-      console.log(err);
-    })
+      .then(db => {
+        addPush(db, { key: "token", payload: localStorage.getItem("token")})
+        addPush(db, { key: "project-type", payload: localStorage.getItem("project-type")})
+        addPush(db, { key: "user", payload: user})
+      }).catch(err => {
+        console.log(err);
+      })
   })
 
   useEffect(() => {
