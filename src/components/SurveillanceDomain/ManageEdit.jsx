@@ -7,6 +7,7 @@ import {Input, Select, Tabs, Button, Checkbox, Table, Modal} from 'antd';
 import {GoogleMap, withGoogleMap, withScriptjs, Polygon, Polyline, Marker} from "react-google-maps";
 import axios from "axios";
 import moment from 'moment';
+
 const {TabPane} = Tabs
 const {Option} = Select;
 
@@ -68,14 +69,14 @@ const MyMapComponent1 = compose(
         <Polygon
             key={props.forceUpdate}
             path={props.triangleCoords}
-            key={1}
+            // key={1}
             editable={true}
             options={{
                 strokeColor: "#0000FF",
                 strokeWeight: 1,
             }}
         />
-    
+        
         <Polyline
             path={props.pathCoordinates}
             geodesic={true}
@@ -92,8 +93,9 @@ const MyMapComponent1 = compose(
                 ]
             }}
         />
-        <Marker position={{lat: parseFloat(props.pathCoordinates[0].lat), lng: parseFloat(props.pathCoordinates[0].lng)}}/>
-        
+        <Marker
+            position={{lat: parseFloat(props.pathCoordinates[0].lat), lng: parseFloat(props.pathCoordinates[0].lng)}}/>
+    
     </GoogleMap>
 )
 
@@ -118,20 +120,11 @@ class ManageEdit extends React.PureComponent {
                 },
                 
                 {
-                    title: 'Thời gian bắt đầu',
-                    render: val => <p>{ moment.unix(val.timeStart / 1000).format("HH:ss")}</p>
+                    title: 'Chiều cao trung bình',
+                    render: val => <p>{val.averageHeight}</p>
                 },
                 {
-                    title: 'Thời gian kết thúc',
-                    render: val => <p>{ moment.unix(val.timeEnd / 1000).format("HH:ss") }</p>
-                },
-                {
-                    title: 'Chiều cao',
-                    key: 'heightFlight',
-                    dataIndex: 'heightFlight',
-                },
-                {
-                    title: '',
+                    title: 'Chi tiết',
                     render: val => (
                         <Button type="primary" style={{marginRight: 10}}
                                 onClick={() => this.showDetail(val)}>
@@ -147,12 +140,17 @@ class ManageEdit extends React.PureComponent {
             openModalDelete: false,
             pathCoordinates: [],
             forceUpdate: 0,
+            user: {},
         }
         this.myRef = React.createRef();
         this._handleChange = this._handleChange.bind(this);
     }
     
     componentDidMount() {
+        let persist = JSON.parse(localStorage.getItem('persist:root'));
+        persist = JSON.parse(persist.user);
+        const {user} = persist;
+        this.setState({user: user});
         if (this.state.newdomain.startPoint.latitude && this.state.newdomain.endPoint.latitude) {
             let triangleCoords = [
                 {lat: this.state.newdomain.startPoint.latitude, lng: this.state.newdomain.startPoint.longitude},
@@ -186,7 +184,7 @@ class ManageEdit extends React.PureComponent {
     
     setModalshow(openModalshow) {
         this.setState({openModalshow});
-        if(!openModalshow) {
+        if (!openModalshow) {
             window.location.reload();
         }
     }
@@ -206,6 +204,15 @@ class ManageEdit extends React.PureComponent {
         })
     }
     
+    
+    toggleActivePriority = name => async (value) => {
+        this.setState(prevState => {
+            let newdomain = Object.assign({}, prevState.newdomain);
+            newdomain['priority'] = value;
+            return {newdomain};
+        });
+    }
+    
     setStatusModalAdd(openModalAdd) {
         this.setState({openModalAdd});
     }
@@ -218,7 +225,7 @@ class ManageEdit extends React.PureComponent {
         let lat = e.latLng.lat();
         let lng = e.latLng.lng();
         let obj = this.state.objectByZone.find(obj => {
-           return obj.lat == lat && obj.lng == lng;
+            return obj.lat == lat && obj.lng == lng;
         });
         let detailMaker = obj ? obj : {};
         this.setState({detailMaker});
@@ -271,22 +278,24 @@ class ManageEdit extends React.PureComponent {
             this.setState({triangleCoords});
         }
     }
-
+    
     
     save() {
         let dataEdit = {
-            "data": {
-                "startPoint": this.state.newdomain.startPoint,
-                "endPoint": this.state.newdomain.endPoint,
-                "priority": this.state.newdomain.priority,
-                "description": this.state.newdomain.description,
-                "code": this.state.newdomain.code,
-            }
+            "startPoint": this.state.newdomain.startPoint,
+            "endPoint": this.state.newdomain.endPoint,
+            "priority": this.state.newdomain.priority,
+            "description": this.state.newdomain.description,
+            "code": this.state.newdomain.code,
         }
         let idZone = this.state.newdomain._id;
+        let token = localStorage.getItem('token');
+        let projecttype = localStorage.getItem('project-type');
         axios.put(`https://monitoredzoneserver.herokuapp.com/monitoredzone/${idZone}`, dataEdit, {
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    token: token,
+                    projecttype: projecttype
                 }
             })
             .then(res => {
@@ -371,8 +380,13 @@ class ManageEdit extends React.PureComponent {
                                 <tr>
                                     <th style={{width: '50%'}}>Độ ưu tiên</th>
                                     <td>
-                                        <Input name="priority" style={{width: 200}} placeholder="Nhập"
-                                               value={this.state.newdomain.priority} onChange={this._handleChange}/>
+                                        <Select defaultValue={this.state.newdomain.priority + ''} name="priority"
+                                                placeholder="Độ ưu tiên" style={{width: 200}}
+                                                onChange={this.toggleActivePriority("Active!")}>
+                                            <Option value="0">Cao </Option>
+                                            <Option value="1">Thấp</Option>
+                                            <Option value="2">Trung bình</Option>
+                                        </Select>
                                     </td>
                                 </tr>
                                 <tr>
@@ -395,19 +409,21 @@ class ManageEdit extends React.PureComponent {
                             />
                         </div>
                         <br/>
-                        <div className="action center">
-                            <div className="save">
-                                {
-                                    !this.diff(this.state.olddomain, this.state.newdomain) &&
-                                    <Button type="primary" onClick={() => this.save()}>Lưu</Button>
-                                }
-                                {
-                                    (this.diff(this.state.olddomain, this.state.newdomain)) &&
-                                    <Button disabled>Lưu</Button>
-                                }
-                            </div>
-                        
-                        </div>
+                        {
+                            (this.state.user.role === 'ADMIN' || this.state.user.role === 'SUPER_ADMIN') && (<div className="action center" >
+                                <div className="save">
+                                    {
+                                        !this.diff(this.state.olddomain, this.state.newdomain) &&
+                                        <Button type="primary" onClick={() => this.save()}>Lưu</Button>
+                                    }
+                                    {
+                                        (this.diff(this.state.olddomain, this.state.newdomain)) &&
+                                        <Button disabled>Lưu</Button>
+                                    }
+                                </div>
+
+                            </div>)
+                        }
                     </TabPane>
                     <TabPane tab="Danh sách hành trình bay" key="2" id="list">
                         <div className="content">
@@ -467,7 +483,7 @@ class ManageEdit extends React.PureComponent {
                                 {this.state.detailMaker.updatedAt}
                             </td>
                         </tr>
-    
+                        
                         <tr>
                             <th style={{width: '50%'}}>Mô tả</th>
                             <td>

@@ -74,6 +74,7 @@ const LoginForm = () => {
                 dispatch(actions.setUserData(res.result));
                 dispatch(actions.setLogin(true));
                 dispatch(actions.setProjectType(res.result.type));
+                dispatch(actions.setRole(res.result.role));
                 localStorage.setItem("token", res.result.api_token);
                 localStorage.setItem("project-type", res.result.type);
                 setHeaders({ token: res.result.api_token });
@@ -88,7 +89,7 @@ const LoginForm = () => {
             } else {
                 localStorage.removeItem("dataLogin");
             }
-        } catch (error) {}
+        } catch (error) { }
     };
 
     const validateData = useCallback(() => {

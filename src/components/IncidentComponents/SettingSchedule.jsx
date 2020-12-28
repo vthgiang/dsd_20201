@@ -29,8 +29,9 @@ const SettingSchedule = () => {
   const [checkboxSundayEdit, setCheckboxSundayEdit] = useState(false);
   const [listDayoffEdit, setListDayoffEdit] = useState([]);
 
-  const API_TOKEN = "4c901bcdba9f440a2a7c31c0bcbd78ec";
-  const CURRENT_TYPE = "LUOI_DIEN";
+  const API_TOKEN =
+    localStorage.getItem('token') || '4c901bcdba9f440a2a7c31c0bcbd78ec';
+  const CURRENT_TYPE = localStorage.getItem('project-type') || 'LUOI_DIEN';
   const childrenDay = [];
   for (let i = 1; i <= 31; i++) {
     childrenDay.push(<Option key={i}>{i}</Option>);

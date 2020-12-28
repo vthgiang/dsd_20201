@@ -32,7 +32,7 @@ const ListDepartment = () => {
                         : "Có lỗi. Vui lòng thử lại!",
             });
         }
-    }, [filter, user]);
+    }, [filter]);
 
     useEffect(() => {
         fetchListDepartment();
@@ -44,7 +44,7 @@ const ListDepartment = () => {
         }
     }, [visible]);
 
-    const handleDelete = async (user) => {
+    const handleDelete = async (department) => {
         Modal.confirm({
             title: "Xác nhận?",
             content: "Bạn có thực sự muốn xóa phòng ban này",
@@ -52,7 +52,7 @@ const ListDepartment = () => {
             cancelText: "Hủy",
             onOk() {
                 const res = new Promise((resolve, reject) => {
-                    resolve(deleteDepartment(user.id));
+                    resolve(deleteDepartment(department.id));
                 }).catch(() => console.log("Oops errors!"));
                 Promise.resolve(res).then((e) => {
                     if (e.status == "successful") {

@@ -2,9 +2,9 @@ import { Image, Tag } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const problemTypes = ["Cháy rừng", "Lưới điện", "Đê điều", "Cây trồng"];
+export const problemTypes = ["Cháy rừng", "Đê điều", "Lưới điện", "Cây trồng"];
 
-export const problemTypesKD = ["CHAY_RUNG", "LUOI_DIEN", "DE_DIEU", "CAY_TRONG"];
+export const problemTypesKD = ["CHAY_RUNG", "DE_DIEU", "LUOI_DIEN", "CAY_TRONG"];
 
 export const problemColumns = [
     {
@@ -19,7 +19,7 @@ export const problemColumns = [
     {
         title: "Video",
         dataIndex: "videos",
-        render: videos => <video src={videos[0]?.link} />
+        render: videos => <video style={{ width: "100%", height: "150px" }} src={videos[0]?.link} />
     },
     {
         title: "Mô tả",
@@ -37,6 +37,11 @@ export const problemColumns = [
     {
         title: 'Ngày xảy ra',
         dataIndex: 'dueDate',
+    },
+    {
+        title: 'Hành động',
+        dataIndex: 'id',
+        render: id => <Link to="#">Xem chi tiết</Link>
     },
 ]
 
