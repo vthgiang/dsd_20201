@@ -31,7 +31,7 @@ const MainLayout = ({ children, history }) => {
     }
   }, []);
 
-  if(projectType == "DE_DIEU"){
+  if(projectType === "DE_DIEU" || projectType === "CHAY_RUNG"){
     return (
         <StyleLayout>
           <Layout>
