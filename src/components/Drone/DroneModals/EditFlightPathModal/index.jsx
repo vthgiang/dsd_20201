@@ -20,6 +20,7 @@ function EditFlightPathModal(props) {
     const [timeStop, setTimeStop] = useState('');
     const [heightPoint, setHeightPoint] = useState('');
     const [flightHeightDown, setFlightHeightDown] = useState('');
+    const [totalDistance, setTotalDistance] = useState(flightPath.distance);
 
     const [newPoint, setNewPoint] = useState({});
     const [flightPoints, setFlightPoints] = useState([]);
@@ -99,7 +100,8 @@ function EditFlightPathModal(props) {
         for(let i = 0; i < flightPoints.length; i++){
             if(flightPoints[i].locationLat == selectedPoint.locationLat && 
                 flightPoints[i].locationLng == selectedPoint.locationLng){
-                setFlightPoints([
+
+                const newFlightPoints = [
                     ...flightPoints.slice(0, i), {
                         ...flightPoints[i],
                         timeCome: timeCome,
@@ -108,12 +110,25 @@ function EditFlightPathModal(props) {
                         flightHeightDown: flightHeightDown
                     },
                     ...flightPoints.slice(i+1)
-                ]);
+                ]
+                setTotalDistance(caculatorDistance(newFlightPoints));
+
+                setFlightPoints(newFlightPoints);
                 setError('');
                 setPointChange(false);
                 console.log('updated point');
             }
         }
+    }
+
+    const caculatorDistance = (flightPoints) => {
+        let totalDistance = 0
+        let distance = 0;
+        for(let i=1; i<flightPoints.length; i++){
+            distance = getDistance(flightPoints[i], flightPoints[i-1]);
+            totalDistance += distance;
+        }
+        return totalDistance;
     }
 
     const handleSaveClick = () => {
@@ -144,7 +159,7 @@ function EditFlightPathModal(props) {
             // monitoredZoneId: selectedZone._id,
             // monitoredZoneCode: selectedZone.code
         };
-        console.log(newFlightPath);
+        // console.log(newFlightPath);
         axios.post('http://skyrone.cf:6789/flightPath/save', newFlightPath)
             .then(response => {
                 console.log(response);
@@ -212,7 +227,8 @@ function EditFlightPathModal(props) {
                         speed={speed} setSpeed={setSpeed}
                         name={name} setName={setName}
                         monitoredZoneName={flightPath.zone.name}
-                        monitoredAreaName={flightPath.area.name}                     
+                        monitoredAreaName={flightPath.area.name}
+                        totalDistance={totalDistance}                  
                     />
                     <Row>
                         <Col md={4}>

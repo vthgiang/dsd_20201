@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Col, Form, Row } from 'react-bootstrap';
 
-FlightPathInfo.propTypes = {
-    
-};
-
 function FlightPathInfo(props) {
-    const {name, setName, monitoredZoneName, monitoredAreaName, speed, setSpeed} = props;
+    const {name, setName, 
+        monitoredZoneName, monitoredAreaName, 
+        speed, setSpeed,
+        totalDistance
+    } = props;
     return (
         <>
         <Row>
@@ -19,6 +18,10 @@ function FlightPathInfo(props) {
                 <Form.Group controlId="speed">
                     <Form.Label>Vận tốc bay</Form.Label>
                     <Form.Control type="number" min="1" max="100" onChange={(e)=>setSpeed(e.target.value)} value={speed} placeholder="m/s" />
+                </Form.Group>
+                <Form.Group controlId="totalDistance">
+                    <Form.Label>Tông quãng đường bay (mét)</Form.Label>
+                    <Form.Control type="number" value={Math.round(totalDistance)} placeholder="mét" />
                 </Form.Group>
             </Col>
         </Row>

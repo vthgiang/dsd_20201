@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Button, Form } from 'react-bootstrap';
 import './PointInput.css'
-
-PointInput.propTypes = {
-    
-};
 
 function PointInput(props) {
 
@@ -23,11 +18,11 @@ function PointInput(props) {
     const [error, setError] = useState('');
 
     const handleOkClick = () => {
-        if(timeStop == '' || !flightHeightDown) {
+        if(timeStop == '') {
             setError('bạn chưa nhập đủ thông tin');
             return;
         }
-        if(flightHeightDown >= heightPoint || flightHeightDown < 0){
+        if(flightHeightDown && (flightHeightDown >= heightPoint || flightHeightDown < 0)){
             setError('Độ cao hạ xuống không hợp lệ');
             return;
         }
@@ -52,7 +47,7 @@ function PointInput(props) {
 
             <Form.Group controlId="timeStop">
                 <Form.Label>Thời gian dừng</Form.Label>
-                <Form.Control type="number" min="1" onChange={(e)=>setTimeStop(e.target.value)} value={timeStop} placeholder="phút" />
+                <Form.Control type="number" min="0" onChange={(e)=>setTimeStop(e.target.value)} value={timeStop} placeholder="phút" />
             </Form.Group>
             <Form.Group controlId="heightPoint">
                 <Form.Label>

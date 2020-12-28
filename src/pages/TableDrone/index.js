@@ -7,6 +7,7 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import ModalEditDataTable from '../../containers/ModalEditDataTable';
 import ModalAddDataTable from '../../containers/ModalAddDataTable'
 import styled from "styled-components";
+import { isAuthorised, DRONE_SEARCH, CRUD_DRONE } from "../../components/Drone/Common/role";
 
 const DataTable = () => {
 
@@ -100,7 +101,7 @@ const DataTable = () => {
         <>
             <div className="row">
                 <div className="col-md-2">
-                    <ModalAddDataTable />
+                    {isAuthorised(CRUD_DRONE) && <ModalAddDataTable />}
                 </div>
                 <div className="col-md-2">
                     <h4>{dronesData.length + 1} drone</h4>
@@ -150,7 +151,7 @@ const DataTable = () => {
                                         <td>{drone.maxFlightHeight}</td>
                                         <td>{drone.rangeBattery}</td>
                                         <td>
-                                            <ModalEditDataTable code={drone.code} id={drone.id} />
+                                            {isAuthorised(CRUD_DRONE) && <ModalEditDataTable code={drone.code} id={drone.id} />}
                                         </td>
                                     </tr>
                                 ))}
