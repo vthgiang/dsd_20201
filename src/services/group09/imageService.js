@@ -41,19 +41,38 @@ class Service extends Base {
     });
   };
 
-  getImagesByMonitoredId = async ({ id } = {}) => {
-    id = id || '5fc68aef1b9ae0001765e821'
-    const url = `https://it4483team2.herokuapp.com/api/records/monitored/images/${id}`
-
-    const [error, response] = await to(fetch(url, {
-      method: 'GET',
-    }));
-    if(error){
-      alert("API của nhóm video/hình ảnh đang lỗi!");
-      return
-    }
-    return response.json();
+  getImagesByMonitoredId = async ({ page, pageSize } = {}) => {
+    return this.request({
+      url: `https://it4483team2.herokuapp.com/api/records/search-image-video?skip=${page}&take=${pageSize}`,
+      method: "POST",
+      isExternalServer: true,
+      data: {
+        type: 0
+      }
+    });
   };
+
+  // getImagesByMonitoredId = async ({ id } = {}) => {
+  //   id = id || '5fc68aef1b9ae0001765e821'
+  //   const url = `https://it4483team2.herokuapp.com/api/records/monitored/images/${id}`
+  //   const header = {
+  //     "api-token": localStorage.getItem("token"),
+  //     "project-type": localStorage.getItem("project-type")
+  //   }
+  //   console.log('header', header)
+  //   const [error, response] = await to(fetch(url, {
+  //     method: 'GET',
+  //     headers: {
+  //       "api-token": localStorage.getItem("token"),
+  //       "project-type": localStorage.getItem("project-type")
+  //     },
+  //   }));
+  //   if(error){
+  //     alert("API của nhóm video/hình ảnh đang lỗi!");
+  //     return
+  //   }
+  //   return response.json();
+  // };
 }
 
 export default () => new Service();

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import to from 'await-to-js';
-import { message, Table, Tag, Input, Space, Button } from 'antd';
+import { message, Table, Tag, Input, Space, Button, Typography } from 'antd';
 import incidentService from '../../../services/group09/incidentService';
 import userService from '../../../services/group09/userService';
 import incidentLevelService from '../../../services/group09/incidentLevelService';
@@ -8,6 +8,7 @@ import incidentStatusService from '../../../services/group09/incidentStatusServi
 import moment from 'moment';
 import _ from "lodash";
 import { SearchOutlined } from '@ant-design/icons';
+import {logger} from "redux-logger/src";
 const Incident = () => {
   const [loading, setLoading] = useState(true);
   const [incidents, setIncidents] = useState([]);
@@ -85,7 +86,7 @@ const Incident = () => {
       title: 'STT',
       dataIndex: 'index',
       key: 'index',
-      ...getColumnSearchProps('name')
+      ...getColumnSearchProps('index')
     },
     {
       title: 'Tên sự cố',
@@ -100,6 +101,7 @@ const Incident = () => {
       dataIndex: 'description',
       key: 'description',
       width: '20%',
+      render: (text, record) => <Typography.Paragraph ellipsis={{ rows: 3, expandable: true, symbol: 'Xem tiếp' }}>{text}</Typography.Paragraph>,
     },
     {
       title: 'Trạng thái',
@@ -144,7 +146,9 @@ const Incident = () => {
       title: 'Người tạo',
       dataIndex: 'createdBy',
       key: 'createdBy',
-      render: (text) => {
+      render: (text, record) => {
+        console.log('text', text, record)
+        console.log('users', users)
         return <div>{users[text]}</div>
       }
     },
