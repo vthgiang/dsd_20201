@@ -75,13 +75,15 @@ import FlightPathDrone from './FLightPathDrone';
 import FlightPoint from './FlightPoint';
 import TableDroneState from './TableDroneState';
 import MapTest from './MapTest';
-import FlightPathManagement from './FlightPathManagement';
+import FlightPath from './FlightPath';
 import FlightSchedule from './FlightSchedule';
 import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
 
 //DE DIEU
 import HomeDeDieu from "./Home/DeDieu";
 import StatisticDeDieu from './Dashboard/IncidentDashboard'
+import Task1 from './Home/DeDieu/Task1/index'
+import Task5 from './Home/DeDieu/Task5/index'
 import DeDieuNcn3 from "./Home/DeDieu/indexncn3";
 
 export const routes = [
@@ -93,6 +95,14 @@ export const routes = [
   {
     path: '/dedieu',
     component: HomeDeDieu,
+  },
+  {
+    path: '/dedieu-ncn1',
+    component: Task1,
+  },
+  {
+    path: '/dedieu-ncn5',
+    component: Task5,
   },
   {
     path: '/dedieu-ncn3',
@@ -121,7 +131,7 @@ export const routes = [
   },
   {
     path: '/flight-path',
-    component: FlightPathManagement,
+    component: FlightPath,
   },
   // {
   //   path: '/flight-schedule',
@@ -410,7 +420,7 @@ export const routes = [
     component: () => <IncidentGroup9 />,
     exact: true
   },
-  
+
   {
     path: "/incidents/:id",
     component: () => <IncidentEdit />,

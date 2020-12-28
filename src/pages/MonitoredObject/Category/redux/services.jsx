@@ -9,9 +9,8 @@ export const CategoryServices = {
 
 function getAllCategories(params) {
   return sendRequest({
-    url:
-      'https://dsd05-monitored-object.herokuapp.com/category-monitored-object',
-    method: 'GET',
+    url: `https://dsd05-monitored-object.herokuapp.com/category-monitored-object`,
+    method: "GET",
     params,
   });
 }

@@ -59,7 +59,6 @@ const DataTable = () => {
             .then(json => {
                 hideLoader();
                 setDrones(json);
-                console.log(json);
             });
     };
 
@@ -73,20 +72,21 @@ const DataTable = () => {
         if (search) {
             computedDrones = computedDrones.filter(
                 comment =>
-                    comment.id.toLowerCase().includes(search.toLowerCase())
+                    comment.id.toLowerCase().includes(search.toLowerCase()) ||
+                    comment.name.toLowerCase().includes(search.toLowerCase())
             );
         }
 
         setTotalItems(computedDrones.length);
 
-        //Sorting comments
-        if (sorting.field) {
-            const reversed = sorting.order === "asc" ? 1 : -1;
-            computedDrones = computedDrones.sort(
-                (a, b) =>
-                    reversed * a[sorting.field].localeCompare(b[sorting.field.toString])
-            );
-        }
+        // //Sorting comments
+        // if (sorting.field) {
+        //     const reversed = sorting.order === "asc" ? 1 : -1;
+        //     computedDrones = computedDrones.sort(
+        //         (a, b) =>
+        //             reversed * a[sorting.field].localeCompare(b[sorting.field.toString])
+        //     );
+        // }
 
         //Current Page slice
         return computedDrones.slice(
@@ -103,7 +103,7 @@ const DataTable = () => {
                     <ModalAddDataTable />
                 </div>
                 <div className="col-md-2">
-                    <h4>{drones.length} drone</h4>
+                    <h4>{dronesData.length + 1} drone</h4>
                 </div>
                 <div className="col-md-4">
                     <Pagination

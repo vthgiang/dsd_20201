@@ -4,6 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import { problemColumns, problemTypesKD, problemTypes } from './config';
+// import { Carousel } from 'antd';
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const { Text } = Typography;
 
@@ -15,6 +18,13 @@ function Detail() {
     const [problems, setProblems] = useState([]);
     const [monitoredObjects, setMonitoredObjects] = useState([]);
     const [currentMonitoredObject, setCurrentMonitoredObject] = useState({});
+    const contentStyle = {
+        height: '450px',
+        color: '#fff',
+        lineHeight: '160px',
+        textAlign: 'center',
+        background: '#364d79',
+    };
 
     const renderDescription = (description) => {
         if (description) {
@@ -36,7 +46,7 @@ function Detail() {
                 headers: {
                     "api-token": localStorage.getItem("token"),
                     "project-type": localStorage.getItem("project-type")
-                },    
+                },
             });
 
             let res2 = null;
@@ -47,7 +57,7 @@ function Detail() {
                     headers: {
                         "api-token": localStorage.getItem("token"),
                         "project-type": localStorage.getItem("project-type")
-                    },        
+                    },
                 });
             } else {
                 res2 = await axios({
@@ -112,7 +122,9 @@ function Detail() {
     }, [])
 
     return <Container>
-        <div>
+        <div style={{
+            marginBottom: "15px"
+        }}>
             <Text>Đối tượng giám sát: </Text>
             <Select
                 value={currentMonitoredObject}
@@ -123,8 +135,6 @@ function Detail() {
                 disabled
             />
         </div>
-
-        <Title>Thông tin chi tiết</Title>
 
         <Row gutter={24} align="middle">
             <Col md={15} >
@@ -138,6 +148,8 @@ function Detail() {
                 }} />}
             </Col>
             <Col md={9}>
+                <Title>Thông tin chi tiết</Title>
+
                 <Info>
                     <Row>
                         <Col md={4}>
@@ -224,22 +236,25 @@ function Detail() {
                 />
             </div>
         </div>
-        <Row gutter={[24, 24]}>
+        <CarouselCustom
+            dots={false}
+        >
             {imageVideoRelated.map((item, index) => {
-                console.log({ item });
-                return <Col md={4}>
+                return <div>
                     {item.type === 0 ? <Image
                         style={{
-                            cursor: "pointer"
+                            cursor: "pointer",
+                            width: "100%"
                         }}
                         key={index}
                         src={item.link}
                         preview={false}
                         onClick={() => setImageVideo(item)}
                     /> : <video src={item.link} style={{ width: "100%" }} onClick={() => setImageVideo(item)} />}
-                </Col>
+                    <p className="legend">{item.title}</p>
+                </div>
             })}
-        </Row>
+        </CarouselCustom>
 
         <Title><p style={{ margin: 0 }}>
             <span>Các sự cố</span>
@@ -252,14 +267,21 @@ const TableCustom = styled(Table)`
 
 `;
 
+const CarouselCustom = styled(Carousel)`
+    .ant-image{
+        width: 100%;
+    }
+`;
+
 const Container = styled.div`
     width: 100%;
     height: 100%;
 `;
 
 const Title = styled.h1`
-    font-size: 40px;
+    font-size: 35px;
     text-align: center;
+    margin-bottom: 10px;
 
     p {
         text-align: left;

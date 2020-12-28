@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 const propTypes = {
   location: PropTypes.object.isRequired
 };
-
 const { Content } = Layout;
 
 const MainLayout = ({ children, history }) => {
@@ -24,6 +23,7 @@ const MainLayout = ({ children, history }) => {
 
   const projectType = useSelector(state => state.user.projectType);
 
+  const [current] = useState(null);
 
   useEffect(() => {
     if (!projectType) {
@@ -69,13 +69,12 @@ const MainLayout = ({ children, history }) => {
                         Quản lý, điều khiển UAV
                       </div>
                     </Menu.Item>
-                    <Menu.Item key="ncn5" >
-                      <div onClick={() =>history.push("/dedieu-ncn5")} rel="noopener noreferrer">
-                        {<SettingOutlined />} Nhóm chức năng 5
-                      <br/>
-                      Quản trị và nâng cao
-                    </div>
-
+                    <Menu.Item key="ncn5" icon={<SettingOutlined />}>
+                      <a className="margin-left-12" href={"/user"} rel="noopener noreferrer">
+                        Nhóm chức năng 5
+                        <br/>
+                        Quản trị và nâng cao
+                      </a>
                     </Menu.Item>
                   </Menu>
                 </div>

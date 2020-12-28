@@ -35,7 +35,6 @@ const Map = ({
   });
 
   useEffect(() => {
-    getMonitoredZone();
     if (option !== "create") {
       setInitLocation({
         lat: parseFloat(monitoredObject.lat),
@@ -46,11 +45,16 @@ const Map = ({
       }
     }
   }, []);
+  useEffect(() => {
+    if (monitoredObject.areaMonitored) {
+      getMonitoredZone();
+    }
+  }, [monitoredObject.areaMonitored]);
 
   const getMonitoredZone = async () => {
     await axios({
       method: "GET",
-      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone`,
+      url: `https://monitoredzoneserver.herokuapp.com/monitoredzone/area/${monitoredObject.areaMonitored}`,
       headers: {
         token: localStorage.getItem("token"),
         projectType: localStorage.getItem("project-type"),
@@ -60,27 +64,13 @@ const Map = ({
         if (res.data) {
           setMonitoredZonesData(res.data.content.zone);
           setMonitoredZonesDataInit(res.data.content.zone);
-
           //Khởi tạo render ban đầu
-          if (res.data.content.zone && option === "create") {
+          setSelectedMonitoredZone(res.data.content.zone);
+          if (res.data.content.zone) {
             setInitLocation({
               lat: parseFloat(res.data.content.zone[0].startPoint.latitude),
               lng: parseFloat(res.data.content.zone[0].startPoint.longitude),
             });
-          }
-          // khởi tạo park nếu đã có sẵn
-          if (monitoredZoneInit) {
-            let zone = res.data.content.zone.find(
-              (element) => element._id == monitoredZoneInit
-            );
-            if (zone) {
-              setPositionClick({
-                lat: (zone.startPoint.latitude + zone.endPoint.latitude) / 2,
-                lng: (zone.startPoint.longitude + zone.endPoint.longitude) / 2,
-              });
-              setCurrentMonitoredZone(zone);
-            }
-            setSelectedMonitoredZone(monitoredZoneInit);
           }
         }
       })
@@ -137,7 +127,7 @@ const Map = ({
   };
   return (
     <GoogleMap
-      defaultZoom={option !== "create" ? 14 : 12}
+      defaultZoom={12}
       defaultCenter={
         option !== "create" && monitoredObject.lat
           ? {
@@ -152,7 +142,7 @@ const Map = ({
         onChange={searchOnChange}
         onSearch={submitSearch}
         enterButton
-        style={{ position: "absolute", top: "10px", left: "10px", width: 250 }}
+        style={{ position: "absolute", top: "50px", right: "55px", width: 250 }}
         value={searchText}
       />
       {monitoredZonesData &&

@@ -1,7 +1,16 @@
-import React from 'react';
-import { Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Select } from 'antd';
+import React, { useState } from 'react';
+import { Table, Space, Button, BackTop, Input, Col, Row, Card, DatePicker, Form, Select, Popover, Modal, Tooltip } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
+import LogDrone from '../LogDrone';
+import LogUser from '../LogUser';
+import LogWarn from '../LogWarn';
+import LogProblem from '../LogProblem';
+import LogIncident from '../LogIncident';
+import LogObjMonitor from '../LogObjMonitor';
+import LogPayload from '../LogPayLoad';
+import LogImage from '../LogImage';
+import LogVideo from '../LogVideo';
 
 export default class UserActivity extends React.Component {
   state = {
@@ -86,8 +95,8 @@ export default class UserActivity extends React.Component {
           textToHighlight={text ? text.toString() : ''}
         />
       ) : (
-        text
-      ),
+          text
+        ),
   });
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -104,7 +113,7 @@ export default class UserActivity extends React.Component {
   };
 
   render() {
-    
+
     const columns = [
       {
         title: 'Id người dùng',
@@ -112,12 +121,6 @@ export default class UserActivity extends React.Component {
         key: 'targetId',
         sorter: (a, b) => a.targetId - b.targetId,
     
-      },
-      {
-        title: 'Metadata',
-        dataIndex: 'metadata',
-        key: 'metadata',
-        ...this.getColumnSearchProps('metadata'),
       },
       {
         title: 'Mã sự cố',
@@ -164,11 +167,124 @@ export default class UserActivity extends React.Component {
         key: 'authorId',
         ...this.getColumnSearchProps('authorId'),
       },
+      {
+        title: 'Metadata',
+        dataIndex: 'metadata',
+        key: 'metadata',
+        ...this.getColumnSearchProps('metadata'),
+        ellipsis: {
+          showTitle: false,
+        },
+        render: data => (
+          <Tooltip placement="topLeft" title={data}>
+            {data}
+          </Tooltip>
+        ),
+      },
+      // {
+      //   title: 'Action',
+      //   dataIndex: 'action',
+      //   key: 'action',
+      //   render: (text, row) => {
+
+      //     return (<div>
+      //       <PopoverShowApp droneName={row.name} droneId={row.targetId} rangeTime={this.props.rangeTime} projectType={this.props.projectType} />
+      //     </div>
+
+      //     )
+
+      //   }
+      // },
     ];
     return (
       <>
-        <Table columns={columns} dataSource={this.props.data} loading={this.props.loading} onChange={this.handleChange} />
+        <Table columns={columns} dataSource={this.props.data} loading={this.props.loading} onChange={this.handleChange} key={this.props.projectType + this.props.rangeTime} />
       </>
+    );
+  }
+}
+
+const ModalShowApp = (props) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
+  const showModal = () => {
+    setClicked(true);
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setClicked(false);
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setClicked(false);
+    setIsModalVisible(false);
+  };
+
+  return (
+    <>
+      <Button type="primary" ghost onClick={() => { showModal(); props.hidePopover() }}>
+        {props.actionType === 'log_payload' && 'Xem payload được gắn'}
+        {props.actionType === 'log_video' && 'Xem video thu thập được'}
+        {props.actionType === 'log_image' && 'Xem ảnh chụp'}
+      </Button>
+      <Modal width={1000} title={ props.droneName + ', mã id ' +props.droneId} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        {clicked && props.actionType === 'log_payload' && <LogPayload droneId={props.droneId} rangeTime={props.rangeTime} projectType={props.projectType} />}
+        {clicked && props.actionType === 'log_video' && <LogVideo droneId={props.droneId} rangeTime={props.rangeTime} projectType={props.projectType} />}
+        {clicked && props.actionType === 'log_image' && <LogImage droneId={props.droneId} rangeTime={props.rangeTime} projectType={props.projectType} />}
+      </Modal>
+    </>
+  );
+};
+
+class PopoverShowApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false,
+    };
+  }
+  hide = () => {
+    this.setState({
+      visible: false,
+    });
+  };
+  handleVisibleChange = visible => {
+    this.setState({ visible });
+  };
+
+  render() {
+    const content = (
+      <div>
+        <h4>Chọn hành động do người dùng id {this.props.droneId} thực hiện: </h4>
+        <Row style={{width: '400px'}} gutter={[10,10]}>
+          <Col span={12}>
+            <ModalShowApp droneId={this.props.droneId} droneName={this.props.droneName} hidePopover={this.hide} actionType='log_problem' rangeTime={this.props.rangeTime} projectType={this.props.projectType} />
+          </Col>
+          <Col span={12}>
+            <ModalShowApp droneId={this.props.droneId} droneName={this.props.droneName} hidePopover={this.hide} actionType='log_resolve_problem' rangeTime={this.props.rangeTime} projectType={this.props.projectType} />
+          </Col>
+          <Col span={12}>
+            <ModalShowApp droneId={this.props.droneId} droneName={this.props.droneName} hidePopover={this.hide} actionType='log_warn' rangeTime={this.props.rangeTime} projectType={this.props.projectType} />
+          </Col>
+        </Row>
+
+
+      </div>
+    )
+    return (
+      <Popover
+        style={{ width: 500 }}
+        content={content}
+
+        trigger="hover"
+        visible={this.state.visible}
+        onVisibleChange={this.handleVisibleChange}
+      >
+        <Button type="primary">Action</Button>
+      </Popover>
     );
   }
 }

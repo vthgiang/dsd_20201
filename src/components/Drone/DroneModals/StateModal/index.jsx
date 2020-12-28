@@ -2,12 +2,6 @@ import React, {useState} from 'react';
 import {Button, Modal} from 'react-bootstrap'; 
 import { DATE_TIME_FORMAT } from '../../../../configs';
 import {
-    Row,
-    Input,
-    Col,
-    Table,
-    Space,
-    Select,
     Form,
     DatePicker,
     notification,
@@ -16,7 +10,7 @@ import {
   import StateDrone from '../StateDrone';
 
 export default function StateModal(props){
-    const {drone} = props;
+    const {drone, onReload} = props;
     const [show, setShow] = useState(false);
     const [date, setDate] = useState();
     const onChange = (value, dateString) => {
@@ -28,9 +22,8 @@ export default function StateModal(props){
         fetch(`http://skyrone.cf:6789/droneState/setDroneBroken/`+drone.idDrone)
             .then(response => response.json())
             .then(json => {
-              alert("Đã cập nhật thành công"); 
               handleClose();
-              window.location.reload();
+              onReload();
             });
       };
       const save = () => {
@@ -44,7 +37,7 @@ export default function StateModal(props){
           headers: headers,
           body: JSON.stringify({ 
             id : drone.idDrone,
-            maintenance : (drone.state === 0) ? true : false,
+            maintenance : (drone.state === 0) ? false : true,
             name : drone.name,
             timeEnd : date[1],
             timeStart : date[0]
@@ -52,11 +45,10 @@ export default function StateModal(props){
           })
         };
         fetch('http://skyrone.cf:6789/droneMaintenance/save', requestOptions)
-        .then(response => response.text())
-        .then(contents =>  {
-          alert("Đã cập nhật thành công"); 
+        .then(response =>  response.json())
+        .then(json =>  {
           handleClose();
-          window.location.reload();
+          onReload();
         })
     
         .catch(() => console.log("Can’t access response. Blocked by browser?"))
@@ -67,13 +59,12 @@ export default function StateModal(props){
     const handleShow = () => setShow(true);
 
     const { RangePicker } = DatePicker;
-    console.log("Drone"+drone);
     const content = {};
     if(drone.state === 0){
-        content.variant = 'secondary';
+        content.variant = 'warning';
         content.name = "Đặt lịch sạc";
     }else if(drone.state === 4){
-        content.variant = 'danger';
+        content.variant = 'warning';
         content.name = "Đặt bảo trì";
     }
 

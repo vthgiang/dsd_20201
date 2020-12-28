@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { withTranslate } from "react-redux-multilingual";
 import MultiSelect from "react-multi-select-component";
-import AreaMonitorImport from "./areaMonitoredImport";
 import Modals from "./modal";
 import { Menu, Dropdown, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +8,8 @@ import { MonitoredObjectActions } from "../redux/actions";
 import Pagination from "@material-ui/lab/Pagination";
 import SuccessNotification from "./SuccessNotification";
 import { MonitoredObjectConstants } from "../redux/constants";
+import { Spin } from "antd";
+
 const axios = require("axios");
 
 function AreaMonitored(props) {
@@ -22,6 +23,7 @@ function AreaMonitored(props) {
     isObjectFailure,
     objectMessages,
     isDeleteMonitored,
+    isLoading,
   } = monitoredObjects;
   const [pagination, setPagination] = useState({
     page: 1,
@@ -57,7 +59,13 @@ function AreaMonitored(props) {
       });
   };
   useEffect(() => {
-    dispatch(MonitoredObjectActions.getAllMonitoredObjects({ page, limit }));
+    dispatch(
+      MonitoredObjectActions.getAllMonitoredObjects({
+        page,
+        limit,
+        type: localStorage.getItem("project-type"),
+      })
+    );
   }, [page]);
   useEffect(() => {
     let arr = [];
@@ -75,14 +83,14 @@ function AreaMonitored(props) {
     if (isObjectSuccess) {
       setFormatStyle("btn btn-success");
       window.$("#modalSuccessNotification").modal("show");
-      dispatch(MonitoredObjectActions.getAllMonitoredObjects({ page, limit }));
+      dispatch(MonitoredObjectActions.getAllMonitoredObjects({ page, limit,type: localStorage.getItem("project-type"), }));
     }
     if (isDeleteMonitored) {
       //gọi log khi xóa đối tượng giám sát
       postLogMonitorObjectDelete();
       setFormatStyle("btn btn-success");
       window.$("#modalSuccessNotification").modal("show");
-      dispatch(MonitoredObjectActions.getAllMonitoredObjects({ page, limit }));
+      dispatch(MonitoredObjectActions.getAllMonitoredObjects({ page, limit,type: localStorage.getItem("project-type"), }));
     }
     dispatch({
       type: MonitoredObjectConstants.DELETE_MONITORED_SUCCESS,
@@ -104,6 +112,7 @@ function AreaMonitored(props) {
         ...itemSearch,
         page: page,
         limit: limit,
+        type: localStorage.getItem("project-type"),
       })
     );
   };
@@ -128,9 +137,6 @@ function AreaMonitored(props) {
       pathname: `/monitored-object-management/view/${item._id}`,
     });
   };
-  const handleAreaImport = () => {
-    window.$("#modalImport").modal("show");
-  };
 
   const handleMonitoredDelete = (item) => {
     setSelectItemDelete(item);
@@ -147,15 +153,6 @@ function AreaMonitored(props) {
           Thêm bằng tay
         </a>
       </Menu.Item>
-      <Menu.Item>
-        <a
-          data-target="#modalImport"
-          title="ImportForm"
-          onClick={() => handleAreaImport()}
-        >
-          Import File
-        </a>
-      </Menu.Item>
     </Menu>
   );
 
@@ -170,33 +167,13 @@ function AreaMonitored(props) {
             <Button
               type="button"
               className="btn btn-success"
-              style={{ borderRadius: 4, width: 90.64, height: 36 }}
+              style={{ borderRadius: 4, height: 36 }}
             >
               Thêm mới
             </Button>
           </Dropdown>
         </div>
         <div className="form-inline" style={{ margin: "15px" }}>
-          <div className="form-group" style={{ marginRight: "30px" }}>
-            <label className="form-control-static" style={{ margin: "10px" }}>
-              <b>Mã đối tượng</b>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name="code"
-              value={itemSearch.code}
-              onChange={(e) => {
-                e.persist();
-                setItemSearch((prev) => ({
-                  ...prev,
-                  code: e.target.value,
-                }));
-              }}
-              placeholder="Mã đối tượng"
-              autoComplete="off"
-            />
-          </div>
           <div className="form-group">
             <label className="form-control-static" style={{ margin: "10px" }}>
               <b>Tên đối tượng</b>
@@ -217,8 +194,6 @@ function AreaMonitored(props) {
               autoComplete="off"
             />
           </div>
-        </div>
-        <div className="form-inline" style={{ margin: "15px" }}>
           <div className="form-group" style={{ marginRight: "15px" }}>
             <label className="form-control-static" style={{ margin: "10px" }}>
               <b>Trạng thái</b>
@@ -253,7 +228,7 @@ function AreaMonitored(props) {
               <th>Tên đối tượng</th>
               <th>Trạng thái</th>
               <th>Mô tả</th>
-              <th>Thuộc danh mục</th>
+              <th>Đối tượng liên kết</th>
               <th>Thuộc khu vực</th>
               <th>Hành động</th>
             </tr>
@@ -299,8 +274,15 @@ function AreaMonitored(props) {
                   </td>
                 </tr>
               ))}
-            {!!listPaginate && listPaginate.length === 0 && (
+            {!isLoading && listPaginate && listPaginate.length === 0 && (
               <tr>Không có dữ liệu</tr>
+            )}
+            {isLoading && (
+              <tr style={{ margin: "15px auto" }}>
+                <td colSpan="7">
+                  <Spin size="large" />
+                </td>
+              </tr>
             )}
           </tbody>
         </table>
@@ -311,8 +293,6 @@ function AreaMonitored(props) {
         />
         ;
       </div>
-      {/* Modal Import */}
-      <AreaMonitorImport />
       {/* Modal Delete */}
       <Modals value={selectItemDelete} />
       <SuccessNotification

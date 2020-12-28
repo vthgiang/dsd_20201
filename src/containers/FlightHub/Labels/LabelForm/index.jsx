@@ -1,6 +1,8 @@
 /* eslint-disable no-template-curly-in-string */
 import React, { useEffect } from 'react';
-import { Form, Input, Button, Modal, Row } from 'antd';
+import { Form, Input, Button, Modal, Row, Select } from 'antd';
+
+const { Option } = Select;
 
 const layout = {
   labelCol: {
@@ -86,13 +88,17 @@ const LabelForm = ({
           <Input disabled={isDetails} placeholder="Nhập tên nhãn" />
         </Form.Item>
 
-        {/* <Form.Item
-          name="property"
-          label="Trường dữ liệu"
+        <Form.Item
+          name="type"
+          label="Loại nhãn"
           rules={[{ type: 'string', required: !isDetails }]}
         >
-          <Input disabled={isDetails} placeholder="Nhập tên trường dữ liệu" />
-        </Form.Item> */}
+          <Select showSearch placeholder="Chọn loại nhãn">
+            <Option value="Payload">Payload</Option>
+            <Option value="Drones">Drones</Option>
+            <Option value="Sự cố">Sự cố</Option>
+          </Select>
+        </Form.Item>
 
         <Form.Item name="description" label="Mô tả">
           <Input disabled={isDetails} placeholder="Nhập mô tả nhãn" />

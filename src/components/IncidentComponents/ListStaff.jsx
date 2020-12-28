@@ -47,9 +47,7 @@ const ListStaff = () => {
     })
       .then(function (response) {
         //handle success
-        console.log(response)
         setLoadingTable(false)
-        console.log(response.data.list)
         setDataAPI(response.data.list)
         // let data = [];
         // response.data.list.map((item) => {
@@ -217,12 +215,22 @@ const ListStaff = () => {
       </div>
       <div>
         <Spin spinning={loadingTable} tip="Loading...">
-          <Table
+          {
+            dataAPI?
+            <Table
             rowKey={(record) => record.employee.id}
             columns={columns}
             dataSource={dataAPI}
             size="middle"
           />
+          : <Table
+          rowKey={(record) => record.employee.id}
+          columns={columns}
+          dataSource={[]}
+          size="middle"
+        />
+          }
+         
         </Spin>
       </div>
       <Modal

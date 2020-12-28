@@ -20,7 +20,6 @@ const UpdateMonitorCampaign = () => {
       try {
         setLoading(true);
         const resp = await monitorCampaignApi.getMonitorCampaign(id);
-        console.log('resp ', resp);
         setMonitorCampaignData(resp.data.result.monitorCampaign);
         setLoading(false);
       } catch (error) {

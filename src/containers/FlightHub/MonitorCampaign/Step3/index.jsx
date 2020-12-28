@@ -54,7 +54,6 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
     try {
       const resp = await droneApi.getAllPathBySupervisedArea(monitoredZone);
       setFlightPathsData(resp.data);
-      console.log('rest =>>>>>>>>>', resp);
 
       setLoading(false);
     } catch (error) {
@@ -105,7 +104,6 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
 
   useEffect(() => {
     const { drones = [] } = data;
-
     if (dronesData.length) {
       const newDronesData = [...dronesData];
       drones.forEach((selectedDrone) => {
@@ -117,7 +115,6 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
           newDronesData[indexSelected].flightPaths = selectedDrone.flightPaths;
         }
       });
-      console.log('data ', newDronesData);
       setDronesData(newDronesData);
     }
 
@@ -187,15 +184,12 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
   const handleNextStep = () => {
     const drones = [...selectedRows];
 
-    console.log({ drones });
-
     if (!drones.length) {
       message.warning('Nhóm drones tham gia không được để trống!');
       return;
     }
 
     for (const drone of drones) {
-      console.log('drrone : ', drone);
       const { payloads, flightPaths } = drone;
       if (!payloads || !payloads.length) {
         message.warning('Bạn chưa chọn payloads đính kèm drone!');
