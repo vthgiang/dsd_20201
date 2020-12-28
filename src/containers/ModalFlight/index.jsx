@@ -25,13 +25,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'scroll'
+    overflow: 'scroll',
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
     // border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(2, 2, 2),
+    width : 700
   },
 
   button: {
@@ -106,14 +107,22 @@ export default function TransitionsModal(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             <br/>
-            <br/>
-            <h2 id="transition-modal-title">Id# : {props.id} </h2>
-            {/* <h3 id="transition-modal-title">Tọa độ Lat :  {drones.locationLat}</h3>
-            <h3 id="transition-modal-title">Tọa độ Lng :  {drones.locationLng}</h3> */}
-            <h3 id="transition-modal-title">Độ cao (m) :  {drones.heightFlight}</h3>
-            {/* <h3 id="transition-modal-title">Thời gian đã bay :  {drones.time}</h3> */}
-            <h3 id="transition-modal-title">Tốc độ bay :  {drones.speed} m/phút</h3>
-            <h3 id="transition-modal-title">Phần trăm pin :  {drones.percentBattery} %</h3>
+            <h4 id="transition-modal-title">Tên drone : {props.name} </h4>
+            <h4 id="transition-modal-title">#ID : {props.id} </h4>
+            <p id="transition-modal-title">Độ cao (m) :  {drones.heightFlight}</p>
+            <p id="transition-modal-title">Phần trăm pin :  {drones.percentBattery} %</p>
+            <p id="transition-modal-title">.         Tốc độ bay :  {drones.speed} m/phút</p>
+            <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.location.href='/stream';
+                    }}
+                >
+                  Xem video stream
+                   </Button>
             <Map flightPath={drones.flightPath}/>
           </div>
         </Fade>

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CatMonitorCreate from './catMonitoredCreate';
 import Modals from './modal';
-import AreaMonitorImport from './areaMonitoredImport';
 import { Menu, Dropdown, Button } from 'antd';
 import Pagination from '@material-ui/lab/Pagination';
 import { CategoryActions } from '../redux/actions';
 import { CategoryConstants } from '../redux/constants';
 import SuccessNotification from './SuccessNotification';
+import { Spin } from "antd";
 
 function AreaMonitored(props) {
   const dispatch = useDispatch();
@@ -18,6 +18,7 @@ function AreaMonitored(props) {
     isError,
     messages,
     isCatSuccess,
+    isLoading,
   } = category;
   const [pagination, setPagination] = useState({
     page: 1,
@@ -37,7 +38,13 @@ function AreaMonitored(props) {
     description: '',
   });
   useEffect(() => {
-    dispatch(CategoryActions.getAllCategories({ page, limit }));
+    dispatch(
+      CategoryActions.getAllCategories({
+        page,
+        limit,
+        type: localStorage.getItem("project-type"),
+      })
+    );
   }, [page]);
   useEffect(() => {}, [listPaginate]);
 
@@ -49,7 +56,11 @@ function AreaMonitored(props) {
     if (isCatSuccess) {
       setFormatStyle('btn btn-success');
       window.$('#modalSuccessNotification').modal('show');
-      dispatch(CategoryActions.getAllCategories({ page, limit }));
+      dispatch(CategoryActions.getAllCategories({ 
+        page, 
+        limit,
+        type: localStorage.getItem("project-type"),
+       }));
     }
     dispatch({
       type: CategoryConstants.CAT_MONITORED_FAILURE,
@@ -87,6 +98,7 @@ function AreaMonitored(props) {
         ...itemSearch,
         page: page,
         limit: limit,
+        type: localStorage.getItem("project-type"),
       }),
     );
   };
@@ -115,15 +127,6 @@ function AreaMonitored(props) {
           Thêm bằng tay
         </a>
       </Menu.Item>
-      <Menu.Item>
-        <a
-          data-target="#modalImport"
-          title="ImportForm"
-          onClick={handleCatImport}
-        >
-          Import File
-        </a>
-      </Menu.Item>
     </Menu>
   );
   return (
@@ -137,35 +140,15 @@ function AreaMonitored(props) {
             <Button
               type="button"
               className="btn btn-success"
-              style={{ borderRadius: 4, width: 90.64, height: 36 }}
+              style={{ borderRadius: 4, height: 36 }}
             >
               Thêm mới
             </Button>
           </Dropdown>
         </div>
-        <div className="form-inline" style={{ margin: '15px' }}>
-          <div className="form-group" style={{ marginRight: '30px' }}>
-            <label className="form-control-static" style={{ margin: '10px' }}>
-              <b>Mã danh mục</b>
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name="code"
-              value={itemSearch.code}
-              onChange={(e) => {
-                e.persist();
-                setItemSearch((prev) => ({
-                  ...prev,
-                  code: e.target.value,
-                }));
-              }}
-              placeholder="Mã danh mục"
-              autoComplete="off"
-            />
-          </div>
+        <div className="form-inline" style={{ margin: "15px" }}>
           <div className="form-group">
-            <label className="form-control-static" style={{ margin: '10px' }}>
+            <label className="form-control-static" style={{ margin: "10px" }}>
               <b>Tên danh mục</b>
             </label>
             <input
@@ -184,7 +167,7 @@ function AreaMonitored(props) {
               autoComplete="off"
             />
           </div>
-          <div className="form-group">
+          <div className="form-group ml-3">
             <button
               type="button"
               className="btn btn-success"
@@ -199,7 +182,6 @@ function AreaMonitored(props) {
           <thead>
             <tr>
               <th>STT</th>
-              <th>Mã danh mục</th>
               <th>Tên danh mục</th>
               <th>Mô tả</th>
               <th>Hành động</th>
@@ -211,7 +193,6 @@ function AreaMonitored(props) {
               listPaginate.map((item, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{item.code}</td>
                   <td>{item.name}</td>
                   <td>{item.description}</td>
                   <td>
@@ -236,8 +217,15 @@ function AreaMonitored(props) {
                   </td>
                 </tr>
               ))}
-            {!!listPaginate && listPaginate.length === 0 && (
+            {!isLoading && !!listPaginate && listPaginate.length === 0 && (
               <tr>Không có dữ liệu</tr>
+            )}
+            {isLoading && (
+              <tr style={{ margin: "15px auto" }}>
+                <td colSpan="7">
+                  <Spin size="large" />
+                </td>
+              </tr>
             )}
           </tbody>
         </table>
@@ -257,8 +245,7 @@ function AreaMonitored(props) {
         option={option}
       />
 
-      {/* Modal Import */}
-      <AreaMonitorImport />
+     
       {/* Modal */}
       <Modals value={catMonitored} setCatMonitored={setCatMonitored} />
       <SuccessNotification formatStyle={formatStyle} messages={messages} />

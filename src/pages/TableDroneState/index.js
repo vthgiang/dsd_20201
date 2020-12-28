@@ -454,28 +454,7 @@ const dronesData = useMemo(() => {
                                     if(isAuthorised(DRONE_MAINTENANCE) || isAuthorised(DRONE_CONFIG))
                                       component = <StateModal drone={drone}/>;
                                 }
-                                    // if (drone.state == 0) {
-                                    // return (
-                                    //         <StateModal drone={drone} onReload={getData} />
-                                    // )
-                                    // } else if (drone.state == 1) {
-                                    //     return (
-                                    //         <ModalFlight id={drone.idDrone} />
-                                    //     )
-                                    // } else if (drone.state == 2 || drone.state == 3) {
-
-                                    //     return (
-                                                   
-                                    //         <SowDateAndGetBackDrone drone={drone} onReload={getData} />
-                                                    
-                                    //     )
-                                    // }
-                                    // else if (drone.state == 4) {
-                                    // return (
-                                    //     <StateModal drone={drone}/>
-                                    // ) 
-                                    // }
-                                    return component;
+                                return component;
                                 })()}
                           </TableCell>
                     </TableRow>
