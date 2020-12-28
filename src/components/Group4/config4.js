@@ -42,4 +42,6 @@ const PROJECT_TYPE_MAP_TITLE = {
   'LUOI_DIEN': 'sự cố lưới điện'
 }
 
-export {ref, PROJECT_TYPE_MAP_TITLE};
+const BASE_URL = "https://it4483-dsd04.herokuapp.com";
+
+export {ref, PROJECT_TYPE_MAP_TITLE, BASE_URL};

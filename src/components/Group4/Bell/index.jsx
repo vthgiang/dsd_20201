@@ -3,7 +3,7 @@ import Rating from '@material-ui/lab/Rating';
 import { Avatar, Badge, Button, List, message, Popover, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from 'react-infinite-scroller';
-import { ref } from '../config4';
+import { ref, BASE_URL } from '../config4';
 import { StyleListNotification } from './index.style';
 import { useHistory } from "react-router-dom";
 import {
@@ -29,12 +29,20 @@ const BellNotification = () => {
 
   useEffect(() => {
     setInterval(() => updateOutputFromIndexedDB(), 5000);
+    openIndexDB(window.indexedDB)
+    .then(db => {
+      addPush(db, { key: "token", payload: localStorage.getItem("token")})
+      addPush(db, { key: "project-type", payload: localStorage.getItem("project-type")})
+    }).catch(err => {
+      console.log(err);
+    })
   })
 
   useEffect(() => {
     if (user.user.id){
       loadData(0, 5);
-      subcribe();
+      var is_root = window.location.pathname == "/" || window.location.pathname == "/dashboard";
+      if (is_root) subcribe();
     }
     else
       setUser(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user))
@@ -50,12 +58,33 @@ const BellNotification = () => {
         const thisDB = e.target.result;
         if (!thisDB.objectStoreNames.contains("pushes")) {
           const pushesOS = thisDB.createObjectStore("pushes", { keyPath: "key" });
-          pushesOS.createIndex("payload", "payload", { unique: false });
+          pushesOS.createIndex("payload", "payload", { unique: true });
         }
       };
       req.onsuccess = e => resolve(e.target.result);
       req.onerror = error => reject(error);
     });
+  }
+
+  const addPush = (db, item) => {
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(["pushes"],"readwrite");
+      const store = transaction.objectStore("pushes");
+      var request = store.get(item.key);
+      request.onerror = function(event) {
+        console.log(`newNotification is not in DB`)
+        store.add(item)
+      };
+      request.onsuccess = function(event) {
+        var requestUpdate = store.put(item);
+        requestUpdate.onerror = function(event) {
+          console.log("update failed")
+        };
+        requestUpdate.onsuccess = function(event) {
+          console.log("update successfully")
+        };
+      };
+    })
   }
 
 // a function go get all the pushes from indexedDB instance
@@ -197,7 +226,7 @@ const updateOutputFromIndexedDB = () => {
     // var user = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user);
     var config = {
       method: 'get',
-      url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf_type',
+      url: `${BASE_URL}/get_list_ntf_type`,
       params: {
         index: start,
         count: to,

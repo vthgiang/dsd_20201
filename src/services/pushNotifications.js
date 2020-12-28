@@ -52,14 +52,18 @@ function createNotificationSubscription() {
   return navigator.serviceWorker.ready.then(function (serviceWorker) {
     // subscribe and return the subscription
     return serviceWorker.pushManager
-      .subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(pushServerPublicKey)
-      })
-      .then(function (subscription) {
-        console.log("User is subscribed.", subscription);
-        return subscription;
-      });
+    .subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(pushServerPublicKey)
+    })
+    .then(function (subscription) {
+      console.log("User is subscribed.", subscription);
+      return subscription;
+    }).catch(err => {
+      if (err.message === "Registration failed - storage error") localStorage.removeItem("persist:root");
+      console.log(err);
+    });
+    
   });
 }
 
@@ -86,9 +90,9 @@ function sendSubscriptionToPushServer(body) {
     const { subscriptionId, code, message } = response;
     console.log(`response: `, response)
     if (code == 200) {
-      alert("Subcribe to receive notification successfully");
+      console.log("Subcribe to receive notification successfully");
     } else {
-      alert(message)
+      console.log(message)
     }
   });
 }

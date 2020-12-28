@@ -7,19 +7,12 @@ import vi from 'javascript-time-ago/locale/vi';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import ReactTimeAgo from 'react-time-ago';
-import {
-  createNotificationSubscription,
-  initializePushNotifications,
-  isPushNotificationSupported,
-  registerServiceWorker,
-  sendPushNotification, sendSubscriptionToPushServer
-} from '../../../services/pushNotifications';
-import { ref } from '../config4';
+import { ref, BASE_URL } from '../config4';
 import SimpleRating from '../Rating';
 import { ListItemStyle } from './index.style';
 import FilterDropdown from '../Dropdown';
 import { Row, Col, Spin } from 'antd';
-import { set } from 'local-storage';
+
 
 
 function LastSeen({ date }) {
@@ -122,7 +115,7 @@ const MyList = () => {
     var user = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user);
     var config = {
       method: 'get',
-      url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf_type',
+      url: `${BASE_URL}/get_list_ntf_type`,
       params: {
         index: start,
         count: to,
@@ -196,7 +189,12 @@ const MyList = () => {
   </div>
   )
 
-  return content();
+  return <div>
+    {loading
+      ? <Spin size="large" style={{marginTop: 300}} spinning={loading} delay={500}> </Spin> 
+      : content() 
+    }
+  </div>
 
 }
 
