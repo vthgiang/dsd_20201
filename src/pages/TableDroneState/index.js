@@ -442,7 +442,7 @@ const dronesData = useMemo(() => {
                                     )
                                     } else if (drone.state == 1) {
                                         return (
-                                            <ModalFlight id={drone.idDrone} />
+                                            <ModalFlight id={drone.idDrone} name={drone.name} />
                                         )
                                     } else if (drone.state == 2 || drone.state == 3) {
 

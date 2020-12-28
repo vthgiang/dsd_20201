@@ -103,7 +103,7 @@ const DataTable = () => {
                     <ModalAddDataTable />
                 </div>
                 <div className="col-md-2">
-                    <h4>{dronesData.length + 1} drone</h4>
+                    <h4>{drones.length + 1} drone</h4>
                 </div>
                 <div className="col-md-4">
                     <Pagination
