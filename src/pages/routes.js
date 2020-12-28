@@ -186,6 +186,10 @@ export const routes = [
     path: '/sucodedieu-statistics',
     component: StatisticDeDieu,
   },
+  {
+    path: '/sucodedieu-report',
+    component: CreateReport,
+  },
   /* {
     path: '/payload-maintenance',
     component: PayloadMaintenance,
