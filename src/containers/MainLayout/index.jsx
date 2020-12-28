@@ -56,7 +56,7 @@ const MainLayout = ({ children, history }) => {
                         </div>
                       </Menu.Item>
                     <Menu.Item key="ncn3">
-                      <div onClick={() =>history.push("/dedieu")}  rel="noopener noreferrer">
+                      <div onClick={() =>history.push("/dedieu-ncn3")}  rel="noopener noreferrer">
                           {<StockOutlined />} Nhóm chức năng 3
                         <br/>
                         Phân tích phát hiện sự cố
