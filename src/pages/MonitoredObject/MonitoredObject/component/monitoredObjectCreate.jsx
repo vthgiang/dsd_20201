@@ -34,7 +34,7 @@ function MonitoredObjectView({ history }) {
     managementUnit: null,
     category: null,
     areaMonitored: "",
-    parent: "",
+    parent: null,
     lat: "", //Vĩ độ
     lng: "", //Kinh độ
     height: "",
@@ -111,13 +111,13 @@ function MonitoredObjectView({ history }) {
       method: "POST",
       url: `http://it4883logging.herokuapp.com/api/monitor-object/add`,
       data: {
-        regionId: monitoredObject.monitoredZone,
+        regionId: idMonitoredCreate.monitoredZone[0],
         entityId: idMonitoredCreate._id,
         description: "add monitor object",
         authorId: "",
         projectType: localStorage.getItem("project-type"),
         state: "",
-        name: monitoredObject.name,
+        name: idMonitoredCreate.name,
       },
     })
       .then((res) => {})
@@ -142,8 +142,8 @@ function MonitoredObjectView({ history }) {
       .catch((error) => console.log(error));
   };
   useEffect(() => {
-    dispatch(CategoryActions.getAllCategories());
-    dispatch(MonitoredObjectActions.getAllMonitoredObjects());
+    dispatch(CategoryActions.getAllCategories({ type: localStorage.getItem("project-type") }));
+    dispatch(MonitoredObjectActions.getAllMonitoredObjects({ type: localStorage.getItem("project-type") }));
     getZoneAll();
     getArea();
   }, []);
@@ -190,7 +190,6 @@ function MonitoredObjectView({ history }) {
         ...monitoredObject,
         code: "1",
         type: localStorage.getItem("project-type"),
-        managementUnit: null,
         images: null,
         videos: null,
         status: monitoredObject.status === "" ? "1" : monitoredObject.status,
@@ -202,13 +201,13 @@ function MonitoredObjectView({ history }) {
       status: 1,
       description: "",
       managementUnit: null,
-      category: "",
-      areaMonitored: "",
-      parent: "",
+      category: null,
+      areaMonitored: null,
+      parent: null,
       lat: "", //Vĩ độ
       lng: "", //Kinh độ
       height: "",
-      drones: "",
+      drones: [],
       images: null,
       videos: null,
     });
