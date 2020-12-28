@@ -137,7 +137,11 @@ const MyList = () => {
     var config = getConfig(start, to);
     axios(config)
       .then(function (response) {
-        setDatas([...datas, ...response.data.data.notifications]);
+        if (index === 0) {
+          setDatas(response.data.data.notifications)
+        } else {
+          setDatas([...datas, ...response.data.data.notifications]);
+        }
         setTotal(response.data.data.total)
         setLoading(false)
       })
@@ -192,12 +196,7 @@ const MyList = () => {
   </div>
   )
 
-  return <div >
-    {loading
-        ? <Spin size="large" style={{marginTop: 300}} spinning={loading} delay={500}> </Spin> 
-        : content() 
-    }
-  </div>
+  return content();
 
 }
 
