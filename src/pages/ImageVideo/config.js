@@ -2,9 +2,9 @@ import { Image, Tag } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const problemTypes = ["Cháy rừng","Đê điều" ,"Lưới điện", "Cây trồng"];
+export const problemTypes = ["Cháy rừng", "Đê điều", "Lưới điện", "Cây trồng"];
 
-export const problemTypesKD = ["CHAY_RUNG", "DE_DIEU","LUOI_DIEN", "CAY_TRONG"];
+export const problemTypesKD = ["CHAY_RUNG", "DE_DIEU", "LUOI_DIEN", "CAY_TRONG"];
 
 export const problemColumns = [
     {
