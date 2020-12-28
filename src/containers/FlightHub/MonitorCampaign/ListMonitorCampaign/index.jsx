@@ -167,8 +167,8 @@ const ListMonitorCampaign = () => {
       sorter: (a, b) => 1,
       render: (data = []) => {
         return data.map((elem) => {
-          const { name, createdAt } = elem;
-          return <div key={createdAt.toString()}>{name}</div>;
+          const { name, _id } = elem;
+          return <div key={_id}>{name}</div>;
         });
       },
     },
