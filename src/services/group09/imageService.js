@@ -43,7 +43,7 @@ class Service extends Base {
 
   getImagesByMonitoredId = async ({ page, pageSize } = {}) => {
     return this.request({
-      url: `https://it4483team2.herokuapp.com/api/records/search-image-video?skip=${page*pageSize}&take=${pageSize}`,
+      url: `https://it4483team2.herokuapp.com/api/records/search-image-video?page=${page}&pageSize=${pageSize}`,
       method: "POST",
       isExternalServer: true,
       data: {

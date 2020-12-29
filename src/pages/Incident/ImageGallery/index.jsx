@@ -10,7 +10,7 @@ import {
     DatePicker,
     message,
     Spin,
-    Pagination, Empty
+    Pagination, Empty, Typography
 } from 'antd';
 import Gallery from 'react-grid-gallery';
 import incidentLevelService from '../../../services/group09/incidentLevelService';
@@ -361,6 +361,7 @@ let cacheMonitoreds = []
 let cache = IMAGES
 let levels = [];
 let cacheImages = []
+let pageSize = 20
 const ImageGalley = (props) => {
     const [images, setImages] = useState([]);
     const [selectAllChecked, setSelectAllChecked] = useState(false);
@@ -409,7 +410,7 @@ const ImageGalley = (props) => {
     }
 
     useEffect(() => {
-        fetchData({page: 0, pageSize: 20});
+        fetchData({page: 0, pageSize});
     }, []);
 
     const fetchData = async ({page, pageSize}) => {
@@ -432,7 +433,7 @@ const ImageGalley = (props) => {
         let _images = convertImages(imagesRes.result || [])
         cacheImages= _images
         setImages(_images);
-        setTotal(_images.length)
+        setTotal(imagesRes.total)
         console.log('imagesRes', imagesRes);
         levels = leverRes;
 
@@ -440,9 +441,8 @@ const ImageGalley = (props) => {
         setImgLoading(false)
     };
 
-    const onChangePagination = async (page, pageSize) => {
+    const onChangePagination = async (page) => {
         console.log('page', page)
-        console.log('pageSize', pageSize)
         await fetchData({page: page - 1, pageSize})
     }
 
@@ -535,6 +535,7 @@ const ImageGalley = (props) => {
     }
     return (
         <div>
+
             <Checkbox onChange={onClickSelectAll} checked={selectAllChecked}>
                 Select All
             </Checkbox>
@@ -560,6 +561,7 @@ const ImageGalley = (props) => {
                     <Select mode="multiple" onChange={onChangeSelect}>{renderOptions()}</Select>
                 </Form.Item>
             </Form>
+            <Typography.Text type="secondary">*Các ảnh không hiển thị do link ảnh từ Service quản lý ảnh-video not found!</Typography.Text>
             <Spin spinning={imgLoading}>
                 {images.length ? <div
                     style={{
@@ -581,16 +583,17 @@ const ImageGalley = (props) => {
                            description={<span>Đối tượng giám sát và ảnh không trùng khớp</span>}/>}
             </Spin>
             <Pagination
-                total={60}
+                total={total}
                 showTotal={(total, range) => {
                     console.log('range', range)
-                    if (range[1] === 0) return `1-20 of ${total} ảnh`
+                    if(!range[1]) return `1-20 of ${total} ảnh`
                     return `${range[0]}-${range[1]} of ${total} ảnh`
                 }}
-                defaultPageSize={20}
-                defaultCurrent={0}
+                defaultPageSize={pageSize}
+                defaultCurrent={1}
                 onChange={onChangePagination}
                 style={{float:'right'}}
+                showSizeChanger={false}
                 // onShowSizeChange={onChangePagination}
             />
             <Modal

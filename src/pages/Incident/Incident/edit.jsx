@@ -8,6 +8,7 @@ import incidentService from "../../../services/group09/incidentService";
 import incidentLevelService from "../../../services/group09/incidentLevelService";
 import incidentStatusService from "../../../services/group09/incidentStatusService";
 import Gallery from "react-grid-gallery";
+import userService from "../../../services/group09/userService";
 
 const IncidentEdit = (props) => {
   let { id } = useParams();
@@ -34,19 +35,29 @@ const IncidentEdit = (props) => {
       incidentLevelService().index(),
       incidentStatusService().index()
     ]))
-    // let [error, incident] = await to(incidentServ,ice().detail(id))
-    // let [error1, _levels = []] = await to()
-    // let [error2, _status = []] = await to()
     if(error) message.error('Có lỗi xảy ra!')
     let _images = (incident.images || []).map((item) => {return {...item, isSelected: false}})
     let latLongs = (incident.images || []).map((item) => {return {lat: item.latitude, lng: item.longitude}})
+    let createdName = await fetchUserById(incident.createdBy)
 
-    setIncident({...incident, images: _images} || {})
+    setIncident({...incident, images: _images, createdName} || {})
     setLevels(_levels)
     setStatus(_status)
+
     setLatLng(getCenterFromDegrees(latLongs))
     setLoading(false)
     console.log('incident', incident)
+  }
+
+  const fetchUserById = async (id) => {
+    let [error, users] = await to(userService().getUserName([id]))
+    let status = _.get(users, "status", "fail");
+    if(status!== "Successful"){
+      alert("Server nhóm user bị lỗi!!!");
+      return;
+    };
+    users = _.get(users, "result", []);
+    return users[0] ? users[0].full_name : ''
   }
 
   const colorStatus = (code) => {
@@ -63,6 +74,7 @@ const IncidentEdit = (props) => {
     }
   }
   const colorLevel = (code) => {
+    console.log('code', code)
     switch (code) {
       case 0:
         return "#2db7f5"
@@ -111,16 +123,16 @@ const IncidentEdit = (props) => {
         <Spin spinning={loading}>
         <Descriptions
             bordered
-            layout="vertical"
             title="Chi tiết sự cố"
-            extra={<Button type="primary">Xử lý sự cố</Button>}
+            size={"small"}
+            extra={<a type="primary" className="ant-btn" href={`/handle-problem`}>Xử lý sự cố</a>}
         >
             <Descriptions.Item label="Tên sự cố">{incident.name}</Descriptions.Item>
           <Descriptions.Item label="Hạn dự kiến">{moment(incident.dueDate).format('YYYY-MM-DD')}</Descriptions.Item>
           <Descriptions.Item label="Ngày tạo">{moment(incident.createdAt).format('YYYY-MM-DD')}</Descriptions.Item>
           <Descriptions.Item label="Loại sự cố">{_.get(incident, 'type.name', '')}</Descriptions.Item>
           <Descriptions.Item label="Trạng thái">
-            <Tag color={`${colorLevel(_.get(incident, 'status.code', null))}`}>
+            <Tag color={`${colorStatus(_.get(incident, 'status.code', null))}`}>
               {_.get(incident, 'status.name', '')}
             </Tag>
           </Descriptions.Item>
@@ -130,8 +142,11 @@ const IncidentEdit = (props) => {
             </Tag>
           </Descriptions.Item>
 
-          <Descriptions.Item label="Mô tả" span={3}>
+          <Descriptions.Item label="Mô tả" span={2}>
             {incident.description}
+          </Descriptions.Item>
+          <Descriptions.Item label="Người tạo" span={1}>
+            {incident.createdName}
           </Descriptions.Item>
           <Descriptions.Item label="Ảnh" span={2}>
             <Gallery
