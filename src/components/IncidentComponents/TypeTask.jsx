@@ -130,7 +130,7 @@ const TypeTask = () => {
       title: 'Trạng thái ưu tiên',
       dataIndex: 'prioritize',
       render: (value, record) => (
-        <p>{record.prioritize == true ? 'true' : 'false'}</p>
+        <p>{record.prioritize == true ? 'Ưu tiên cao' : 'Ưu tiên thấp'}</p>
       ),
     },
     {
@@ -352,8 +352,8 @@ const TypeTask = () => {
           onChange={(e) => onChangeValue('prioritize', e)}
           style={{ width: '100%' }}
         >
-          <Option value={1}>true</Option>
-          <Option value={0}>false</Option>
+          <Option value={1}>Ưu tiên cao</Option>
+          <Option value={0}>Ưu tiên thấp</Option>
         </Select>
 
         <Button
@@ -399,8 +399,8 @@ const TypeTask = () => {
           onChange={(e) => onChangeValue('prioritize', e)}
           style={{ width: '100%' }}
         >
-          <Option value={1}>true</Option>
-          <Option value={0}>false</Option>
+          <Option value={1}>Ưu tiên cao</Option>
+          <Option value={0}>Ưu tiên thấp</Option>
         </Select>
 
         <Button
