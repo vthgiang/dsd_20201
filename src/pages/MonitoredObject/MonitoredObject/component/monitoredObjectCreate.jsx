@@ -29,7 +29,7 @@ function MonitoredObjectView({ history }) {
   const [monitoredObject, setMonitoredObject] = useState({
     code: "",
     name: "",
-    status: 1,
+    status: "1",
     description: "",
     managementUnit: null,
     category: null,
@@ -198,7 +198,7 @@ function MonitoredObjectView({ history }) {
     setMonitoredObject({
       code: "",
       name: "",
-      status: 1,
+      status: "1",
       description: "",
       managementUnit: null,
       category: null,
