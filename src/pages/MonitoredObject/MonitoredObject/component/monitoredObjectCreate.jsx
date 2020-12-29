@@ -19,6 +19,7 @@ function MonitoredObjectView({ history }) {
   const dispatch = useDispatch();
   const category = useSelector((state) => state.category);
   const user = useSelector((state) => state.user.user);
+  const role = user.role;
   const monitoredObjects = useSelector((state) => state.monitoredObjects);
   const {
     isObjectSuccess,
@@ -222,6 +223,7 @@ function MonitoredObjectView({ history }) {
       monitoredZone: id,
     }));
   };
+  console.log(category[0]);
   return (
     <div>
       <div className="header-title mb-3">

@@ -162,6 +162,10 @@ function MonitoredObjectView({ history }) {
       await axios({
         method: "GET",
         url: `https://it4483team2.herokuapp.com/api/records/monitored/images/${id}`,
+        headers: {
+          "api-token": localStorage.getItem("token"),
+          "project-type": localStorage.getItem("project-type")
+      },
       })
         .then((res) => {
           if (res.data) {
@@ -181,6 +185,10 @@ function MonitoredObjectView({ history }) {
       await axios({
         method: "GET",
         url: `https://it4483team2.herokuapp.com/api/records/monitored/videos/${id}`,
+        headers: {
+          "api-token": localStorage.getItem("token"),
+          "project-type": localStorage.getItem("project-type")
+      },
       })
         .then((res) => {
           if (res.data) {
@@ -328,6 +336,7 @@ function MonitoredObjectView({ history }) {
   };
 
   let indexImage = 0;
+  console.log(category);
   return (
     <div>
       <div className="header-title mb-5">
