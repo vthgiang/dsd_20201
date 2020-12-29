@@ -8,6 +8,8 @@ import Search from '../../components/Drone/Search';
 import axios from 'axios';
 import {getToken, getProjectType, getRole} from '../../components/Drone/Common/info';
 
+import {FLIGHT_PATH_MANAGEMENT, isAuthorised} from '../../components/Drone/Common/role';
+
 function FlightPath(props) {
 
     const [flightPathView, setFlightPathView] = useState(null);
@@ -253,7 +255,7 @@ function FlightPath(props) {
     return (
         <Container>
             <Row>
-                <Col md={3}><AddFlightPathModel addFlightPath={addFlightPath} pageReload={pageReload}/></Col>
+                <Col md={3}>{isAuthorised(FLIGHT_PATH_MANAGEMENT) && <AddFlightPathModel addFlightPath={addFlightPath} pageReload={pageReload}/>}</Col>
                 <Col md={4}><Pagination pagination={pagination} pageChange={pageChange}/></Col>
                 <Col md={5}>
                     <Search 

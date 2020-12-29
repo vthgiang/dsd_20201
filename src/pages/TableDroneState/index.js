@@ -27,6 +27,7 @@ import SowDateAndGetBackDrone from "../../components/Drone/DroneModals/ShowDateA
 import ModalFlight from '../../containers/ModalFlight'
 import useFullPageLoader from "../../components/hooks/useFullPageLoader";
 import { useSelector } from "react-redux";
+import { isAuthorised, DRONE_CONFIG, DRONE_MAINTENANCE} from "../../components/Drone/Common/role";
 
 
 
@@ -449,27 +450,24 @@ const dronesData = useMemo(() => {
                       <TableCell align="center"><StateDrone state={drone.state} /></TableCell>
                       <TableCell align="center">
                              {(() => {
-                                    if (drone.state == 0) {
-                                    return (
-                                            <StateModal drone={drone} onReload={getData} />
-                                    )
-                                    } else if (drone.state == 1) {
-                                        return (
-                                            <ModalFlight id={drone.idDrone} name={drone.name} />
-                                        )
-                                    } else if (drone.state == 2 || drone.state == 3) {
-
-                                        return (
-                                                   
-                                            <SowDateAndGetBackDrone drone={drone} onReload={getData} />
-                                                    
-                                        )
-                                    }
-                                    else if (drone.state == 4) {
-                                    return (
-                                        <StateModal drone={drone}/>
-                                    ) 
-                                    }
+                                let component = <p></p>;
+                                switch(drone.state){
+                                  case 0:
+                                    if(isAuthorised(DRONE_CONFIG)) component = <StateModal drone={drone} onReload={getData} />;
+                                    break;
+                                  case 1:
+                                    component = <ModalFlight id={drone.idDrone} />;
+                                    break;
+                                  case 2:
+                                  case 3:
+                                    if(isAuthorised(DRONE_MAINTENANCE) || isAuthorised(DRONE_CONFIG)) 
+                                      component = <SowDateAndGetBackDrone drone={drone} onReload={getData} />
+                                    break;
+                                  case 4:
+                                    if(isAuthorised(DRONE_MAINTENANCE) || isAuthorised(DRONE_CONFIG))
+                                      component = <StateModal drone={drone}/>;
+                                }
+                                return component;
                                 })()}
                           </TableCell>
                     </TableRow>

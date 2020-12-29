@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import FlightPathInput from '../FlightPathInput';
 import './FlightPathModal.css';
@@ -7,10 +6,6 @@ import Map from '../Map';
 import PointInput from '../PointInput';
 import axios from 'axios';
 import {getDistance} from '../../Common/MapHelper'
-
-AddFlightPathModal.propTypes = {
-    
-};
 
 function AddFlightPathModal(props) {
 
@@ -31,6 +26,8 @@ function AddFlightPathModal(props) {
     const [selectedZone, setSelectedZone] = useState(null);
     const [monitoredObjectList, setMonitoredObjectList] = useState([]);
     const [monitoredObjectListLoading, setMonitoredObjectListLoading] = useState(false);
+
+    const [totalDistance, setTotalDistance] = useState(0);
 
     const [speed, setSpeed] = useState('');
 
@@ -126,10 +123,24 @@ function AddFlightPathModal(props) {
             idSupervisedObject: objectId,
             flightHeightDown: flightHeightDown
         }
-        setFlightPoints([...flightPoints, point]);
+        const newFlightPoints = [...flightPoints, point]
+
+        setFlightPoints(newFlightPoints);
+        
+        setTotalDistance(caculatorDistance(newFlightPoints));
         resetPoint();
     }
-    
+
+    const caculatorDistance = (flightPoints) => {
+        let totalDistance = 0
+        let distance = 0;
+        for(let i=1; i<flightPoints.length; i++){
+            distance = getDistance(flightPoints[i], flightPoints[i-1]);
+            totalDistance += distance;
+        }
+        return totalDistance;
+    }
+
     const resetPoint = () => {
         // setTimeCome('');
         setTimeStop('');
@@ -179,6 +190,7 @@ function AddFlightPathModal(props) {
                         selectedZone={selectedZone} setSelectedZone={setSelectedZone}
                         resetPoint={resetPoint}
                         speed={speed} setSpeed={setSpeed}
+                        totalDistance={totalDistance}
                     />
                     <Row>
                         <Col md={4}>

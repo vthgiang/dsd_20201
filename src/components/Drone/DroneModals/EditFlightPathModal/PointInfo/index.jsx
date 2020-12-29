@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Button, Form } from 'react-bootstrap';
-
-PointInfo.propTypes = {
-    
-};
 
 function PointInfo(props) {
     const {
@@ -28,12 +23,6 @@ function PointInfo(props) {
     }
     return (
         <>
-            <Form.Group controlId="timeCome">
-                <Form.Label>Thời gian bay đến (s)</Form.Label>
-                <Form.Control type="number" value={timeCome} 
-                    placeholder="giây" />
-            </Form.Group>
-
             <Form.Group controlId="timeStop">
                 <Form.Label>Thời gian dừng</Form.Label>
                 <Form.Control type="number" 
