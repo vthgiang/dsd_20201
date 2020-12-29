@@ -58,11 +58,15 @@ class List extends Component {
   }
 
   loadAllPayload() {
-    axios.get(`http://dsd06.herokuapp.com/api/payload`)
-        .then(res => {
-          //const persons = res.data;
-          this.setState({ tables: res.data });
-        })
+      axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { type: null, status: null } })
+          .then(res => {
+              if (res.status == 500) {
+                  this.openNotificationError(res.data.message || "")
+              } else {
+                  let arr = res.data.filter((item) => {return item.type != null});
+                  this.setState({ tables: arr });
+              }
+          })
   }
 
 
@@ -97,8 +101,12 @@ class List extends Component {
   searchPayload(values) {
     axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { type: values.type, status: values.status } })
         .then(res => {
-          //const persons = res.data;
-          this.setState({ tables: res.data });
+            if (res.status == 500) {
+                this.openNotificationError(res.data.message || "")
+            } else {
+                let arr = res.data.filter((item) => {return item.type != null});
+                this.setState({ tables: arr });
+            }
         })
   }
 
@@ -241,7 +249,7 @@ class List extends Component {
                 </Col>
               </Row>
             </Form>
-            <Table dataSource={dataSource} columns={columns} />;
+            <Table dataSource={dataSource} columns={columns} />
           </div>
 
 
