@@ -180,7 +180,7 @@ const ListReport = () => {
       sorter: (a, b) => b.status.charCodeAt(0) - a.status.charCodeAt(0),
       sortDirections: ['descend'],
       render: (text, record) =>
-        record.status == 'waitting' ? (
+        record.status == 'waiting' ? (
           <div
             style={{
               flexDirection: 'row',
