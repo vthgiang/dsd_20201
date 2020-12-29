@@ -274,7 +274,7 @@ const ListMonitorCampaign = () => {
           // initialValues={initialValues}
         >
           <Row>
-            <Col span={16}>
+            <Col span={16} offset={8} pull={8}>
               <Form.Item
                 name='timeRange'
                 label='Thời gian'
@@ -283,7 +283,6 @@ const ListMonitorCampaign = () => {
                 <RangePicker showTime format={DATE_TIME_FORMAT} />
               </Form.Item>
             </Col>
-            <Col span={8}></Col>
 
             {isAdmin && (
               <Col span={8}>
@@ -369,7 +368,7 @@ const ListMonitorCampaign = () => {
               </Form.Item>
             </Col>
 
-            <Col span={8}>
+            <Col span={8} offset={isAdmin ? 0 : 8}>
               <Col span={13} offset={10}>
                 <Row type='flex' justify='end'>
                   <Button
