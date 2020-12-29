@@ -85,7 +85,6 @@ import StatisticDeDieu from './Dashboard/IncidentDashboard';
 import Task1 from './Home/DeDieu/Task1/index';
 import Task5 from './Home/DeDieu/Task5/index';
 import DeDieuNcn3 from './Home/DeDieu/indexncn3';
-import DeDieuNcn4 from './Home/DeDieu/indexncn4';
 
 export const routes = [
   {
@@ -108,10 +107,6 @@ export const routes = [
   {
     path: '/dedieu-ncn3',
     component: DeDieuNcn3,
-  },
-  {
-    path: '/dedieu-ncn4',
-    component: DeDieuNcn4,
   },
   {
     path: '/dashboard',
