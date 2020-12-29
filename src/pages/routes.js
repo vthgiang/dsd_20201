@@ -85,6 +85,7 @@ import StatisticDeDieu from './Dashboard/IncidentDashboard'
 import Task1 from './Home/DeDieu/Task1/index'
 import Task5 from './Home/DeDieu/Task5/index'
 import DeDieuNcn3 from "./Home/DeDieu/indexncn3";
+import UAVMana from './UAVMana';
 
 export const routes = [
   {
@@ -116,6 +117,10 @@ export const routes = [
   {
     path: '/drones',
     component: () => <div>DroneManagement</div>,
+  },
+  {
+    path: '/dedieu-uav-mana',
+    component: UAVMana,
   },
   {
     path: '/drone-list',
