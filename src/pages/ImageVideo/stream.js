@@ -110,7 +110,7 @@ function Stream() {
       setLoadList(true);
       const { data } = await axios({
         method: 'GET',
-        url: 'http://skyrone.cf:6789/droneState/getAllDroneActive'
+        url: 'http://skyrone.cf:6789/droneState/getAllDroneActiveRealTime'
       });
 
       const res = await axios({
@@ -153,7 +153,6 @@ function Stream() {
     var element = document.createElement('a');
     element.setAttribute('href', link);
     element.setAttribute('target', '_blank');
-    element.setAttribute('download', filename);
 
     element.style.display = 'none';
     document.body.appendChild(element);
@@ -287,6 +286,7 @@ function Stream() {
           </Form>
           {downloadLink && (
             <Button
+            style={{marginTop:16}}
               type="primary"
               shape="round"
               icon={<DownloadOutlined />}
@@ -297,7 +297,7 @@ function Stream() {
           )}
         </Col>
         <Col md={8}>
-          <TitleList>Danh sách drones</TitleList>
+          <TitleList>Danh sách drone đang hoạt động</TitleList>
           <List
             loading={loadList}
             bordered
@@ -307,10 +307,10 @@ function Stream() {
                 <ActiveItemCustom onClick={() => fetchCurrentDrone(drone)}>
                   <div>{drone.name}</div>
                   <div>
-                    {drone.used ? (
-                      <Tag color="green">Active</Tag>
+                    {drone.message==="Đang Bay" ? (
+                      <Tag color="green">Đang bay</Tag>
                     ) : (
-                      <Tag color="red">Not Active</Tag>
+                      <Tag color="red">Không hoạt động</Tag>
                     )}
                   </div>
                 </ActiveItemCustom>
@@ -318,10 +318,10 @@ function Stream() {
                 <ItemCustom onClick={() => fetchCurrentDrone(drone)}>
                   <div>{drone.name}</div>
                   <div>
-                    {drone.used ? (
-                      <Tag color="green">Active</Tag>
+                  {drone.message==="Đang Bay" ? (
+                      <Tag color="green">Đang bay</Tag>
                     ) : (
-                      <Tag color="red">Not Active</Tag>
+                      <Tag color="red">Không hoạt động</Tag>
                     )}
                   </div>
                 </ItemCustom>
