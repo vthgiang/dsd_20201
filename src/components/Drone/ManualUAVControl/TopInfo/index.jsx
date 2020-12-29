@@ -17,7 +17,7 @@ function TopInfo(props) {
     const [areaSelected, setAreaSelected] = useState(null);
     const [areaLoading, setAreaLoading] = useState(true);
 
-    const {droneSelected, setDroneSelected} = useContext(UAVContext);
+    const {droneSelected, setDroneSelected, isFlying} = useContext(UAVContext);
 
     useEffect( async ()=> {
         setDroneLoading(true);
@@ -56,6 +56,7 @@ function TopInfo(props) {
                         isLoading={droneLoading}
                         onChange={handleDroneChange}
                         options={drones.current}
+                        isDisabled={isFlying}
                     />
                 </Form.Group>
             </Col>

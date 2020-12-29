@@ -77,22 +77,25 @@ function ActionControl(props) {
 
     const goBack = () => {
         tmpPos.current = curPos;
-        // setDesPos(TRU_SO);
+        setIsMoving(true);
+        setDesPos(TRU_SO);
         interval.current = setInterval(()=> {
             if(getDistance(latLngToPoint(tmpPos.current), latLngToPoint(TRU_SO)) < parseFloat(speed)){
                 setCurPos(TRU_SO);
-                // setDesPos(null);
+                setDesPos(null);
                 clearInterval(interval.current);
                 setIsMoving(false);
+                nextAction('goBack');
                 setIsFlying(false);
-                nextAction('stop');
                 return;
             }
             const nextPos = nextPositon(tmpPos.current, TRU_SO, speed, 1000);
             setCurPos(nextPos);
             tmpPos.current = nextPos;
         }, 1000);
-        nextAction('goBack');
+        setDroneSpeed(speed);
+        setDroneHeight(droneHeight);
+        nextAction('go');
     }
 
     useEffect(()=> {
@@ -194,7 +197,7 @@ const getNextAction = (currentAction) => {
         case 'stop':
             return [actions[1], actions[3]];
         case 'goBack':
-            return [actions[2]];
+            return [actions[0]];
     }
 }
 
