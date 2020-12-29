@@ -8,7 +8,6 @@ import incidentStatusService from '../../../services/group09/incidentStatusServi
 import moment from 'moment';
 import _ from "lodash";
 import { SearchOutlined } from '@ant-design/icons';
-import {logger} from "redux-logger/src";
 const Incident = () => {
   const [loading, setLoading] = useState(true);
   const [incidents, setIncidents] = useState([]);
@@ -57,17 +56,6 @@ const Incident = () => {
         setTimeout(() => searchInput.select(), 100);
       }
     },
-    // render: text =>
-    //     searchedColumn === dataIndex ? (
-    //         <Highlighter
-    //             highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-    //             searchWords={[searchText]}
-    //             autoEscape
-    //             textToHighlight={text ? text.toString() : ''}
-    //         />
-    //     ) : (
-    //         text
-    //     ),
   });
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {

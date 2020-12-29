@@ -10,15 +10,16 @@ import {
     DatePicker,
     message,
     Spin,
-    Pagination
+    Pagination, Empty
 } from 'antd';
 import Gallery from 'react-grid-gallery';
 import incidentLevelService from '../../../services/group09/incidentLevelService';
 import incidentService from '../../../services/group09/incidentService';
 import imageService from '../../../services/group09/imageService';
+import monitoredService from '../../../services/group09/monitoredService';
 import moment from 'moment';
 
-let levels = [];
+
 const MONITORED_OBJS = [
     {
         id: '1',
@@ -356,7 +357,9 @@ const IMAGES = [
     },
 
 ]
+let cacheMonitoreds = []
 let cache = IMAGES
+let levels = [];
 const ImageGalley = (props) => {
     const [images, setImages] = useState([]);
     const [selectAllChecked, setSelectAllChecked] = useState(false);
@@ -410,18 +413,28 @@ const ImageGalley = (props) => {
 
     const fetchData = async ({page, pageSize}) => {
         setImgLoading(true)
-        let [leverRes = {}, imagesRes = {}] = await Promise.all([
+        let [leverRes = {}, imagesRes = {}, monitoreds = {}] = await Promise.all([
             incidentLevelService().index(),
-            imageService().getImagesByMonitoredId({page, pageSize})
+            imageService().getImagesByMonitoredId({page, pageSize}),
+            monitoredService().index()
         ]);
         if (imagesRes.status !== 200) {
             message.error(`${imagesRes.status}: Dịch vụ ảnh video bị lỗi`)
         }
+        console.log('monitoreds', monitoreds)
+        if (!monitoreds.success) {
+            message.error(monitoreds.messages)
+        }
+
+
+
         let _images = convertImages(imagesRes.result || [])
         setImages(_images);
         setTotal(_images.length)
         console.log('imagesRes', imagesRes);
         levels = leverRes;
+
+        cacheMonitoreds = monitoreds.content
         setImgLoading(false)
     };
 
@@ -505,13 +518,14 @@ const ImageGalley = (props) => {
     };
 
     const onChangeSelect = async (value = []) => {
-        let filterImages = IMAGES.filter(i => value.includes(i.monitoredObjectId))
+        console.log('value', value)
+        let filterImages = images.filter(i => value.includes(i.monitoredObjectId))
         await setImages(convertImages(filterImages))
     }
 
     const renderOptions = () => {
-        return MONITORED_OBJS.map((item) => (
-            <Select.Option value={item.id} key={item.id}>{item.name}</Select.Option>
+        return cacheMonitoreds.map((item) => (
+            <Select.Option value={item._id} key={item._id}>{item.name}</Select.Option>
         ))
     }
     return (
@@ -535,8 +549,14 @@ const ImageGalley = (props) => {
             >
                 Selected images: {getSelectedImages().toString()}
             </div>
+
+            <Form>
+                <Form.Item label="Đối tượng giám sát">
+                    <Select mode="multiple" onChange={onChangeSelect}>{renderOptions()}</Select>
+                </Form.Item>
+            </Form>
             <Spin spinning={imgLoading}>
-                <div
+                {images.length ? <div
                     style={{
                         display: 'block',
                         minHeight: '1px',
@@ -545,13 +565,13 @@ const ImageGalley = (props) => {
                         overflow: 'auto',
                     }}
                 >
-                    {images && <Gallery
+                    <Gallery
                         images={images}
                         onSelectImage={onSelectImage}
                         showLightboxThumbnails={true}
-                    />}
+                    />
 
-                </div>
+                </div> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
             </Spin>
             <Pagination
                 total={60}
@@ -563,6 +583,7 @@ const ImageGalley = (props) => {
                 defaultPageSize={20}
                 defaultCurrent={0}
                 onChange={onChangePagination}
+                style={{float:'right'}}
                 // onShowSizeChange={onChangePagination}
             />
             <Modal
