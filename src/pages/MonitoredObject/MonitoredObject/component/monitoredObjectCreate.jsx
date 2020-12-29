@@ -112,13 +112,13 @@ function MonitoredObjectView({ history }) {
       method: "POST",
       url: `http://it4883logging.herokuapp.com/api/monitor-object/add`,
       data: {
-        regionId: idMonitoredCreate.monitoredZone[0],
-        entityId: idMonitoredCreate._id,
-        description: "add monitor object",
+        regionId: monitoredObject.monitoredZone,
+        entityId: monitoredObject._id,
+        description: "edit monitor object",
         authorId: "",
         projectType: localStorage.getItem("project-type"),
         state: "",
-        name: idMonitoredCreate.name,
+        name: monitoredObject.name,
       },
     })
       .then((res) => {})
@@ -223,7 +223,6 @@ function MonitoredObjectView({ history }) {
       monitoredZone: id,
     }));
   };
-  console.log(category[0]);
   return (
     <div>
       <div className="header-title mb-3">

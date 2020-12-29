@@ -336,7 +336,6 @@ function MonitoredObjectView({ history }) {
   };
 
   let indexImage = 0;
-  console.log(category);
   return (
     <div>
       <div className="header-title mb-5">
