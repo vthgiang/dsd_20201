@@ -26,6 +26,7 @@ import SetStateAll from "../../components/Drone/DroneModals/SetStateAll";
 import SowDateAndGetBackDrone from "../../components/Drone/DroneModals/ShowDateAndGetBackDrone";
 import ModalFlight from '../../containers/ModalFlight'
 import useFullPageLoader from "../../components/hooks/useFullPageLoader";
+import { useSelector } from "react-redux";
 
 
 
@@ -60,6 +61,7 @@ function stableSort(array, comparator) {
   });
   return stabilizedThis.map((el) => el[0]);
 }
+
 
 const headCells = [
   {
@@ -219,8 +221,18 @@ const [search, setSearch] = useState();
 const [stateDrone, setStateDrone] = useState("0");  
 const [numDrone, setNumDrone] = useState();
 
+const users = useSelector((state) => state.user.user);
+const projectType = users.type;
+const role = users.role;
+
+
 const dronesData = useMemo(() => {
-    let computedDrones = drones;
+    let droneRole = drones;
+    if (role !='SUPER_ADMIN') {
+      droneRole = droneRole.filter(
+          comment => comment.project.toString().includes("2") || !comment.state.toString().includes("1"));
+    } 
+    let computedDrones = droneRole;
     setPage(0);
     if (stateDrone) {
         setSelected([]);
@@ -234,7 +246,7 @@ const dronesData = useMemo(() => {
     setNumDrone(computedDrones.length);
     if (search) {
         computedDrones = computedDrones.filter(
-            comment =>
+            (comment) =>
                 comment.idDrone.toLowerCase().includes(search.toLowerCase())
         );
     } 
@@ -257,6 +269,7 @@ const dronesData = useMemo(() => {
     setSelected([]);
   };
 
+ 
 
   const handleClick = (event, id) => {
     if (stateDrone != 0 && stateDrone != "Đang Bay") {
@@ -301,7 +314,7 @@ const dronesData = useMemo(() => {
     const EnhancedTableToolbar = (props) => {
         const classes = useToolbarStyles();
         const { numSelected } = props;
-      
+
         return (
           <Toolbar
             className={clsx(classes.root, {

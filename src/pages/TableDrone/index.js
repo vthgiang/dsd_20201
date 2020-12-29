@@ -99,21 +99,13 @@ const DataTable = () => {
 
         <>
             <div className="row">
-                <div className="col-md-2">
+                <div className="col-md-4">
                     <ModalAddDataTable />
                 </div>
                 <div className="col-md-2">
                     <h4>{drones.length + 1} drone</h4>
                 </div>
-                <div className="col-md-4">
-                    <Pagination
-                        total={totalItems}
-                        itemsPerPage={ITEMS_PER_PAGE}
-                        currentPage={currentPage}
-                        onPageChange={page => setCurrentPage(page)}
-                    />
-                </div>
-                <div className="col-md-4 d-flex flex-row-reverse">
+                <div className="col-md-6 d-flex flex-row-reverse">
                     <Search
                         onSearch={value => {
                             setSearch(value);
@@ -122,6 +114,12 @@ const DataTable = () => {
                     />
                 </div>
             </div>
+            <Pagination
+                        total={totalItems}
+                        itemsPerPage={ITEMS_PER_PAGE}
+                        currentPage={currentPage}
+                        onPageChange={page => setCurrentPage(page)}
+                    />
             <Styles>
                 <div className="row w-100">
                     <div className="col mb-3 col-12 text-center">
