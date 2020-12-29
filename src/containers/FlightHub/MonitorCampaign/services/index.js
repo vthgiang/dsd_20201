@@ -2,7 +2,7 @@ import moment from 'moment';
 import { DATE_TIME_FORMAT } from '../../../../configs';
 
 export const covertMomentToDate = (dateMoment) => {
-  return new Date(moment(dateMoment).add(7, 'hours'));
+  return new Date(moment(dateMoment).valueOf());
 };
 
 export const convertTimeRangeToData = (timeRange) => {
@@ -14,9 +14,13 @@ export const convertTimeRangeToData = (timeRange) => {
 
 export const convertDateToTimeRange = ({ startTime, endTime }) => {
   return [
-    moment(startTime, DATE_TIME_FORMAT),
-    moment(endTime, DATE_TIME_FORMAT),
+    moment(moment(startTime).local(), DATE_TIME_FORMAT),
+    moment(moment(endTime).local(), DATE_TIME_FORMAT),
   ];
+};
+
+export const formatMomentDateToDateTimeString = (momentDate) => {
+  return moment(momentDate).local().format(DATE_TIME_FORMAT);
 };
 
 export const convertInitialDataToFieldValues = (data) => {
@@ -63,10 +67,6 @@ export const convertFieldValuesToDataSubmit = (fieldValues) => {
   }
 
   return dataSubmit;
-};
-
-export const formatMomentDateToDateTimeString = (momentDate) => {
-  return moment(momentDate).subtract(7, 'hours').format(DATE_TIME_FORMAT);
 };
 
 export const randomDateTime = (start, end) => {
