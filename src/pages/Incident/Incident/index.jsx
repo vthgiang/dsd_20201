@@ -17,6 +17,7 @@ const Incident = () => {
   const [searchText, setSearchText] = useState('')
   const [searchedColumn, setSearchedColumn] = useState('')
   let searchInput = null
+  console.log('incidents', incidents)
   const getColumnSearchProps = dataIndex => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
         <div style={{ padding: 8 }}>
@@ -121,7 +122,6 @@ const Incident = () => {
       }),
       onFilter: (value, record) => Number(record.level.code) === Number(value),
       render: (text) => {
-        console.log('text', text);
         switch (text.code) {
           case 0:
             return <Tag color="#2db7f5">{text.name}</Tag>;
@@ -135,8 +135,6 @@ const Incident = () => {
       dataIndex: 'createdBy',
       key: 'createdBy',
       render: (text, record) => {
-        console.log('text', text, record)
-        console.log('users', users)
         return <div>{users[text]}</div>
       }
     },
@@ -165,6 +163,7 @@ const Incident = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
   const fetchUsers = async (userIds) => {
     let [error, users] = await to(userService().getUserName(userIds))
    let status = _.get(users, "status", "fail");
@@ -177,6 +176,7 @@ const Incident = () => {
     users.map(item => _userObj[item.id] = item.full_name);
     setUsers(_userObj);
   }
+
   const fetchData = async () => {
     setLoading(true);
     let [error, [incidents = {}, _levels, _status] = []] = await to(
@@ -204,6 +204,13 @@ const Incident = () => {
       columns={columns}
       loading={loading}
       dataSource={incidents}
+      pagination={{
+        pageSize: 10,
+        total: incidents.length,
+        showTotal: (total) => `${total} sự cố`,
+        showSizeChanger: false
+      }}
+      bordered
     />
   );
 };
