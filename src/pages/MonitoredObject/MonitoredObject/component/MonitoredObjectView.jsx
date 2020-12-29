@@ -278,16 +278,16 @@ function MonitoredObjectView({ history }) {
     }));
   };
   const handleCreateMonitoredObject = () => {
-    // if (
-    //   currentMonitoredZone &&
-    //   (monitoredObject.height < currentMonitoredZone.minHeight ||
-    //     monitoredObject.height > currentMonitoredZone.maxHeight)
-    // ) {
-    //   alert(
-    //     `Chọn chiều cao cho đối tượng trong khoảng giá trị từ ${currentMonitoredZone.minHeight} - ${currentMonitoredZone.maxHeight}`,
-    //   );
-    //   return;
-    // }
+    if (
+      currentMonitoredZone &&
+      (monitoredObject.height < currentMonitoredZone.minHeight ||
+        monitoredObject.height > currentMonitoredZone.maxHeight)
+    ) {
+      alert(
+        `Chọn chiều cao cho đối tượng trong khoảng giá trị từ ${currentMonitoredZone.minHeight} - ${currentMonitoredZone.maxHeight}`,
+      );
+      return;
+    }
 
     dispatch(
       MonitoredObjectActions.editMonitoredObject(monitoredObject._id, {

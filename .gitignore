@@ -1,5 +1,6 @@
 # Package-lock.json
 package-lock.json
+package-lock-me.json
 
 # IDE
 .vscode

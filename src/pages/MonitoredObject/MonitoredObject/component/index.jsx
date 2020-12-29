@@ -13,6 +13,9 @@ import { Spin } from "antd";
 const axios = require("axios");
 
 function AreaMonitored(props) {
+  const user = useSelector((state) => state.user.user);
+  const role = user.role;
+
   const { history } = props;
   const dispatch = useDispatch();
   const monitoredObjects = useSelector((state) => state.monitoredObjects);
@@ -59,13 +62,20 @@ function AreaMonitored(props) {
       });
   };
   useEffect(() => {
+  {role === "SUPER_ADMIN" ? 
+    dispatch(
+      MonitoredObjectActions.getAllMonitoredObjects({
+        page,
+        limit,
+      })
+    ):
     dispatch(
       MonitoredObjectActions.getAllMonitoredObjects({
         page,
         limit,
         type: localStorage.getItem("project-type"),
       })
-    );
+    )};
   }, [page]);
   useEffect(() => {
     let arr = [];
@@ -240,9 +250,11 @@ function AreaMonitored(props) {
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{item.name}</td>
-                  <td style={{ color: "green" }}>
-                    {item.status === 1 ? "Bình thường" : "Đang được sửa chữa"}
-                  </td>
+                  { item.status === "1" ? <td style={{ color: "green"}}>Bình thường</td> : 
+                    item.status === "2" ? <td style={{ color: "red"}}>Đã hỏng</td> :
+                    <td style={{ color: "blue" }}>Đang được sửa chữa</td>
+                  }
+                  
                   <td>{item.description}</td>
                   <td>
                     {!!item.category ? item.category.name : "Chưa có giá trị"}
