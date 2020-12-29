@@ -75,7 +75,7 @@ function Dashboard() {
   }, []);
 
   return (
-    <div>
+    <div className="dashboard">
       {/* <Breadcrumb
       style={{
         marginBottom: 16,

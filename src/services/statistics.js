@@ -41,102 +41,140 @@ export const getDroneOverallMetrics = async (projectType) => {
 
 export const getDroneDetailedMetrics = async (projectType) => {
   try {
-    if (projectType == 'CHAY_RUNG') {
-      const {
-        data
-      } = await requestWithCache(
-        "getDroneDetailedMetrics",
-        () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
-      );
-      const metrics = {};
-      metrics.idle = data.filter((item) => item.state === 0).length;
-      metrics.flying = data.filter((item) => item.project === 1).length;
-      metrics.charging = data.filter((item) => item.state === 2).length;
-      metrics.maintaining = data.filter((item) => item.state === 3).length;
-      metrics.broken = data.filter((item) => item.state === 4).length;
-      metrics.noProject = data.filter((item) => item.project === 0).length;
-      metrics.CR = data.filter((item) => item.project === 1).length;
-      metrics.DD = data.filter((item) => item.project === 2).length;
-      metrics.LD = data.filter((item) => item.project === 3).length;
-      metrics.CT = data.filter((item) => item.project === 4).length;
-      return metrics;
-    } else if (projectType == 'LUOI_DIEN') {
-      const {
-        data
-      } = await requestWithCache(
-        "getDroneDetailedMetrics",
-        () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
-      );
-      const metrics = {};
-      metrics.idle = data.filter((item) => item.state === 0).length;
-      metrics.flying = data.filter((item) => item.project === 3).length;
-      metrics.charging = data.filter((item) => item.state === 2).length;
-      metrics.maintaining = data.filter((item) => item.state === 3).length;
-      metrics.broken = data.filter((item) => item.state === 4).length;
-      metrics.noProject = data.filter((item) => item.project === 0).length;
-      metrics.CR = data.filter((item) => item.project === 1).length;
-      metrics.DD = data.filter((item) => item.project === 2).length;
-      metrics.LD = data.filter((item) => item.project === 3).length;
-      metrics.CT = data.filter((item) => item.project === 4).length;
-      return metrics;
-    } else if (projectType == 'CAY_TRONG') {
-      const {
-        data
-      } = await requestWithCache(
-        "getDroneDetailedMetrics",
-        () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
-      );
-      const metrics = {};
-      metrics.idle = data.filter((item) => item.state === 0).length;
-      metrics.flying = data.filter((item) => item.project === 4).length;
-      metrics.charging = data.filter((item) => item.state === 2).length;
-      metrics.maintaining = data.filter((item) => item.state === 3).length;
-      metrics.broken = data.filter((item) => item.state === 4).length;
-      metrics.noProject = data.filter((item) => item.project === 0).length;
-      metrics.CR = data.filter((item) => item.project === 1).length;
-      metrics.DD = data.filter((item) => item.project === 2).length;
-      metrics.LD = data.filter((item) => item.project === 3).length;
-      metrics.CT = data.filter((item) => item.project === 4).length;
-      return metrics;
-    } else if (projectType == 'DE_DIEU') {
-      const {
-        data
-      } = await requestWithCache(
-        "getDroneDetailedMetrics",
-        () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
-      );
-      const metrics = {};
-      metrics.idle = data.filter((item) => item.state === 0).length;
-      metrics.flying = data.filter((item) => item.project === 2).length;
-      metrics.charging = data.filter((item) => item.state === 2).length;
-      metrics.maintaining = data.filter((item) => item.state === 3).length;
-      metrics.broken = data.filter((item) => item.state === 4).length;
-      metrics.noProject = data.filter((item) => item.project === 0).length;
-      metrics.CR = data.filter((item) => item.project === 1).length;
-      metrics.DD = data.filter((item) => item.project === 2).length;
-      metrics.LD = data.filter((item) => item.project === 3).length;
-      metrics.CT = data.filter((item) => item.project === 4).length;
-      return metrics;
-    } else {
-      const {
-        data
-      } = await requestWithCache(
-        "getDroneDetailedMetrics",
-        () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
-      );
-      const metrics = {};
-      metrics.idle = data.filter((item) => item.state === 0).length;
-      metrics.flying = data.filter((item) => item.state === 1).length;
-      metrics.charging = data.filter((item) => item.state === 2).length;
-      metrics.maintaining = data.filter((item) => item.state === 3).length;
-      metrics.broken = data.filter((item) => item.state === 4).length;
-      metrics.noProject = data.filter((item) => item.project === 0).length;
-      metrics.CR = data.filter((item) => item.project === 1).length;
-      metrics.DD = data.filter((item) => item.project === 2).length;
-      metrics.LD = data.filter((item) => item.project === 3).length;
-      metrics.CT = data.filter((item) => item.project === 4).length;
-      return metrics;
-    }
+    const {
+      data
+    } = await requestWithCache(
+      "getDroneDetailedMetrics",
+      () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
+    );
+    const metrics = {};
+    metrics.rawData = data;
+    metrics.idle = data.filter((item) => item.state === 0).length;
+    metrics.flying = data.filter((item) => item.project === 1).length;
+    metrics.charging = data.filter((item) => item.state === 2).length;
+    metrics.maintaining = data.filter((item) => item.state === 3).length;
+    metrics.broken = data.filter((item) => item.state === 4).length;
+    metrics.noProject = data.filter((item) => item.project === 0).length;
+    metrics.CR = data.filter((item) => item.project === 1).length;
+    metrics.DD = data.filter((item) => item.project === 2).length;
+    metrics.LD = data.filter((item) => item.project === 3).length;
+    metrics.CT = data.filter((item) => item.project === 4).length;
+    metrics.overallTable = [
+      { status: "Đang rảnh", amount: metrics.idle },
+      { status: "Đang bay", amount: metrics.flying },
+      { status: "Đang sạc", amount: metrics.charging },
+      { status: "Đang bảo trì", amount: metrics.maintaining },
+      { status: "Đã hỏng", amount: metrics.broken },
+    ];
+    return metrics;
+    // if (projectType == 'CHAY_RUNG') {
+    //   const {
+    //     data
+    //   } = await requestWithCache(
+    //     "getDroneDetailedMetrics",
+    //     () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
+    //   );
+    //   const metrics = {};
+    //   metrics.rawData = data;
+    //   metrics.idle = data.filter((item) => item.state === 0).length;
+    //   metrics.flying = data.filter((item) => item.project === 1).length;
+    //   metrics.charging = data.filter((item) => item.state === 2).length;
+    //   metrics.maintaining = data.filter((item) => item.state === 3).length;
+    //   metrics.broken = data.filter((item) => item.state === 4).length;
+    //   metrics.noProject = data.filter((item) => item.project === 0).length;
+    //   metrics.CR = data.filter((item) => item.project === 1).length;
+    //   metrics.DD = data.filter((item) => item.project === 2).length;
+    //   metrics.LD = data.filter((item) => item.project === 3).length;
+    //   metrics.CT = data.filter((item) => item.project === 4).length;
+    //   metrics.overallTable = [
+    //     { status: "Đang rảnh", amount: metrics.idle },
+    //     { status: "Đang bay", amount: metrics.flying },
+    //     { status: "Đang sạc", amount: metrics.charging },
+    //     { status: "Đang bảo trì", amount: metrics.maintaining },
+    //     { status: "Đã hỏng", amount: metrics.broken },
+    //   ];
+    //   return metrics;
+    // } else if (projectType == 'LUOI_DIEN') {
+    //   const {
+    //     data
+    //   } = await requestWithCache(
+    //     "getDroneDetailedMetrics",
+    //     () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
+    //   );
+    //   const metrics = {};
+    //   metrics.rawData = data;
+    //   metrics.idle = data.filter((item) => item.state === 0).length;
+    //   metrics.flying = data.filter((item) => item.project === 3).length;
+    //   metrics.charging = data.filter((item) => item.state === 2).length;
+    //   metrics.maintaining = data.filter((item) => item.state === 3).length;
+    //   metrics.broken = data.filter((item) => item.state === 4).length;
+    //   metrics.noProject = data.filter((item) => item.project === 0).length;
+    //   metrics.CR = data.filter((item) => item.project === 1).length;
+    //   metrics.DD = data.filter((item) => item.project === 2).length;
+    //   metrics.LD = data.filter((item) => item.project === 3).length;
+    //   metrics.CT = data.filter((item) => item.project === 4).length;
+    //   return metrics;
+    // } else if (projectType == 'CAY_TRONG') {
+    //   const {
+    //     data
+    //   } = await requestWithCache(
+    //     "getDroneDetailedMetrics",
+    //     () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
+    //   );
+    //   const metrics = {};
+    //   metrics.rawData = data;
+    //   metrics.idle = data.filter((item) => item.state === 0).length;
+    //   metrics.flying = data.filter((item) => item.project === 4).length;
+    //   metrics.charging = data.filter((item) => item.state === 2).length;
+    //   metrics.maintaining = data.filter((item) => item.state === 3).length;
+    //   metrics.broken = data.filter((item) => item.state === 4).length;
+    //   metrics.noProject = data.filter((item) => item.project === 0).length;
+    //   metrics.CR = data.filter((item) => item.project === 1).length;
+    //   metrics.DD = data.filter((item) => item.project === 2).length;
+    //   metrics.LD = data.filter((item) => item.project === 3).length;
+    //   metrics.CT = data.filter((item) => item.project === 4).length;
+    //   return metrics;
+    // } else if (projectType == 'DE_DIEU') {
+    //   const {
+    //     data
+    //   } = await requestWithCache(
+    //     "getDroneDetailedMetrics",
+    //     () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
+    //   );
+    //   const metrics = {};
+    //   metrics.rawData = data;
+    //   metrics.idle = data.filter((item) => item.state === 0).length;
+    //   metrics.flying = data.filter((item) => item.project === 2).length;
+    //   metrics.charging = data.filter((item) => item.state === 2).length;
+    //   metrics.maintaining = data.filter((item) => item.state === 3).length;
+    //   metrics.broken = data.filter((item) => item.state === 4).length;
+    //   metrics.noProject = data.filter((item) => item.project === 0).length;
+    //   metrics.CR = data.filter((item) => item.project === 1).length;
+    //   metrics.DD = data.filter((item) => item.project === 2).length;
+    //   metrics.LD = data.filter((item) => item.project === 3).length;
+    //   metrics.CT = data.filter((item) => item.project === 4).length;
+    //   return metrics;
+    // } else {
+    //   const {
+    //     data
+    //   } = await requestWithCache(
+    //     "getDroneDetailedMetrics",
+    //     () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
+    //   );
+    //   const metrics = {};
+    //   metrics.rawData = data;
+    //   metrics.idle = data.filter((item) => item.state === 0).length;
+    //   metrics.flying = data.filter((item) => item.state === 1).length;
+    //   metrics.charging = data.filter((item) => item.state === 2).length;
+    //   metrics.maintaining = data.filter((item) => item.state === 3).length;
+    //   metrics.broken = data.filter((item) => item.state === 4).length;
+    //   metrics.noProject = data.filter((item) => item.project === 0).length;
+    //   metrics.CR = data.filter((item) => item.project === 1).length;
+    //   metrics.DD = data.filter((item) => item.project === 2).length;
+    //   metrics.LD = data.filter((item) => item.project === 3).length;
+    //   metrics.CT = data.filter((item) => item.project === 4).length;
+    //   return metrics;
+    // }
   } catch (error) {
     console.error(error);
   }

@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState, useMemo, useRef } from 'react';
 import { Card, Select, Modal, Spin, Button } from 'antd';
 import Axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import QueryString from 'query-string';
 
 import ReportTemplate from './ReportTemplate';
 
@@ -27,6 +29,13 @@ export default function CreateReport() {
   const [report, setReport] = useState(null);
   const [currentTemplateId, setCurrentTemplateId] = useState(null);
   const [templatesList, setTemplatesList] = useState([]);
+  const location = useLocation();
+  const { templateId } = QueryString.parse(location.search);
+
+  const handleChangeOption = useCallback((id) => {
+    setCurrentTemplateId(id);
+    setReport(null);
+  }, []);
 
   useEffect(() => {
     Axios.get('https://dsd07.herokuapp.com/api/reports/templates', {
@@ -35,17 +44,17 @@ export default function CreateReport() {
       },
     })
       .then(response => {
-        if (response.data.success)
-          setTemplatesList(response.data.data)
+        if (response.data.success) {
+          const templates = response.data.data;
+          setTemplatesList(templates);
+          if (templates.find((item) => item.id === templateId)) {
+            handleChangeOption(templateId);
+          }
+        }
       }).catch(err => {
         // handleShowModal()
       });
-  }, []);
-
-  const handleChangeOption = useCallback((id) => {
-    setCurrentTemplateId(id);
-    setReport(null);
-  }, []);
+  }, [templateId]);
 
   const handleSubmitReport = useCallback(() => {
     Axios.post('https://dsd07.herokuapp.com/api/user-reports', processDataToAPI(report), {
@@ -87,6 +96,7 @@ export default function CreateReport() {
           <Select
             style={{ marginRight: 16, width: '40%' }}
             onChange={handleChangeOption}
+            value={currentTemplateId}
           >
             {renderTemplateDropdownList()}
           </Select>
