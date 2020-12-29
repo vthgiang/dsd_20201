@@ -4,12 +4,14 @@ import WrappedMap from "./map";
 import { useParams } from "react-router-dom";
 import SuccessNotification from "./SuccessNotification";
 import { Image } from "antd";
+import Gallery from "react-grid-gallery";
 
 import { CategoryActions } from "../../Category/redux/actions";
 import { MonitoredObjectConstants } from "../redux/constants";
 import { MonitoredObjectActions } from "../redux/actions";
 import CreateArea from "./CreateArea";
 import { FolderAddOutlined } from "@ant-design/icons";
+import moment from "moment";
 import { Button } from "antd";
 
 const axios = require("axios");
@@ -252,8 +254,16 @@ function MonitoredObjectView({ history }) {
   };
 
   useEffect(() => {
-    dispatch(CategoryActions.getAllCategories({type:localStorage.getItem("project-type")}));
-    dispatch(MonitoredObjectActions.getAllMonitoredObjects({type:localStorage.getItem("project-type")}));
+    dispatch(
+      CategoryActions.getAllCategories({
+        type: localStorage.getItem("project-type"),
+      })
+    );
+    dispatch(
+      MonitoredObjectActions.getAllMonitoredObjects({
+        type: localStorage.getItem("project-type"),
+      })
+    );
     getZoneAll();
     getArea();
     getDetailMonitoredObject();
@@ -334,7 +344,41 @@ function MonitoredObjectView({ history }) {
       monitoredZone: id,
     }));
   };
+  const [images, setImages] = useState([]);
+  const [selectAllChecked, setSelectAllChecked] = useState(false);
 
+  const convertImages = (values = []) => {
+    return (values || []).map((item) => {
+      let createdAt = moment().format("DD/MM/YYYY hh:mm:ss");
+      return {
+        ...item,
+        src: item.link,
+        caption: item.title,
+        thumbnailWidth: 320,
+        thumbnailHeight: 212,
+        thumbnail: item.link,
+        tags: [{ value: createdAt, title: "Created At" }],
+      };
+    });
+  };
+
+  const onSelectImage = (index, image) => {
+    let _images = images.slice();
+    let img = _images[index];
+    img.hasOwnProperty("isSelected")
+      ? (img.isSelected = !img.isSelected)
+      : (img.isSelected = true);
+    setImages(_images);
+    allImagesSelected(images)
+      ? setSelectAllChecked(true)
+      : setSelectAllChecked(false);
+  };
+  const allImagesSelected = (_images) => {
+    return (
+      _images.filter((img) => Boolean(img.isSelected)).length == _images.length
+    );
+  };
+  console.log(monitoredObject.images);
   let indexImage = 0;
   return (
     <div>
@@ -498,79 +542,21 @@ function MonitoredObjectView({ history }) {
             </label>
             <div className="col-sm-10">
               <div
-                id="carousel-example-2"
-                className="carousel slide carousel-fade z-depth-1-half"
-                data-ride="carousel"
-                style={{ height: "300px", background: "#8e8080" }}
+                style={{
+                  display: "block",
+                  minHeight: "1px",
+                  width: "100%",
+                  border: "1px solid #ddd",
+                  overflow: "auto",
+                }}
               >
-                <ol className="carousel-indicators">
-                  {monitoredObject.images &&
-                    monitoredObject.images.length > 0 &&
-                    monitoredObject.images.map((item, index) => (
-                      <li
-                        data-target="#carousel-example-2"
-                        data-slide-to={index}
-                        className={indexImage === index ? "active" : ""}
-                        key={index}
-                      ></li>
-                    ))}
-                </ol>
-                <div className="carousel-inner" role="listbox">
-                  {monitoredObject.images &&
-                    monitoredObject.images.length > 0 &&
-                    monitoredObject.images.map((item, index) => (
-                      <div
-                        className={
-                          indexImage === index
-                            ? "carousel-item active"
-                            : "carousel-item"
-                        }
-                        key={index}
-                      >
-                        <div className="view">
-                          <Image
-                            style={{
-                              cursor: "pointer",
-                            }}
-                            src={item.link}
-                            preview={false}
-                            alt={item.title}
-                          />
-                          {/* <img
-                            className="d-block w-100"
-                            src={item.link}
-                            alt="First slide"
-                            height={300}
-                          /> */}
-                          <div className="mask rgba-black-light"></div>
-                        </div>
-                      </div>
-                    ))}
-                </div>
-                <a
-                  className="carousel-control-prev"
-                  href="#carousel-example-2"
-                  role="button"
-                  data-slide="prev"
-                >
-                  <span
-                    className="carousel-control-prev-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span className="sr-only">Previous</span>
-                </a>
-                <a
-                  className="carousel-control-next"
-                  href="#carousel-example-2"
-                  role="button"
-                  data-slide="next"
-                >
-                  <span
-                    className="carousel-control-next-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span className="sr-only">Next</span>
-                </a>
+                {monitoredObject.images && (
+                  <Gallery
+                    images={convertImages(monitoredObject.images)}
+                    onSelectImage={onSelectImage}
+                    showLightboxThumbnails={true}
+                  />
+                )}
               </div>
             </div>
           </div>
