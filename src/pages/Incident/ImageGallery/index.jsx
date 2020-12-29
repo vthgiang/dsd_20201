@@ -360,6 +360,7 @@ const IMAGES = [
 let cacheMonitoreds = []
 let cache = IMAGES
 let levels = [];
+let cacheImages = []
 const ImageGalley = (props) => {
     const [images, setImages] = useState([]);
     const [selectAllChecked, setSelectAllChecked] = useState(false);
@@ -429,6 +430,7 @@ const ImageGalley = (props) => {
 
 
         let _images = convertImages(imagesRes.result || [])
+        cacheImages= _images
         setImages(_images);
         setTotal(_images.length)
         console.log('imagesRes', imagesRes);
@@ -518,9 +520,12 @@ const ImageGalley = (props) => {
     };
 
     const onChangeSelect = async (value = []) => {
-        console.log('value', value)
+        if(!value.length) {
+            setImages(cacheImages)
+            return
+        }
         let filterImages = images.filter(i => value.includes(i.monitoredObjectId))
-        await setImages(convertImages(filterImages))
+        await setImages(filterImages)
     }
 
     const renderOptions = () => {
@@ -571,7 +576,9 @@ const ImageGalley = (props) => {
                         showLightboxThumbnails={true}
                     />
 
-                </div> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+                </div> :
+                    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}
+                           description={<span>Đối tượng giám sát và ảnh không trùng khớp</span>}/>}
             </Spin>
             <Pagination
                 total={60}
