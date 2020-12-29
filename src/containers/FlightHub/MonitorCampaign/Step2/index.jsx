@@ -32,6 +32,7 @@ const Step2 = ({
       projectType: projectType,
     };
 
+    if (!monitoredZone) return;
     axios({
       method: 'GET',
       url: `https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-zone`,
@@ -88,31 +89,27 @@ const Step2 = ({
 
   return (
     <StyleStep2>
-      {loading ? (
-        <div style={{ position: 'fixed', top: '45%', left: '35%' }}>
+      {loading && (
+        <StyleSpinContainer>
           <Spin />
-        </div>
-      ) : (
-        ''
+        </StyleSpinContainer>
       )}
       <Form
         {...LAYOUT}
         form={form}
-        name="flight-hub-object"
+        name='flight-hub-object'
         onFinish={onFinish}
         validateMessages={VALIDATE_MESSAGES}
-        initialValues={data}
-      >
+        initialValues={data}>
         <Form.Item
-          name="monitoredZone"
-          label="Miền giám sát"
-          rules={[{ type: 'string', required: true }]}
-        >
+          name='monitoredZone'
+          label='Miền giám sát'
+          rules={[{ type: 'string', required: true }]}>
           <WrappedMap
             task={data.task}
             monitoredObjects={monitoredObjects}
             // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCV09KQtrmzDnyXYeC_UzB-HAwMKytXRpE"
-            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA15qz81pHiNfVEV3eeniSNhAu64SsJKgU"
+            googleMapURL='https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA15qz81pHiNfVEV3eeniSNhAu64SsJKgU'
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `400px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
@@ -123,30 +120,27 @@ const Step2 = ({
         </Form.Item>
 
         <Form.Item
-          name="monitoredObjects"
-          label="Đối tượng giám sát"
-          rules={[{ type: 'array', required: true }]}
-        >
+          name='monitoredObjects'
+          label='Đối tượng giám sát'
+          rules={[{ type: 'array', required: true }]}>
           <Select
-            mode="multiple"
+            mode='multiple'
             showSearch
-            placeholder="Chọn đối tượng giám sát"
-          >
+            placeholder='Chọn đối tượng giám sát'>
             {getObjectOptions()}
           </Select>
         </Form.Item>
 
         <Col offset={6}>
-          <Row type="flex">
+          <Row type='flex'>
             <Button
-              type="default"
+              type='default'
               icon={<StepBackwardOutlined />}
-              onClick={prevStep}
-            >
+              onClick={prevStep}>
               Quay lại
             </Button>
             &ensp;
-            <Button type="primary" icon={<FormOutlined />} htmlType="submit">
+            <Button type='primary' icon={<FormOutlined />} htmlType='submit'>
               Tiếp theo
             </Button>
           </Row>

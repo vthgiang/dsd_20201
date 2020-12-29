@@ -2,7 +2,7 @@ import moment from 'moment';
 import { DATE_TIME_FORMAT } from '../../../../configs';
 
 export const covertMomentToDate = (dateMoment) => {
-  return new Date(moment(dateMoment).valueOf());
+  return new Date(moment(dateMoment).add(7, 'hours'));
 };
 
 export const convertTimeRangeToData = (timeRange) => {
