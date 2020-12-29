@@ -62,9 +62,12 @@ class List extends Component {
   loadAllPayload() {
     axios.get(`http://dsd06.herokuapp.com/api/payload`)
       .then(res => {
-        console.log(res.data);
-        //const persons = res.data;
-        this.setState({ tables: res.data });
+        if (res.status == 500) {
+          this.openNotificationError(res.data.message || "")
+        } else {
+          let arr = res.data.filter((item) => {return item.type != null});
+          this.setState({ tables: arr });
+        }
       })
   }
 
