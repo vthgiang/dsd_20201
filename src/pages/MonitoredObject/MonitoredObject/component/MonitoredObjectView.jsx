@@ -182,6 +182,20 @@ function MonitoredObjectView({ history }) {
         });
     }
   };
+  ///test
+  const getDetailImageByID = async()=>{
+    if (id){
+      await axios({
+        method: "GET",
+        url: `https://it4483team2.herokuapp.com/api/records/${id}`,
+      })
+      .then((res)=>{
+        if(res.data){
+          setImages(res.data.content.image);
+        }
+      })
+    }
+  }
   const getVideoMonitored = async () => {
     if (id) {
       await axios({
