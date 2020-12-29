@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Card, Select, Modal, Spin, Button, Table } from 'antd';
 import Axios from 'axios';
+import { useSelector } from "react-redux";
 
 import ReportViewer from './ReportTemplate/ReportViewer';
 import { useUserState } from '../../hooks/useUserState';
@@ -9,6 +10,7 @@ const role = 'MANAGER';
 // const role = 'USER';
 
 export default function ViewReport() {
+  const { user: { api_token, type } } = useSelector(state => state.user);
   const [reports, setReports] = useState([]);
   const [reportId, setReportId] = useState(null);
   const [otherReports, setOtherReports] = useState([]);
@@ -22,8 +24,8 @@ export default function ViewReport() {
     Axios.get('https://dsd07.herokuapp.com/api/user-reports?role=author', {
       headers: {
         'Access-Control-Allow-Origin': true,
-        'api-token': '4e3fe3463afd3a705c0be7ec2322c335',
-        'project-type': 'LUOI_DIEN',
+        "api-token": api_token,
+        "project-type": type,
       },
     })
       .then(response => {
@@ -39,8 +41,8 @@ export default function ViewReport() {
       Axios.get('https://dsd07.herokuapp.com/api/user-reports?role=reviewer', {
         headers: {
           'Access-Control-Allow-Origin': true,
-          'api-token': '4e3fe3463afd3a705c0be7ec2322c335',
-          'project-type': 'LUOI_DIEN',
+          "api-token": api_token,
+          "project-type": type,
         },
       })
         .then(response => {

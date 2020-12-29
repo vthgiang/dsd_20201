@@ -6,6 +6,7 @@ import Axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import matchInputs from './ReportTemplate/Inputify/utils/matchInputs';
 import ReportRenderer from './ReportTemplate/ReportRenderer';
+import { useSelector } from "react-redux";
 import {
   getDroneDetailedMetrics,
 } from '../../services/statistics';
@@ -121,6 +122,7 @@ const processFromToAPI = (template) => {
 }
 
 export default function ManageReportTemplate() {
+  const { user: { api_token, type } } = useSelector(state => state.user);
   const [templates, setTemplates] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalData, setModalData] = useState({});
@@ -130,8 +132,8 @@ export default function ManageReportTemplate() {
     Axios.get('https://dsd07.herokuapp.com/api/reports/templates', {
       headers: {
         'Access-Control-Allow-Origin': true,
-        'api-token': '4e3fe3463afd3a705c0be7ec2322c335',
-        'project-type': 'LUOI_DIEN',
+        "api-token": api_token,
+        "project-type": type,
       },
     })
       .then(response => {
@@ -154,8 +156,8 @@ export default function ManageReportTemplate() {
       Axios.post('https://dsd07.herokuapp.com/api/reports/templates', processDataToAPI(modalData), {
         headers: {
           'Access-Control-Allow-Origin': true,
-          'api-token': '4e3fe3463afd3a705c0be7ec2322c335',
-          'project-type': 'LUOI_DIEN',
+          "api-token": api_token,
+          "project-type": type,
         },
       })
         .then(response => {
@@ -171,8 +173,8 @@ export default function ManageReportTemplate() {
       Axios.patch(`https://dsd07.herokuapp.com/api/reports/templates/${modalData.templateId}`, processDataToAPI(modalData), {
         headers: {
           'Access-Control-Allow-Origin': true,
-          'api-token': '4e3fe3463afd3a705c0be7ec2322c335',
-          'project-type': 'LUOI_DIEN',
+          "api-token": api_token,
+          "project-type": type,
         },
       })
         .then(response => {
@@ -215,8 +217,8 @@ export default function ManageReportTemplate() {
     Axios.get(`https://dsd07.herokuapp.com/api/reports/templates/${templateId}`, {
       headers: {
         'Access-Control-Allow-Origin': true,
-        'api-token': '4e3fe3463afd3a705c0be7ec2322c335',
-        'project-type': 'LUOI_DIEN',
+        "api-token": api_token,
+        "project-type": type,
       },
     })
       .then(response => {
@@ -239,8 +241,8 @@ export default function ManageReportTemplate() {
       Axios.delete(`https://dsd07.herokuapp.com/api/reports/templates/${id}`, {
         headers: {
           'Access-Control-Allow-Origin': true,
-          'api-token': '4e3fe3463afd3a705c0be7ec2322c335',
-          'project-type': 'LUOI_DIEN',
+          "api-token": api_token,
+          "project-type": type,
         },
       })
         .then(response => {
