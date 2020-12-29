@@ -35,12 +35,9 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
   };
 
   const fetchPayloadsData = async (params) => {
-    setLoading(true);
     try {
       const resp = await payloadApi.getAllPayload(params);
       setPayloadsData(resp.data);
-
-      setLoading(false);
     } catch (error) {
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại.',
@@ -49,13 +46,10 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
   };
 
   const fetchFlightPathsData = async (params) => {
-    setLoading(true);
     const { monitoredZone } = data;
     try {
       const resp = await droneApi.getAllPathBySupervisedArea(monitoredZone);
       setFlightPathsData(resp.data);
-
-      setLoading(false);
     } catch (error) {
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại.',

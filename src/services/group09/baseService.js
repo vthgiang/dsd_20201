@@ -35,7 +35,7 @@ class BaseService {
         isExternalServer = false,
         options
     } = {}) => {
-        if (["GET", "DELETE"].includes(method)) {
+        if (["GET", "DELETE"].includes(method) && data) {
             url += "?" + this.makeQuery(data)
         } else {
             options = {

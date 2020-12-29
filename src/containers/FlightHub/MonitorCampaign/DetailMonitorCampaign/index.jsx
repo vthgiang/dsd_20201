@@ -3,9 +3,9 @@ import StyleListMonitorCampaign, { StyleSpinContainer } from './index.style';
 import { StyleTitle } from '../../../../themes/default';
 import { useParams } from 'react-router-dom';
 import { monitorCampaignApi } from '../../../../apis';
-import { Descriptions, Badge, Spin } from 'antd';
+import { Descriptions, Spin } from 'antd';
 import moment from 'moment';
-import axios from 'axios';
+import { formatMomentDateToDateTimeString } from '../services';
 
 const DetailMonitorCampaign = ({}) => {
   const params = useParams();
@@ -30,26 +30,22 @@ const DetailMonitorCampaign = ({}) => {
         <>
           <StyleTitle>Thông tin đợt giám sát</StyleTitle>
           <Descriptions bordered style={{ marginTop: '20px' }}>
-            <Descriptions.Item label="Tên đợt giám sát" span={2}>
+            <Descriptions.Item label='Tên đợt giám sát' span={2}>
               {monitorCampaign.name}
             </Descriptions.Item>
-            <Descriptions.Item label="Sự cố" span={2}>
+            <Descriptions.Item label='Sự cố' span={2}>
               {monitorCampaign.task}
             </Descriptions.Item>
-            <Descriptions.Item label="Thời gian bắt đầu" span={2}>
-              {moment(monitorCampaign.startTime).format(
-                'MMMM Do YYYY, h:mm:ss a',
-              )}
+            <Descriptions.Item label='Thời gian bắt đầu' span={2}>
+              {formatMomentDateToDateTimeString(monitorCampaign.startTime)}
             </Descriptions.Item>
-            <Descriptions.Item label="Thời gian kết thúc" span={2}>
-              {moment(monitorCampaign.endTime).format(
-                'MMMM Do YYYY, h:mm:ss a',
-              )}
+            <Descriptions.Item label='Thời gian kết thúc' span={2}>
+              {formatMomentDateToDateTimeString(monitorCampaign.endTime)}
             </Descriptions.Item>
-            <Descriptions.Item label="Miền giám sát" span={6}>
+            <Descriptions.Item label='Miền giám sát' span={6}>
               {monitorCampaign.monitoredZone.name}
             </Descriptions.Item>
-            <Descriptions.Item label="Drone sử dụng" span={2}>
+            <Descriptions.Item label='Drone sử dụng' span={2}>
               {monitorCampaign.drones.map((drone) => {
                 return (
                   <>
@@ -59,7 +55,7 @@ const DetailMonitorCampaign = ({}) => {
               })}
             </Descriptions.Item>
 
-            <Descriptions.Item label="Đối tượng giám sát" span={2}>
+            <Descriptions.Item label='Đối tượng giám sát' span={2}>
               {monitorCampaign.monitoredObjects.map((monitoredObject) => {
                 return (
                   <>
@@ -68,16 +64,16 @@ const DetailMonitorCampaign = ({}) => {
                 );
               })}
             </Descriptions.Item>
-            <Descriptions.Item label="Cơ chế thu thập">
+            <Descriptions.Item label='Cơ chế thu thập'>
               {monitorCampaign.mechanism}
             </Descriptions.Item>
-            <Descriptions.Item label="Dạng lưu trữ">
+            <Descriptions.Item label='Dạng lưu trữ'>
               {monitorCampaign.metadataType}
             </Descriptions.Item>
-            <Descriptions.Item label="Độ phân giải">
+            <Descriptions.Item label='Độ phân giải'>
               {monitorCampaign.resolution}
             </Descriptions.Item>
-            <Descriptions.Item label="Nhãn đính kèm" span={6}>
+            <Descriptions.Item label='Nhãn đính kèm' span={6}>
               {monitorCampaign.labels.map((label) => {
                 return (
                   <>
@@ -86,7 +82,7 @@ const DetailMonitorCampaign = ({}) => {
                 );
               })}
             </Descriptions.Item>
-            <Descriptions.Item label="Mô tả" span={6}>
+            <Descriptions.Item label='Mô tả' span={6}>
               {monitorCampaign.description}
             </Descriptions.Item>
           </Descriptions>
