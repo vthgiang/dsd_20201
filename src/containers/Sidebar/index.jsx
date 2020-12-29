@@ -5,6 +5,9 @@ import { StyleSidebarMenu } from './index.style';
 import Logo from '../../components/Logo';
 import { sidebarMenu } from './config';
 import { getPermissionResource } from '../../modules/user/store/services';
+import { isAuthorised, CRUD_DRONE} from "../../components/Drone/Common/role";
+import { useSelector } from "react-redux";
+
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -54,10 +57,18 @@ const Sidebar = ({ collapsed, toggle }) => {
     history.push(route);
   };
 
+  const users = useSelector((state) => state.user.user);
+  const projectType = users.type;
+  const role = users.role;
   const renderListMenu = (menu) => {
     return menu.map((menuItem) => {
       const { subMenu = [], key, heading, icon } = menuItem;
       if (!subMenu.length) {
+        if (key === "DroneStatistic" && role != 'SUPER_ADMIN') {
+            return (
+              <hr></hr>
+            )
+        }
         return (
           <Menu.Item
             key={key}
@@ -67,7 +78,7 @@ const Sidebar = ({ collapsed, toggle }) => {
             <span className="collapsed">{heading}</span>
           </Menu.Item>
         );
-      }
+      } 
       return (
         <SubMenu
           key={key}

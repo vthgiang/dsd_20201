@@ -46,7 +46,6 @@ const ListSupports = () => {
     })
       .then(function (response) {
         //handle success
-        console.log(response);
         setLoadingTable(false);
         setDataSupports(response.data.list);
       })
@@ -84,14 +83,14 @@ const ListSupports = () => {
             size="small"
             style={{ width: 90 }}
           >
-            Search
+            Tìm kiếm
           </Button>
           <Button
             onClick={() => handleReset(clearFilters)}
             size="small"
             style={{ width: 90 }}
           >
-            Reset
+            Làm mới
           </Button>
         </Space>
       </div>

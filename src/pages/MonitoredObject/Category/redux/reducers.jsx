@@ -23,6 +23,7 @@ const initialState = {
   isCatSuccess: false,
   isError: false,
   messages: '',
+  isLoading: false,
 };
 
 export function category(state = initialState, action) {
@@ -31,7 +32,15 @@ export function category(state = initialState, action) {
 
   switch (action.type) {
     case CategoryConstants.GET_ALL_CATEGORY_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
     case CategoryConstants.GET_PAGINATE_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
     case CategoryConstants.CREATE_CATEGORY_MONITORED_REQUEST:
     case CategoryConstants.DELETE_MONITORED_REQUEST:
     case CategoryConstants.EDIT_CATEGORY_MONITORED_REQUEST:
@@ -43,6 +52,7 @@ export function category(state = initialState, action) {
       return {
         ...state,
         list: action.payload,
+        isLoading: false,
       };
     case CategoryConstants.GET_PAGINATE_SUCCESS:
       return {
@@ -57,6 +67,7 @@ export function category(state = initialState, action) {
         hasNextPage: action.payload.hasNextPage,
         prevPage: action.payload.prevPage,
         nextPage: action.payload.nextPage,
+        isLoading: false,
       };
 
     case CategoryConstants.CREATE_CATEGORY_MONITORED_SUCCESS:
@@ -94,7 +105,15 @@ export function category(state = initialState, action) {
         isCatSuccess: action.payload,
       };
     case CategoryConstants.GET_ALL_CATEGORY_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+      };
     case CategoryConstants.GET_PAGINATE_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+      };
     case CategoryConstants.CREATE_CATEGORY_MONITORED_FAILURE:
     case CategoryConstants.DELETE_MONITORED_FAILURE:
     case CategoryConstants.CAT_MONITORED_FAILURE:

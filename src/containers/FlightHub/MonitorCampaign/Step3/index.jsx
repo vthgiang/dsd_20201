@@ -35,12 +35,9 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
   };
 
   const fetchPayloadsData = async (params) => {
-    setLoading(true);
     try {
       const resp = await payloadApi.getAllPayload(params);
       setPayloadsData(resp.data);
-
-      setLoading(false);
     } catch (error) {
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại.',
@@ -49,14 +46,10 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
   };
 
   const fetchFlightPathsData = async (params) => {
-    setLoading(true);
     const { monitoredZone } = data;
     try {
       const resp = await droneApi.getAllPathBySupervisedArea(monitoredZone);
       setFlightPathsData(resp.data);
-      console.log('rest =>>>>>>>>>', resp);
-
-      setLoading(false);
     } catch (error) {
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại.',
@@ -79,7 +72,7 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
     setDronesData(newDrones);
 
     const indexSelected = selectedRowKeys.findIndex(
-      (item) => record.id === item,
+      (item) => record.id === item
     );
     if (indexSelected > -1) {
       const newSelectedRows = [...selectedRows];
@@ -94,7 +87,7 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
     setDronesData(newDrones);
 
     const indexSelected = selectedRowKeys.findIndex(
-      (item) => record.id === item,
+      (item) => record.id === item
     );
     if (indexSelected > -1) {
       const newSelectedRows = [...selectedRows];
@@ -105,19 +98,17 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
 
   useEffect(() => {
     const { drones = [] } = data;
-
     if (dronesData.length) {
       const newDronesData = [...dronesData];
       drones.forEach((selectedDrone) => {
         const indexSelected = newDronesData.findIndex(
-          (drone) => drone.id === selectedDrone.id,
+          (drone) => drone.id === selectedDrone.id
         );
         if (indexSelected !== -1) {
           newDronesData[indexSelected].payloads = selectedDrone.payloads;
           newDronesData[indexSelected].flightPaths = selectedDrone.flightPaths;
         }
       });
-      console.log('data ', newDronesData);
       setDronesData(newDronesData);
     }
 
@@ -146,11 +137,10 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
         return (
           <Select
             style={{ width: 150 }}
-            mode="multiple"
+            mode='multiple'
             value={data}
             onChange={handleChangePayloads(record, index)}
-            placeholder="Chọn payloads"
-          >
+            placeholder='Chọn payloads'>
             {payloadsData.map(({ _id, name }) => (
               <Select.Option key={_id.toString()} value={_id}>
                 {name}
@@ -171,10 +161,9 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
           <Select
             style={{ width: 150 }}
             value={data}
-            mode="multiple"
+            mode='multiple'
             onChange={handleChangeFlightPath(record, index)}
-            placeholder="Chọn đường bay"
-          >
+            placeholder='Chọn đường bay'>
             {flightPathsData.map(({ id, name }) => (
               <Select.Option key={id} value={id}>
                 {name}
@@ -189,15 +178,12 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
   const handleNextStep = () => {
     const drones = [...selectedRows];
 
-    console.log({ drones });
-
     if (!drones.length) {
       message.warning('Nhóm drones tham gia không được để trống!');
       return;
     }
 
     for (const drone of drones) {
-      console.log('drrone : ', drone);
       const { payloads, flightPaths } = drone;
       if (!payloads || !payloads.length) {
         message.warning('Bạn chưa chọn payloads đính kèm drone!');
@@ -222,40 +208,33 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
           moment(timeRange[1]).format(DATE_TIME_FORMAT)}
       </StyleTitle>
       <StyleSeparator />
-      {loading ? (
-        <StyleSpinContainer>
-          <Spin />
-        </StyleSpinContainer>
-      ) : (
-        <Table
-          rowKey="id"
-          rowSelection={{
-            type: 'checkbox',
-            onChange: (selectedRowKeys, selectedRows) => {
-              setSelectedRows(selectedRows);
-              setSelectedRowKeys(selectedRowKeys);
-            },
-            selectedRowKeys: selectedRowKeys,
-          }}
-          // selections={true}
-          columns={columns}
-          dataSource={dronesData}
-        />
-      )}
-      <Row type="flex">
+      <Table
+        loading={loading}
+        rowKey='id'
+        rowSelection={{
+          type: 'checkbox',
+          onChange: (selectedRowKeys, selectedRows) => {
+            setSelectedRows(selectedRows);
+            setSelectedRowKeys(selectedRowKeys);
+          },
+          selectedRowKeys: selectedRowKeys,
+        }}
+        // selections={true}
+        columns={columns}
+        dataSource={dronesData}
+      />
+      <Row type='flex'>
         <Button
-          type="default"
+          type='default'
           icon={<StepBackwardOutlined />}
-          onClick={prevStep}
-        >
+          onClick={prevStep}>
           Quay lại
         </Button>
         &ensp;
         <Button
-          type="primary"
+          type='primary'
           icon={<StepForwardOutlined />}
-          onClick={handleNextStep}
-        >
+          onClick={handleNextStep}>
           Tiếp theo
         </Button>
       </Row>

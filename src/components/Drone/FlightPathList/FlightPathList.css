@@ -29,3 +29,13 @@ button.btn-edit:active {
     color: rgb(184, 163, 241);
     outline:0;  
 }
+div.view-flight-path {
+    color: #03b848;
+}
+div.view-flight-path:hover {
+    color: #416e59;
+    cursor: pointer;
+}
+div.view-flight-path:active {
+    color: #013f19;
+}

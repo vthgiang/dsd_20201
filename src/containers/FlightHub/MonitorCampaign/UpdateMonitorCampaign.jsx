@@ -7,6 +7,7 @@ import { notification } from 'antd';
 
 const UpdateMonitorCampaign = () => {
   const [monitorCampaignData, setMonitorCampaignData] = useState({});
+  const [loading, setLoading] = useState(false);
   const params = useParams();
   const history = useHistory();
   const goBack = () => {
@@ -17,10 +18,12 @@ const UpdateMonitorCampaign = () => {
     const { id } = params;
     const fetchMonitorCampaignData = async () => {
       try {
+        setLoading(true);
         const resp = await monitorCampaignApi.getMonitorCampaign(id);
-        console.log('resp ', resp);
         setMonitorCampaignData(resp.data.result.monitorCampaign);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         notification.error({
           message: 'Có lỗi xảy ra! Xin thử lại',
         });
@@ -48,10 +51,10 @@ const UpdateMonitorCampaign = () => {
 
   return (
     <MonitorCampaignForm
+      loading={loading}
       initialData={convertInitialDataToFieldValues(monitorCampaignData)}
-      title="Sửa đợt giám sát"
-      handleSubmit={updateMonitorCampaign}
-    ></MonitorCampaignForm>
+      title='Sửa đợt giám sát'
+      handleSubmit={updateMonitorCampaign}></MonitorCampaignForm>
   );
 };
 

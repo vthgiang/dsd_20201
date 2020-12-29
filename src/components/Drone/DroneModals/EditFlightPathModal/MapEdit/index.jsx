@@ -36,6 +36,10 @@ const MapEdit = compose(
         setSelectedPoint(null);
     }
 
+    const handlePolygonClick = () =>  {
+        setSelectedPoint(null);
+    }
+
     return (
         <GoogleMap
             ref={mapRef}
@@ -58,7 +62,7 @@ const MapEdit = compose(
             />}
             {zone != null && <Polygon 
                 path={getPathFromZone(zone)}
-                // onClick={onClick}
+                onClick={handlePolygonClick}
                 options={{
                     strokeColor: "#0000FF",
                     strokeOpacity: 1,

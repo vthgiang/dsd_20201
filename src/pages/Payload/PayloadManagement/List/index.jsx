@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Space, Input, Form, Select, Modal, notification , Row, Col } from 'antd';
+import { Table, Space, Input, Form, Select, Modal, notification , Row, Col, Image } from 'antd';
 import { Button } from 'antd';
 import StyleList from './index.style';
 import { useState } from 'react';
@@ -62,9 +62,12 @@ class List extends Component {
   loadAllPayload() {
     axios.get(`http://dsd06.herokuapp.com/api/payload`)
       .then(res => {
-        console.log(res.data);
-        //const persons = res.data;
-        this.setState({ tables: res.data });
+        if (res.status == 500) {
+          this.openNotificationError(res.data.message || "")
+        } else {
+          let arr = res.data.filter((item) => {return item.type != null});
+          this.setState({ tables: arr });
+        }
       })
   }
 
@@ -110,6 +113,7 @@ class List extends Component {
   handleFormSubmitEdit(values) {
     const data = {
       code: values.code,
+      image: values.image,
       name: values.name,
       type: values.type,
       detail: {
@@ -164,14 +168,15 @@ class List extends Component {
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={12}>
-          <Form.Item initialValue={this.state.detailPayload.name}
-            label="Tên"
-            name="name"
-            rules={[{ required: true, message: 'Hãy nhập tên payload!' }]}
+          <Form.Item initialValue={this.state.detailPayload.image}
+            label="Link ảnh"
+            name="image"
+            rules={[{ required: true, message: 'Hãy nhập mã!' }]}
           >
             <Input />
           </Form.Item>
         </Col>
+       
       </Row>
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
@@ -184,10 +189,10 @@ class List extends Component {
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={12}>
-          <Form.Item
-            label="Mô tả"
-            name="desciption"
-
+          <Form.Item initialValue={this.state.detailPayload.name}
+            label="Tên"
+            name="name"
+            rules={[{ required: true, message: 'Hãy nhập tên payload!' }]}
           >
             <Input />
           </Form.Item>
@@ -293,6 +298,7 @@ class List extends Component {
       code: values.code,
       name: values.name,
       type: values.type,
+      image: values.image,
       detail: {
         manufacturer: values.manufacturer,
         weight: values.weight,
@@ -367,11 +373,11 @@ class List extends Component {
         </Col>
         <Col className="gutter-row" span={12}>
           <Form.Item
-            label="Mô tả"
-            name="desciption"
+            label="Link ảnh"
+            name="image"
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
-            <Input />
+            <Input/>
           </Form.Item>
         </Col>
       </Row>
@@ -563,6 +569,7 @@ class List extends Component {
         tiltingmax: payload.detail.tilting.max,
         zoommin: payload.detail.zoom.min,
         zoommax: payload.detail.zoom.max,
+        image: payload.image
 
       })
     )
@@ -574,6 +581,19 @@ class List extends Component {
         title: 'Mã ',
         dataIndex: 'code',
         key: 'code',
+      },
+      {
+        title: 'Hình ảnh',
+        key: 'image',
+        render: (record) => (
+
+          <Image 
+            width={100} height={80}
+            src= {record.image}
+          />
+
+          
+        ),
       },
       {
         title: 'Tên',
@@ -589,11 +609,6 @@ class List extends Component {
         title: 'Loại',
         dataIndex: 'type',
         key: 'type',
-      },
-      {
-        title: 'Mô tả',
-        dataIndex: 'des',
-        key: 'des',
       },
       {
         title: 'Trạng thái',
@@ -628,18 +643,18 @@ class List extends Component {
             className="searchtype" onFinish={(values) => this.searchPayload(values)}
           >
             <Row justify="space-around">
-              <Col span={4}>
+              <Col span={5}>
                 <Form.Item label="Loại" name="type">
                   <Select options={this.state.Options} />
 
                 </Form.Item>
               </Col>
-              <Col span={4}>
+              <Col span={5}>
                 <Form.Item label="Trạng thái" name="status">
                   <Select options={this.state.status} />
                 </Form.Item>
               </Col>
-              <Col span={4}>
+              <Col span={3}>
                 <Button type="primary" htmlType="submit" icon={<SearchOutlined />}>
                   Tìm kiếm
               </Button>
@@ -647,7 +662,7 @@ class List extends Component {
             </Row>
           </Form>
           <Button type="primary" className="buttontype" onClick={() => this.showModalAdd()} >Thêm</Button>
-          <Table dataSource={dataSource} columns={columns} />;
+          <Table dataSource={dataSource} columns={columns} />
         </div>
         <Modal
           title="Chi tiết"
@@ -696,7 +711,7 @@ class List extends Component {
           }
         </Modal>
       </StyleList>
-    );
+    )
   }
 }
 export default List; 

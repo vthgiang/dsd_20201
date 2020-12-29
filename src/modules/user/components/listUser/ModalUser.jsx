@@ -30,8 +30,9 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode, 
     const fetchUser = useCallback(async () => {
         try {
             const res = await getUser(userId);
+            console.log("res", res);
             if (res.status === "successful") {
-                setUser(res.result);
+                setUser({ ...res.result, ...(res.result.department && { department: res.result.department.id }) });
                 if (res.result && res.result.avatar) {
                     setImageUrl(res.result.avatar);
                 }
@@ -178,12 +179,16 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode, 
         if (data["role"] == "Chưa xác định") {
             data["role"] = null;
         }
+        if (!user["birthday"] || user['birthday'] == "") {
+            data["birthday"] = null;
+        } else {
+            data['birthday'] = moment(user["birthday"]).format("YYYY-MM-DD 00:00:00");
+        }
         if (loginUser.role != "SUPER_ADMIN") {
             data.type = localStorage.getItem("project-type");
         } else {
             data.type = user.type;
         }
-        data.birthday = moment(user["birthday"]).format("YYYY-MM-DD 00:00:00");
         return data;
     };
 
@@ -257,9 +262,6 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode, 
             onChange={(value) => setUser({ ...user, department: value })}
             defaultValue='Chưa xác định'
             style={{ width: "100%" }}>
-            <Option key={-1} value='Chưa xác định'>
-                Chưa xác định
-            </Option>
             {listDepartments &&
                 listDepartments.map((department, index) => {
                     return (
@@ -276,7 +278,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode, 
             disabled={mode == "detail"}
             className='select-box'
             value={user?.type}
-            onChange={(value) => setUser({ ...user, type: value, page_id: 0 })}
+            onChange={(value) => setUser({ ...user, type: value })}
             defaultValue='Chưa xác định'
             style={{ width: "100%", minWidth: 100 }}>
             {loginUser && loginUser.role == "SUPER_ADMIN" && (
@@ -414,7 +416,7 @@ const ModalUser = ({ userId, setVisible, visible, fetchListUser, mode, setMode, 
                         {renderSelectDepartment()}
                     </Form.Item>
                     {loginUser && loginUser.role == "SUPER_ADMIN" && (
-                        <Form.Item name='type'>
+                        <Form.Item name='type' style={{ width: "45%" }}>
                             <label htmlFor=''>Dự án </label>
                             {renderSelectType()}
                         </Form.Item>
