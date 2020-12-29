@@ -66,7 +66,7 @@ export const convertFieldValuesToDataSubmit = (fieldValues) => {
 };
 
 export const formatMomentDateToDateTimeString = (momentDate) => {
-  return moment(momentDate).format(DATE_TIME_FORMAT);
+  return moment(momentDate).subtract(7, 'hours').format(DATE_TIME_FORMAT);
 };
 
 export const randomDateTime = (start, end) => {
