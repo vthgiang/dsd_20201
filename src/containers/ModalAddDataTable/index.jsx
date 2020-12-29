@@ -10,6 +10,8 @@ import { Form, Input, Col, Row,  InputNumber } from "antd";
 import React, { useEffect, useState, useMemo } from "react";
 import ImageUploader from "react-images-upload";
 import axios from 'axios';
+import { Spin } from 'antd';
+
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -47,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TransitionsModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
+  const [loader, setLoader] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
       
@@ -94,10 +96,13 @@ export default function TransitionsModal(props) {
 }, [name, brand, color, dimensions, maxFlightHeight, maxFlightRange, maxFlightSpeed, maxFlightTime, rangeBattery, selectedImage]);
   
   const saveDrone = () => {
+
     if (!isValidate) {
+      setLoader(false)
       setAlert(true);
       return;
     } 
+    setLoader(true);
     setAlert(false);
     const fd = new FormData();
     fd.append('file', selectedImage, selectedImage.name)
@@ -284,7 +289,10 @@ export default function TransitionsModal(props) {
               {(alert) && (
                 <p>*Hãy điền đầy đủ và đúng trường thông tin</p>
               )}
-              <Button
+              {loader? (
+                  <Spin></Spin>
+              ) : (
+                <Button
                 onClick={saveDrone}
                 variant="contained"
                 color="primary"
@@ -293,6 +301,8 @@ export default function TransitionsModal(props) {
               >
                 Lưu
               </Button>
+              )
+              }
               
              </div>
           </div>

@@ -10,7 +10,7 @@ import { Form, Input, Col, Row, InputNumber } from "antd";
 import React, { useEffect, useState, useMemo } from "react";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Image from 'react-bootstrap/Image'
-import ImageUploader from "react-images-upload";
+import { Spin } from 'antd';
 
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -51,21 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function TransitionsModal(props) {
-  // state = {
-  //   brand: "",
-  //   color: "",
-  //   dimensions: "",
-  //   id: props.id,
-  //   idLog: 0,
-  //   maxFlightHeight: 0,
-  //   maxFlightRange: 0,
-  //   maxFlightSpeed: 0,
-  //   maxFlightTime: 0,
-  //   name: "",
-  //   rangeBattery: 0,
-  //   task: 0,
-  //   used: true
-  // }
+  const [loader, setLoader] = React.useState(false);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -95,6 +81,7 @@ export default function TransitionsModal(props) {
     setOpen(false);
   };
   const delteDrone = () => {
+    setLoader(true);
     fetch("http://skyrone.cf:6789/drone/delete/" + props.id)
       .then(response => response.json())
       .then(json => {
@@ -131,7 +118,7 @@ export default function TransitionsModal(props) {
   const [rangeBattery, setBattery] = useState(drones.rangeBattery);
   const [type, setType] = useState(drones.type)
   const saveDrone = () => {
-   
+    setLoader(true);
     let headers = new Headers();
 
     headers.append('Content-Type', 'application/json');
@@ -288,25 +275,30 @@ export default function TransitionsModal(props) {
               </Col>
             </Row>
             <div className={classes.divButton}>
-              <Button
-                onClick={delteDrone}
-                variant="contained"
-                color="secondary"
-                className={classes.button}
-                startIcon={<DeleteIcon />}
-              >
-                Xóa Drone
-              </Button>
-              <Button
-                onClick={saveDrone}
-                variant="contained"
-                color="primary"
-                className={classes.button}
-                startIcon={<SaveIcon />}
-              >
-                Lưu
-              </Button>
-
+            {loader? (
+                  <Spin></Spin>
+              ) : (
+                <div>
+                  <Button
+                    onClick={delteDrone}
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
+                    startIcon={<DeleteIcon />}
+                  >
+                    Xóa Drone
+                  </Button>
+                  <Button
+                  onClick={saveDrone}
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                  startIcon={<SaveIcon />}
+                >
+                  Lưu
+                </Button>
+               </div>
+              )}
               
              </div>
           </div>
