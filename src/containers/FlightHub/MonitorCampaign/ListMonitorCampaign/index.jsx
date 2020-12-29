@@ -92,11 +92,13 @@ const ListMonitorCampaign = () => {
     history.push(`/flight-hub-monitor-campaigns/create`);
   };
 
-  const handleDeleteMonitorCampaign = (item, index) => async () => {
+  const handleDeleteMonitorCampaign = (item) => async () => {
     try {
       await monitorCampaignApi.deleteMonitorCampaign(item._id);
-      const newListMonitorCampaignsData = [...listMonitorCampaignsData];
-      newListMonitorCampaignsData.splice(index, 1);
+      let newListMonitorCampaignsData = [...listMonitorCampaignsData];
+      newListMonitorCampaignsData = newListMonitorCampaignsData.filter(
+        (elem) => elem._id !== item._id
+      );
       setListMonitorCampaignsData(newListMonitorCampaignsData);
       notification.info({
         message: 'Xóa thành công!',
@@ -108,7 +110,7 @@ const ListMonitorCampaign = () => {
     }
   };
 
-  const deleteConfirm = (item, index) => () => {
+  const deleteConfirm = (item) => () => {
     const { name } = item;
     Modal.confirm({
       title: 'Cảnh báo',
@@ -120,7 +122,7 @@ const ListMonitorCampaign = () => {
       ),
       okText: 'Đồng ý',
       cancelText: 'Hủy',
-      onOk: handleDeleteMonitorCampaign(item, index),
+      onOk: handleDeleteMonitorCampaign(item),
     });
   };
 
@@ -351,16 +353,15 @@ const ListMonitorCampaign = () => {
       </StyleSearchForm>
 
       <StyleSeparator />
-        <StyleTable>
-          <Table
+      <StyleTable>
+        <Table
           loading={loading}
-            rowKey='_id'
-            columns={columns}
-            dataSource={listMonitorCampaignsData}
-            scroll={{ x: 1560 }}
-          />
-        </StyleTable>
-
+          rowKey='_id'
+          columns={columns}
+          dataSource={listMonitorCampaignsData}
+          scroll={{ x: 1560 }}
+        />
+      </StyleTable>
     </StyleListMonitorCampaign>
   );
 };
