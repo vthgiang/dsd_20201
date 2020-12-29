@@ -13,6 +13,9 @@ import { Spin } from "antd";
 const axios = require("axios");
 
 function AreaMonitored(props) {
+  const user = useSelector((state) => state.user.user);
+  const role = user.role;
+
   const { history } = props;
   const dispatch = useDispatch();
   const monitoredObjects = useSelector((state) => state.monitoredObjects);
@@ -59,13 +62,20 @@ function AreaMonitored(props) {
       });
   };
   useEffect(() => {
+  {role === "SUPER_ADMIN" ? 
+    dispatch(
+      MonitoredObjectActions.getAllMonitoredObjects({
+        page,
+        limit,
+      })
+    ):
     dispatch(
       MonitoredObjectActions.getAllMonitoredObjects({
         page,
         limit,
         type: localStorage.getItem("project-type"),
       })
-    );
+    )};
   }, [page]);
   useEffect(() => {
     let arr = [];

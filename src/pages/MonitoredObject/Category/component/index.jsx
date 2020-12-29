@@ -10,6 +10,8 @@ import SuccessNotification from './SuccessNotification';
 import { Spin } from "antd";
 
 function AreaMonitored(props) {
+  const user = useSelector((state) => state.user.user);
+  const role = user.role;
   const dispatch = useDispatch();
   const category = useSelector((state) => state.category);
   const {
@@ -38,13 +40,22 @@ function AreaMonitored(props) {
     description: '',
   });
   useEffect(() => {
+    {role==="SUPER_ADMIN"?
+    dispatch(
+      CategoryActions.getAllCategories({
+        page,
+        limit,
+      })
+    ):
     dispatch(
       CategoryActions.getAllCategories({
         page,
         limit,
         type: localStorage.getItem("project-type"),
       })
-    );
+    )
+  }
+    ;
   }, [page]);
   useEffect(() => {}, [listPaginate]);
 
