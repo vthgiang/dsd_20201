@@ -5,6 +5,7 @@ import axios from 'axios';
 import PointInfo from './PointInfo';
 import FlightPathInfo from './FlightPathInfo';
 import MapEdit from './MapEdit';
+import { getDistance } from '../../Common/MapHelper';
 
 EditFlightPathModal.propTypes = {
     
@@ -14,11 +15,13 @@ function EditFlightPathModal(props) {
     const {flightPath} = props;
 
     const [name, setName] = useState('');
-
+    const [speed, setSpeed] = useState('');
     const [timeCome, setTimeCome] = useState('');
     const [timeStop, setTimeStop] = useState('');
     const [heightPoint, setHeightPoint] = useState('');
-    
+    const [flightHeightDown, setFlightHeightDown] = useState('');
+    const [totalDistance, setTotalDistance] = useState(flightPath.distance);
+
     const [newPoint, setNewPoint] = useState({});
     const [flightPoints, setFlightPoints] = useState([]);
     const [monitoredObjectId, setMonitoredObjectId] = useState('');
@@ -38,6 +41,7 @@ function EditFlightPathModal(props) {
     useEffect(()=> {
         console.log('reset');
         setName(flightPath.name);
+        setSpeed(flightPath.speed);
         setFlightPoints(flightPath.flightPoints);
     }, [show]);
 
@@ -46,6 +50,7 @@ function EditFlightPathModal(props) {
         setTimeCome(selectedPoint.timeCome);
         setTimeStop(selectedPoint.timeStop);
         setHeightPoint(selectedPoint.flightHeight);
+        setFlightHeightDown(selectedPoint.flightHeightDown);
         setPointChange(false);
     }, [selectedPoint])
 
@@ -73,7 +78,7 @@ function EditFlightPathModal(props) {
                         }
                     }
                 }
-                console.log("flights point",flightPoints);
+                // console.log("flights point",flightPoints);
                 setMonitoredObjectList(tmp);
             })
             .catch(e => {
@@ -86,20 +91,29 @@ function EditFlightPathModal(props) {
     
     const updatePoint = () => {
         const {zone} = flightPath;
-        if(!timeCome || !timeStop || !heightPoint) return setError("Bạn chưa nhập đử tham số");
+        if(!timeStop || !heightPoint ) return setError("Bạn chưa nhập đử tham số");
         
+        if(timeStop<0) return setError('Thời gian dừng không hợp lệ');
+
+        if(flightHeightDown && (flightHeightDown > heightPoint || flightHeightDown < 0)) return setError('Độ cao hạ xuống không hợp lệ');
+
         for(let i = 0; i < flightPoints.length; i++){
             if(flightPoints[i].locationLat == selectedPoint.locationLat && 
                 flightPoints[i].locationLng == selectedPoint.locationLng){
-                setFlightPoints([
+
+                const newFlightPoints = [
                     ...flightPoints.slice(0, i), {
                         ...flightPoints[i],
                         timeCome: timeCome,
                         timeStop: timeStop,
-                        flightHeight: heightPoint
+                        flightHeight: heightPoint,
+                        flightHeightDown: flightHeightDown
                     },
                     ...flightPoints.slice(i+1)
-                ]);
+                ]
+                setTotalDistance(caculatorDistance(newFlightPoints));
+
+                setFlightPoints(newFlightPoints);
                 setError('');
                 setPointChange(false);
                 console.log('updated point');
@@ -107,13 +121,37 @@ function EditFlightPathModal(props) {
         }
     }
 
+    const caculatorDistance = (flightPoints) => {
+        let totalDistance = 0
+        let distance = 0;
+        for(let i=1; i<flightPoints.length; i++){
+            distance = getDistance(flightPoints[i], flightPoints[i-1]);
+            totalDistance += distance;
+        }
+        return totalDistance;
+    }
+
     const handleSaveClick = () => {
         // xử lý đồng ý thêm đường bay
         if(!name || flightPoints.length===0 ) return setError('Bạn chưa nhập đủ thông tin');
+
+        // tính timecome cho flightPoint
+        let totalDistance = 0
+        let distance = 0;
+        let time = 0;
+        for(let i=1; i<flightPoints.length; i++){
+            distance = getDistance(flightPoints[i], flightPoints[i-1]);
+            time = Math.ceil(distance/parseInt(speed))
+            // console.log(distance, time, speed);
+            flightPoints[i].timeCome = time/60;
+            totalDistance += distance;
+        }
+
         let newFlightPath = {
             ...flightPath,
             name, 
             flightPoints,
+            distance: totalDistance,
             // heightFlight :height,
             // idSupervisedArea: selectedZone._id //~~~~
             // idSupervisedArea: selectedArea._id,
@@ -121,7 +159,7 @@ function EditFlightPathModal(props) {
             // monitoredZoneId: selectedZone._id,
             // monitoredZoneCode: selectedZone.code
         };
-        console.log(newFlightPath);
+        // console.log(newFlightPath);
         axios.post('http://skyrone.cf:6789/flightPath/save', newFlightPath)
             .then(response => {
                 console.log(response);
@@ -185,10 +223,12 @@ function EditFlightPathModal(props) {
             </Modal.Header>
             <Modal.Body>
                 <Container>
-                    <FlightPathInfo 
+                    <FlightPathInfo
+                        speed={speed} setSpeed={setSpeed}
                         name={name} setName={setName}
                         monitoredZoneName={flightPath.zone.name}
-                        monitoredAreaName={flightPath.area.name}                        
+                        monitoredAreaName={flightPath.area.name}
+                        totalDistance={totalDistance}                  
                     />
                     <Row>
                         <Col md={4}>
@@ -202,6 +242,7 @@ function EditFlightPathModal(props) {
                                 setPointChange={setPointChange}
                                 pointChange={pointChange}
                                 selectedPoint={selectedPoint}
+                                flightHeightDown={flightHeightDown} setFlightHeightDown={setFlightHeightDown}
                             />}
                         </Col>
                         <Col md={8}>

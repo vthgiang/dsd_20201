@@ -13,12 +13,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
 import StateDrone from "../../components/Drone/DroneModals/StateDrone";
 import React, { useEffect, useState, useMemo } from "react";
 import StateModal from "../../components/Drone/DroneModals/StateModal";
@@ -26,6 +22,8 @@ import SetStateAll from "../../components/Drone/DroneModals/SetStateAll";
 import SowDateAndGetBackDrone from "../../components/Drone/DroneModals/ShowDateAndGetBackDrone";
 import ModalFlight from '../../containers/ModalFlight'
 import useFullPageLoader from "../../components/hooks/useFullPageLoader";
+import { useSelector } from "react-redux";
+import { isAuthorised, DRONE_CONFIG, DRONE_MAINTENANCE, SUPER_ADMIN, DRONE_STATISTICS} from "../../components/Drone/Common/role";
 
 
 
@@ -61,6 +59,7 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
+
 const headCells = [
   {
     id: "id",
@@ -91,7 +90,7 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-            {(stateDrone != 0 && stateDrone != "Đang Bay") ? (
+            {(stateDrone != 0 && stateDrone != "Đang Bay" && isAuthorised(DRONE_STATISTICS)) ? (
                 <Checkbox
                 indeterminate={numSelected > 0 && numSelected < rowCount}
                 checked={rowCount > 0 && numSelected === rowCount}
@@ -216,11 +215,21 @@ useEffect(() => {
 
 const [loader, showLoader, hideLoader] = useFullPageLoader();
 const [search, setSearch] = useState();
-const [stateDrone, setStateDrone] = useState("0");  
+const [stateDrone, setStateDrone] = useState("Đang Bay");  
 const [numDrone, setNumDrone] = useState();
 
+const users = useSelector((state) => state.user.user);
+const projectType = users.type;
+const role = users.role;
+
+
 const dronesData = useMemo(() => {
-    let computedDrones = drones;
+    let droneRole = drones;
+    if (!isAuthorised(SUPER_ADMIN)) {
+      droneRole = droneRole.filter(
+          comment => comment.project.toString().includes("2") || !comment.state.toString().includes("1"));
+    } 
+    let computedDrones = droneRole;
     setPage(0);
     if (stateDrone) {
         setSelected([]);
@@ -234,7 +243,7 @@ const dronesData = useMemo(() => {
     setNumDrone(computedDrones.length);
     if (search) {
         computedDrones = computedDrones.filter(
-            comment =>
+            (comment) =>
                 comment.idDrone.toLowerCase().includes(search.toLowerCase())
         );
     } 
@@ -257,6 +266,7 @@ const dronesData = useMemo(() => {
     setSelected([]);
   };
 
+ 
 
   const handleClick = (event, id) => {
     if (stateDrone != 0 && stateDrone != "Đang Bay") {
@@ -301,7 +311,7 @@ const dronesData = useMemo(() => {
     const EnhancedTableToolbar = (props) => {
         const classes = useToolbarStyles();
         const { numSelected } = props;
-      
+
         return (
           <Toolbar
             className={clsx(classes.root, {
@@ -357,12 +367,12 @@ const dronesData = useMemo(() => {
               <select value={stateDrone} 
                     style={{marginRight: '0.5rem' }}
                   onChange={event => setStateDrone(event.target.value)}>
-                  <option value="0">Tất cả</option>
                   <option value="Đang Rảnh">Đang rảnh</option>
                   <option value="Đang Bay">Đang bay</option>
                   <option value="Đang Sạc">Đang sạc</option>
                   <option value="Đang Bảo trì">Đang bảo trì</option>
                   <option value="Hỏng">Hỏng</option>
+                  <option value="0">Tất cả</option>
               </select>
               <Typography> {numDrone}drone </Typography>
           </Toolbar>
@@ -412,7 +422,7 @@ const dronesData = useMemo(() => {
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
-                          {(stateDrone != 0 && stateDrone != "Đang Bay") ? (
+                          {(stateDrone != 0 && stateDrone != "Đang Bay" && isAuthorised(DRONE_STATISTICS)) ? (
                             <Checkbox
                             onClick={(event) => handleClick(event, drone.idDrone)}
                             checked={isItemSelected}
@@ -436,27 +446,24 @@ const dronesData = useMemo(() => {
                       <TableCell align="center"><StateDrone state={drone.state} /></TableCell>
                       <TableCell align="center">
                              {(() => {
-                                    if (drone.state == 0) {
-                                    return (
-                                            <StateModal drone={drone} onReload={getData} />
-                                    )
-                                    } else if (drone.state == 1) {
-                                        return (
-                                            <ModalFlight id={drone.idDrone} />
-                                        )
-                                    } else if (drone.state == 2 || drone.state == 3) {
-
-                                        return (
-                                                   
-                                            <SowDateAndGetBackDrone drone={drone} onReload={getData} />
-                                                    
-                                        )
-                                    }
-                                    else if (drone.state == 4) {
-                                    return (
-                                        <StateModal drone={drone}/>
-                                    ) 
-                                    }
+                                let component = <p></p>;
+                                switch(drone.state){
+                                  case 0:
+                                    if(isAuthorised(DRONE_CONFIG)) component = <StateModal drone={drone} onReload={getData} />;
+                                    break;
+                                  case 1:
+                                    component = <ModalFlight id={drone.idDrone} />;
+                                    break;
+                                  case 2:
+                                  case 3:
+                                    if(isAuthorised(DRONE_MAINTENANCE) || isAuthorised(DRONE_CONFIG)) 
+                                      component = <SowDateAndGetBackDrone drone={drone} onReload={getData} />
+                                    break;
+                                  case 4:
+                                    if(isAuthorised(DRONE_MAINTENANCE) || isAuthorised(DRONE_CONFIG))
+                                      component = <StateModal drone={drone}/>;
+                                }
+                                return component;
                                 })()}
                           </TableCell>
                     </TableRow>

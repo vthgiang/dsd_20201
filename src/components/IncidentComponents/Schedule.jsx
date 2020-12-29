@@ -95,14 +95,14 @@ const Schedule = () => {
               size="small"
               style={{ width: 90 }}
             >
-              Search
+              Tìm kiếm
           </Button>
             <Button
               onClick={() => handleReset(clearFilters)}
               size="small"
               style={{ width: 90 }}
             >
-              Reset
+              Làm mới
           </Button>
           </Space>
         </div>

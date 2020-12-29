@@ -65,10 +65,10 @@ import MonitoredObject from './MonitoredObject/MonitoredObject/component';
 import MonitoredObjectCreate from './MonitoredObject/MonitoredObject/component/monitoredObjectCreate';
 import MonitoredObjectView from './MonitoredObject/MonitoredObject/component/MonitoredObjectView';
 // incident group 09
-import IncidentGroup9 from "./Incident/Incident";
-import ImageGallery from "./Incident/ImageGallery";
-import VideoGallery from "./Incident/VideoGallery";
-import IncidentEdit from "./Incident/Incident/edit";
+import IncidentGroup9 from './Incident/Incident';
+import ImageGallery from './Incident/ImageGallery';
+import VideoGallery from './Incident/VideoGallery';
+import IncidentEdit from './Incident/Incident/edit';
 // dsd_01 drone
 import TableDrone from './TableDrone';
 import FlightPathDrone from './FLightPathDrone';
@@ -80,11 +80,11 @@ import FlightSchedule from './FlightSchedule';
 import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
 
 //DE DIEU
-import HomeDeDieu from "./Home/DeDieu";
-import StatisticDeDieu from './Dashboard/IncidentDashboard'
-import Task1 from './Home/DeDieu/Task1/index'
-import Task5 from './Home/DeDieu/Task5/index'
-import DeDieuNcn3 from "./Home/DeDieu/indexncn3";
+import HomeDeDieu from './Home/DeDieu';
+import StatisticDeDieu from './Dashboard/IncidentDashboard';
+import Task1 from './Home/DeDieu/Task1/index';
+import Task5 from './Home/DeDieu/Task5/index';
+import DeDieuNcn3 from './Home/DeDieu/indexncn3';
 
 export const routes = [
   {
@@ -416,24 +416,23 @@ export const routes = [
     component: ListUserMeta,
   },
   {
-    path: "/incidents",
+    path: '/incidents',
     component: () => <IncidentGroup9 />,
-    exact: true
+    exact: true,
   },
 
   {
-    path: "/incidents/:id",
+    path: '/incidents/:id',
     component: () => <IncidentEdit />,
-    exact: true
-
+    exact: true,
   },
   {
-    path: "/imageGallery",
+    path: '/imageGallery',
     component: () => <ImageGallery />,
-    exact: true
+    exact: true,
   },
   {
-    path: "/videoGallery",
+    path: '/videoGallery',
     component: () => <VideoGallery />,
   },
   {
@@ -460,7 +459,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        isLogin ? <Component {...props} /> : <Redirect to="/login" />
+        isLogin ? <Component {...props} /> : <Redirect to='/login' />
       }
     />
   );

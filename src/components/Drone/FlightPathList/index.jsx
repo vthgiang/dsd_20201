@@ -1,12 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Table } from 'react-bootstrap';
 import "./FlightPathList.css";
 import EditFlightPathModal from '../DroneModals/EditFlightPathModal';
-
-FlightPathList.propTypes = {
-    
-};
+import { isAuthorised, FLIGHT_PATH_MANAGEMENT } from '../Common/role';
 
 function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath, baseIndex, pageReload}) {
 
@@ -18,7 +14,7 @@ function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath, ba
                     <th>Tên đường bay</th>
                     <th>Khu vực giám sát</th>
                     <th>Miền giám sát</th>
-                    <th>Action</th>
+                    {isAuthorised(FLIGHT_PATH_MANAGEMENT) && <th>Action</th>}
                 </tr>
             </thead>
             <tbody>
@@ -32,12 +28,14 @@ function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath, ba
                     </td>
                     <td>{item.monitoredAreaName}</td>
                     <td>{item.monitoredZoneName}</td>
+                    {isAuthorised(FLIGHT_PATH_MANAGEMENT) &&
                     <td className="td-action">
                         <EditFlightPathModal flightPath={item} pageReload={pageReload}/>{'/'}
                         <button className="btn-delete" onClick={()=>handleDeleteFlightPath(item)}>
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
+                    }
                 </tr>))}
             </tbody>
         </Table>

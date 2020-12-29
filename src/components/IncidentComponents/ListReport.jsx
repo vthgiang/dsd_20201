@@ -91,14 +91,14 @@ const ListReport = () => {
             size="small"
             style={{ width: 90 }}
           >
-            Search
+            Tìm kiếm
           </Button>
           <Button
             onClick={() => handleReset(clearFilters)}
             size="small"
             style={{ width: 90 }}
           >
-            Reset
+            Làm mới
           </Button>
         </Space>
       </div>
@@ -180,7 +180,7 @@ const ListReport = () => {
       sorter: (a, b) => b.status.charCodeAt(0) - a.status.charCodeAt(0),
       sortDirections: ['descend'],
       render: (text, record) =>
-        record.status == 'waiting' ? (
+        record.status == 'waitting' ? (
           <div
             style={{
               flexDirection: 'row',
@@ -198,7 +198,7 @@ const ListReport = () => {
             ></div>
             <p style={{ marginLeft: 10, fontSize: 18, marginTop: 10 }}>
               {' '}
-              {record.status}
+              {'Chờ xử lý'}
             </p>
           </div>
         ) : record.status == 'accept' ? (
@@ -427,7 +427,7 @@ const ListReport = () => {
       </div>
       <Input.Search
         style={{ margin: '0 0 10px 0' }}
-        placeholder="Search by..."
+        placeholder="Nhập từ khóa tìm kiếm..."
         enterButton
         onSearch={search}
       />
