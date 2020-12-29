@@ -15,14 +15,13 @@ const CreateMonitorCampaign = () => {
   persist = JSON.parse(persist.user);
   const { user } = persist;
   const { id } = user;
-
   const createMonitorCampaign = async (data) => {
     try {
       const response = await monitorCampaignApi.createMonitorCampaign(data);
       const monitorCampaignId = response.data.result.monitorCampaign._id;
 
       const notificationData = {
-        fromUserID: id,
+        fromUserID: id, 
         toUserIDs: ['550', '64', '55'],
         refID: monitorCampaignId,
         refLinkView: `${FRONT_END_URL}flight-hub-monitor-campaigns/${monitorCampaignId}`,
