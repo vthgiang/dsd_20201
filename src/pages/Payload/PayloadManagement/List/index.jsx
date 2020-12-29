@@ -543,7 +543,17 @@ class List extends Component {
       })
   }
 
-
+  chargeDone(id) {
+    axios.post(`https://dsd06.herokuapp.com/api/payloadregister/chargeDone/${id}`)
+      .then(res => {
+        if (res.status == 200) {
+          this.openNotificationSucess("Chuyển trạng thái sạc thành công")
+          this.loadAllPayload();
+        } else {
+          this.openNotificationError(res.data.message || "Hệ thống đang gặp lỗi!")
+        }
+      })
+  }
 
   render() {
 
@@ -624,8 +634,9 @@ class List extends Component {
           <Space size="small" >
             <Button type="link" onClick={() => this.showModal(record)} >Sửa</Button>
             <Button danger type="text" onClick={() => this.showModalDelete(record)}>Xóa</Button>
-            <Button type="link" onClick={() => this.showMaintenance(record.id)}>Bảo dưỡng</Button>
-            <Button type="link" onClick={() => this.showCharging(record.id)}>Sạc</Button>
+            {record.status == "idle" ? <Button type="link" onClick={() => this.showMaintenance(record.id)}>Bảo dưỡng</Button> : <div/>}
+            {record.status == "idle" ? <Button type="link" onClick={() => this.showCharging(record.id)}>Sạc</Button> : <div/>}
+            {record.status == "charging" ? <Button type="link" onClick={() => this.chargeDone(record.id)}>Sạc xong</Button> : <div/>}
           </Space>
         ),
       },
