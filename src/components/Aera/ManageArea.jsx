@@ -60,6 +60,8 @@ class ManageArea extends React.Component {
             arrayDelete: [],
             listArea: [
             ],
+            token: localStorage.getItem('token'),
+            projecttype: localStorage.getItem('project-type'),
             openModalAdd: false,
             columns: [
                 {
@@ -110,7 +112,7 @@ class ManageArea extends React.Component {
                     longitude: '',
                 },
                 name: 'Nui NamDL',
-                code: 'namDL',
+                code: "ZONE" + (Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000),
                 maxHeight: 100,
                 minHeight: 10,
                 priority: 0,
@@ -185,10 +187,22 @@ class ManageArea extends React.Component {
         })
     }
     setStatusModalAdd(openModalAdd) {
-         this.setState({openModalAdd});
+        this.setState(prevState => {
+            let create = Object.assign({}, prevState.create);
+            create.code = "AREA" + (Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000);
+            return {create};
+        })
+        this.setState({openModalAdd});
      }
     getAllArea() {
-        axios.get(`https://monitoredzoneserver.herokuapp.com/area?pageSize=1000`)
+        let token = localStorage.getItem('token');
+        let projecttype = localStorage.getItem('project-type');
+        axios.get(`https://monitoredzoneserver.herokuapp.com/area?pageSize=1000`, {
+            headers: {
+                token: token,
+                projecttype: projecttype
+            }
+        })
           .then(res => {
             let loading = false;
             this.setState({loading});
@@ -223,7 +237,9 @@ class ManageArea extends React.Component {
         let data = this.state.create;
         axios.post(`https://monitoredzoneserver.herokuapp.com/area`, data, {
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    token: this.state.token,
+                    projecttype: this.state.projecttype
                 }
             })
             .then(res => {
@@ -237,7 +253,12 @@ class ManageArea extends React.Component {
     deleteArea(area) {
         let id = area._id;
         if(window.confirm(`Xóa khu vực này : ${area.name}? `)) {
-            axios.delete(`https://monitoredzoneserver.herokuapp.com/area/${id}`)
+            axios.delete(`https://monitoredzoneserver.herokuapp.com/area/${id}`, {
+                headers: {
+                    token: this.state.token,
+                    projecttype: this.state.projecttype
+                }
+            })
                 .then(res => {
                     if (res.data.success) {
                         this.getAllArea();
@@ -298,9 +319,6 @@ class ManageArea extends React.Component {
                 <div className="filter">
                     <Row>
                         <Col span={6}>
-                            <Input style={{width: 250}} placeholder="Tìm kiếm" prefix={<SearchOutlined/>}/>
-                        </Col>
-                        <Col span={6}>
                             <Button type="primary" icon={<FolderAddOutlined/>}
                                     onClick={() => this.setStatusModalAdd(true)}>
                                 Thêm mới
@@ -315,12 +333,6 @@ class ManageArea extends React.Component {
                                 centered
                             >
                                 <table className="table table-hover table-responsive table-borderless">
-                                    <tr>
-                                        <th style={{width: '50%'}}>Mã khu vực giám sát</th>
-                                        <td>
-                                            <Input name = 'code' style={{width: 200}} onChange={this._handleChange} placeholder="Nhập"/>
-                                        </td>
-                                    </tr>
                                     <tr>
                                         <th style={{width: '50%'}}>Tên khu vực giám sát</th>
                                         <td>

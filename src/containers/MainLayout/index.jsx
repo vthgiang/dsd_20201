@@ -31,7 +31,7 @@ const MainLayout = ({ children, history }) => {
     }
   }, []);
 
-  if(projectType === "DE_DIEU" || projectType === "CHAY_RUNG"){
+  if(projectType === "DE_DIEU"){
     return (
         <StyleLayout>
           <Layout>
@@ -70,7 +70,7 @@ const MainLayout = ({ children, history }) => {
                       </Link>
                     </Menu.Item>
                     <Menu.Item key="ncn5" icon={<SettingOutlined />}>
-                      <a className="margin-left-12" href={"/user"} rel="noopener noreferrer">
+                      <a className="margin-left-12" href={"/dedieu-ncn5"} rel="noopener noreferrer">
                         Nhóm chức năng 5
                         <br/>
                         Quản trị và nâng cao
