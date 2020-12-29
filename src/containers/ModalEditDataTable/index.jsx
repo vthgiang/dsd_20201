@@ -116,6 +116,7 @@ export default function TransitionsModal(props) {
     setMaxFlightTime(json.maxFlightTime);
     setBattery(json.rangeBattery);
     setUrlImage(json.urlImage);
+    setType(json.type);
   }
 
   const [urlImage, setUrlImage] = useState();
@@ -128,6 +129,7 @@ export default function TransitionsModal(props) {
   const [maxFlightSpeed, setMaxFlightSpeed] = useState(drones.maxFlightSpeed);
   const [maxFlightTime, setMaxFlightTime] = useState(drones.maxFlightTime);
   const [rangeBattery, setBattery] = useState(drones.rangeBattery);
+  const [type, setType] = useState(drones.type)
   const saveDrone = () => {
    
     let headers = new Headers();
@@ -154,6 +156,7 @@ export default function TransitionsModal(props) {
         rangeBattery: rangeBattery,
         task: 0,
         used: false,
+        type: type,
         urlImage: urlImage
       })
     };
@@ -198,7 +201,7 @@ export default function TransitionsModal(props) {
             <Col>
                 <Form.Item className={classes.formItem}>
                   <h4>Tốc độ tối đa (m/phút)</h4>
-                  <InputNumber size="large" min={1} 
+                  <InputNumber  min={1} 
                     value={maxFlightSpeed}
                     className={classes.input}
                     onChange={event => setMaxFlightSpeed(event)}
@@ -206,7 +209,7 @@ export default function TransitionsModal(props) {
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Thời gian bay (phút)</h4>
-                  <InputNumber size="large" min={1} 
+                  <InputNumber min={1} 
                     value={maxFlightTime}
                     className={classes.input}
                     onChange={event => setMaxFlightTime(event)}
@@ -214,7 +217,7 @@ export default function TransitionsModal(props) {
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Trần bay (m)</h4>
-                  <InputNumber size="large" min={1} 
+                  <InputNumber min={1} 
                     value={maxFlightHeight}
                     className={classes.input}
                     onChange={event => setMaxFlightHeight(event)}
@@ -222,14 +225,20 @@ export default function TransitionsModal(props) {
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Dung lượng pin (mAh)</h4>
-                  <InputNumber size="large" min={1} style={{ width: '80%' }}
-                    size="large"
+                  <InputNumber min={1} style={{ width: '80%' }}
                     value={rangeBattery}
                     className={classes.input}
                     onChange={event => setBattery(event)}
                   />
                 </Form.Item>
-
+                <Form.Item className={classes.formItem}>
+                  <h4>Loại</h4>
+                  <InputNumber min={1} 
+                    value={type}
+                    className={classes.input}
+                    onChange={event => setType(event)}
+                  />
+                </Form.Item>
               </Col>
               <Col>
                 <Form.Item className={classes.formItem}>

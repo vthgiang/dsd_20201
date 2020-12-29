@@ -10,12 +10,12 @@ export const MonitoredObjectActions = {
 };
 
 function getAllMonitoredObjects(data) {
-  if (data === undefined) {
+  if (data.limit === undefined || data.page === undefined) {
     return (dispatch) => {
       dispatch({
         type: MonitoredObjectConstants.GET_ALL_MONITORED_OBJECT_REQUEST,
       });
-      MonitoredObjectServices.getAllMonitoredObjects()
+      MonitoredObjectServices.getAllMonitoredObjects(data)
         .then((res) => {
           dispatch({
             type: MonitoredObjectConstants.GET_ALL_MONITORED_OBJECT_SUCCESS,

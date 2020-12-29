@@ -244,8 +244,8 @@ function MonitoredObjectView({ history }) {
   };
 
   useEffect(() => {
-    dispatch(CategoryActions.getAllCategories());
-    dispatch(MonitoredObjectActions.getAllMonitoredObjects());
+    dispatch(CategoryActions.getAllCategories({type:localStorage.getItem("project-type")}));
+    dispatch(MonitoredObjectActions.getAllMonitoredObjects({type:localStorage.getItem("project-type")}));
     getZoneAll();
     getArea();
     getDetailMonitoredObject();
@@ -278,16 +278,16 @@ function MonitoredObjectView({ history }) {
     }));
   };
   const handleCreateMonitoredObject = () => {
-    // if (
-    //   currentMonitoredZone &&
-    //   (monitoredObject.height < currentMonitoredZone.minHeight ||
-    //     monitoredObject.height > currentMonitoredZone.maxHeight)
-    // ) {
-    //   alert(
-    //     `Chọn chiều cao cho đối tượng trong khoảng giá trị từ ${currentMonitoredZone.minHeight} - ${currentMonitoredZone.maxHeight}`,
-    //   );
-    //   return;
-    // }
+    if (
+      currentMonitoredZone &&
+      (monitoredObject.height < currentMonitoredZone.minHeight ||
+        monitoredObject.height > currentMonitoredZone.maxHeight)
+    ) {
+      alert(
+        `Chọn chiều cao cho đối tượng trong khoảng giá trị từ ${currentMonitoredZone.minHeight} - ${currentMonitoredZone.maxHeight}`,
+      );
+      return;
+    }
 
     dispatch(
       MonitoredObjectActions.editMonitoredObject(monitoredObject._id, {

@@ -68,6 +68,7 @@ export default function TransitionsModal(props) {
   const [maxFlightSpeed, setMaxFlightSpeed] = useState(0);
   const [maxFlightTime, setMaxFlightTime] = useState(0);
   const [rangeBattery, setBattery] = useState(0);
+  const [type, setType] = useState(0);
   
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
@@ -132,6 +133,7 @@ export default function TransitionsModal(props) {
                 rangeBattery: rangeBattery,
                 task: 0,
                 used: false,
+                type: type,
                 urlImage: "https://drive.google.com/uc?id="+res.data.image_id
               })
             };
@@ -230,7 +232,7 @@ export default function TransitionsModal(props) {
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Giới hạn tầm bay (m)</h4>
-                  <InputNumber min={1}
+                  <InputNumber min={1}   size="large"
                     className={classes.input}
                     onChange={event => setMaxFlightRange(event)}
                   />
@@ -240,30 +242,37 @@ export default function TransitionsModal(props) {
               <Col>
                 <Form.Item className={classes.formItem}>
                   <h4>Tốc độ tối đa (m/phút)</h4>
-                  <InputNumber min={1} 
+                  <InputNumber min={1}  size="large"
                     className={classes.input}
                     onChange={event => setMaxFlightSpeed(event)}
                   />
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Thời gian bay (phút)</h4>
-                  <InputNumber min={1} 
+                  <InputNumber min={1}  size="large"
                     className={classes.input}
                     onChange={event => setMaxFlightTime(event)}
                   />
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Trần bay (m)</h4>
-                  <InputNumber min={1} 
+                  <InputNumber min={1}  size="large"
                     className={classes.input}
                     onChange={event => setMaxFlightHeight(event)}
                   />
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Dung lượng pin (mAh)</h4>
-                  <InputNumber min={1} 
+                  <InputNumber  size="large" min={1} 
                     className={classes.input}
                     onChange={event => setBattery(event)}
+                  />
+                </Form.Item>
+                <Form.Item className={classes.formItem}>
+                  <h4>Loại Drone</h4>
+                  <InputNumber  size="large" min={1} 
+                    className={classes.input}
+                    onChange={event => setType(event)}
                   />
                 </Form.Item>
 

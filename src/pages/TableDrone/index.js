@@ -37,7 +37,7 @@ const DataTable = () => {
     const [search, setSearch] = useState("");
     const [sorting, setSorting] = useState({ field: "", order: "" });
 
-    const ITEMS_PER_PAGE = 20;
+    const ITEMS_PER_PAGE = 50;
 
     const headers = [
         { name: "Id#", field: "id", sortable: true },

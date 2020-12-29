@@ -6,13 +6,13 @@ import { omitIsNil } from '../../../../utils/omit';
 import { updateLabelApi } from '../../../../apis/label';
 
 const UpdateLabel = ({ visible, hideModal, labelDetails, updateLabel }) => {
-  const onUpdateLabel = async ({ name, description, property }) => {
+  const onUpdateLabel = async ({ name, description, type }) => {
     const labelData = omitIsNil(
       {
         _id: labelDetails._id || '',
         name,
         description,
-        property,
+        type
       },
       { deep: false },
     );

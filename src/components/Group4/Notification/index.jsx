@@ -7,19 +7,12 @@ import vi from 'javascript-time-ago/locale/vi';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import ReactTimeAgo from 'react-time-ago';
-import {
-  createNotificationSubscription,
-  initializePushNotifications,
-  isPushNotificationSupported,
-  registerServiceWorker,
-  sendPushNotification, sendSubscriptionToPushServer
-} from '../../../services/pushNotifications';
-import { ref } from '../config4';
+import { ref, BASE_URL } from '../config4';
 import SimpleRating from '../Rating';
 import { ListItemStyle } from './index.style';
 import FilterDropdown from '../Dropdown';
-import { Row, Col } from 'antd';
-import { set } from 'local-storage';
+import { Row, Col, Spin } from 'antd';
+
 
 
 function LastSeen({ date }) {
@@ -110,7 +103,7 @@ const MyList = () => {
   const [count, setCount] = useState(5);
   const [total, setTotal] = useState(0);
   const [type, setType] = useState(15);
-  const [first, setFirst] = useState(true);
+  const [loading, setLoading] = useState(true);
   const classes = useStyles();
   const history = useHistory();
 
@@ -122,7 +115,7 @@ const MyList = () => {
     var user = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user);
     var config = {
       method: 'get',
-      url: 'https://it4483-dsd04.herokuapp.com/get_list_ntf_type',
+      url: `${BASE_URL}/get_list_ntf_type`,
       params: {
         index: start,
         count: to,
@@ -143,6 +136,7 @@ const MyList = () => {
           setDatas([...datas, ...response.data.data.notifications]);
         }
         setTotal(response.data.data.total)
+        setLoading(false)
       })
       .catch(function (error) {
         console.log(error);
@@ -160,50 +154,14 @@ const MyList = () => {
     history.push(`/warning-detail/${id}`)
   }
 
-  const handleOnclickSubcribe = () => {
-    console.log("clicked to send subcription")
-    if (isPushNotificationSupported()) {
-      initializePushNotifications().then(result => {
-        if (result === "granted") {
-          console.log("start registering sw")
-          registerServiceWorker();
-          createNotificationSubscription().then(subscription => {
-            sendSubscriptionToPushServer({
-              subscription: subscription,
-              project_type: 'CHAY_RUNG'
-            })
-          });
-        }
-      })
-    }
-  }
-
-  const handleOnclickSendNotification = () => {
-    console.log("clicked to send notification")
-    sendPushNotification({
-      project_type: 'CHAY_RUNG',
-      payload: {
-        "title": "chay rung",
-        "text": "da xay ra chay rung o khu vuc ABC",
-        "image": "logo512.png",
-        "url": "https://vtv.vn/chay-rung.html"
-      }
-    })
-  }
-
   const reset = (type, index) => {
     setType(type);
     setIndex(index)
     setPage(0)
   }
 
-  return <div >
-    <Button variant="contained" color="primary" onClick={handleOnclickSubcribe}>
-      Subcribe notification
-        </Button>
-    <Button style={{ margin: 2 }} variant="contained" color="secondary" onClick={handleOnclickSendNotification}>
-      Send notifications
-        </Button>
+  const content = () => (
+    <div >
     <Row>
       <Col span={20}><div className={classes.title}>Danh sách cảnh báo</div></Col>
       <Col span={4}><FilterDropdown reset={reset} /></Col>
@@ -228,6 +186,14 @@ const MyList = () => {
       page={page}
       onChangePage={handleChangePage}
     />
+  </div>
+  )
+
+  return <div>
+    {loading
+      ? <Spin size="large" style={{marginTop: 300}} spinning={loading} delay={500}> </Spin> 
+      : content() 
+    }
   </div>
 
 }

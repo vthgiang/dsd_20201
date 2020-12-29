@@ -84,6 +84,7 @@ import HomeDeDieu from "./Home/DeDieu";
 import StatisticDeDieu from './Dashboard/IncidentDashboard'
 import Task1 from './Home/DeDieu/Task1/index'
 import Task5 from './Home/DeDieu/Task5/index'
+import DeDieuNcn3 from "./Home/DeDieu/indexncn3";
 
 export const routes = [
   {
@@ -102,6 +103,10 @@ export const routes = [
   {
     path: '/dedieu-ncn5',
     component: Task5,
+  },
+  {
+    path: '/dedieu-ncn3',
+    component: DeDieuNcn3,
   },
   {
     path: '/dashboard',
@@ -195,6 +200,10 @@ export const routes = [
   {
     path: '/sucodedieu-statistics',
     component: StatisticDeDieu,
+  },
+  {
+    path: '/sucodedieu-report',
+    component: CreateReport,
   },
   /* {
     path: '/payload-maintenance',

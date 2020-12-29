@@ -6,13 +6,13 @@ import { omitIsNil } from '../../../../utils/omit';
 import { addLabelApi } from '../../../../apis/label';
 
 const AddLabel = ({ visible, hideModal, addLabel }) => {
-  const onAddLabel = async ({ name, description, property }) => {
+  const onAddLabel = async ({ name, description, type }) => {
     let labelData = omitIsNil(
       {
         name,
-        // property,
         description,
         isDefault: true,
+        type,
       },
       { deep: false },
     );
@@ -22,7 +22,7 @@ const AddLabel = ({ visible, hideModal, addLabel }) => {
       if (!resp || !resp.status || !resp.result) throw new Error('Máy chủ lỗi');
 
       const { result: newLabel } = resp;
-      addLabel(newLabel);
+      addLabel(newLabel); 
 
       notification.success({
         message: 'Thêm nhãn thành công',

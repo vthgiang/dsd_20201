@@ -1,5 +1,6 @@
 import {getRole} from './info';
 
+
 const role = {
     superadmin: 'SUPER_ADMIN',
     admin: 'ADMIN',
@@ -9,6 +10,7 @@ const role = {
     incidentStaff: 'INCIDENT_STAFF'
 }
 
+const SUPER_ADMIN = [role.superadmin];
 const CRUD_DRONE = [role.superadmin, role.admin, role.manager];
 const DRONE_SEARCH = [...CRUD_DRONE, role.supervisor, role.droneStaff];
 const DRONE_STATISTICS = DRONE_SEARCH;
@@ -18,11 +20,13 @@ const DRONE_MAINTENANCE = DRONE_SEARCH;
 
 const isAuthorised = (featureRoles) => {
     const userRole = getRole();
-    return featureRoles.includes(userRole.toUpperCase());
+    
+    return featureRoles.includes(userRole.toString().toUpperCase());
 }
 
 export {
-    CRUD_DRONE, DRONE_SEARCH, 
+    SUPER_ADMIN,
+    CRUD_DRONE, DRONE_SEARCH,  
     DRONE_STATISTICS, FLIGHT_PATH_MANAGEMENT, 
     DRONE_CONFIG, DRONE_MAINTENANCE, 
     isAuthorised
