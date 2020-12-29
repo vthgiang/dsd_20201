@@ -71,7 +71,7 @@ const MainLayout = ({ children, history }) => {
 
                     </Menu.Item>
                     <Menu.Item key="ncn5" icon={<SettingOutlined />}>
-                      <a className="margin-left-12" href={"/user"} rel="noopener noreferrer">
+                      <a className="margin-left-12" href={"/dedieu-ncn5"} rel="noopener noreferrer">
                         Nhóm chức năng 5
                         <br/>
                         Quản trị và nâng cao
