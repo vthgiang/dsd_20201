@@ -1,11 +1,14 @@
 import Base from "./baseService";
 import to from "await-to-js"
 class Service extends Base {
-  index = async (filter) => {
+  index = async () => {
+    let projectType = ''
+    if (typeof(window) !== 'undefined') {
+      projectType = '?type=' + localStorage.getItem("project-type");
+    }
     return this.request({
-      url: 'https://dsd05-monitored-object.herokuapp.com/monitored-object/',
+      url: `https://dsd05-monitored-object.herokuapp.com/monitored-object${projectType}`,
       method: "GET",
-      data: filter,
       isExternalServer: true
     });
   };
