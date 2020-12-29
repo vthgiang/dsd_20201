@@ -132,7 +132,8 @@ class PayloadDroneHistory extends Component {
   }
 
   returnPayload(valuesOfReturnPayload) {
-    const fee = valuesOfReturnPayload.fee;
+    // const fee = valuesOfReturnPayload.fee;
+    const fee = 0;
     const qs = require('qs');
     axios.post('https://dsd06.herokuapp.com/api/payloadregister/return/' + this.state.idPayloadReturn, qs.stringify({'fee': fee}))
     .then(res => {
@@ -149,9 +150,9 @@ class PayloadDroneHistory extends Component {
     return <div>
       <Form onFinish= {(valuesOfReturnPayload) => this.returnPayload(valuesOfReturnPayload)}>
       <p>Bạn có chắc trả lại payload này?</p>
-      <Form.Item label="Chi phí" name="fee" rules={[{required: true, message: 'Vui lòng nhập chi phí!'}]}>
+      {/* <Form.Item label="Chi phí" name="fee" rules={[{required: true, message: 'Vui lòng nhập chi phí!'}]}>
         <Input></Input>
-      </Form.Item>
+      </Form.Item> */}
       <Button type="primary" htmlType="submit" danger>Trả payload</Button>
       </Form>
    

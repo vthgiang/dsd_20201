@@ -34,10 +34,6 @@ class List extends Component {
       ],
         typeData: [
             {
-                x: "Camera góc rộng",
-                y: 0,
-            },
-            {
                 x: "Camera nhiệt",
                 y: 0,
             },
@@ -53,6 +49,10 @@ class List extends Component {
                 x: "Cảm biến tiệm cận",
                 y: 0,
             },
+            {
+                x: "Panorama Camera",
+                y: 0,
+            },
         ],
     }
   }
@@ -66,8 +66,12 @@ class List extends Component {
   loadAllPayload() {
     axios.get(`http://dsd06.herokuapp.com/api/payload`)
         .then(res => {
-          //const persons = res.data;
-          this.setState({ tables: res.data });
+            if (res.status == 500) {
+                this.openNotificationError(res.data.message || "")
+            } else {
+                let arr = res.data.filter((item) => {return item.type != null});
+                this.setState({ tables: arr });
+            }
         })
   }
 
@@ -99,6 +103,7 @@ class List extends Component {
         var that = this;
         let valu = await axios.get('https://dsd06.herokuapp.com/api/payloadtype')
             .then(function(response){
+
                 return response.data.map(payload =>
                     ({
                         x: payload.name,
@@ -272,7 +277,7 @@ class List extends Component {
                 </Col>
               </Row>
             </Form>
-            <Table dataSource={dataSource} columns={columns} />;
+            <Table dataSource={dataSource} columns={columns} />
           </div>
 
 
