@@ -452,7 +452,7 @@ const ListIncidents = () => {
       <div>
         <Input.Search
           style={{ margin: '0 0 10px 0' }}
-          placeholder="Search by..."
+          placeholder="Nhập từ khóa tìm kiếm..."
           enterButton
           onSearch={search}
         />
@@ -656,7 +656,7 @@ const ListIncidents = () => {
             </Form.List>
             <Form.Item>
               <Button type="primary" htmlType="submit">
-                Submit
+                Thêm
               </Button>
             </Form.Item>
           </Form>

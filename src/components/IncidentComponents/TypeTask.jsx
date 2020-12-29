@@ -300,7 +300,7 @@ const TypeTask = () => {
       </div>
       <Input.Search
         style={{ margin: '0 0 10px 0' }}
-        placeholder="Search by..."
+        placeholder="Nhập từ khóa tìm kiếm..."
         enterButton
         onSearch={search}
       />
@@ -361,7 +361,7 @@ const TypeTask = () => {
           onClick={submitEditData}
           style={{ marginTop: 20 }}
         >
-          Submit
+          Lưu
         </Button>
       </Modal>
 
@@ -408,7 +408,7 @@ const TypeTask = () => {
           onClick={submitAddData}
           style={{ marginTop: 20 }}
         >
-          Submit
+          Thêm mới
         </Button>
       </Modal>
     </div>
