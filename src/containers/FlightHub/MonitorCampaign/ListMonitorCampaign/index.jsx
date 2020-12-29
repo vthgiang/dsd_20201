@@ -35,10 +35,16 @@ import {
 } from '../services';
 import moment from 'moment';
 import { DATE_TIME_FORMAT } from '../../../../configs';
-import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../../constants';
+import {
+  MECHANISM,
+  METADATA_TYPES,
+  RESOLUTION,
+  TASK,
+} from '../../../../constants';
 
 import { monitorCampaignApi } from '../../../../apis';
 import debounce from '../../../../utils/debounce';
+import { useSelector } from 'react-redux';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -49,6 +55,8 @@ const ListMonitorCampaign = () => {
   const [form] = Form.useForm();
   const history = useHistory();
   const location = useLocation();
+  const projectType = useSelector((state) => state.user.projectType);
+  const isAdmin = projectType === 'ALL_PROJECT';
 
   const fetchListMonitorCampaignsData = async (params = {}) => {
     try {
@@ -241,9 +249,8 @@ const ListMonitorCampaign = () => {
 
   return (
     <StyleListMonitorCampaign>
-      <StyleTitle>Danh sách đợt giám sát</StyleTitle>
-
-      <Row type='flex' justify='end' align='middle'>
+      <Row type='flex' justify='space-between' align='middle'>
+        <StyleTitle>Danh sách đợt giám sát</StyleTitle>
         <Button
           icon={<PlusOutlined />}
           type='primary'
@@ -267,6 +274,40 @@ const ListMonitorCampaign = () => {
           // initialValues={initialValues}
         >
           <Row>
+            <Col span={16}>
+              <Form.Item
+                name='timeRange'
+                label='Thời gian'
+                labelCol={{ span: 5 }}
+                rules={[{ type: 'array' }]}>
+                <RangePicker showTime format={DATE_TIME_FORMAT} />
+              </Form.Item>
+            </Col>
+            <Col span={8}></Col>
+
+            {isAdmin && (
+              <Col span={8}>
+                <Form.Item
+                  name='task'
+                  label='Loại sự cố'
+                  rules={[
+                    {
+                      type: 'string',
+                    },
+                  ]}>
+                  <Select allowClear placeholder='Chọn loại sự cố'>
+                    {Object.keys(TASK).map((key) => {
+                      return (
+                        <Select.Option key={key} value={TASK[key]}>
+                          {TASK[key]}
+                        </Select.Option>
+                      );
+                    })}
+                  </Select>
+                </Form.Item>
+              </Col>
+            )}
+
             <Col span={8}>
               <Form.Item
                 name='name'
@@ -317,6 +358,7 @@ const ListMonitorCampaign = () => {
                 </Select>
               </Form.Item>
             </Col>
+
             <Col span={8}>
               <Form.Item name='resolution' label='Độ phân giải'>
                 <Select allowClear placeholder='Chọn độ phân giải'>
@@ -327,28 +369,19 @@ const ListMonitorCampaign = () => {
               </Form.Item>
             </Col>
 
-            <Col span={16}>
-              <Form.Item
-                name='timeRange'
-                label='Thời gian'
-                labelCol={{ span: 5 }}
-                rules={[{ type: 'array' }]}>
-                <RangePicker showTime format={DATE_TIME_FORMAT} />
-              </Form.Item>
+            <Col span={8}>
+              <Col span={13} offset={10}>
+                <Row type='flex' justify='end'>
+                  <Button
+                    size='middle'
+                    icon={<HistoryOutlined />}
+                    onClick={onResetFieldValues}>
+                    Đặt lại
+                  </Button>
+                </Row>
+              </Col>
             </Col>
           </Row>
-          <Col span={8} offset={16}>
-            <Col span={13} offset={10}>
-              <Row type='flex' justify='end'>
-                <Button
-                  size='middle'
-                  icon={<HistoryOutlined />}
-                  onClick={onResetFieldValues}>
-                  Đặt lại
-                </Button>
-              </Row>
-            </Col>
-          </Col>
         </Form>
       </StyleSearchForm>
 
