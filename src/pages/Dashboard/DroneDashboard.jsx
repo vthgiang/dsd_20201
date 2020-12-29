@@ -63,7 +63,7 @@ const columns = [
     title: "Hành động",
     key: "action",
     render: () => (
-      <a href="#">Chi tiết</a>
+      <a href="http://123.30.235.196:5599/drone-state">Chi tiết</a>
     ),
   },
 ];

@@ -91,7 +91,7 @@ export default function PayloadDashboard() {
     {
       title: 'Hành động',
       key: 'action',
-      render: (text, record) => <a href="#">Chi tiết</a>,
+      render: (text, record) => <a href="http://123.30.235.196:5599/payload-statistic">Chi tiết</a>,
     },
   ];
   const lineChartData = React.useMemo(() => {
