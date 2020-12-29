@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import Select from 'react-select';
 import axios from 'axios';
 import { getToken, getProjectType } from '../../Common/info';
-
-FlightPathInput.propTypes = {
-    
-};
 
 function FlightPathInput(props) {
 
@@ -15,7 +10,9 @@ function FlightPathInput(props) {
         name, setName, height, setHeight, heightPoint, setHeightPoint, 
         selectedArea, setSelectedArea,
         selectedZone, setSelectedZone,
-        resetPoint
+        resetPoint,
+        speed, setSpeed, 
+        totalDistance
     } = props;
     
     // list khu vuc giam sat
@@ -97,10 +94,15 @@ function FlightPathInput(props) {
                     <Form.Control type="text" value={name} onChange={(e)=>setName(e.target.value)} placeholder="Nhập tên đường bay" />
                 </Form.Group>
 
-                {/* <Form.Group controlId="heightFlight">
-                    <Form.Label>Độ cao khi bay</Form.Label>
-                    <Form.Control type="number" onChange={(e)=>setHeight(e.target.value)} value={height} placeholder="m" />
-                </Form.Group> */}
+                <Form.Group controlId="speed">
+                    <Form.Label>Vận tốc bay</Form.Label>
+                    <Form.Control type="number" min="1" max="100" onChange={(e)=>setSpeed(e.target.value)} value={speed} placeholder="mét/phút" />
+                </Form.Group>
+
+                <Form.Group controlId="totalDistance">
+                    <Form.Label>Tông quãng đường bay (mét)</Form.Label>
+                    <Form.Control type="number" value={Math.round(totalDistance)} placeholder="mét" />
+                </Form.Group>
             </Col>
         </Row>
         <Row>

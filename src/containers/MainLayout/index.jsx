@@ -62,12 +62,13 @@ const MainLayout = ({ children, history }) => {
                         Phân tích phát hiện sự cố
                       </div>
                     </Menu.Item>
-                    <Menu.Item key="ncn4">
-                      <div onClick={() =>history.push("/dedieu-ncn4")} rel="noopener noreferrer">
-                        {<AppstoreAddOutlined />} Nhóm chức năng 4
+                    <Menu.Item key="ncn4" icon={<AppstoreAddOutlined />}>
+                      <a className="margin-left-12" href={"/drone-state"} rel="noopener noreferrer">
+                        Nhóm chức năng 4
                         <br/>
-                        Quản lý, điều khiển UAV
-                      </div>
+                        Quản lý UAV
+                      </a>
+
                     </Menu.Item>
                     <Menu.Item key="ncn5" icon={<SettingOutlined />}>
                       <a className="margin-left-12" href={"/dedieu-ncn5"} rel="noopener noreferrer">

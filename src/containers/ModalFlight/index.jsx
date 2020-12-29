@@ -9,6 +9,8 @@ import SaveIcon from '@material-ui/icons/Save';
 import { Form, Input, Col, Row } from "antd";
 import React, { useEffect, useState, useMemo } from "react";
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import axios from 'axios';
+import Map from './Map';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -23,12 +25,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'scroll',
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
     // border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(2, 2, 2),
+    width : 700
   },
 
   button: {
@@ -54,8 +58,16 @@ export default function TransitionsModal(props) {
     fetch("http://skyrone.cf:6789/droneState/getParameterFlightRealTime/" + props.id)
       .then(response => response.json())
       .then(json => {
+        console.log(json.data);
+        
         setDrones(json.data);
         setOpen(true);
+        // getFlightPath()
+        //   .then(flightPath => {
+        //     json.data.flightPath = flightPath;
+        //     setDrones(json.data);
+        //     setOpen(true);
+        //   })
       });
   };
 
@@ -94,13 +106,24 @@ export default function TransitionsModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Id# : {props.id} </h2>
-            <h3 id="transition-modal-title">Tọa độ Lat :  {drones.locationLat}</h3>
-            <h3 id="transition-modal-title">Tọa độ Lng :  {drones.locationLng}</h3>
-            <h3 id="transition-modal-title">Độ cao (m) :  {drones.heightFlight}</h3>
-            {/* <h3 id="transition-modal-title">Thời gian đã bay :  {drones.time}</h3> */}
-            <h3 id="transition-modal-title">Tốc độ bay :  {drones.speed} m/phút</h3>
-            <h3 id="transition-modal-title">Phần trăm pin :  {drones.percentBattery} %</h3>
+            <br/>
+            <h4 id="transition-modal-title">Tên drone : {props.name} </h4>
+            <h4 id="transition-modal-title">#ID : {props.id} </h4>
+            <p id="transition-modal-title">Độ cao (m) :  {drones.heightFlight}</p>
+            <p id="transition-modal-title">Phần trăm pin :  {drones.percentBattery} %</p>
+            <p id="transition-modal-title">.         Tốc độ bay :  {drones.speed} m/phút</p>
+            <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.location.href='/stream';
+                    }}
+                >
+                  Xem video stream
+                   </Button>
+            <Map flightPath={drones.flightPath}/>
           </div>
         </Fade>
       </Modal>
@@ -109,3 +132,65 @@ export default function TransitionsModal(props) {
 
 }
 
+const fakeData = {
+  name: "Phúc Đồng - Long Biên 1",
+  id: "5fd87500b94e272f3f9e8ffc",
+  flightPoints: [
+    {
+      flightHeight: 67,
+      idSupervisedObject: "",
+      locationLat: 21.048094,
+      locationLng: 105.892944,
+      timeCome: 8,
+      timeStop: 2
+    },
+    {
+      flightHeight: 67,
+      idFlightPath: null,
+      idSupervisedObject: "",
+      locationLat: 21.042646,
+      locationLng: 105.89689,
+      note: null,
+      timeCome: 4,
+      timeStop: 3
+    },
+    {
+      flightHeight: 68,
+      idFlightPath: null,
+      idSupervisedObject: "",
+      locationLat: 21.03816,
+      locationLng: 105.89878,
+      note: null,
+      timeCome: 3,
+      timeStop: 2
+    },
+    {
+      flightHeight: 67,
+      idFlightPath: null,
+      idSupervisedObject: "",
+      locationLat: 21.035517,
+      locationLng: 105.90256,
+      note: null,
+      timeCome: 3,
+      timeStop: 3
+    },
+    {
+      flightHeight: 67,
+      idFlightPath: null,
+      idSupervisedObject: "",
+      locationLat: 21.03039,
+      locationLng: 105.9132,
+      note: null,
+      timeCome: 6,
+      timeStop: 2,
+    }
+  ]
+}
+
+function getFlightPath(){
+  return new Promise((resolve, reject) => {
+    setTimeout(()=>{
+      resolve(fakeData);
+    }, 500);
+  })
+}

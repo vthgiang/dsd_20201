@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Button, Form } from 'react-bootstrap';
-
-PointInfo.propTypes = {
-    
-};
 
 function PointInfo(props) {
     const {
@@ -13,7 +8,8 @@ function PointInfo(props) {
         heightPoint, setHeightPoint,
         zone, updatePoint,
         pointChange, setPointChange,
-        selectedPoint
+        selectedPoint,
+        flightHeightDown, setFlightHeightDown
     } = props;
 
     const [error, setError] = useState(''); 
@@ -25,18 +21,8 @@ function PointInfo(props) {
         updatePoint();
         setError('');
     }
-
     return (
         <>
-            <Form.Group controlId="timeCome">
-                <Form.Label>Thời gian bay đến</Form.Label>
-                <Form.Control type="number" value={timeCome} 
-                    onChange={(e)=>{
-                        setTimeCome(e.target.value); 
-                        setPointChange(true);}
-                    } placeholder="phút" />
-            </Form.Group>
-
             <Form.Group controlId="timeStop">
                 <Form.Label>Thời gian dừng</Form.Label>
                 <Form.Control type="number" 
@@ -56,6 +42,17 @@ function PointInfo(props) {
                         setPointChange(true);
                         }}  
                     value={heightPoint} placeholder="m" />
+            </Form.Group>
+            <Form.Group controlId="heightdown">
+                <Form.Label>
+                    Độ cao hạ xuống
+                </Form.Label>
+                <Form.Control type="number" 
+                    onChange={(e)=>{
+                        setFlightHeightDown(e.target.value);
+                        setPointChange(true);
+                        }}  
+                    value={flightHeightDown} placeholder="m" />
             </Form.Group>
             {selectedPoint != null && selectedPoint.object != null && (<Form.Group controlId="monitoredObject">
                 <Form.Text className="text-muted">
