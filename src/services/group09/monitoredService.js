@@ -3,9 +3,10 @@ import to from "await-to-js"
 class Service extends Base {
   index = async (filter) => {
     return this.request({
-      url: "/api/users",
+      url: 'https://dsd05-monitored-object.herokuapp.com/monitored-object/',
       method: "GET",
-      data: filter
+      data: filter,
+      isExternalServer: true
     });
   };
   create = async (data) => {
@@ -41,16 +42,7 @@ class Service extends Base {
     });
   };
 
-  getImagesByMonitoredId = async ({ page, pageSize } = {}) => {
-    return this.request({
-      url: `https://it4483team2.herokuapp.com/api/records/search-image-video?skip=${page*pageSize}&take=${pageSize}`,
-      method: "POST",
-      isExternalServer: true,
-      data: {
-        type: 0
-      }
-    });
-  };
+
 
   // getImagesByMonitoredId = async ({ id } = {}) => {
   //   id = id || '5fc68aef1b9ae0001765e821'

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import to from 'await-to-js';
-import { message, Table, Tag, Input, Space, Button } from 'antd';
+import { message, Table, Tag, Input, Space, Button, Typography } from 'antd';
 import incidentService from '../../../services/group09/incidentService';
 import userService from '../../../services/group09/userService';
 import incidentLevelService from '../../../services/group09/incidentLevelService';
@@ -56,17 +56,6 @@ const Incident = () => {
         setTimeout(() => searchInput.select(), 100);
       }
     },
-    // render: text =>
-    //     searchedColumn === dataIndex ? (
-    //         <Highlighter
-    //             highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-    //             searchWords={[searchText]}
-    //             autoEscape
-    //             textToHighlight={text ? text.toString() : ''}
-    //         />
-    //     ) : (
-    //         text
-    //     ),
   });
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -85,7 +74,7 @@ const Incident = () => {
       title: 'STT',
       dataIndex: 'index',
       key: 'index',
-      ...getColumnSearchProps('name')
+      ...getColumnSearchProps('index')
     },
     {
       title: 'Tên sự cố',
@@ -100,6 +89,7 @@ const Incident = () => {
       dataIndex: 'description',
       key: 'description',
       width: '20%',
+      render: (text, record) => <Typography.Paragraph ellipsis={{ rows: 3, expandable: true, symbol: 'Xem tiếp' }}>{text}</Typography.Paragraph>,
     },
     {
       title: 'Trạng thái',
@@ -144,7 +134,9 @@ const Incident = () => {
       title: 'Người tạo',
       dataIndex: 'createdBy',
       key: 'createdBy',
-      render: (text) => {
+      render: (text, record) => {
+        console.log('text', text, record)
+        console.log('users', users)
         return <div>{users[text]}</div>
       }
     },

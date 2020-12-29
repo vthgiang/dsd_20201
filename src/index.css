@@ -121,6 +121,9 @@ body {
   position: sticky;
   top: 0;
 }
+a.ant-typography-expand {
+  color: #1890ff !important;
+}
 .pin {
   width: 15px;
   height: 15px;
