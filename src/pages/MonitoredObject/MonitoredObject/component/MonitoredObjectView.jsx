@@ -191,7 +191,7 @@ function MonitoredObjectView({ history }) {
       })
       .then((res)=>{
         if(res.data){
-          setImages(res.data.content.image);
+          setImages(res.data.content.image)
         }
       })
     }
