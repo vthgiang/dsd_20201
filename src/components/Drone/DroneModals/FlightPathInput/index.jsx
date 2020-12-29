@@ -100,7 +100,7 @@ function FlightPathInput(props) {
                 </Form.Group>
 
                 <Form.Group controlId="totalDistance">
-                    <Form.Label>Tông quãng đường bay (mét)</Form.Label>
+                    <Form.Label>Tổng quãng đường bay (mét)</Form.Label>
                     <Form.Control type="number" value={Math.round(totalDistance)} placeholder="mét" />
                 </Form.Group>
             </Col>

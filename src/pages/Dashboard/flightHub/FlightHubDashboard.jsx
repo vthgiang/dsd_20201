@@ -34,7 +34,7 @@ const columns = [
         title: "Hành động",
         key: "action",
         render: () => (
-            <a href="#">Chi tiết</a>
+            <a href="/flight-hub-monitor-campaigns">Chi tiết</a>
         ),
     },
 ];

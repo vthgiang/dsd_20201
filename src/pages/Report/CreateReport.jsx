@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useState, useMemo, useRef } from 'react';
 import { Card, Select, Modal, Spin, Button } from 'antd';
 import Axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import QueryString from 'query-string';
+import { useSelector } from "react-redux";
 
 import ReportTemplate from './ReportTemplate';
 
@@ -24,35 +27,45 @@ const processDataToAPI = (report) => {
 }
 
 export default function CreateReport() {
+  const { user: { api_token, type } } = useSelector(state => state.user);
   const [report, setReport] = useState(null);
   const [currentTemplateId, setCurrentTemplateId] = useState(null);
   const [templatesList, setTemplatesList] = useState([]);
-
-  useEffect(() => {
-    Axios.get('https://dsd07.herokuapp.com/api/reports/templates', {
-      headers: {
-        'Access-Control-Allow-Origin': true,
-      },
-    })
-      .then(response => {
-        if (response.data.success)
-          setTemplatesList(response.data.data)
-      }).catch(err => {
-        // handleShowModal()
-      });
-  }, []);
+  const location = useLocation();
+  const { templateId } = QueryString.parse(location.search);
 
   const handleChangeOption = useCallback((id) => {
     setCurrentTemplateId(id);
     setReport(null);
   }, []);
 
+  useEffect(() => {
+    Axios.get('https://dsd07.herokuapp.com/api/reports/templates', {
+      headers: {
+        'Access-Control-Allow-Origin': true,
+        "api-token": api_token,
+        "project-type": type,
+      },
+    })
+      .then(response => {
+        if (response.data.success) {
+          const templates = response.data.data;
+          setTemplatesList(templates);
+          if (templates.find((item) => item.id === templateId)) {
+            handleChangeOption(templateId);
+          }
+        }
+      }).catch(err => {
+        // handleShowModal()
+      });
+  }, [templateId]);
+
   const handleSubmitReport = useCallback(() => {
     Axios.post('https://dsd07.herokuapp.com/api/user-reports', processDataToAPI(report), {
       headers: {
         'Access-Control-Allow-Origin': true,
-        'api-token': '4e3fe3463afd3a705c0be7ec2322c335',
-        'project-type': 'LUOI_DIEN',
+        "api-token": api_token,
+        "project-type": type,
       },
     })
       .then(response => {
@@ -87,6 +100,7 @@ export default function CreateReport() {
           <Select
             style={{ marginRight: 16, width: '40%' }}
             onChange={handleChangeOption}
+            value={currentTemplateId}
           >
             {renderTemplateDropdownList()}
           </Select>

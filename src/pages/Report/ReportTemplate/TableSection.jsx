@@ -27,6 +27,7 @@ export default function TableSection({
   section,
   onSectionChange,
   formatted,
+  dataSource,
 }) {
   const [data, setData] = useState([]);
   const onDeleteRow = useCallback((key) => {
@@ -56,6 +57,7 @@ export default function TableSection({
             <Input
               name={header}
               onChange={(e) => onCellChange(e, record.key)}
+              value={data?.[index]?.[header]}
             />
           )
         ),
@@ -69,7 +71,7 @@ export default function TableSection({
         },
       ])
     ];
-  }, [section.headers, onDeleteRow, onCellChange, formatted]);
+  }, [section.headers, onDeleteRow, onCellChange, formatted, data]);
 
   const onClickAddRow = useCallback(() => {
     setData((data) => ([
@@ -95,6 +97,41 @@ export default function TableSection({
       setData(processDataFromAPI(section.records, section.headers));
     }
   }, [section, formatted])
+
+  useEffect(() => {
+    if (dataSource && dataSource.data && dataSource.info && section.dataSource) {
+      const tableName = section.dataSource.split('.')[1];
+      if (!(tableName && dataSource.info.tableMaps?.[tableName] && dataSource.data[tableName])) {
+        return;
+      }
+      const tableInfo = dataSource.info.tableMaps[tableName];
+      let isDataUsable = false;
+      section.headers.forEach((header) => {
+        if (Object.keys(tableInfo).includes(header)) {
+          isDataUsable = true;
+        }
+      });
+      if (!isDataUsable) return;
+      setData((data) => ([
+        ...data,
+        ...dataSource.data[tableName].map((row) => {
+          return section.headers.reduce((finalResult, currentItem) => {
+            let currentItemValue = null;
+            const tableColumnKey = tableInfo[currentItem];
+            if (tableColumnKey && row[tableColumnKey] !== undefined) {
+              currentItemValue = row[tableColumnKey];
+            }
+            return ({
+              ...finalResult,
+              [currentItem]: currentItemValue,
+            });
+          }, {
+            key: uuidv4(),
+          });
+        }),
+      ]));
+    }
+  }, [dataSource]);
 
   if (columns.length === 0) return null;
 

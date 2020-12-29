@@ -1,310 +1,227 @@
 /* eslint-disable no-underscore-dangle */
 import Axios from "axios";
 import {
-  requestWithCache
+    requestWithCache
 } from "./utils";
+import moment from 'moment';
+
+// const API_URL = "http://14.248.5.197";
+const API_URL = "http://skyrone.cf";
 
 export const getDroneOverallMetrics = async (projectType) => {
-  try {
-    if (projectType != 'ALL_PROJECT') {
-      const {
-        data
-      } = await requestWithCache(
-        "getDroneOverallMetrics",
-        () => Axios.get("http://skyrone.cf:6789/drone/getAll"),
-      );
-      const metrics = {};
-      metrics.all = data.length;
-      metrics.broken = data.filter((item) => !item.used).length;
-      metrics.working = metrics.all - metrics.broken;
-      return metrics;
-    } else {
-      const {
-        data
-      } = await requestWithCache(
-        "getDroneOverallMetrics",
-        () => Axios.get("http://skyrone.cf:6789/drone/getAll"),
-      );
-      const metrics = {};
-      // const results = data.filter((item) => item.type)
-      metrics.all = data.length;
-      metrics.broken = data.filter((item) => !item.used).length;
-      metrics.working = metrics.all - metrics.broken;
-      return metrics;
-    }
+    try {
+        if (projectType != 'ALL_PROJECT') {
+            const {
+                data
+            } = await requestWithCache(
+                "getDroneOverallMetrics",
+                () => Axios.get(`${API_URL}:6789/drone/getAll`),
+            );
+            const metrics = {};
+            metrics.all = data.length;
+            metrics.broken = data.filter((item) => !item.used).length;
+            metrics.working = metrics.all - metrics.broken;
+            return metrics;
+        } else {
+            const {
+                data
+            } = await requestWithCache(
+                "getDroneOverallMetrics",
+                () => Axios.get(`${API_URL}:6789/drone/getAll`),
+            );
+            const metrics = {};
+            // const results = data.filter((item) => item.type)
+            metrics.all = data.length;
+            metrics.broken = data.filter((item) => !item.used).length;
+            metrics.working = metrics.all - metrics.broken;
+            return metrics;
+        }
 
-  } catch (error) {
-    console.error(error);
-  }
-  return null;
+    } catch (error) {
+        console.error(error);
+    }
+    return null;
 };
 
 export const getDroneDetailedMetrics = async (projectType) => {
-  try {
-    if (projectType == 'CHAY_RUNG') {
-      const {
-        data
-      } = await requestWithCache(
-        "getDroneDetailedMetrics",
-        () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
-      );
-      const metrics = {};
-      metrics.idle = data.filter((item) => item.state === 0).length;
-      metrics.flying = data.filter((item) => item.project === 1).length;
-      metrics.charging = data.filter((item) => item.state === 2).length;
-      metrics.maintaining = data.filter((item) => item.state === 3).length;
-      metrics.broken = data.filter((item) => item.state === 4).length;
-      metrics.noProject = data.filter((item) => item.project === 0).length;
-      metrics.CR = data.filter((item) => item.project === 1).length;
-      metrics.DD = data.filter((item) => item.project === 2).length;
-      metrics.LD = data.filter((item) => item.project === 3).length;
-      metrics.CT = data.filter((item) => item.project === 4).length;
-      return metrics;
-    } else if (projectType == 'LUOI_DIEN') {
-      const {
-        data
-      } = await requestWithCache(
-        "getDroneDetailedMetrics",
-        () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
-      );
-      const metrics = {};
-      metrics.idle = data.filter((item) => item.state === 0).length;
-      metrics.flying = data.filter((item) => item.project === 3).length;
-      metrics.charging = data.filter((item) => item.state === 2).length;
-      metrics.maintaining = data.filter((item) => item.state === 3).length;
-      metrics.broken = data.filter((item) => item.state === 4).length;
-      metrics.noProject = data.filter((item) => item.project === 0).length;
-      metrics.CR = data.filter((item) => item.project === 1).length;
-      metrics.DD = data.filter((item) => item.project === 2).length;
-      metrics.LD = data.filter((item) => item.project === 3).length;
-      metrics.CT = data.filter((item) => item.project === 4).length;
-      return metrics;
-    } else if (projectType == 'CAY_TRONG') {
-      const {
-        data
-      } = await requestWithCache(
-        "getDroneDetailedMetrics",
-        () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
-      );
-      const metrics = {};
-      metrics.idle = data.filter((item) => item.state === 0).length;
-      metrics.flying = data.filter((item) => item.project === 4).length;
-      metrics.charging = data.filter((item) => item.state === 2).length;
-      metrics.maintaining = data.filter((item) => item.state === 3).length;
-      metrics.broken = data.filter((item) => item.state === 4).length;
-      metrics.noProject = data.filter((item) => item.project === 0).length;
-      metrics.CR = data.filter((item) => item.project === 1).length;
-      metrics.DD = data.filter((item) => item.project === 2).length;
-      metrics.LD = data.filter((item) => item.project === 3).length;
-      metrics.CT = data.filter((item) => item.project === 4).length;
-      return metrics;
-    } else if (projectType == 'DE_DIEU') {
-      const {
-        data
-      } = await requestWithCache(
-        "getDroneDetailedMetrics",
-        () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
-      );
-      const metrics = {};
-      metrics.idle = data.filter((item) => item.state === 0).length;
-      metrics.flying = data.filter((item) => item.project === 2).length;
-      metrics.charging = data.filter((item) => item.state === 2).length;
-      metrics.maintaining = data.filter((item) => item.state === 3).length;
-      metrics.broken = data.filter((item) => item.state === 4).length;
-      metrics.noProject = data.filter((item) => item.project === 0).length;
-      metrics.CR = data.filter((item) => item.project === 1).length;
-      metrics.DD = data.filter((item) => item.project === 2).length;
-      metrics.LD = data.filter((item) => item.project === 3).length;
-      metrics.CT = data.filter((item) => item.project === 4).length;
-      return metrics;
-    } else {
-      const {
-        data
-      } = await requestWithCache(
-        "getDroneDetailedMetrics",
-        () => Axios.get("http://skyrone.cf:6789/droneState/getAllStateNow"),
-      );
-      const metrics = {};
-      metrics.idle = data.filter((item) => item.state === 0).length;
-      metrics.flying = data.filter((item) => item.state === 1).length;
-      metrics.charging = data.filter((item) => item.state === 2).length;
-      metrics.maintaining = data.filter((item) => item.state === 3).length;
-      metrics.broken = data.filter((item) => item.state === 4).length;
-      metrics.noProject = data.filter((item) => item.project === 0).length;
-      metrics.CR = data.filter((item) => item.project === 1).length;
-      metrics.DD = data.filter((item) => item.project === 2).length;
-      metrics.LD = data.filter((item) => item.project === 3).length;
-      metrics.CT = data.filter((item) => item.project === 4).length;
-      return metrics;
+    try {
+        const {
+            data
+        } = await requestWithCache(
+            "getDroneDetailedMetrics",
+            () => Axios.get(`${API_URL}:6789/droneState/getAllStateNow`),
+        );
+        const metrics = {};
+        metrics.rawData = data;
+        metrics.idle = data.filter((item) => item.state === 0).length;
+        metrics.flying = data.filter((item) => item.project === 1).length;
+        metrics.charging = data.filter((item) => item.state === 2).length;
+        metrics.maintaining = data.filter((item) => item.state === 3).length;
+        metrics.broken = data.filter((item) => item.state === 4).length;
+        metrics.noProject = data.filter((item) => item.project === 0).length;
+        metrics.CR = data.filter((item) => item.project === 1).length;
+        metrics.DD = data.filter((item) => item.project === 2).length;
+        metrics.LD = data.filter((item) => item.project === 3).length;
+        metrics.CT = data.filter((item) => item.project === 4).length;
+        metrics.overallTable = [
+            { status: "Đang rảnh", amount: metrics.idle },
+            { status: "Đang bay", amount: metrics.flying },
+            { status: "Đang sạc", amount: metrics.charging },
+            { status: "Đang bảo trì", amount: metrics.maintaining },
+            { status: "Đã hỏng", amount: metrics.broken },
+        ];
+        return metrics;
+    } catch (error) {
+        console.error(error);
     }
-  } catch (error) {
-    console.error(error);
-  }
-  return null;
+    return null;
 };
 
 export const getIncidentOverallMetrics = async () => {
-  try {
-    const {
-      data
-    } = await requestWithCache(
-      "getIncidentOverallMetrics",
-      () => Axios.get("https://distributed-dsd08.herokuapp.com/api/external/report-listing?type=LUOI_DIEN"),
-    );
-    console.log({
-      data
-    });
-    const metrics = {};
-    metrics.all = data?.created_tasks_total?.created_total;
-    metrics.doing = data?.created_tasks_total?.doing_total;
-    metrics.done = data?.created_tasks_total?.done_total;
-    metrics.pending = data?.created_tasks_total?.pending_total;
-    return metrics;
-  } catch (error) {
-    console.error(error);
-  }
-  return null;
+    try {
+        const {
+            data
+        } = await requestWithCache(
+            "getIncidentOverallMetrics",
+            () => Axios.get("https://distributed-dsd08.herokuapp.com/api/external/report-listing?type=LUOI_DIEN"),
+        );
+        console.log({
+            data
+        });
+        const metrics = {};
+        metrics.all = data?.created_tasks_total?.created_total;
+        metrics.doing = data?.created_tasks_total?.doing_total;
+        metrics.done = data?.created_tasks_total?.done_total;
+        metrics.pending = data?.created_tasks_total?.pending_total;
+        return metrics;
+    } catch (error) {
+        console.error(error);
+    }
+    return null;
 };
 
 export const getIncidentDetailedMetrics = async (project, token) => {
-  try {
-    if (project != 'ALL_PROJECT') {
-      const results = await Promise.all([
-        requestWithCache(
-          "getIncidentDetailedMetrics",
-          () => Axios.get(`https://distributed-dsd08.herokuapp.com/api/external/report-listing?type=${project}`, {
-            headers: {
-              "api-token": token,
-              "project-type": project,
-            },
-          }),
-        ),
-        requestWithCache(
-          "getIncidentDetailedMetrics",
-          () => Axios.get("https://distributed-dsd08.herokuapp.com/api/task/incident-listing", {
-            headers: {
-              "api-token": token,
-              "project-type": project,
-            },
-          }),
-        ),
-      ]);
-      const metrics = {
-        overall: results[0].data,
-        detailed: results[1].data.filter(item => item.type.type == project),
-      };
-      return metrics;
-    } else {
-      const results = await Promise.all([
-        requestWithCache(
-          "getIncidentOverallMetrics",
-          () => Axios.get("https://distributed-dsd08.herokuapp.com/api/external/report-listing"),
-        ),
-        requestWithCache(
-          "getIncidentDetailedMetrics",
-          () => Axios.get("https://distributed-dsd08.herokuapp.com/api/task/incident-listing", {
-            headers: {
-              "api-token": "4c901bcdba9f440a2a7c31c0bcbd78ec",
-              "project-type": "LUOI_DIEN",
-            },
-          }),
-        ),
-      ]);
-      const metrics = {
-        overall: results[0].data,
-        detailed: results[1].data,
-      };
-      return metrics;
-    };
-  } catch (error) {
-    console.error(error);
-  }
-  return null;
+    try {
+        const results = await Promise.all([
+            requestWithCache(
+                "getIncidentDetailedMetrics",
+                () => Axios.get(`https://distributed-dsd08.herokuapp.com/api/external/report-listing${project !== 'ALL_PROJECT' ? `?type=${project}` : ''}`, {
+                    headers: {
+                        "api-token": token || "4c901bcdba9f440a2a7c31c0bcbd78ec",
+                        "project-type": project || "LUOI_DIEN",
+                    },
+                }),
+            ),
+            requestWithCache(
+                "getIncidentDetailedMetrics",
+                () => Axios.get("https://distributed-dsd08.herokuapp.com/api/task/incident-listing", {
+                    headers: {
+                        "api-token": token || "4c901bcdba9f440a2a7c31c0bcbd78ec",
+                        "project-type": project || "LUOI_DIEN",
+                    },
+                }),
+            ),
+        ]);
+        const metrics = {
+            overall: results[0].data,
+            detailed: results[1].data.filter(item => (project === 'ALL_PROJECT' ? true : item.type.type === project)),
+        };
+        metrics.incidentTable = [
+            { status: "Tổng số sự cố", amount: metrics.overall?.created_tasks_total?.created_total },
+            { status: "Đang khắc phục", amount: metrics.overall?.created_tasks_total?.doing_total },
+            { status: "Đã xử lý", amount: metrics.overall?.created_tasks_total?.done_total },
+            { status: "Đang chờ", amount: metrics.overall?.created_tasks_total?.pending_total },
+        ];
+        return metrics;
+    } catch (error) {
+        console.error(error);
+    }
+    return null;
 };
 
 export const getUsersMetrics = async (projectType) => {
-  try {
-    if (projectType != 'ALL_PROJECT') {
-      const {
-        data: {
-          result
+    try {
+        if (projectType != 'ALL_PROJECT') {
+            const {
+                data: {
+                    result
+                }
+            } = await requestWithCache(
+                "getUsersMetrics",
+                () => Axios.get("https://distributed.de-lalcool.com/api/user?page_id=0&page_size=10000", {
+                    headers: {
+                        token: "9e35bc1346ffd9113c17af3ac309bf85",
+                        "project-type": "ALL_PROJECT",
+                    },
+                }),
+            );
+            console.log(result);
+            const datas = result.flat().filter((item) => item.type === projectType);
+            console.log(datas);
+            const metrics = {};
+            metrics.data = datas;
+            metrics.all = datas.length;
+            metrics.active = datas.filter((item) => item.status === "ACTIVE").length;
+            metrics.inactive = datas.filter((item) => item.status === "INACTIVE").length;
+            metrics.pending = datas.filter((item) => item.status === "PENDING").length;
+            metrics.admin = datas.filter((item) => item.role === "ADMIN");
+            metrics.manager = datas.filter((item) => item.role === "MANAGER");
+            metrics.droneStaff = datas.filter((item) => item.role === "DRONE_STAFF");
+            metrics.incidentStaff = datas.filter((item) => item.role === "INCIDENT_STAFF");
+            metrics.supervisor = datas.filter((item) => item.role === "SUPERVISOR");
+            return metrics;
+        } else {
+            const {
+                data: {
+                    result
+                }
+            } = await requestWithCache(
+                "getUsersMetrics",
+                () => Axios.get("https://distributed.de-lalcool.com/api/user?page_id=0&page_size=1000000", {
+                    headers: {
+                        token: "9e35bc1346ffd9113c17af3ac309bf85",
+                        "project-type": "ALL_PROJECT",
+                    },
+                }),
+            );
+            const metrics = {};
+            metrics.data = result;
+            metrics.all = result.length;
+            metrics.active = result.filter((item) => item.status === "ACTIVE").length;
+            metrics.inactive = result.filter((item) => item.status === "INACTIVE").length;
+            metrics.pending = result.filter((item) => item.status === "PENDING").length;
+            metrics.admin = result.filter((item) => item.role === "ADMIN");
+            metrics.manager = result.filter((item) => item.role === "MANAGER");
+            metrics.droneStaff = result.filter((item) => item.role === "DRONE_STAFF");
+            metrics.incidentStaff = result.filter((item) => item.role === "INCIDENT_STAFF");
+            metrics.supervisor = result.filter((item) => item.role === "SUPERVISOR");
+            metrics.superadmin = result.filter((item) => item.role === "SUPER_ADMIN");
+            return metrics;
         }
-      } = await requestWithCache(
-        "getUsersMetrics",
-        () => Axios.get("https://distributed.de-lalcool.com/api/user?page_id=0&page_size=10000", {
-          headers: {
-            token: "9e35bc1346ffd9113c17af3ac309bf85",
-            "project-type": "ALL_PROJECT",
-          },
-        }),
-      );
-      console.log(result);
-      const datas = result.flat().filter((item) => item.type === projectType);
-      console.log(datas);
-      const metrics = {};
-      metrics.data = datas;
-      metrics.all = datas.length;
-      metrics.active = datas.filter((item) => item.status === "ACTIVE").length;
-      metrics.inactive = datas.filter((item) => item.status === "INACTIVE").length;
-      metrics.pending = datas.filter((item) => item.status === "PENDING").length;
-      metrics.admin = datas.filter((item) => item.role === "ADMIN");
-      metrics.manager = datas.filter((item) => item.role === "MANAGER");
-      metrics.droneStaff = datas.filter((item) => item.role === "DRONE_STAFF");
-      metrics.incidentStaff = datas.filter((item) => item.role === "INCIDENT_STAFF");
-      metrics.supervisor = datas.filter((item) => item.role === "SUPERVISOR");
-      return metrics;
-    } else {
-      const {
-        data: {
-          result
-        }
-      } = await requestWithCache(
-        "getUsersMetrics",
-        () => Axios.get("https://distributed.de-lalcool.com/api/user?page_id=0&page_size=1000000", {
-          headers: {
-            token: "9e35bc1346ffd9113c17af3ac309bf85",
-            "project-type": "ALL_PROJECT",
-          },
-        }),
-      );
-      const metrics = {};
-      metrics.data = result;
-      metrics.all = result.length;
-      metrics.active = result.filter((item) => item.status === "ACTIVE").length;
-      metrics.inactive = result.filter((item) => item.status === "INACTIVE").length;
-      metrics.pending = result.filter((item) => item.status === "PENDING").length;
-      metrics.admin = result.filter((item) => item.role === "ADMIN");
-      metrics.manager = result.filter((item) => item.role === "MANAGER");
-      metrics.droneStaff = result.filter((item) => item.role === "DRONE_STAFF");
-      metrics.incidentStaff = result.filter((item) => item.role === "INCIDENT_STAFF");
-      metrics.supervisor = result.filter((item) => item.role === "SUPERVISOR");
-      metrics.superadmin = result.filter((item) => item.role === "SUPER_ADMIN");
-      return metrics;
-    }
 
-  } catch (error) {
-    console.error(error);
-  }
-  return null;
+    } catch (error) {
+        console.error(error);
+    }
+    return null;
 };
 
 export const getPayloadOverallMetrics = async () => {
-  try {
-    const {
-      data
-    } = await requestWithCache(
-      "getPayloadOverallMetrics",
-      () => Axios.get("https://dsd06.herokuapp.com/api/payload"),
-    );
-    const metrics = {};
-    metrics.all = data.length;
-    metrics.idle = data.filter((item) => item.status !== "working").length;
-    metrics.working = metrics.all - metrics.idle;
-    return metrics;
-  } catch (error) {
-    console.error(error);
-  }
-  return null;
+    try {
+        const {
+            data
+        } = await requestWithCache(
+            "getPayloadOverallMetrics",
+            () => Axios.get("https://dsd06.herokuapp.com/api/payload"),
+        );
+        const metrics = {};
+        metrics.all = data.length;
+        metrics.idle = data.filter((item) => item.status !== "working").length;
+        metrics.working = metrics.all - metrics.idle;
+        return metrics;
+    } catch (error) {
+        console.error(error);
+    }
+    return null;
 };
 
 export const getPayloadDetailedMetrics = async () => {
@@ -332,6 +249,12 @@ export const getPayloadDetailedMetrics = async () => {
             fixing: results[1].data,
             working: results[2].data,
         };
+        metrics.overallTable = [
+            { status: "Đang rảnh", amount: metrics.idle },
+            { status: "Đang bay", amount: metrics.working },
+            { status: "Đang sạc", amount: metrics.charging },
+            { status: "Đang bảo trì", amount: metrics.fixing },
+        ];
         return metrics;
     } catch (error) {
         console.error(error);
@@ -367,27 +290,30 @@ export const getFlightHubMetrics = async (startDate, endDate) => {
     return null;
 };
 
-export const getFlightHubProjectTypeMetrics = async (startDate, endDate, projectType) => {
+export const getFlightHubProjectTypeMetrics = async (startDate, endDate, apiToken, projectTypeCode, projectType) => {
+    console.log(startDate, endDate, apiToken, projectTypeCode, projectType)
     try {
-        const results = await Axios.get(`https://flight-hub-api.herokuapp.com/api/monitor-campaigns?timeFrom=${startDate}&timeTo=${endDate}`);
+        const results = await Axios.get(`https://flight-hub-api.herokuapp.com/api/monitor-campaigns`, {
+            headers: {
+                'authorization': `Bearer ${apiToken}`,
+                "projectType": projectTypeCode,
+            },
+        });
         const metrics = {};
-        console.log('getFlightHubProjectTypeMetrics', results);
         const { monitorCampaigns } = results?.data.result;
+        console.log('getFlightHubProjectTypeMetrics', monitorCampaigns);
         if (monitorCampaigns && monitorCampaigns.length > 0) {
-            const monitorProjectTypeFound = monitorCampaigns.filter((item) => item.task === projectType);
-            if (monitorProjectTypeFound) {
-                return monitorProjectTypeFound.map((monitorProjectTypeFoundItem) => {
-                    return {
-                        name: monitorProjectTypeFoundItem.name,
-                        startTime: monitorProjectTypeFoundItem.startTime,
-                        endTime: monitorProjectTypeFoundItem.endTime,
-                        monitoredObjectsList: monitorProjectTypeFoundItem.monitoredObjects.map((item) => item.content.name),
-                        dronesList: monitorProjectTypeFoundItem.drones.map((item) => item.name),
-                        monitoredZone: monitorProjectTypeFoundItem.monitoredZone.name,
-                    }
-                })
-            }
-            return metrics;
+            const monitorProjectTypeFound = monitorCampaigns.filter(item => moment(item.endTime).isAfter(moment(endDate, 'YYYY-MM-DD')) && moment(item.endTime).isAfter(moment(item.startTime, 'YYYY-MM-DD')))
+            return monitorProjectTypeFound.map((monitorProjectTypeFoundItem) => {
+                return {
+                    name: monitorProjectTypeFoundItem.name,
+                    startTime: monitorProjectTypeFoundItem.startTime,
+                    endTime: monitorProjectTypeFoundItem.endTime,
+                    monitoredObjectsList: monitorProjectTypeFoundItem.monitoredObjects.map((item) => item.name),
+                    dronesList: monitorProjectTypeFoundItem.drones.map((item) => item.name),
+                    monitoredZone: monitorProjectTypeFoundItem.monitoredZone.name,
+                }
+            })
         }
         return metrics;
     } catch (error) {
@@ -397,435 +323,435 @@ export const getFlightHubProjectTypeMetrics = async (startDate, endDate, project
 };
 
 export const getNotifyMetrics = async (projectType, token) => {
-  try {
-    if (projectType == 'CHAY_RUNG') {
-      const results = await Promise.all([
-        requestWithCache(
-          'getNotiIncitdentAll',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=12', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv1',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=1', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
+    try {
+        if (projectType == 'CHAY_RUNG') {
+            const results = await Promise.all([
+                requestWithCache(
+                    'getNotiIncitdentAll',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=12', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv1',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=1', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
 
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv2',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=2', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv2',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=2', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
 
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv3',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=3', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv3',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=3', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
 
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv4',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=4', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv5',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=5', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
-        ),
-      ])
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv4',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=4', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv5',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=5', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+            ])
 
-      const metrics = {};
-      metrics.all = {
-        isTrue: results[0]?.data.data.trueNtf,
-        isFalse: results[0]?.data.data.falseNtf,
-        total: results[0]?.data.data.totalNtf
-      };
-      metrics.lv1 = results[1]?.data.data.total;      
-      metrics.lv2 = results[2]?.data.data.total;      
-      metrics.lv3 = results[3]?.data.data.total;      
-      metrics.lv4 = results[4]?.data.data.total;      
-      metrics.lv5 = results[5]?.data.data.total;
-      return metrics;
-    } else if (projectType == 'LUOI_DIEN') {
-      const results = await Promise.all([
-        requestWithCache(
-          'getNotiIncitdentAll',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=10', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv1',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=1', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv2',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=2', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv3',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=3', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv4',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=4', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv5',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=5', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
-        ),
-      ])
+            const metrics = {};
+            metrics.all = {
+                isTrue: results[0]?.data.data.trueNtf,
+                isFalse: results[0]?.data.data.falseNtf,
+                total: results[0]?.data.data.totalNtf
+            };
+            metrics.lv1 = results[1]?.data.data.total;
+            metrics.lv2 = results[2]?.data.data.total;
+            metrics.lv3 = results[3]?.data.data.total;
+            metrics.lv4 = results[4]?.data.data.total;
+            metrics.lv5 = results[5]?.data.data.total;
+            return metrics;
+        } else if (projectType == 'LUOI_DIEN') {
+            const results = await Promise.all([
+                requestWithCache(
+                    'getNotiIncitdentAll',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=10', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv1',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=1', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv2',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=2', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv3',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=3', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv4',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=4', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv5',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=5', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+            ])
 
-      const metrics = {};
-      console.log(results[0]?.data.data.trueNtf);
-      metrics.all = {
-        isTrue: results[0]?.data.data.trueNtf,
-        isFalse: results[0]?.data.data.falseNtf,
-        total: results[0]?.data.data.totalNtf
-      };
-      metrics.lv1 = results[1]?.data.data.total;      
-      metrics.lv2 = results[2]?.data.data.total;      
-      metrics.lv3 = results[3]?.data.data.total;      
-      metrics.lv4 = results[4]?.data.data.total;      
-      metrics.lv5 = results[5]?.data.data.total;
-      return metrics;
-    } else if (projectType == 'CAY_TRONG') {
-      const results = await Promise.all([
-        requestWithCache(
-          'getNotiIncitdentAll',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=11', {
-            headers: {
-              'api-token':token,
-              'project-type': projectType,
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv1',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=1', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
+            const metrics = {};
+            console.log(results[0]?.data.data.trueNtf);
+            metrics.all = {
+                isTrue: results[0]?.data.data.trueNtf,
+                isFalse: results[0]?.data.data.falseNtf,
+                total: results[0]?.data.data.totalNtf
+            };
+            metrics.lv1 = results[1]?.data.data.total;
+            metrics.lv2 = results[2]?.data.data.total;
+            metrics.lv3 = results[3]?.data.data.total;
+            metrics.lv4 = results[4]?.data.data.total;
+            metrics.lv5 = results[5]?.data.data.total;
+            return metrics;
+        } else if (projectType == 'CAY_TRONG') {
+            const results = await Promise.all([
+                requestWithCache(
+                    'getNotiIncitdentAll',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=11', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv1',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=1', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
 
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv2',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=2', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv2',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=2', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
 
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv3',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=3', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv3',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=3', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
 
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv4',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=4', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv5',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=5', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
-        ),
-      ])
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv4',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=4', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv5',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=5', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+            ])
 
-      const metrics = {};
-      console.log(results[0]?.data.data.trueNtf);
-      metrics.all = {
-        isTrue: results[0]?.data.data.trueNtf,
-        isFalse: results[0]?.data.data.falseNtf,
-        total: results[0]?.data.data.totalNtf
-      };
-      metrics.lv1 = results[1]?.data.data.total;      
-      metrics.lv2 = results[2]?.data.data.total;      
-      metrics.lv3 = results[3]?.data.data.total;      
-      metrics.lv4 = results[4]?.data.data.total;      
-      metrics.lv5 = results[5]?.data.data.total;
-      return metrics;
-    } else if (projectType == 'DE_DIEU') {
-      const results = await Promise.all([
-        requestWithCache(
-          'getNotiIncitdentAll',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=13', {
-            headers: {
-              "api-token": "9e35bc1346ffd9113c17af3ac309bf85",
-              "project-type": "ALL_PROJECT",
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv1',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=1', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
+            const metrics = {};
+            console.log(results[0]?.data.data.trueNtf);
+            metrics.all = {
+                isTrue: results[0]?.data.data.trueNtf,
+                isFalse: results[0]?.data.data.falseNtf,
+                total: results[0]?.data.data.totalNtf
+            };
+            metrics.lv1 = results[1]?.data.data.total;
+            metrics.lv2 = results[2]?.data.data.total;
+            metrics.lv3 = results[3]?.data.data.total;
+            metrics.lv4 = results[4]?.data.data.total;
+            metrics.lv5 = results[5]?.data.data.total;
+            return metrics;
+        } else if (projectType == 'DE_DIEU') {
+            const results = await Promise.all([
+                requestWithCache(
+                    'getNotiIncitdentAll',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=13', {
+                        headers: {
+                            "api-token": "9e35bc1346ffd9113c17af3ac309bf85",
+                            "project-type": "ALL_PROJECT",
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv1',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=1', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
 
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv2',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=2', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv2',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=2', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
 
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv3',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=3', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv3',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=3', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
 
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv4',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=4', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv5',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=5', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
-        ),
-      ])
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv4',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=4', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv5',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=5', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+            ])
 
-      const metrics = {};
-      console.log(results[0]?.data.data.trueNtf);
-      metrics.all = {
-        isTrue: results[0]?.data.data.trueNtf,
-        isFalse: results[0]?.data.data.falseNtf,
-        total: results[0]?.data.data.totalNtf
-      };
-      metrics.lv1 = results[1]?.data.data.total;      
-      metrics.lv2 = results[2]?.data.data.total;      
-      metrics.lv3 = results[3]?.data.data.total;      
-      metrics.lv4 = results[4]?.data.data.total;      
-      metrics.lv5 = results[5]?.data.data.total;
-      return metrics;
-    } else {
-      const results = await Promise.all([
-        requestWithCache(
-          'getNotiIncitdentAll',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=14', {
-            headers: {
-              "api-token": "9e35bc1346ffd9113c17af3ac309bf85",
-              "project-type": "ALL_PROJECT",
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentLD',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=10', {
-            headers: {
-              "api-token": "9e35bc1346ffd9113c17af3ac309bf85",
-              "project-type": "ALL_PROJECT",
-            },
-          })
+            const metrics = {};
+            console.log(results[0]?.data.data.trueNtf);
+            metrics.all = {
+                isTrue: results[0]?.data.data.trueNtf,
+                isFalse: results[0]?.data.data.falseNtf,
+                total: results[0]?.data.data.totalNtf
+            };
+            metrics.lv1 = results[1]?.data.data.total;
+            metrics.lv2 = results[2]?.data.data.total;
+            metrics.lv3 = results[3]?.data.data.total;
+            metrics.lv4 = results[4]?.data.data.total;
+            metrics.lv5 = results[5]?.data.data.total;
+            return metrics;
+        } else {
+            const results = await Promise.all([
+                requestWithCache(
+                    'getNotiIncitdentAll',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=14', {
+                        headers: {
+                            "api-token": "9e35bc1346ffd9113c17af3ac309bf85",
+                            "project-type": "ALL_PROJECT",
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLD',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=10', {
+                        headers: {
+                            "api-token": "9e35bc1346ffd9113c17af3ac309bf85",
+                            "project-type": "ALL_PROJECT",
+                        },
+                    })
 
-        ),
-        requestWithCache(
-          'getNotiIncitdentCT',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=11', {
-            headers: {
-              "api-token": "9e35bc1346ffd9113c17af3ac309bf85",
-              "project-type": "ALL_PROJECT",
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentCR',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=12', {
-            headers: {
-              "api-token": "9e35bc1346ffd9113c17af3ac309bf85",
-              "project-type": "ALL_PROJECT",
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentDD',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=13', {
-            headers: {
-              "api-token": "9e35bc1346ffd9113c17af3ac309bf85",
-              "project-type": "ALL_PROJECT",
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv1',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=1', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentCT',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=11', {
+                        headers: {
+                            "api-token": "9e35bc1346ffd9113c17af3ac309bf85",
+                            "project-type": "ALL_PROJECT",
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentCR',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=12', {
+                        headers: {
+                            "api-token": "9e35bc1346ffd9113c17af3ac309bf85",
+                            "project-type": "ALL_PROJECT",
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentDD',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/count_ntf_type?type=13', {
+                        headers: {
+                            "api-token": "9e35bc1346ffd9113c17af3ac309bf85",
+                            "project-type": "ALL_PROJECT",
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv1',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=1', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
 
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv2',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=2', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv2',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=2', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
 
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv3',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=3', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv3',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=3', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
 
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv4',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=4', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
-        ),
-        requestWithCache(
-          'getNotiIncitdentLv5',
-          () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=5', {
-            headers: {
-              'api-token': token,
-              'project-type': projectType,
-            },
-          })
-        ),
-      ])
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv4',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=4', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getNotiIncitdentLv5',
+                    () => Axios.get('https://it4483-dsd04.herokuapp.com/get_list_ntf_level?index=0&count=5&level=5', {
+                        headers: {
+                            'api-token': token,
+                            'project-type': projectType,
+                        },
+                    })
+                ),
+            ])
 
-      const metrics = {};
-      console.log(results[0]?.data.data.trueNtf);
-      metrics.all = {
-        isTrue: results[0]?.data.data.trueNtf,
-        isFalse: results[0]?.data.data.falseNtf,
-        total: results[0]?.data.data.totalNtf
-      };
-      metrics.LD = {
-        isTrue: results[1]?.data.data.trueNtf,
-        isFalse: results[1]?.data.data.falseNtf,
-        total: results[1]?.data.data.totalNtf
-      };
-      metrics.CT = {
-        isTrue: results[2]?.data.data.trueNtf,
-        isFalse: results[2]?.data.data.falseNtf,
-        total: results[2]?.data.data.totalNtf
-      };
-      metrics.CR = {
-        isTrue: results[3]?.data.data.trueNtf,
-        isFalse: results[3]?.data.data.falseNtf,
-        total: results[3]?.data.data.totalNtf
-      };
-      metrics.DD = {
-        isTrue: results[4]?.data.data.trueNtf,
-        isFalse: results[4]?.data.data.falseNtf,
-        total: results[4]?.data.data.totalNtf,
-      };
-      metrics.lv1 = results[5]?.data.data.total;      
-      metrics.lv2 = results[6]?.data.data.total;      
-      metrics.lv3 = results[7]?.data.data.total;      
-      metrics.lv4 = results[8]?.data.data.total;      
-      metrics.lv5 = results[9]?.data.data.total;
-      return metrics;
+            const metrics = {};
+            console.log(results[0]?.data.data.trueNtf);
+            metrics.all = {
+                isTrue: results[0]?.data.data.trueNtf,
+                isFalse: results[0]?.data.data.falseNtf,
+                total: results[0]?.data.data.totalNtf
+            };
+            metrics.LD = {
+                isTrue: results[1]?.data.data.trueNtf,
+                isFalse: results[1]?.data.data.falseNtf,
+                total: results[1]?.data.data.totalNtf
+            };
+            metrics.CT = {
+                isTrue: results[2]?.data.data.trueNtf,
+                isFalse: results[2]?.data.data.falseNtf,
+                total: results[2]?.data.data.totalNtf
+            };
+            metrics.CR = {
+                isTrue: results[3]?.data.data.trueNtf,
+                isFalse: results[3]?.data.data.falseNtf,
+                total: results[3]?.data.data.totalNtf
+            };
+            metrics.DD = {
+                isTrue: results[4]?.data.data.trueNtf,
+                isFalse: results[4]?.data.data.falseNtf,
+                total: results[4]?.data.data.totalNtf,
+            };
+            metrics.lv1 = results[5]?.data.data.total;
+            metrics.lv2 = results[6]?.data.data.total;
+            metrics.lv3 = results[7]?.data.data.total;
+            metrics.lv4 = results[8]?.data.data.total;
+            metrics.lv5 = results[9]?.data.data.total;
+            return metrics;
+        }
+    } catch (error) {
+        console.error(error);
     }
-  } catch (error) {
-    console.error(error);
-  }
-  return null;
+    return null;
 };
 
 export const getMonitorZoneMetrics = async () => {
@@ -852,181 +778,181 @@ export const getMonitorZoneMetrics = async () => {
 };
 
 export const getMonitoreObjectMetrics = async (projectType) => {
-  try {
-    if (projectType == 'CHAY_RUNG') {
-      const metrics = {};
-      const results = await Promise.all([
-        
-        requestWithCache(
-          'getObjectByCR',
-          () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=CHAY_RUNG', {
-            headers: {
-              'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
-              'project-type': 'CHAY_RUNG',
-            },
-          })
-        ),
-        
-      ])
+    try {
+        if (projectType == 'CHAY_RUNG') {
+            const metrics = {};
+            const results = await Promise.all([
 
-      metrics.all = {
-        total: results[0]?.data.content.length,
-        nomal: results[0]?.data.content.filter((item) => item.status == "1").length,
-        break: results[0]?.data.content.filter((item) => item.status == "2").length,
-        fixing: results[0]?.data.content.filter((item) => item.status == "3").length,
-        listZone: [{
-            name: '1'
-          },
-          {
-            name: '2'
-          },
-        ]
-      };
+                requestWithCache(
+                    'getObjectByCR',
+                    () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=CHAY_RUNG', {
+                        headers: {
+                            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+                            'project-type': 'CHAY_RUNG',
+                        },
+                    })
+                ),
 
-      console.log(metrics);
-      return metrics;
-    } else if (projectType == 'LUOI_DIEN') {
-      const metrics = {};
-      const results = await Promise.all([
-        
-        requestWithCache(
-          'getObjectByLD',
-          () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=LUOI_DIEN', {
-            headers: {
-              'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
-              'project-type': 'CHAY_RUNG',
-            },
-          })
-        ),
-        
-      ])
+            ])
 
-      metrics.all = {
-        total: results[0]?.data.content.length,
-        nomal: results[0]?.data.content.filter((item) => item.status == "1").length,
-        break: results[0]?.data.content.filter((item) => item.status == "2").length,
-        fixing: results[0]?.data.content.filter((item) => item.status == "3").length,
-      };
+            metrics.all = {
+                total: results[0]?.data.content.length,
+                nomal: results[0]?.data.content.filter((item) => item.status == "1").length,
+                break: results[0]?.data.content.filter((item) => item.status == "2").length,
+                fixing: results[0]?.data.content.filter((item) => item.status == "3").length,
+                listZone: [{
+                    name: '1'
+                },
+                {
+                    name: '2'
+                },
+                ]
+            };
 
-      console.log(metrics);
-      return metrics;
-    } else if (projectType == 'CAY_TRONG') {
-      const metrics = {};
-      const results = await Promise.all([
-        
-        requestWithCache(
-          'getObjectByCT',
-          () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=CAY_TRONG', {
-            headers: {
-              'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
-              'project-type': 'CHAY_RUNG',
-            },
-          })
-        ),
-      ])
+            console.log(metrics);
+            return metrics;
+        } else if (projectType == 'LUOI_DIEN') {
+            const metrics = {};
+            const results = await Promise.all([
 
-      metrics.all = {
-        total: results[0]?.data.content.length,
-        nomal: results[0]?.data.content.filter((item) => item.status == "1").length,
-        break: results[0]?.data.content.filter((item) => item.status == "2").length,
-        fixing: results[0]?.data.content.filter((item) => item.status == "3").length,
-      };
+                requestWithCache(
+                    'getObjectByLD',
+                    () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=LUOI_DIEN', {
+                        headers: {
+                            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+                            'project-type': 'CHAY_RUNG',
+                        },
+                    })
+                ),
 
-      console.log(metrics);
-      return metrics;
-    } else if (projectType == 'DE_DIEU') {
-      const metrics = {};
-      const results = await Promise.all([
-        
-        requestWithCache(
-          'getObjectByDD',
-          () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=DE_DIEU', {
-            headers: {
-              'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
-              'project-type': 'CHAY_RUNG',
-            },
-          })
-        ),
-      ])
+            ])
 
-      metrics.all = {
-        total: results[0]?.data.content.length,
-        nomal: results[0]?.data.content.filter((item) => item.status == "1").length,
-        break: results[0]?.data.content.filter((item) => item.status == "2").length,
-        fixing: results[0]?.data.content.filter((item) => item.status == "3").length,
-      };
+            metrics.all = {
+                total: results[0]?.data.content.length,
+                nomal: results[0]?.data.content.filter((item) => item.status == "1").length,
+                break: results[0]?.data.content.filter((item) => item.status == "2").length,
+                fixing: results[0]?.data.content.filter((item) => item.status == "3").length,
+            };
 
-      console.log(metrics);
-      return metrics;
-    } else {
-      const metrics = {};
-      const results = await Promise.all([
-        requestWithCache(
-          'getAllMonitoreObject',
-          () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object', {
-            headers: {
-              'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
-              'project-type': 'CHAY_RUNG',
-            },
-          })
-        ),
-        requestWithCache(
-          'getObjectByLD',
-          () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=LUOI_DIEN', {
-            headers: {
-              'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
-              'project-type': 'CHAY_RUNG',
-            },
-          })
-        ),
-        requestWithCache(
-          'getObjectByCT',
-          () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=CAY_TRONG', {
-            headers: {
-              'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
-              'project-type': 'CHAY_RUNG',
-            },
-          })
-        ),
-        requestWithCache(
-          'getObjectByCR',
-          () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=CHAY_RUNG', {
-            headers: {
-              'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
-              'project-type': 'CHAY_RUNG',
-            },
-          })
-        ),
-        requestWithCache(
-          'getObjectByDD',
-          () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=DE_DIEU', {
-            headers: {
-              'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
-              'project-type': 'CHAY_RUNG',
-            },
-          })
-        ),
-      ])
+            console.log(metrics);
+            return metrics;
+        } else if (projectType == 'CAY_TRONG') {
+            const metrics = {};
+            const results = await Promise.all([
 
-      metrics.all = {
-        total: results[0]?.data.content.length,
-        luoiDien: results[1]?.data.content.length,
-        cayTrong: results[2]?.data.content.length,
-        chayRung: results[3]?.data.content.length,
-        deDieu: results[4]?.data.content.length,
-        nomal: results[0]?.data.content.filter((item) => item.status == "1").length,
-        break: results[0]?.data.content.filter((item) => item.status == "2").length,
-        fixing: results[0]?.data.content.filter((item) => item.status == "3").length,
+                requestWithCache(
+                    'getObjectByCT',
+                    () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=CAY_TRONG', {
+                        headers: {
+                            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+                            'project-type': 'CHAY_RUNG',
+                        },
+                    })
+                ),
+            ])
 
-      };
+            metrics.all = {
+                total: results[0]?.data.content.length,
+                nomal: results[0]?.data.content.filter((item) => item.status == "1").length,
+                break: results[0]?.data.content.filter((item) => item.status == "2").length,
+                fixing: results[0]?.data.content.filter((item) => item.status == "3").length,
+            };
 
-      console.log(metrics);
-      return metrics;
+            console.log(metrics);
+            return metrics;
+        } else if (projectType == 'DE_DIEU') {
+            const metrics = {};
+            const results = await Promise.all([
+
+                requestWithCache(
+                    'getObjectByDD',
+                    () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=DE_DIEU', {
+                        headers: {
+                            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+                            'project-type': 'CHAY_RUNG',
+                        },
+                    })
+                ),
+            ])
+
+            metrics.all = {
+                total: results[0]?.data.content.length,
+                nomal: results[0]?.data.content.filter((item) => item.status == "1").length,
+                break: results[0]?.data.content.filter((item) => item.status == "2").length,
+                fixing: results[0]?.data.content.filter((item) => item.status == "3").length,
+            };
+
+            console.log(metrics);
+            return metrics;
+        } else {
+            const metrics = {};
+            const results = await Promise.all([
+                requestWithCache(
+                    'getAllMonitoreObject',
+                    () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object', {
+                        headers: {
+                            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+                            'project-type': 'CHAY_RUNG',
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getObjectByLD',
+                    () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=LUOI_DIEN', {
+                        headers: {
+                            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+                            'project-type': 'CHAY_RUNG',
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getObjectByCT',
+                    () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=CAY_TRONG', {
+                        headers: {
+                            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+                            'project-type': 'CHAY_RUNG',
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getObjectByCR',
+                    () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=CHAY_RUNG', {
+                        headers: {
+                            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+                            'project-type': 'CHAY_RUNG',
+                        },
+                    })
+                ),
+                requestWithCache(
+                    'getObjectByDD',
+                    () => Axios.get('https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-type?type=DE_DIEU', {
+                        headers: {
+                            'api-token': '34ccdf500ab1b25fe1ecd142a52eba79',
+                            'project-type': 'CHAY_RUNG',
+                        },
+                    })
+                ),
+            ])
+
+            metrics.all = {
+                total: results[0]?.data.content.length,
+                luoiDien: results[1]?.data.content.length,
+                cayTrong: results[2]?.data.content.length,
+                chayRung: results[3]?.data.content.length,
+                deDieu: results[4]?.data.content.length,
+                nomal: results[0]?.data.content.filter((item) => item.status == "1").length,
+                break: results[0]?.data.content.filter((item) => item.status == "2").length,
+                fixing: results[0]?.data.content.filter((item) => item.status == "3").length,
+
+            };
+
+            console.log(metrics);
+            return metrics;
+        }
+    } catch (error) {
+        console.error(error);
     }
-  } catch (error) {
-    console.error(error);
-  }
-  return null;
+    return null;
 };
 
 export const getSystemLogMetrics = async () => {
