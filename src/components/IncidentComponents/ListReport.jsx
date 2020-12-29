@@ -196,7 +196,7 @@ const ListReport = () => {
                 borderRadius: 5,
               }}
             ></div>
-            <p style={{ marginLeft: 10, fontSize: 18, marginTop: 10 }}>
+            <p style={{ marginLeft: 10, marginTop: 10 }}>
               {' '}
               {'Chờ xử lý'}
             </p>
@@ -217,7 +217,7 @@ const ListReport = () => {
                 borderRadius: 5,
               }}
             ></div>
-            <p style={{ marginLeft: 10, fontSize: 18, marginTop: 10 }}>
+            <p style={{ marginLeft: 10, marginTop: 10 }}>
               {' '}
               {'Đã chấp nhận'}
             </p>
@@ -238,7 +238,7 @@ const ListReport = () => {
                 borderRadius: 5,
               }}
             ></div>
-            <p style={{ marginLeft: 10, fontSize: 18, marginTop: 10 }}>
+            <p style={{ marginLeft: 10, marginTop: 10 }}>
               {' '}
               {'Đã từ chối'}
             </p>
