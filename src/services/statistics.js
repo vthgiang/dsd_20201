@@ -101,54 +101,37 @@ export const getIncidentOverallMetrics = async () => {
 
 export const getIncidentDetailedMetrics = async (project, token) => {
   try {
-    if (project != 'ALL_PROJECT') {
-      const results = await Promise.all([
-        requestWithCache(
-          "getIncidentDetailedMetrics",
-          () => Axios.get(`https://distributed-dsd08.herokuapp.com/api/external/report-listing?type=${project}`, {
-            headers: {
-              "api-token": token,
-              "project-type": project,
-            },
-          }),
-        ),
-        requestWithCache(
-          "getIncidentDetailedMetrics",
-          () => Axios.get("https://distributed-dsd08.herokuapp.com/api/task/incident-listing", {
-            headers: {
-              "api-token": token,
-              "project-type": project,
-            },
-          }),
-        ),
-      ]);
-      const metrics = {
-        overall: results[0].data,
-        detailed: results[1].data.filter(item => item.type.type == project),
-      };
-      return metrics;
-    } else {
-      const results = await Promise.all([
-        requestWithCache(
-          "getIncidentOverallMetrics",
-          () => Axios.get("https://distributed-dsd08.herokuapp.com/api/external/report-listing"),
-        ),
-        requestWithCache(
-          "getIncidentDetailedMetrics",
-          () => Axios.get("https://distributed-dsd08.herokuapp.com/api/task/incident-listing", {
-            headers: {
-              "api-token": "4c901bcdba9f440a2a7c31c0bcbd78ec",
-              "project-type": "LUOI_DIEN",
-            },
-          }),
-        ),
-      ]);
-      const metrics = {
-        overall: results[0].data,
-        detailed: results[1].data,
-      };
-      return metrics;
+    const results = await Promise.all([
+      requestWithCache(
+        "getIncidentDetailedMetrics",
+        () => Axios.get(`https://distributed-dsd08.herokuapp.com/api/external/report-listing${project !== 'ALL_PROJECT' ? `?type=${project}` : ''}`, {
+          headers: {
+            "api-token": token || "4c901bcdba9f440a2a7c31c0bcbd78ec",
+            "project-type": project || "LUOI_DIEN",
+          },
+        }),
+      ),
+      requestWithCache(
+        "getIncidentDetailedMetrics",
+        () => Axios.get("https://distributed-dsd08.herokuapp.com/api/task/incident-listing", {
+          headers: {
+            "api-token": token || "4c901bcdba9f440a2a7c31c0bcbd78ec",
+            "project-type": project || "LUOI_DIEN",
+          },
+        }),
+      ),
+    ]);
+    const metrics = {
+      overall: results[0].data,
+      detailed: results[1].data.filter(item => (project === 'ALL_PROJECT' ? true : item.type.type === project)),
     };
+    metrics.incidentTable = [
+      { status: "Tổng số sự cố", amount: metrics.overall?.created_tasks_total?.created_total },
+      { status: "Đang khắc phục", amount: metrics.overall?.created_tasks_total?.doing_total },
+      { status: "Đã xử lý", amount: metrics.overall?.created_tasks_total?.done_total },
+      { status: "Đang chờ", amount: metrics.overall?.created_tasks_total?.pending_total },
+    ];
+    return metrics;
   } catch (error) {
     console.error(error);
   }
@@ -265,6 +248,12 @@ export const getPayloadDetailedMetrics = async () => {
             fixing: results[1].data,
             working: results[2].data,
         };
+        metrics.overallTable = [
+          { status: "Đang rảnh", amount: metrics.idle },
+          { status: "Đang bay", amount: metrics.working },
+          { status: "Đang sạc", amount: metrics.charging },
+          { status: "Đang bảo trì", amount: metrics.fixing },
+        ];
         return metrics;
     } catch (error) {
         console.error(error);

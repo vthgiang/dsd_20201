@@ -9,6 +9,8 @@ import ReportRenderer from './ReportTemplate/ReportRenderer';
 import { useSelector } from "react-redux";
 import {
   getDroneDetailedMetrics,
+  getPayloadDetailedMetrics,
+  getIncidentDetailedMetrics,
 } from '../../services/statistics';
 
 const { Option } = Select;
@@ -24,6 +26,10 @@ const SectionType = {
 
 export const DataSourceType = {
   DRONE: 'drone',
+  PAYLOAD: 'payload',
+  INCIDENT: 'incident',
+  USER: 'user',
+  WARNING: 'warning',
 }
 
 export const DataSourceInfo = {
@@ -37,7 +43,25 @@ export const DataSourceInfo = {
         'Số lượng': 'amount',
       },
     }
-  }
+  },
+  [DataSourceType.PAYLOAD]: {
+    service: getPayloadDetailedMetrics,
+    tableMaps: {
+      overallTable: {
+        'Trạng thái': 'status',
+        'Số lượng': 'amount',
+      },
+    }
+  },
+  [DataSourceType.INCIDENT]: {
+    service: getIncidentDetailedMetrics,
+    tableMaps: {
+      incidentTable: {
+        'Trạng thái': 'status',
+        'Số lượng': 'amount',
+      },
+    }
+  },
 }
 
 const SectionTypeData = {
@@ -444,7 +468,9 @@ export default function ManageReportTemplate() {
             value={section.data?.dataSource}
           >
             <Option value="">Không có</Option>
-            <Option value={DataSourceType.DRONE}>Drone</Option>
+            {Object.keys(DataSourceType).map((key) => (
+              <Option value={DataSourceType[key]}>{DataSourceType[key]}</Option>
+            ))}
           </Select>
           <div style={{ width: 600 }}>
             <TextArea placeholder="VD: Doanh thu là $doanh_thu_01 VND ..." onChange={onTextChange} value={section.data?.text} />
@@ -497,7 +523,9 @@ export default function ManageReportTemplate() {
             value={section.data?.dataSource}
           >
             <Option value="">Không có</Option>
-            <Option value={DataSourceType.DRONE}>Drone</Option>
+            {Object.keys(DataSourceType).map((key) => (
+              <Option value={DataSourceType[key]}>{DataSourceType[key]}</Option>
+            ))}
           </Select>
           {section.data?.dataSource && (
             <>
