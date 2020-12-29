@@ -371,7 +371,12 @@ function MonitoredObjectView({ history }) {
         thumbnailWidth: 320,
         thumbnailHeight: 212,
         thumbnail: item.link,
-        tags: [{ value: createdAt, title: "Created At" }],
+        tags: [
+          { value: createdAt, title: "Created At" },
+          // { value: item.latitude, title: "Vĩ độ" },
+          // { value: item.longitude, title: "Kinh độ" },
+          { value: item.description, title: "Miêu tả" },
+        ],
       };
     });
   };
@@ -392,7 +397,6 @@ function MonitoredObjectView({ history }) {
       _images.filter((img) => Boolean(img.isSelected)).length == _images.length
     );
   };
-  console.log(monitoredObject.images);
   let indexImage = 0;
   return (
     <div>
