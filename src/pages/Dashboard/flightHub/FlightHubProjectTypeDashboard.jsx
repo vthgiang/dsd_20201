@@ -88,7 +88,7 @@ export default function FlightHubProjectTypeDashboard() {
         setFlightHubMetrics(null);
         setStartDateRender(moment(startDate).format("DD/MM/YYYY"));
         setEndDateRender(moment(endDate).format("DD/MM/YYYY"));
-        const payload = await getFlightHubProjectTypeMetrics(startDateFormatted, endDateFormatted, projectType);
+        const payload = await getFlightHubProjectTypeMetrics(startDateFormatted, endDateFormatted, user.user.api_token, user.projectType, projectType);
         setFlightHubMetrics(payload);
     };
     const tableData = React.useMemo(() => {
@@ -104,7 +104,9 @@ export default function FlightHubProjectTypeDashboard() {
             const tempDayFormatted = tempDay.format("DD/MM");
             metricsWithDaysArr.push({
                 name: tempDayFormatted,
-                value: flightHubMetrics.filter(item => moment(item.startTime).isSameOrBefore(tempDay) && moment(item.endTime).isSameOrAfter(tempDay)).length
+                value: flightHubMetrics.filter(item => 
+                    (moment(item.startTime).isSameOrBefore(tempDay) || moment(item.startTime).format('DD/MM') === tempDayFormatted) 
+                    && (moment(item.endTime).isSameOrAfter(tempDay) || moment(item.endTime).format('DD/MM') === tempDayFormatted)).length
             })
             tempDay.add(1, 'days')
         }
@@ -135,7 +137,7 @@ export default function FlightHubProjectTypeDashboard() {
                             : (
                                 <Col style={{ overflowX: 'scroll', width: "900px" }}>
                                     <BarChart
-                                        width={(20 + 50) * chartData.length}
+                                        width={(20 + 80) * chartData.length}
                                         height={300}
                                         data={chartData}
                                     >
