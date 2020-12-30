@@ -4,6 +4,7 @@ import { Button, Col, Input, List, Row, Form, Tabs, Tag } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import VideoPlayer from './VideoPlayer';
+import Map from "../../containers/ModalFlight/Map"
 
 const { TabPane } = Tabs;
 const { Item } = List;
@@ -22,7 +23,7 @@ function Stream() {
   const [streamId, setStreamId] = useState(null);
   const [downloadLink, setDownloadLink] = useState(null);
   const [cropLink, setCropLink] = useState(null);
-  const [currentDrone, setCurrentDrone] = useState({});
+  const [currentDrone, setCurrentDrone] = useState({flightPath:{flightPoints:[]}});
   const [drones, setDrones] = useState([]);
   const [cropLoading, setCropLoading] = useState(false);
   const [loadList, setLoadList] = useState(false);
@@ -141,6 +142,8 @@ function Stream() {
       url: `http://skyrone.cf:6789/droneState/getParameterFlightRealTime/${drone.idDrone}`
     });
 
+    console.log({res});
+
     setCurrentDrone({
       ...res.data.data,
       urlStream: null,
@@ -182,6 +185,8 @@ function Stream() {
     setCropLoading(false);
     setCropLink(src);
   };
+
+console.log({currentDrone});
 
   return (
     <Container>
@@ -328,6 +333,11 @@ function Stream() {
               )
             }
           />
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+      <Map flightPath={currentDrone.flightPath}/>
         </Col>
       </Row>
     </Container>
