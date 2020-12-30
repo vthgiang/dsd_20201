@@ -161,7 +161,8 @@ function ImageVideo() {
                         <Text>Drone:</Text>
                         <Select
                             value={droneId}
-                            labelInValue={true} style={{ minWidth: 100 }}
+                            labelInValue={true}
+                            style={{ minWidth: 100 }}
                             placeholder="Drone giám sát"
                             onChange={onChangeDrone}
                             options={droneObjects.filter((item) => { imageVideos.findIndex((e) => e.droneId == item.id) })}
