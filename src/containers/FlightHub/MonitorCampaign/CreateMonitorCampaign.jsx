@@ -18,21 +18,23 @@ const CreateMonitorCampaign = () => {
   const createMonitorCampaign = async (data) => {
     try {
       const response = await monitorCampaignApi.createMonitorCampaign(data);
-      const monitorCampaignId = response.data.result.monitorCampaign._id;
-
+      const { monitorCampaign = {} } = response.data.result;
+      const { _id, name } = monitorCampaign;
       const notificationData = {
-        fromUserID: id, 
-        toUserIDs: ['550', '64', '55'],
-        refID: monitorCampaignId,
-        refLinkView: `${FRONT_END_URL}flight-hub-monitor-campaigns/${monitorCampaignId}`,
-        content: 'Tạo đợt giám sát thành công',
+        fromUserID: id,
+        toUserIDs: [id],
+        refID: _id,
+        refLinkView: `${FRONT_END_URL}flight-hub-monitor-campaigns/${_id}`,
+        content: `Tạo đợt giám sát ${name} thành công.`,
         level: 1,
         ntfType: 4,
         refType: 9,
       };
-      // const createdNotification = await notificationApi.createNotification(
-      //   notificationData,
-      // );
+      try {
+        notificationApi.createNotification(notificationData);
+      } catch (error) {
+        console.log(error);
+      }
 
       notification.success({
         message: 'Tạo thành công!',
@@ -47,9 +49,8 @@ const CreateMonitorCampaign = () => {
 
   return (
     <MonitorCampaignForm
-      title="Tạo đợt giám sát"
-      handleSubmit={createMonitorCampaign}
-    ></MonitorCampaignForm>
+      title='Tạo đợt giám sát'
+      handleSubmit={createMonitorCampaign}></MonitorCampaignForm>
   );
 };
 
