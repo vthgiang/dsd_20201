@@ -226,7 +226,7 @@ function MonitoredObjectView({ history }) {
   const postLogMonitorObjectEdit = async () => {
     await axios({
       method: "POST",
-      url: `http://it4883logging.herokuapp.com/api/monitor-object/edit`,
+      url: `http://14.248.5.197:5012/api/monitor-object/edit`,
       data: {
         regionId: monitoredObject.monitoredZone,
         entityId: monitoredObject._id,

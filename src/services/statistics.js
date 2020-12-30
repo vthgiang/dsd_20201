@@ -1034,7 +1034,7 @@ export const getSystemLogMetrics = async () => {
         const results = await Promise.all([
             requestWithCache(
                 "getSystemLogMetrics",
-                () => Axios.get("http://it4883logging.herokuapp.com/api/system/all-logs"),
+                () => Axios.get("http://14.248.5.197:5012/api/system/all-logs"),
             ),
         ]);
         const metrics = {};
@@ -1061,10 +1061,10 @@ export const getSystemLogMetrics = async () => {
 export const getUserLogAllMetrics = async (startDate, endDate) => {
     try {
         const results = await Promise.all([
-            Axios.get(`http://it4883logging.herokuapp.com/api/user?MinDate=${startDate}&MaxDate=${endDate}&projectType=DE_DIEU`),
-            Axios.get(`http://it4883logging.herokuapp.com/api/user?MinDate=${startDate}&MaxDate=${endDate}&projectType=CHAY_RUNG`),
-            Axios.get(`http://it4883logging.herokuapp.com/api/user?MinDate=${startDate}&MaxDate=${endDate}&projectType=LUOI_DIEN`),
-            Axios.get(`http://it4883logging.herokuapp.com/api/user?MinDate=${startDate}&MaxDate=${endDate}&projectType=CAY_TRONG`),
+            Axios.get(`http://14.248.5.197:5012/api/user?MinDate=${startDate}&MaxDate=${endDate}&projectType=DE_DIEU`),
+            Axios.get(`http://14.248.5.197:5012/api/user?MinDate=${startDate}&MaxDate=${endDate}&projectType=CHAY_RUNG`),
+            Axios.get(`http://14.248.5.197:5012/api/user?MinDate=${startDate}&MaxDate=${endDate}&projectType=LUOI_DIEN`),
+            Axios.get(`http://14.248.5.197:5012/api/user?MinDate=${startDate}&MaxDate=${endDate}&projectType=CAY_TRONG`),
         ]);
         const metrics = {};
         if (results && results.length > 0) {
