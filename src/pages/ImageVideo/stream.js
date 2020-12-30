@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { Button, Col, Input, List, Row, Form, Tabs, Tag } from 'antd';
+import { Button, Col, Input, List, Row, Form, Tabs, Tag, Select, Space } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 import axios from 'axios';
-import VideoPlayer from './VideoPlayer';
+import Map from '../../containers/ModalFlight/Map';
 
 const { TabPane } = Tabs;
+const { Option } = Select;
 const { Item } = List;
 const WS_STREAM_HOST = 'ws://192.168.1.102:7002';
 // const WS_STREAM_HOST = 'ws://localhost:7002';
@@ -22,10 +23,10 @@ function Stream() {
   const [streamId, setStreamId] = useState(null);
   const [downloadLink, setDownloadLink] = useState(null);
   const [cropLink, setCropLink] = useState(null);
-  const [currentDrone, setCurrentDrone] = useState({});
+  const [currentDrone, setCurrentDrone] = useState({ flightPath: { flightPoints: [] } });
   const [drones, setDrones] = useState([]);
   const [cropLoading, setCropLoading] = useState(false);
-  const [loadList, setLoadList] = useState(false);
+
   useEffect(() => {
     form.setFieldsValue({
       startTime: '00:00:00',
@@ -107,7 +108,6 @@ function Stream() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoadList(true);
       const { data } = await axios({
         method: 'GET',
         url: 'http://skyrone.cf:6789/droneState/getAllDroneActiveRealTime'
@@ -118,17 +118,22 @@ function Stream() {
         url: `http://skyrone.cf:6789/droneState/getParameterFlightRealTime/${data[0].idDrone}`
       });
 
-      setLoadList(false);
+      console.log({ data });
+
       setDrones(
         data.map((drone) => ({
           ...drone,
-          urlStream: urlStreams[Math.floor(Math.random() * urlStreams.length)]
+          urlStream: urlStreams[Math.floor(Math.random() * urlStreams.length)],
+          label: drone.name,
+          value: drone.idDrone
         }))
       );
       setCurrentDrone({
         ...data[0],
         urlStream: urlStreams[Math.floor(Math.random() * urlStreams.length)],
-        ...res.data.data
+        ...res.data.data,
+        label: res.data.data.name,
+        value: res.data.data.idDrone
       });
     };
 
@@ -174,8 +179,7 @@ function Stream() {
     //   }`
     // );
     const { data } = await axios.get(
-      `http://192.168.1.102:7002/stream/crop/${streamId}/${startTime}/${
-        parseDuration > validDuration ? validDuration : parseDuration
+      `http://192.168.1.102:7002/stream/crop/${streamId}/${startTime}/${parseDuration > validDuration ? validDuration : parseDuration
       }`
     );
     const { src } = data;
@@ -186,7 +190,7 @@ function Stream() {
   return (
     <Container>
       <Row gutter={16}>
-        <Col md={16}>
+        <Col md={14}>
           <HeaderList>
             {currentDrone.name
               ? `Stream từ ${currentDrone.name}`
@@ -286,7 +290,7 @@ function Stream() {
           </Form>
           {downloadLink && (
             <Button
-            style={{marginTop:16}}
+              style={{ marginTop: 16 }}
               type="primary"
               shape="round"
               icon={<DownloadOutlined />}
@@ -296,40 +300,54 @@ function Stream() {
             </Button>
           )}
         </Col>
-        <Col md={8}>
-          <TitleList>Danh sách drone đang hoạt động</TitleList>
-          <List
-            loading={loadList}
-            bordered
+
+        <Col md={10}>
+          <TitleList>Danh sách drone đang bay</TitleList>
+          <Select
+            placeholder="Chọn drone"
+            value={currentDrone.value}
+            style={{ minWidth: 300 }}
+            allowClear
+            onChange={(droneId) => {
+              fetchCurrentDrone(drones.find(drone => drone.idDrone === droneId));
+            }}
+          >
+            {drones.map(drone => <Option value={drone.value}>{drone.name} - <span>
+              {drone.message === "Đang Bay" ? (
+                <Tag color="green">Đang bay</Tag>
+              ) : (
+                  <Tag color="red">Không hoạt động</Tag>
+                )}
+            </span></Option>)}
+          </Select>
+          <TitleList style={{ marginTop: "10px" }} >
+            Miền giám sát
+          </TitleList>
+          {/* <List
             dataSource={drones}
             renderItem={(drone) =>
               currentDrone && currentDrone.idDrone === drone.idDrone ? (
-                <ActiveItemCustom onClick={() => fetchCurrentDrone(drone)}>
-                  <div>{drone.name}</div>
-                  <div>
-                    {drone.message==="Đang Bay" ? (
-                      <Tag color="green">Đang bay</Tag>
-                    ) : (
-                      <Tag color="red">Không hoạt động</Tag>
-                    )}
-                  </div>
+                <ActiveItemCustom onClick={() => }>
                 </ActiveItemCustom>
               ) : (
-                <ItemCustom onClick={() => fetchCurrentDrone(drone)}>
-                  <div>{drone.name}</div>
-                  <div>
-                  {drone.message==="Đang Bay" ? (
-                      <Tag color="green">Đang bay</Tag>
-                    ) : (
-                      <Tag color="red">Không hoạt động</Tag>
-                    )}
-                  </div>
-                </ItemCustom>
-              )
+                  <ItemCustom onClick={() => fetchCurrentDrone(drone)}>
+                    <div>{drone.name}</div>
+                    <div>
+                      {drone.message === "Đang Bay" ? (
+                        <Tag color="green">Đang bay</Tag>
+                      ) : (
+                          <Tag color="red">Không hoạt động</Tag>
+                        )}
+                    </div>
+                  </ItemCustom>
+                )
             }
-          />
+          /> */}
+
+          <Map flightPath={currentDrone.flightPath} />
         </Col>
       </Row>
+
     </Container>
   );
 }
