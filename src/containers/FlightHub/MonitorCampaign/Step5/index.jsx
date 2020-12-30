@@ -22,7 +22,13 @@ import { getListLabelsApi } from '../../../../apis/label';
 
 const { TextArea } = Input;
 
-const Step5 = ({ prevStep, data, handleChangeData, handleSubmit, isUpdate = false }) => {
+const Step5 = ({
+  prevStep,
+  data,
+  handleChangeData,
+  handleSubmit,
+  isUpdate = false,
+}) => {
   const [labelsData, setLabelsData] = useState([]);
 
   const [form] = Form.useForm();
@@ -47,6 +53,7 @@ const Step5 = ({ prevStep, data, handleChangeData, handleSubmit, isUpdate = fals
       } catch (error) {
         notification.error({
           message: 'Máy chủ lỗi, vui lòng thử lại sau',
+          description: error.message,
         });
       }
     };
