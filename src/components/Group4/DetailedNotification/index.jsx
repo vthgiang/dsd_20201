@@ -71,29 +71,33 @@ const DetailedNotification = () => {
   const [loading, setLoading] = useState(true);
 
   const onVerify = () => {
-    if (status) openNotificationWithIcon("success", "Notification", "Unverified Incident Successfully")
-    else openNotificationWithIcon("success", "Notification", "Verified Incident Successfully")
-    setStatus(!status);
-    var config = {
-      method: 'post',
-      url: `${BASE_URL}/check_ntf`,
-      headers : {
-        'Content-Type': 'application/json',
-        'project-type': localStorage.getItem('project-type'),
-        'api-token': localStorage.getItem('token')
-      },
-      data: {
-        "idNtf": id
-      }
-    };
-    axios(config)
-      .then(function (response) {
-        console.log(`verified successfully: `, response)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    
+    var user = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user);
+    if (!["ADMIN", "SUPER_ADMIN"].includes(user.user.role)){
+      openNotificationWithIcon('error', "Error", "You don't have permission to do this")
+    } else {
+      if (status) openNotificationWithIcon("success", "Notification", "Unverified Incident Successfully")
+      else openNotificationWithIcon("success", "Notification", "Verified Incident Successfully")
+      setStatus(!status);
+      var config = {
+        method: 'post',
+        url: `${BASE_URL}/check_ntf`,
+        headers : {
+          'Content-Type': 'application/json',
+          'project-type': localStorage.getItem('project-type'),
+          'api-token': localStorage.getItem('token')
+        },
+        data: {
+          "idNtf": id
+        }
+      };
+      axios(config)
+        .then(function (response) {
+          console.log(`verified successfully: `, response)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } 
   }
 
   const openNotificationWithIcon = (type, message, description) => {

@@ -76,10 +76,19 @@ async function receivePushNotification(event) {
     requireInteraction: true,
     actions: actions
   };
-  event.waitUntil(self.registration.showNotification("Thông báo mới", options));
-  event.waitUntil(openIndexDB(self.indexedDB)
+  try {
+    event.waitUntil(self.registration.showNotification("Thông báo mới", options));
+  } catch (error) {
+    console.log(error)
+  }
+  try {
+    event.waitUntil(openIndexDB(self.indexedDB)
       .then((db) => addPush(db, newNotfication))
       .then(() => console.log(`inserted to indexedDB`)));
+  } catch (error) {
+    console.log(error)
+  }
+  
 }
 
 function openPushNotification(event) {

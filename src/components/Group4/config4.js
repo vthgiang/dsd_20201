@@ -31,7 +31,7 @@ const ref = {
         11: {name: 'Sư cố cây trồng', value: 11, img: `${PUBLIC_URL}/images/tree.jpg`, icon: 'fas fa-tree'},
         12: {name: 'Sư cố cháy rừng', value: 12, img: `${PUBLIC_URL}/images/forest_fires.jpg`, icon: 'fas fa-fire'},
         13: {name: 'Sư cố đê điều', value: 13, img: `${PUBLIC_URL}/images/dike.jpg`, icon: 'fas fa-disease'},
-        14: {name: 'Tất cả các sự cố', value: 14, img: `${PUBLIC_URL}/images/dike.jpg`, icon: 'fas fa-notes-medical'},
+        15: {name: 'Tất cả các sự cố', value: 15, img: `${PUBLIC_URL}/images/dike.jpg`, icon: 'fas fa-notes-medical'},
     }
 }
 

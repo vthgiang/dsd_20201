@@ -1,6 +1,6 @@
 import { BellOutlined } from "@ant-design/icons";
 import Rating from '@material-ui/lab/Rating';
-import { Avatar, Badge, Button, List, message, Popover, Spin } from "antd";
+import { Avatar, Badge, Button, List, message, Popover, Spin, notification } from "antd";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from 'react-infinite-scroller';
 import { ref, BASE_URL } from '../config4';
@@ -15,6 +15,8 @@ import {
 } from '../../../services/pushNotifications';
 
 var axios = require('axios');
+
+// if( window.location.pathname == "/" || window.location.pathname == "/dashboard") window.location.reload();
 
 const BellNotification = () => {
 
@@ -43,13 +45,44 @@ const BellNotification = () => {
     if (user.user.id){
       loadData(0, 5);
       var is_root = window.location.pathname == "/" || window.location.pathname == "/dashboard";
-      if (is_root) subcribe();
+      if (is_root) {
+        subcribe();
+      }
     }
     else
       setUser(JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user))
 
   }, [user])
 
+  const onVerify = (id) => {
+    var user = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user);
+    if (!["ADMIN", "SUPER_ADMIN"].includes(user.user.role)){
+      openNotificationWithIcon('error', "Error", "You don't have permission to do this")
+    } else {
+      const key = 'updatable';
+      message.loading({ content: loading, key, duration: 2 });
+      openNotificationWithIcon("success", "Notification", "Verified Incident Successfully");
+      var config = {
+        method: 'post',
+        url: `${BASE_URL}/check_ntf`,
+        headers : {
+          'Content-Type': 'application/json',
+          'project-type': localStorage.getItem('project-type'),
+          'api-token': localStorage.getItem('token')
+        },
+        data: {
+          "idNtf": id
+        }
+      };
+      axios(config)
+        .then(function (response) {
+          console.log(`verified successfully: `, response)
+        })
+        .catch(function (error) {
+          console.log(error);
+      });
+    } 
+  }
 
   // a simple function to open the indexedDB
   const openIndexDB = (indexedDB, v = 1) => {
@@ -111,29 +144,28 @@ const BellNotification = () => {
     });
   }
 
-// update the UI with data from indexedDB
-const updateOutputFromIndexedDB = () => {  
-  openIndexDB(window.indexedDB)
-    .then(db => getPushes(db))
-    .then(event => {
-      const item = event.target.result;
-      if (item) console.log(`new notification: `, item)
-      if (item){ 
-        setDiff(1)
-        setNotifications([item.payload, ...notifications])
-        openIndexDB(window.indexedDB).then(
-          db => {
-            deletePushes(db).then(
-              // console.log("deleted newNotification from indexed DB")
-            ).catch(
-              // console.log("cannot delete newNotification")
-            )
-          }
-        )
-      };
-    });
-}
-
+  // update the UI with data from indexedDB
+  const updateOutputFromIndexedDB = () => {  
+    openIndexDB(window.indexedDB)
+      .then(db => getPushes(db))
+      .then(event => {
+        const item = event.target.result;
+        if (item) console.log(`new notification: `, item)
+        if (item){ 
+          setDiff(1)
+          setNotifications([item.payload, ...notifications])
+          openIndexDB(window.indexedDB).then(
+            db => {
+              deletePushes(db).then(
+                // console.log("deleted newNotification from indexed DB")
+              ).catch(
+                // console.log("cannot delete newNotification")
+              )
+            }
+          )
+        };
+      });
+  }
 
   const subcribe = () => {
     console.log("clicked to send subcription")
@@ -158,12 +190,12 @@ const updateOutputFromIndexedDB = () => {
     }
   }
 
-  const openMessage = (loading, loaded, timeout) => {
-    const key = 'updatable';
-    message.loading({ content: loading, key });
-    setTimeout(() => {
-      message.success({ content: loaded, key, duration: 2 });
-    }, timeout);
+  const openNotificationWithIcon = (type, message, description) => {
+    notification[type]({
+      message: message,
+      description: description,
+      placement: "bottomRight"
+    });
   };
 
   const handleClick = (id) => {
@@ -180,7 +212,7 @@ const updateOutputFromIndexedDB = () => {
     loadData(index, count);
   }
 
-  const notification = () => {
+  const listNotification = () => {
     // setDiff(0);
     return ( <StyleListNotification>
       <InfiniteScroll
@@ -197,8 +229,8 @@ const updateOutputFromIndexedDB = () => {
           renderItem={item => (
             <List.Item
               actions={[
-                <Button size="small" type="primary" style={{ background: "#009933" }} onClick={() => openMessage("Processing the incidents", "Processed the incidents succesfully", 2000)} > Confirm</Button>,
-                <Button size="small" type="primary" onClick={() => openMessage("Declining the incidents", "Declined the incidents succesfully", 500)} danger>Decline</Button>
+                <Button size="small" type="primary" style={{ background: "#009933" }} onClick={() => onVerify(item._id)} > Verify</Button>,
+                <Button size="small" type="primary" onClick={() => history.push(`/incidents/${item._id}`)} danger>Goto</Button>
               ]}
               //  extra={item.isNew && <Badge status="processing" style={{ marginLeft: 0, marginTop: 25 }} />}
               key={item._id}>
@@ -257,7 +289,7 @@ const updateOutputFromIndexedDB = () => {
     <Popover
       placement="bottom"
       title="Thông báo"
-      content={notification}
+      content={listNotification}
       trigger="click"
       style={{ width: 300 }}
     >

@@ -25,7 +25,7 @@ const FilterDropDown = (props) => {
   );
 
   return (
-    <Space wrap style={{ marginLeft: 35 }}>
+    <Space wrap style={{ marginLeft: 22 }}>
       <Dropdown overlay={menu}>
         <Button size="large" style={{ width: 189 }}>
           Tất cả cảnh báo <DownOutlined />

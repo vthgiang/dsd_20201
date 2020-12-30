@@ -40,7 +40,8 @@ function initializePushNotifications() {
 
 // register service worker file to listen push event from server
 async function registerServiceWorker() {
-  await navigator.serviceWorker.register("serviceWorker.js")
+  const { PUBLIC_URL } = process.env;
+  await navigator.serviceWorker.register(`${PUBLIC_URL}/sw.js`);
 }
 
 
