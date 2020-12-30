@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { TemplateSectionType } from '../../../constants/report';
 import PredefinedSection from './PredefinedSection';
@@ -10,9 +10,21 @@ export default function ReportRenderer({
   sections,
   formatted,
   onSectionChange,
+  dataSources,
 }) {
+  const getDataSource = (section) => {
+    if (section.dataSource) {
+      const dataSourceType = section.dataSource.split('.')[0];
+      if (dataSourceType && dataSources && dataSources[dataSourceType]) {
+        return dataSources[dataSourceType];
+      }
+    }
+    return null;
+  };
+
   const renderSection = (section) => {
     if (!section?.type) return null;
+    const dataSource = getDataSource(section);
     switch (section.type) {
       case TemplateSectionType.PREDEFINED_SECTION: {
         return (
@@ -36,6 +48,7 @@ export default function ReportRenderer({
             section={section}
             formatted={formatted}
             onSectionChange={onSectionChange}
+            dataSource={dataSource}
           />
         );
       }
@@ -45,6 +58,7 @@ export default function ReportRenderer({
             section={section}
             formatted={formatted}
             onSectionChange={onSectionChange}
+            dataSource={dataSource}
           />
         );
       }

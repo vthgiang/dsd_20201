@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Table, Spin, DatePicker, Space, Button } from 'antd';
+import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import {
   Legend,
@@ -51,7 +52,7 @@ export default function PayloadDashboard() {
   const [payloadMetrics, setPayloadMetrics] = React.useState(null);
   const [feeMetrics, setFeeMetrics] = React.useState(null);
   const [year, setYear] = React.useState(moment());
-  console.log(year);
+  const history = useHistory();
 
   const fetchYear = async () => {
     setFeeMetrics(null);
@@ -91,7 +92,7 @@ export default function PayloadDashboard() {
     {
       title: 'Hành động',
       key: 'action',
-      render: (text, record) => <a href="#">Chi tiết</a>,
+      render: (text, record) => <a href="/payload-statistic">Chi tiết</a>,
     },
   ];
   const lineChartData = React.useMemo(() => {
@@ -133,6 +134,13 @@ export default function PayloadDashboard() {
   return (
     <>
       <h1>Payload</h1>
+      <Button
+        type="primary"
+        style={{ position: 'absolute', top: 0, right: 0 }}
+        onClick={() => history.push('/create-report?templateId=5fbc926caded842734e9f5ce')}
+      >
+        Tạo báo cáo
+      </Button>
       {!payloadMetrics ? (
         <Spin />
       ) : (
@@ -189,9 +197,6 @@ export default function PayloadDashboard() {
             <br />
             <Button type="primary" className="mt-3 ml-5" onClick={fetchYear}>
               Duyệt
-            </Button>
-            <Button href="http://" className={'ml-3 btn-success'}>
-              Chi tiết
             </Button>
             <LineChart
               className="mt-5"

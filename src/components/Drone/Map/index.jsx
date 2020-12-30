@@ -39,7 +39,7 @@ const MyMapComponent = compose(
             defaultCenter={{ lat: 20.99933610536628, lng: 105.8329881666537 }}
             onClick={onClick}
         >
-            {flightPathView && <FlightPath flightPoints={flightPathView.flightPoints} />}
+            {flightPathView && <FlightPath speed={flightPathView.speed} flightPoints={flightPathView.flightPoints} />}
             {flightPathView && flightPathView.zone && <Polygon 
                 path={getPathFromZone(flightPathView.zone)}
                 options={{
