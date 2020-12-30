@@ -11,7 +11,7 @@ import {
   Form,
   DatePicker,
   notification,
-  Spin,
+  Tag,
 } from 'antd';
 import {
   DeleteOutlined,
@@ -19,7 +19,6 @@ import {
   ExclamationCircleOutlined,
   HistoryOutlined,
   PlusOutlined,
-  InfoOutlined,
 } from '@ant-design/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 import StyleListMonitorCampaign, { StyleSpinContainer } from './index.style';
@@ -62,7 +61,15 @@ const ListMonitorCampaign = () => {
     try {
       setLoading(true);
       const resp = await monitorCampaignApi.getListMonitorCampaigns(params);
-      setListMonitorCampaignsData(resp.data.result.monitorCampaigns);
+      let { monitorCampaigns } = resp.data.result;
+      monitorCampaigns = monitorCampaigns
+        .map((monitorCampaign) => {
+          const isValidMonitorCampaign = checkTask(monitorCampaign);
+          return isValidMonitorCampaign;
+        })
+        .filter((elem) => !!elem);
+
+      setListMonitorCampaignsData(monitorCampaigns);
       setLoading(false);
     } catch (error) {
       if (error.response && error.response.status === 400) return;
@@ -71,6 +78,7 @@ const ListMonitorCampaign = () => {
       });
     }
   };
+
   useEffect(() => {
     fetchListMonitorCampaignsData();
   }, [location]);
@@ -134,6 +142,32 @@ const ListMonitorCampaign = () => {
     });
   };
 
+  const checkTask = (monitorCampaign) => {
+    const { startTime, endTime, task } = monitorCampaign;
+    const now = Date.now();
+    const COLORS = {
+      success: 'success',
+      processing: 'processing',
+      error: 'error',
+      default: 'default',
+      warning: 'warning',
+    };
+    monitorCampaign.status =
+      moment(now).diff(startTime) < 0
+        ? { color: COLORS.default, content: 'Chưa diễn ra' }
+        : moment(now).diff(endTime) <= 0
+        ? { color: COLORS.success, content: 'Đang diễn ra' }
+        : { color: COLORS.warning, content: 'Đã đóng' };
+
+    const taskValue = form.getFieldValue('task');
+    if (taskValue && task !== taskValue) return null;
+    return monitorCampaign;
+  };
+
+  const renderStatus = (status) => {
+    return status && <Tag color={status.color}>{status.content}</Tag>;
+  };
+
   const columns = [
     {
       dataIndex: '_id',
@@ -151,9 +185,37 @@ const ListMonitorCampaign = () => {
     {
       dataIndex: 'task',
       title: 'Loại sự cố',
-      width: '15%',
+      width: '10%',
       sorter: (a, b) => a.task.localeCompare(b.task),
     },
+    {
+      dataIndex: 'status',
+      title: 'Trạng thái',
+      width: '10%',
+      sorter: (a, b) => {
+        return a.status.content.localeCompare(b.status.content);
+      },
+      render: renderStatus,
+    },
+    // {
+    //   dataIndex: 'monitoredObjects',
+    //   title: 'Đối tượng giám sát',
+    //   width: '12.5%',
+    //   sorter: (a, b) => 1,
+    //   render: (data = []) => {
+    //     return data.map((elem) => {
+    //       const { name, _id } = elem;
+    //       return <div key={_id}>{name}</div>;
+    //     });
+    //   },
+    // },
+    // {
+    //   dataIndex: 'monitoredZone',
+    //   title: 'Miền giám sát',
+    //   width: '12.5%',
+    //   sorter: (a, b) => a.name.localeCompare(b.name),
+    //   render: (data) => data && <span>{data.name}</span>,
+    // },
     {
       dataIndex: 'startTime',
       width: '12.5%',
@@ -171,54 +233,11 @@ const ListMonitorCampaign = () => {
       render: formatMomentDateToDateTimeString,
     },
     {
-      dataIndex: 'monitoredObjects',
-      title: 'Đối tượng giám sát',
-      width: '12.5%',
-      sorter: (a, b) => 1,
-      render: (data = []) => {
-        return data.map((elem) => {
-          const { name, _id } = elem;
-          return <div key={_id}>{name}</div>;
-        });
-      },
-    },
-    {
-      dataIndex: 'monitoredZone',
-      title: 'Miền giám sát',
-      width: '12.5%',
-      sorter: (a, b) => a.name.localeCompare(b.name),
-      render: (data) => data && <span>{data.name}</span>,
-    },
-    {
-      dataIndex: 'mechanism',
-      title: 'Chế độ điều khiển',
-      width: '7.5%',
-      align: 'center',
-      sorter: (a, b) => a.mechanism.localeCompare(b.mechanism),
-      render: (data) => <span>{data === 'AUTO' ? 'Tự động' : 'Thủ công'}</span>,
-    },
-    {
-      dataIndex: 'metadataType',
-      title: 'Dạng dữ liệu',
-      width: '7.5%',
-      align: 'center',
-      sorter: (a, b) => a.metadataType.localeCompare(b.metadataType),
-      render: (data) => (
-        <span>{data === METADATA_TYPES.VIDEO ? 'Video' : 'Ảnh'}</span>
-      ),
-    },
-    {
-      dataIndex: 'resolution',
-      title: 'Độ phân giải',
-      width: '7.5%',
-      align: 'center',
-      sorter: (a, b) => a.resolution.localeCompare(b.resolution),
-    },
-    {
       key: 'actions',
       title: 'Hành động',
       width: '10%',
       align: 'center',
+      fixed: 'right',
       render: (data, record, index) => {
         return (
           <Space size={4}>
@@ -316,30 +335,6 @@ const ListMonitorCampaign = () => {
               </Form.Item>
             </Col>
 
-            {/* <Col span={8}>
-              <Form.Item name="monitoredObject" label="Đối tượng giám sát">
-                <Select allowClear placeholder="Chọn đối tượng giám sát">
-                  {monitoredObjects.map(({ id, name }) => (
-                    <Option key={id} value={id}>
-                      {name}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col>
-
-            <Col span={8}>
-              <Form.Item name="monitoredZone" label="Miền giám sát">
-                <Select allowClear placeholder="Chọn miền giám sát">
-                  {monitoredZones.map(({ id, name }) => (
-                    <Option key={id} value={id}>
-                      {name}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col> */}
-
             <Col span={8}>
               <Form.Item name='mechanism' label='Chế độ điều khiển'>
                 <Select allowClear placeholder='Tự động/Thủ công'>
@@ -391,7 +386,6 @@ const ListMonitorCampaign = () => {
           rowKey='_id'
           columns={columns}
           dataSource={listMonitorCampaignsData}
-          scroll={{ x: 1560 }}
         />
       </StyleTable>
     </StyleListMonitorCampaign>
