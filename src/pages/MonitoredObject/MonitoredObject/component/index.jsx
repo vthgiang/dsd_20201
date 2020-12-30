@@ -45,7 +45,7 @@ function AreaMonitored(props) {
   const postLogMonitorObjectDelete = async () => {
     await axios({
       method: "POST",
-      url: `http://it4883logging.herokuapp.com/api/monitor-object/delete`,
+      url: `http://14.248.5.197:5012/api/monitor-object/delete`,
       data: {
         regionId: selectItemDelete.monitoredZone,
         entityId: selectItemDelete._id,

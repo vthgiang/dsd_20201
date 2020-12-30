@@ -25,7 +25,7 @@ function App (props) {
 
   const fetchData = () => {
     setIsLoadedLogActivity(false);
-    let url = 'https://it4883logging.herokuapp.com/api/uav-connect?';
+    let url = 'http://14.248.5.197:5012/api/uav-connect?';
     let fromDate  = rangeTime.fromDate;
     let toDate = rangeTime.toDate;
 
