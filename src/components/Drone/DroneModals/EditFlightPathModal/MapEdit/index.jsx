@@ -51,6 +51,7 @@ const MapEdit = compose(
             <Marker
                 onClick={() => handlePointClick(point)}
                 key={index}
+                label={index.toString()}
                 position={{lat: point.locationLat, lng: point.locationLng}}
             />)}
             {flightPoints.length >= 2 && 

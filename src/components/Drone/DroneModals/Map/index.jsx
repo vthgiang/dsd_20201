@@ -60,6 +60,7 @@ const MyMapComponent = compose(
         >
             {flightPoints.length !== 0 && flightPoints.map( (point, index) => 
             <Marker
+                label={index.toString()}
                 key={index}
                 position={{lat: point.locationLat, lng: point.locationLng}}
             />)}
