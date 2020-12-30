@@ -10,10 +10,13 @@ const instance = axios.create({
 instance.interceptors.request.use(async (config) => {
   const token = localStorage.getItem('token');
   const projectType = localStorage.getItem('project-type');
-
+  let persist = JSON.parse(localStorage.getItem('persist:root'));
+  persist = JSON.parse(persist.user) || {};
+  const { user = {} } = persist;
   // eslint-disable-next-line no-param-reassign
   config.headers.Authorization = `Bearer ${token}`;
   config.headers.projectType = projectType;
+  config.headers.userId = user.id;
   return config;
 });
 
