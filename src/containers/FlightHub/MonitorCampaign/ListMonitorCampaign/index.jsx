@@ -75,6 +75,7 @@ const ListMonitorCampaign = () => {
       if (error.response && error.response.status === 400) return;
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại',
+        description: error.message
       });
     }
   };

@@ -1,9 +1,9 @@
-import React from 'react';
-import MonitorCampaignForm from './MonitorCampaignForm';
-import { notification } from 'antd';
-import { useHistory } from 'react-router-dom';
-import { monitorCampaignApi, notificationApi } from '../../../apis';
-import { FRONT_END_URL } from '../../../configs';
+import React from "react";
+import MonitorCampaignForm from "./MonitorCampaignForm";
+import { notification } from "antd";
+import { useHistory } from "react-router-dom";
+import { monitorCampaignApi, notificationApi } from "../../../apis";
+import { FRONT_END_URL } from "../../../configs";
 
 const CreateMonitorCampaign = () => {
   const history = useHistory();
@@ -11,7 +11,7 @@ const CreateMonitorCampaign = () => {
     history.goBack();
   };
 
-  let persist = JSON.parse(localStorage.getItem('persist:root'));
+  let persist = JSON.parse(localStorage.getItem("persist:root"));
   persist = JSON.parse(persist.user);
   const { user } = persist;
   const { id } = user;
@@ -37,20 +37,22 @@ const CreateMonitorCampaign = () => {
       }
 
       notification.success({
-        message: 'Tạo thành công!',
+        message: "Tạo thành công!",
       });
       goBack();
     } catch (error) {
       notification.error({
-        message: 'Có lỗi xảy ra! Xin thử lại',
+        message: "Có lỗi xảy ra! Xin thử lại",
+        description: error.message,
       });
     }
   };
 
   return (
     <MonitorCampaignForm
-      title='Tạo đợt giám sát'
-      handleSubmit={createMonitorCampaign}></MonitorCampaignForm>
+      title="Tạo đợt giám sát"
+      handleSubmit={createMonitorCampaign}
+    ></MonitorCampaignForm>
   );
 };
 

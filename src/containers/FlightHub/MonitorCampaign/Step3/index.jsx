@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSeparator, StyleTitle } from '../../../../themes/default';
-import StyleStep3, { StyleSpinContainer } from './index.style';
-import { Button, Row, Table, message, notification, Select, Spin } from 'antd';
-import { StepBackwardOutlined, StepForwardOutlined } from '@ant-design/icons';
-import moment from 'moment';
-import { DATE_TIME_FORMAT } from '../../../../configs';
-import { droneApi, payloadApi } from '../../../../apis';
-import { formatMomentDateToDateTimeString } from '../services';
-import { convertDronesData } from './service';
+import React, { useEffect, useState } from "react";
+import { StyleSeparator, StyleTitle } from "../../../../themes/default";
+import StyleStep3, { StyleSpinContainer } from "./index.style";
+import { Button, Row, Table, message, notification, Select, Spin } from "antd";
+import { StepBackwardOutlined, StepForwardOutlined } from "@ant-design/icons";
+import moment from "moment";
+import { DATE_TIME_FORMAT } from "../../../../configs";
+import { droneApi, payloadApi } from "../../../../apis";
+import { formatMomentDateToDateTimeString } from "../services";
+import { convertDronesData } from "./service";
 
 const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -29,7 +29,8 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
       setLoading(false);
     } catch (error) {
       notification.error({
-        message: 'Có lỗi xảy ra! Xin thử lại.',
+        message: "Có lỗi xảy ra! Xin thử lại.",
+        description: error.message,
       });
     }
   };
@@ -40,7 +41,8 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
       setPayloadsData(resp.data);
     } catch (error) {
       notification.error({
-        message: 'Có lỗi xảy ra! Xin thử lại.',
+        message: "Có lỗi xảy ra! Xin thử lại.",
+        description: error.message,
       });
     }
   };
@@ -52,7 +54,7 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
       setFlightPathsData(resp.data);
     } catch (error) {
       notification.error({
-        message: 'Có lỗi xảy ra! Xin thử lại.',
+        message: "Có lỗi xảy ra! Xin thử lại.",
       });
     }
   };
@@ -62,7 +64,9 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
     const timeEnd = formatMomentDateToDateTimeString(timeRange[1]);
     const params = { timeStart, timeEnd };
     fetchDronesData(params);
-    fetchPayloadsData();
+    fetchPayloadsData({
+      status: "idle",
+    });
     fetchFlightPathsData();
   }, [timeRange]);
 
@@ -118,29 +122,30 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
   }, [data, dronesData.length]);
 
   const columns = [
-    { dataIndex: 'name', title: 'Tên drone', width: 'auto' },
-    { dataIndex: 'dimensions', title: 'Kịch thước', width: '15%' },
-    { dataIndex: 'color', title: 'Màu', width: '15%' },
+    { dataIndex: "name", title: "Tên drone", width: "auto" },
+    { dataIndex: "dimensions", title: "Kịch thước", width: "15%" },
+    { dataIndex: "color", title: "Màu", width: "15%" },
     {
-      dataIndex: 'brand',
-      title: 'Nhà sản xuất',
-      width: '15%',
+      dataIndex: "brand",
+      title: "Nhà sản xuất",
+      width: "15%",
     },
 
     {
-      dataIndex: 'payloads',
-      title: 'Payload',
-      width: '20%',
-      align: 'center',
+      dataIndex: "payloads",
+      title: "Payload",
+      width: "20%",
+      align: "center",
       editable: true,
       render: (data, record, index) => {
         return (
           <Select
             style={{ width: 150 }}
-            mode='multiple'
+            mode="multiple"
             value={data}
             onChange={handleChangePayloads(record, index)}
-            placeholder='Chọn payloads'>
+            placeholder="Chọn payloads"
+          >
             {payloadsData.map(({ _id, name }) => (
               <Select.Option key={_id.toString()} value={_id}>
                 {name}
@@ -151,19 +156,20 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
       },
     },
     {
-      dataIndex: 'flightPaths',
-      title: 'Đường bay',
-      width: '20%',
-      align: 'center',
+      dataIndex: "flightPaths",
+      title: "Đường bay",
+      width: "20%",
+      align: "center",
       editable: true,
       render: (data, record, index) => {
         return (
           <Select
             style={{ width: 150 }}
             value={data}
-            mode='multiple'
+            mode="multiple"
             onChange={handleChangeFlightPath(record, index)}
-            placeholder='Chọn đường bay'>
+            placeholder="Chọn đường bay"
+          >
             {flightPathsData.map(({ id, name }) => (
               <Select.Option key={id} value={id}>
                 {name}
@@ -179,18 +185,18 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
     const drones = [...selectedRows];
 
     if (!drones.length) {
-      message.warning('Nhóm drones tham gia không được để trống!');
+      message.warning("Nhóm drones tham gia không được để trống!");
       return;
     }
 
     for (const drone of drones) {
       const { payloads, flightPaths } = drone;
       if (!payloads || !payloads.length) {
-        message.warning('Bạn chưa chọn payloads đính kèm drone!');
+        message.warning("Bạn chưa chọn payloads đính kèm drone!");
         return;
       }
       if (!flightPaths || !flightPaths.length) {
-        message.warning('Bạn chưa chọn đường bay cho drone!');
+        message.warning("Bạn chưa chọn đường bay cho drone!");
         return;
       }
     }
@@ -202,17 +208,17 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
   return (
     <StyleStep3>
       <StyleTitle>
-        {'Danh sách drone sẵn sàng từ ' +
+        {"Danh sách drone sẵn sàng từ " +
           moment(timeRange[0]).format(DATE_TIME_FORMAT) +
-          ' đến ' +
+          " đến " +
           moment(timeRange[1]).format(DATE_TIME_FORMAT)}
       </StyleTitle>
       <StyleSeparator />
       <Table
         loading={loading}
-        rowKey='id'
+        rowKey="id"
         rowSelection={{
-          type: 'checkbox',
+          type: "checkbox",
           onChange: (selectedRowKeys, selectedRows) => {
             setSelectedRows(selectedRows);
             setSelectedRowKeys(selectedRowKeys);
@@ -223,18 +229,20 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
         columns={columns}
         dataSource={dronesData}
       />
-      <Row type='flex'>
+      <Row type="flex">
         <Button
-          type='default'
+          type="default"
           icon={<StepBackwardOutlined />}
-          onClick={prevStep}>
+          onClick={prevStep}
+        >
           Quay lại
         </Button>
         &ensp;
         <Button
-          type='primary'
+          type="primary"
           icon={<StepForwardOutlined />}
-          onClick={handleNextStep}>
+          onClick={handleNextStep}
+        >
           Tiếp theo
         </Button>
       </Row>
