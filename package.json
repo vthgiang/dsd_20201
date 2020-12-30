@@ -61,6 +61,7 @@
     "recharts": "^1.8.5",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
+    "serve": "^11.3.2",
     "string.prototype.matchall": "^4.0.3",
     "styled-components": "^5.1.1",
     "uuid": "^8.3.1",
@@ -71,8 +72,9 @@
     "with-default-props": "^0.2.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
+    "heroku-postbuild": "npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
