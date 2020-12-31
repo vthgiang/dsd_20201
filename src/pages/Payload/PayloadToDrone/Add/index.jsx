@@ -1,7 +1,6 @@
-
 //NEW COMPONENT
 import React, { Component } from "react";
-import { Form, Input, Button, Select, DatePicker, TimePicker, Alert} from 'antd';
+import { Form, Input, Button, Select, DatePicker, TimePicker, Alert, notification} from 'antd';
 import StyleEdit from '../index.style';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
@@ -58,6 +57,18 @@ class AddSignupPayloadDrone extends Component {
       showFailAlert: false,
     }
   }
+
+  openNotificationSucess = (message) => {
+    notification.success({
+      message: message,
+    })
+  };
+
+  openNotificationError = (message) => {
+    notification.error({
+      message: message,
+    })
+  };
 
       componentDidMount() {
         this.getAllPayload();
@@ -122,8 +133,14 @@ class AddSignupPayloadDrone extends Component {
             axios.post('https://dsd06.herokuapp.com/api/payloadregister/working/' + payloadToDrone.payloadId, payloadToDrone)
                 .then(res => {
                 console.log(res.data);
-                this.setState({showSuccessAlert: true});
-                this.props.history.push('/payload-drone');
+                if (res.status === 200) {
+                  this.openNotificationSucess("Đăng ký thành công");
+                  this.props.history.push('/payload-drone');
+                } else {
+                  this.openNotificationError(res.data.message || "Hệ thống đang gặp lỗi!")
+                }
+                // this.setState({showSuccessAlert: true});
+                // this.props.history.push('/payload-drone');
 
                 // setTimeout(function() {
                 // }, 2000)
@@ -321,3 +338,4 @@ class AddSignupPayloadDrone extends Component {
   
 }
 export default AddSignupPayloadDrone; 
+
