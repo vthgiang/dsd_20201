@@ -3,7 +3,7 @@ import StyleListMonitorCampaign, { StyleSpinContainer } from './index.style';
 import { StyleTitle } from '../../../../themes/default';
 import { useParams } from 'react-router-dom';
 import { monitorCampaignApi } from '../../../../apis';
-import { Descriptions, Row, Spin } from 'antd';
+import { Descriptions, notification, Spin } from 'antd';
 import { formatMomentDateToDateTimeString } from '../services';
 
 const DetailMonitorCampaign = ({}) => {
@@ -14,9 +14,15 @@ const DetailMonitorCampaign = ({}) => {
   useEffect(() => {
     const getMonitorCampaignById = async (id) => {
       setIsLoading(true);
-      const resp = await monitorCampaignApi.getMonitorCampaign(id);
-
-      setMonitorCampaign(resp.data.result.monitorCampaign);
+      try {
+        const resp = await monitorCampaignApi.getMonitorCampaign(id);
+        setMonitorCampaign(resp.data.result.monitorCampaign);
+      } catch (error) {
+        notification.error({
+          message: 'Có lỗi xảy ra! Xin thử lại',
+          description: error.message,
+        });
+      }
       setIsLoading(false);
     };
 

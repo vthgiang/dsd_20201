@@ -58,7 +58,8 @@ const ListLabels = () => {
         setLoading(false);
       } catch (error) {
         notification.error({
-          message: 'Máy chủ lỗi, vui lòng thử lại sau',
+          message: 'Có lỗi xảy ra! Xin thử lại',
+          description: error.message,
         });
       }
     };
