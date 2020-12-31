@@ -8,7 +8,6 @@ const FilterDropDown = (props) => {
   const { reset } = props;
 
   const handleMenuClick = (e) => {
-    message.info('Click on menu item.');
     reset(parseInt(e.key), 0)
   }
 

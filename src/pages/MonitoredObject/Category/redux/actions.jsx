@@ -9,12 +9,12 @@ export const CategoryActions = {
 };
 
 function getAllCategories(data) {
-  if (data === undefined) {
+  if (data.limit === undefined || data.page === undefined) {
     return (dispatch) => {
       dispatch({
         type: CategoryConstants.GET_ALL_CATEGORY_REQUEST,
       });
-      CategoryServices.getAllCategories()
+      CategoryServices.getAllCategories(data)
         .then((res) => {
           dispatch({
             type: CategoryConstants.GET_ALL_CATEGORY_SUCCESS,

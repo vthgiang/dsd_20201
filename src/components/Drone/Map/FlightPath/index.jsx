@@ -2,7 +2,7 @@ import React from 'react';
 import { Polyline } from 'react-google-maps';
 import MarkerInfo from '../MarkerInfo';
 
-export default function FlightPath({flightPoints}){
+export default function FlightPath({flightPoints, speed}){
 
     return (<>{ flightPoints.length !== 0 && (<>
         <Polyline 
@@ -11,7 +11,7 @@ export default function FlightPath({flightPoints}){
             strokeOpacity: 1,
             strokeWeight: 3}}
         />
-        {flightPoints.map((point, index) => <MarkerInfo key={index} point={point} />)}
+        {flightPoints.map((point, index) => <MarkerInfo key={index} speed={speed} index={index} point={point} />)}
         </>)
         
     }

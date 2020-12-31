@@ -92,11 +92,13 @@ const ListMonitorCampaign = () => {
     history.push(`/flight-hub-monitor-campaigns/create`);
   };
 
-  const handleDeleteMonitorCampaign = (item, index) => async () => {
+  const handleDeleteMonitorCampaign = (item) => async () => {
     try {
       await monitorCampaignApi.deleteMonitorCampaign(item._id);
-      const newListMonitorCampaignsData = [...listMonitorCampaignsData];
-      newListMonitorCampaignsData.splice(index, 1);
+      let newListMonitorCampaignsData = [...listMonitorCampaignsData];
+      newListMonitorCampaignsData = newListMonitorCampaignsData.filter(
+        (elem) => elem._id !== item._id
+      );
       setListMonitorCampaignsData(newListMonitorCampaignsData);
       notification.info({
         message: 'Xóa thành công!',
@@ -108,7 +110,7 @@ const ListMonitorCampaign = () => {
     }
   };
 
-  const deleteConfirm = (item, index) => () => {
+  const deleteConfirm = (item) => () => {
     const { name } = item;
     Modal.confirm({
       title: 'Cảnh báo',
@@ -120,7 +122,7 @@ const ListMonitorCampaign = () => {
       ),
       okText: 'Đồng ý',
       cancelText: 'Hủy',
-      onOk: handleDeleteMonitorCampaign(item, index),
+      onOk: handleDeleteMonitorCampaign(item),
     });
   };
 
@@ -167,8 +169,8 @@ const ListMonitorCampaign = () => {
       sorter: (a, b) => 1,
       render: (data = []) => {
         return data.map((elem) => {
-          const { name, createdAt } = elem;
-          return <div key={createdAt.toString()}>{name}</div>;
+          const { name, _id } = elem;
+          return <div key={_id}>{name}</div>;
         });
       },
     },
@@ -351,20 +353,15 @@ const ListMonitorCampaign = () => {
       </StyleSearchForm>
 
       <StyleSeparator />
-      {loading ? (
-        <StyleSpinContainer>
-          <Spin />
-        </StyleSpinContainer>
-      ) : (
-        <StyleTable>
-          <Table
-            rowKey='_id'
-            columns={columns}
-            dataSource={listMonitorCampaignsData}
-            scroll={{ x: 1560 }}
-          />
-        </StyleTable>
-      )}
+      <StyleTable>
+        <Table
+          loading={loading}
+          rowKey='_id'
+          columns={columns}
+          dataSource={listMonitorCampaignsData}
+          scroll={{ x: 1560 }}
+        />
+      </StyleTable>
     </StyleListMonitorCampaign>
   );
 };

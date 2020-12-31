@@ -538,18 +538,16 @@ const HomeDeDieu = ({ history }) => {
           <h2>Tra cứu thông tin sự cố</h2>
           <br/>
           <Row>
-          <Col span={6}>
-            <Button type="primary" className="buttontype" onClick={() => window.open('/imageGallery', "_blank")}>Tạo sự cố offline</Button>
-          </Col>
-          <Col span={6}>
-            <Button type="primary" className="buttontype" onClick={() => window.open('/videoGallery', "_blank")}>Tạo sự cố từ stream</Button>
-          </Col>
+
           <Col span={6}>
             <Button type="primary" className="buttontype" onClick={() => window.open('/sucodedieu-statistics', "_blank")}>Thống kê sự cố</Button>
           </Col>
             <Col span={6}>
               <Button type="primary" className="buttontype"  onClick={() => window.open('/handle-problem', "_blank")}>Tiến trình xử lý sự cố</Button>
             </Col>
+            <Col span={6}>
+            <Button type="primary" className="buttontype" onClick={() => window.open('/sucodedieu-report', "_blank")}>Tạo báo cáo sự cố</Button>
+          </Col>
           </Row>
           <br/>
           <br/>

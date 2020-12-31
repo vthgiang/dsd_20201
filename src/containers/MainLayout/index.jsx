@@ -31,7 +31,7 @@ const MainLayout = ({ children, history }) => {
     }
   }, []);
 
-  if(projectType == "DE_DIEU"){
+  if(projectType === "DE_DIEU"){
     return (
         <StyleLayout>
           <Layout>
@@ -40,34 +40,35 @@ const MainLayout = ({ children, history }) => {
               <Header collapsed={collapsed} toggle={toggle} />
               <Content>
                 <div>
-                  <Menu onClick={(e) => this.current = e.key } selectedKeys={current} mode="horizontal">
-                    <Menu.Item  key="ncn1" icon={<EyeOutlined />}>
-                      <a className="margin-left-12" href={"/dedieu-ncn1"} rel="noopener noreferrer">
-                        Nhóm chức năng 1
+                    <Menu mode="horizontal">
+                    <Menu.Item  key="ncn1">
+                      <div onClick={() =>history.push("/dedieu-ncn1")} rel="noopener noreferrer">
+                        <EyeOutlined /> Nhóm chức năng 1
                         <br/>
                         Theo dõi giám sát sự cố
-                      </a>
+                      </div>
                     </Menu.Item>
-                    <Menu.Item key="ncn2" icon={<BarChartOutlined />}>
-                      <a className="margin-left-12" href={"/dedieu"}  rel="noopener noreferrer">
-                        Nhóm chức năng 2
-                        <br/>
-                        Dữ liệu, tra cứu, thống kê
-                      </a>
-                    </Menu.Item>
-                    <Menu.Item key="ncn3" icon={<StockOutlined />}>
-                      <a className="margin-left-12" href={"/dedieu"}  rel="noopener noreferrer">
-                        Nhóm chức năng 3
+                      <Menu.Item key="ncn2">
+                        <div onClick={() =>history.push("/dedieu")}  rel="noopener noreferrer">
+                          {<BarChartOutlined />} Nhóm chức năng 2
+                          <br/>
+                          Dữ liệu, tra cứu, thống kê
+                        </div>
+                      </Menu.Item>
+                    <Menu.Item key="ncn3">
+                      <div onClick={() =>history.push("/dedieu-ncn3")}  rel="noopener noreferrer">
+                          {<StockOutlined />} Nhóm chức năng 3
                         <br/>
                         Phân tích phát hiện sự cố
-                      </a>
+                      </div>
                     </Menu.Item>
                     <Menu.Item key="ncn4" icon={<AppstoreAddOutlined />}>
-                      <a className="margin-left-12" href={"/dedieu-ncn4"} rel="noopener noreferrer">
+                      <a className="margin-left-12" href={"/drone-state"} rel="noopener noreferrer">
                         Nhóm chức năng 4
                         <br/>
-                        Quản lý, điều khiển UAV
+                        Quản lý UAV
                       </a>
+
                     </Menu.Item>
                     <Menu.Item key="ncn5" icon={<SettingOutlined />}>
                       <a className="margin-left-12" href={"/dedieu-ncn5"} rel="noopener noreferrer">

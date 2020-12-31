@@ -108,7 +108,7 @@ const ListLabels = () => {
   const updateLabel = (label) => {
     const { _id } = label;
     const updatedListLabels = listLabels.map((element) =>
-      element._id === _id ? label : element,
+      element._id === _id ? label : element
     );
 
     setListLabels(updatedListLabels);
@@ -122,8 +122,8 @@ const ListLabels = () => {
       if (!resp || !resp.status) throw new Error('Máy chủ lỗi');
 
       const newListLabels = listLabels.filter((label) => {
-        const { id = '' } = label;
-        return labelId !== id;
+        const { _id = '' } = label;
+        return labelId !== _id;
       });
 
       setListLabels(newListLabels);
@@ -163,7 +163,13 @@ const ListLabels = () => {
       width: '15%',
       sorter: (a, b) => a.name.localeCompare(b.name),
     },
-
+    {
+      key: 'type',
+      dataIndex: 'type',
+      title: 'Loại nhãn',
+      width: '10%',
+      sorter: (a, b) => a.type.localeCompare(b.type),
+    },
     {
       key: 'description',
       dataIndex: 'description',
@@ -189,32 +195,37 @@ const ListLabels = () => {
     },
     {
       key: 'actions',
-      title: 'Hành động',
+      // title: 'Hành động',
       width: 'auto',
       align: 'center',
       render: (data, record) => {
+        console.log({ record });
         return (
-          <Row type="flex" gutter={[8, 8]} justify="center" align="middle">
-            <Col>
-              <Button
-                icon={<EditOutlined />}
-                size="small"
-                onClick={showModalUpdate(record)}
-              >
-                Cập nhật
-              </Button>
-            </Col>
-            <Col>
-              <Button
-                icon={<DeleteOutlined />}
-                danger
-                size="small"
-                onClick={() => deleteConfirm(record)}
-              >
-                Xóa
-              </Button>
-            </Col>
-          </Row>
+          <>
+            {record.isDefault === false ? (
+              <Row type='flex' gutter={[8, 8]} justify='center' align='middle'>
+                <Col>
+                  <Button
+                    icon={<EditOutlined />}
+                    size='small'
+                    onClick={showModalUpdate(record)}
+                  >
+                    Cập nhật
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    icon={<DeleteOutlined />}
+                    danger
+                    size='small'
+                    onClick={() => deleteConfirm(record)}
+                  >
+                    Xóa
+                  </Button>
+                </Col>
+              </Row>
+            ): <span>Nhãn mặc định</span>}
+          </>
         );
       },
     },
@@ -237,31 +248,26 @@ const ListLabels = () => {
 
       <h3>Danh sách nhãn</h3>
 
-      <Row type="flex" justify="space-between" align="middle">
+      <Row type='flex' justify='space-between' align='middle'>
         <Col span={8}>
           <Search
-            placeholder="Tìm tên nhãn, mô tả..."
+            placeholder='Tìm tên nhãn, mô tả...'
             onSearch={handleSearch}
             enterButton
           />
         </Col>
         <Button
-          type="primary"
+          type='primary'
           icon={<PlusOutlined />}
           onClick={showModalCreate}
         >
           Thêm nhãn
         </Button>
       </Row>
-      {loading ? (
-        <StyleSpinContainer>
-          <Spin />
-        </StyleSpinContainer>
-      ) : (
-        <StyledTable>
-          <Table columns={columns} dataSource={listLabels} />
-        </StyledTable>
-      )}
+
+      <StyledTable>
+        <Table loading={loading} columns={columns} dataSource={listLabels} />
+      </StyledTable>
     </StyleListLabels>
   );
 };

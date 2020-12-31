@@ -1,12 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Table } from 'react-bootstrap';
 import "./FlightPathList.css";
 import EditFlightPathModal from '../DroneModals/EditFlightPathModal';
-
-FlightPathList.propTypes = {
-    
-};
+import { isAuthorised, FLIGHT_PATH_MANAGEMENT } from '../Common/role';
 
 function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath, baseIndex, pageReload}) {
 
@@ -18,23 +14,28 @@ function FlightPathList({flightPaths, viewFlightPath, handleDeleteFlightPath, ba
                     <th>Tên đường bay</th>
                     <th>Khu vực giám sát</th>
                     <th>Miền giám sát</th>
-                    <th>Action</th>
+                    {isAuthorised(FLIGHT_PATH_MANAGEMENT) && <th>Action</th>}
                 </tr>
             </thead>
             <tbody>
                 {flightPaths.map((item, index) => (<tr key={item.id}>
                     <td>{baseIndex + index + 1}</td>
-                    <td>{item.name}</td>
+                    <td>
+                        <div className="view-flight-path" 
+                        onClick={()=>viewFlightPath(item)}>
+                            {item.name}
+                        </div>
+                    </td>
                     <td>{item.monitoredAreaName}</td>
                     <td>{item.monitoredZoneName}</td>
-                    <td className="td-action"><button className="btn-view" onClick={()=>viewFlightPath(item)}>
-                        <i className="far fa-eye"></i>
-                    </button>{"/"}
-                    <button className="btn-delete" onClick={()=>handleDeleteFlightPath(item)}>
-                        <i class="fas fa-trash-alt"></i>
-                    </button>{"/"}
-                    <EditFlightPathModal flightPath={item} pageReload={pageReload}/>
+                    {isAuthorised(FLIGHT_PATH_MANAGEMENT) &&
+                    <td className="td-action">
+                        <EditFlightPathModal flightPath={item} pageReload={pageReload}/>{'/'}
+                        <button className="btn-delete" onClick={()=>handleDeleteFlightPath(item)}>
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </td>
+                    }
                 </tr>))}
             </tbody>
         </Table>
