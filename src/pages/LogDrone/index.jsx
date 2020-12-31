@@ -5,13 +5,13 @@ import { SearchOutlined } from '@ant-design/icons';
 import DroneActivity from './DroneActivity';
 import { useDispatch, useSelector } from "react-redux";
 import moment from 'moment';
+import {useParams} from "react-router-dom";
 
 var axios = require('axios');
 const { RangePicker } = DatePicker;
 const {Option} = Select;
 
 function App (props) {
-
   const user = useSelector(state => state.user.user);
 
   const [projectType, setProjectType] = useState(props.projectType? props.projectType: user.type === 'ALL_PROJECT' ? 'de_dieu' : user.type.toLowerCase());
@@ -101,8 +101,6 @@ function App (props) {
           </Form>
           <br />
             <DroneActivity data={logActivityData} loading={!isLoadedLogActivityData} rangeTime={rangeTime} projectType={projectType} />
-          
-        
       </Col>
       <BackTop/>
     </>
