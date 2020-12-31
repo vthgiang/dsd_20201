@@ -1,7 +1,7 @@
 
 //NEW COMPONENT
 import React, { Component } from "react";
-import { Form, Input, Button, Select, DatePicker, TimePicker, Alert} from 'antd';
+import { Form, Input, Button, Select, DatePicker, TimePicker, Alert, InputNumber} from 'antd';
 import StyleEdit from '../index.style';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
@@ -287,14 +287,32 @@ class AddSignupPayloadDrone extends Component {
               <Form.Item label="Đối tượng" name={`configsObject${i}`}>
                 <Input></Input>
               </Form.Item>
-              <Form.Item label="Panning(Từ trái qua phải)" name ={`configsPan${i}`} rules={[{  message: 'Please input panning!' }]}>
-                <Input placeholder="0 độ - 360 độ"></Input>
+              <Form.Item label="Panning(Từ trái qua phải)" name ={`configsPan${i}`} >
+                  <InputNumber
+                      defaultValue={100}
+                      min={0}
+                      max={360}
+                      formatter={value => `${value} độ`}
+                      parser={value => value.replace(' độ', '')}
+                  />
               </Form.Item>
-              <Form.Item label="Tilting(Từ trên xuống dưới)" name ={`configsTilt${i}`} rules={[{  message: 'Please input tilting!' }]}>
-                <Input placeholder="0 độ - 360 độ"></Input>
+              <Form.Item label="Tilting(Từ trên xuống dưới)" name ={`configsTilt${i}`}>
+                  <InputNumber
+                      defaultValue={100}
+                      min={0}
+                      max={360}
+                      formatter={value => `${value} độ`}
+                      parser={value => value.replace(' độ', '')}
+                  />
               </Form.Item>
-              <Form.Item label="Zooming" name ={`configsZoom${i}`} rules={[{  message: 'Please input zooming!' }]}>
-                <Input placeholder="2.0 Megapixel trở lên"></Input>
+              <Form.Item label="Zooming" name ={`configsZoom${i}`}>
+                  <InputNumber
+                      defaultValue={2}
+                      min={0}
+                      max={100}
+                      formatter={value => `${value} MP`}
+                      parser={value => value.replace(' MP', '')}
+                  />
               </Form.Item>
               <Form.Item label="Auto Tracking" name ={`configsTracking${i}`} rules={[{ }]}>
                 <Select options={this.state.tracking}>

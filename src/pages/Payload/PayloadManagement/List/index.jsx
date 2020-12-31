@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Space, Input, Form, Select, Modal, notification , Row, Col, Image } from 'antd';
+import {Table, Space, Input, Form, Select, Modal, notification, Row, Col, Image, Spin, InputNumber} from 'antd';
 import { Button } from 'antd';
 import StyleList from './index.style';
 import { useState } from 'react';
@@ -60,11 +60,13 @@ class List extends Component {
   }
 
   loadAllPayload() {
+    this.setState({modalLoading: true});
     axios.get(`http://dsd06.herokuapp.com/api/payload`)
       .then(res => {
         if (res.status == 500) {
           this.openNotificationError(res.data.message || "")
         } else {
+          this.setState({modalLoading: false});
           let arr = res.data.filter((item) => {return item.type != null});
           this.setState({ tables: arr });
         }
@@ -77,7 +79,6 @@ class List extends Component {
 
     this.setState({ detailPayload: record });
     this.setState({ idPayload: record.id })
-    //this.getDetailPayload(record.id);
   };
 
   handleOk = e => {
@@ -366,7 +367,7 @@ class List extends Component {
           <Form.Item
             label="Loại"
             name="type"
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            rules={[{ required: true, message: 'Hãy chọn loại Payload' }]}
           >
             <Select options={this.state.Options} />
           </Form.Item>
@@ -375,7 +376,7 @@ class List extends Component {
           <Form.Item
             label="Link ảnh"
             name="image"
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            rules={[{ required: true, message: 'Hãy nhập link ảnh!' }]}
           >
             <Input/>
           </Form.Item>
@@ -384,11 +385,17 @@ class List extends Component {
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
           <Form.Item label="Weight" name="weight">
-            <Input />
+            <InputNumber
+                defaultValue={100}
+                min={1}
+                max={10000}
+                formatter={value => `${value} gam`}
+                parser={value => value.replace(' gam', '')}
+            />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="Nhà sản xuất" name="manufacturer">
+          <Form.Item label="Nhà sản xuất" name="manufacturer" rules={[{ required: true, message: 'Hãy nhập NSX' }]}>
             <Input />
           </Form.Item>
         </Col>
@@ -396,12 +403,20 @@ class List extends Component {
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
           <Form.Item label="OpticalZoom" name="opticalZoom">
-            <Input />
+            <InputNumber
+                defaultValue={1}
+                min={1}
+                max={100}
+            />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={12}>
           <Form.Item label="DigitalZoom" name="digitalZoom">
-            <Input />
+            <InputNumber
+                defaultValue={1}
+                min={1}
+                max={10000}
+            />
           </Form.Item>
         </Col>
       </Row>
@@ -409,53 +424,95 @@ class List extends Component {
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
           <Form.Item label="Panning min" name="panningmin">
-            <Input />
+            <InputNumber
+                defaultValue={180}
+                min={1}
+                max={360}
+                formatter={value => `${value} độ`}
+                parser={value => value.replace(' độ', '')}
+            />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={12}>
           <Form.Item label="Panning max" name="panningmax">
-            <Input />
+            <InputNumber
+                defaultValue={180}
+                min={1}
+                max={360}
+                formatter={value => `${value} độ`}
+                parser={value => value.replace(' độ', '')}
+            />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
           <Form.Item label="Tilting min" name="tiltingmin">
-            <Input />
+            <InputNumber
+                defaultValue={180}
+                min={1}
+                max={360}
+                formatter={value => `${value} độ`}
+                parser={value => value.replace(' độ', '')}
+            />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={12}>
           <Form.Item label="Tilting max" name="tiltingmax">
-            <Input />
+            <InputNumber
+                defaultValue={180}
+                min={1}
+                max={360}
+                formatter={value => `${value} độ`}
+                parser={value => value.replace(' độ', '')}
+            />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
           <Form.Item label="Zooming min" name="zoomingmin">
-            <Input />
+            <InputNumber min={0} max={10000} defaultValue={1} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={12}>
           <Form.Item label="Zooming max" name="zoomingmax">
-            <Input />
+            <InputNumber min={0} max={10000} defaultValue={1} />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={16}>
         <Col className="gutter-row" span={8}>
           <Form.Item label="Width" name="sizewidth">
-            <Input />
+            <InputNumber
+                defaultValue={10}
+                min={1}
+                max={100}
+                formatter={value => `${value} cm`}
+                parser={value => value.replace(' cm', '')}
+            />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={8} >
           <Form.Item label="Height" name="sizeheight">
-            <Input />
+            <InputNumber
+                defaultValue={10}
+                min={1}
+                max={100}
+                formatter={value => `${value} cm`}
+                parser={value => value.replace(' cm', '')}
+            />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={8}>
           <Form.Item label="Length" name="sizelength">
-            <Input />
+            <InputNumber
+                defaultValue={10}
+                min={1}
+                max={100}
+                formatter={value => `${value} cm`}
+                parser={value => value.replace(' cm', '')}
+            />
           </Form.Item>
         </Col>
       </Row>
@@ -518,10 +575,10 @@ class List extends Component {
 
 
   searchPayload(values) {
-    console.log(values)
+    this.setState({modalLoading: true});
     axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { type: values.type, status: values.status } })
       .then(res => {
-        //const persons = res.data;
+        this.setState({modalLoading: false});
         this.setState({ tables: res.data });
       })
   }
@@ -642,7 +699,7 @@ class List extends Component {
       },
     ];
 
-    const { visible, visibleAdd, visibleDelete, visibleMaintenance, tables } = this.state;
+    const { visible, visibleAdd, visibleDelete, visibleMaintenance, tables, modalLoading } = this.state;
 
     return (
       <StyleList>
@@ -673,7 +730,9 @@ class List extends Component {
             </Row>
           </Form>
           <Button type="primary" className="buttontype" onClick={() => this.showModalAdd()} >Thêm</Button>
+          <Spin spinning={modalLoading} tip="Loading...">
           <Table dataSource={dataSource} columns={columns} />
+          </Spin>
         </div>
         <Modal
           title="Chi tiết"
