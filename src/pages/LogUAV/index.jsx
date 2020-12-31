@@ -45,7 +45,7 @@ function App (props) {
         let logActivityData = response.data.map((data, index) => ({
           key: index,
           ...data
-        }));
+        })).reverse(); // sort by timestamp 
         logActivityData.forEach((logData) => {
           for(let key in logData) {
             if (logData[key] == null) logData[key] ='';
@@ -72,7 +72,7 @@ function App (props) {
       <Col style={{ marginRight: '4%', marginTop: 20 }}>
         
           <h2>
-            Log lịch sử kết nối UAV
+            Log Flight Hub
           </h2>
           <br />
           <Form layout="inline">

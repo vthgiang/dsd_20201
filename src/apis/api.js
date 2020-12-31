@@ -16,7 +16,7 @@ instance.interceptors.request.use(async (config) => {
   // eslint-disable-next-line no-param-reassign
   config.headers.Authorization = `Bearer ${token}`;
   config.headers.projectType = projectType;
-  config.headers.userId = user.id;
+  config.headers.user = user.full_name;
   return config;
 });
 
