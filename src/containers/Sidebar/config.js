@@ -263,7 +263,7 @@ export const sidebarMenu = [
       },
       {
         key: 'LogUAV',
-        heading: 'Kết nối UAV',
+        heading: 'Flight Hub',
         icon: 'fal fa-drone',
         route: '/log-uav',
       },
