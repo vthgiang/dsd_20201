@@ -132,13 +132,12 @@ const PayloadActivity = function (props) {
       key: 'timestamp',
       sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1 : -1
     },
-
-    {
-      title: 'Id người thực hiện',
-      dataIndex: 'authorId',
-      key: 'authorId',
-      ...getColumnSearchProps('authorId'),
-    },
+    // {
+    //   title: 'Id người thực hiện',
+    //   dataIndex: 'authorId',
+    //   key: 'authorId',
+    //   ...getColumnSearchProps('authorId'),
+    // },
   ];
   return (
       <>

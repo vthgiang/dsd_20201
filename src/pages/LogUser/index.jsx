@@ -5,7 +5,8 @@ import {SearchOutlined} from '@ant-design/icons';
 import UserActivity from './UserActivity';
 import {useDispatch, useSelector} from "react-redux";
 import moment from 'moment';
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
+import {buildQuery, createRangeTime, filterLog} from "../../services/utils";
 
 var axios = require('axios');
 const {RangePicker} = DatePicker;
@@ -13,47 +14,23 @@ const {Option} = Select;
 
 function App(props) {
   const query = new URLSearchParams(props.location.search);
-  let fromDate = query.get("fromDate");
-  let toDate = query.get("toDate");
   console.log("handle log user: ", query.toString());
   const user = useSelector(state => state.user.user);
   const [filter, setFilter] = useState({
-    userId: query.get("userId"),
+    targetId: query.get("userId"),
     problemId: query.get("problemId"),
     regionId: query.get("regionId"),
   });
   const [projectType, setProjectType] = useState(props.projectType ? props.projectType : user.type === 'ALL_PROJECT' ? 'de_dieu' : user.type.toLowerCase());
-  const [logActivityData, setLogActivityData] = useState(null);
+  const [logActivityData, setLogActivityData] = useState([]);
   const [isLoadedLogActivityData, setIsLoadedLogActivity] = useState(false);
-  let initialRangeTime = '';
-  if (fromDate && toDate) {
-    initialRangeTime = {
-      fromDate: fromDate,
-      toDate: toDate
-    };
-  } else if (props.rangeTime) {
-    initialRangeTime = props.rangeTime;
-  } else {
-    initialRangeTime = {
-      fromDate: "",
-      toDate: ""
-    };
-  }
-  const [rangeTime, setRangeTime] = useState(initialRangeTime);
+  const [rangeTime, setRangeTime] = useState(createRangeTime(
+      query.get("fromDate"), query.get("toDate"), props.rangeTime
+  ));
 
   useEffect(() => {
     fetchData();
-  }, [projectType, rangeTime, filter]);
-
-  const updateParamData = function (params, listProps) {
-    listProps.forEach(e => {
-      if (filter[e] && filter[e] != 0) {
-        params[e] = filter[e]
-      } else if (props[e] && props[e] != 0) {
-        params[e] = props[e]
-      }
-    })
-  }
+  }, [projectType, rangeTime]);
 
   const fetchData = () => {
     setIsLoadedLogActivity(false);
@@ -65,7 +42,6 @@ function App(props) {
     };
     if (fromDate) params.fromDate = fromDate;
     if (toDate) params.toDate = toDate;
-    updateParamData(params, ["userId", "regionId", "problemId"]);
 
     axios.get(url, {
       params: params
@@ -95,9 +71,53 @@ function App(props) {
     });
   }
 
+  const history = useHistory();
+  const handleChooseUser = function (value) {
+    if (value) {
+      setFilter({
+        targetId: value.toString(),
+        regionId: null
+      })
+      history.push(buildQuery("/log-user", {
+        userId: value
+      }));
+    } else {
+      setFilter({
+        targetId: null,
+        regionId: null
+      })
+    }
+  }
+
+  const handleChooseRegion = function (value) {
+    if (value) {
+      setFilter({
+        regionId: value.toString(),
+        targetId: null,
+      })
+      history.push(buildQuery("/log-user", {
+        regionId: value
+      }));
+    } else {
+      setFilter({
+        regionId: null,
+        targetId: null,
+      })
+    }
+  }
+
   const onProjectTypeChange = (projectType) => {
     setProjectType(projectType);
   }
+
+  const logIndex = [];
+  const regionId = [];
+  logActivityData.forEach(log => {
+    if (regionId.indexOf(log.regionId) === -1) {
+      regionId.push(log.regionId)
+    }
+  })
+  regionId.sort();
 
   return (
       <>
@@ -130,10 +150,33 @@ function App(props) {
                 </Form.Item>
                 : <></>
             }
+            {logActivityData &&
+            <>
+              <Form.Item label="User">
+                <Select style={{width: 170}} onChange={handleChooseUser}
+                        value={filter.targetId}>
+                  <Option value={null}>All User</Option>
+                  {logActivityData.map(function (log) {
+                    if (logIndex.indexOf(log.targetId) === -1) {
+                      logIndex.push(log.targetId)
+                      return (<Option value={log.targetId}>{log.name}</Option>)
+                    }
+                  })}
+                </Select>
+              </Form.Item>
+              <Form.Item label="Region">
+                <Select style={{width: 170}} onChange={handleChooseRegion}
+                        value={filter.regionId}>
+                  <Option value={null}>All Region</Option>
+                  {regionId.map(id => (<Option value={id}>{id}</Option>))}
+                </Select>
+              </Form.Item>
+            </>}
 
           </Form>
           <br/>
-          <UserActivity data={logActivityData} loading={!isLoadedLogActivityData} rangeTime={rangeTime}
+          <UserActivity data={filterLog(logActivityData, filter)} loading={!isLoadedLogActivityData}
+                        rangeTime={rangeTime}
                         projectType={projectType}/>
 
 

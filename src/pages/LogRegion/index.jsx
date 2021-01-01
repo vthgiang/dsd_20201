@@ -5,7 +5,7 @@ import {SearchOutlined} from '@ant-design/icons';
 import RegionActivity from './RegionActivity';
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useHistory} from 'react-router-dom';
-import {buildQuery, filterLog} from "../../services/utils"
+import {buildQuery, createRangeTime, filterLog} from "../../services/utils"
 
 var axios = require('axios');
 const {RangePicker} = DatePicker;
@@ -14,28 +14,15 @@ const {Option} = Select;
 function App(props) {
   const query = new URLSearchParams(props.location.search);
   console.log("handle log region: ", query.toString());
-  let fromDate = query.get("fromDate");
-  let toDate = query.get("toDate");
   const user = useSelector(state => state.user.user);
   const [filter, setFilter] = useState({entityId: query.get("regionId")});
   const [projectType, setProjectType] = useState(user.type === 'ALL_PROJECT' ? 'de_dieu' : user.type.toLowerCase());
   const [logActivityData, setLogActivityData] = useState(null);
   const [isLoadedLogActivityData, setIsLoadedLogActivity] = useState(false);
-  const [rangeTime, setRangeTime] = useState(
-      {
-        fromDate: fromDate ? fromDate : undefined,
-        toDate: toDate ? toDate : undefined
-      }
-  )
+  const [rangeTime, setRangeTime] = useState(createRangeTime(
+      query.get("fromDate"), query.get("toDate"), props.rangeTime
+  ));
   const history = useHistory();
-
-  const updateParamData = function (params, listProps) {
-    listProps.forEach(e => {
-      if (props[e] && props[e] != 0) {
-        params[e] = props[e]
-      }
-    })
-  }
 
   useEffect(() => {
     fetchData();
@@ -51,7 +38,6 @@ function App(props) {
       fromDate: fromDate ? fromDate : undefined,
       toDate: toDate ? toDate : undefined
     };
-    updateParamData(params, ["regionId"]);
 
     axios.get(url, {params: params})
         .then((response) => {
@@ -94,7 +80,7 @@ function App(props) {
       })
     } else {
       setFilter({
-        entityId: undefined
+        entityId: null
       })
     }
   }
@@ -110,8 +96,7 @@ function App(props) {
           <br/>
           <Form layout="inline">
             <Form.Item
-                label="Chọn khoảng thời gian"
-            >
+                label="Chọn khoảng thời gian">
               <RangePicker format='MM/DD/YYYY'
                            onChange={(dates, dateStrings) => onRangePickerChange(dates, dateStrings)}/>
 
@@ -130,7 +115,7 @@ function App(props) {
                 : <></>
             }
             {logActivityData && <Form.Item label="Region">
-              <Select style={{width: 170}} onChange={handleChoose} defaultValue={filter.entityId}>
+              <Select style={{width: 170}} onChange={handleChoose} value={filter.entityId}>
                 <Option value={null}>All Region</Option>
                 {logActivityData.map(function (log) {
                   if (logIndex.indexOf(log.entityId) === -1) {
@@ -140,12 +125,21 @@ function App(props) {
                 })}
               </Select>
             </Form.Item>}
-            {filter.entityId != null && filter.entityId !== "null" && <>
-              <Button type={"primary"}><Link to={buildQuery(
-                  "/log-user", {regionId: filter.entityId}
-              )}>User</Link></Button>
-            </>}
           </Form>
+          {filter.entityId != null && filter.entityId !== "null" && <Form style={{marginTop: "15px"}}>
+            <Button><Link to={buildQuery(
+                "/log-user", {regionId: filter.entityId}
+            )}>User</Link></Button>
+            <Button type={"ghost"}><Link to={buildQuery(
+                "/log-objmonitor", {regionId: filter.entityId}
+            )}>Monitor Object</Link></Button>
+            <Button><Link to={buildQuery(
+                "/log-problem", {regionId: filter.entityId}
+            )}>Sự cố</Link></Button>
+            <Button><Link to={buildQuery(
+                "/log-incident", {regionId: filter.entityId}
+            )}>Xử lý sự cố</Link></Button>
+          </Form>}
           <br/>
           <RegionActivity
               data={filterLog(logActivityData, filter)}

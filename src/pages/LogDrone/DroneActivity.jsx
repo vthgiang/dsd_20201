@@ -174,12 +174,12 @@ export default class RegionActivity extends React.Component {
         key: 'regionId',
         ...this.getColumnSearchProps('regionId'),
       },
-      {
-        title: 'Id người thực hiện',
-        dataIndex: 'authorId',
-        key: 'authorId',
-        ...this.getColumnSearchProps('authorId'),
-      },
+      // {
+      //   title: 'Id người thực hiện',
+      //   dataIndex: 'authorId',
+      //   key: 'authorId',
+      //   ...this.getColumnSearchProps('authorId'),
+      // },
       {
         title: 'Action',
         dataIndex: 'action',

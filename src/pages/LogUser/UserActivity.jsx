@@ -177,6 +177,9 @@ export default class UserActivity extends React.Component {
         key: 'regionId',
         ...this.getColumnSearchProps('regionId'),
         render: (regionId) => {
+          if (regionId == null) {
+            return (<></>);
+          }
           let url = "/log-region?";
           let params;
           if (rangeTime.fromDate != null) {
@@ -190,19 +193,19 @@ export default class UserActivity extends React.Component {
             }).toString()
           }
           return (
-              <Button type={"primary"}>
+              <Button>
                 <Link to={url + params}>{regionId}</Link>
               </Button>)
         }
       },
+      // {
+      //   title: 'Id người thực hiện',
+      //   dataIndex: 'targetId',
+      //   key: 'targetId',
+      //   ...this.getColumnSearchProps('targetId'),
+      // },
       {
-        title: 'Id người thực hiện',
-        dataIndex: 'targetId',
-        key: 'targetId',
-        ...this.getColumnSearchProps('targetId'),
-      },
-      {
-        title: 'Tên người thực hiện',
+        title: 'Tên',
         dataIndex: 'name',
         key: 'name',
         ...this.getColumnSearchProps('name'),

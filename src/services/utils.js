@@ -36,11 +36,13 @@ export const filterLog = function (logActivityData, filter) {
   }
   let logs = [];
   console.log(logActivityData);
+  console.log(filter);
   logActivityData.forEach(log => {
     let canPush = true;
     for (let key in filter) {
       if (filter[key] != null && filter[key] != "null" && log[key] != filter[key]) {
         canPush = false;
+        break;
       }
     }
     if (canPush)
@@ -48,6 +50,22 @@ export const filterLog = function (logActivityData, filter) {
   })
   console.log(logs);
   return logs;
+}
+
+export const createRangeTime = function (fromDate, toDate, rangeTime) {
+  let initialRangeTime = {
+    fromDate: "",
+    toDate: ""
+  };
+  if (fromDate && toDate) {
+    initialRangeTime = {
+      fromDate: fromDate,
+      toDate: toDate
+    };
+  } else if (rangeTime) {
+    initialRangeTime = rangeTime;
+  }
+  return initialRangeTime;
 }
 
 export default {
