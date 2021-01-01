@@ -76,6 +76,7 @@ class List extends Component {
 
   showModal = (record) => {
     this.setState({ visible: true });
+    this.setState({ detailPayload: {} })
 
     this.setState({ detailPayload: record });
     this.setState({ idPayload: record.id })
@@ -384,7 +385,7 @@ class List extends Component {
       </Row>
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="Weight" name="weight">
+          <Form.Item label="Weight" name="weight" initialValue={100} >
             <InputNumber
                 defaultValue={100}
                 min={1}
@@ -402,16 +403,15 @@ class List extends Component {
       </Row>
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="OpticalZoom" name="opticalZoom">
+          <Form.Item label="OpticalZoom" name="opticalZoom" initialValue={1}>
             <InputNumber
-                defaultValue={1}
                 min={1}
                 max={100}
             />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="DigitalZoom" name="digitalZoom">
+          <Form.Item label="DigitalZoom" name="digitalZoom" initialValue={1}>
             <InputNumber
                 defaultValue={1}
                 min={1}
@@ -423,7 +423,7 @@ class List extends Component {
 
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="Panning min" name="panningmin">
+          <Form.Item label="Panning min" name="panningmin" initialValue={180}>
             <InputNumber
                 defaultValue={180}
                 min={1}
@@ -434,31 +434,7 @@ class List extends Component {
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="Panning max" name="panningmax">
-            <InputNumber
-                defaultValue={180}
-                min={1}
-                max={360}
-                formatter={value => `${value} độ`}
-                parser={value => value.replace(' độ', '')}
-            />
-          </Form.Item>
-        </Col>
-      </Row>
-      <Row gutter={16}>
-        <Col className="gutter-row" span={12}>
-          <Form.Item label="Tilting min" name="tiltingmin">
-            <InputNumber
-                defaultValue={180}
-                min={1}
-                max={360}
-                formatter={value => `${value} độ`}
-                parser={value => value.replace(' độ', '')}
-            />
-          </Form.Item>
-        </Col>
-        <Col className="gutter-row" span={12}>
-          <Form.Item label="Tilting max" name="tiltingmax">
+          <Form.Item label="Panning max" name="panningmax" initialValue={180}>
             <InputNumber
                 defaultValue={180}
                 min={1}
@@ -471,19 +447,43 @@ class List extends Component {
       </Row>
       <Row gutter={16}>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="Zooming min" name="zoomingmin">
+          <Form.Item label="Tilting min" name="tiltingmin" initialValue={180}>
+            <InputNumber
+                defaultValue={180}
+                min={1}
+                max={360}
+                formatter={value => `${value} độ`}
+                parser={value => value.replace(' độ', '')}
+            />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={12}>
+          <Form.Item label="Tilting max" name="tiltingmax" initialValue={180}>
+            <InputNumber
+                defaultValue={180}
+                min={1}
+                max={360}
+                formatter={value => `${value} độ`}
+                parser={value => value.replace(' độ', '')}
+            />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col className="gutter-row" span={12}>
+          <Form.Item label="Zooming min" name="zoomingmin" initialValue={1}>
             <InputNumber min={0} max={10000} defaultValue={1} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={12}>
-          <Form.Item label="Zooming max" name="zoomingmax">
+          <Form.Item label="Zooming max" name="zoomingmax" initialValue={1}>
             <InputNumber min={0} max={10000} defaultValue={1} />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={16}>
         <Col className="gutter-row" span={8}>
-          <Form.Item label="Width" name="sizewidth">
+          <Form.Item label="Width" name="sizewidth" initialValue={10}>
             <InputNumber
                 defaultValue={10}
                 min={1}
@@ -494,7 +494,7 @@ class List extends Component {
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={8} >
-          <Form.Item label="Height" name="sizeheight">
+          <Form.Item label="Height" name="sizeheight" initialValue={10}>
             <InputNumber
                 defaultValue={10}
                 min={1}
@@ -505,7 +505,7 @@ class List extends Component {
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={8}>
-          <Form.Item label="Length" name="sizelength">
+          <Form.Item label="Length" name="sizelength" initialValue={10}>
             <InputNumber
                 defaultValue={10}
                 min={1}
@@ -612,6 +612,19 @@ class List extends Component {
       })
   }
 
+  fixDone(id) {
+    axios.post(`https://dsd06.herokuapp.com/api/payloadregister/return/${id}`)
+      .then(res => {
+        if (res.status == 200) {
+          this.openNotificationSucess("Chuyển trạng sửa chữa thành công")
+          this.loadAllPayload();
+        } else {
+          this.openNotificationError(res.data.message || "Hệ thống đang gặp lỗi!")
+        }
+      })
+  }
+
+
   render() {
 
     const dataSource = this.state.tables.map(payload =>
@@ -694,6 +707,7 @@ class List extends Component {
             {record.status == "idle" ? <Button type="link" onClick={() => this.showMaintenance(record.id)}>Bảo dưỡng</Button> : <div/>}
             {record.status == "idle" ? <Button type="link" onClick={() => this.showCharging(record.id)}>Sạc</Button> : <div/>}
             {record.status == "charging" ? <Button type="link" onClick={() => this.chargeDone(record.id)}>Sạc xong</Button> : <div/>}
+            {record.status == "fixing" ? <Button type="link" onClick={() => this.fixDone(record.id)}>Sửa xong</Button> : <div/>}
           </Space>
         ),
       },
