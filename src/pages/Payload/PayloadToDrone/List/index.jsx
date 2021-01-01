@@ -259,7 +259,7 @@ class PayloadDroneHistory extends Component {
             {/* <Button type="link" onClick={() => this.props.history.push('/edit-signup-payload-drone')}>Sửa</Button> */}
             {record.status == "working" ? <Button style={{backgroundColor: "red", color:"white"}} danger type="text" onClick={() => this.showModalReturnPayload(record)}>Trả payload</Button> : <div/>}
             {/* {record.status == "working" ? <Button type="text" onClick={() => this.showModalReturnPayload(record)}>Trả payload</Button> : <div/>} */}
-            {record.status == "fixing" ? <Button type="text" onClick={() => this.showModalReturnPayload(record)}>Trả payload</Button> : <div/>}
+            {record.status == "fixing" ? <Button style={{backgroundColor: "red", color:"white"}} danger type="text" onClick={() => this.showModalReturnPayload(record)}>Trả payload</Button> : <div/>}
           </Space>
         ),
       },
