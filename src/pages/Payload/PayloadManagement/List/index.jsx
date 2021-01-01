@@ -422,6 +422,14 @@ class List extends Component {
       </Row>
 
       <Row gutter={16}>
+        Auto-merging src/pages/Payload/PayloadToDrone/List/index.jsx
+        CONFLICT (content): Merge conflict in src/pages/Payload/PayloadToDrone/List/index.jsx
+        Auto-merging src/pages/Payload/PayloadToDrone/Add/index.jsx
+        CONFLICT (content): Merge conflict in src/pages/Payload/PayloadToDrone/Add/index.jsx
+        Automatic merge failed; fix conflicts and then commit the result.
+
+        C:\xampp\htdocs\dsd_20201>
+
         <Col className="gutter-row" span={12}>
           <Form.Item label="Panning min" name="panningmin" initialValue={180}>
             <InputNumber

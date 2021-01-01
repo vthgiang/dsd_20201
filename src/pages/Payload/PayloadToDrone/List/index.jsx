@@ -2,7 +2,7 @@
 // New COMPONENT
 
 import React, { Component } from 'react';
-import {Table, Space, Input, Form, Select, Modal, DatePicker, Row, Col, Spin} from 'antd';
+import {Table, Space, Input, Form, Select, Modal, DatePicker, Row, Col, Spin, notification} from 'antd';
 import { Button } from 'antd';
 import StyleList from '../index.style';
 import { useState } from 'react';
@@ -36,7 +36,18 @@ class PayloadDroneHistory extends Component {
     }
   }
 
- 
+  openNotificationSucess = (message) => {
+    notification.success({
+      message: message,
+    })
+  };
+
+  openNotificationError = (message) => {
+    notification.error({
+      message: message,
+    })
+  };
+
 
   componentDidMount() {
     this.setState({isGetAllHistoryPayload: true});
@@ -141,10 +152,15 @@ class PayloadDroneHistory extends Component {
     axios.post('https://dsd06.herokuapp.com/api/payloadregister/return/' + this.state.idPayloadReturn, qs.stringify({'fee': fee}))
     .then(res => {
         this.setState({ visableReturnModal: false })
-        // this.handleFindPayloadHistory(this.state.idPayloadReturn);
-        setTimeout(function() {
-          window.location.reload(false);
-        }, 2000)
+        if (res.status === 200) {
+          this.openNotificationSucess("Trả payload thành công");
+          this.getAllHistories();
+        } else {
+          this.openNotificationError(res.data.message || "Hệ thống đang gặp lỗi!")
+        }
+        // setTimeout(function() {
+        //   window.location.reload(false);
+        // }, 2000)
     })
   }
 
@@ -200,11 +216,11 @@ class PayloadDroneHistory extends Component {
         dataIndex: 'memory',
         key: 'memory',
       },
-      {
-        title: 'Phí dịch vụ',
-        dataIndex: 'fee',
-        key: 'fee'
-      },
+      // {
+      //   title: 'Phí dịch vụ',
+      //   dataIndex: 'fee',
+      //   key: 'fee'
+      // },
       {
         title:  'Lý do',
         dataIndex: 'reason',
@@ -243,8 +259,9 @@ class PayloadDroneHistory extends Component {
         render: (text, record) => (
           <Space size="small" >
             {/* <Button type="link" onClick={() => this.props.history.push('/edit-signup-payload-drone')}>Sửa</Button> */}
-            {/* <Button danger type="text">Trả payload</Button> */}
-            <Button style={{backgroundColor: "red", color:"white"}} danger type="text" onClick={() => this.showModalReturnPayload(record)}>Trả payload</Button>
+            {record.status == "working" ? <Button style={{backgroundColor: "red", color:"white"}} danger type="text" onClick={() => this.showModalReturnPayload(record)}>Trả payload</Button> : <div/>}
+            {/* {record.status == "working" ? <Button type="text" onClick={() => this.showModalReturnPayload(record)}>Trả payload</Button> : <div/>} */}
+            {record.status == "fixing" ? <Button style={{backgroundColor: "red", color:"white"}} danger type="text" onClick={() => this.showModalReturnPayload(record)}>Trả payload</Button> : <div/>}
           </Space>
         ),
       },
@@ -262,7 +279,7 @@ class PayloadDroneHistory extends Component {
             startedAt: Moment(payloadDroneHistory.startedAt).format("YYYY-MM-DD hh:mm:ss"),
             finishedAt: Moment(payloadDroneHistory.finishedAt).format("YYYY-MM-DD hh:mm:ss"),
             type: payloadDroneHistory.type,
-            fee: payloadDroneHistory.fee,
+            // fee: payloadDroneHistory.fee,
             status: payloadDroneHistory.payload.status,
             memory: payloadDroneHistory.sdCardId.name + payloadDroneHistory.sdCardId.volume,
             reason: payloadDroneHistory.reason,
@@ -280,7 +297,7 @@ class PayloadDroneHistory extends Component {
             startedAt: Moment(payloadDroneHistory.startedAt).format("YYYY-MM-DD hh:mm:ss"),
             finishedAt: Moment(payloadDroneHistory.finishedAt).format("YYYY-MM-DD hh:mm:ss"),
             type: payloadDroneHistory.type,
-            fee: payloadDroneHistory.fee,
+            // fee: payloadDroneHistory.fee,
             status: payloadDroneHistory.payload.status,
             memory: payloadDroneHistory.sdCardId.name + payloadDroneHistory.sdCardId.volume,
             reason: payloadDroneHistory.reason,
