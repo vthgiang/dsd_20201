@@ -422,14 +422,6 @@ class List extends Component {
       </Row>
 
       <Row gutter={16}>
-        Auto-merging src/pages/Payload/PayloadToDrone/List/index.jsx
-        CONFLICT (content): Merge conflict in src/pages/Payload/PayloadToDrone/List/index.jsx
-        Auto-merging src/pages/Payload/PayloadToDrone/Add/index.jsx
-        CONFLICT (content): Merge conflict in src/pages/Payload/PayloadToDrone/Add/index.jsx
-        Automatic merge failed; fix conflicts and then commit the result.
-
-        C:\xampp\htdocs\dsd_20201>
-
         <Col className="gutter-row" span={12}>
           <Form.Item label="Panning min" name="panningmin" initialValue={180}>
             <InputNumber
@@ -624,7 +616,7 @@ class List extends Component {
     axios.post(`https://dsd06.herokuapp.com/api/payloadregister/return/${id}`)
       .then(res => {
         if (res.status == 200) {
-          this.openNotificationSucess("Chuyển trạng sửa chữa thành công")
+          this.openNotificationSucess("Chuyển trạng thái sửa chữa thành công")
           this.loadAllPayload();
         } else {
           this.openNotificationError(res.data.message || "Hệ thống đang gặp lỗi!")

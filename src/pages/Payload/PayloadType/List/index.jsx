@@ -85,7 +85,7 @@ class ListTypePayload extends Component {
       name: values.name,
       description: values.description,
     };
-    axios.put(`https://dsd06.herokuapp.com/api/payload/` + this.state.idPayloadType, data)
+    axios.put(`https://dsd06.herokuapp.com/api/payloadtype/` + this.state.idPayloadType, data)
       .then(res => {
         this.setState({ visible: false })
       })
