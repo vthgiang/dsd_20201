@@ -6,6 +6,12 @@ import Axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import matchInputs from './ReportTemplate/Inputify/utils/matchInputs';
 import ReportRenderer from './ReportTemplate/ReportRenderer';
+import { useSelector } from "react-redux";
+import {
+  getDroneDetailedMetrics,
+  getPayloadDetailedMetrics,
+  getIncidentDetailedMetrics,
+} from '../../services/statistics';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -16,6 +22,46 @@ const SectionType = {
   TEXT: 'Đoạn văn cố định',
   TEXT_KEY: 'Đoạn văn có nhập liệu',
   TABLE: 'Bảng dữ liệu',
+}
+
+export const DataSourceType = {
+  DRONE: 'drone',
+  PAYLOAD: 'payload',
+  INCIDENT: 'incident',
+  USER: 'user',
+  WARNING: 'warning',
+}
+
+export const DataSourceInfo = {
+  [DataSourceType.DRONE]: {
+    service: getDroneDetailedMetrics,
+    // Support auto-fill (future functionality)
+    keys: ['idle', 'flying', 'charging', 'maintaining', 'broken', 'noProject', 'CR', 'DD', 'LD', 'CT'],
+    tableMaps: {
+      overallTable: {
+        'Trạng thái': 'status',
+        'Số lượng': 'amount',
+      },
+    }
+  },
+  [DataSourceType.PAYLOAD]: {
+    service: getPayloadDetailedMetrics,
+    tableMaps: {
+      overallTable: {
+        'Trạng thái': 'status',
+        'Số lượng': 'amount',
+      },
+    }
+  },
+  [DataSourceType.INCIDENT]: {
+    service: getIncidentDetailedMetrics,
+    tableMaps: {
+      incidentTable: {
+        'Trạng thái': 'status',
+        'Số lượng': 'amount',
+      },
+    }
+  },
 }
 
 const SectionTypeData = {
@@ -44,11 +90,13 @@ const SectionTypeData = {
     "type": "text-key",
     "format": "paragraph",
     "text": "",
+    "dataSource": "",
     // "keys": {},
   },
   [SectionType.TABLE]: {
     "type": "table",
     "headers": [],
+    "dataSource": "",
   },
 }
 
@@ -98,6 +146,7 @@ const processFromToAPI = (template) => {
 }
 
 export default function ManageReportTemplate() {
+  const { user: { api_token, type } } = useSelector(state => state.user);
   const [templates, setTemplates] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalData, setModalData] = useState({});
@@ -107,8 +156,8 @@ export default function ManageReportTemplate() {
     Axios.get('https://dsd07.herokuapp.com/api/reports/templates', {
       headers: {
         'Access-Control-Allow-Origin': true,
-        'api-token': '4e3fe3463afd3a705c0be7ec2322c335',
-        'project-type': 'LUOI_DIEN',
+        "api-token": api_token,
+        "project-type": type,
       },
     })
       .then(response => {
@@ -131,8 +180,8 @@ export default function ManageReportTemplate() {
       Axios.post('https://dsd07.herokuapp.com/api/reports/templates', processDataToAPI(modalData), {
         headers: {
           'Access-Control-Allow-Origin': true,
-          'api-token': '4e3fe3463afd3a705c0be7ec2322c335',
-          'project-type': 'LUOI_DIEN',
+          "api-token": api_token,
+          "project-type": type,
         },
       })
         .then(response => {
@@ -148,8 +197,8 @@ export default function ManageReportTemplate() {
       Axios.patch(`https://dsd07.herokuapp.com/api/reports/templates/${modalData.templateId}`, processDataToAPI(modalData), {
         headers: {
           'Access-Control-Allow-Origin': true,
-          'api-token': '4e3fe3463afd3a705c0be7ec2322c335',
-          'project-type': 'LUOI_DIEN',
+          "api-token": api_token,
+          "project-type": type,
         },
       })
         .then(response => {
@@ -192,8 +241,8 @@ export default function ManageReportTemplate() {
     Axios.get(`https://dsd07.herokuapp.com/api/reports/templates/${templateId}`, {
       headers: {
         'Access-Control-Allow-Origin': true,
-        'api-token': '4e3fe3463afd3a705c0be7ec2322c335',
-        'project-type': 'LUOI_DIEN',
+        "api-token": api_token,
+        "project-type": type,
       },
     })
       .then(response => {
@@ -216,8 +265,8 @@ export default function ManageReportTemplate() {
       Axios.delete(`https://dsd07.herokuapp.com/api/reports/templates/${id}`, {
         headers: {
           'Access-Control-Allow-Origin': true,
-          'api-token': '4e3fe3463afd3a705c0be7ec2322c335',
-          'project-type': 'LUOI_DIEN',
+          "api-token": api_token,
+          "project-type": type,
         },
       })
         .then(response => {
@@ -374,6 +423,15 @@ export default function ManageReportTemplate() {
           }
         })
       }
+      const onDataSourceSelect = (dataSource) => {
+        setSectionById(section.id, {
+          ...section,
+          data: {
+            ...section.data,
+            dataSource,
+          }
+        })
+      }
       const onTextChange = (e) => {
         setSectionById(section.id, {
           ...section,
@@ -402,6 +460,18 @@ export default function ManageReportTemplate() {
             <Option value="paragraph">Đoạn văn</Option>
             <Option value="header">Tiêu đề</Option>
           </Select>
+          <span>Lấy dữ liệu từ:</span>
+          <Select
+            style={{ width: 120 }}
+            onChange={onDataSourceSelect}
+            placeholder="Chọn nguồn ..."
+            value={section.data?.dataSource}
+          >
+            <Option value="">Không có</Option>
+            {Object.keys(DataSourceType).map((key) => (
+              <Option value={DataSourceType[key]}>{DataSourceType[key]}</Option>
+            ))}
+          </Select>
           <div style={{ width: 600 }}>
             <TextArea placeholder="VD: Doanh thu là $doanh_thu_01 VND ..." onChange={onTextChange} value={section.data?.text} />
           </div>
@@ -423,8 +493,50 @@ export default function ManageReportTemplate() {
           }
         })
       }
+      const onDataSourceSelect = (dataSource) => {
+        setSectionById(section.id, {
+          ...section,
+          data: {
+            ...section.data,
+            dataSource,
+          }
+        })
+      }
+      const onDataSourceTableChange = (e) => {
+        const { target: { value } } = e;
+        const trimmed = value.replace('.', '');
+        setSectionById(section.id, {
+          ...section,
+          data: {
+            ...section.data,
+            dataSource: `${section.data.dataSource.split('.')[0]}.${trimmed}`,
+          }
+        })
+      }
       return (
         <>
+          <span>Lấy dữ liệu từ:</span>
+          <Select
+            style={{ width: 120 }}
+            onChange={onDataSourceSelect}
+            placeholder="Chọn nguồn ..."
+            value={section.data?.dataSource}
+          >
+            <Option value="">Không có</Option>
+            {Object.keys(DataSourceType).map((key) => (
+              <Option value={DataSourceType[key]}>{DataSourceType[key]}</Option>
+            ))}
+          </Select>
+          {section.data?.dataSource && (
+            <>
+              <span>Tên bảng dữ liệu:</span>
+              <Input
+                style={{ width: 120 }}
+                onChange={onDataSourceTableChange}
+                value={section.data?.dataSource?.split('.')[1]}
+              />
+            </>
+          )}
           <span>Thêm cột:</span>
           <Input
             style={{ width: 360 }}

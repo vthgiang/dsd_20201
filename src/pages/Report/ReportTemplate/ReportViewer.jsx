@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Spin } from 'antd';
 import Axios from 'axios';
+import { useSelector } from "react-redux";
 
 import ReportRenderer from './ReportRenderer';
 
 export default function ReportViewer({
   reportId,
 }) {
+  const { user: { api_token, type } } = useSelector(state => state.user);
   const [currentReport, setCurrentReport] = useState(null);
 
   useEffect(() => {
@@ -14,8 +16,8 @@ export default function ReportViewer({
     Axios.get(`https://dsd07.herokuapp.com/api/user-reports/${reportId}`, {
       headers: {
         'Access-Control-Allow-Origin': true,
-        'api-token': '4e3fe3463afd3a705c0be7ec2322c335',
-        'project-type': 'LUOI_DIEN',
+        "api-token": api_token,
+        "project-type": type,
       },
     })
       .then(response => {

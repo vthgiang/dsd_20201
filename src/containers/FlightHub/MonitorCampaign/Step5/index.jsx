@@ -22,7 +22,13 @@ import { getListLabelsApi } from '../../../../apis/label';
 
 const { TextArea } = Input;
 
-const Step5 = ({ prevStep, data, handleChangeData, handleSubmit }) => {
+const Step5 = ({
+  prevStep,
+  data,
+  handleChangeData,
+  handleSubmit,
+  isUpdate = false,
+}) => {
   const [labelsData, setLabelsData] = useState([]);
 
   const [form] = Form.useForm();
@@ -47,6 +53,7 @@ const Step5 = ({ prevStep, data, handleChangeData, handleSubmit }) => {
       } catch (error) {
         notification.error({
           message: 'Máy chủ lỗi, vui lòng thử lại sau',
+          description: error.message,
         });
       }
     };
@@ -64,7 +71,7 @@ const Step5 = ({ prevStep, data, handleChangeData, handleSubmit }) => {
       icon: <ExclamationCircleOutlined />,
       content: (
         <span>
-          Bạn có muốn {data.description ? 'sửa' : 'tạo'} đợt giám sát{' '}
+          Bạn có muốn {isUpdate ? 'sửa' : 'tạo'} đợt giám sát{' '}
           <strong>{name}</strong>?
         </span>
       ),
@@ -86,16 +93,14 @@ const Step5 = ({ prevStep, data, handleChangeData, handleSubmit }) => {
       <Form
         {...LAYOUT}
         form={form}
-        name="flight-hub-create"
+        name='flight-hub-create'
         onFinish={onFinish}
-        validateMessages={VALIDATE_MESSAGES}
-      >
+        validateMessages={VALIDATE_MESSAGES}>
         <Form.Item
-          name="labels"
-          label="Nhãn đính kèm"
-          rules={[{ type: 'array', required: false }]}
-        >
-          <Select mode="multiple" allowClear placeholder="Chọn nhãn đính kèm">
+          name='labels'
+          label='Nhãn đính kèm'
+          rules={[{ type: 'array', required: false }]}>
+          <Select mode='multiple' allowClear placeholder='Chọn nhãn đính kèm'>
             {labelsData.map(({ _id, name }) => {
               return (
                 <Select.Option key={_id} value={_id}>
@@ -106,26 +111,24 @@ const Step5 = ({ prevStep, data, handleChangeData, handleSubmit }) => {
           </Select>
         </Form.Item>
         <Form.Item
-          name="description"
-          label="Ghi chú"
-          rules={[{ type: 'string', required: false }]}
-        >
+          name='description'
+          label='Ghi chú'
+          rules={[{ type: 'string', required: false }]}>
           <TextArea
-            placeholder="Để lại lời nhắn..."
+            placeholder='Để lại lời nhắn...'
             autoSize={{ minRows: 2, maxRows: 6 }}
           />
         </Form.Item>
         <Col offset={6}>
           <Row>
             <Button
-              type="default"
+              type='default'
               icon={<StepBackwardOutlined />}
-              onClick={prevStep}
-            >
+              onClick={prevStep}>
               Quay lại
             </Button>
             &ensp;
-            <Button type="primary" icon={<FormOutlined />} htmlType="submit">
+            <Button type='primary' icon={<FormOutlined />} htmlType='submit'>
               Lưu
             </Button>
           </Row>

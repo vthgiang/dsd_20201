@@ -107,32 +107,32 @@ export default class UAVActivity extends React.Component {
     
     const columns = [
       {
-        title: 'Tên kết nối UAV',
+        title: 'Đợt giám sát',
         dataIndex: 'name',
         key: 'name',
         ...this.getColumnSearchProps('name'),
     
       },
       {
-        title: 'Id kết nối UAV',
+        title: 'Số lượng drone',
         dataIndex: 'entityId',
         key: 'entityId',
         sorter: (a, b) => a.entityId - b.entityId,
     
       },
       {
-        title: 'Id miền giám sát',
+        title: 'Miền giám sát',
         dataIndex: 'regionId',
         key: 'regionId',
         sorter: (a, b) => a.regionId - b.regionId,
     
       },
-      {
-        title: 'trạng thái',
-        dataIndex: 'state',
-        key: 'state',
-        sorter: (a, b) => a.state - b.state,
-      },
+      // {
+      //   title: 'trạng thái',
+      //   dataIndex: 'state',
+      //   key: 'state',
+      //   sorter: (a, b) => a.state - b.state,
+      // },
       {
         title: 'Hành động',
         dataIndex: 'type',
@@ -153,7 +153,7 @@ export default class UAVActivity extends React.Component {
         sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1: -1
       },
       {
-        title: 'Id người thực hiện',
+        title: 'Người thực hiện',
         dataIndex: 'authorId',
         key: 'authorId',
         ...this.getColumnSearchProps('authorId'),

@@ -58,7 +58,8 @@ const ListLabels = () => {
         setLoading(false);
       } catch (error) {
         notification.error({
-          message: 'Máy chủ lỗi, vui lòng thử lại sau',
+          message: 'Có lỗi xảy ra! Xin thử lại',
+          description: error.message,
         });
       }
     };
@@ -208,8 +209,7 @@ const ListLabels = () => {
                   <Button
                     icon={<EditOutlined />}
                     size='small'
-                    onClick={showModalUpdate(record)}
-                  >
+                    onClick={showModalUpdate(record)}>
                     Cập nhật
                   </Button>
                 </Col>
@@ -218,13 +218,14 @@ const ListLabels = () => {
                     icon={<DeleteOutlined />}
                     danger
                     size='small'
-                    onClick={() => deleteConfirm(record)}
-                  >
+                    onClick={() => deleteConfirm(record)}>
                     Xóa
                   </Button>
                 </Col>
               </Row>
-            ): <span>Nhãn mặc định</span>}
+            ) : (
+              <span>Nhãn mặc định</span>
+            )}
           </>
         );
       },
@@ -259,8 +260,7 @@ const ListLabels = () => {
         <Button
           type='primary'
           icon={<PlusOutlined />}
-          onClick={showModalCreate}
-        >
+          onClick={showModalCreate}>
           Thêm nhãn
         </Button>
       </Row>

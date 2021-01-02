@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import StyleStep4 from './index.style';
-import { Button, Col, Form, Select, Row } from 'antd';
-import { VALIDATE_MESSAGES, LAYOUT } from '../config';
-import { StepBackwardOutlined, StepForwardOutlined } from '@ant-design/icons';
+import React, { useEffect } from "react";
+import StyleStep4 from "./index.style";
+import { Button, Col, Form, Select, Row } from "antd";
+import { VALIDATE_MESSAGES, LAYOUT } from "../config";
+import { StepBackwardOutlined, StepForwardOutlined } from "@ant-design/icons";
 
-import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../../constants';
+import { MECHANISM, METADATA_TYPES, RESOLUTION } from "../../../../constants";
 
 const { Option } = Select;
 
@@ -32,7 +32,7 @@ const Step4 = ({ prevStep, nextStep, data, handleChangeData }) => {
         <Form.Item
           name="mechanism"
           label="Cơ chế thu thập"
-          rules={[{ type: 'string', required: true }]}
+          rules={[{ type: "string", required: true }]}
         >
           <Select showSearch placeholder="Chọn cơ chế thu thập">
             <Option value={MECHANISM.AUTO}>Tự động</Option>
@@ -42,7 +42,7 @@ const Step4 = ({ prevStep, nextStep, data, handleChangeData }) => {
         <Form.Item
           name="metadataType"
           label="Dạng lưu trữ"
-          rules={[{ type: 'string', required: true }]}
+          rules={[{ type: "string", required: true }]}
         >
           <Select showSearch allowClear placeholder="Video/Ảnh">
             <Option value={METADATA_TYPES.VIDEO}>Video</Option>
@@ -52,12 +52,12 @@ const Step4 = ({ prevStep, nextStep, data, handleChangeData }) => {
         <Form.Item
           name="resolution"
           label="Độ phân giải"
-          rules={[{ type: 'string', required: true }]}
+          rules={[{ type: "string", required: true }]}
         >
           <Select showSearch placeholder="Chọn độ phân giải">
-            <Option value={RESOLUTION['480p']}>480p</Option>
-            <Option value={RESOLUTION['720p']}>720p</Option>
-            <Option value={RESOLUTION['1080p']}>1080p</Option>
+            <Option value={RESOLUTION["480p"]}>480p</Option>
+            <Option value={RESOLUTION["720p"]}>720p</Option>
+            <Option value={RESOLUTION["1080p"]}>1080p</Option>
           </Select>
         </Form.Item>
 

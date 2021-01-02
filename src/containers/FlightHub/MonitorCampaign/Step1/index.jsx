@@ -5,6 +5,7 @@ import { VALIDATE_MESSAGES, LAYOUT } from '../config';
 import { DATE_TIME_FORMAT } from '../../../../configs';
 import { StepForwardOutlined } from '@ant-design/icons';
 import { TASK } from '../../../../constants';
+import { useSelector } from 'react-redux';
 
 const { RangePicker } = DatePicker;
 
@@ -15,7 +16,8 @@ const Step1 = ({ nextStep, data, handleChangeData }) => {
     form.setFieldsValue(data);
   }, [data, form]);
 
-  const projectType = localStorage.getItem('project-type');
+  const projectType = useSelector((state) => state.user.projectType);
+  const isAdmin = projectType === 'ALL_PROJECT';
 
   const onFinish = (values) => {
     handleChangeData(values);
@@ -38,7 +40,7 @@ const Step1 = ({ nextStep, data, handleChangeData }) => {
           <Input placeholder='VD: Đợt giám sát rừng phòng hộ quý 1'></Input>
         </Form.Item>
 
-        {projectType === 'ALL_PROJECT' && (
+        {isAdmin && (
           <Form.Item
             name='task'
             label='Loại sự cố'

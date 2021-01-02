@@ -25,7 +25,7 @@ function App (props) {
 
   const fetchData = () => {
     setIsLoadedLogActivity(false);
-    let url = 'https://it4883logging.herokuapp.com/api/uav-connect?';
+    let url = 'http://14.248.5.197:5012/api/uav-connect?';
     let fromDate  = rangeTime.fromDate;
     let toDate = rangeTime.toDate;
 
@@ -45,7 +45,7 @@ function App (props) {
         let logActivityData = response.data.map((data, index) => ({
           key: index,
           ...data
-        }));
+        })).reverse(); // sort by timestamp 
         logActivityData.forEach((logData) => {
           for(let key in logData) {
             if (logData[key] == null) logData[key] ='';
@@ -72,7 +72,7 @@ function App (props) {
       <Col style={{ marginRight: '4%', marginTop: 20 }}>
         
           <h2>
-            Log lịch sử kết nối UAV
+            Log Flight Hub
           </h2>
           <br />
           <Form layout="inline">

@@ -80,12 +80,12 @@ import FlightSchedule from './FlightSchedule';
 import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
 
 //DE DIEU
-import HomeDeDieu from './Home/DeDieu';
-import StatisticDeDieu from './Dashboard/IncidentDashboard';
-import Task1 from './Home/DeDieu/Task1/index';
-import Task5 from './Home/DeDieu/Task5/index';
-import DeDieuNcn3 from './Home/DeDieu/indexncn3';
-import DeDieuNcn4 from './Home/DeDieu/indexncn4';
+import HomeDeDieu from "./Home/DeDieu";
+import StatisticDeDieu from './Dashboard/IncidentDashboard'
+import Task1 from './Home/DeDieu/Task1/index'
+import Task5 from './Home/DeDieu/Task5/index'
+import DeDieuNcn3 from "./Home/DeDieu/indexncn3";
+import UAVMana from './UAVMana';
 
 export const routes = [
   {
@@ -110,10 +110,6 @@ export const routes = [
     component: DeDieuNcn3,
   },
   {
-    path: '/dedieu-ncn4',
-    component: DeDieuNcn4,
-  },
-  {
     path: '/dashboard',
     component: Dashboard,
     exact: true,
@@ -121,6 +117,10 @@ export const routes = [
   {
     path: '/drones',
     component: () => <div>DroneManagement</div>,
+  },
+  {
+    path: '/dedieu-uav-mana',
+    component: UAVMana,
   },
   {
     path: '/drone-list',

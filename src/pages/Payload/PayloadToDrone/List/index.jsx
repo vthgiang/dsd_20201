@@ -2,7 +2,7 @@
 // New COMPONENT
 
 import React, { Component } from 'react';
-import { Table, Space, Input, Form, Select, Modal, DatePicker, Row, Col} from 'antd';
+import {Table, Space, Input, Form, Select, Modal, DatePicker, Row, Col, Spin, notification} from 'antd';
 import { Button } from 'antd';
 import StyleList from '../index.style';
 import { useState } from 'react';
@@ -28,6 +28,7 @@ class PayloadDroneHistory extends Component {
       status: '',
       startedAt: '',
       type: '',
+      loadingModal: false,
 
       droneName: '',
       isGetAllHistoryPayload: true,
@@ -35,7 +36,18 @@ class PayloadDroneHistory extends Component {
     }
   }
 
- 
+  openNotificationSucess = (message) => {
+    notification.success({
+      message: message,
+    })
+  };
+
+  openNotificationError = (message) => {
+    notification.error({
+      message: message,
+    })
+  };
+
 
   componentDidMount() {
     this.setState({isGetAllHistoryPayload: true});
@@ -45,8 +57,10 @@ class PayloadDroneHistory extends Component {
   }
 
   getAllHistories () {
+    this.setState({loadingModal: true});
     axios.get('https://dsd06.herokuapp.com/api/payloadregister/allHistories')
     .then(res => {
+      this.setState({loadingModal: false});
       var listAllHistoriesFromServer = res.data;
       var listHistoriesHasPayloadNull = [];
       var listHistoriesHasPayload = [];
@@ -91,10 +105,11 @@ class PayloadDroneHistory extends Component {
   }
 
   handleFindPayloadHistory(values){
-    // const payloadId = { payloadId: values.payloadId };
     this.setState({isGetAllHistoryPayload: false});
+    this.setState({loadingModal: true});
     axios.get('https://dsd06.herokuapp.com/api/payloadregister/histories/' + values.payloadId)
       .then(res => {
+        this.setState({loadingModal: false});
         const listPayloadDroneHistoryFromServer = res.data;
         console.log(values.payloadId);
         listPayloadDroneHistoryFromServer.map(payloadHistory => {
@@ -125,23 +140,27 @@ class PayloadDroneHistory extends Component {
   }
 
   showModalReturnPayload(record) {
-    console.log(record);
     this.setState({ visableReturnModal: true })
     // this.setState({ idPayloadReturn: this.state.payloadId })
     this.setState({ idPayloadReturn: record.payloadId })
   }
 
   returnPayload(valuesOfReturnPayload) {
-    const fee = valuesOfReturnPayload.fee;
+    // const fee = valuesOfReturnPayload.fee;
+    const fee = 0;
     const qs = require('qs');
     axios.post('https://dsd06.herokuapp.com/api/payloadregister/return/' + this.state.idPayloadReturn, qs.stringify({'fee': fee}))
     .then(res => {
-      console.log(res.data);
         this.setState({ visableReturnModal: false })
-        // this.handleFindPayloadHistory(this.state.idPayloadReturn);
-        setTimeout(function() {
-          window.location.reload(false);
-        }, 2000)
+        if (res.status === 200) {
+          this.openNotificationSucess("Trả payload thành công");
+          this.getAllHistories();
+        } else {
+          this.openNotificationError(res.data.message || "Hệ thống đang gặp lỗi!")
+        }
+        // setTimeout(function() {
+        //   window.location.reload(false);
+        // }, 2000)
     })
   }
 
@@ -149,9 +168,9 @@ class PayloadDroneHistory extends Component {
     return <div>
       <Form onFinish= {(valuesOfReturnPayload) => this.returnPayload(valuesOfReturnPayload)}>
       <p>Bạn có chắc trả lại payload này?</p>
-      <Form.Item label="Chi phí" name="fee" rules={[{required: true, message: 'Vui lòng nhập chi phí!'}]}>
+      {/* <Form.Item label="Chi phí" name="fee" rules={[{required: true, message: 'Vui lòng nhập chi phí!'}]}>
         <Input></Input>
-      </Form.Item>
+      </Form.Item> */}
       <Button type="primary" htmlType="submit" danger>Trả payload</Button>
       </Form>
    
@@ -197,11 +216,11 @@ class PayloadDroneHistory extends Component {
         dataIndex: 'memory',
         key: 'memory',
       },
-      {
-        title: 'Phí dịch vụ',
-        dataIndex: 'fee',
-        key: 'fee'
-      },
+      // {
+      //   title: 'Phí dịch vụ',
+      //   dataIndex: 'fee',
+      //   key: 'fee'
+      // },
       {
         title:  'Lý do',
         dataIndex: 'reason',
@@ -240,8 +259,9 @@ class PayloadDroneHistory extends Component {
         render: (text, record) => (
           <Space size="small" >
             {/* <Button type="link" onClick={() => this.props.history.push('/edit-signup-payload-drone')}>Sửa</Button> */}
-            {/* <Button danger type="text">Trả payload</Button> */}
-            <Button style={{backgroundColor: "red", color:"white"}} danger type="text" onClick={() => this.showModalReturnPayload(record)}>Trả payload</Button>
+            {record.status == "working" ? <Button style={{backgroundColor: "red", color:"white"}} danger type="text" onClick={() => this.showModalReturnPayload(record)}>Trả payload</Button> : <div/>}
+            {/* {record.status == "working" ? <Button type="text" onClick={() => this.showModalReturnPayload(record)}>Trả payload</Button> : <div/>} */}
+            {record.status == "fixing" ? <Button style={{backgroundColor: "red", color:"white"}} danger type="text" onClick={() => this.showModalReturnPayload(record)}>Trả payload</Button> : <div/>}
           </Space>
         ),
       },
@@ -259,7 +279,7 @@ class PayloadDroneHistory extends Component {
             startedAt: Moment(payloadDroneHistory.startedAt).format("YYYY-MM-DD hh:mm:ss"),
             finishedAt: Moment(payloadDroneHistory.finishedAt).format("YYYY-MM-DD hh:mm:ss"),
             type: payloadDroneHistory.type,
-            fee: payloadDroneHistory.fee,
+            // fee: payloadDroneHistory.fee,
             status: payloadDroneHistory.payload.status,
             memory: payloadDroneHistory.sdCardId.name + payloadDroneHistory.sdCardId.volume,
             reason: payloadDroneHistory.reason,
@@ -277,61 +297,28 @@ class PayloadDroneHistory extends Component {
             startedAt: Moment(payloadDroneHistory.startedAt).format("YYYY-MM-DD hh:mm:ss"),
             finishedAt: Moment(payloadDroneHistory.finishedAt).format("YYYY-MM-DD hh:mm:ss"),
             type: payloadDroneHistory.type,
-            fee: payloadDroneHistory.fee,
+            // fee: payloadDroneHistory.fee,
             status: payloadDroneHistory.payload.status,
             memory: payloadDroneHistory.sdCardId.name + payloadDroneHistory.sdCardId.volume,
             reason: payloadDroneHistory.reason,
         })
       )
     }
-    // const dataSource = 
-    //   this.state.listPayloadDroneHistory.map(payloadDroneHistory =>
-    //     ({
-    //         // droneId: payloadDroneHistory._id,
-    //         droneName: this.state.droneName,
-    //         payloadId: payloadDroneHistory.payload._id,
-    //         payloadCode: payloadDroneHistory.payload.code,
-    //         payloadName: payloadDroneHistory.payload.name,
-    //         startedAt: payloadDroneHistory.startedAt,
-    //         finishedAt: payloadDroneHistory.finishedAt,
-    //         type: payloadDroneHistory.type,
-    //         fee: payloadDroneHistory.fee,
-    //         status: payloadDroneHistory.payload.status,
-    //         memory: payloadDroneHistory.sdCardId.name + payloadDroneHistory.sdCardId.volume,
-    //     })
-    //   )
-    //   console.log(dataSource);
   
-    const { visible, visibleAdd, visableReturnModal, currentTable, tables } = this.state;
+    const { visible, visibleAdd, visableReturnModal, currentTable, tables, loadingModal } = this.state;
 
     
     return (
     <StyleList>
       <div>
-      <h1 style={{fontWeight:'bold', fontSize:16}}>Danh sách lịch sử đăng ký payload drone</h1>
+      <h2>Danh sách lịch sử đăng ký payload drone</h2>
         <Form
           layout="horizontal"
            className="searchtype"
            onFinish={(values) => this.handleFindPayloadHistory(values)}
-          // onValuesChange={onFormLayoutChange}
-          // size={componentSize}
+
         >
           <Row justify="space-around">
-            {/* <Col span={4}>
-              <Form.Item label="Từ ngày">
-                <DatePicker />
-              </Form.Item>
-            </Col>
-            <Col span={4}>
-              <Form.Item label="Đến ngày">
-               <DatePicker></DatePicker>
-              </Form.Item>
-            </Col>
-            <Col span={4}>
-              <Form.Item label="Loại thiết bị">
-               <Select options = {typeDeviceOption}/>
-              </Form.Item>
-            </Col> */}
             <Col span={9}>
               <Form.Item label="Payload" name="payloadId">
                 <Select options={this.state.PayloadOptions}></Select>
@@ -346,22 +333,13 @@ class PayloadDroneHistory extends Component {
           </Row>
         </Form>
         <Button type="primary" className="buttontype" onClick={() => this.props.history.push('/add-signup-payload-drone')}>Đăng ký mới</Button>
-        <Table dataSource={dataSource} columns={columns} />;
+        <Spin spinning={loadingModal} tip="Loading...">
+        <Table dataSource={dataSource} columns={columns} />
+        </Spin>
         </div>
 
         <Modal
-          title="Basic Modal"
-          // visible={visible}
-          //onOk={handleOk}
-          //onCancel={handleCancel}
-        >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
-
-        <Modal
-          title="Xóa Payload"
+          title="Trả Payload"
           visible={visableReturnModal}
           // onOk={this.handleOkDelete}
           onCancel={this.handleCancelReturnPayload}
