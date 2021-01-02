@@ -8,7 +8,7 @@ import {
 } from 'react-google-maps';
 import { removeVietnameseTones } from '../../../../helpers/removeVietnameseTones';
 
-import { Input } from 'antd';
+import { Input, notification } from 'antd';
 import { HeatMapOutlined } from '@ant-design/icons';
 import convertTaskToProjectType from './service';
 const axios = require('axios');
@@ -74,7 +74,7 @@ const Map = ({
           // khởi tạo park nếu đã có sẵn
           if (monitoredZoneInit) {
             let zone = res.data.content.zone.find(
-              (element) => element._id === monitoredZoneInit,
+              (element) => element._id === monitoredZoneInit
             );
             if (zone) {
               setPositionClick({
@@ -87,8 +87,12 @@ const Map = ({
           }
         }
       })
-      .catch((err) => {
+      .catch((error) => {
         setLoadingMonitoredZone(false);
+        notification.error({
+          message: 'Có lỗi xảy ra! Xin thử lại',
+          description: 'Miền giám sát: ' + error.message,
+        });
       });
   };
 
@@ -137,7 +141,7 @@ const Map = ({
       defaultCenter={initLocation} // Hiển thị ra vùng trung tâm ban đầu
     >
       <Search
-        placeholder="Nhập vào miền giám sát"
+        placeholder='Nhập vào miền giám sát'
         onChange={searchOnChange}
         onSearch={submitSearch}
         enterButton
@@ -170,12 +174,12 @@ const Map = ({
               new window.google.maps.LatLngBounds(
                 new window.google.maps.LatLng(
                   zone.startPoint.latitude,
-                  zone.startPoint.longitude,
+                  zone.startPoint.longitude
                 ),
                 new window.google.maps.LatLng(
                   zone.endPoint.latitude,
-                  zone.endPoint.longitude,
-                ),
+                  zone.endPoint.longitude
+                )
               )
             }
             onClick={(e) => handleClickMonitoredZones(zone, e)}
@@ -205,8 +209,7 @@ const Map = ({
           }}
           onCloseClick={() => {
             handleCloseMonitoredZones();
-          }}
-        >
+          }}>
           <div>
             <h3>{currentMonitoredZone.name}</h3>
             <div>Mã miền g/s: {currentMonitoredZone.code}</div>
@@ -227,8 +230,7 @@ const Map = ({
                 width: '100%',
                 display: 'flex',
                 justifyContent: 'center',
-              }}
-            >
+              }}>
               {currentMonitoredZone._id === selectedMonitoredZone ? (
                 <button onClick={(e) => handleMonitoredZoneChange('', e)}>
                   <HeatMapOutlined /> &ensp;
@@ -238,8 +240,7 @@ const Map = ({
                 <button
                   onClick={(e) =>
                     handleMonitoredZoneChange(currentMonitoredZone, e)
-                  }
-                >
+                  }>
                   <HeatMapOutlined /> &ensp;
                   <a>Chọn miền g/s này</a>
                 </button>

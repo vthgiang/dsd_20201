@@ -30,7 +30,7 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
     } catch (error) {
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại.',
-        description: error.message,
+        description: 'Drones: ' + error.message,
       });
     }
   };
@@ -42,7 +42,7 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
     } catch (error) {
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại.',
-        description: error.message,
+        description: 'Payloads: ' + error.message,
       });
     }
   };
@@ -54,8 +54,8 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
       setFlightPathsData(resp.data);
     } catch (error) {
       notification.error({
-        message: 'Có lỗi xảy ra! Xin thử lại.',
-        description: error.message,
+        message: 'Có lỗi xảy ra.',
+        description: 'Drones: ' + error.message,
       });
     }
   };
