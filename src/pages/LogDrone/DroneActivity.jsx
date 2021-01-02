@@ -10,6 +10,8 @@ import LogObjMonitor from '../LogObjMonitor';
 import LogPayload from '../LogPayLoad';
 import LogImage from '../LogImage';
 import LogVideo from '../LogVideo';
+import {Link} from "react-router-dom";
+import {buildQuery} from "../../services/utils";
 
 export default class RegionActivity extends React.Component {
   constructor(props) {
@@ -122,7 +124,6 @@ export default class RegionActivity extends React.Component {
         dataIndex: 'entityId',
         key: 'entityId',
         sorter: (a, b) => a.entityId - b.entityId,
-
       },
       {
         title: 'Tên drone',
@@ -152,6 +153,7 @@ export default class RegionActivity extends React.Component {
       {
         title: 'Mô tả',
         dataIndex: 'description',
+        width: "30%",
         key: 'description',
         ...this.getColumnSearchProps('description'),
       },
@@ -161,40 +163,46 @@ export default class RegionActivity extends React.Component {
         key: 'timestamp',
         sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1 : -1
       },
-
       {
-        title: 'Miền hoạt động',
-        dataIndex: 'regionName',
-        key: 'regionName',
-        ...this.getColumnSearchProps('regionName'),
+        title: 'Mã đợt giám sát',
+        dataIndex: 'uavConnectId',
+        key: 'uavConnectId',
+        ...this.getColumnSearchProps('uavConnectId'),
       },
       {
-        title: 'Mã miền',
-        dataIndex: 'regionId',
-        key: 'regionId',
-        ...this.getColumnSearchProps('regionId'),
+        title: 'Xem',
+        dataIndex: 'entityId',
+        key: 'action',
+        render: entityId => <>
+          <Button>
+            <Link to={buildQuery("/log-image", {
+              droneId: entityId
+            })}>Ảnh</Link>
+          </Button>
+          <Button>
+            <Link to={buildQuery("/log-video", {
+              droneId: entityId
+            })}>Video</Link>
+          </Button>
+          <Button>
+            <Link to={buildQuery("/log-payload", {
+              droneId: entityId
+            })}>Payload</Link>
+          </Button>
+        </>
       },
       // {
-      //   title: 'Id người thực hiện',
-      //   dataIndex: 'authorId',
-      //   key: 'authorId',
-      //   ...this.getColumnSearchProps('authorId'),
+      //   title: 'Action',
+      //   dataIndex: 'action',
+      //   key: 'action',
+      //   render: (text, row) => {
+      //     return (<div>
+      //           <PopoverShowApp droneName={row.name} droneId={row.entityId} rangeTime={this.props.rangeTime}
+      //                           projectType={this.props.projectType}/>
+      //         </div>
+      //     )
+      //   }
       // },
-      {
-        title: 'Action',
-        dataIndex: 'action',
-        key: 'action',
-        render: (text, row) => {
-
-          return (<div>
-                <PopoverShowApp droneName={row.name} droneId={row.entityId} rangeTime={this.props.rangeTime}
-                                projectType={this.props.projectType}/>
-              </div>
-
-          )
-
-        }
-      },
     ];
     return (
         <>

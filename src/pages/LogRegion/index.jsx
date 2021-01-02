@@ -17,7 +17,7 @@ function App(props) {
   const user = useSelector(state => state.user.user);
   const [filter, setFilter] = useState({entityId: query.get("regionId")});
   const [projectType, setProjectType] = useState(user.type === 'ALL_PROJECT' ? 'de_dieu' : user.type.toLowerCase());
-  const [logActivityData, setLogActivityData] = useState(null);
+  const [logActivityData, setLogActivityData] = useState([]);
   const [isLoadedLogActivityData, setIsLoadedLogActivity] = useState(false);
   const [rangeTime, setRangeTime] = useState(createRangeTime(
       query.get("fromDate"), query.get("toDate"), props.rangeTime
@@ -84,8 +84,6 @@ function App(props) {
       })
     }
   }
-
-
   let logIndex = [];
   return (
       <>
@@ -139,6 +137,9 @@ function App(props) {
             <Button><Link to={buildQuery(
                 "/log-incident", {regionId: filter.entityId}
             )}>Xử lý sự cố</Link></Button>
+            <Button><Link to={buildQuery(
+                "/log-uav", {regionId: filter.entityId}
+            )}>Đợt giám sát</Link></Button>
           </Form>}
           <br/>
           <RegionActivity

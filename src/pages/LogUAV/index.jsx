@@ -5,7 +5,8 @@ import {SearchOutlined} from '@ant-design/icons';
 import UAVActivity from './UAVActivity';
 import {useDispatch, useSelector} from "react-redux";
 import moment from 'moment';
-import {createRangeTime, filterLog} from "../../services/utils";
+import {buildQuery, createRangeTime, filterLog} from "../../services/utils";
+import {Link, useHistory} from "react-router-dom";
 
 var axios = require('axios');
 const {RangePicker} = DatePicker;
@@ -19,7 +20,7 @@ function App(props) {
     regionId: query.get("regionId"),
   });
   const [projectType, setProjectType] = useState(props.projectType ? props.projectType : user.type === 'ALL_PROJECT' ? 'de_dieu' : user.type.toLowerCase());
-  const [logActivityData, setLogActivityData] = useState(null);
+  const [logActivityData, setLogActivityData] = useState([]);
   const [isLoadedLogActivityData, setIsLoadedLogActivity] = useState(false);
 
   const [rangeTime, setRangeTime] = useState(createRangeTime(
@@ -76,6 +77,47 @@ function App(props) {
     setProjectType(projectType);
   }
 
+  const history = useHistory();
+  const handleChooseRegion = function (value) {
+    if (value) {
+      setFilter({
+        regionId: value.toString(),
+        entityId: null,
+      })
+      history.push(buildQuery("/log-uav", {
+        regionId: value
+      }));
+    } else {
+      setFilter({
+        regionId: null,
+        entityId: null,
+      })
+    }
+  }
+  const handleChooseHub = function (value) {
+    if (value) {
+      setFilter({
+        entityId: value.toString(),
+        regionId: null
+      })
+      history.push(buildQuery("/log-uav", {
+        entityId: value
+      }));
+    } else {
+      setFilter({
+        entityId: null,
+        regionId: null
+      })
+    }
+  }
+  const problemId = [];
+  const regionId = [];
+  logActivityData.forEach(log => {
+    if (regionId.indexOf(log.regionId) === -1) {
+      regionId.push(log.regionId)
+    }
+  })
+  regionId.sort();
   return (
       <>
         <Col style={{marginRight: '4%', marginTop: 20}}>
@@ -107,12 +149,38 @@ function App(props) {
                 </Form.Item>
                 : <></>
             }
-
           </Form>
+          {logActivityData &&
+          <Form layout="inline" style={{marginTop: "15px"}}>
+            <Form.Item label="Đợt giám sát">
+              <Select style={{width: 200}} onChange={handleChooseHub}
+                      value={filter.entityId}>
+                <Option value={null}>Tất cả các đợt giám sát</Option>
+                {logActivityData.map(function (log) {
+                  if (problemId.indexOf(log.entityId) === -1) {
+                    problemId.push(log.entityId)
+                    return (<Option value={log.entityId}>{log.name}</Option>)
+                  }
+                })}
+              </Select>
+            </Form.Item>
+            <Form.Item label="RegionId">
+              <Select style={{width: 150}} onChange={handleChooseRegion} value={filter.regionId}>
+                <Option value={null}>All Region</Option>
+                {regionId.map(id => (<Option value={id}>{id}</Option>))}
+              </Select>
+            </Form.Item>
+            {filter.entityId &&
+            <Button>
+              <Link to={buildQuery("/log-drone", {uavConnectId: filter.entityId})}>Xem Drone</Link>
+            </Button>}
+          </Form>}
           <br/>
-          <UAVActivity data={filterLog(logActivityData, filter)} loading={!isLoadedLogActivityData}
-                       rangeTime={rangeTime} projectType={projectType}/>
-
+          <UAVActivity
+              data={filterLog(logActivityData, filter)}
+              loading={!isLoadedLogActivityData}
+              rangeTime={rangeTime}
+              projectType={projectType}/>
 
         </Col>
         <BackTop/>
