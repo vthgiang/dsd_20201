@@ -344,7 +344,9 @@ class PayloadDroneHistory extends Component {
           </Row>
         </Form>
         <Button type="primary" className="buttontype" onClick={() => this.props.history.push('/add-signup-payload-drone')}>Đăng ký mới</Button>
+        <Spin spinning={loadingModal} tip="Loading...">
         <Table dataSource={dataSource} columns={columns} />;
+        </Spin>
         </div>
 
         <Modal
