@@ -21,6 +21,7 @@ import monitoredService from '../../../services/group09/monitoredService';
 import moment from 'moment';
 import userService from '../../../services/group09/userService';
 
+import _ from 'lodash'
 
 const MONITORED_OBJS = [
     {
@@ -374,6 +375,7 @@ const ImageGalley = (props) => {
     const [selectedIds, setSelectedIds] = useState([]);
     const [total, setTotal] = useState(0);
     const [imgLoading, setImgLoading] = useState(true);
+    const [monitoredIds, setMonitoredIds] = useState([])
     const convertImages = (values = []) => {
         return (values || []).map((item) => {
             let monitored = MONITORED_OBJS.find(i => i.id === item.monitoredObjectId)
@@ -492,6 +494,10 @@ const ImageGalley = (props) => {
 
     const showModal = () => {
         setVisible(true);
+        let selectedImages = images.filter((item) => Boolean(item.isSelected));
+        console.log('selectedImages', selectedImages)
+        let _monitoredIds = _.uniq(selectedImages.map(item => item.monitoredObjectId))
+        setMonitoredIds(_monitoredIds)
     };
     const renderPayload = () => {
         return payloads.map((item, key) => {
@@ -511,6 +517,7 @@ const ImageGalley = (props) => {
                         dueDate: moment(values.dueDate).format('YYYY-MM-DD'),
                         images: selectedImages,
                         type: localStorage.getItem("project-type"),
+                        monitoredIds: monitoredIds
                     }),
                 );
                 if (error) message.error('Đã có lỗi xảy ra!');
@@ -597,7 +604,6 @@ const ImageGalley = (props) => {
             <Pagination
                 total={total}
                 showTotal={(total, range) => {
-                    console.log('range', range)
                     if(!range[1]) return `1-20 of ${total} ảnh`
                     return `${range[0]}-${range[1]} of ${total} ảnh`
                 }}
@@ -606,7 +612,6 @@ const ImageGalley = (props) => {
                 onChange={onChangePagination}
                 style={{float:'right'}}
                 showSizeChanger={false}
-                // onShowSizeChange={onChangePagination}
             />
             <Modal
                 title="Title"
@@ -616,7 +621,12 @@ const ImageGalley = (props) => {
                 onCancel={handleCancel}
                 destroyOnClose={true}
             >
-                <Form layout="vertical" initialValues={{}} form={form} preserve={false}>
+                <Form layout="vertical" initialValues={{
+                    monitoredIds
+                }} form={form} preserve={false}>
+                    <Form.Item label="Đối tượng giám sát" name="monitoredIds" disabled>
+                        <Select mode="multiple">{renderOptions()}</Select>
+                    </Form.Item>
                     <Form.Item
                         label="Tên sự cố"
                         name="name"
