@@ -168,6 +168,15 @@ export default class RegionActivity extends React.Component {
         dataIndex: 'uavConnectId',
         key: 'uavConnectId',
         ...this.getColumnSearchProps('uavConnectId'),
+        render: uavConnectId => <>
+          <Button>
+            <Link to={buildQuery("/log-uav", {
+              entityId: uavConnectId
+            })}>
+              {uavConnectId}
+            </Link>
+          </Button>
+        </>
       },
       {
         title: 'Xem',

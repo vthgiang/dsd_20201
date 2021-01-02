@@ -180,21 +180,21 @@ export default class RegionActivity extends React.Component {
               </Button>)
         },
       },
-      {
-        title: 'Action',
-        dataIndex: 'action',
-        key: 'action',
-        render: (text, row) => {
-
-          return (<div>
-                <PopoverShowApp regionName={row.name} regionId={row.entityId} rangeTime={this.props.rangeTime}
-                                projectType={this.props.projectType}/>
-              </div>
-
-          )
-
-        }
-      },
+      // {
+      //   title: 'Action',
+      //   dataIndex: 'action',
+      //   key: 'action',
+      //   render: (text, row) => {
+      //
+      //     return (<div>
+      //           <PopoverShowApp regionName={row.name} regionId={row.entityId} rangeTime={this.props.rangeTime}
+      //                           projectType={this.props.projectType}/>
+      //         </div>
+      //
+      //     )
+      //
+      //   }
+      // },
     ];
     return (
         <>

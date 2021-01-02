@@ -16,7 +16,7 @@ function App(props) {
   const query = new URLSearchParams(props.location.search);
   const user = useSelector(state => state.user.user);
   const [filter, setFilter] = useState({
-    entityId: query.get("uavConnectId"),
+    entityId: query.get("entityId"),
     regionId: query.get("regionId"),
   });
   const [projectType, setProjectType] = useState(props.projectType ? props.projectType : user.type === 'ALL_PROJECT' ? 'de_dieu' : user.type.toLowerCase());
