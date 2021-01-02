@@ -7,6 +7,7 @@ import {
     Input,
     Form,
     Select,
+    Tag,
     DatePicker,
     message,
     Spin,
@@ -18,6 +19,7 @@ import incidentService from '../../../services/group09/incidentService';
 import imageService from '../../../services/group09/imageService';
 import monitoredService from '../../../services/group09/monitoredService';
 import moment from 'moment';
+import userService from '../../../services/group09/userService';
 
 
 const MONITORED_OBJS = [
@@ -364,6 +366,7 @@ let cacheImages = []
 let pageSize = 20
 const ImageGalley = (props) => {
     const [images, setImages] = useState([]);
+    const [payloads, setPayloads] = useState([]);
     const [selectAllChecked, setSelectAllChecked] = useState(false);
     const [visible, setVisible] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
@@ -415,15 +418,17 @@ const ImageGalley = (props) => {
 
     const fetchData = async ({page, pageSize}) => {
         setImgLoading(true)
-        let [leverRes = {}, imagesRes = {}, monitoreds = {}] = await Promise.all([
+        let [leverRes = {}, imagesRes = {}, monitoreds = {}, payloads = []] = await Promise.all([
             incidentLevelService().index(),
             imageService().getImagesByMonitoredId({page, pageSize}),
-            monitoredService().index()
+            monitoredService().index(),
+            userService().getAllPayload()
         ]);
         if (imagesRes.status !== 200) {
             message.error(`${imagesRes.status}: Dịch vụ ảnh video bị lỗi`)
         }
-        console.log('monitoreds', monitoreds)
+        let items = payloads.slice(0, 3);
+        setPayloads(items);
         if (!monitoreds.success) {
             message.error(monitoreds.messages)
         }
@@ -488,7 +493,11 @@ const ImageGalley = (props) => {
     const showModal = () => {
         setVisible(true);
     };
-
+    const renderPayload = () => {
+        return payloads.map((item, key) => {
+            return <Tag color="#2db7f5" style = {{marginRight: "8px"}}>Tên: {item.name}, Mã {item.code}</Tag>
+        })
+    }
     const handleOk = async () => {
         setConfirmLoading(true);
         let selectedImages = images.filter((item) => Boolean(item.isSelected));
@@ -561,6 +570,9 @@ const ImageGalley = (props) => {
                     <Select mode="multiple" onChange={onChangeSelect}>{renderOptions()}</Select>
                 </Form.Item>
             </Form>
+            <div>
+             <span style= {{fontWeight: "bold"}}>Payload: </span> {renderPayload()}
+            </div>
             <Typography.Text type="secondary">*Các ảnh không hiển thị do link ảnh từ Service quản lý ảnh-video not found!</Typography.Text>
             <Spin spinning={imgLoading}>
                 {images.length ? <div
