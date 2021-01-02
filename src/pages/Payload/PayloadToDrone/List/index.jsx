@@ -29,7 +29,7 @@ class PayloadDroneHistory extends Component {
       startedAt: '',
       type: '',
 
-      droneName: '',
+      // droneName: '',
       isGetAllHistoryPayload: true,
       listAllHistories: [],
     }
@@ -61,15 +61,28 @@ class PayloadDroneHistory extends Component {
       var listAllHistoriesFromServer = res.data;
       var listHistoriesHasPayloadNull = [];
       var listHistoriesHasPayload = [];
-      console.log(listAllHistoriesFromServer);
       listAllHistoriesFromServer.map(history => {
-        if (history.payload == null || history.sdCardId == null || history.sdCardId == '') {
+        history["droneNameOfPayload"] = [];
+        if (history.payload == null || history.sdCardId == null || history.sdCardId == ''|| history.droneId === undefined) {
           listHistoriesHasPayloadNull.push(history);
+        } else if (history.droneId === "5fbdad824e0fc003db237c6d" || history.droneId === "5fbdad624e0fc003db237c66" || history.droneId === "5fbdad724e0fc003db237c68" || history.droneId === undefined) {
+          history.droneNameOfPayload = ["Không xác định"];
+          // listHistoriesHasPayload.push(history);
         } else {
-          listHistoriesHasPayload.push(history);
+          axios.get('http://skyrone.cf:6789/drone/getById/' + history.droneId)
+          .then(res => {
+          if (res.status === 200) {
+            const drone = res.data;
+            history.droneNameOfPayload = [drone.name];
+          } else {
+            history.droneNameOfPayload = ["Không xác định"];
+          }
+         })
+         listHistoriesHasPayload.push(history);
         }
+        
       })
-
+      // console.log("aaa", listHistoriesHasPayload);
       this.setState({listAllHistories: listHistoriesHasPayload});
     })
   }
@@ -102,34 +115,32 @@ class PayloadDroneHistory extends Component {
   }
 
   handleFindPayloadHistory(values){
-    // const payloadId = { payloadId: values.payloadId };
     this.setState({isGetAllHistoryPayload: false});
+    console.log(values);
     axios.get('https://dsd06.herokuapp.com/api/payloadregister/histories/' + values.payloadId)
       .then(res => {
         const listPayloadDroneHistoryFromServer = res.data;
-        console.log(values.payloadId);
+        console.log(res.data);
         listPayloadDroneHistoryFromServer.map(payloadHistory => {
           const droneId = payloadHistory.droneId;
         
-          this.findDroneById(droneId);
+          // this.findDroneById(droneId);
 
         })
         this.setState({ listPayloadDroneHistory: listPayloadDroneHistoryFromServer });
-        // this.setState({ payloadId: res.data.payload});
       })
 
   }
 
-  findDroneById(droneId) {
-       axios.get('http://skyrone.cf:6789/drone/getById/' + droneId)
-    .then(res => {
-      const drone = res.data;
-      console.log("ssss", drone);
-      this.setState({
-        droneName: drone.name,
-      })
-    })
-  }
+  // findDroneById(droneId) {
+  //      axios.get('http://skyrone.cf:6789/drone/getById/' + droneId)
+  //   .then(res => {
+  //     const drone = res.data;
+  //     this.setState({
+  //       droneName: drone.name,
+  //     })
+  //   })
+  // }
 
   handleCancelReturnPayload = e => {
     this.setState({ visableReturnModal: false })
@@ -166,9 +177,6 @@ class PayloadDroneHistory extends Component {
     return <div>
       <Form onFinish= {(valuesOfReturnPayload) => this.returnPayload(valuesOfReturnPayload)}>
       <p>Bạn có chắc trả lại payload này?</p>
-      {/* <Form.Item label="Chi phí" name="fee" rules={[{required: true, message: 'Vui lòng nhập chi phí!'}]}>
-        <Input></Input>
-      </Form.Item> */}
       <Button type="primary" htmlType="submit" danger>Trả payload</Button>
       </Form>
    
@@ -184,11 +192,7 @@ class PayloadDroneHistory extends Component {
     ]
     
     const columns = [
-      // {
-      //   title: 'STT',
-      //   dataIndex: 'id',
-      //   key: 'id',
-      // },
+    
       {
         title: 'Mã payload',
         dataIndex: 'payloadCode',
@@ -209,31 +213,21 @@ class PayloadDroneHistory extends Component {
         dataIndex: 'droneId',
         key: 'droneId',
       },
+      // {
+      //   title: 'Tên Drone',
+      //   dataIndex: 'droneNameOfPayload',
+      //   key: 'droneNameOfPayload',
+      // },
       {
         title: 'Thẻ nhớ',
         dataIndex: 'memory',
         key: 'memory',
       },
-      // {
-      //   title: 'Phí dịch vụ',
-      //   dataIndex: 'fee',
-      //   key: 'fee'
-      // },
       {
         title:  'Lý do',
         dataIndex: 'reason',
         key: 'reason'
       },
-      // {
-      //   title: 'Ngày đăng ký',
-      //   dataIndex: 'createdTime',
-      //   key: 'createdTime',
-      // },
-      // {
-      //   title: 'Payload',
-      //   dataIndex: 'payloadId',
-      //   key: 'payloadId'
-      // },
       {
         title: 'Thời gian bắt đầu',
         dataIndex: 'startedAt',
@@ -270,7 +264,7 @@ class PayloadDroneHistory extends Component {
       this.state.listAllHistories.map(payloadDroneHistory =>
         ({
             droneId: payloadDroneHistory.droneId,
-            droneName: this.state.droneName,
+            droneNameOfPayload: payloadDroneHistory.droneNameOfPayload,
             payloadId: payloadDroneHistory.payload._id,
             payloadCode: payloadDroneHistory.payload.code,
             payloadName: payloadDroneHistory.payload.name,
@@ -279,16 +273,17 @@ class PayloadDroneHistory extends Component {
             type: payloadDroneHistory.type,
             // fee: payloadDroneHistory.fee,
             status: payloadDroneHistory.payload.status,
-            memory: payloadDroneHistory.sdCardId.name + payloadDroneHistory.sdCardId.volume,
+            memory: payloadDroneHistory.sdCardId.name,
+            // memory: payloadDroneHistory.sdCardId.name + payloadDroneHistory.sdCardId.volume,
             reason: payloadDroneHistory.reason,
         })
       )
     } else {
       dataSource = 
-      this.state.listPayloadDroneHistory.map(payloadDroneHistory =>
+      this.state.listAllHistories.map(payloadDroneHistory =>
         ({
             droneId: payloadDroneHistory.droneId,
-            droneName: this.state.droneName,
+            droneNameOfPayload: payloadDroneHistory.droneNameOfPayload,
             payloadId: payloadDroneHistory.payload._id,
             payloadCode: payloadDroneHistory.payload.code,
             payloadName: payloadDroneHistory.payload.name,
@@ -297,7 +292,8 @@ class PayloadDroneHistory extends Component {
             type: payloadDroneHistory.type,
             // fee: payloadDroneHistory.fee,
             status: payloadDroneHistory.payload.status,
-            memory: payloadDroneHistory.sdCardId.name + payloadDroneHistory.sdCardId.volume,
+            memory: payloadDroneHistory.sdCardId.name,
+            // memory: payloadDroneHistory.sdCardId.name + payloadDroneHistory.sdCardId.volume,
             reason: payloadDroneHistory.reason,
         })
       )
@@ -333,7 +329,7 @@ class PayloadDroneHistory extends Component {
                <Select options = {typeDeviceOption}/>
               </Form.Item>
             </Col> */}
-            <Col span={9}>
+            {/* <Col span={9}>
               <Form.Item label="Payload" name="payloadId">
                 <Select options={this.state.PayloadOptions}></Select>
               </Form.Item>
@@ -343,7 +339,7 @@ class PayloadDroneHistory extends Component {
               <Button type="primary" htmlType="submit" icon={<SearchOutlined />} >
                 Tìm kiếm
               </Button>
-            </Col>
+            </Col> */}
           </Row>
         </Form>
         <Button type="primary" className="buttontype" onClick={() => this.props.history.push('/add-signup-payload-drone')}>Đăng ký mới</Button>
