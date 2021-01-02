@@ -61,7 +61,7 @@ class PayloadDroneHistory extends Component {
       var listAllHistoriesFromServer = res.data;
       var listHistoriesHasPayloadNull = [];
       var listHistoriesHasPayload = [];
-
+      console.log(listAllHistoriesFromServer);
       listAllHistoriesFromServer.map(history => {
         if (history.payload == null || history.sdCardId == null || history.sdCardId == '') {
           listHistoriesHasPayloadNull.push(history);
@@ -124,7 +124,7 @@ class PayloadDroneHistory extends Component {
        axios.get('http://skyrone.cf:6789/drone/getById/' + droneId)
     .then(res => {
       const drone = res.data;
-      console.log(drone);
+      console.log("ssss", drone);
       this.setState({
         droneName: drone.name,
       })
@@ -205,9 +205,9 @@ class PayloadDroneHistory extends Component {
         key: 'status',
       },
       {
-        title: 'Tên Drone',
-        dataIndex: 'droneName',
-        key: 'droneName',
+        title: 'DroneID',
+        dataIndex: 'droneId',
+        key: 'droneId',
       },
       {
         title: 'Thẻ nhớ',
@@ -269,7 +269,7 @@ class PayloadDroneHistory extends Component {
       dataSource = 
       this.state.listAllHistories.map(payloadDroneHistory =>
         ({
-            // droneId: payloadDroneHistory._id,
+            droneId: payloadDroneHistory.droneId,
             droneName: this.state.droneName,
             payloadId: payloadDroneHistory.payload._id,
             payloadCode: payloadDroneHistory.payload.code,
@@ -287,7 +287,7 @@ class PayloadDroneHistory extends Component {
       dataSource = 
       this.state.listPayloadDroneHistory.map(payloadDroneHistory =>
         ({
-            // droneId: payloadDroneHistory._id,
+            droneId: payloadDroneHistory.droneId,
             droneName: this.state.droneName,
             payloadId: payloadDroneHistory.payload._id,
             payloadCode: payloadDroneHistory.payload.code,
