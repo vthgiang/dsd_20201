@@ -15,7 +15,7 @@ function App (props) {
   const user = useSelector(state => state.user.user);
 
   const [projectType, setProjectType] = useState(props.projectType? props.projectType: user.type === 'ALL_PROJECT' ? 'de_dieu' : user.type.toLowerCase());
-  const [logActivityData, setLogActivityData] = useState(null);
+  const [logActivityData, setLogActivityData] = useState([]);
   const [isLoadedLogActivityData, setIsLoadedLogActivity] = useState(false);
   const [rangeTime, setRangeTime] = useState(props.rangeTime ? props.rangeTime : {fromDate: '', toDate: ''}) 
 
