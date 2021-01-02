@@ -119,11 +119,7 @@ class PayloadDroneHistory extends Component {
 
   handleFindPayloadHistory(values){
     this.setState({isGetAllHistoryPayload: false});
-<<<<<<< HEAD
     this.setState({loadingModal: true});
-=======
-    console.log(values);
->>>>>>> sucodedieu
     axios.get('https://dsd06.herokuapp.com/api/payloadregister/histories/' + values.payloadId)
       .then(res => {
         this.setState({loadingModal: false});
@@ -309,19 +305,17 @@ class PayloadDroneHistory extends Component {
 
     
     return (
-    <StyleList>
+      <StyleList>
       <div>
-      <h2>Danh sách lịch sử đăng ký payload drone</h2>
+      <h1 style={{fontWeight:'bold', fontSize:16}}>Danh sách lịch sử đăng ký payload drone</h1>
         <Form
           layout="horizontal"
            className="searchtype"
            onFinish={(values) => this.handleFindPayloadHistory(values)}
-
+          // onValuesChange={onFormLayoutChange}
+          // size={componentSize}
         >
           <Row justify="space-around">
-<<<<<<< HEAD
-            <Col span={9}>
-=======
             {/* <Col span={4}>
               <Form.Item label="Từ ngày">
                 <DatePicker />
@@ -338,12 +332,10 @@ class PayloadDroneHistory extends Component {
               </Form.Item>
             </Col> */}
             {/* <Col span={9}>
->>>>>>> sucodedieu
               <Form.Item label="Payload" name="payloadId">
                 <Select options={this.state.PayloadOptions}></Select>
               </Form.Item>
             </Col>
-
             <Col span={3}>
               <Button type="primary" htmlType="submit" icon={<SearchOutlined />} >
                 Tìm kiếm
@@ -352,13 +344,22 @@ class PayloadDroneHistory extends Component {
           </Row>
         </Form>
         <Button type="primary" className="buttontype" onClick={() => this.props.history.push('/add-signup-payload-drone')}>Đăng ký mới</Button>
-        <Spin spinning={loadingModal} tip="Loading...">
-        <Table dataSource={dataSource} columns={columns} />
-        </Spin>
+        <Table dataSource={dataSource} columns={columns} />;
         </div>
 
         <Modal
-          title="Trả Payload"
+          title="Basic Modal"
+          // visible={visible}
+          //onOk={handleOk}
+          //onCancel={handleCancel}
+        >
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal>
+
+        <Modal
+          title="Xóa Payload"
           visible={visableReturnModal}
           // onOk={this.handleOkDelete}
           onCancel={this.handleCancelReturnPayload}
