@@ -21,11 +21,34 @@ function Stream() {
   const refVideo = useRef(null);
   const [form] = Form.useForm();
   const [streamId, setStreamId] = useState(null);
+  const [payload, setPayload] = useState(null);
   const [downloadLink, setDownloadLink] = useState(null);
   const [cropLink, setCropLink] = useState(null);
   const [currentDrone, setCurrentDrone] = useState({ flightPath: { flightPoints: [] } });
   const [drones, setDrones] = useState([]);
   const [cropLoading, setCropLoading] = useState(false);
+  const [campaign, setCampaign] = useState([]);
+  const [drone, setDrone] = useState("");
+
+  const[obj,setObj]=useState([]);
+    
+  const handleObjs = (type) => {
+      axios({
+          method: "GET",
+          url: "https://dsd05-monitored-object.herokuapp.com/monitored-object/",
+          params: {
+              "type":type
+          },
+          headers: {
+          },
+
+          data: {
+          }
+      }).then(({ data }) => {
+              setObj(data.content[0]);
+        
+      })
+  };
 
   useEffect(() => {
     form.setFieldsValue({
@@ -33,6 +56,55 @@ function Stream() {
       duration: 10
     });
   }, [form]);
+  useEffect(()=>{
+
+    handleObjs(localStorage.getItem("project-type"))
+    axios({
+      method:"GET",
+      url:"http://dsd06.herokuapp.com/api/payload",
+      params:{
+          "droneId":currentDrone.idDrone,
+      },
+      data:{
+
+      }
+  },[currentDrone]).then(({ data }) => {
+    axios({
+      method:"GET",
+      url:"https://dsd06.herokuapp.com/api/payload/"+data[0]?._id,
+      params:{
+      },
+      data:{
+
+      }
+  }).then(({ data }) => {
+      setPayload(data)
+  })
+  })
+
+  axios({
+    method: "GET",
+    url: "http://skyrone.cf:6789/drone/getById/"+currentDrone.idDrone,
+    params: {
+    },
+    headers: {
+        "api-token": localStorage.getItem("token"),
+        "project-type": localStorage.getItem("project-type")
+    },
+
+    data: {
+    }
+  }).then(({ data }) => {
+    setDrone(data)
+})
+
+  axios({
+    method: "GET",
+    url: "http://skyrone.cf:6789/flightItinerary/getByIdDrone/"+currentDrone.idDrone,
+  }).then((res)=>{if(res?.data?.data!=null)setCampaign(res?.data?.data[0])})
+
+  },[currentDrone])
+  
   // const videoJsOptions = {
   //     autoplay: true,
   //     controls: true,
@@ -198,9 +270,12 @@ function Stream() {
           </HeaderList>
 
           <Row>
+          <Col md={24}>
+          <strong>Thông tin Drone:</strong>{' '}
+          </Col>
             <Col md={12}>
-              <strong>Drone ID:</strong>{' '}
-              <span>{currentDrone.idDrone ? currentDrone.idDrone : '...'}</span>
+              <strong>Drone: </strong>{' '}
+              <span>{drone.name ? drone.name : '...'}</span>
             </Col>
             <Col md={12}>
               <strong>Pin:</strong>{' '}
@@ -221,6 +296,28 @@ function Stream() {
                 {currentDrone.heightFlight ? currentDrone.heightFlight : '...'}m
               </span>
             </Col>
+            <Col md={24}>
+            <strong>Thông tin giám sát:</strong>{' '}
+            </Col>
+            <Col md={12}>
+              <strong>Payload: </strong>{' '}
+              <span>
+                {payload?.name ? payload?.name : '...'}m
+              </span>
+            </Col>
+            <Col md={12}>
+              <strong>Đợt giám sát:</strong>{' '}
+              <span>{campaign?.name}</span>
+            </Col>
+            <Col md={12}>
+              <strong>Đối tượng: </strong>{' '}
+              <span>
+                {obj.name
+                  ? obj.name
+                  : '...'}
+              </span>
+            </Col>
+
           </Row>
 
           <div
