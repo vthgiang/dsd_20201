@@ -78,6 +78,7 @@ import MapTest from './MapTest';
 import FlightPath from './FlightPath';
 import FlightSchedule from './FlightSchedule';
 import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
+import FlightCreateZone from '../components/Drone/FlightCreateZone';
 
 //DE DIEU
 import HomeDeDieu from "./Home/DeDieu";
@@ -117,6 +118,10 @@ export const routes = [
   {
     path: '/drones',
     component: () => <div>DroneManagement</div>,
+  },
+  {
+    path: '/flight-create-zone/:areaId',
+    component: FlightCreateZone,
   },
   {
     path: '/dedieu-uav-mana',

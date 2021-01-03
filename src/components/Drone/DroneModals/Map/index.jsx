@@ -126,7 +126,7 @@ const MyMapComponent = compose(
                     {/* <span>Vị trí được chọn nằm ngoài miền</span>
                     <br/>
                     <Button type='link' onClick={()=>setShow(true)}>bấm vào đây để thêm miền mới</Button> */}
-                    <Link to='/surveillance-domain-manage'>Vị trí được chọn nằm ngoài miền<br/>bấm vào đây để thêm miền mới</Link>
+                    <Link to={`/flight-create-zone/${selectedArea._id}`}>Vị trí nằm ngoài miền<br/>bấm vào đây để thêm miền mới</Link>
                 </div>
                 </InfoWindow>}
         </GoogleMap>
