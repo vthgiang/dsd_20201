@@ -13,6 +13,14 @@ class Service extends Base {
     });
     return response.json();
   };
+  getAllPayload = async (ids) => {
+    return this.request({
+      url: 'https://dsd06.herokuapp.com/api/payload',
+      method: "GET",
+      data: {},
+      isExternalServer: true
+    });
+  };
   getUserName = async (ids) => {
     return this.request({
       url: 'https://distributed.de-lalcool.com/api/get-user-name',
