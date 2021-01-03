@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_DOMAIN, REQUEST_TIMEOUT } from '../configs';
+import { removeVietnameseTones } from '../helpers/removeVietnameseTones';
 
 const instance = axios.create({
   baseURL: API_DOMAIN,
@@ -16,7 +17,7 @@ instance.interceptors.request.use(async (config) => {
   // eslint-disable-next-line no-param-reassign
   config.headers.Authorization = `Bearer ${token}`;
   config.headers.projectType = projectType;
-  config.headers.user = user.full_name;
+  config.headers.user = removeVietnameseTones(user.full_name);
   return config;
 });
 

@@ -20,7 +20,7 @@ import {
   HistoryOutlined,
   PlusOutlined,
 } from '@ant-design/icons';
-import { useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import StyleListMonitorCampaign, { StyleSpinContainer } from './index.style';
 import {
   StyleTitle,
@@ -75,7 +75,7 @@ const ListMonitorCampaign = () => {
       if (error.response && error.response.status === 400) return;
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại',
-        description: error.message
+        description: error.message,
       });
     }
   };
@@ -98,11 +98,6 @@ const ListMonitorCampaign = () => {
   const goToUpdateMonitorCampaign = (item) => () => {
     const { _id } = item;
     history.push(`/flight-hub-monitor-campaigns/update/${_id}`);
-  };
-
-  const goToDetailMonitorCampaign = (item) => () => {
-    const { _id } = item;
-    history.push(`/flight-hub-monitor-campaigns/${_id}`);
   };
 
   const goToCreate = () => {
@@ -170,18 +165,22 @@ const ListMonitorCampaign = () => {
   };
 
   const columns = [
-    {
-      dataIndex: '_id',
-      title: 'Mã đợt giám sát',
-      width: '7.5%',
-      align: 'center',
-      // sorter: (a, b) => a._id.localeCompare(b._id),
-    },
+    // {
+    //   dataIndex: '_id',
+    //   title: 'Mã đợt giám sát',
+    //   width: '7.5%',
+    //   align: 'center',
+    //   // sorter: (a, b) => a._id.localeCompare(b._id),
+    // },
     {
       dataIndex: 'name',
       title: 'Tên đợt giám sát',
       width: '15%',
       sorter: (a, b) => a.name.localeCompare(b.name),
+      render: (data, record) => {
+        const { _id } = record;
+        return <Link to={`/flight-hub-monitor-campaigns/${_id}`}>{data}</Link>;
+      },
     },
     {
       dataIndex: 'task',
@@ -198,25 +197,36 @@ const ListMonitorCampaign = () => {
       },
       render: renderStatus,
     },
-    // {
-    //   dataIndex: 'monitoredObjects',
-    //   title: 'Đối tượng giám sát',
-    //   width: '12.5%',
-    //   sorter: (a, b) => 1,
-    //   render: (data = []) => {
-    //     return data.map((elem) => {
-    //       const { name, _id } = elem;
-    //       return <div key={_id}>{name}</div>;
-    //     });
-    //   },
-    // },
-    // {
-    //   dataIndex: 'monitoredZone',
-    //   title: 'Miền giám sát',
-    //   width: '12.5%',
-    //   sorter: (a, b) => a.name.localeCompare(b.name),
-    //   render: (data) => data && <span>{data.name}</span>,
-    // },
+    {
+      dataIndex: 'mechanism',
+      width: '7.5%',
+      title: 'Chế độ điều kiển',
+      align: 'center',
+      sorter: (a, b) => a.mechanism.localeCompare(b.mechanism),
+      render: (data) => (
+        <span>{data === MECHANISM.AUTO ? 'Tự động' : 'Thủ công'}</span>
+      ),
+    },
+    {
+      dataIndex: 'metadataType',
+      width: '7.5%',
+      title: 'Dạng dữ liệu',
+      align: 'center',
+      sorter: (a, b) => a.metadataType.localeCompare(b.metadataType),
+      render: (data) => (
+        <span>{data === METADATA_TYPES.VIDEO ? 'Video' : 'Ảnh'}</span>
+      ),
+    },
+    {
+      dataIndex: 'resolution',
+      width: '7.5%',
+      title: 'Dạng dữ liệu',
+      align: 'center',
+      sorter: (a, b) =>
+        parseInt(a.resolution.substring(0, a.resolution.length - 2), 10) -
+        parseInt(b.resolution.substring(0, b.resolution.length - 2), 10),
+      render: (data) => <span>{data}</span>,
+    },
     {
       dataIndex: 'startTime',
       width: '12.5%',
@@ -239,15 +249,9 @@ const ListMonitorCampaign = () => {
       width: '10%',
       align: 'center',
       fixed: 'right',
-      render: (data, record, index) => {
+      render: (_, record, index) => {
         return (
           <Space size={4}>
-            <Button
-              size='small'
-              type='primary'
-              onClick={goToDetailMonitorCampaign(record)}>
-              Chi tiết
-            </Button>
             <Button
               icon={<EditOutlined />}
               size='small'

@@ -11,6 +11,8 @@ const DetailMonitorCampaign = ({}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [monitorCampaign, setMonitorCampaign] = useState(null);
 
+  console.log({ monitorCampaign });
+
   useEffect(() => {
     const getMonitorCampaignById = async (id) => {
       setIsLoading(true);
@@ -70,7 +72,19 @@ const DetailMonitorCampaign = ({}) => {
               {monitorCampaign.drones.map((drone) => {
                 return (
                   <>
-                    {drone.name} <br />
+                    {drone.name} - Payload:
+                    {drone.payloads.length !== 0 ? (
+                      <>
+                        
+                        {drone.payloads.map((payload, index) => (
+                          <>
+                            <span>{payload.name}</span>
+                            {index !== drone.payloads.length - 1 && ', '}
+                          </>
+                        ))}
+                      </> 
+                    ) : <span> payload nào đó đã bị xoá bất hợp pháp</span>}
+                    <br />
                   </>
                 );
               })}

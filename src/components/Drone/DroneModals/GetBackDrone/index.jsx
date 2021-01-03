@@ -40,7 +40,7 @@ export default function GetBackDrone(props){
           <Modal show={show} onHide={handleClose}>
               <Modal.Header>
               <p>     
-                  <StateDrone state={drone.state} />   
+                  <StateDrone state={drone.state} percent={drone.percentBattery}/>   
                   <h3>Chuyển trạng thái sẵn sàng</h3> 
               </p>
               </Modal.Header>

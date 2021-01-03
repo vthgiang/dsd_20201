@@ -9,6 +9,11 @@ import incidentLevelService from "../../../services/group09/incidentLevelService
 import incidentStatusService from "../../../services/group09/incidentStatusService";
 import Gallery from "react-grid-gallery";
 import userService from "../../../services/group09/userService";
+import monitoredService from '../../../services/group09/monitoredService';
+import areaService from '../../../services/group09/areaService';
+
+let cacheMonitoreds = []
+let cacheAreas = []
 
 const IncidentEdit = (props) => {
   let { id } = useParams();
@@ -30,12 +35,21 @@ const IncidentEdit = (props) => {
   }, []);
 
   const fetchData = async () => {
-    let [error, [incident, _levels = [], _status = []]] = await to(Promise.all([
+    let [error, [incident, _levels = [], _status = [], monitoreds = {}, areas ={}]] = await to(Promise.all([
       incidentService().detail(id),
       incidentLevelService().index(),
-      incidentStatusService().index()
+      incidentStatusService().index(),
+      monitoredService().index(),
+      areaService().index(),
+
     ]))
     if(error) message.error('Có lỗi xảy ra!')
+    if (!monitoreds.success) {
+      message.error(monitoreds.messages)
+    }
+    if (!areas.success) {
+      message.error(areas.messages)
+    }
     let _images = (incident.images || []).map((item) => {return {...item, isSelected: false}})
     let latLongs = (incident.images || []).map((item) => {return {lat: item.latitude, lng: item.longitude}})
     let createdName = await fetchUserById(incident.createdBy)
@@ -43,10 +57,28 @@ const IncidentEdit = (props) => {
     setIncident({...incident, images: _images, createdName} || {})
     setLevels(_levels)
     setStatus(_status)
-
+    cacheMonitoreds = monitoreds.content
+    cacheAreas = _.get(areas, 'content.zone', [])
     setLatLng(getCenterFromDegrees(latLongs))
     setLoading(false)
     console.log('incident', incident)
+  }
+
+  const getMonitoreds = () => {
+    const images = incident.images || []
+    const monitoredIds = _.uniq(images.map(item => item.monitoredObjectId))
+    const monitoreds = cacheMonitoreds.filter(item => monitoredIds.includes(item._id))
+    return <div>{
+      monitoreds.map(item => <a key={item._id} href={`/monitored-object-management/view/${item._id}`}><Tag>{item.name}</Tag></a>)
+    }</div>
+  }
+  const getAreas = () => {
+    const images = incident.images || []
+    const areaIds = _.uniq(images.map(item => item.idSupervisedArea))
+    const areas = cacheAreas.filter(item => areaIds.includes(item._id))
+    return <div>{
+      areas.map(item => <a key={item._id} href={`/surveillance-domain-manage/edit`}><Tag>{item.name}</Tag></a>)
+    }</div>
   }
 
   const fetchUserById = async (id) => {
@@ -140,6 +172,12 @@ const IncidentEdit = (props) => {
             <Tag color={colorLevel(_.get(incident, 'level.code', null))}>
               {_.get(incident, 'level.name', '')}
             </Tag>
+          </Descriptions.Item>
+          <Descriptions.Item label="Đối tượng giám sát" >
+            {getMonitoreds()}
+          </Descriptions.Item>
+          <Descriptions.Item label="Miền giám sát" span={2}>
+            {getAreas()}
           </Descriptions.Item>
 
           <Descriptions.Item label="Mô tả" span={2}>

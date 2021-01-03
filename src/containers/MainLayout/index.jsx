@@ -63,18 +63,18 @@ const MainLayout = ({ children, history }) => {
                       </div>
                     </Menu.Item>
                     <Menu.Item key="ncn4" icon={<AppstoreAddOutlined />}>
-                      <Link className="margin-left-12" to={"/dedieu-uav-mana"} rel="noopener noreferrer">
+                      <Link className="margin-left-12" to={"/dedieu-ncn4"} rel="noopener noreferrer">
                         Nhóm chức năng 4
                         <br/>
                         Quản lý UAV
                       </Link>
                     </Menu.Item>
                     <Menu.Item key="ncn5" icon={<SettingOutlined />}>
-                      <a className="margin-left-12" href={"/dedieu-ncn5"} rel="noopener noreferrer">
+                      <Link className="margin-left-12" to={"/dedieu-ncn5"} rel="noopener noreferrer">
                         Nhóm chức năng 5
                         <br/>
                         Quản trị và nâng cao
-                      </a>
+                      </Link>
                     </Menu.Item>
                   </Menu>
                 </div>
