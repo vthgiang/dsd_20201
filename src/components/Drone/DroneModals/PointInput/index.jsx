@@ -22,6 +22,8 @@ function PointInput(props) {
             setError('bạn chưa nhập đủ thông tin');
             return;
         }
+        if(timeStop && timeStop < 0) return setError('Giá trị thời gian không hợp lệ');
+        
         if(flightHeightDown && (flightHeightDown >= heightPoint || flightHeightDown < 0)){
             setError('Độ cao hạ xuống không hợp lệ');
             return;

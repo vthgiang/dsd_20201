@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Tag} from 'antd';
 export default function StateModal(props){
-    const {state} = props;
+    const {state, percent} = props;
     return (
         <>
               {(() => {
@@ -15,7 +15,11 @@ export default function StateModal(props){
                         )
                     } else if (state == 2) {
                         return (
-                            <Tag color="orange">Đang sạc</Tag>
+                            <div>
+                                 <Tag color="orange">Đang sạc</Tag>
+                                <p>{percent}%</p>
+                            </div>
+                           
                         )
                     } else if (state == 3) {
                         return (

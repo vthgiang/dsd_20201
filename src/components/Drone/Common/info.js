@@ -19,4 +19,8 @@ const getRole = () => {
     return JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).user.role;
 }
 
-export {getToken, getProjectType, getRole};
+const getUser = () => {
+    return JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).user;
+}
+
+export {getToken, getProjectType, getRole, getUser};
