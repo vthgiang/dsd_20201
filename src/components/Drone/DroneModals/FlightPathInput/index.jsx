@@ -146,7 +146,7 @@ function FlightPathInput(props) {
             <Col>
             <Form.Group controlId="formBasicEmail">
                 <Form.Text className="text-muted">
-                    <Link to='/surveillance-domain-manage'>Khu vực hiện tại chưa có miền nào, bấm vào đây để thêm miền mới</Link>
+                    <Link to={`/flight-create-zone/${selectedArea._id}`}>Khu vực hiện tại chưa có miền nào, bấm vào đây để thêm miền mới</Link>
                 </Form.Text>
             </Form.Group>
             </Col>
