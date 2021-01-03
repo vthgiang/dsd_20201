@@ -272,7 +272,7 @@ class StepLog extends React.Component {
                 filterOption={(input, option) =>
                   option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
-                onChange={(value) => {this.props.setSelectedZoneId(value);this.props.setDisabledStep(5); this.setState({current: 3})}}
+                onChange={(value) => {this.props.setSelectedZoneId(value);this.props.setDisabledStep(5); this.setState({current: 3}); this.props.setSelectedCollapseKeys([])}}
               >
                 {
                   this.props.zoneList !== null && this.props.zoneList.map((data) =>

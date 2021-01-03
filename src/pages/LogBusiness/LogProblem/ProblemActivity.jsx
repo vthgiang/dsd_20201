@@ -2,6 +2,12 @@ import React from 'react';
 import { Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Select } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 export default class ProblemActivity extends React.Component {
   state = {
@@ -117,6 +123,7 @@ export default class ProblemActivity extends React.Component {
         title: 'Id sự cố',
         dataIndex: 'entityId',
         key: 'entityId',
+        render: (value) => <Link to={"/incidents/" + value}>{value}</Link>,
         sorter: (a, b) => a.entityId - b.entityId,
     
       },
