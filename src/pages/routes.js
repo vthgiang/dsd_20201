@@ -123,6 +123,10 @@ export const routes = [
     component: UAVMana,
   },
   {
+    path: '/dedieu-ncn4',
+    component: TableDroneState,
+  },
+  {
     path: '/drone-list',
     component: TableDrone,
   },
