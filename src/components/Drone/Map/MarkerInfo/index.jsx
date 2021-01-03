@@ -14,7 +14,7 @@ function MarkerInfo({point, index, speed}){
 
     return <Marker 
         title={index}
-        label={index.toString()}
+        label={(index+1).toString()}
         position={{lat: point.locationLat, lng: point.locationLng}} 
         onClick={toggle}>
         {isOpen && <InfoWindow onCloseClick={toggle}>

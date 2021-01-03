@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { compose, withProps } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polyline, Polygon, Circle} from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polyline, Polygon, Circle, InfoWindow} from "react-google-maps"
+import { Button } from 'antd';
+import { getRole } from '../../Common/info';
 
 const MyMapComponent = compose(
   withProps({
@@ -16,17 +18,35 @@ const MyMapComponent = compose(
     const {
         newPoint, setNewPoint, 
         flightPoints, 
-        selectedZone,
+        selectedZone, selectedArea, 
         monitoredObjectList,
         setMonitoredObjectId,
         setHeightPoint, heightPoint,
-        setSelectedObject
+        setSelectedObject, setShow
     } = props;
+
+    const [openInfoWD, setOpenInfoWD] = useState(false);
+    const [infoWDPositon, setInfoWDPosion] = useState({});
+
+    const hideInfoWD = () => {
+        setOpenInfoWD(false);
+    }
 
     function onClick(e){
         console.log(e.latLng.lat(), e.latLng.lng());
         setNewPoint({...newPoint, locationLat: e.latLng.lat(), locationLng: e.latLng.lng()});
         setSelectedObject(null);
+        hideInfoWD();
+    }
+
+    const handleMapClick = (e) => {
+        if(!selectedZone) return;
+        const role = getRole();
+        if(role !== 'ADMIN' && role !== 'SUPER_ADMIN') return;
+        console.log(e.latLng.lat(), e.latLng.lng());
+        console.log('map clicked')
+        setInfoWDPosion({lat: e.latLng.lat(), lng: e.latLng.lng()});
+        setOpenInfoWD(true);
     }
 
     const handlePointClick = (index) => {
@@ -37,6 +57,7 @@ const MyMapComponent = compose(
         setMonitoredObjectId(object._id);
         console.log(object);
         setSelectedObject(object);
+        hideInfoWD();
     }
 
     useEffect(()=> {
@@ -56,11 +77,11 @@ const MyMapComponent = compose(
             ref={mapRef}
             defaultZoom={10}
             defaultCenter={{ lat: 20.99933610536628, lng: 105.8329881666537 }}
-            // onClick={onClick}
+            onClick={handleMapClick}
         >
             {flightPoints.length !== 0 && flightPoints.map( (point, index) => 
             <Marker
-                label={index.toString()}
+                label={(index+1).toString()}
                 key={index}
                 position={{lat: point.locationLat, lng: point.locationLng}}
             />)}
@@ -96,6 +117,16 @@ const MyMapComponent = compose(
                     fillOpacity: 1,
                 }}
             />)}
+            {openInfoWD && <InfoWindow 
+                onCloseClick={()=> setOpenInfoWD(false)}
+                position={infoWDPositon}
+            >
+                <div>
+                    <span>Vị trí được chọn nằm ngoài miền</span>
+                    <br/>
+                    <Button type='link' onClick={()=>setShow(true)}>bấm vào đây để thêm miền mới</Button>
+                </div>
+                </InfoWindow>}
         </GoogleMap>
     )}
 )
@@ -106,9 +137,11 @@ export default function Map(props){
 }
 
 function getPathFromPoints(flightPoints){
+    // console.log('flight points', flightPoints);
     return flightPoints.map( point => ({lat: point.locationLat, lng: point.locationLng}));
 }
 function getPathFromZone(zone){
+    console.log('zone', zone);
     return [
         {lat: zone.startPoint.latitude, lng: zone.startPoint.longitude},
         {lat: zone.endPoint.latitude, lng: zone.startPoint.longitude},
