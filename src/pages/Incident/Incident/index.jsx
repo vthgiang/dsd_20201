@@ -6,12 +6,14 @@ import userService from '../../../services/group09/userService';
 import incidentLevelService from '../../../services/group09/incidentLevelService';
 import incidentStatusService from '../../../services/group09/incidentStatusService';
 import monitoredService from '../../../services/group09/monitoredService';
+import areaService from '../../../services/group09/areaService';
 
 import moment from 'moment';
 import _ from "lodash";
 import { SearchOutlined } from '@ant-design/icons';
 
 let cacheMonitoreds = []
+let cacheAreas = []
 
 const Incident = () => {
   const [loading, setLoading] = useState(true);
@@ -99,7 +101,7 @@ const Incident = () => {
     },
     {
       title: 'Đối tượng giám sát',
-      dataIndex: 'monitoredIds', // 'open', 'inProcess', 'resolve', 'close'
+      dataIndex: 'monitoredIds',
       key: 'monitoredIds',
       filters: cacheMonitoreds.map((item) => {
         return { text: item.name, value: item._id };
@@ -115,6 +117,27 @@ const Incident = () => {
         const monitoreds = cacheMonitoreds.filter(item => monitoredIds.includes(item._id))
         return <div>{
           monitoreds.map(item => <a key={item._id} href={`/monitored-object-management/view/${item._id}`}><Tag>{item.name}</Tag></a>)
+        }</div>
+      }
+    },
+    {
+      title: 'Miền giám sát',
+      dataIndex: 'areaIds',
+      key: 'areaIds',
+      filters: cacheAreas.map((item) => {
+        return { text: item.name, value: item._id };
+      }),
+      onFilter: (value, record) => {
+        const images = record.images || []
+        const areaIds = _.uniq(images.map(item => item.idSupervisedArea))
+        return areaIds.includes(value)
+      },
+      render: (text, record) => {
+        const images = record.images || []
+        const areaIds = _.uniq(images.map(item => item.idSupervisedArea))
+        const areas = cacheAreas.filter(item => areaIds.includes(item._id))
+        return <div>{
+          areas.map(item => <a key={item._id} href={`/surveillance-domain-manage/edit`}><Tag>{item.name}</Tag></a>)
         }</div>
       }
     },
@@ -205,12 +228,13 @@ const Incident = () => {
 
   const fetchData = async () => {
     setLoading(true);
-    let [error, [incidents = {}, _levels, _status, monitoreds = {}] = []] = await to(
+    let [error, [incidents = {}, _levels, _status, monitoreds = {}, areas ={}] = []] = await to(
       Promise.all([
         incidentService().index(),
         incidentLevelService().index(),
         incidentStatusService().index(),
-        monitoredService().index()
+        monitoredService().index(),
+        areaService().index()
       ]),
     );
     if (error){
@@ -220,12 +244,16 @@ const Incident = () => {
     if (!monitoreds.success) {
       message.error(monitoreds.messages)
     }
+    if (!areas.success) {
+      message.error(areas.messages)
+    }
     let _incidents = _.get(incidents, "incidents", []).map((i, index) => {return {...i, index}})
     
     setIncidents(_incidents);
     setLevels(_levels || []);
     setStatus(_status || []);
     cacheMonitoreds = monitoreds.content
+    cacheAreas = _.get(areas, 'content.zone', [])
     setLoading(false);
     let userIds = _incidents.map(item => item.createdBy);
     fetchUsers(userIds);

@@ -17,348 +17,14 @@ import incidentLevelService from '../../../services/group09/incidentLevelService
 import incidentService from '../../../services/group09/incidentService';
 import imageService from '../../../services/group09/imageService';
 import monitoredService from '../../../services/group09/monitoredService';
+import areaService from '../../../services/group09/areaService';
+import droneService from '../../../services/group09/droneService';
 import moment from 'moment';
 import _ from 'lodash'
 
-const MONITORED_OBJS = [
-    {
-        id: '1',
-        name: 'Trạm HDHN 01'
-    },
-    {
-        id: '2',
-        name: 'Trạm vượt biển'
-    },
-    {
-        id: '3',
-        name: 'Cháy trạm NT3'
-    },
-    {
-        id: '4',
-        name: 'Trạm Rừng Tràm CP1'
-    },
-    {
-        id: '5',
-        name: 'Trạm Hoài Đức'
-    },
-    {
-        id: '6',
-        name: 'Trạm rừng Sơn La'
-    },
-    {
-        id: '7',
-        name: 'Trạm rừng chim Ninh Bình'
-    },
-    {
-        id: '8',
-        name: 'Cột cao thế đơn Đan Phượng km11'
-    },
-]
-const IMAGES = [
-    {
-        description: "Ảnh theo dõi trạm HDHN 01 ngày 25/16/2020",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_1.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "1",
-        problemType: 2,
-        title: "Trạm HDHN 01",
-        type: 0
-    },
-    {
-        description: "Ảnh theo dõi trạm HDHN 01 ngày 25/16/2020",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_2.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "1",
-        problemType: 2,
-        title: "Trạm HDHN 01",
-        type: 0
-    },
-    {
-        description: "Ảnh theo dõi trạm HDHN 01 ngày 25/16/2020",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_3.jpeg",
-        longitude: 0.512543,
-        monitoredObjectId: "1",
-        problemType: 2,
-        title: "Trạm HDHN 03",
-        type: 0
-    },
-    {
-        description: "Ảnh theo dõi trạm vượt biển 01",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_4.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "2",
-        problemType: 2,
-        title: "Trạm vượt biển",
-        type: 0
-    },
-    {
-        description: "Ảnh theo dõi trạm vượt biển 01",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_5.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "2",
-        problemType: 2,
-        title: "Trạm vượt biển",
-        type: 0
-    },
-    {
-        description: "Ảnh theo dõi trạm vượt biển 01",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_6.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "2",
-        problemType: 2,
-        title: "Trạm vượt biển",
-        type: 0
-    },
-    {
-        description: "Ảnh theo dõi trạm vượt biển 01",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_7.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "2",
-        problemType: 2,
-        title: "Trạm vượt biển",
-        type: 0
-    },
-    {
-        description: "Cháy trạm NT3",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_8.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "3",
-        problemType: 2,
-        title: "Cháy trạm NT3",
-        type: 0
-    },
-    {
-        description: "Đổ và cháy trạm NT3",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_9.jpeg",
-        longitude: 0.512543,
-        monitoredObjectId: "3",
-        problemType: 2,
-        title: "trạm NT3",
-        type: 0
-    },
-    {
-        description: "Vượn trèo trạm trong rừng",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_10.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "4",
-        problemType: 2,
-        title: "Trạm Rừng Tràm CP1",
-        type: 0
-    },
-    {
-        description: "Vượn trèo trạm trong rừng",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_11.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "4",
-        problemType: 2,
-        title: "Trạm Rừng Tràm CP1",
-        type: 0
-    },
-    {
-        description: "Vượn trèo trạm trong rừng",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_12.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "4",
-        problemType: 2,
-        title: "Trạm Rừng Tràm CP1",
-        type: 0
-    },
-    {
-        description: "Trạm Hoài Đức",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_13.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "5",
-        problemType: 2,
-        title: "Trạm Hoài Đức",
-        type: 0
-    },
-    {
-        description: "Trạm Hoài Đức",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_14.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "5",
-        problemType: 2,
-        title: "Trạm Hoài Đức",
-        type: 0
-    },
-    {
-        description: "Trạm Hoài Đức",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_15.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "5",
-        problemType: 2,
-        title: "Trạm Hoài Đức",
-        type: 0
-    },
-    {
-        description: "Trạm Hoài Đức",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_16.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "5",
-        problemType: 2,
-        title: "Trạm Hoài Đức",
-        type: 0
-    },
-    {
-        description: "Trạm rừng Sơn La",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_17.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "6",
-        problemType: 2,
-        title: "Trạm rừng Sơn La",
-        type: 0
-    },
-    {
-        description: "Trạm rừng Sơn La",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_18.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "6",
-        problemType: 2,
-        title: "Trạm rừng Sơn La",
-        type: 0
-    },
-    {
-        description: "Trạm rừng Sơn La",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_19.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "6",
-        problemType: 2,
-        title: "Trạm rừng Sơn La",
-        type: 0
-    },
-    {
-        description: "Trạm rừng Sơn La",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_20.jpeg",
-        longitude: 0.512543,
-        monitoredObjectId: "6",
-        problemType: 2,
-        title: "Trạm rừng Sơn La",
-        type: 0
-    },
-    {
-        description: "Trạm rừng Sơn La",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_25.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "6",
-        problemType: 2,
-        title: "Trạm rừng Sơn La",
-        type: 0
-    },
-    {
-        description: "Trạm rừng Sơn La",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_26.jpeg",
-        longitude: 0.512543,
-        monitoredObjectId: "6",
-        problemType: 2,
-        title: "Trạm rừng Sơn La",
-        type: 0
-    },
-    {
-        description: "Trạm rừng Sơn La",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_27.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "6",
-        problemType: 2,
-        title: "Trạm rừng Sơn La",
-        type: 0
-    },
-    {
-        description: "Trạm rừng chim Ninh Bình",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_21.jpeg",
-        longitude: 0.512543,
-        monitoredObjectId: "7",
-        problemType: 2,
-        title: "Trạm rừng chim Ninh Bình",
-        type: 0
-    },
-    {
-        description: "Trạm rừng chim Ninh Bình",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_22.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "7",
-        problemType: 2,
-        title: "Trạm rừng chim Ninh Bình",
-        type: 0
-    },
-    {
-        description: "Trạm rừng chim Ninh Bình",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_23.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "7",
-        problemType: 2,
-        title: "Trạm rừng chim Ninh Bình",
-        type: 0
-    },
-    {
-        description: "Trạm rừng chim Ninh Bình",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_24.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "7",
-        problemType: 2,
-        title: "Trạm rừng chim Ninh Bình",
-        type: 0
-    },
-    {
-        description: "Trạm rừng chim Ninh Bình",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_31.jpeg",
-        longitude: 0.512543,
-        monitoredObjectId: "7",
-        problemType: 2,
-        title: "Trạm rừng chim Ninh Bình",
-        type: 0
-    },
-    {
-        description: "Cột cao thế đơn Đan Phượng km11",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_32.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "8",
-        problemType: 2,
-        title: "Cột cao thế đơn Đan Phượng km11",
-        type: 0
-    },
-    {
-        description: "Cột cao thế đơn Đan Phượng km11",
-        latitude: 0.679296,
-        link: "/images/luoi_dien/dien_33.jpg",
-        longitude: 0.512543,
-        monitoredObjectId: "8",
-        problemType: 2,
-        title: "Cột cao thế đơn Đan Phượng km11",
-        type: 0
-    },
-
-]
 let cacheMonitoreds = []
-let cache = IMAGES
+let cacheAreas = []
+let cacheDrones = []
 let levels = [];
 let cacheImages = []
 let pageSize = 20
@@ -372,10 +38,10 @@ const ImageGalley = (props) => {
     const [total, setTotal] = useState(0);
     const [imgLoading, setImgLoading] = useState(true);
     const [monitoredIds, setMonitoredIds] = useState([])
+    const [areaIds, setAreaIds] = useState([])
     const convertImages = (values = []) => {
         return (values || []).map((item) => {
-            let monitored = MONITORED_OBJS.find(i => i.id === item.monitoredObjectId)
-            let createdAt = moment().format('DD/MM/YYYY hh:mm:ss');
+            let createdAt = moment(item.createdAt).format('DD/MM/YYYY hh:mm:ss');
             let nameType = '';
             let isTraining = item.isTraining ? 'Đang training' : null
             switch (item.problemType) {
@@ -394,6 +60,9 @@ const ImageGalley = (props) => {
                 default:
                     nameType = '';
             }
+            let droneCode = (cacheDrones.find(drone => drone.id === item.idDrone) || {}).code || ''
+            let areaName = (cacheAreas.find(area => area._id === item.idSupervisedArea) || {}).name || ''
+            let monitoredName = (cacheMonitoreds.find(monitored => monitored._id === item.monitoredObjectId) || {}).name || ''
             return {
                 ...item,
                 src: item.link,
@@ -402,9 +71,12 @@ const ImageGalley = (props) => {
                 thumbnailHeight: 212,
                 thumbnail: item.link,
                 tags: [
-                    {value: createdAt, title: 'Created At'},
-                    {value: nameType, title: 'Type'},
+                    {value: droneCode, title: 'Drone'},
+                    {value: areaName, title: 'Miền giám sát'},
+                    {value: monitoredName, title: 'Đối tượng giám sát'},
                     {value: isTraining, title: 'Is Training'},
+                    {value: nameType, title: 'Type'},
+                    {value: createdAt, title: 'Created At'},
                 ],
             };
         });
@@ -416,20 +88,27 @@ const ImageGalley = (props) => {
 
     const fetchData = async ({page, pageSize}) => {
         setImgLoading(true)
-        let [leverRes = {}, imagesRes = {}, monitoreds = {}] = await Promise.all([
+        let [leverRes = {}, imagesRes = {}, monitoreds = {}, areas = {}, drones = []] = await Promise.all([
             incidentLevelService().index(),
             imageService().getImagesByMonitoredId({page, pageSize}),
-            monitoredService().index()
+            monitoredService().index(),
+            areaService().index(),
+            droneService().index(),
         ]);
         if (imagesRes.status !== 200) {
             message.error(`${imagesRes.status}: Dịch vụ ảnh video bị lỗi`)
         }
-        console.log('monitoreds', monitoreds)
+
+        console.log('drones', drones)
         if (!monitoreds.success) {
             message.error(monitoreds.messages)
         }
-
-
+        if (!areas.success) {
+            message.error(monitoreds.messages)
+        }
+        cacheDrones = drones
+        cacheMonitoreds = monitoreds.content
+        cacheAreas = _.get(areas, 'content.zone', [])
 
         let _images = convertImages(imagesRes.result || [])
         cacheImages= _images
@@ -437,8 +116,6 @@ const ImageGalley = (props) => {
         setTotal(imagesRes.total)
         console.log('imagesRes', imagesRes);
         levels = leverRes;
-
-        cacheMonitoreds = monitoreds.content
         setImgLoading(false)
     };
 
@@ -491,7 +168,11 @@ const ImageGalley = (props) => {
         let selectedImages = images.filter((item) => Boolean(item.isSelected));
         console.log('selectedImages', selectedImages)
         let _monitoredIds = _.uniq(selectedImages.map(item => item.monitoredObjectId))
+        let _areaIds = _.uniq(selectedImages.map(item => item.idSupervisedArea))
+        console.log('_areaIds', _areaIds)
         setMonitoredIds(_monitoredIds)
+        setAreaIds(_areaIds)
+
     };
 
     const handleOk = async () => {
@@ -507,7 +188,8 @@ const ImageGalley = (props) => {
                         dueDate: moment(values.dueDate).format('YYYY-MM-DD'),
                         images: selectedImages,
                         type: localStorage.getItem("project-type"),
-                        monitoredIds: monitoredIds
+                        monitoredIds: monitoredIds,
+                        areaIds
                     }),
                 );
                 if (error) message.error('Đã có lỗi xảy ra!');
@@ -536,6 +218,11 @@ const ImageGalley = (props) => {
 
     const renderOptions = () => {
         return cacheMonitoreds.map((item) => (
+            <Select.Option value={item._id} key={item._id}>{item.name}</Select.Option>
+        ))
+    }
+    const renderAreaOptions = () => {
+        return cacheAreas.map((item) => (
             <Select.Option value={item._id} key={item._id}>{item.name}</Select.Option>
         ))
     }
@@ -609,10 +296,14 @@ const ImageGalley = (props) => {
                 destroyOnClose={true}
             >
                 <Form layout="vertical" initialValues={{
-                    monitoredIds
+                    monitoredIds,
+                    areaIds
                 }} form={form} preserve={false}>
-                    <Form.Item label="Đối tượng giám sát" name="monitoredIds" disabled>
+                    <Form.Item label="Đối tượng giám sát" name="monitoredIds" disabled={true}>
                         <Select mode="multiple">{renderOptions()}</Select>
+                    </Form.Item>
+                    <Form.Item label="Miền giám sát" name="areaIds" disabled={true}>
+                        <Select mode="multiple">{renderAreaOptions()}</Select>
                     </Form.Item>
                     <Form.Item
                         label="Tên sự cố"
