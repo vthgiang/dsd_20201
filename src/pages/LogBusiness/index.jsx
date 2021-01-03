@@ -20,6 +20,11 @@ const { Step } = Steps;
 
 function App(props) {
   const user = useSelector(state => state.user.user);
+
+  const tokenDeDieu = 'a8e141fe1a01dc16787a454e168b3f06';
+  const tokenCayTrong = 'f5134fcb341b492ea9776485fbd62890';
+  const tokenChayRung = '1fa6b94047ba20d998b44ff1a2c78bba';
+  const tokenLuoiDien = '3698155aecdf0782cdb3a55fe63a5df4';
   console.log("user.........................")
   console.log(user)
 
@@ -32,14 +37,25 @@ function App(props) {
   const [selectedAreaId, setSelectedAreaId] = useState(null);
   const [selectedZoneId, setSelectedZoneId] = useState(null);
   const [zoneLoading, setZoneLoading] = useState(false);
-  const [disabledStep, setDisabledStep] = useState(1);
+  const [disabledStep, setDisabledStep] = useState(2);
+  const [selectedCollapseKeys, setSelectedCollapseKeys] = useState(null);
+
+  // 0 : projectType
+  // 1 : areaList
+  // 2 : zoneList
+  // 3 : areaList
+  // 4 : areaList
+  const resetStatefromOrder = (order) => {
+
+  }
 
 
   useEffect(() => {
     //fetchData();
     fetchAreaList();
     fetchZoneListByAreaId();
-  }, [selectedAreaId]);
+    setSelectedCollapseKeys([])
+  }, [selectedAreaId, projectType]);
 
   const fetchData = () => {
     setIsLoadedLogActivity(false);
@@ -84,7 +100,7 @@ function App(props) {
       method: 'get',
       url: url,
       headers: {
-        "token": '1fa6b94047ba20d998b44ff1a2c78bba',
+        "token": user.api_token,
         "Content-Type": 'application/json',
       }
     };
@@ -108,6 +124,13 @@ function App(props) {
 
   const fetchZoneListByAreaId = () => {
     if (selectedAreaId == null) return;
+    console.log(projectType)
+    let projectTypeFetch = projectType.toUpperCase();
+    let token = null;
+    if (projectTypeFetch === "CAY_TRONG") token = tokenCayTrong;
+    if (projectTypeFetch === "LUOI_DIEN") token = tokenLuoiDien;
+    if (projectTypeFetch === "CHAY_RUNG") token = tokenChayRung;
+    if (projectTypeFetch === "DE_DIEU") token = tokenDeDieu;
     setZoneLoading(true);
     let url = 'https://monitoredzoneserver.herokuapp.com/monitoredzone/area/' + selectedAreaId;
 
@@ -115,8 +138,8 @@ function App(props) {
       method: 'get',
       url: url,
       headers: {
-        "token": 'f5134fcb341b492ea9776485fbd62890',
-        "projectType": 'CAY_TRONG',
+        "token": token,
+        "projectType": projectType,
       }
     };
 
@@ -127,6 +150,7 @@ function App(props) {
           code: data.code,
           id: data._id,
           name: data.name,
+          projectType: data.incidentType,
         }));
         console.log(zoneList);
         setZoneList(zoneList);
@@ -138,7 +162,11 @@ function App(props) {
   }
 
   const onRangePickerChange = (dates, dateStrings) => {
-    if (dates) setRangeTime({ fromDate: dates[0].format('YYYY-MM-DDT00:00:00'), toDate: dates[1].format('YYYY-MM-DDT23:59:59') });
+    if (dates) {
+      setRangeTime({ fromDate: dates[0].format('YYYY-MM-DDT00:00:00'), toDate: dates[1].format('YYYY-MM-DDT23:59:59') });
+    } else {
+      setRangeTime({ fromDate: '', toDate: '' });
+    }
   }
 
   const onProjectTypeChange = (projectType) => {
@@ -160,6 +188,8 @@ function App(props) {
           zoneLoading={zoneLoading}
           disabledStep={disabledStep}
           setDisabledStep={setDisabledStep}
+          selectedCollapseKeys={selectedCollapseKeys}
+          setSelectedCollapseKeys={setSelectedCollapseKeys}
         />
 
         <br />
@@ -199,6 +229,7 @@ class StepLog extends React.Component {
             <Select defaultValue={this.props.projectType} style={{ width: 120 }} onChange={(value) => {
               this.props.onProjectTypeChange(value);
               this.props.setDisabledStep(2)
+              this.setState({current: 1})
             }}>
               <Option value="de_dieu">Đê điều</Option>
               <Option value="luoi_dien">Lưới điện</Option>
@@ -218,7 +249,7 @@ class StepLog extends React.Component {
                 filterOption={(input, option) =>
                   option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
-                onChange={(value) => {this.props.setSelectedAreaId(value); this.props.setDisabledStep(3)}}
+                onChange={(value) => {this.props.setSelectedAreaId(value); this.props.setDisabledStep(3); this.setState({current: 2})}}
               >
                 {
                   this.props.areaList !== null && this.props.areaList.map((data) =>
@@ -241,11 +272,11 @@ class StepLog extends React.Component {
                 filterOption={(input, option) =>
                   option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
-                onChange={(value) => {this.props.setSelectedZoneId(value);this.props.setDisabledStep(4)}}
+                onChange={(value) => {this.props.setSelectedZoneId(value);this.props.setDisabledStep(5); this.setState({current: 3})}}
               >
                 {
                   this.props.zoneList !== null && this.props.zoneList.map((data) =>
-                    <Option key={data.id} value={1}>{data.name}</Option>
+                    <Option key={data.id} value={data.id}>{data.name}</Option>
                   )
                 }
               </Select>
@@ -259,8 +290,8 @@ class StepLog extends React.Component {
                 disabled={3 >= this.props.disabledStep}
                 defaultValue={this.props.rangeTime.fromDate ? [moment(this.props.rangeTime.fromDate, 'YYYY-MM-DDTHH:mm:ss'), moment(this.props.rangeTime.toDate, 'YYYY-MM-DDTHH:mm:ss')] : null}
                 format='MM/DD/YYYY'
-                onChange={(dates, dateStrings) => {this.props.onRangePickerChange(dates, dateStrings); this.props.setDisabledStep(5)}}
-                onOpenChange={() =>  this.props.setDisabledStep(5)}
+                onChange={(dates, dateStrings) => {this.props.onRangePickerChange(dates, dateStrings); this.props.setDisabledStep(5); this.props.setSelectedCollapseKeys(null)}}
+                onOpenChange={() =>  {this.props.setDisabledStep(5); this.setState({current: 4})}}
               />
             } />
           <Step
@@ -272,6 +303,8 @@ class StepLog extends React.Component {
                 projectType={this.props.projectType}
                 rangeTime={this.props.rangeTime}
                 selectedZoneId={this.props.selectedZoneId}
+                selectedCollapseKeys={this.props.selectedCollapseKeys}
+                setSelectedCollapseKeys={this.props.setSelectedCollapseKeys}
               />
             } />
         </Steps>
@@ -283,19 +316,16 @@ class StepLog extends React.Component {
 class CollapseLog extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedKeys: null
-    }
   }
   callback = (key) => {
     console.log(key);
   }
 
   render() {
-    let selectedKeys = this.state.selectedKeys;
+    let selectedKeys = this.props.selectedCollapseKeys;
     return (
 
-      <Collapse onChange={(keys) => this.setState({ selectedKeys: keys })}>
+      <Collapse onChange={(keys) => this.props.setSelectedCollapseKeys(keys)}  defaultActiveKey={selectedKeys}>
         <Panel header="Xem các đợt giám sát" key="1" disabled={this.props.disabled}>
           {selectedKeys != null && selectedKeys.find((element) => element === "1") != undefined && <LogUAV projectType={this.props.projectType} rangeTime={this.props.rangeTime} regionId={this.props.selectedZoneId} />}
         </Panel>
