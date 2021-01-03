@@ -223,8 +223,8 @@ const ListMonitorCampaign = () => {
       title: 'Độ phân giải',
       align: 'center',
       sorter: (a, b) =>
-        parseInt(a.resolution.substring(0, a.resolution.length - 2), 10) -
-        parseInt(b.resolution.substring(0, b.resolution.length - 2), 10),
+        parseInt(a.resolution.substring(0, a.resolution.length - 1), 10) -
+        parseInt(b.resolution.substring(0, b.resolution.length - 1), 10),
       render: (data) => <span>{data}</span>,
     },
     {
