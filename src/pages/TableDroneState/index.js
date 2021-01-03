@@ -443,7 +443,7 @@ const dronesData = useMemo(() => {
                         {drone.idDrone}
                       </TableCell>
                       <TableCell align="right">{drone.name}</TableCell>
-                      <TableCell align="center"><StateDrone state={drone.state} /></TableCell>
+                      <TableCell align="right"><StateDrone state={drone.state} percent={drone.percentBattery}/> </TableCell>
                       <TableCell align="center">
                              {(() => {
                                 let component = <p></p>;
@@ -452,7 +452,7 @@ const dronesData = useMemo(() => {
                                     if(isAuthorised(DRONE_CONFIG)) component = <StateModal drone={drone} onReload={getData} />;
                                     break;
                                   case 1:
-                                    component = <ModalFlight id={drone.idDrone} />;
+                                    component = <ModalFlight id={drone.idDrone} name={drone.name} />;
                                     break;
                                   case 2:
                                   case 3:
@@ -465,6 +465,7 @@ const dronesData = useMemo(() => {
                                 }
                                 return component;
                                 })()}
+                               
                           </TableCell>
                     </TableRow>
                   );

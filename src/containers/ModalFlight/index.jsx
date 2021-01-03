@@ -11,6 +11,10 @@ import React, { useEffect, useState, useMemo } from "react";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import axios from 'axios';
 import Map from './Map';
+import 'antd/dist/antd.css';
+import { Tabs } from 'antd';
+import Payload from './Payload';
+import MonitorCampain from './MonitorCampain';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -32,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     // border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 2, 2),
-    width : 700
+    width: 700
   },
 
   button: {
@@ -51,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TransitionsModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
+  const { TabPane } = Tabs;
   const [drones, setDrones] = useState([]);
 
   const getData = () => {
@@ -59,27 +63,50 @@ export default function TransitionsModal(props) {
       .then(response => response.json())
       .then(json => {
         console.log(json.data);
-        
+
         setDrones(json.data);
         setOpen(true);
-        // getFlightPath()
-        //   .then(flightPath => {
-        //     json.data.flightPath = flightPath;
-        //     setDrones(json.data);
-        //     setOpen(true);
-        //   })
+        getMonitorCampain(json.data.idCampaign);
       });
   };
 
+
   const handleOpen = () => {
-      getData();
-      
+    getData();
+    getPayLoad();
   };
 
   const handleClose = () => {
     setOpen(false);
   };
 
+  const [payload, setPayload] = useState();
+  const [monitorCampain, setMonitorCampain] = useState();
+  const getPayLoad = () => {
+    fetch("https://dsd06.herokuapp.com/api/payload?droneId="+props.id)
+      .then(response => response.json())
+      .then(json => {
+        console.log("Payload" + json);
+        setPayload(json)
+      });
+}
+
+// let headers = new Headers();
+
+// headers.append('authorization', 'Bearer d2144ec994a49df05be439ac03c4f88c');
+// headers.append('projectType', 'application/json');
+// const requestOptions = {
+//   method: 'GEt',
+//   headers: headers
+// }
+
+  const getMonitorCampain = (id) => {
+    fetch("http://123.30.235.196:5598/api/monitor-campaigns/quick/"+id)
+    .then(response => response.json())
+    .then(json => {
+      setMonitorCampain(json)
+    });
+  }
 
 
   return (
@@ -106,24 +133,37 @@ export default function TransitionsModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <br/>
-            <h4 id="transition-modal-title">Tên drone : {props.name} </h4>
+            <br />
             <h4 id="transition-modal-title">#ID : {props.id} </h4>
+            <p id="transition-modal-title">Tên :  {props.name}</p>
             <p id="transition-modal-title">Độ cao (m) :  {drones.heightFlight}</p>
             <p id="transition-modal-title">Phần trăm pin :  {drones.percentBattery} %</p>
             <p id="transition-modal-title">.         Tốc độ bay :  {drones.speed} m/phút</p>
+             
             <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href='/stream';
-                    }}
-                >
-                  Xem video stream
-                   </Button>
-            <Map flightPath={drones.flightPath}/>
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = '/stream';
+              }}
+            >
+              Xem video stream
+            </Button>
+
+            <Tabs defaultActiveKey="1">
+              <TabPane tab="Bản đồ" key="1">
+                  <Map flightPath={drones.flightPath} />
+              </TabPane>
+              <TabPane tab="Payload" key="2">
+                <Payload payload={payload} />
+              </TabPane>
+              <TabPane tab="Đợt giám sát" key="3">
+                <MonitorCampain monitorCampain={monitorCampain} />
+              </TabPane>
+            </Tabs>
+           
           </div>
         </Fade>
       </Modal>
@@ -132,65 +172,5 @@ export default function TransitionsModal(props) {
 
 }
 
-const fakeData = {
-  name: "Phúc Đồng - Long Biên 1",
-  id: "5fd87500b94e272f3f9e8ffc",
-  flightPoints: [
-    {
-      flightHeight: 67,
-      idSupervisedObject: "",
-      locationLat: 21.048094,
-      locationLng: 105.892944,
-      timeCome: 8,
-      timeStop: 2
-    },
-    {
-      flightHeight: 67,
-      idFlightPath: null,
-      idSupervisedObject: "",
-      locationLat: 21.042646,
-      locationLng: 105.89689,
-      note: null,
-      timeCome: 4,
-      timeStop: 3
-    },
-    {
-      flightHeight: 68,
-      idFlightPath: null,
-      idSupervisedObject: "",
-      locationLat: 21.03816,
-      locationLng: 105.89878,
-      note: null,
-      timeCome: 3,
-      timeStop: 2
-    },
-    {
-      flightHeight: 67,
-      idFlightPath: null,
-      idSupervisedObject: "",
-      locationLat: 21.035517,
-      locationLng: 105.90256,
-      note: null,
-      timeCome: 3,
-      timeStop: 3
-    },
-    {
-      flightHeight: 67,
-      idFlightPath: null,
-      idSupervisedObject: "",
-      locationLat: 21.03039,
-      locationLng: 105.9132,
-      note: null,
-      timeCome: 6,
-      timeStop: 2,
-    }
-  ]
-}
 
-function getFlightPath(){
-  return new Promise((resolve, reject) => {
-    setTimeout(()=>{
-      resolve(fakeData);
-    }, 500);
-  })
-}
+
