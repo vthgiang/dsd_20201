@@ -195,7 +195,7 @@ export const sidebarMenu = [
       {
         key: 'LogBusiness',
         heading: 'Log nghiệp vụ',
-        icon: 'fas fa-crop-alt',
+        icon: 'fas fa-business-time',
         route: '/log-business',
       },
       {
