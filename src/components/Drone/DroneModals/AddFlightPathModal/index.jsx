@@ -7,6 +7,7 @@ import PointInput from '../PointInput';
 import axios from 'axios';
 import {getDistance} from '../../Common/MapHelper'
 import ModalAddZone from './ModalAddZone';
+import { getProjectType, getUser } from '../../Common/info';
 
 function AddFlightPathModal(props) {
 
@@ -107,7 +108,31 @@ function AddFlightPathModal(props) {
                 if(response.status != 200){
                     alert(`Lỗi ${response.status}, thêm thất bại`);
                 }else{
-                    props.pageReload();
+                    // ghi log
+                    // console.log('create response', response);
+                    // console.log(getUser());
+                    
+                    const user = getUser();
+                    const logData = {
+                        projectType: getProjectType(),
+                        authorId: user.id.toString(),
+                        entityId: response.data.data.id,
+                        description: "create flight path",
+                        name: response.data.data.name,
+                        regionId: response.data.data.idSupervisedArea,
+                        longitude: 0,
+                        latitude: 0,
+                        uavConnectId: 'NONE'
+                    };
+                    // console.log(logData);
+                    axios.post('http://14.248.5.197:5012/api/drones/add', logData)
+                        .then(logRes => {
+                            console.log('logResponse', logRes);
+                        })
+                        .catch(err => {
+                            console.log('err log', err);
+                        })
+                    // props.pageReload();
                 }
             })
             .catch(err => {
