@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import {
   Row,
   Input,
@@ -220,7 +220,7 @@ const ListMonitorCampaign = () => {
     {
       dataIndex: 'resolution',
       width: '7.5%',
-      title: 'Dạng dữ liệu',
+      title: 'Độ phân giải',
       align: 'center',
       sorter: (a, b) =>
         parseInt(a.resolution.substring(0, a.resolution.length - 2), 10) -
