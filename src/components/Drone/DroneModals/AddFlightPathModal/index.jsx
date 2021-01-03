@@ -235,11 +235,11 @@ function AddFlightPathModal(props) {
                             />
                         </Col>
                     </Row>
-                    <Row>
+                    {/* <Row>
                         <Col>
                     {selectedArea && showAddZoneModal && <ModalAddZone area={selectedArea} show={showAddZoneModal} setShow={setShowAddZoneModal}/>}
                         </Col>
-                    </Row>
+                    </Row> */}
                 </Container>
             </Modal.Body>
             <Modal.Footer>

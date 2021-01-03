@@ -3,6 +3,7 @@ import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polyline, Polygon, Circle, InfoWindow} from "react-google-maps"
 import { Button } from 'antd';
 import { getRole } from '../../Common/info';
+import { Link } from 'react-router-dom';
 
 const MyMapComponent = compose(
   withProps({
@@ -122,9 +123,10 @@ const MyMapComponent = compose(
                 position={infoWDPositon}
             >
                 <div>
-                    <span>Vị trí được chọn nằm ngoài miền</span>
+                    {/* <span>Vị trí được chọn nằm ngoài miền</span>
                     <br/>
-                    <Button type='link' onClick={()=>setShow(true)}>bấm vào đây để thêm miền mới</Button>
+                    <Button type='link' onClick={()=>setShow(true)}>bấm vào đây để thêm miền mới</Button> */}
+                    <Link to='/surveillance-domain-manage'>Vị trí được chọn nằm ngoài miền<br/>bấm vào đây để thêm miền mới</Link>
                 </div>
                 </InfoWindow>}
         </GoogleMap>
