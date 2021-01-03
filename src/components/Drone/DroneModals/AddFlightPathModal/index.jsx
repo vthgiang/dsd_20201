@@ -6,6 +6,8 @@ import Map from '../Map';
 import PointInput from '../PointInput';
 import axios from 'axios';
 import {getDistance} from '../../Common/MapHelper'
+import ModalAddZone from './ModalAddZone';
+import { getProjectType, getUser } from '../../Common/info';
 
 function AddFlightPathModal(props) {
 
@@ -36,6 +38,9 @@ function AddFlightPathModal(props) {
 
     const [error, setError] = useState('');
 
+    // modal add zone state
+    const [showAddZoneModal, setShowAddZoneModal] = useState(false);
+
     useEffect(()=> {
         // load đối tượng giám sát tương ứng với miền
         if(!selectedZone) return;
@@ -60,6 +65,12 @@ function AddFlightPathModal(props) {
             .finally(() => {
                 setMonitoredObjectListLoading(false);
             });
+
+            if(flightPoints.length !== 0){
+                // xóa thông tin đường bay trước
+                setFlightPoints([]);
+                resetPoint()
+            }
         }, [selectedZone]);
         
     const handleOkClick = () => {
@@ -97,7 +108,31 @@ function AddFlightPathModal(props) {
                 if(response.status != 200){
                     alert(`Lỗi ${response.status}, thêm thất bại`);
                 }else{
-                    props.pageReload();
+                    // ghi log
+                    // console.log('create response', response);
+                    // console.log(getUser());
+                    
+                    const user = getUser();
+                    const logData = {
+                        projectType: getProjectType(),
+                        authorId: user.id.toString(),
+                        entityId: response.data.data.id,
+                        description: "create flight path",
+                        name: response.data.data.name,
+                        regionId: response.data.data.idSupervisedArea,
+                        longitude: 0,
+                        latitude: 0,
+                        uavConnectId: 'NONE'
+                    };
+                    // console.log(logData);
+                    axios.post('http://14.248.5.197:5012/api/drones/add', logData)
+                        .then(logRes => {
+                            console.log('logResponse', logRes);
+                        })
+                        .catch(err => {
+                            console.log('err log', err);
+                        })
+                    // props.pageReload();
                 }
             })
             .catch(err => {
@@ -166,6 +201,7 @@ function AddFlightPathModal(props) {
 
     const handleModalHide = () => {
         reset();
+        setShowAddZoneModal(false);
         toggle();
     }
 
@@ -215,14 +251,20 @@ function AddFlightPathModal(props) {
                             <Map 
                                 newPoint={newPoint} setNewPoint={setNewPoint}
                                 flightPoints={newPoint.locationLat? [...flightPoints, newPoint] : flightPoints}
-                                selectedZone={selectedZone}
+                                selectedZone={selectedZone} selectedArea={selectedArea}
                                 monitoredObjectList={monitoredObjectList}
                                 setMonitoredObjectId={setMonitoredObjectId}
                                 setHeightPoint={setHeightPoint} heightPoint={heightPoint}
                                 setSelectedObject={setSelectedObject}
+                                setShow={setShowAddZoneModal}
                             />
                         </Col>
                     </Row>
+                    {/* <Row>
+                        <Col>
+                    {selectedArea && showAddZoneModal && <ModalAddZone area={selectedArea} show={showAddZoneModal} setShow={setShowAddZoneModal}/>}
+                        </Col>
+                    </Row> */}
                 </Container>
             </Modal.Body>
             <Modal.Footer>
