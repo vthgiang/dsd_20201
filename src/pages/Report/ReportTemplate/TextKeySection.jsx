@@ -9,6 +9,7 @@ export default function TextKeySection({
   section,
   onSectionChange,
   formatted,
+  dataSource,
 }) {
   const [inputValues, setInputValues] = useState({});
   const Tag = getFormatTagName(section.format);
@@ -23,13 +24,16 @@ export default function TextKeySection({
     }));
   }, []);
 
-  const componentDecorator = useCallback((decoratedInput, key) => (
-    <Input
-      name={decoratedInput}
-      style={{ width: 80 }}
-      onChange={onInputChange}
-    />
-  ), [onInputChange]);
+  const componentDecorator = useCallback((decoratedInput, key) => {
+    return (
+      <Input
+        value={inputValues?.[decoratedInput]}
+        name={decoratedInput}
+        style={{ width: 80 }}
+        onChange={onInputChange}
+      />
+    );
+  }, [onInputChange, inputValues]);
 
   const componentFormattedDecorator = useCallback((decoratedInput, key) => {
     const formattedText = Object.keys(section.keys).reduce((finalString, currentKey) => {
@@ -55,6 +59,21 @@ export default function TextKeySection({
       keys: inputValues,
     });
   }, [inputValues, section.uniqueId]);
+
+  useEffect(() => {
+    if (dataSource && dataSource.data) {
+      setInputValues((inputValues) => {
+        const newInputs = { ...inputValues };
+        Object.keys(inputValues).map((key) => {
+          const trimmedKey = key.slice(1);
+          if (dataSource.data[trimmedKey] !== undefined) {
+            newInputs[key] = dataSource.data[trimmedKey].toString();
+          }
+        });
+        return newInputs;
+      });
+    }
+  }, [dataSource]);
 
   return (
     <Tag

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Space, Input, Form, Select, Modal, DatePicker, Row, Col } from 'antd';
+import {Table, Space, Input, Form, Select, Modal, DatePicker, Row, Col, Spin, message} from 'antd';
 import { Button } from 'antd';
 import StyleList from './index.style';
 import { useState } from 'react';
@@ -26,6 +26,8 @@ class ListTypePayload extends Component {
       visibleAdd: false,
       visibleDelete: false,
       idPayloadDelete: null,
+      loadingModal: false,
+      setLoadingModal: false,
     }
   }
 
@@ -39,11 +41,18 @@ class ListTypePayload extends Component {
   }
 
   loadAllPayloadType() {
+    this.setState( {loadingModal:true});
     axios.get(`https://dsd06.herokuapp.com/api/payloadtype`)
       .then(res => {
+        this.setState( {loadingModal:false});
         //const persons = res.data;
         this.setState({ tables: res.data });
-      })
+      }) .catch(function (err) {
+      //handle error
+      console.log(err);
+      message.error(err.response.data.error.message);
+      this.setState( {loadingModal:false});
+    });
   }
 
 
@@ -76,9 +85,8 @@ class ListTypePayload extends Component {
       name: values.name,
       description: values.description,
     };
-    axios.put(`https://dsd06.herokuapp.com/api/payload/` + this.state.idPayloadType, data)
+    axios.put(`https://dsd06.herokuapp.com/api/payloadtype/` + this.state.idPayloadType, data)
       .then(res => {
-        console.log(res.data);
         this.setState({ visible: false })
       })
 
@@ -127,14 +135,12 @@ class ListTypePayload extends Component {
   }
 
   handleFormSubmit(values) {
-    console.log(values)
     const data = {
       name: values.name,
       description: values.description,
     };
     axios.post(`https://dsd06.herokuapp.com/api/payloadtype`, data)
       .then(res => {
-        console.log(res.data);
         this.setState({ visibleAdd: false })
         this.loadAllPayloadType();
       })
@@ -184,7 +190,6 @@ class ListTypePayload extends Component {
   deleteRecord() {
     axios.delete(`https://dsd06.herokuapp.com/api/payloadtype/` + this.state.idPayloadDelete)
       .then(res => {
-        console.log(res.data);
         this.setState({ visibleDelete: false })
         this.loadAllPayloadType();
       })
@@ -229,7 +234,6 @@ class ListTypePayload extends Component {
         render: (text, record) => (
 
           <Space size="small" >
-            {/*  <Button type="link" onClick={() => history.push('/payload-configuration')}>Cấu hình</Button> */}
             <Button type="link" onClick={() => this.showModal(record)} >Sửa</Button>
             <Button danger type="text" onClick={() => this.showModalDelete(record)}>Xóa</Button>
           </Space>
@@ -237,7 +241,7 @@ class ListTypePayload extends Component {
       },
     ];
 
-    const { visible, visibleAdd, visibleDelete, currentTable, tables } = this.state;
+    const { visible, visibleAdd, visibleDelete, currentTable, tables, loadingModal } = this.state;
 
     return (
       <StyleList>
@@ -245,7 +249,9 @@ class ListTypePayload extends Component {
           <h2>Quản lý loại Payload</h2>
           <br/>
           <Button type="primary" className="buttontype" onClick={() => this.showModalAdd()} >Thêm loại mới</Button>
+          <Spin spinning={loadingModal} tip="Loading...">
           <Table dataSource={dataSource} columns={columns} />
+          </Spin>
         </div>
         <Modal
           title="Chi tiết"

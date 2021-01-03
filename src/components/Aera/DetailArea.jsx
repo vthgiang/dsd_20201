@@ -113,13 +113,13 @@ class DetailArea extends React.PureComponent {
             oldarea: {},
             id: this.props.location.state.id,
             newarea: {
-                "startPoint": {
-                    "longitude": 105.79941430192696,
-                    "latitude": 21.050373019230733
+                startPoint: {
+                    longitude: 105.79941430192696,
+                    latitude: 21.050373019230733
                 },
-                "endPoint": {
-                    "latitude": 21.023990392074978,
-                    "longitude": 105.83088096859359
+                endPoint: {
+                    latitude: 21.023990392074978,
+                    longitude: 105.83088096859359
                 },
                 "monitoredZone": [
                     "5fcf79eda122370017d3ae2b",
@@ -153,7 +153,7 @@ class DetailArea extends React.PureComponent {
     
     componentDidMount() {
         this.setArea(this.state.id);
-        this.showDomain();
+        setTimeout(300);
         this.getZoneByArea(this.state.id);
     }
     
@@ -234,20 +234,24 @@ class DetailArea extends React.PureComponent {
                     let newarea = {};
                     newarea = Object.assign({}, area);
                     this.setState({newarea});
+                    console.log(this.state.newarea.startPoint.latitude);
+                    this.showDomain();
                 }
+                
             )
             .catch(error => console.log(error));
+        
     }
     getZoneByArea(id) {
         let listDomainToShow = [];
-        let Area = this.state.newarea;
+        /*let Area = this.state.newarea;
         let area = [
             {lat: Area.startPoint.latitude, lng: Area.startPoint.longitude},
             {lat: Area.startPoint.latitude, lng: Area.endPoint.longitude},
             {lat: Area.endPoint.latitude, lng: Area.endPoint.longitude},
             {lat: Area.endPoint.latitude, lng: Area.startPoint.longitude}
         ];
-        listDomainToShow.push(area);
+        listDomainToShow.push(area);*/
         axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone/area/${id}`, {
             headers: {
                 token: this.state.token,

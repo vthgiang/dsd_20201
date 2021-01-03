@@ -12,7 +12,7 @@ import { StyleSpinContainer } from './index.style';
 
 const { Step } = Steps;
 
-const MonitorCampaignForm = ({ initialData, title, handleSubmit, loading }) => {
+const MonitorCampaignForm = ({ initialData, title, handleSubmit, loading, ...rest }) => {
   const history = useHistory();
   const [current, setCurrent] = React.useState(0);
   const [data, setData] = useState({});
@@ -50,6 +50,7 @@ const MonitorCampaignForm = ({ initialData, title, handleSubmit, loading }) => {
         data={data}
         handleSubmit={handleSubmit}
         handleChangeData={handleChangeData}
+        {...rest}
       />
     );
   };

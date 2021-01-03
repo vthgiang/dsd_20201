@@ -55,10 +55,10 @@ const DeDieuNcn3 = ({ history }) => {
           <br/>
           <Form>
             <Tabs defaultActiveKey="1">
-              <TabPane tab={<span>Tạo sự cố Offline</span>} key="6">
+              <TabPane tab={<span>Tạo sự cố Offline</span>} key="1">
                 <ImageGallery />
               </TabPane>
-              <TabPane tab={<span>Sự cố từ streaming</span>} key="1">
+              <TabPane tab={<span>Sự cố từ streaming</span>} key="2">
                 <VideoGallery />
               </TabPane>
             </Tabs>

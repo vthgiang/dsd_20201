@@ -1,10 +1,12 @@
 import React from "react";
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import {
   Row,
   Col,
   Table,
   Spin,
+  Button,
 } from "antd";
 import {
   Legend,
@@ -61,7 +63,7 @@ const columns = [
     title: "Hành động",
     key: "action",
     render: () => (
-      <a href="#">Chi tiết</a>
+      <a href="/drone-state">Chi tiết</a>
     ),
   },
 ];
@@ -87,6 +89,7 @@ const columns2 = [
 
 export default function DroneDashboard() {
   const users = useSelector((state) => state.user.user);
+  const history = useHistory();
   const projectType = users.type;
   const role = users.role;
   const [droneMetrics, setDroneMetrics] = React.useState(null);
@@ -146,6 +149,13 @@ export default function DroneDashboard() {
   return (
     <>
       <h1>Drone</h1>
+      <Button
+        type="primary"
+        style={{ position: 'absolute', top: 0, right: 0 }}
+        onClick={() => history.push('/create-report?templateId=5fb3fba96054ef2d1899ccb5')}
+      >
+        Tạo báo cáo
+      </Button>
       {!droneMetrics ? (
         <Spin />
       ) : (

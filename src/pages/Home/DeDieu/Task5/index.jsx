@@ -44,7 +44,7 @@ const role = user.role;
           <ListRolePermission />
         </TabPane>
       ) : (
-        <TabPane tab="Quản lý chức vụ" key="5" disabled>
+        <TabPane tab="Phân quyền" key="5" disabled>
           <ListRolePermission />
         </TabPane>
       )}

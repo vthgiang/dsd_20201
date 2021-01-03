@@ -1,7 +1,7 @@
 // NEW COMPONENT
 
 import React, { Component } from "react";
-import { Table, Space, Input, Form, Select, Modal, DatePicker, Row, Col } from 'antd';
+import {Table, Space, Input, Form, Select, Modal, DatePicker, Row, Col, Spin} from 'antd';
 import { Button } from 'antd';
 import { useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
@@ -57,13 +57,16 @@ class PayloadStatisticWorking extends Component {
                 y: 0,
             },
         ],
+        modalLoading: false,
     }
   }
 
 
   componentDidMount() {
+      this.setState({modalLoading: true});
      axios.get('https://dsd06.herokuapp.com/api/payloadStat/feeWorking')
       .then(res => {
+          this.setState({modalLoading: false});
         var listPayloadWorking = res.data;
         listPayloadWorking = listPayloadWorking.filter( x => x.payload != null)
                 for( var i = 0; i < listPayloadWorking.length; i++){
@@ -154,7 +157,7 @@ class PayloadStatisticWorking extends Component {
           finishedAt: payloadWorking.finishedAt
         })
       )
-      const {  workData } = this.state;
+      const {  workData, modalLoading} = this.state;
     
     return (
     <StyleList>
@@ -176,8 +179,9 @@ class PayloadStatisticWorking extends Component {
 
           </Row>
         </Form>
-
+          <Spin spinning={modalLoading} tip="Loading...">
         <Table dataSource={dataSource} columns={columns} />
+          </Spin>
         </div>
     </StyleList>
     );
