@@ -9,6 +9,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import SuccessNotification from "./SuccessNotification";
 import { MonitoredObjectConstants } from "../redux/constants";
 import { Spin } from "antd";
+import MonitorObjectHistory from './monitorObjectHistory';
 
 const axios = require("axios");
 
@@ -36,6 +37,7 @@ function AreaMonitored(props) {
   const [formatStyle, setFormatStyle] = useState("");
   const [selected, setSelected] = useState([]);
   const [selectItemDelete, setSelectItemDelete] = useState({});
+  const [selectItemHistory, setSelectItemHistory]=useState({}); 
   const [itemSearch, setItemSearch] = useState({
     code: "",
     name: "",
@@ -147,11 +149,15 @@ function AreaMonitored(props) {
       pathname: `/monitored-object-management/view/${item._id}`,
     });
   };
-
+  const handleMonitoredHistory = (item) => {
+    setSelectItemHistory(item);
+    window.$("#modalhistory").modal("show");
+  };
   const handleMonitoredDelete = (item) => {
     setSelectItemDelete(item);
     window.$("#modal").modal("show");
   };
+  
   const menu = (
     <Menu>
       <Menu.Item>
@@ -283,6 +289,12 @@ function AreaMonitored(props) {
                     >
                       <i className="material-icons">delete</i>
                     </a>
+                    <a
+                      className="text-blue"
+                      onClick={() => handleMonitoredHistory(item)}
+                    >
+                      <i className="material-icons">article</i>
+                    </a>
                   </td>
                 </tr>
               ))}
@@ -311,6 +323,7 @@ function AreaMonitored(props) {
         formatStyle={formatStyle}
         messages={objectMessages}
       />
+      <MonitorObjectHistory />
     </div>
   );
 }

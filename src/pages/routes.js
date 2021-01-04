@@ -65,6 +65,7 @@ import CategoryMonitored from './MonitoredObject/Category/component';
 import MonitoredObject from './MonitoredObject/MonitoredObject/component';
 import MonitoredObjectCreate from './MonitoredObject/MonitoredObject/component/monitoredObjectCreate';
 import MonitoredObjectView from './MonitoredObject/MonitoredObject/component/MonitoredObjectView';
+import MonitoredObjectHistory from './MonitoredObject/MonitoredObject/component/monitorObjectHistory';
 // incident group 09
 import IncidentGroup9 from './Incident/Incident';
 import ImageGallery from './Incident/ImageGallery';
@@ -284,6 +285,13 @@ export const routes = [
     path: '/monitored-object-management/:option/:id',
     component: MonitoredObjectView,
     exact: true,
+  },
+  //view history incident
+  {
+    path: '/monitored-object-management/history/',
+    component: MonitoredObjectHistory,
+    exact: true,
+
   },
   // create monitored Object
   {

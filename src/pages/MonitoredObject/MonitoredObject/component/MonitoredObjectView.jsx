@@ -381,17 +381,17 @@ function MonitoredObjectView({ history }) {
     });
   };
 
-  const onSelectImage = (index, image) => {
-    let _images = images.slice();
-    let img = _images[index];
-    img.hasOwnProperty("isSelected")
-      ? (img.isSelected = !img.isSelected)
-      : (img.isSelected = true);
-    setImages(_images);
-    allImagesSelected(images)
-      ? setSelectAllChecked(true)
-      : setSelectAllChecked(false);
-  };
+  // const onSelectImage = (index, image) => {
+  //   let _images = images.slice();
+  //   let img = _images[index];
+  //   img.hasOwnProperty("isSelected")
+  //     ? (img.isSelected = !img.isSelected)
+  //     : (img.isSelected = true);
+  //   setImages(_images);
+  //   allImagesSelected(images)
+  //     ? setSelectAllChecked(true)
+  //     : setSelectAllChecked(false);
+  // };
   const allImagesSelected = (_images) => {
     return (
       _images.filter((img) => Boolean(img.isSelected)).length == _images.length
@@ -437,7 +437,7 @@ function MonitoredObjectView({ history }) {
               </label>
               <div className="col-sm-10">
                 <select
-                  disabled={option === "view"}
+                  disabled={option === "view"||option==="edit"}
                   className="custom-select"
                   name="type"
                   value={monitoredObject.type}
@@ -571,8 +571,9 @@ function MonitoredObjectView({ history }) {
                 {monitoredObject.images && (
                   <Gallery
                     images={convertImages(monitoredObject.images)}
-                    onSelectImage={onSelectImage}
+                  //  onSelectImage={onSelectImage}
                     showLightboxThumbnails={true}
+    
                   />
                 )}
               </div>

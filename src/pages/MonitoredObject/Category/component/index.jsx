@@ -101,9 +101,7 @@ function AreaMonitored(props) {
     window.$("#modalCreateCatObject").modal("show");
     setOption("add");
   };
-  const handleCatImport = () => {
-    window.$("#modalImport").modal("show");
-  };
+  
 
   const handleSubmitSearch = () => {
     dispatch(
