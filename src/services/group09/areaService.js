@@ -20,6 +20,7 @@ class Service extends Base {
       },
     }
     const result = await fetch(url, requestOptions)
+
     return await this.handleResponse(result)
   };
 
