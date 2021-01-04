@@ -112,13 +112,13 @@ function MonitoredObjectView({ history }) {
       method: "POST",
       url: `http://14.248.5.197:5012/api/monitor-object/add`,
       data: {
-        regionId: idMonitoredCreate.monitoredZone,
-        entityId: idMonitoredCreate._id,
+        regionId: monitoredObject.monitoredZone,
+        entityId: monitoredObject._id,
         description: "edit monitor object",
         authorId: "",
         projectType: localStorage.getItem("project-type"),
         state: "",
-        name: idMonitoredCreate.name,
+        name: monitoredObject.name,
       },
     })
       .then((res) => {})

@@ -49,13 +49,13 @@ function AreaMonitored(props) {
       method: "POST",
       url: `http://14.248.5.197:5012/api/monitor-object/delete`,
       data: {
-        regionId: selectItemDelete.monitoredZone,
-        entityId: selectItemDelete._id,
+        regionId: monitoredObjects.monitoredZone,
+        entityId: monitoredObjects._id,
         description: "delete monitor object",
         authorId: "",
         projectType: localStorage.getItem("project-type"),
         state: "",
-        name: selectItemDelete.name,
+        name: monitoredObjects.name,
       },
     })
       .then((res) => {})
@@ -245,7 +245,6 @@ function AreaMonitored(props) {
               <th>Trạng thái</th>
               <th>Mô tả</th>
               <th>Đối tượng liên kết</th>
-              <th>Thuộc khu vực</th>
               <th>Hành động</th>
             </tr>
           </thead>
@@ -264,11 +263,6 @@ function AreaMonitored(props) {
                   <td>{item.description}</td>
                   <td>
                     {!!item.category ? item.category.name : "Chưa có giá trị"}
-                  </td>
-                  <td>
-                    {!!item.areaMonitored
-                      ? item.areaMonitored.name
-                      : "Chưa có giá trị"}
                   </td>
                   <td>
                     <a
