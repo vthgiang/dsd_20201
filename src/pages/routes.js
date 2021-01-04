@@ -38,6 +38,7 @@ import LogRegion from './LogRegion';
 import LogStatistic from './LogStatistic';
 import LogUAV from './LogUAV';
 import LogDashboardPage from './LogTreeProject';
+import LogBusiness from './LogBusiness';
 //Payload
 import ListPayload from './Payload/PayloadManagement/List';
 import ListTypePayload from './Payload/PayloadType/List';
@@ -381,6 +382,10 @@ export const routes = [
   {
     path: '/log-uav',
     component: LogUAV,
+  },
+  {
+    path: '/log-business',
+    component: LogBusiness,
   },
   {
     path: '/log-dash-board-page',

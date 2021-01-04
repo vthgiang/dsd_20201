@@ -193,6 +193,12 @@ export const sidebarMenu = [
     route: '/activity-log',
     subMenu: [
       {
+        key: 'LogBusiness',
+        heading: 'Log nghiệp vụ',
+        icon: 'fas fa-business-time',
+        route: '/log-business',
+      },
+      {
         key: 'LogRegion',
         heading: 'Miền giám sát',
         icon: 'fas fa-crop-alt',
