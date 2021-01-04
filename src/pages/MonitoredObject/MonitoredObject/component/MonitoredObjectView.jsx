@@ -560,6 +560,11 @@ function MonitoredObjectView({ history }) {
                       className="mr-3"
                       style={{ listStyle: "none" }}
                       key={index}
+                      onClick={()=>{
+                        history.push({
+                          pathname:  `/image-video-detail/${item.id}`,
+                        });
+                      }} 
                     >
                       <video width="320" height="240" controls>
                         <source src={item.link} type="video/mp4" />
