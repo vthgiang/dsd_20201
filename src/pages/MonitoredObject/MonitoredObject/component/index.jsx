@@ -49,7 +49,7 @@ function AreaMonitored(props) {
       method: "POST",
       url: `http://14.248.5.197:5012/api/monitor-object/delete`,
       data: {
-        regionId: selectItemDelete.monitoredZone,
+        regionId: selectItemDelete.monitoredZone[0] || "",
         entityId: selectItemDelete._id,
         description: "delete monitor object",
         authorId: "",
@@ -157,7 +157,7 @@ function AreaMonitored(props) {
     setSelectItemDelete(item);
     window.$("#modal").modal("show");
   };
-  
+
   const menu = (
     <Menu>
       <Menu.Item>
@@ -260,7 +260,7 @@ function AreaMonitored(props) {
                     item.status === "2" ? <td style={{ color: "red"}}>Đã hỏng</td> :
                     <td style={{ color: "blue" }}>Đang được sửa chữa</td>
                   }
-                  
+
                   <td>{item.description}</td>
                   <td>
                     {!!item.category ? item.category.name : "Chưa có giá trị"}
