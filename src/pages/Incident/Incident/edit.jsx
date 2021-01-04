@@ -11,9 +11,11 @@ import Gallery from "react-grid-gallery";
 import userService from "../../../services/group09/userService";
 import monitoredService from '../../../services/group09/monitoredService';
 import areaService from '../../../services/group09/areaService';
+import droneService from "../../../services/group09/droneService";
 
 let cacheMonitoreds = []
 let cacheAreas = []
+let cacheDrones = []
 
 const IncidentEdit = (props) => {
   let { id } = useParams();
@@ -22,25 +24,22 @@ const IncidentEdit = (props) => {
   const [status, setStatus] = useState([])
   const [loading, setLoading] = useState(true)
   const [latLng, setLatLng] = useState({})
-  console.log('latLng', latLng)
-  const users = [
-    {value: '1', label: 'Dung Nguyen'},
-    {value: '2', label: 'Viet Anh'},
-    {value: '3', label: 'Luan Phung'},
-    {value: '4', label: 'Huy Tran'}
-  ]
+
+
+
 
   useEffect(() => {
     fetchData()
   }, []);
 
   const fetchData = async () => {
-    let [error, [incident, _levels = [], _status = [], monitoreds = {}, areas ={}]] = await to(Promise.all([
+    let [error, [incident, _levels = [], _status = [], monitoreds = {}, areas ={}, drones = []]] = await to(Promise.all([
       incidentService().detail(id),
       incidentLevelService().index(),
       incidentStatusService().index(),
       monitoredService().index(),
       areaService().index(),
+      droneService().index(),
 
     ]))
     if(error) message.error('Có lỗi xảy ra!')
@@ -57,6 +56,7 @@ const IncidentEdit = (props) => {
     setIncident({...incident, images: _images, createdName} || {})
     setLevels(_levels)
     setStatus(_status)
+    cacheDrones = drones
     cacheMonitoreds = monitoreds.content
     cacheAreas = _.get(areas, 'content.zone', [])
     setLatLng(getCenterFromDegrees(latLongs))
