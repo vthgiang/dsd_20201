@@ -9,6 +9,12 @@ import SaveIcon from '@material-ui/icons/Save';
 import { Form, Input, Col, Row } from "antd";
 import React, { useEffect, useState, useMemo } from "react";
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import axios from 'axios';
+import Map from './Map';
+import 'antd/dist/antd.css';
+import { Tabs } from 'antd';
+import Payload from './Payload';
+import MonitorCampain from './MonitorCampain';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -23,12 +29,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'scroll',
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
     // border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(2, 2, 2),
+    width: 700
   },
 
   button: {
@@ -47,27 +55,58 @@ const useStyles = makeStyles((theme) => ({
 export default function TransitionsModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
+  const { TabPane } = Tabs;
   const [drones, setDrones] = useState([]);
 
   const getData = () => {
     fetch("http://skyrone.cf:6789/droneState/getParameterFlightRealTime/" + props.id)
       .then(response => response.json())
       .then(json => {
+        console.log(json.data);
+
         setDrones(json.data);
         setOpen(true);
+        getMonitorCampain(json.data.idCampaign);
       });
   };
 
+
   const handleOpen = () => {
-      getData();
-      
+    getData();
+    getPayLoad();
   };
 
   const handleClose = () => {
     setOpen(false);
   };
 
+  const [payload, setPayload] = useState();
+  const [monitorCampain, setMonitorCampain] = useState();
+  const getPayLoad = () => {
+    fetch("https://dsd06.herokuapp.com/api/payload?droneId="+props.id)
+      .then(response => response.json())
+      .then(json => {
+        console.log("Payload" + json);
+        setPayload(json)
+      });
+}
+
+// let headers = new Headers();
+
+// headers.append('authorization', 'Bearer d2144ec994a49df05be439ac03c4f88c');
+// headers.append('projectType', 'application/json');
+// const requestOptions = {
+//   method: 'GEt',
+//   headers: headers
+// }
+
+  const getMonitorCampain = (id) => {
+    fetch("http://123.30.235.196:5598/api/monitor-campaigns/quick/"+id)
+    .then(response => response.json())
+    .then(json => {
+      setMonitorCampain(json)
+    });
+  }
 
 
   return (
@@ -94,13 +133,37 @@ export default function TransitionsModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Id# : {props.id} </h2>
-            <h3 id="transition-modal-title">Tọa độ Lat :  {drones.locationLat}</h3>
-            <h3 id="transition-modal-title">Tọa độ Lng :  {drones.locationLng}</h3>
-            <h3 id="transition-modal-title">Độ cao (m) :  {drones.heightFlight}</h3>
-            {/* <h3 id="transition-modal-title">Thời gian đã bay :  {drones.time}</h3> */}
-            <h3 id="transition-modal-title">Tốc độ bay :  {drones.speed} m/phút</h3>
-            <h3 id="transition-modal-title">Phần trăm pin :  {drones.percentBattery} %</h3>
+            <br />
+            <h4 id="transition-modal-title">#ID : {props.id} </h4>
+            <p id="transition-modal-title">Tên :  {props.name}</p>
+            <p id="transition-modal-title">Độ cao (m) :  {drones.heightFlight}</p>
+            <p id="transition-modal-title">Phần trăm pin :  {drones.percentBattery} %</p>
+            <p id="transition-modal-title">.         Tốc độ bay :  {drones.speed} m/phút</p>
+             
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = '/stream';
+              }}
+            >
+              Xem video stream
+            </Button>
+
+            <Tabs defaultActiveKey="1">
+              <TabPane tab="Bản đồ" key="1">
+                  <Map flightPath={drones.flightPath} />
+              </TabPane>
+              <TabPane tab="Payload" key="2">
+                <Payload payload={payload} />
+              </TabPane>
+              <TabPane tab="Đợt giám sát" key="3">
+                <MonitorCampain monitorCampain={monitorCampain} />
+              </TabPane>
+            </Tabs>
+           
           </div>
         </Fade>
       </Modal>
@@ -108,4 +171,6 @@ export default function TransitionsModal(props) {
   );
 
 }
+
+
 

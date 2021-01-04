@@ -1,61 +1,61 @@
 import React from 'react';
-import { compose, withProps } from 'recompose';
+import {compose, withProps} from 'recompose';
 import 'antd/dist/antd.css';
-import { Table, Col, Row, Input, Select, Button, Modal } from 'antd';
+import {Table, Col, Row, Input, Select, Button, Modal, notification} from 'antd';
 import {
-  SearchOutlined,
-  DeleteOutlined,
-  FolderAddOutlined,
+    SearchOutlined,
+    DeleteOutlined,
+    FolderAddOutlined, ExclamationCircleOutlined,
 } from '@ant-design/icons';
-import { Spin, Space } from 'antd';
-import { withRouter } from 'react-router';
+import {Spin, Space} from 'antd';
+import {withRouter} from 'react-router';
 import axios from 'axios';
 import {
-  withGoogleMap,
-  withScriptjs,
-  GoogleMap,
-  Polygon,
+    withGoogleMap,
+    withScriptjs,
+    GoogleMap,
+    Polygon,
 } from 'react-google-maps';
 
-const { Option } = Select;
+const {Option} = Select;
 
 const MyMapComponent = compose(
-  withProps({
-    googleMapURL:
-      'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA15qz81pHiNfVEV3eeniSNhAu64SsJKgU',
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
-    mapElement: <div style={{ height: `100%` }} />,
-  }),
-  withScriptjs,
-  withGoogleMap,
+    withProps({
+        googleMapURL:
+            'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyA15qz81pHiNfVEV3eeniSNhAu64SsJKgU',
+        loadingElement: <div style={{height: `100%`}}/>,
+        containerElement: <div style={{height: `400px`}}/>,
+        mapElement: <div style={{height: `100%`}}/>,
+    }),
+    withScriptjs,
+    withGoogleMap,
 )((props) => (
-  <GoogleMap defaultZoom={12} defaultCenter={{ lat: 21.0245, lng: 105.84117 }}>
-    {props.chooseArea.map((area, index) => {
-      return (
+    <GoogleMap defaultZoom={12} defaultCenter={{lat: 21.0245, lng: 105.84117}}>
+        {props.chooseArea.map((area, index) => {
+            return (
+                <Polygon
+                    path={area}
+                    key={index}
+                    editable={true}
+                    onClick={props.onMarkerClick}
+                    options={{
+                        strokeColor: '#FF0000',
+                        strokeWeight: 1,
+                    }}
+                ></Polygon>
+            );
+        })}
         <Polygon
-          path={area}
-          key={index}
-          editable={true}
-          onClick={props.onMarkerClick}
-          options={{
-            strokeColor: '#FF0000',
-            strokeWeight: 1,
-          }}
-        ></Polygon>
-      );
-    })}
-    <Polygon
-      path={props.triangleCoords}
-      onClick={props.onMarkerClick}
-      key={1}
-      editable={true}
-      options={{
-        strokeColor: '#0000FF',
-        strokeWeight: 1,
-      }}
-    />
-  </GoogleMap>
+            path={props.triangleCoords}
+            onClick={props.onMarkerClick}
+            key={1}
+            editable={true}
+            options={{
+                strokeColor: '#0000FF',
+                strokeWeight: 1,
+            }}
+        />
+    </GoogleMap>
 ));
 
 class Manage extends React.Component {
@@ -74,16 +74,16 @@ class Manage extends React.Component {
             columns: [
                 {
                     title: 'Mã miền',
-                    render: val => <a onClick={() => {
+                    render: val => <a style={{"color": "#1890ff"}} onClick={() => {
                         this.editDomain(val._id)
                     }}>{val.code}</a>
                 },
                 {
                     title: 'Độ ưu tiên',
                     render: val => {
-                        if(val.priority == 0) {
+                        if (val.priority == 0) {
                             return 'Cao';
-                        } else if(val.priority == 1) {
+                        } else if (val.priority == 1) {
                             return 'Thấp';
                         } else {
                             return 'Trung bình';
@@ -92,20 +92,30 @@ class Manage extends React.Component {
                 },
                 {
                     title: 'Tên miền',
-                    render: val => <p>{val.name}</p>
+                    render: val => <span>{val.name}</span>
                 },
                 {
                     title: 'Chiều cao tối thiểu',
-                    render: val => <p>{val.minHeight}</p>
+                    // render: val => <span>{val.minHeight}</span>,
+                    dataIndex: 'minHeight',
+                    sorter: {
+                        compare: (a, b) => a.minHeight - b.minHeight,
+                        multiple: 2,
+                    },
                 },
-
+                
                 {
                     title: 'Chiều cao tối đa',
-                    render: val => <p>{val.maxHeight}</p>
+                    // render: val => <span>{val.maxHeight}</span>
+                    dataIndex: 'maxHeight',
+                    sorter: {
+                        compare: (a, b) => a.maxHeight - b.maxHeight,
+                        multiple: 2,
+                    },
                 },
                 {
                     title: 'Mô tả',
-                    render: val => <p>{val.description}</p>
+                    render: val => <span>{val.description}</span>
                 },
                 {
                     title: 'Thời gian cập nhật',
@@ -113,7 +123,7 @@ class Manage extends React.Component {
                 },
                 {
                     title: 'Khu vực',
-                    render: val => <p>{this.getNameArea(val.area)}</p>
+                    render: val => <span>{this.getNameArea(val.area)}</span>
                 },
                 {
                     title: '',
@@ -164,13 +174,13 @@ class Manage extends React.Component {
         this._handleChange = this._handleChange.bind(this);
         this.searchName = this.searchName.bind(this);
     }
-
+    
     delayedShowMarker = () => {
         setTimeout(() => {
             this.setState({isMarkerShown: true})
         }, 3000)
     }
-
+    
     handleMarkerClick = (e) => {
         //get kinh do vi do khi click ban do
         let lat = e.latLng.lat();
@@ -178,7 +188,7 @@ class Manage extends React.Component {
         // check xem co ton tai startPoint va endPoint
         let latStartPoint = this.state.create.data.startPoint.latitude;
         let latEndPoint = this.state.create.data.endPoint.latitude;
-
+        
         if (!latStartPoint) {
             this.setState(prevState => {
                 let create = Object.assign({}, prevState.create);
@@ -215,7 +225,7 @@ class Manage extends React.Component {
         this.setState({isMarkerShown: false});
         this.delayedShowMarker();
     }
-
+    
     _handleChange(e) {
         let key = e.target.name;
         let value = e.target.value;
@@ -225,7 +235,7 @@ class Manage extends React.Component {
             return {create};
         })
     }
-
+    
     setStatusModalAdd(openModalAdd) {
         this.setState(prevState => {
             let create = Object.assign({}, prevState.create);
@@ -234,10 +244,10 @@ class Manage extends React.Component {
         })
         this.setState({openModalAdd});
     }
-
+    
     createDomain() {
-        this.setStatusModalAdd(false);
         let dataCreate = this.state.create;
+        
         axios.post(`https://monitoredzoneserver.herokuapp.com/monitoredzone/area`, dataCreate, {
                 headers: {
                     "Content-Type": "application/json",
@@ -247,16 +257,26 @@ class Manage extends React.Component {
             })
             .then(res => {
                 if (res.data.success) {
+                    this.setStatusModalAdd(false);
+                    notification.success({
+                        message: 'Thêm miền giám sát thành công!',
+                    });
                     window.location.reload();
                 }
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                notification.warning({
+                    message: 'Vui lòng điền đầy đủ các thông tin yêu cầu',
+                    time: 3000
+                });
+                console.log(error)
+            });
     }
-
+    
     getAllZone() {
         let token = localStorage.getItem('token');
         let projecttype = localStorage.getItem('project-type');
-        axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone?pageSize=1000`,{
+        axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone?pageSize=1000`, {
                 headers: {
                     token: token,
                     projecttype: projecttype
@@ -267,33 +287,58 @@ class Manage extends React.Component {
                 this.setState({loading});
                 const listDomain = res.data.content.zone;
                 const listDomainTmp = res.data.content.zone;
+                this.setState(prevState => {
+                    let search = Object.assign({}, prevState.search);
+                    search.priority = '';
+                    search.name = '';
+                    search.area = '';
+                    return {search};
+                });
                 this.setState({listDomain});
                 this.setState({listDomainTmp});
             })
             .catch(error => console.log(error));
-
+        
     }
-
+    
     deleteZone(zone) {
         let id = zone._id;
-        if (window.confirm(`Bạn muốn xóa miền : ${zone.name}? `)) {
-            axios.delete(`https://monitoredzoneserver.herokuapp.com/monitoredzone/${id}`,{
-                    headers: {
-                        token: this.state.token,
-                        projecttype: this.state.projecttype
-                    }
-                })
-                .then(res => {
-                    if (res.data.success) {
-                        this.getAllZone();
-                    }
-                })
-                .catch(error => console.log(error));
-        } else {
-
-        }
+        Modal.confirm({
+            title: 'Cảnh báo',
+            icon: <ExclamationCircleOutlined/>,
+            content: (
+                <span>
+          Bạn muốn xóa miền <strong>{zone.name}</strong> không?
+        </span>
+            ),
+            okText: 'Đồng ý',
+            cancelText: 'Hủy',
+            onOk: async () => {this.handleDeleteZone(id)},
+        });
     }
-
+    
+    handleDeleteZone = async (id) => {
+        axios.delete(`https://monitoredzoneserver.herokuapp.com/monitoredzone/${id}`, {
+                headers: {
+                    token: this.state.token,
+                    projecttype: this.state.projecttype
+                }
+            })
+            .then(res => {
+                if (res.data.success) {
+                    notification.info({
+                        message: 'Xóa thành công!',
+                    });
+                    this.getAllZone();
+                }
+            })
+            .catch(error => {
+                notification.info({
+                    message: 'Xóa không thành công!',
+                });
+            });
+    }
+    
     getArea() {
         axios.get(`https://monitoredzoneserver.herokuapp.com/area?pageSize=1000`, {
                 headers: {
@@ -307,7 +352,7 @@ class Manage extends React.Component {
             })
             .catch(error => console.log(error));
     }
-
+    
     getNameArea(id) {
         let area = this.state.listArea.find(area => area._id === id);
         if (area) {
@@ -316,19 +361,19 @@ class Manage extends React.Component {
             return id;
         }
     }
-
+    
     componentDidMount() {
         let persist = JSON.parse(localStorage.getItem('persist:root'));
         persist = JSON.parse(persist.user);
-        const { user } = persist;
+        const {user} = persist;
         this.setState({user: user});
         this.delayedShowMarker();
         this.getIncident();
         this.getArea();
         this.getAllZone();
     }
-
-
+    
+    
     onChange(e) {
         let val = e.target['data-key'];
         let status = e.target.checked;
@@ -347,7 +392,7 @@ class Manage extends React.Component {
             }
         }
     }
-
+    
     async editDomain(id) {
         let domain = this.state.listDomain.find(domain => domain._id === id);
         domain.nameArea = this.getNameArea(domain.area);
@@ -358,7 +403,7 @@ class Manage extends React.Component {
                 return elm;
             }
         });
-
+        
         this.props.history.push({
             pathname: '/surveillance-domain-manage/edit',
             state: {
@@ -368,7 +413,7 @@ class Manage extends React.Component {
             }
         });
     }
-
+    
     async getMonitoredObjectByZone(zoneId) {
         return new Promise((resolve, reject) => {
             axios.get(`https://dsd05-monitored-object.herokuapp.com/monitored-object/get-object-by-zone?monitoredZone=${zoneId}`)
@@ -379,7 +424,7 @@ class Manage extends React.Component {
                 .catch(error => console.log(error));
         });
     }
-
+    
     async getZonebyArea(idArea) {
         return new Promise((resolve, reject) => {
             axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone/area/${idArea}`, {
@@ -395,7 +440,7 @@ class Manage extends React.Component {
                 .catch(error => console.log(error));
         });
     }
-
+    
     toggleActivePriority = name => async (value) => {
         this.setState(prevState => {
             let create = Object.assign({}, prevState.create);
@@ -403,7 +448,7 @@ class Manage extends React.Component {
             return {create};
         });
     }
-
+    
     searchPriority = priority => async (value) => {
         this.setState(prevState => {
             let search = Object.assign({}, prevState.search);
@@ -411,17 +456,89 @@ class Manage extends React.Component {
             return {search};
         });
         let domains;
-        if(value && value.length > 0) {
+        if (value && value.length > 0) {
             domains = this.state.listDomain.filter(domain => {
                 return domain.priority == value;
             });
-
+            
         } else {
             domains = this.state.listDomain;
         }
-        if(this.state.search.area && this.state.search.area.length > 0) {
+        if (this.state.search.area && this.state.search.area.length > 0) {
             domains = domains.filter(domain => {
-                console.log(domain,this.state.search.area);
+                return (domain.area == this.state.search.area);
+            });
+        }
+    
+        if (this.state.search.name && this.state.search.name.length > 0) {
+            domains = domains.filter((domain) => {
+                return domain.name.toLowerCase().indexOf(this.state.search.name.toLowerCase()) >= 0;
+            });
+        }
+        
+        this.setState(prevState => {
+            let listDomainTmp;
+            listDomainTmp = domains;
+            return {listDomainTmp};
+        });
+    }
+    
+    searchArea = area => async (value) => {
+        this.setState(prevState => {
+            let search = Object.assign({}, prevState.search);
+            search.area = value;
+            return {search};
+        });
+        let domains;
+        if (value && value.length > 0) {
+            domains = this.state.listDomain.filter(domain => {
+                return (domain.area == value);
+            });
+        } else {
+            domains = this.state.listDomain;
+        }
+        if (this.state.search.priority && this.state.search.priority.length > 0) {
+            domains = domains.filter(domain => {
+                return (domain.priority == this.state.search.priority);
+            });
+        }
+        
+        if (this.state.search.name && this.state.search.name.length > 0) {
+            domains = domains.filter((domain) => {
+                return domain.name.toLowerCase().indexOf(this.state.search.name.toLowerCase()) >= 0;
+            });
+        }
+        
+        this.setState(prevState => {
+            let listDomainTmp;
+            listDomainTmp = domains;
+            return {listDomainTmp};
+        });
+    }
+    
+    searchName(e) {
+        let value = e.target.value;
+        this.setState(prevState => {
+            let search = Object.assign({}, prevState.search);
+            search.name = value;
+            return {search};
+        });
+        let domains;
+        if (value && value.length > 0) {
+            domains = this.state.listDomain.filter((domain) => {
+                return domain.name.toLowerCase().indexOf(this.state.search.name.toLowerCase()) >= 0;
+            });
+        } else {
+            domains = this.state.listDomain;
+        }
+        if (this.state.search.priority && this.state.search.priority.length > 0) {
+            domains = domains.filter(domain => {
+                return (domain.priority == this.state.search.priority);
+            });
+        }
+    
+        if (this.state.search.area && this.state.search.area.length > 0) {
+            domains = domains.filter(domain => {
                 return (domain.area == this.state.search.area);
             });
         }
@@ -431,42 +548,7 @@ class Manage extends React.Component {
             return {listDomainTmp};
         });
     }
-
-    searchArea = area => async (value) => {
-        this.setState(prevState => {
-            let search = Object.assign({}, prevState.search);
-            search.area = value;
-            return {search};
-        });
-        let domains;
-        if(value && value.length > 0) {
-            domains = this.state.listDomain.filter(domain => {
-                return (domain.area == value);
-            });
-        } else {
-            domains = this.state.listDomain;
-        }
-        if(this.state.search.priority && this.state.search.priority.length > 0) {
-            domains = domains.filter(domain => {
-                return (domain.priority == this.state.search.priority);
-            });
-        }
-        this.setState(prevState => {
-            let listDomainTmp;
-            listDomainTmp = domains;
-            return {listDomainTmp};
-        });
-    }
-
-    searchName(e) {
-        let value = e.target.value;
-        this.setState(prevState => {
-            let search = Object.assign({}, prevState.search);
-            search.content = value;
-            return {search};
-        })
-    }
-
+    
     toggleActive = name => async (value) => {
         let chooseArea = [];
         this.setState(prevState => {
@@ -474,7 +556,7 @@ class Manage extends React.Component {
             create._id = value;
             return {create};
         });
-
+        
         let zoneByArea = await this.getZonebyArea(value);
         let area = this.state.listArea.find(area => area._id === value);
         if (area) {
@@ -499,7 +581,7 @@ class Manage extends React.Component {
         }
         this.setState({chooseArea});
     }
-
+    
     getIncident() {
         return new Promise((resolve, reject) => {
             axios.get(`https://distributed.de-lalcool.com/api/projectType`, {
@@ -517,19 +599,20 @@ class Manage extends React.Component {
                 .catch(error => console.log(error));
         });
     }
-
+    
     render() {
-
-        const { name = '' } = this.state.incident || {};
+        
+        const {name = ''} = this.state.incident || {};
         return (
             <div className="main">
                 <div className="filter">
                     <Row>
-                        {/*<Col span={4}>*/}
-                        {/*    <Input name='content' onChange={this.searchName} style={{width: 150}} placeholder="Search" prefix={<SearchOutlined/>}/>*/}
-                        {/*</Col>*/}
                         <Col span={4}>
-                            <Select name='priority' placeholder="Độ ưu tiên" style={{width: 150}} onChange={this.searchPriority("Active!")}>
+                            <Input name='content' onChange={this.searchName} style={{width: 150}} placeholder="Search" prefix={<SearchOutlined/>}/>
+                        </Col>
+                        <Col span={4}>
+                            <Select name='priority' placeholder="Độ ưu tiên" style={{width: 150}}
+                                    onChange={this.searchPriority("Active!")}>
                                 <Option>Tất cả</Option>
                                 <Option value="0">Cao </Option>
                                 <Option value="1">Thấp</Option>
@@ -608,7 +691,7 @@ class Manage extends React.Component {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th style={{width: '50%'}}>Chiều cao tối thiểu</th>
+                                        <th style={{width: '50%'}}>Chiều cao tối thiểu <span className="text-danger">*</span></th>
                                         <td>
                                             <Input name="minHeight" style={{width: 200}}
                                                    placeholder="Nhập chiều cao tối thiểu"
@@ -616,7 +699,7 @@ class Manage extends React.Component {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th style={{width: '50%'}}>Chiều cao tối đa</th>
+                                        <th style={{width: '50%'}}>Chiều cao tối đa <span className="text-danger">*</span></th>
                                         <td>
                                             <Input name="maxHeight" style={{width: 200}}
                                                    placeholder="Nhập chiều cao tối đa"
@@ -633,6 +716,7 @@ class Manage extends React.Component {
                                 </table>
                                 <br/>
                                 <div>
+                                    <span className="text-danger font-italic">Chú ý: Vui lòng chọn tọa độ trên bản đồ </span>
                                     <MyMapComponent
                                         onMarkerClick={this.handleMarkerClick}
                                         triangleCoords={this.state.triangleCoords}

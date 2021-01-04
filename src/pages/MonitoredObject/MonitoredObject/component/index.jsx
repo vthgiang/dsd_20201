@@ -9,10 +9,14 @@ import Pagination from "@material-ui/lab/Pagination";
 import SuccessNotification from "./SuccessNotification";
 import { MonitoredObjectConstants } from "../redux/constants";
 import { Spin } from "antd";
+import MonitorObjectHistory from './monitorObjectHistory';
 
 const axios = require("axios");
 
 function AreaMonitored(props) {
+  const user = useSelector((state) => state.user.user);
+  const role = user.role;
+
   const { history } = props;
   const dispatch = useDispatch();
   const monitoredObjects = useSelector((state) => state.monitoredObjects);
@@ -33,6 +37,7 @@ function AreaMonitored(props) {
   const [formatStyle, setFormatStyle] = useState("");
   const [selected, setSelected] = useState([]);
   const [selectItemDelete, setSelectItemDelete] = useState({});
+  const [selectItemHistory, setSelectItemHistory]=useState({}); 
   const [itemSearch, setItemSearch] = useState({
     code: "",
     name: "",
@@ -42,15 +47,16 @@ function AreaMonitored(props) {
   const postLogMonitorObjectDelete = async () => {
     await axios({
       method: "POST",
-      url: `http://it4883logging.herokuapp.com/api/monitor-object/delete`,
+      url: `http://14.248.5.197:5012/api/monitor-object/delete`,
       data: {
-        regionId: selectItemDelete.monitoredZone,
-        entityId: selectItemDelete._id,
+       
+        regionId: monitoredObjects.monitoredZone[0],         // monitoredObjects.monitoredZone[0],
+        entityId: monitoredObjects._id,
         description: "delete monitor object",
         authorId: "",
         projectType: localStorage.getItem("project-type"),
         state: "",
-        name: selectItemDelete.name,
+        name: monitoredObjects.name,
       },
     })
       .then((res) => {})
@@ -59,13 +65,20 @@ function AreaMonitored(props) {
       });
   };
   useEffect(() => {
+  {role === "SUPER_ADMIN" ? 
+    dispatch(
+      MonitoredObjectActions.getAllMonitoredObjects({
+        page,
+        limit,
+      })
+    ):
     dispatch(
       MonitoredObjectActions.getAllMonitoredObjects({
         page,
         limit,
         type: localStorage.getItem("project-type"),
       })
-    );
+    )};
   }, [page]);
   useEffect(() => {
     let arr = [];
@@ -137,11 +150,15 @@ function AreaMonitored(props) {
       pathname: `/monitored-object-management/view/${item._id}`,
     });
   };
-
+  const handleMonitoredHistory = (item) => {
+    setSelectItemHistory(item);
+    window.$("#modalhistory").modal("show");
+  };
   const handleMonitoredDelete = (item) => {
     setSelectItemDelete(item);
     window.$("#modal").modal("show");
   };
+  
   const menu = (
     <Menu>
       <Menu.Item>
@@ -229,7 +246,6 @@ function AreaMonitored(props) {
               <th>Trạng thái</th>
               <th>Mô tả</th>
               <th>Đối tượng liên kết</th>
-              <th>Thuộc khu vực</th>
               <th>Hành động</th>
             </tr>
           </thead>
@@ -240,17 +256,14 @@ function AreaMonitored(props) {
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{item.name}</td>
-                  <td style={{ color: "green" }}>
-                    {item.status === 1 ? "Bình thường" : "Đang được sửa chữa"}
-                  </td>
+                  { item.status === "1" ? <td style={{ color: "green"}}>Bình thường</td> : 
+                    item.status === "2" ? <td style={{ color: "red"}}>Đã hỏng</td> :
+                    <td style={{ color: "blue" }}>Đang được sửa chữa</td>
+                  }
+                  
                   <td>{item.description}</td>
                   <td>
                     {!!item.category ? item.category.name : "Chưa có giá trị"}
-                  </td>
-                  <td>
-                    {!!item.areaMonitored
-                      ? item.areaMonitored.name
-                      : "Chưa có giá trị"}
                   </td>
                   <td>
                     <a
@@ -270,6 +283,12 @@ function AreaMonitored(props) {
                       onClick={() => handleMonitoredDelete(item)}
                     >
                       <i className="material-icons">delete</i>
+                    </a>
+                    <a
+                      className="text-blue"
+                      onClick={() => handleMonitoredHistory(item)}
+                    >
+                      <i className="material-icons">article</i>
                     </a>
                   </td>
                 </tr>
@@ -299,6 +318,7 @@ function AreaMonitored(props) {
         formatStyle={formatStyle}
         messages={objectMessages}
       />
+      <MonitorObjectHistory />
     </div>
   );
 }

@@ -1,23 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import FlightPathInput from '../FlightPathInput';
 import './FlightPathModal.css';
 import Map from '../Map';
 import PointInput from '../PointInput';
 import axios from 'axios';
-
-AddFlightPathModal.propTypes = {
-    
-};
+import {getDistance} from '../../Common/MapHelper'
+import ModalAddZone from './ModalAddZone';
+import { getProjectType, getUser } from '../../Common/info';
 
 function AddFlightPathModal(props) {
 
     const [name, setName] = useState('');
     const [height, setHeight] = useState('');
     const [task, setTask] = useState('');
-    const [timeCome, setTimeCome] = useState('');
+    // const [timeCome, setTimeCome] = useState('');
     const [timeStop, setTimeStop] = useState('');
+    const [flightHeightDown, setFlightHeightDown] = useState('');
     
     const [newPoint, setNewPoint] = useState({});
     const [flightPoints, setFlightPoints] = useState([]);
@@ -30,10 +29,17 @@ function AddFlightPathModal(props) {
     const [monitoredObjectList, setMonitoredObjectList] = useState([]);
     const [monitoredObjectListLoading, setMonitoredObjectListLoading] = useState(false);
 
+    const [totalDistance, setTotalDistance] = useState(0);
+
+    const [speed, setSpeed] = useState('');
+
     const [show, setShow] = useState(false);
     const toggle = () => setShow(!show);
 
     const [error, setError] = useState('');
+
+    // modal add zone state
+    const [showAddZoneModal, setShowAddZoneModal] = useState(false);
 
     useEffect(()=> {
         // load đối tượng giám sát tương ứng với miền
@@ -59,13 +65,34 @@ function AddFlightPathModal(props) {
             .finally(() => {
                 setMonitoredObjectListLoading(false);
             });
+
+            if(flightPoints.length !== 0){
+                // xóa thông tin đường bay trước
+                setFlightPoints([]);
+                resetPoint()
+            }
         }, [selectedZone]);
         
     const handleOkClick = () => {
         // xử lý đồng ý thêm đường bay
-        if(!name || flightPoints.length===0 || !selectedZone) return setError('Bạn chưa nhập đủ thông tin');
+        if(!name || flightPoints.length===0 || !selectedZone || !speed) return setError('Bạn chưa nhập đủ thông tin');
+
+        if(speed < 1) return setError('Vận tốc không hợp lệ');
+        // tính timecome cho flightPoint
+        let totalDistance = 0
+        let distance = 0;
+        let time = 0;
+        for(let i=1; i<flightPoints.length; i++){
+            distance = getDistance(flightPoints[i], flightPoints[i-1]);
+            time = Math.ceil(distance/parseInt(speed))
+            // console.log(distance, time, speed);
+            flightPoints[i].timeCome = time/60;
+            totalDistance += distance;
+        }
+        // console.log(flightPoints);
         // let id = Math.trunc(Math.random()*2000);
-        let newFlightPath = {name, flightPoints,
+        let newFlightPath = {name, speed, flightPoints,
+            distance: totalDistance,
             // heightFlight :height,
             idSupervisedArea: selectedZone._id //~~~~
             // idSupervisedArea: selectedArea._id,
@@ -73,7 +100,7 @@ function AddFlightPathModal(props) {
             // monitoredZoneId: selectedZone._id,
             // monitoredZoneCode: selectedZone.code
         };
-        console.log(newFlightPath);
+        // console.log(newFlightPath);
         axios.post('http://skyrone.cf:6789/flightPath/save', newFlightPath)
             .then(response => {
                 console.log(response);
@@ -81,7 +108,31 @@ function AddFlightPathModal(props) {
                 if(response.status != 200){
                     alert(`Lỗi ${response.status}, thêm thất bại`);
                 }else{
-                    props.pageReload();
+                    // ghi log
+                    // console.log('create response', response);
+                    // console.log(getUser());
+                    
+                    const user = getUser();
+                    const logData = {
+                        projectType: getProjectType(),
+                        authorId: user.id.toString(),
+                        entityId: response.data.data.id,
+                        description: "create flight path",
+                        name: response.data.data.name,
+                        regionId: response.data.data.idSupervisedArea,
+                        longitude: 0,
+                        latitude: 0,
+                        uavConnectId: 'NONE'
+                    };
+                    // console.log(logData);
+                    axios.post('http://14.248.5.197:5012/api/drones/add', logData)
+                        .then(logRes => {
+                            console.log('logResponse', logRes);
+                        })
+                        .catch(err => {
+                            console.log('err log', err);
+                        })
+                    // props.pageReload();
                 }
             })
             .catch(err => {
@@ -101,17 +152,32 @@ function AddFlightPathModal(props) {
         let point = {
             locationLat: newPoint.locationLat,
             locationLng: newPoint.locationLng,
-            timeCome: timeCome,
+            // timeCome: timeCome,
             timeStop: timeStop,
-            flightHeight: heightPoint != '' ? heightPoint : 30,
-            idSupervisedObject: objectId
+            flightHeight: heightPoint,
+            idSupervisedObject: objectId,
+            flightHeightDown: flightHeightDown
         }
-        setFlightPoints([...flightPoints, point]);
+        const newFlightPoints = [...flightPoints, point]
+
+        setFlightPoints(newFlightPoints);
+        
+        setTotalDistance(caculatorDistance(newFlightPoints));
         resetPoint();
     }
-    
+
+    const caculatorDistance = (flightPoints) => {
+        let totalDistance = 0
+        let distance = 0;
+        for(let i=1; i<flightPoints.length; i++){
+            distance = getDistance(flightPoints[i], flightPoints[i-1]);
+            totalDistance += distance;
+        }
+        return totalDistance;
+    }
+
     const resetPoint = () => {
-        setTimeCome('');
+        // setTimeCome('');
         setTimeStop('');
         setNewPoint({});
         setSelectedObject(null);
@@ -129,12 +195,13 @@ function AddFlightPathModal(props) {
         setMonitoredObjectList([]);
         setMonitoredObjectId('');
         setError('');
-
+        setSpeed('');
         resetPoint();
     }
 
     const handleModalHide = () => {
         reset();
+        setShowAddZoneModal(false);
         toggle();
     }
 
@@ -158,12 +225,15 @@ function AddFlightPathModal(props) {
                         selectedArea={selectedArea} setSelectedArea={setSelectedArea}
                         selectedZone={selectedZone} setSelectedZone={setSelectedZone}
                         resetPoint={resetPoint}
+                        speed={speed} setSpeed={setSpeed}
+                        totalDistance={totalDistance}
                     />
                     <Row>
                         <Col md={4}>
                             {monitoredObjectListLoading && <p>Loading...</p>}
                             {!monitoredObjectListLoading && newPoint.locationLat && <PointInput 
-                                timeCome={timeCome} setTimeCome={setTimeCome}
+                                // timeCome={timeCome} setTimeCome={setTimeCome}
+                                flightHeightDown={flightHeightDown} setFlightHeightDown={setFlightHeightDown}
                                 timeStop={timeStop} setTimeStop={setTimeStop}
                                 newPoint={newPoint} addPoint={addPoint}
                                 heightPoint={heightPoint} setHeightPoint={setHeightPoint}
@@ -181,14 +251,20 @@ function AddFlightPathModal(props) {
                             <Map 
                                 newPoint={newPoint} setNewPoint={setNewPoint}
                                 flightPoints={newPoint.locationLat? [...flightPoints, newPoint] : flightPoints}
-                                selectedZone={selectedZone}
+                                selectedZone={selectedZone} selectedArea={selectedArea}
                                 monitoredObjectList={monitoredObjectList}
                                 setMonitoredObjectId={setMonitoredObjectId}
                                 setHeightPoint={setHeightPoint} heightPoint={heightPoint}
                                 setSelectedObject={setSelectedObject}
+                                setShow={setShowAddZoneModal}
                             />
                         </Col>
                     </Row>
+                    {/* <Row>
+                        <Col>
+                    {selectedArea && showAddZoneModal && <ModalAddZone area={selectedArea} show={showAddZoneModal} setShow={setShowAddZoneModal}/>}
+                        </Col>
+                    </Row> */}
                 </Container>
             </Modal.Body>
             <Modal.Footer>

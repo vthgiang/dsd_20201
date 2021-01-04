@@ -15,7 +15,7 @@ function App (props) {
   const user = useSelector(state => state.user.user);
 
   const [projectType, setProjectType] = useState(props.projectType? props.projectType: user.type === 'ALL_PROJECT' ? 'de_dieu' : user.type.toLowerCase());
-  const [logActivityData, setLogActivityData] = useState(null);
+  const [logActivityData, setLogActivityData] = useState([]);
   const [isLoadedLogActivityData, setIsLoadedLogActivity] = useState(false);
   const [rangeTime, setRangeTime] = useState(props.rangeTime ? props.rangeTime : {fromDate: '', toDate: ''}) 
 
@@ -25,7 +25,7 @@ function App (props) {
 
   const fetchData = () => {
     setIsLoadedLogActivity(false);
-    let url = 'https://it4883logging.herokuapp.com/api/warning?';
+    let url = 'http://14.248.5.197:5012/api/warning?';
     let fromDate  = rangeTime.fromDate;
     let toDate = rangeTime.toDate;
 

@@ -13,12 +13,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
 import StateDrone from "../../components/Drone/DroneModals/StateDrone";
 import React, { useEffect, useState, useMemo } from "react";
 import StateModal from "../../components/Drone/DroneModals/StateModal";
@@ -26,6 +22,8 @@ import SetStateAll from "../../components/Drone/DroneModals/SetStateAll";
 import SowDateAndGetBackDrone from "../../components/Drone/DroneModals/ShowDateAndGetBackDrone";
 import ModalFlight from '../../containers/ModalFlight'
 import useFullPageLoader from "../../components/hooks/useFullPageLoader";
+import { useSelector } from "react-redux";
+import { isAuthorised, DRONE_CONFIG, DRONE_MAINTENANCE, SUPER_ADMIN, DRONE_STATISTICS } from "../../components/Drone/Common/role";
 
 
 
@@ -61,6 +59,7 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
+
 const headCells = [
   {
     id: "id",
@@ -91,17 +90,17 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-            {(stateDrone != 0 && stateDrone != "Đang Bay") ? (
-                <Checkbox
-                indeterminate={numSelected > 0 && numSelected < rowCount}
-                checked={rowCount > 0 && numSelected === rowCount}
-                onChange={onSelectAllClick}
-                inputProps={{ "aria-label": "select all desserts" }}
-                />
-            ) : (
-                <p>-</p>
+          {(stateDrone != 0 && stateDrone != "Đang Bay" && isAuthorised(DRONE_STATISTICS)) ? (
+            <Checkbox
+              indeterminate={numSelected > 0 && numSelected < rowCount}
+              checked={rowCount > 0 && numSelected === rowCount}
+              onChange={onSelectAllClick}
+              inputProps={{ "aria-label": "select all desserts" }}
+            />
+          ) : (
+              <p>-</p>
             )}
-         
+
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
@@ -149,13 +148,13 @@ const useToolbarStyles = makeStyles((theme) => ({
   highlight:
     theme.palette.type === "light"
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85)
-        }
+        color: theme.palette.secondary.main,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.85)
+      }
       : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark
-        },
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.secondary.dark
+      },
   title: {
     flex: "1 1 100%"
   }
@@ -200,46 +199,57 @@ export default function EnhancedTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(15);
 
   const [drones, setDrones] = useState([]);
-const getData = () => {
+  const getData = () => {
     showLoader();
     fetch(`http://skyrone.cf:6789/droneState/getAllStateNow`)
-        .then(response => response.json())
-        .then(json => {
-            setDrones(json);
-            hideLoader();
-        });
-};
+      .then(response => response.json())
+      .then(json => {
+        setDrones(json);
+        hideLoader();
+      });
+  };
 
-useEffect(() => {
+  useEffect(() => {
     getData();
-}, []);
+  }, []);
 
-const [loader, showLoader, hideLoader] = useFullPageLoader();
-const [search, setSearch] = useState();
-const [stateDrone, setStateDrone] = useState("0");  
-const [numDrone, setNumDrone] = useState();
+  const [loader, showLoader, hideLoader] = useFullPageLoader();
+  const [search, setSearch] = useState();
+  const [stateDrone, setStateDrone] = useState("Đang Bay");
+  const [numDrone, setNumDrone] = useState();
 
-const dronesData = useMemo(() => {
-    let computedDrones = drones;
+  const users = useSelector((state) => state.user.user);
+  const projectType = users.type;
+  const role = users.role;
+
+
+  const dronesData = useMemo(() => {
+    let droneRole = drones;
+    if (!isAuthorised(SUPER_ADMIN)) {
+      droneRole = droneRole.filter(
+        comment => comment.project.toString().includes("2") || !comment.state.toString().includes("1"));
+    }
+    let computedDrones = droneRole;
     setPage(0);
     if (stateDrone) {
-        setSelected([]);
-        if (stateDrone === "0") {
-            computedDrones = drones
-        } else {
-            computedDrones = computedDrones.filter(
-                comment => comment.message.includes(stateDrone));
-        }
+      setSelected([]);
+      if (stateDrone === "0") {
+        computedDrones = drones
+      } else {
+        computedDrones = computedDrones.filter(
+          comment => comment.message.includes(stateDrone));
+      }
     }
     setNumDrone(computedDrones.length);
     if (search) {
-        computedDrones = computedDrones.filter(
-            comment =>
-                comment.idDrone.toLowerCase().includes(search.toLowerCase())
-        );
-    } 
+      computedDrones = computedDrones.filter(
+        (comment) =>
+          comment.idDrone.toLowerCase().includes(search.toLowerCase()) || comment.name.toLowerCase().includes(search.toLowerCase())
+      );
+
+    }
     return computedDrones;
-}, [drones, search, stateDrone]);
+  }, [drones, search, stateDrone]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -258,25 +268,26 @@ const dronesData = useMemo(() => {
   };
 
 
+
   const handleClick = (event, id) => {
     if (stateDrone != 0 && stateDrone != "Đang Bay") {
-        const selectedIndex = selected.indexOf(id);
-        let newSelected = [];
-    
-        if (selectedIndex === -1) {
-          newSelected = newSelected.concat(selected, id);
-        } else if (selectedIndex === 0) {
-          newSelected = newSelected.concat(selected.slice(1));
-        } else if (selectedIndex === selected.length - 1) {
-          newSelected = newSelected.concat(selected.slice(0, -1));
-        } else if (selectedIndex > 0) {
-          newSelected = newSelected.concat(
-            selected.slice(0, selectedIndex),
-            selected.slice(selectedIndex + 1)
-          );
-        }
-    
-        setSelected(newSelected);
+      const selectedIndex = selected.indexOf(id);
+      let newSelected = [];
+
+      if (selectedIndex === -1) {
+        newSelected = newSelected.concat(selected, id);
+      } else if (selectedIndex === 0) {
+        newSelected = newSelected.concat(selected.slice(1));
+      } else if (selectedIndex === selected.length - 1) {
+        newSelected = newSelected.concat(selected.slice(0, -1));
+      } else if (selectedIndex > 0) {
+        newSelected = newSelected.concat(
+          selected.slice(0, selectedIndex),
+          selected.slice(selectedIndex + 1)
+        );
+      }
+
+      setSelected(newSelected);
     }
   };
 
@@ -298,87 +309,87 @@ const dronesData = useMemo(() => {
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, dronesData.length - page * rowsPerPage);
 
-    const EnhancedTableToolbar = (props) => {
-        const classes = useToolbarStyles();
-        const { numSelected } = props;
-      
-        return (
-          <Toolbar
-            className={clsx(classes.root, {
-              [classes.highlight]: numSelected > 0
-            })}
+  const EnhancedTableToolbar = (props) => {
+    const classes = useToolbarStyles();
+    const { numSelected } = props;
+
+    return (
+      <Toolbar
+        className={clsx(classes.root, {
+          [classes.highlight]: numSelected > 0
+        })}
+      >
+        {numSelected > 0 ? (
+          <Typography
+            className={classes.title}
+            color="inherit"
+            variant="subtitle1"
+            component="div"
           >
-            {numSelected > 0 ? (
-              <Typography
-                className={classes.title}
-                color="inherit"
-                variant="subtitle1"
-                component="div"
-              >
-                {numSelected} drone được chọn
-              </Typography>
-            ) : (
-              <Typography
-                className={classes.title}
-                variant="h6"
-                id="tableTitle"
-                component="div"
-              >
-                Thống kê drone
-              </Typography>
-            )}
-             {(numSelected > 0 && stateDrone !== "Đang Bay") ? (
-                 <Typography
-                 className={classes.title}
-                 variant="h6"
-                 id="tableTitle"
-                 component="div"
-               >
-                 <SetStateAll listId={selected} state={stateDrone} onReload={getData}/>
-               </Typography>
-                 
-            ) : (
-             
-                <p></p>
-            )}
-             {/* <Search
+            {numSelected} drone được chọn
+          </Typography>
+        ) : (
+            <Typography
+              className={classes.title}
+              variant="h6"
+              id="tableTitle"
+              component="div"
+            >
+              Thống kê drone
+            </Typography>
+          )}
+        {(numSelected > 0 && stateDrone !== "Đang Bay") ? (
+          <Typography
+            className={classes.title}
+            variant="h6"
+            id="tableTitle"
+            component="div"
+          >
+            <SetStateAll listId={selected} state={stateDrone} onReload={getData} />
+          </Typography>
+
+        ) : (
+
+            <p></p>
+          )}
+        {/* <Search
                 onSearch={value => {
                     setSearch(value);
                 }} 
             /> */}
-             <input
-                type="text"
-                className="form-control"
-                style={{ width: "240px", marginRight: '1rem' }}
-                placeholder="Tìm kiếm ID"
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-            />
-              <select value={stateDrone} 
-                    style={{marginRight: '0.5rem' }}
-                  onChange={event => setStateDrone(event.target.value)}>
-                  <option value="0">Tất cả</option>
-                  <option value="Đang Rảnh">Đang rảnh</option>
-                  <option value="Đang Bay">Đang bay</option>
-                  <option value="Đang Sạc">Đang sạc</option>
-                  <option value="Đang Bảo trì">Đang bảo trì</option>
-                  <option value="Hỏng">Hỏng</option>
-              </select>
-              <Typography> {numDrone}drone </Typography>
-          </Toolbar>
-        );
-      };
+        <select value={stateDrone}
+          style={{ marginRight: '0.5rem' }}
+          onChange={event => setStateDrone(event.target.value)}>
+          <option value="Đang Rảnh">Đang rảnh</option>
+          <option value="Đang Bay">Đang bay</option>
+          <option value="Đang Sạc">Đang sạc</option>
+          <option value="Đang Bảo trì">Đang bảo trì</option>
+          <option value="Hỏng">Hỏng</option>
+          <option value="0">Tất cả</option>
+        </select>
+        <Typography> {numDrone}drone </Typography>
+      </Toolbar>
+    );
+  };
 
-      EnhancedTableToolbar.propTypes = {
-        numSelected: PropTypes.number.isRequired
-      };
+  EnhancedTableToolbar.propTypes = {
+    numSelected: PropTypes.number.isRequired
+  };
 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
+      <input
+          type="text"
+          className="form-control"
+          style={{ width: "240px", marginRight: '1rem' }}
+          placeholder="Tìm kiếm ID hoặc tên drone"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer className={classes.container}>
-        {loader}
+          {loader}
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
@@ -386,7 +397,7 @@ const dronesData = useMemo(() => {
             stickyHeader aria-label="sticky table"
           >
             <EnhancedTableHead
-                stateDrone={stateDrone}
+              stateDrone={stateDrone}
               classes={classes}
               numSelected={selected.length}
               order={order}
@@ -412,17 +423,17 @@ const dronesData = useMemo(() => {
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
-                          {(stateDrone != 0 && stateDrone != "Đang Bay") ? (
-                            <Checkbox
+                        {(stateDrone != 0 && stateDrone != "Đang Bay" && isAuthorised(DRONE_STATISTICS)) ? (
+                          <Checkbox
                             onClick={(event) => handleClick(event, drone.idDrone)}
                             checked={isItemSelected}
                             inputProps={{ "aria-labelledby": labelId }}
                           />
-                          ):(
-                              <p></p>
+                        ) : (
+                            <p></p>
                           )
                         }
-                        
+
                       </TableCell>
                       <TableCell
                         component="th"
@@ -433,32 +444,30 @@ const dronesData = useMemo(() => {
                         {drone.idDrone}
                       </TableCell>
                       <TableCell align="right">{drone.name}</TableCell>
-                      <TableCell align="center"><StateDrone state={drone.state} /></TableCell>
+                      <TableCell align="right"><StateDrone state={drone.state} percent={drone.percentBattery} /> </TableCell>
                       <TableCell align="center">
-                             {(() => {
-                                    if (drone.state == 0) {
-                                    return (
-                                            <StateModal drone={drone} onReload={getData} />
-                                    )
-                                    } else if (drone.state == 1) {
-                                        return (
-                                            <ModalFlight id={drone.idDrone} />
-                                        )
-                                    } else if (drone.state == 2 || drone.state == 3) {
+                        {(() => {
+                          let component = <p></p>;
+                          switch (drone.state) {
+                            case 0:
+                              if (isAuthorised(DRONE_CONFIG)) component = <StateModal drone={drone} onReload={getData} />;
+                              break;
+                            case 1:
+                              component = <ModalFlight id={drone.idDrone} name={drone.name} />;
+                              break;
+                            case 2:
+                            case 3:
+                              if (isAuthorised(DRONE_MAINTENANCE) || isAuthorised(DRONE_CONFIG))
+                                component = <SowDateAndGetBackDrone drone={drone} onReload={getData} />
+                              break;
+                            case 4:
+                              if (isAuthorised(DRONE_MAINTENANCE) || isAuthorised(DRONE_CONFIG))
+                                component = <StateModal drone={drone} />;
+                          }
+                          return component;
+                        })()}
 
-                                        return (
-                                                   
-                                            <SowDateAndGetBackDrone drone={drone} onReload={getData} />
-                                                    
-                                        )
-                                    }
-                                    else if (drone.state == 4) {
-                                    return (
-                                        <StateModal drone={drone}/>
-                                    ) 
-                                    }
-                                })()}
-                          </TableCell>
+                      </TableCell>
                     </TableRow>
                   );
                 })}

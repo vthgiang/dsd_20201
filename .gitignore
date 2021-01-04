@@ -1,13 +1,12 @@
 # Package-lock.json
 package-lock.json
-package-lock-me.json
+package-lock*
 
 # IDE
 .vscode
 
 # Build
 build/
-.vscode
 
 # Logs
 logs
@@ -23,6 +22,3 @@ yarn.lock
 #Lib
 node_modules/
 .idea/
-
-/package.json
-/package-lock.json

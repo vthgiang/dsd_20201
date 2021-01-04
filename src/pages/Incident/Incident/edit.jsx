@@ -8,6 +8,14 @@ import incidentService from "../../../services/group09/incidentService";
 import incidentLevelService from "../../../services/group09/incidentLevelService";
 import incidentStatusService from "../../../services/group09/incidentStatusService";
 import Gallery from "react-grid-gallery";
+import userService from "../../../services/group09/userService";
+import monitoredService from '../../../services/group09/monitoredService';
+import areaService from '../../../services/group09/areaService';
+import droneService from "../../../services/group09/droneService";
+
+let cacheMonitoreds = []
+let cacheAreas = []
+let cacheDrones = []
 
 const IncidentEdit = (props) => {
   let { id } = useParams();
@@ -16,37 +24,72 @@ const IncidentEdit = (props) => {
   const [status, setStatus] = useState([])
   const [loading, setLoading] = useState(true)
   const [latLng, setLatLng] = useState({})
-  console.log('latLng', latLng)
-  const users = [
-    {value: '1', label: 'Dung Nguyen'},
-    {value: '2', label: 'Viet Anh'},
-    {value: '3', label: 'Luan Phung'},
-    {value: '4', label: 'Huy Tran'}
-  ]
+
+
+
 
   useEffect(() => {
     fetchData()
   }, []);
 
   const fetchData = async () => {
-    let [error, [incident, _levels = [], _status = []]] = await to(Promise.all([
+    let [error, [incident, _levels = [], _status = [], monitoreds = {}, areas ={}, drones = []]] = await to(Promise.all([
       incidentService().detail(id),
       incidentLevelService().index(),
-      incidentStatusService().index()
+      incidentStatusService().index(),
+      monitoredService().index(),
+      areaService().index(),
+      droneService().index(),
+
     ]))
-    // let [error, incident] = await to(incidentServ,ice().detail(id))
-    // let [error1, _levels = []] = await to()
-    // let [error2, _status = []] = await to()
     if(error) message.error('Có lỗi xảy ra!')
+    if (!monitoreds.success) {
+      message.error(monitoreds.messages)
+    }
+    if (!areas.success) {
+      message.error(areas.messages)
+    }
     let _images = (incident.images || []).map((item) => {return {...item, isSelected: false}})
     let latLongs = (incident.images || []).map((item) => {return {lat: item.latitude, lng: item.longitude}})
+    let createdName = await fetchUserById(incident.createdBy)
 
-    setIncident({...incident, images: _images} || {})
+    setIncident({...incident, images: _images, createdName} || {})
     setLevels(_levels)
     setStatus(_status)
+    cacheDrones = drones
+    cacheMonitoreds = monitoreds.content
+    cacheAreas = _.get(areas, 'content.zone', [])
     setLatLng(getCenterFromDegrees(latLongs))
     setLoading(false)
     console.log('incident', incident)
+  }
+
+  const getMonitoreds = () => {
+    const images = incident.images || []
+    const monitoredIds = _.uniq(images.map(item => item.monitoredObjectId))
+    const monitoreds = cacheMonitoreds.filter(item => monitoredIds.includes(item._id))
+    return <div>{
+      monitoreds.map(item => <a key={item._id} href={`/monitored-object-management/view/${item._id}`}><Tag>{item.name}</Tag></a>)
+    }</div>
+  }
+  const getAreas = () => {
+    const images = incident.images || []
+    const areaIds = _.uniq(images.map(item => item.idSupervisedArea))
+    const areas = cacheAreas.filter(item => areaIds.includes(item._id))
+    return <div>{
+      areas.map(item => <a key={item._id} href={`/surveillance-domain-manage/edit`}><Tag>{item.name}</Tag></a>)
+    }</div>
+  }
+
+  const fetchUserById = async (id) => {
+    let [error, users] = await to(userService().getUserName([id]))
+    let status = _.get(users, "status", "fail");
+    if(status!== "Successful"){
+      alert("Server nhóm user bị lỗi!!!");
+      return;
+    };
+    users = _.get(users, "result", []);
+    return users[0] ? users[0].full_name : ''
   }
 
   const colorStatus = (code) => {
@@ -63,6 +106,7 @@ const IncidentEdit = (props) => {
     }
   }
   const colorLevel = (code) => {
+    console.log('code', code)
     switch (code) {
       case 0:
         return "#2db7f5"
@@ -111,16 +155,16 @@ const IncidentEdit = (props) => {
         <Spin spinning={loading}>
         <Descriptions
             bordered
-            layout="vertical"
             title="Chi tiết sự cố"
-            extra={<Button type="primary">Xử lý sự cố</Button>}
+            size={"small"}
+            extra={<a type="primary" className="ant-btn" href={`/handle-problem`}>Xử lý sự cố</a>}
         >
             <Descriptions.Item label="Tên sự cố">{incident.name}</Descriptions.Item>
           <Descriptions.Item label="Hạn dự kiến">{moment(incident.dueDate).format('YYYY-MM-DD')}</Descriptions.Item>
           <Descriptions.Item label="Ngày tạo">{moment(incident.createdAt).format('YYYY-MM-DD')}</Descriptions.Item>
           <Descriptions.Item label="Loại sự cố">{_.get(incident, 'type.name', '')}</Descriptions.Item>
           <Descriptions.Item label="Trạng thái">
-            <Tag color={`${colorLevel(_.get(incident, 'status.code', null))}`}>
+            <Tag color={`${colorStatus(_.get(incident, 'status.code', null))}`}>
               {_.get(incident, 'status.name', '')}
             </Tag>
           </Descriptions.Item>
@@ -129,9 +173,18 @@ const IncidentEdit = (props) => {
               {_.get(incident, 'level.name', '')}
             </Tag>
           </Descriptions.Item>
+          <Descriptions.Item label="Đối tượng giám sát" >
+            {getMonitoreds()}
+          </Descriptions.Item>
+          <Descriptions.Item label="Miền giám sát" span={2}>
+            {getAreas()}
+          </Descriptions.Item>
 
-          <Descriptions.Item label="Mô tả" span={3}>
+          <Descriptions.Item label="Mô tả" span={2}>
             {incident.description}
+          </Descriptions.Item>
+          <Descriptions.Item label="Người tạo" span={1}>
+            {incident.createdName}
           </Descriptions.Item>
           <Descriptions.Item label="Ảnh" span={2}>
             <Gallery

@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import CatMonitorCreate from './catMonitoredCreate';
-import Modals from './modal';
-import { Menu, Dropdown, Button } from 'antd';
-import Pagination from '@material-ui/lab/Pagination';
-import { CategoryActions } from '../redux/actions';
-import { CategoryConstants } from '../redux/constants';
-import SuccessNotification from './SuccessNotification';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import CatMonitorCreate from "./catMonitoredCreate";
+import Modals from "./modal";
+import { Menu, Dropdown, Button } from "antd";
+import Pagination from "@material-ui/lab/Pagination";
+import { CategoryActions } from "../redux/actions";
+import { CategoryConstants } from "../redux/constants";
+import SuccessNotification from "./SuccessNotification";
 import { Spin } from "antd";
 
 function AreaMonitored(props) {
+  const user = useSelector((state) => state.user.user);
+  const role = user.role;
   const dispatch = useDispatch();
   const category = useSelector((state) => state.category);
   const {
@@ -25,42 +27,53 @@ function AreaMonitored(props) {
     limit: 5,
   });
   const { page, limit } = pagination;
-  const [formatStyle, setFormatStyle] = useState('');
+  const [formatStyle, setFormatStyle] = useState("");
   const [itemSearch, setItemSearch] = useState({
-    code: '',
-    name: '',
+    code: "",
+    name: "",
   });
 
-  const [option, setOption] = useState('');
+  const [option, setOption] = useState("");
   const [catMonitored, setCatMonitored] = useState({
-    code: '',
-    name: '',
-    description: '',
+    code: "",
+    name: "",
+    description: "",
   });
   useEffect(() => {
-    dispatch(
-      CategoryActions.getAllCategories({
-        page,
-        limit,
-        type: localStorage.getItem("project-type"),
-      })
-    );
+    {
+      role === "SUPER_ADMIN"
+        ? dispatch(
+            CategoryActions.getAllCategories({
+              page,
+              limit,
+            })
+          )
+        : dispatch(
+            CategoryActions.getAllCategories({
+              page,
+              limit,
+              type: localStorage.getItem("project-type"),
+            })
+          );
+    }
   }, [page]);
   useEffect(() => {}, [listPaginate]);
 
   useEffect(() => {
     if (isError) {
-      setFormatStyle('btn btn-danger');
-      window.$('#modalSuccessNotification').modal('show');
+      setFormatStyle("btn btn-danger");
+      window.$("#modalSuccessNotification").modal("show");
     }
     if (isCatSuccess) {
-      setFormatStyle('btn btn-success');
-      window.$('#modalSuccessNotification').modal('show');
-      dispatch(CategoryActions.getAllCategories({ 
-        page, 
-        limit,
-        type: localStorage.getItem("project-type"),
-       }));
+      setFormatStyle("btn btn-success");
+      window.$("#modalSuccessNotification").modal("show");
+      dispatch(
+        CategoryActions.getAllCategories({
+          page,
+          limit,
+          type: localStorage.getItem("project-type"),
+        })
+      );
     }
     dispatch({
       type: CategoryConstants.CAT_MONITORED_FAILURE,
@@ -85,12 +98,10 @@ function AreaMonitored(props) {
     }));
   };
   const handleCatCreate = () => {
-    window.$('#modalCreateCatObject').modal('show');
-    setOption('add');
+    window.$("#modalCreateCatObject").modal("show");
+    setOption("add");
   };
-  const handleCatImport = () => {
-    window.$('#modalImport').modal('show');
-  };
+  
 
   const handleSubmitSearch = () => {
     dispatch(
@@ -99,22 +110,22 @@ function AreaMonitored(props) {
         page: page,
         limit: limit,
         type: localStorage.getItem("project-type"),
-      }),
+      })
     );
   };
   const handleACatView = (item) => {
     setCatMonitored(item);
-    setOption('view');
-    window.$('#modalCreateCatObject').modal('show');
+    setOption("view");
+    window.$("#modalCreateCatObject").modal("show");
   };
   const handleCatEdit = (item) => {
     setCatMonitored(item);
-    setOption('edit');
-    window.$('#modalCreateCatObject').modal('show');
+    setOption("edit");
+    window.$("#modalCreateCatObject").modal("show");
   };
   const handleCatDelete = (item) => {
     setCatMonitored(item);
-    window.$('#modal').modal('show');
+    window.$("#modal").modal("show");
   };
   const menu = (
     <Menu>
@@ -135,7 +146,7 @@ function AreaMonitored(props) {
         <h3>Quản lý danh mục giám sát</h3>
       </div>
       <div className="box-body">
-        <div style={{ marginLeft: '90%' }}>
+        <div style={{ marginLeft: "90%" }}>
           <Dropdown overlay={menu} placement="bottomLeft" arrow>
             <Button
               type="button"
@@ -245,7 +256,6 @@ function AreaMonitored(props) {
         option={option}
       />
 
-     
       {/* Modal */}
       <Modals value={catMonitored} setCatMonitored={setCatMonitored} />
       <SuccessNotification formatStyle={formatStyle} messages={messages} />

@@ -91,14 +91,14 @@ const ListReport = () => {
             size="small"
             style={{ width: 90 }}
           >
-            Search
+            Tìm kiếm
           </Button>
           <Button
             onClick={() => handleReset(clearFilters)}
             size="small"
             style={{ width: 90 }}
           >
-            Reset
+            Làm mới
           </Button>
         </Space>
       </div>
@@ -196,9 +196,9 @@ const ListReport = () => {
                 borderRadius: 5,
               }}
             ></div>
-            <p style={{ marginLeft: 10, fontSize: 18, marginTop: 10 }}>
+            <p style={{ marginLeft: 10, marginTop: 10 }}>
               {' '}
-              {record.status}
+              {'Chờ xử lý'}
             </p>
           </div>
         ) : record.status == 'accept' ? (
@@ -217,7 +217,7 @@ const ListReport = () => {
                 borderRadius: 5,
               }}
             ></div>
-            <p style={{ marginLeft: 10, fontSize: 18, marginTop: 10 }}>
+            <p style={{ marginLeft: 10, marginTop: 10 }}>
               {' '}
               {'Đã chấp nhận'}
             </p>
@@ -238,7 +238,7 @@ const ListReport = () => {
                 borderRadius: 5,
               }}
             ></div>
-            <p style={{ marginLeft: 10, fontSize: 18, marginTop: 10 }}>
+            <p style={{ marginLeft: 10, marginTop: 10 }}>
               {' '}
               {'Đã từ chối'}
             </p>
@@ -427,7 +427,7 @@ const ListReport = () => {
       </div>
       <Input.Search
         style={{ margin: '0 0 10px 0' }}
-        placeholder="Search by..."
+        placeholder="Nhập từ khóa tìm kiếm..."
         enterButton
         onSearch={search}
       />

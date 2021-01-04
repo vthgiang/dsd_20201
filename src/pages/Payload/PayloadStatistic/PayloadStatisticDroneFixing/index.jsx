@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Space, Input, Form, Select, Modal, DatePicker, Row, Col } from 'antd';
+import {Table, Space, Input, Form, Select, Modal, DatePicker, Row, Col, Spin} from 'antd';
 import 'ant-design-pro/dist/ant-design-pro.css';
 import { Bar } from 'ant-design-pro/lib/Charts';
 import { Button } from 'antd';
@@ -14,14 +14,17 @@ class PayloadStatisticDrone extends Component {
     super(props)
     this.state = {
       listPayloadFixing:[],
+      modalLoading: false,
     }
   }
 
   
 
   componentDidMount() {
+    this.setState({modalLoading: true});
     axios.get('https://dsd06.herokuapp.com/api/payloadStat/feeFixing')
       .then(res => {
+        this.setState({modalLoading: false});
         var listPayloadFixing = res.data;
         listPayloadFixing = listPayloadFixing.filter( x => x.payload != null)
         for( var i = 0; i < listPayloadFixing.length; i++){
@@ -87,7 +90,7 @@ class PayloadStatisticDrone extends Component {
         })
       )
 
-    
+    const { modalLoading } = this.state;
     return (
     <StyleList>
       <div>
@@ -105,17 +108,10 @@ class PayloadStatisticDrone extends Component {
 
           </Row>
         </Form>
-
+        <Spin spinning={modalLoading} tip="Loading...">
         <Table dataSource={dataSource} columns={columns} />
+        </Spin>
         </div>
-
-        <Modal
-          title="Basic Modal"
-        >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
     </StyleList>
     );
   }

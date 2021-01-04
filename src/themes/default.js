@@ -13,7 +13,13 @@ export const StyleSeparator = styled.div`
 
 export const StyleTable = styled.div`
   .ant-table-cell {
-    padding: 8px;
+    padding: 12px;
+  }
+  .ant-table-column-sorters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
   }
 `;
 

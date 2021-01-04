@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import {
   Row,
   Input,
@@ -11,7 +11,7 @@ import {
   Form,
   DatePicker,
   notification,
-  Spin,
+  Tag,
 } from 'antd';
 import {
   DeleteOutlined,
@@ -19,9 +19,8 @@ import {
   ExclamationCircleOutlined,
   HistoryOutlined,
   PlusOutlined,
-  InfoOutlined,
 } from '@ant-design/icons';
-import { useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import StyleListMonitorCampaign, { StyleSpinContainer } from './index.style';
 import {
   StyleTitle,
@@ -35,10 +34,16 @@ import {
 } from '../services';
 import moment from 'moment';
 import { DATE_TIME_FORMAT } from '../../../../configs';
-import { MECHANISM, METADATA_TYPES, RESOLUTION } from '../../../../constants';
+import {
+  MECHANISM,
+  METADATA_TYPES,
+  RESOLUTION,
+  TASK,
+} from '../../../../constants';
 
 import { monitorCampaignApi } from '../../../../apis';
 import debounce from '../../../../utils/debounce';
+import { useSelector } from 'react-redux';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -49,20 +54,32 @@ const ListMonitorCampaign = () => {
   const [form] = Form.useForm();
   const history = useHistory();
   const location = useLocation();
+  const projectType = useSelector((state) => state.user.projectType);
+  const isAdmin = projectType === 'ALL_PROJECT';
 
   const fetchListMonitorCampaignsData = async (params = {}) => {
     try {
       setLoading(true);
       const resp = await monitorCampaignApi.getListMonitorCampaigns(params);
-      setListMonitorCampaignsData(resp.data.result.monitorCampaigns);
+      let { monitorCampaigns } = resp.data.result;
+      monitorCampaigns = monitorCampaigns
+        .map((monitorCampaign) => {
+          const isValidMonitorCampaign = checkTask(monitorCampaign);
+          return isValidMonitorCampaign;
+        })
+        .filter((elem) => !!elem);
+
+      setListMonitorCampaignsData(monitorCampaigns);
       setLoading(false);
     } catch (error) {
       if (error.response && error.response.status === 400) return;
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại',
+        description: error.message,
       });
     }
   };
+
   useEffect(() => {
     fetchListMonitorCampaignsData();
   }, [location]);
@@ -83,20 +100,17 @@ const ListMonitorCampaign = () => {
     history.push(`/flight-hub-monitor-campaigns/update/${_id}`);
   };
 
-  const goToDetailMonitorCampaign = (item) => () => {
-    const { _id } = item;
-    history.push(`/flight-hub-monitor-campaigns/${_id}`);
-  };
-
   const goToCreate = () => {
     history.push(`/flight-hub-monitor-campaigns/create`);
   };
 
-  const handleDeleteMonitorCampaign = (item, index) => async () => {
+  const handleDeleteMonitorCampaign = (item) => async () => {
     try {
       await monitorCampaignApi.deleteMonitorCampaign(item._id);
-      const newListMonitorCampaignsData = [...listMonitorCampaignsData];
-      newListMonitorCampaignsData.splice(index, 1);
+      let newListMonitorCampaignsData = [...listMonitorCampaignsData];
+      newListMonitorCampaignsData = newListMonitorCampaignsData.filter(
+        (elem) => elem._id !== item._id
+      );
       setListMonitorCampaignsData(newListMonitorCampaignsData);
       notification.info({
         message: 'Xóa thành công!',
@@ -108,7 +122,7 @@ const ListMonitorCampaign = () => {
     }
   };
 
-  const deleteConfirm = (item, index) => () => {
+  const deleteConfirm = (item) => () => {
     const { name } = item;
     Modal.confirm({
       title: 'Cảnh báo',
@@ -120,29 +134,98 @@ const ListMonitorCampaign = () => {
       ),
       okText: 'Đồng ý',
       cancelText: 'Hủy',
-      onOk: handleDeleteMonitorCampaign(item, index),
+      onOk: handleDeleteMonitorCampaign(item),
     });
   };
 
+  const checkTask = (monitorCampaign) => {
+    const { startTime, endTime, task } = monitorCampaign;
+    const now = Date.now();
+    const COLORS = {
+      success: 'success',
+      processing: 'processing',
+      error: 'error',
+      default: 'default',
+      warning: 'warning',
+    };
+    monitorCampaign.status =
+      moment(now).diff(startTime) < 0
+        ? { color: COLORS.default, content: 'Chưa diễn ra' }
+        : moment(now).diff(endTime) <= 0
+        ? { color: COLORS.success, content: 'Đang diễn ra' }
+        : { color: COLORS.warning, content: 'Đã đóng' };
+
+    const taskValue = form.getFieldValue('task');
+    if (taskValue && task !== taskValue) return null;
+    return monitorCampaign;
+  };
+
+  const renderStatus = (status) => {
+    return status && <Tag color={status.color}>{status.content}</Tag>;
+  };
+
   const columns = [
-    {
-      dataIndex: '_id',
-      title: 'Mã đợt giám sát',
-      width: '7.5%',
-      align: 'center',
-      // sorter: (a, b) => a._id.localeCompare(b._id),
-    },
+    // {
+    //   dataIndex: '_id',
+    //   title: 'Mã đợt giám sát',
+    //   width: '7.5%',
+    //   align: 'center',
+    //   // sorter: (a, b) => a._id.localeCompare(b._id),
+    // },
     {
       dataIndex: 'name',
       title: 'Tên đợt giám sát',
       width: '15%',
       sorter: (a, b) => a.name.localeCompare(b.name),
+      render: (data, record) => {
+        const { _id } = record;
+        return <Link to={`/flight-hub-monitor-campaigns/${_id}`}>{data}</Link>;
+      },
     },
     {
       dataIndex: 'task',
       title: 'Loại sự cố',
-      width: '15%',
+      width: '10%',
       sorter: (a, b) => a.task.localeCompare(b.task),
+    },
+    {
+      dataIndex: 'status',
+      title: 'Trạng thái',
+      width: '10%',
+      sorter: (a, b) => {
+        return a.status.content.localeCompare(b.status.content);
+      },
+      render: renderStatus,
+    },
+    {
+      dataIndex: 'mechanism',
+      width: '7.5%',
+      title: 'Chế độ điều kiển',
+      align: 'center',
+      sorter: (a, b) => a.mechanism.localeCompare(b.mechanism),
+      render: (data) => (
+        <span>{data === MECHANISM.AUTO ? 'Tự động' : 'Thủ công'}</span>
+      ),
+    },
+    {
+      dataIndex: 'metadataType',
+      width: '7.5%',
+      title: 'Dạng dữ liệu',
+      align: 'center',
+      sorter: (a, b) => a.metadataType.localeCompare(b.metadataType),
+      render: (data) => (
+        <span>{data === METADATA_TYPES.VIDEO ? 'Video' : 'Ảnh'}</span>
+      ),
+    },
+    {
+      dataIndex: 'resolution',
+      width: '7.5%',
+      title: 'Độ phân giải',
+      align: 'center',
+      sorter: (a, b) =>
+        parseInt(a.resolution.substring(0, a.resolution.length - 1), 10) -
+        parseInt(b.resolution.substring(0, b.resolution.length - 1), 10),
+      render: (data) => <span>{data}</span>,
     },
     {
       dataIndex: 'startTime',
@@ -161,63 +244,14 @@ const ListMonitorCampaign = () => {
       render: formatMomentDateToDateTimeString,
     },
     {
-      dataIndex: 'monitoredObjects',
-      title: 'Đối tượng giám sát',
-      width: '12.5%',
-      sorter: (a, b) => 1,
-      render: (data = []) => {
-        return data.map((elem) => {
-          const { name, _id } = elem;
-          return <div key={_id}>{name}</div>;
-        });
-      },
-    },
-    {
-      dataIndex: 'monitoredZone',
-      title: 'Miền giám sát',
-      width: '12.5%',
-      sorter: (a, b) => a.name.localeCompare(b.name),
-      render: (data) => data && <span>{data.name}</span>,
-    },
-    {
-      dataIndex: 'mechanism',
-      title: 'Chế độ điều khiển',
-      width: '7.5%',
-      align: 'center',
-      sorter: (a, b) => a.mechanism.localeCompare(b.mechanism),
-      render: (data) => <span>{data === 'AUTO' ? 'Tự động' : 'Thủ công'}</span>,
-    },
-    {
-      dataIndex: 'metadataType',
-      title: 'Dạng dữ liệu',
-      width: '7.5%',
-      align: 'center',
-      sorter: (a, b) => a.metadataType.localeCompare(b.metadataType),
-      render: (data) => (
-        <span>{data === METADATA_TYPES.VIDEO ? 'Video' : 'Ảnh'}</span>
-      ),
-    },
-    {
-      dataIndex: 'resolution',
-      title: 'Độ phân giải',
-      width: '7.5%',
-      align: 'center',
-      sorter: (a, b) => a.resolution.localeCompare(b.resolution),
-    },
-    {
       key: 'actions',
       title: 'Hành động',
       width: '10%',
       align: 'center',
-      render: (data, record, index) => {
+      fixed: 'right',
+      render: (_, record, index) => {
         return (
           <Space size={4}>
-            <Button
-              size='small'
-              type='primary'
-              onClick={goToDetailMonitorCampaign(record)}>
-              Chi tiết
-            </Button>
             <Button
               icon={<EditOutlined />}
               size='small'
@@ -239,9 +273,8 @@ const ListMonitorCampaign = () => {
 
   return (
     <StyleListMonitorCampaign>
-      <StyleTitle>Danh sách đợt giám sát</StyleTitle>
-
-      <Row type='flex' justify='end' align='middle'>
+      <Row type='flex' justify='space-between' align='middle'>
+        <StyleTitle>Danh sách đợt giám sát</StyleTitle>
         <Button
           icon={<PlusOutlined />}
           type='primary'
@@ -265,6 +298,39 @@ const ListMonitorCampaign = () => {
           // initialValues={initialValues}
         >
           <Row>
+            <Col span={16} offset={8} pull={8}>
+              <Form.Item
+                name='timeRange'
+                label='Thời gian'
+                labelCol={{ span: 5 }}
+                rules={[{ type: 'array' }]}>
+                <RangePicker showTime format={DATE_TIME_FORMAT} />
+              </Form.Item>
+            </Col>
+
+            {isAdmin && (
+              <Col span={8}>
+                <Form.Item
+                  name='task'
+                  label='Loại sự cố'
+                  rules={[
+                    {
+                      type: 'string',
+                    },
+                  ]}>
+                  <Select allowClear placeholder='Chọn loại sự cố'>
+                    {Object.keys(TASK).map((key) => {
+                      return (
+                        <Select.Option key={key} value={TASK[key]}>
+                          {TASK[key]}
+                        </Select.Option>
+                      );
+                    })}
+                  </Select>
+                </Form.Item>
+              </Col>
+            )}
+
             <Col span={8}>
               <Form.Item
                 name='name'
@@ -273,30 +339,6 @@ const ListMonitorCampaign = () => {
                 <Input placeholder='Nhập tên đợt giám sát' />
               </Form.Item>
             </Col>
-
-            {/* <Col span={8}>
-              <Form.Item name="monitoredObject" label="Đối tượng giám sát">
-                <Select allowClear placeholder="Chọn đối tượng giám sát">
-                  {monitoredObjects.map(({ id, name }) => (
-                    <Option key={id} value={id}>
-                      {name}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col>
-
-            <Col span={8}>
-              <Form.Item name="monitoredZone" label="Miền giám sát">
-                <Select allowClear placeholder="Chọn miền giám sát">
-                  {monitoredZones.map(({ id, name }) => (
-                    <Option key={id} value={id}>
-                      {name}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col> */}
 
             <Col span={8}>
               <Form.Item name='mechanism' label='Chế độ điều khiển'>
@@ -315,6 +357,7 @@ const ListMonitorCampaign = () => {
                 </Select>
               </Form.Item>
             </Col>
+
             <Col span={8}>
               <Form.Item name='resolution' label='Độ phân giải'>
                 <Select allowClear placeholder='Chọn độ phân giải'>
@@ -325,42 +368,31 @@ const ListMonitorCampaign = () => {
               </Form.Item>
             </Col>
 
-            <Col span={16}>
-              <Form.Item
-                name='timeRange'
-                label='Thời gian'
-                labelCol={{ span: 5 }}
-                rules={[{ type: 'array' }]}>
-                <RangePicker showTime format={DATE_TIME_FORMAT} />
-              </Form.Item>
+            <Col span={8} offset={isAdmin ? 0 : 8}>
+              <Col span={13} offset={10}>
+                <Row type='flex' justify='end'>
+                  <Button
+                    size='middle'
+                    icon={<HistoryOutlined />}
+                    onClick={onResetFieldValues}>
+                    Đặt lại
+                  </Button>
+                </Row>
+              </Col>
             </Col>
           </Row>
-          <Col span={8} offset={16}>
-            <Col span={13} offset={10}>
-              <Row type='flex' justify='end'>
-                <Button
-                  size='middle'
-                  icon={<HistoryOutlined />}
-                  onClick={onResetFieldValues}>
-                  Đặt lại
-                </Button>
-              </Row>
-            </Col>
-          </Col>
         </Form>
       </StyleSearchForm>
 
       <StyleSeparator />
-        <StyleTable>
-          <Table
+      <StyleTable>
+        <Table
           loading={loading}
-            rowKey='_id'
-            columns={columns}
-            dataSource={listMonitorCampaignsData}
-            scroll={{ x: 1560 }}
-          />
-        </StyleTable>
-
+          rowKey='_id'
+          columns={columns}
+          dataSource={listMonitorCampaignsData}
+        />
+      </StyleTable>
     </StyleListMonitorCampaign>
   );
 };

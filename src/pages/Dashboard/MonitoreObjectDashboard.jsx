@@ -113,7 +113,7 @@ export default function PayloadDashboard() {
     {
       title: 'Hành động',
       key: 'action',
-      render: (text, record) => <a href="#">Chi tiết</a>,
+      render: (text, record) => <a href="/monitored-object-management">Chi tiết</a>,
     },
   ];
 

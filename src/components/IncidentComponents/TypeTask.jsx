@@ -130,7 +130,7 @@ const TypeTask = () => {
       title: 'Trạng thái ưu tiên',
       dataIndex: 'prioritize',
       render: (value, record) => (
-        <p>{record.prioritize == true ? 'true' : 'false'}</p>
+        <p>{record.prioritize == true ? 'Ưu tiên cao' : 'Ưu tiên thấp'}</p>
       ),
     },
     {
@@ -300,7 +300,7 @@ const TypeTask = () => {
       </div>
       <Input.Search
         style={{ margin: '0 0 10px 0' }}
-        placeholder="Search by..."
+        placeholder="Nhập từ khóa tìm kiếm..."
         enterButton
         onSearch={search}
       />
@@ -352,8 +352,8 @@ const TypeTask = () => {
           onChange={(e) => onChangeValue('prioritize', e)}
           style={{ width: '100%' }}
         >
-          <Option value={1}>true</Option>
-          <Option value={0}>false</Option>
+          <Option value={1}>Ưu tiên cao</Option>
+          <Option value={0}>Ưu tiên thấp</Option>
         </Select>
 
         <Button
@@ -361,7 +361,7 @@ const TypeTask = () => {
           onClick={submitEditData}
           style={{ marginTop: 20 }}
         >
-          Submit
+          Lưu
         </Button>
       </Modal>
 
@@ -399,8 +399,8 @@ const TypeTask = () => {
           onChange={(e) => onChangeValue('prioritize', e)}
           style={{ width: '100%' }}
         >
-          <Option value={1}>true</Option>
-          <Option value={0}>false</Option>
+          <Option value={1}>Ưu tiên cao</Option>
+          <Option value={0}>Ưu tiên thấp</Option>
         </Select>
 
         <Button
@@ -408,7 +408,7 @@ const TypeTask = () => {
           onClick={submitAddData}
           style={{ marginTop: 20 }}
         >
-          Submit
+          Thêm mới
         </Button>
       </Modal>
     </div>

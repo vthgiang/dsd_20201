@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import Select from 'react-select';
 import axios from 'axios';
-import { getToken, getProjectType } from '../../Common/info';
-
-FlightPathInput.propTypes = {
-    
-};
+import { getToken, getProjectType, getRole } from '../../Common/info';
+import { Link } from 'react-router-dom';
 
 function FlightPathInput(props) {
 
@@ -15,7 +11,9 @@ function FlightPathInput(props) {
         name, setName, height, setHeight, heightPoint, setHeightPoint, 
         selectedArea, setSelectedArea,
         selectedZone, setSelectedZone,
-        resetPoint
+        resetPoint,
+        speed, setSpeed, 
+        totalDistance
     } = props;
     
     // list khu vuc giam sat
@@ -25,8 +23,11 @@ function FlightPathInput(props) {
     const [monitoredZoneList, setMonitoredZoneList] = useState([]);
     const [zoneLoading, setZoneLoading] = useState(true);
 
+    const [showLinkCreateZone, setShowLinkCreateZone] = useState(false);
+
     useEffect(()=> {
         // load khu vuc giam sat
+        setShowLinkCreateZone(false);
         axios.get('https://monitoredzoneserver.herokuapp.com/area?page=0')
             .then(response => {
                 // console.log(response.data.content.monitoredArea)
@@ -49,6 +50,7 @@ function FlightPathInput(props) {
     useEffect(()=> {
         // load mien giam sat
         console.log("load zone");
+        setShowLinkCreateZone(false);
         if(!selectedArea) return;
         const token = getToken();
         const projectType = getProjectType();
@@ -68,6 +70,11 @@ function FlightPathInput(props) {
                 }))
                 console.log("mien giam sat",tmp);
                 setMonitoredZoneList(tmp);
+                if(tmp.length === 0){
+                    const role = getRole();
+                    if(role === 'ADMIN' || role === 'SUPER_ADMIN')
+                        setShowLinkCreateZone(true);
+                }
                 setZoneLoading(false);
             })
             .catch(e => {
@@ -97,10 +104,15 @@ function FlightPathInput(props) {
                     <Form.Control type="text" value={name} onChange={(e)=>setName(e.target.value)} placeholder="Nhập tên đường bay" />
                 </Form.Group>
 
-                {/* <Form.Group controlId="heightFlight">
-                    <Form.Label>Độ cao khi bay</Form.Label>
-                    <Form.Control type="number" onChange={(e)=>setHeight(e.target.value)} value={height} placeholder="m" />
-                </Form.Group> */}
+                <Form.Group controlId="speed">
+                    <Form.Label>Vận tốc bay</Form.Label>
+                    <Form.Control type="number" min="1" max="100" onChange={(e)=>setSpeed(e.target.value)} value={speed} placeholder="mét/phút" />
+                </Form.Group>
+
+                <Form.Group controlId="totalDistance">
+                    <Form.Label>Tổng quãng đường bay (mét)</Form.Label>
+                    <Form.Control type="number" value={Math.round(totalDistance)} placeholder="mét" />
+                </Form.Group>
             </Col>
         </Row>
         <Row>
@@ -129,6 +141,16 @@ function FlightPathInput(props) {
                 </Form.Group>
             </Col>
         </Row>
+        {showLinkCreateZone &&
+        <Row>
+            <Col>
+            <Form.Group controlId="formBasicEmail">
+                <Form.Text className="text-muted">
+                    <Link to={`/flight-create-zone/${selectedArea._id}`}>Khu vực hiện tại chưa có miền nào, bấm vào đây để thêm miền mới</Link>
+                </Form.Text>
+            </Form.Group>
+            </Col>
+        </Row>}
         </>
     );
 }

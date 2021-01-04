@@ -19,6 +19,7 @@ function MonitoredObjectView({ history }) {
   const dispatch = useDispatch();
   const category = useSelector((state) => state.category);
   const user = useSelector((state) => state.user.user);
+  const role = user.role;
   const monitoredObjects = useSelector((state) => state.monitoredObjects);
   const {
     isObjectSuccess,
@@ -29,7 +30,7 @@ function MonitoredObjectView({ history }) {
   const [monitoredObject, setMonitoredObject] = useState({
     code: "",
     name: "",
-    status: 1,
+    status: "1",
     description: "",
     managementUnit: null,
     category: null,
@@ -109,15 +110,15 @@ function MonitoredObjectView({ history }) {
   const postLogMonitorObjectAdd = async () => {
     await axios({
       method: "POST",
-      url: `http://it4883logging.herokuapp.com/api/monitor-object/add`,
+      url: `http://14.248.5.197:5012/api/monitor-object/add`,
       data: {
-        regionId: idMonitoredCreate.monitoredZone[0],
-        entityId: idMonitoredCreate._id,
-        description: "add monitor object",
+        regionId: monitoredObject.monitoredZone,
+        entityId: monitoredObject._id,
+        description: "edit monitor object",
         authorId: "",
         projectType: localStorage.getItem("project-type"),
         state: "",
-        name: idMonitoredCreate.name,
+        name: monitoredObject.name,
       },
     })
       .then((res) => {})
@@ -198,7 +199,7 @@ function MonitoredObjectView({ history }) {
     setMonitoredObject({
       code: "",
       name: "",
-      status: 1,
+      status: "1",
       description: "",
       managementUnit: null,
       category: null,

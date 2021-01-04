@@ -10,6 +10,8 @@ import { Form, Input, Col, Row,  InputNumber } from "antd";
 import React, { useEffect, useState, useMemo } from "react";
 import ImageUploader from "react-images-upload";
 import axios from 'axios';
+import { Spin } from 'antd';
+
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -47,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TransitionsModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
+  const [loader, setLoader] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
       
@@ -68,6 +70,7 @@ export default function TransitionsModal(props) {
   const [maxFlightSpeed, setMaxFlightSpeed] = useState(0);
   const [maxFlightTime, setMaxFlightTime] = useState(0);
   const [rangeBattery, setBattery] = useState(0);
+  const [type, setType] = useState(0);
   
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
@@ -93,10 +96,13 @@ export default function TransitionsModal(props) {
 }, [name, brand, color, dimensions, maxFlightHeight, maxFlightRange, maxFlightSpeed, maxFlightTime, rangeBattery, selectedImage]);
   
   const saveDrone = () => {
+
     if (!isValidate) {
+      setLoader(false)
       setAlert(true);
       return;
     } 
+    setLoader(true);
     setAlert(false);
     const fd = new FormData();
     fd.append('file', selectedImage, selectedImage.name)
@@ -132,6 +138,7 @@ export default function TransitionsModal(props) {
                 rangeBattery: rangeBattery,
                 task: 0,
                 used: false,
+                type: type,
                 urlImage: "https://drive.google.com/uc?id="+res.data.image_id
               })
             };
@@ -230,7 +237,7 @@ export default function TransitionsModal(props) {
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Giới hạn tầm bay (m)</h4>
-                  <InputNumber min={1}
+                  <InputNumber min={1}   size="large"
                     className={classes.input}
                     onChange={event => setMaxFlightRange(event)}
                   />
@@ -240,30 +247,37 @@ export default function TransitionsModal(props) {
               <Col>
                 <Form.Item className={classes.formItem}>
                   <h4>Tốc độ tối đa (m/phút)</h4>
-                  <InputNumber min={1} 
+                  <InputNumber min={1}  size="large"
                     className={classes.input}
                     onChange={event => setMaxFlightSpeed(event)}
                   />
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Thời gian bay (phút)</h4>
-                  <InputNumber min={1} 
+                  <InputNumber min={1}  size="large"
                     className={classes.input}
                     onChange={event => setMaxFlightTime(event)}
                   />
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Trần bay (m)</h4>
-                  <InputNumber min={1} 
+                  <InputNumber min={1}  size="large"
                     className={classes.input}
                     onChange={event => setMaxFlightHeight(event)}
                   />
                 </Form.Item>
                 <Form.Item className={classes.formItem}>
                   <h4>Dung lượng pin (mAh)</h4>
-                  <InputNumber min={1} 
+                  <InputNumber  size="large" min={1} 
                     className={classes.input}
                     onChange={event => setBattery(event)}
+                  />
+                </Form.Item>
+                <Form.Item className={classes.formItem}>
+                  <h4>Loại Drone</h4>
+                  <InputNumber  size="large" min={1} 
+                    className={classes.input}
+                    onChange={event => setType(event)}
                   />
                 </Form.Item>
 
@@ -275,7 +289,10 @@ export default function TransitionsModal(props) {
               {(alert) && (
                 <p>*Hãy điền đầy đủ và đúng trường thông tin</p>
               )}
-              <Button
+              {loader? (
+                  <Spin></Spin>
+              ) : (
+                <Button
                 onClick={saveDrone}
                 variant="contained"
                 color="primary"
@@ -284,6 +301,8 @@ export default function TransitionsModal(props) {
               >
                 Lưu
               </Button>
+              )
+              }
               
              </div>
           </div>

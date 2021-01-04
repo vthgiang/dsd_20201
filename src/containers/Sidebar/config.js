@@ -192,7 +192,42 @@ export const sidebarMenu = [
     icon: 'fas fa-file-signature',
     route: '/activity-log',
     subMenu: [
-
+      {
+        key: 'LogBusiness',
+        heading: 'Log nghiệp vụ',
+        icon: 'fas fa-business-time',
+        route: '/log-business',
+      },
+      {
+        key: 'LogRegion',
+        heading: 'Miền giám sát',
+        icon: 'fas fa-crop-alt',
+        route: '/log-region',
+      },
+      {
+        key: 'LogObjMonitor',
+        heading: 'Đối tượng giám sát',
+        icon: 'fas fa-binoculars',
+        route: '/log-objmonitor',
+      },
+      {
+        key: 'LogProblem',
+        heading: 'Sự cố',
+        icon: 'fas fa-toolbox',
+        route: '/log-problem',
+      },
+      {
+        key: 'LogIncident',
+        heading: 'Xử lý sự cố',
+        icon: 'fas fa-toolbox',
+        route: '/log-incident',
+      },
+      {
+        key: 'LogUAV',
+        heading: 'Flight Hub',
+        icon: 'fal fa-drone',
+        route: '/log-uav',
+      },
       {
         key: 'LogDrone',
         heading: 'Drone',
@@ -225,47 +260,16 @@ export const sidebarMenu = [
         route: '/log-video',
       },
       {
-        key: 'LogProblem',
-        heading: 'Sự cố',
-        icon: 'fas fa-toolbox',
-        route: '/log-problem',
-      },
-      {
-        key: 'LogObjMonitor',
-        heading: 'Đối tượng giám sát',
-        icon: 'fas fa-binoculars',
-        route: '/log-objmonitor',
-      },
-      {
         key: 'LogWarn',
         heading: 'Cảnh báo',
         icon: 'far fa-bell',
         route: '/log-warn',
       },
       {
-        key: 'LogIncident',
-        heading: 'Xử lý sự cố',
-        icon: 'fas fa-toolbox',
-        route: '/log-incident',
-      },
-
-      {
-        key: 'LogRegion',
-        heading: 'Miền giám sát',
-        icon: 'fas fa-crop-alt',
-        route: '/log-region',
-      },
-      {
         key: 'LogStatistic',
         heading: 'Báo cáo, thống kê',
         icon: 'fa fa-file-chart-line',
         route: '/log-statistic',
-      },
-      {
-        key: 'LogUAV',
-        heading: 'Kết nối UAV',
-        icon: 'fal fa-drone',
-        route: '/log-uav',
       },
     ],
   },

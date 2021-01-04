@@ -27,6 +27,15 @@ const getMonitorCampaign = async (monitorCampaignId) => {
   return result;
 };
 
+const getQuickMonitorCampaign = async (monitorCampaignId) => {
+  const result = await axiosInstance({
+    method: 'GET',
+    url: `/api/monitor-campaigns/quick/${monitorCampaignId}`,
+  });
+
+  return result;
+};
+
 const updateMonitorCampaign = async (data) => {
   const result = await axiosInstance({
     method: 'PATCH',
@@ -50,4 +59,5 @@ export default {
   getMonitorCampaign,
   updateMonitorCampaign,
   deleteMonitorCampaign,
+  getQuickMonitorCampaign
 };

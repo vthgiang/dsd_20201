@@ -1,167 +1,363 @@
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { lighten, makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableRow from "@material-ui/core/TableRow";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 import React, { useEffect, useState, useMemo } from "react";
-import { TableHeader, Pagination, Search } from "../../components/DataTable";
 import useFullPageLoader from "../../components/hooks/useFullPageLoader";
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import ModalEditDataTable from '../../containers/ModalEditDataTable';
+import { useSelector } from "react-redux";
 import ModalAddDataTable from '../../containers/ModalAddDataTable'
-import styled from "styled-components";
+import ModalEditDataTable from '../../containers/ModalEditDataTable';
+import {Tag} from 'antd';
 
-const DataTable = () => {
+import { isAuthorised, DRONE_SEARCH, CRUD_DRONE } from "../../components/Drone/Common/role";
 
-    const Styles = styled.div`
-  > div {
-    height: 80vh;
-    overflow: auto;
+
+
+function descendingComparator(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
   }
-  table {
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
 
-    border-spacing: 0;
+function getComparator(order, orderBy) {
+  return order === "desc"
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
 
-    thead > tr {
-      th {
-        text-align: center;
-        z-index: 50;
-      }
-    }
-
-    
-`;
-
-    const [drones, setDrones] = useState([]);
-    const [loader, showLoader, hideLoader] = useFullPageLoader();
-    const [totalItems, setTotalItems] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [search, setSearch] = useState("");
-    const [sorting, setSorting] = useState({ field: "", order: "" });
-
-    const ITEMS_PER_PAGE = 20;
-
-    const headers = [
-        { name: "Id#", field: "id", sortable: true },
-        { name: "Tên", field: "name", sortable: true },
-        { name: "Nhãn hiệu", field: "brand", sortable: true },
-        { name: "Màu", field: "color", sortable: true },
-        { name: "Kích thước", field: "dimension", sortable: false },
-        { name: "Giới hạn tầm bay (m)", field: "maxFlightRange", sortable: false },
-        { name: "Tốc độ tối đa (m/min)", field: "maxFlightSpeed", sortable: false },
-        { name: "Thời gian bay tối đa (min)", field: "maxFlightTime", sortable: false },
-        { name: "Trần cao (m)", field: "maxFlightHeight", sortable: false },
-        { name: "Dung lượng pin (mAh)", field: "rangeBattery", sortable: false },
-        { name: "_____", field: "rangeBattery", sortable: false }
-    ];
-    const getData = () => {
-        showLoader();
-
-        fetch(`http://skyrone.cf:6789/drone/getAll`)
-            .then(response => response.json())
-            .then(json => {
-                hideLoader();
-                setDrones(json);
-            });
-    };
-
-    useEffect(() => {
-        getData();
-    }, []);
-
-    const dronesData = useMemo(() => {
-        let computedDrones = drones;
-
-        if (search) {
-            computedDrones = computedDrones.filter(
-                comment =>
-                    comment.id.toLowerCase().includes(search.toLowerCase()) ||
-                    comment.name.toLowerCase().includes(search.toLowerCase())
-            );
-        }
-
-        setTotalItems(computedDrones.length);
-
-        // //Sorting comments
-        // if (sorting.field) {
-        //     const reversed = sorting.order === "asc" ? 1 : -1;
-        //     computedDrones = computedDrones.sort(
-        //         (a, b) =>
-        //             reversed * a[sorting.field].localeCompare(b[sorting.field.toString])
-        //     );
-        // }
-
-        //Current Page slice
-        return computedDrones.slice(
-            (currentPage - 1) * ITEMS_PER_PAGE,
-            (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
-        );
-    }, [drones, currentPage, search, sorting]);
-
-    return (
-
-        <>
-            <div className="row">
-                <div className="col-md-2">
-                    <ModalAddDataTable />
-                </div>
-                <div className="col-md-2">
-                    <h4>{dronesData.length + 1} drone</h4>
-                </div>
-                <div className="col-md-4">
-                    <Pagination
-                        total={totalItems}
-                        itemsPerPage={ITEMS_PER_PAGE}
-                        currentPage={currentPage}
-                        onPageChange={page => setCurrentPage(page)}
-                    />
-                </div>
-                <div className="col-md-4 d-flex flex-row-reverse">
-                    <Search
-                        onSearch={value => {
-                            setSearch(value);
-                            setCurrentPage(1);
-                        }}
-                    />
-                </div>
-            </div>
-            <Styles>
-                <div className="row w-100">
-                    <div className="col mb-3 col-12 text-center">
+function stableSort(array, comparator) {
+  const stabilizedThis = array.map((el, index) => [el, index]);
+  stabilizedThis.sort((a, b) => {
+    const order = comparator(a[0], b[0]);
+    if (order !== 0) return order;
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map((el) => el[0]);
+}
 
 
-                        <table className="table table-striped sticky-table">
-                            <TableHeader
-                                headers={headers}
-                                onSorting={(field, order) =>
-                                    setSorting({ field, order })
-                                }
-                            />
-                            <tbody>
-                                {dronesData.map(drone => (
-                                    <tr>
-                                        <th scope="row" key={drone.id}>
-                                            {drone.id}
-                                        </th>
-                                        <td>{drone.name}</td>
-                                        <td>{drone.brand}</td>
-                                        <td>{drone.color}</td>
-                                        <td>{drone.dimensions}</td>
-                                        <td>{drone.maxFlightRange}</td>
-                                        <td>{drone.maxFlightSpeed}</td>
-                                        <td>{drone.maxFlightTime}</td>
-                                        <td>{drone.maxFlightHeight}</td>
-                                        <td>{drone.rangeBattery}</td>
-                                        <td>
-                                            <ModalEditDataTable code={drone.code} id={drone.id} />
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                    {loader}
-                </div>
-            </Styles>
-        </>
-    );
+const headCells = [
+  {
+    id: "id",
+    numeric: false,
+    disablePadding: true,
+    label: "ID drone"
+  },
+  { id: "name", numeric: true, disablePadding: false, label: "Tên drone" },
+  { id: "brand", numeric: true, disablePadding: false, label: "nhãn hiệu" },
+  { id: "color", numeric: true, disablePadding: false, label: "color" },
+  { id: "maxFlightRange", numeric: true, disablePadding: false, label: "Tầm bay (m)" },
+  { id: "maxFlightSpeed", numeric: true, disablePadding: false, label: "Tốc độ tối đa(m)" },
+  { id: "maxFlightTime", numeric: true, disablePadding: false, label: "thời gian bay tối đa (p)" },
+  { id: "maxFlightHeight", numeric: true, disablePadding: false, label: "Trần bay (m)" },
+  { id: "rangeBattery", numeric: true, disablePadding: false, label: "dung lượng pin (mAh)" },
+  { id: "type", numeric: true, disablePadding: false, label: "loại" }
+];
+
+function EnhancedTableHead(props) {
+  const {
+    stateDrone,
+    classes,
+    onSelectAllClick,
+    order,
+    orderBy,
+    numSelected,
+    rowCount,
+    onRequestSort
+  } = props;
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
+  };
+
+  return (
+    <TableHead>
+      <TableRow>
+        {headCells.map((headCell) => (
+          <TableCell
+            key={headCell.id}
+            align={headCell.numeric ? "right" : "left"}
+            padding={headCell.disablePadding ? "none" : "default"}
+            sortDirection={orderBy === headCell.id ? order : false}
+          >
+            <TableSortLabel
+              active={orderBy === headCell.id}
+              direction={orderBy === headCell.id ? order : "asc"}
+              onClick={createSortHandler(headCell.id)}
+            >
+              {headCell.label}
+              {orderBy === headCell.id ? (
+                <span className={classes.visuallyHidden}>
+                  {order === "desc" ? "sorted descending" : "sorted ascending"}
+                </span>
+              ) : null}
+            </TableSortLabel>
+          </TableCell>
+        ))}
+        <TableCell>
+        </TableCell>
+      </TableRow>
+    </TableHead>
+  );
+}
+
+EnhancedTableHead.propTypes = {
+  classes: PropTypes.object.isRequired,
+  numSelected: PropTypes.number.isRequired,
+  onRequestSort: PropTypes.func.isRequired,
+  onSelectAllClick: PropTypes.func.isRequired,
+  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
+  orderBy: PropTypes.string.isRequired,
+  rowCount: PropTypes.number.isRequired
 };
 
-export default DataTable;
+const useToolbarStyles = makeStyles((theme) => ({
+  root: {
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(1)
+  },
+  highlight:
+    theme.palette.type === "light"
+      ? {
+          color: theme.palette.secondary.main,
+          backgroundColor: lighten(theme.palette.secondary.light, 0.85)
+        }
+      : {
+          color: theme.palette.text.primary,
+          backgroundColor: theme.palette.secondary.dark
+        },
+  title: {
+    flex: "1 1 100%"
+  }
+}));
+
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%"
+  },
+  paper: {
+    width: "100%",
+    marginBottom: theme.spacing(2)
+  },
+  table: {
+    minWidth: 750
+  },
+  visuallyHidden: {
+    border: 0,
+    clip: "rect(0 0 0 0)",
+    height: 1,
+    margin: -1,
+    overflow: "hidden",
+    padding: 0,
+    position: "absolute",
+    top: 20,
+    width: 1
+  },
+  container: {
+    maxHeight: 500,
+  }
+}));
+
+export default function EnhancedTable() {
+  const classes = useStyles();
+  const [order, setOrder] = React.useState("asc");
+  const [orderBy, setOrderBy] = React.useState("calories");
+  const [selected, setSelected] = React.useState([]);
+  const [page, setPage] = React.useState(0);
+  const [dense, setDense] = React.useState(false);
+  const [rowsPerPage, setRowsPerPage] = React.useState(35);
+
+  const [drones, setDrones] = useState([]);
+const getData = () => {
+    showLoader();
+    fetch(`http://skyrone.cf:6789/drone/getAll`)
+        .then(response => response.json())
+        .then(json => {
+            setDrones(json);
+            hideLoader();
+        });
+};
+
+useEffect(() => {
+    getData();
+}, []);
+
+const [loader, showLoader, hideLoader] = useFullPageLoader();
+const [search, setSearch] = useState();
+const [numDrone, setNumDrone] = useState();
+
+const users = useSelector((state) => state.user.user);
+const projectType = users.type;
+const role = users.role;
+
+
+const dronesData = useMemo(() => {
+    let computedDrones = drones;
+    setPage(0);
+   
+    setNumDrone(computedDrones.length);
+    if (search) {
+        computedDrones = computedDrones.filter(
+            (comment) =>
+                comment.id.toLowerCase().includes(search.toLowerCase()) || comment.name.toLowerCase().includes(search.toLowerCase())
+        );
+    } 
+    return computedDrones;
+}, [drones, search]);
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
+
+  const handleSelectAllClick = (event) => {
+    if (event.target.checked) {
+      const newSelecteds = dronesData.map((n) => n.idDrone);
+      setSelected(newSelecteds);
+      console.log(selected);
+      return;
+    }
+    setSelected([]);
+  };
+
+ 
+
+
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const handleChangeDense = (event) => {
+    setDense(event.target.checked);
+  };
+
+  const isSelected = (name) => selected.indexOf(name) !== -1;
+
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, dronesData.length - page * rowsPerPage);
+
+  const EnhancedTableToolbar = (props) => {
+        const classes = useToolbarStyles();
+        return (
+          <Toolbar>
+           
+           <Typography   className={classes.title}> <ModalAddDataTable></ModalAddDataTable> </Typography>
+              <Typography> {numDrone}drone </Typography>
+          </Toolbar>
+        );
+      };
+
+  return (
+    <div className={classes.root}>
+      <Paper className={classes.paper}>
+      <input
+                key="111"
+                type="text"
+                className="form-control"
+                style={{ width: "400px", marginRight: '1rem', marginLeft: '2rem' }}
+                placeholder="Tìm kiếm ID hoặc tên drone"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+            />
+        <EnhancedTableToolbar />
+        <TableContainer className={classes.container}>
+        {loader}
+          <Table
+            className={classes.table}
+            aria-labelledby="tableTitle"
+            size={dense ? "small" : "medium"}
+            stickyHeader aria-label="sticky table"
+          >
+            <EnhancedTableHead
+              classes={classes}
+              numSelected={selected.length}
+              order={order}
+              orderBy={orderBy}
+              onSelectAllClick={handleSelectAllClick}
+              onRequestSort={handleRequestSort}
+              rowCount={dronesData.length}
+            />
+            <TableBody>
+              {stableSort(dronesData, getComparator(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((drone, index) => {
+                  const isItemSelected = isSelected(drone.idDrone);
+                  const labelId = `enhanced-table-checkbox-${index}`;
+
+                  return (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      key={drone.id}
+                      selected={isItemSelected}
+                    >
+                      <TableCell>
+                        {drone.id}
+                      </TableCell>
+                      <TableCell align="right">{drone.name}</TableCell>
+                      <TableCell align="right">{drone.brand}</TableCell>
+                      <TableCell align="right">{drone.color}</TableCell>
+                      <TableCell align="right">{drone.maxFlightRange}</TableCell>
+                      <TableCell align="right">{drone.maxFlightSpeed}</TableCell>
+                      <TableCell align="right">{drone.maxFlightTime}</TableCell>
+                      <TableCell align="right">{drone.maxFlightHeight}</TableCell>
+                      <TableCell align="right">{drone.rangeBattery}</TableCell>
+                      <TableCell align="right"><Tag color="green">{drone.type}</Tag></TableCell>
+                      <TableCell align="center">
+                              {isAuthorised(CRUD_DRONE) && <ModalEditDataTable code={drone.code} id={drone.id} />}  
+                          </TableCell>
+                    </TableRow>
+                  );
+                })}
+              {emptyRows > 0 && (
+                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[35, 50, 70]}
+          component="div"
+          count={dronesData.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
+      </Paper>
+      <FormControlLabel
+        control={<Switch checked={dense} onChange={handleChangeDense} />}
+        label="Thu gọn"
+      />
+    </div>
+  );
+}

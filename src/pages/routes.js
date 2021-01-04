@@ -38,6 +38,7 @@ import LogRegion from './LogRegion';
 import LogStatistic from './LogStatistic';
 import LogUAV from './LogUAV';
 import LogDashboardPage from './LogTreeProject';
+import LogBusiness from './LogBusiness';
 //Payload
 import ListPayload from './Payload/PayloadManagement/List';
 import ListTypePayload from './Payload/PayloadType/List';
@@ -57,6 +58,7 @@ import EditSignupPayloadDrone from './Payload/PayloadToDrone/Edit';
 import AddSignupPayloadDrone from './Payload/PayloadToDrone/Add';
 import DScard from './Payload/PayloadSDcard';
 import ImageVideo from './ImageVideo';
+import Tracking from './ImageVideo/tracking';
 import Detail from './ImageVideo/detail';
 import Stream from './ImageVideo/stream';
 //monitored Object Group 05
@@ -64,11 +66,12 @@ import CategoryMonitored from './MonitoredObject/Category/component';
 import MonitoredObject from './MonitoredObject/MonitoredObject/component';
 import MonitoredObjectCreate from './MonitoredObject/MonitoredObject/component/monitoredObjectCreate';
 import MonitoredObjectView from './MonitoredObject/MonitoredObject/component/MonitoredObjectView';
+import MonitoredObjectHistory from './MonitoredObject/MonitoredObject/component/monitorObjectHistory';
 // incident group 09
-import IncidentGroup9 from "./Incident/Incident";
-import ImageGallery from "./Incident/ImageGallery";
-import VideoGallery from "./Incident/VideoGallery";
-import IncidentEdit from "./Incident/Incident/edit";
+import IncidentGroup9 from './Incident/Incident';
+import ImageGallery from './Incident/ImageGallery';
+import VideoGallery from './Incident/VideoGallery';
+import IncidentEdit from './Incident/Incident/edit';
 // dsd_01 drone
 import TableDrone from './TableDrone';
 import FlightPathDrone from './FLightPathDrone';
@@ -78,6 +81,7 @@ import MapTest from './MapTest';
 import FlightPath from './FlightPath';
 import FlightSchedule from './FlightSchedule';
 import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
+import FlightCreateZone from '../components/Drone/FlightCreateZone';
 
 //DE DIEU
 import HomeDeDieu from "./Home/DeDieu";
@@ -85,6 +89,7 @@ import StatisticDeDieu from './Dashboard/IncidentDashboard'
 import Task1 from './Home/DeDieu/Task1/index'
 import Task5 from './Home/DeDieu/Task5/index'
 import DeDieuNcn3 from "./Home/DeDieu/indexncn3";
+import UAVMana from './UAVMana';
 
 export const routes = [
   {
@@ -116,6 +121,18 @@ export const routes = [
   {
     path: '/drones',
     component: () => <div>DroneManagement</div>,
+  },
+  {
+    path: '/flight-create-zone/:areaId',
+    component: FlightCreateZone,
+  },
+  {
+    path: '/dedieu-uav-mana',
+    component: UAVMana,
+  },
+  {
+    path: '/dedieu-ncn4',
+    component: TableDroneState,
   },
   {
     path: '/drone-list',
@@ -249,6 +266,10 @@ export const routes = [
     component: () => <ImageVideo />,
   },
   {
+    path: '/tracking',
+    component: () => <Tracking />,
+  },
+  {
     path: '/stream',
     component: () => <Stream />,
   },
@@ -269,6 +290,13 @@ export const routes = [
     path: '/monitored-object-management/:option/:id',
     component: MonitoredObjectView,
     exact: true,
+  },
+  //view history incident
+  {
+    path: '/monitored-object-management/history/',
+    component: MonitoredObjectHistory,
+    exact: true,
+
   },
   // create monitored Object
   {
@@ -369,6 +397,10 @@ export const routes = [
     component: LogUAV,
   },
   {
+    path: '/log-business',
+    component: LogBusiness,
+  },
+  {
     path: '/log-dash-board-page',
     component: LogDashboardPage,
   },
@@ -416,24 +448,23 @@ export const routes = [
     component: ListUserMeta,
   },
   {
-    path: "/incidents",
+    path: '/incidents',
     component: () => <IncidentGroup9 />,
-    exact: true
+    exact: true,
   },
 
   {
-    path: "/incidents/:id",
+    path: '/incidents/:id',
     component: () => <IncidentEdit />,
-    exact: true
-
+    exact: true,
   },
   {
-    path: "/imageGallery",
+    path: '/imageGallery',
     component: () => <ImageGallery />,
-    exact: true
+    exact: true,
   },
   {
-    path: "/videoGallery",
+    path: '/videoGallery',
     component: () => <VideoGallery />,
   },
   {
@@ -460,7 +491,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        isLogin ? <Component {...props} /> : <Redirect to="/login" />
+        isLogin ? <Component {...props} /> : <Redirect to='/login' />
       }
     />
   );

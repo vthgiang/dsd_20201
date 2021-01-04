@@ -116,10 +116,17 @@ body {
   margin-bottom: 32px;
 }
 
+.dashboard .ant-tabs-content-holder {
+  position: relative;
+}
+
 .sticky-column {
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
+}
+a.ant-typography-expand {
+  color: #1890ff !important;
 }
 .pin {
   width: 15px;

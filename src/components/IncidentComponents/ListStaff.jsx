@@ -48,7 +48,11 @@ const ListStaff = () => {
       .then(function (response) {
         //handle success
         setLoadingTable(false)
-        setDataAPI(response.data.list)
+        let list = response.data.list
+        .filter(function (el) {
+          return el.employee != null;
+        });
+        setDataAPI(list)
         // let data = [];
         // response.data.list.map((item) => {
         //   let convertItem = item.employee;
