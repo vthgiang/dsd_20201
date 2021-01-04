@@ -38,6 +38,7 @@ import LogRegion from './LogRegion';
 import LogStatistic from './LogStatistic';
 import LogUAV from './LogUAV';
 import LogDashboardPage from './LogTreeProject';
+import LogBusiness from './LogBusiness';
 //Payload
 import ListPayload from './Payload/PayloadManagement/List';
 import ListTypePayload from './Payload/PayloadType/List';
@@ -57,6 +58,7 @@ import EditSignupPayloadDrone from './Payload/PayloadToDrone/Edit';
 import AddSignupPayloadDrone from './Payload/PayloadToDrone/Add';
 import DScard from './Payload/PayloadSDcard';
 import ImageVideo from './ImageVideo';
+import Tracking from './ImageVideo/tracking';
 import Detail from './ImageVideo/detail';
 import Stream from './ImageVideo/stream';
 //monitored Object Group 05
@@ -263,6 +265,10 @@ export const routes = [
     component: () => <ImageVideo />,
   },
   {
+    path: '/tracking',
+    component: () => <Tracking />,
+  },
+  {
     path: '/stream',
     component: () => <Stream />,
   },
@@ -381,6 +387,10 @@ export const routes = [
   {
     path: '/log-uav',
     component: LogUAV,
+  },
+  {
+    path: '/log-business',
+    component: LogBusiness,
   },
   {
     path: '/log-dash-board-page',

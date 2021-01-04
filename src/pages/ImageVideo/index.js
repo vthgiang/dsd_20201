@@ -18,6 +18,8 @@ function ImageVideo() {
     const [monitoredObjects, setMonitoredObjects] = useState([]);
     const [droneObjects, setDroneObjects] = useState([]);
     const [currentMonitoredObject, setCurrentMonitoredObject] = useState({});
+    const [campaigns, setCampaigns] = useState([]);
+    const [currentCampaign, setCurrentCampaign] = useState({});
     const [droneId, setDroneId] = useState();
 
     const onChangeDate = (date, dateString) => {
@@ -46,9 +48,12 @@ function ImageVideo() {
             data: {
                 title: searchString,
                 problemType: filterFields.problemType,
+                monitoredObjectId: currentMonitoredObject._id,
+                idCampaign: currentCampaign?.value,
             }
         }).then(({ data }) => {
-            setImageVideos(data.result.map((i, index) => ({
+            setImageVideos(data.result.map((i, index) => (
+                {
                 ...i,
                 link: i.type === 0 ?
                     <div style={{
@@ -74,11 +79,15 @@ function ImageVideo() {
     };
 
     const onChangeMonitorObject = monitorObjectId => {
-        setCurrentMonitoredObject(monitoredObjects.find(i => i._id === monitorObjectId));
+        setCurrentMonitoredObject(monitoredObjects.find(i => i._id === monitorObjectId.key));
     };
 
     const onChangeDrone = droneId => {
         setDroneId(droneObjects.find(i => i._id === droneId));
+    };
+
+    const onChangeCampaign = campaigId => {
+        setCurrentCampaign(campaigns.find(i => i._id === campaigId.key));
     };
 
     useEffect(() => {
@@ -106,12 +115,43 @@ function ImageVideo() {
                 params: {},
                 data: {}
             })
+            axios({
+                method: "GET",
+                url: "https://dsd05-monitored-object.herokuapp.com/monitored-object/",
+                params: {
+                    "type":localStorage.getItem("project-type")
+                },
+                headers: {
+                },
+    
+                data: {
+                }
+                }).then((res=>{
+                    const res1Data = (res?.data?.content?.map(i => ({ ...i, value: i._id, label: i.name })));
+                    setMonitoredObjects(res1Data);
+                    setCurrentMonitoredObject(res1Data);
+                }))
 
-            const res1Data = res1.data.content.splice(0, 10).map(i => ({ ...i, value: i._id, label: i.name }));
-            const res2Data = res2.data.map(i => ({ ...i, value: i.id, label: i.name }));
-
-            setMonitoredObjects(res1Data);
-            setCurrentMonitoredObject(res1Data[0]);
+                axios({
+                    method: "GET",
+                    url: "http://123.30.235.196:5598/api/monitor-campaigns/",
+                    params: {
+                        "type":localStorage.getItem("project-type"),
+                    },
+                    headers: {
+                        "Authorization": "Bearer "+localStorage.getItem("token"),
+                        "projectType":localStorage.getItem("project-type"),
+                    },
+        
+                    data: {
+                    }
+                    }).then((res=>{
+                        const res1Data = (res?.data?.result?.monitorCampaigns?.map(i => ({ ...i, value: i._id, label: i.name })));
+                        setCampaigns(res1Data);
+                        setCurrentCampaign(res1Data);
+                    }))
+    
+                const res2Data = res2.data.map(i => ({ ...i, value: i.id, label: i.name }));
             setDroneObjects(res2Data);
             setDroneId(res2Data[0]);
 
@@ -177,6 +217,13 @@ function ImageVideo() {
                         <Button type="primary" onClick={handleSearch}>Tìm kiếm</Button>
                     </Space>
                 </SpaceCustom>
+                <Select
+                    value={currentCampaign}
+                    labelInValue={true} style={{ minWidth: 100 }}
+                    placeholder="Đợt giám sát"
+                    onChange={onChangeCampaign}
+                    options={campaigns}
+                />
                 <Select
                     value={currentMonitoredObject}
                     labelInValue={true} style={{ minWidth: 100 }}
