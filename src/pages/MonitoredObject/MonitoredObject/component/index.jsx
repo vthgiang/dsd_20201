@@ -49,7 +49,8 @@ function AreaMonitored(props) {
       method: "POST",
       url: `http://14.248.5.197:5012/api/monitor-object/delete`,
       data: {
-        regionId: monitoredObjects.monitoredZone,
+       
+        regionId: monitoredObjects.monitoredZone[0],         // monitoredObjects.monitoredZone[0],
         entityId: monitoredObjects._id,
         description: "delete monitor object",
         authorId: "",
