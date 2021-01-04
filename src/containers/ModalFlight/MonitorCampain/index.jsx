@@ -38,7 +38,7 @@ return (
   <>
   <div>
     {(() => {
-      if (monitorCampain.status === "0") {
+      if (monitorCampain.status == 0) {
         return (<p>Thông tin đợt giám sát đã bị xóa</p>)
       } else {
         return(
