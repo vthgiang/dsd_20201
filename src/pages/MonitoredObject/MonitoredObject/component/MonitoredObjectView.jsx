@@ -171,10 +171,17 @@ function MonitoredObjectView({ history }) {
       })
         .then((res) => {
           if (res.data) {
-            setMonitoredObject((prev) => ({
-              ...prev,
-              images: res.data.result,
-            }));
+            if (res.data.result.length > 6) {
+              setMonitoredObject((prev) => ({
+                ...prev,
+                images: res.data.result.filter((item, index) => index < 6),
+              }));
+            } else {
+              setMonitoredObject((prev) => ({
+                ...prev,
+                images: res.data.result,
+              }));
+            }
           }
         })
         .catch((err) => {
