@@ -58,6 +58,7 @@ import EditSignupPayloadDrone from './Payload/PayloadToDrone/Edit';
 import AddSignupPayloadDrone from './Payload/PayloadToDrone/Add';
 import DScard from './Payload/PayloadSDcard';
 import ImageVideo from './ImageVideo';
+import Tracking from './ImageVideo/tracking';
 import Detail from './ImageVideo/detail';
 import Stream from './ImageVideo/stream';
 //monitored Object Group 05
@@ -262,6 +263,10 @@ export const routes = [
   {
     path: '/metadata',
     component: () => <ImageVideo />,
+  },
+  {
+    path: '/tracking',
+    component: () => <Tracking />,
   },
   {
     path: '/stream',
