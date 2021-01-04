@@ -520,12 +520,12 @@ function MonitoredObjectView({ history }) {
                   monitoredObject.images.map((item, index) => (
                     <Image
                       style={{
-                        marginRight: "7px",
-                        marginLeft: "7px",
+                        paddingLeft: "7px",
+                        paddingBottom: "7px",
                         cursor: "pointer",
                       }}
                       key={index}
-                      width={280}
+                      width={270}
                       height={160}
                       src={item.link || "error"}
                       alt={item.title}
