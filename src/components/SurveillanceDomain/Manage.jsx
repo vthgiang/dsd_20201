@@ -96,12 +96,22 @@ class Manage extends React.Component {
                 },
                 {
                     title: 'Chiều cao tối thiểu',
-                    render: val => <span>{val.minHeight}</span>
+                    // render: val => <span>{val.minHeight}</span>,
+                    dataIndex: 'minHeight',
+                    sorter: {
+                        compare: (a, b) => a.minHeight - b.minHeight,
+                        multiple: 2,
+                    },
                 },
                 
                 {
                     title: 'Chiều cao tối đa',
-                    render: val => <span>{val.maxHeight}</span>
+                    // render: val => <span>{val.maxHeight}</span>
+                    dataIndex: 'maxHeight',
+                    sorter: {
+                        compare: (a, b) => a.maxHeight - b.maxHeight,
+                        multiple: 2,
+                    },
                 },
                 {
                     title: 'Mô tả',
