@@ -244,7 +244,7 @@ const dronesData = useMemo(() => {
     if (search) {
         computedDrones = computedDrones.filter(
             (comment) =>
-                comment.idDrone.toLowerCase().includes(search.toLowerCase())
+                comment.idDrone.toLowerCase().includes(search.toLowerCase()) || comment.name.toLowerCase().includes(search.toLowerCase())
         );
     } 
     return computedDrones;
