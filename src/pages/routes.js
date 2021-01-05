@@ -87,6 +87,7 @@ import StatisticPayload from "./Statistic/StatisticPayload";
 import StatisticObjectMonitor from "./Statistic/StatisticObjectMonitor";
 import ImageVideoStatistic from "./Statistic/ImageVideoStatistic";
 import IncidentStatistic from "./Statistic/IncidentStatistic";
+import IncidentStatisticWorking from "./Statistic/IncidentStatisticWorking";
 
 export const routes = [ 
   {
@@ -270,6 +271,10 @@ export const routes = [
   {
     path: "/incident-statistic",
     component: IncidentStatistic,
+  },
+  {
+    path: "/incident-statistic-working",
+    component: IncidentStatisticWorking,
   },
   {
     path: "/report",
