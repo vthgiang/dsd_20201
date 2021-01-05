@@ -197,9 +197,9 @@ export const sidebarMenu = [
         route: '/incident-statistic',
       },
       {
-        key: 'IncidentStatisticWorking',
+        key: 'HandleProblemStatistic',
         heading: 'Thống kê xử lý sự cố',
-        icon: 'fas fa-times-octagon',
+        icon: 'fas fa-toolbox',
         route: '/incident-statistic-working',
       }
     ],
