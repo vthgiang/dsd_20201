@@ -6,6 +6,7 @@ import PointInfo from './PointInfo';
 import FlightPathInfo from './FlightPathInfo';
 import MapEdit from './MapEdit';
 import { getDistance } from '../../Common/MapHelper';
+import { getProjectType, getUser } from '../../Common/info';
 
 EditFlightPathModal.propTypes = {
     
@@ -168,6 +169,28 @@ function EditFlightPathModal(props) {
                     alert(`Lỗi ${response.status}, cập nhật thất bại`);
                 }else{
                     props.pageReload();
+
+                    //ghi log
+                    const user = getUser();
+                    const logData = {
+                        projectType: getProjectType(),
+                        authorId: user.id.toString(),
+                        entityId: response.data.data.id,
+                        description: "EDIT FLIGHT PATH",
+                        name: response.data.data.name,
+                        regionId: response.data.data.idSupervisedArea,
+                        longitude: 0,
+                        latitude: 0,
+                        uavConnectId: 'NONE'
+                    };
+                    // console.log(logData);
+                    axios.post('http://14.248.5.197:5012/api/drones/edit', logData)
+                        .then(logRes => {
+                            console.log('logResponse', logRes);
+                        })
+                        .catch(err => {
+                            console.log('err log', err);
+                        })
                 }
             })
             .catch(err => {
