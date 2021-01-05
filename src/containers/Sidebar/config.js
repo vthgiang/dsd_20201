@@ -172,12 +172,12 @@ export const sidebarMenu = [
         icon: 'fas fa-drone-alt',
         route: '/statistic-payload',
       },
-      // {
-      //   key: 'ManageReportTemplate',
-      //   heading: 'Thống kê miền giám sát',
-      //   icon: 'fas fa-drone-alt',
-      //   route: '/statistic-drone',
-      // },
+      {
+        key: 'ManageReportTemplate',
+        heading: 'Thống kê đối tượng giám sát',
+        icon: 'fas fa-drone-alt',
+        route: '/statistic-monitor-object',
+      },
       // {
       //   key: 'ManageReportTemplate',
       //   heading: 'Thống kê đợt giám sát',

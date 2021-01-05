@@ -3,11 +3,6 @@ import QueryString from 'query-string';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import {
-  getDroneOverallMetrics,
-  getIncidentOverallMetrics,
-  getNotifyMetrics, getPayloadOverallMetrics, getUsersMetrics
-} from '../../services/statistics';
 import PayloadStatisticDroneFixing from "../Payload/PayloadStatistic/PayloadStatisticDroneFixing";
 import PayloadStatisticFrequency from "../Payload/PayloadStatistic/PayloadStatisticFrequency";
 import PayloadStatisticStatus from '../Payload/PayloadStatistic/PayloadStatisticStatus';
