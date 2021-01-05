@@ -155,6 +155,50 @@ export const sidebarMenu = [
     ],
   },
   {
+    key: 'Statistic',
+    heading: 'Thống kê',
+    icon: 'fas fa-chart-line',
+    route: '/statistic',
+    subMenu: [
+      {
+        key: 'StatisticDrone',
+        heading: 'Thống kê drone',
+        icon: 'fas fa-drone-alt',
+        route: '/statistic-drone',
+      },
+      // {
+      //   key: 'ViewReport',
+      //   heading: 'Thống kê payload',
+      //   icon: 'fas fa-drone-alt',
+      //   route: '/statistic-drone',
+      // },
+      // {
+      //   key: 'ManageReportTemplate',
+      //   heading: 'Thống kê miền giám sát',
+      //   icon: 'fas fa-drone-alt',
+      //   route: '/statistic-drone',
+      // },
+      // {
+      //   key: 'ManageReportTemplate',
+      //   heading: 'Thống kê đợt giám sát',
+      //   icon: 'fas fa-drone-alt',
+      //   route: '/statistic-drone',
+      // },
+      // {
+      //   key: 'ManageReportTemplate',
+      //   heading: 'Thống kê đối tượng giám sát',
+      //   icon: 'fas fa-drone-alt',
+      //   route: '/statistic-drone',
+      // },
+      // {
+      //   key: 'ManageReportTemplate',
+      //   heading: 'Thống kê sự cố',
+      //   icon: 'fas fa-drone-alt',
+      //   route: '/statistic-drone',
+      // }
+    ],
+  },
+  {
     key: 'GeneralReport',
     heading: 'Báo cáo',
     icon: 'fas fa-book',

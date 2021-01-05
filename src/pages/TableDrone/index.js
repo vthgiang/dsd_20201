@@ -1,12 +1,9 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { TableHeader, Pagination, Search } from "../../components/DataTable";
-import useFullPageLoader from "../../components/hooks/useFullPageLoader";
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import ModalEditDataTable from '../../containers/ModalEditDataTable';
-import ModalAddDataTable from '../../containers/ModalAddDataTable'
+import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
+import { Pagination, Search, TableHeader } from "../../components/DataTable";
+import useFullPageLoader from "../../components/hooks/useFullPageLoader";
+import ModalAddDataTable from '../../containers/ModalAddDataTable';
+import ModalEditDataTable from '../../containers/ModalEditDataTable';
 
 const DataTable = () => {
 
