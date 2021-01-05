@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { Button, Col, Input, List, Row, Form, Tabs, Tag, Space, Select } from 'antd';
+import { Button, Col, Input, List, Row, Form, Tabs, Tag, Space } from 'antd';
+import Select from "react-select";
 import { DownloadOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import Map from '../../containers/ModalFlight/Map';
@@ -190,9 +191,6 @@ function Stream() {
         url: `http://skyrone.cf:6789/droneState/getParameterFlightRealTime/${data[0].idDrone}`
       });
 
-      console.log(data[0]);
-      console.log({ res });
-
       const lstDrones = data.map((drone) => ({
         ...drone,
         urlStream: urlStreams[Math.floor(Math.random() * urlStreams.length)],
@@ -219,12 +217,12 @@ function Stream() {
       url: `http://skyrone.cf:6789/droneState/getParameterFlightRealTime/${drone?.idDrone}`
     });
 
+    console.log({ res });
+
     setCurrentDrone({
       ...res.data.data,
       urlStream: null,
-      ...drone,
-      value: res.data.data.idDrone,
-      label: res.data.data.name
+      ...drone
     });
     requestStream();
   };
@@ -284,8 +282,7 @@ function Stream() {
               <strong>Pin:</strong>{' '}
               <span>
                 {currentDrone.percentBattery
-                  ? currentDrone.percentBattery
-                  : '...'}
+                  ?? '...'}
                 %
               </span>
             </Col>
@@ -405,11 +402,11 @@ function Stream() {
           <TitleList>Danh sách drone đang bay</TitleList>
           <Select
             placeholder="Chọn drone"
-            value={currentDrone.value}
+            value={currentDrone}
             options={drones}
             style={{ minWidth: 300 }}
-            onChange={(droneId) => {
-              fetchCurrentDrone(drones.find(drone => drone.idDrone === droneId));
+            onChange={(curDrone) => {
+              fetchCurrentDrone(drones.find(drone => drone.idDrone === curDrone.value));
             }}
           >
             {drones.map(drone => <Option value={drone.value}>{drone.label} - <span>
