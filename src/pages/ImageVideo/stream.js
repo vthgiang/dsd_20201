@@ -240,6 +240,33 @@ function Stream() {
     document.body.removeChild(element);
   };
 
+  const cutImage = ()=>{
+    axios({
+      url:"https://it4483team2.herokuapp.com/api/records",
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        "api-token": localStorage.getItem("token"),
+        "project-type": localStorage.getItem("project-type"),      
+      },
+      data: {
+      "title": "Ảnh theo dõi "+ obj.name +" " +Date.now(),
+      "description":obj.description,
+      "type": 0,
+      "problemType": 3,
+      "isTraining": Math.floor(Math.random() * 10)<7,
+      "link":"https://res.cloudinary.com/webtt20191/image/upload/v1607244077/cay-trong/cay-trong-16.jpg",
+      "monitoredObjectId": obj._id,
+      "idSupervisedArea": "",
+      "idDrone": drone.id,
+      "idFlightPath": "",
+      "metaData": "",
+      "idCampaign": campaign.idCampaign,
+  }
+    });
+  }
+
   const onCropVideo = async ({ startTime, duration }) => {
     form.getFieldValue('duration');
     const parseDuration = parseInt(duration);
@@ -251,10 +278,36 @@ function Stream() {
     //     parseDuration > validDuration ? validDuration : parseDuration
     //   }`
     // );
+    console.log(obj);
+    axios({
+      url:"https://it4483team2.herokuapp.com/api/records",
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        "api-token": localStorage.getItem("token"),
+        "project-type": localStorage.getItem("project-type"),      
+      },
+      data: {
+      "title": "Video theo dõi "+ obj.name +" " +Date.now(),
+      "description":obj.description,
+      "type": 1,
+      "problemType": 3,
+      "isTraining": Math.floor(Math.random() * 10)<7,
+      "link":"https://media.istockphoto.com/videos/aerial-view-of-amazon-rainforest-in-brazil-video-id1169794330",
+      "monitoredObjectId": obj._id,
+      "idSupervisedArea": "",
+      "idDrone": drone.id,
+      "idFlightPath": "",
+      "metaData": "",
+      "idCampaign": campaign.idCampaign,
+  }
+    });
     const { data } = await axios.get(
       `http://192.168.1.102:7002/stream/crop/${streamId}/${startTime}/${parseDuration > validDuration ? validDuration : parseDuration
       }`
     );
+
     const { src } = data;
     setCropLoading(false);
     setCropLink(src);
@@ -373,6 +426,12 @@ function Stream() {
                 </Button>
               )}
             </Form.Item>
+            <Button
+                  type="primary"
+                  onClick={() => cutImage()}
+                >
+                  Cắt ảnh
+                </Button>
             {cropLink && (
               <Form.Item shouldUpdate={true}>
                 <Button
@@ -396,6 +455,8 @@ function Stream() {
               Download full stream
             </Button>
           )}
+
+
         </Col>
 
         <Col md={10}>
