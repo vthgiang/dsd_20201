@@ -85,6 +85,8 @@ import DetailMonitorCampaignPage from "./FlightHub/DetailMonitorCampaign";
 import DroneStatistic from "./Statistic/DroneStatistic";
 import StatisticPayload from "./Statistic/StatisticPayload";
 import StatisticObjectMonitor from "./Statistic/StatisticObjectMonitor";
+import ImageVideoStatistic from "./Statistic/ImageVideoStatistic";
+import IncidentStatistic from "./Statistic/IncidentStatistic";
 
 export const routes = [ 
   {
@@ -260,6 +262,14 @@ export const routes = [
   {
     path: "/statistic-monitor-object",
     component: StatisticObjectMonitor,
+  },
+  {
+    path: "/statistic-image-video",
+    component: ImageVideoStatistic,
+  },
+  {
+    path: "/incident-statistic",
+    component: IncidentStatistic,
   },
   {
     path: "/report",
