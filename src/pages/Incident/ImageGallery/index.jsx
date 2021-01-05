@@ -22,6 +22,7 @@ import areaService from '../../../services/group09/areaService';
 import droneService from '../../../services/group09/droneService';
 import moment from 'moment';
 import userService from '../../../services/group09/userService';
+import { monitorCampaignApi } from '../../../apis';
 
 import _ from 'lodash'
 
@@ -30,6 +31,7 @@ let cacheAreas = []
 let cacheDrones = []
 let levels = [];
 let cacheImages = []
+let cacheCampaign = []
 let pageSize = 20
 const ImageGalley = (props) => {
     const [images, setImages] = useState([]);
@@ -43,8 +45,16 @@ const ImageGalley = (props) => {
     const [imgLoading, setImgLoading] = useState(true);
     const [monitoredIds, setMonitoredIds] = useState([])
     const [areaIds, setAreaIds] = useState([])
-    const convertImages = (values = []) => {
-        return (values || []).map((item) => {
+    const convertImages = async (values = []) => {
+
+        let campaigns = await Promise.all(
+            values.map(item => monitorCampaignApi.getQuickMonitorCampaign(item.idCampaign))
+        )
+        campaigns = campaigns.map(item => _.get(item, 'data.result.monitorCampaign', {}))
+        cacheCampaign = _.uniq(cacheCampaign.concat(campaigns))
+        console.log('campaigns', campaigns)
+
+        let result = (values || []).map((item, index) => {
             let createdAt = moment(item.createdAt).format('DD/MM/YYYY hh:mm:ss');
             let nameType = '';
             let isTraining = item.isTraining ? 'Đang training' : null
@@ -67,6 +77,7 @@ const ImageGalley = (props) => {
             let droneCode = (cacheDrones.find(drone => drone.id === item.idDrone) || {}).code || ''
             let areaName = (cacheAreas.find(area => area._id === item.idSupervisedArea) || {}).name || ''
             let monitoredName = (cacheMonitoreds.find(monitored => monitored._id === item.monitoredObjectId) || {}).name || ''
+            let campaign = campaigns[index] || {}
             return {
                 ...item,
                 src: item.link,
@@ -78,12 +89,15 @@ const ImageGalley = (props) => {
                     {value: droneCode, title: 'Drone'},
                     {value: areaName, title: 'Miền giám sát'},
                     {value: monitoredName, title: 'Đối tượng giám sát'},
+                    {value: campaign.name, title: 'Đợt giám sát'},
                     {value: isTraining, title: 'Is Training'},
                     {value: nameType, title: 'Type'},
                     {value: createdAt, title: 'Created At'},
                 ],
             };
         });
+
+        return result
     }
 
     useEffect(() => {
@@ -117,7 +131,7 @@ const ImageGalley = (props) => {
         cacheMonitoreds = monitoreds.content
         cacheAreas = _.get(areas, 'content.zone', [])
 
-        let _images = convertImages(imagesRes.result || [])
+        let _images = await convertImages(imagesRes.result || [])
         cacheImages= _images
         setImages(_images);
         setTotal(imagesRes.total)
@@ -179,7 +193,6 @@ const ImageGalley = (props) => {
         console.log('_areaIds', _areaIds)
         setMonitoredIds(_monitoredIds)
         setAreaIds(_areaIds)
-
     };
     const renderPayload = () => {
         return payloads.map((item, key) => {
@@ -237,6 +250,8 @@ const ImageGalley = (props) => {
             <Select.Option value={item._id} key={item._id}>{item.name}</Select.Option>
         ))
     }
+
+    console.log('check images', images)
     return (
         <div>
 

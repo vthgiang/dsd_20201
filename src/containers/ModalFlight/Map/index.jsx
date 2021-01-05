@@ -56,17 +56,15 @@ const MyMapComponent = compose(
         }
 
         mapRef.current.fitBounds(bounds);
-
         getZoneById(flightPath.idSupervisedArea)
             .then(zone => {
-                console.log('zone', zone);
+                // console.log('zone', zone);
                 setZone(zone);
             })
             .catch(err => {
                 console.log(err);
             });
-        console.log(flightPath)
-    }, [])
+    }, [flightPath])
 
     useEffect(() => {
         // random vi tri bay
@@ -78,7 +76,7 @@ const MyMapComponent = compose(
             lat: (startPoint.locationLat + endPoint.locationLat)/2,
             lng: (startPoint.locationLng + endPoint.locationLng)/2
         })
-    }, [])
+    }, [flightPath])
 
     return (
         <GoogleMap

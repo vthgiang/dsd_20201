@@ -11,7 +11,8 @@ import React, { useEffect, useState, useMemo } from "react";
 import ImageUploader from "react-images-upload";
 import axios from 'axios';
 import { Spin } from 'antd';
-
+import { getProjectType, getUser } from '../../components/Drone/Common/info';
+import { logAdd } from '../../apis/drone';
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -109,7 +110,7 @@ export default function TransitionsModal(props) {
     let url = 'https://luan-drive.cf/upload?token=111111&folder=images';
     axios.post(url, fd)
         .then(res => {
-          console.log(res.data.image_id);
+          // console.log(res.data.image_id);
           if (res.data.image_id != null) {
             setImageUrl("https://drive.google.com/uc?id="+res.data.image_id);
 
@@ -144,13 +145,30 @@ export default function TransitionsModal(props) {
             };
         
             fetch('http://skyrone.cf:6789/drone/save', requestOptions)
-            .then(response => response.text())
+            .then(response => response.json())
             .then(contents =>  {
-              alert("Đã cập nhật thành công"); 
+              // alert("Đã cập nhật thành công"); 
               setOpen(false);
+              // console.log('response create drone', contents);
+              //ghi log
+              const user = getUser();
+              const logData = {
+                projectType: getProjectType(),
+                authorId: user.id.toString(),
+                entityId: contents.id,
+                description: "ADD DRONE",
+                name: contents.name,
+                regionId: "NONE",
+                longitude: 0,
+                latitude: 0,  
+                uavConnectId: "NONE"
+              };
+              logAdd(logData)
+
               window.location.reload();
               })
-            .catch(() => {
+            .catch((err) => {
+              console.log(err);
               console.log("Can’t access " + 'http://skyrone.cf:6789/drone/getByCode/save' + " response. Blocked by browser?")
               setOpen(false);
               window.location.reload();
