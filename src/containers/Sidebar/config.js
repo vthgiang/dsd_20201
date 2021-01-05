@@ -195,6 +195,12 @@ export const sidebarMenu = [
         heading: 'Thống kê sự cố',
         icon: 'fas fa-times-octagon',
         route: '/incident-statistic',
+      },
+      {
+        key: 'IncidentStatisticWorking',
+        heading: 'Thống kê xử lý sự cố',
+        icon: 'fas fa-times-octagon',
+        route: '/incident-statistic-working',
       }
     ],
   },

@@ -135,12 +135,15 @@ const IncidentStatistic = () => {
     fetchUsers(userIds);
   };
   return (
+      <>
+      <h3>Thống kê sự cố</h3>
     <Table
       columns={columns}
       loading={loading}
       dataSource={incidents}
       loading={loading}
     />
+      </>
   );
 };
 
