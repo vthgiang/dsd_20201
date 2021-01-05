@@ -28,7 +28,7 @@ export const problemColumns = [
     {
         title: "Loại sự cố",
         dataIndex: "type",
-        render: type => <span>{type.name}</span>
+        render: type => <span>{type?.name}</span>
     },
     {
         title: 'Vị trí',
