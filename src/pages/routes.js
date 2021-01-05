@@ -83,6 +83,7 @@ import DetailMonitorCampaignPage from "./FlightHub/DetailMonitorCampaign";
 
 // Statistic
 import DroneStatistic from "./Statistic/DroneStatistic";
+import StatisticPayload from "./Statistic/StatisticPayload";
 
 export const routes = [ 
   {
@@ -250,6 +251,10 @@ export const routes = [
   {
     path: "/statistic-drone",
     component: DroneStatistic,
+  },
+  {
+    path: "/statistic-payload",
+    component: StatisticPayload,
   },
   {
     path: "/report",
