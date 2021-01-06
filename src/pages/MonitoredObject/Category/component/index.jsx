@@ -31,6 +31,7 @@ function AreaMonitored(props) {
   const [itemSearch, setItemSearch] = useState({
     code: "",
     name: "",
+    type: "",
   });
 
   const [option, setOption] = useState("");
@@ -172,8 +173,8 @@ function AreaMonitored(props) {
             </Button>
           </Dropdown>
         </div>
-        <div className="form-inline" style={{ margin: "15px" }}>
-          <div className="form-group">
+        <div className="form-inline row" style={{ margin: "15px" }}>
+          <div className="form-group col-4">
             <label className="form-control-static" style={{ margin: "10px" }}>
               <b>Tên danh mục</b>
             </label>
@@ -193,7 +194,34 @@ function AreaMonitored(props) {
               autoComplete="off"
             />
           </div>
-          <div className="form-group ml-3">
+          {role === "SUPER_ADMIN" ? (
+            <div className="form-group col-4">
+              <label className="form-control-static" style={{ margin: "10px" }}>
+                Loại
+              </label>
+              <select
+                className="custom-select"
+                name="type"
+                value={itemSearch.type}
+                onChange={(e) => {
+                  e.persist();
+                  setItemSearch((prev) => ({
+                    ...prev,
+                    type: e.target.value,
+                  }));
+                }}
+              >
+                <option value="" disabled>
+                  Chọn loại
+                </option>
+                <option value="DE_DIEU">Đê Điều</option>
+                <option value="CHAY_RUNG">Cháy rừng</option>
+                <option value="LUOI_DIEN">Lưới điện</option>
+                <option value="CAY_TRONG">Cây trồng</option>
+              </select>
+            </div>
+          ) : null}
+          <div className="form-group ml-3 col-4">
             <button
               type="button"
               className="btn btn-success"
