@@ -87,7 +87,8 @@ import StatisticPayload from "./Statistic/StatisticPayload";
 import TableDrone from './TableDrone';
 import TableDroneState from './TableDroneState';
 import UAVMana from './UAVMana';
-
+import Tracking from './ImageVideo/tracking'
+import LogBusiness from './LogBusiness'
 
 
 
