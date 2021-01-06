@@ -1,0 +1,643 @@
+[{
+  "_id": {
+    "$oid": "5fcddf6d85a6dc0017e0842d"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5fcf48c1a065e000176e1f80"
+    },
+    {
+      "$oid": "5fe19fb1e40ec00017660153"
+    },
+    {
+      "$oid": "5fe1a1ade40ec00017660154"
+    },
+    {
+      "$oid": "5feb43c709b7580017a56417"
+    }
+  ],
+  "name": "Quận Hà Đông",
+  "code": "AREA21321",
+  "startPoint": {
+    "longitude": 105.75433302852463,
+    "latitude": 20.990742021977198
+  },
+  "endPoint": {
+    "latitude": 20.95880664308126,
+    "longitude": 105.80422225900298
+  },
+  "maxHeight": 120,
+  "minHeight": 34,
+  "priority": 0,
+  "level": 0,
+  "times": 10,
+  "description": null,
+  "createdAt": {
+    "$date": "2020-12-07T07:53:17.297Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T15:55:45.591Z"
+  },
+  "__v": 20
+},{
+  "_id": {
+    "$oid": "5fcf2e3ca065e000176e1f72"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5fcf488aa065e000176e1f7d"
+    },
+    {
+      "$oid": "5fcf48b7a065e000176e1f7f"
+    },
+    {
+      "$oid": "5fcf48d4a065e000176e1f82"
+    }
+  ],
+  "name": "Quận Hoàng Mai, Hà Nội",
+  "code": "AREA00023",
+  "startPoint": {
+    "longitude": 105.83459503333341,
+    "latitude": 20.984246091413794
+  },
+  "endPoint": {
+    "longitude": 105.8540617000001,
+    "latitude": 20.958287562964614
+  },
+  "maxHeight": 235,
+  "minHeight": 123,
+  "priority": 0,
+  "level": 0,
+  "times": 20,
+  "description": null,
+  "createdAt": {
+    "$date": "2020-12-08T07:41:48.453Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T15:58:31.334Z"
+  },
+  "__v": 19
+},{
+  "_id": {
+    "$oid": "5fcf4f08a065e000176e1f83"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5fcf4f30a065e000176e1f84"
+    }
+  ],
+  "name": "Quận Cầu Giấy",
+  "code": "AREA00012",
+  "startPoint": {
+    "longitude": 105.78251341259829,
+    "latitude": 21.047403788248857
+  },
+  "endPoint": {
+    "longitude": 105.83311341259832,
+    "latitude": 20.993948160992048
+  },
+  "maxHeight": 200,
+  "minHeight": 50,
+  "priority": 0,
+  "level": 0,
+  "times": 15,
+  "description": null,
+  "createdAt": {
+    "$date": "2020-12-08T10:01:44.375Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T16:51:13.768Z"
+  },
+  "__v": 7
+},{
+  "_id": {
+    "$oid": "5fcf7744a122370017d3ae15"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5fcf7965a122370017d3ae27"
+    },
+    {
+      "$oid": "5fcf7984a122370017d3ae29"
+    },
+    {
+      "$oid": "5fe5a4901af3800017815f76"
+    },
+    {
+      "$oid": "5fe5a4aa1af3800017815f77"
+    },
+    {
+      "$oid": "5fe5a4d81af3800017815f78"
+    },
+    {
+      "$oid": "5fe5a56d1af3800017815f7b"
+    },
+    {
+      "$oid": "5fe5a5961af3800017815f7c"
+    },
+    {
+      "$oid": "5fe5a5ad1af3800017815f7d"
+    },
+    {
+      "$oid": "5fe5a5db1af3800017815f7e"
+    }
+  ],
+  "name": "Quận Từ Liêm, Hà Nội",
+  "code": "AREA0023",
+  "startPoint": {
+    "longitude": 105.70578112997038,
+    "latitude": 21.028400790492967
+  },
+  "endPoint": {
+    "latitude": 20.973817863244463,
+    "longitude": 105.76331446330386
+  },
+  "maxHeight": 200,
+  "minHeight": 100,
+  "priority": 0,
+  "level": 0,
+  "times": 18,
+  "description": null,
+  "createdAt": {
+    "$date": "2020-12-08T12:53:24.438Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T11:12:01.188Z"
+  },
+  "__v": 13
+},{
+  "_id": {
+    "$oid": "5fcf777aa122370017d3ae16"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5fcf792ca122370017d3ae24"
+    },
+    {
+      "$oid": "5fcf7945a122370017d3ae26"
+    },
+    {
+      "$oid": "5fd8e9773853ed001729e49f"
+    }
+  ],
+  "name": "Quận Long Biên, Hà Nội",
+  "code": "AREA0027",
+  "startPoint": {
+    "longitude": 105.85871987254603,
+    "latitude": 21.070870791077724
+  },
+  "endPoint": {
+    "longitude": 105.91874499839054,
+    "latitude": 21.01552636870116
+  },
+  "maxHeight": 200,
+  "minHeight": 56,
+  "priority": 0,
+  "level": 0,
+  "times": 0,
+  "description": null,
+  "createdAt": {
+    "$date": "2020-12-08T12:54:18.013Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-15T16:51:04.309Z"
+  },
+  "__v": 3
+},{
+  "_id": {
+    "$oid": "5fcf77a4a122370017d3ae17"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5fe82f09a719c60017775cb3"
+    },
+    {
+      "$oid": "5feb44b409b7580017a56419"
+    },
+    {
+      "$oid": "5fef34d32024870017139e51"
+    },
+    {
+      "$oid": "5ff180490f8a2700171b7624"
+    }
+  ],
+  "name": "Quận Tây Hồ, Hà Nội",
+  "code": "AREA0028",
+  "startPoint": {
+    "longitude": 105.79303323727612,
+    "latitude": 21.086170378843633
+  },
+  "endPoint": {
+    "latitude": 21.044613173171484,
+    "longitude": 105.83203323727616
+  },
+  "maxHeight": 170,
+  "minHeight": 60,
+  "priority": 0,
+  "level": 0,
+  "times": 0,
+  "description": null,
+  "createdAt": {
+    "$date": "2020-12-08T12:55:00.089Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-03T08:52:52.363Z"
+  },
+  "__v": 16
+},{
+  "_id": {
+    "$oid": "5fe57d35517d0e0017021783"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5fe57e8a517d0e001702178b"
+    },
+    {
+      "$oid": "5fe57eb0517d0e001702178c"
+    },
+    {
+      "$oid": "5fe57edb517d0e001702178d"
+    },
+    {
+      "$oid": "5fe57f09517d0e001702178e"
+    },
+    {
+      "$oid": "5fe57f42517d0e001702178f"
+    },
+    {
+      "$oid": "5fe57f67517d0e0017021790"
+    },
+    {
+      "$oid": "5fe58645517d0e0017021791"
+    },
+    {
+      "$oid": "5fe5867e517d0e0017021792"
+    },
+    {
+      "$oid": "5fe8923fa719c60017775cc0"
+    }
+  ],
+  "name": "Quận hoàn kiếm, Hà Nội",
+  "code": "AREA1002",
+  "startPoint": {
+    "longitude": 105.83444663085828,
+    "latitude": 21.05105523752117
+  },
+  "endPoint": {
+    "latitude": 21.014156059958125,
+    "longitude": 105.87575098052724
+  },
+  "maxHeight": 300,
+  "minHeight": 120,
+  "priority": 0,
+  "level": 0,
+  "times": 0,
+  "description": "",
+  "createdAt": {
+    "$date": "2020-12-25T05:48:37.733Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T14:34:57.548Z"
+  },
+  "__v": 21
+},{
+  "_id": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5fe5885a517d0e0017021794"
+    },
+    {
+      "$oid": "5fe58880517d0e0017021796"
+    },
+    {
+      "$oid": "5fe5889f517d0e0017021797"
+    },
+    {
+      "$oid": "5fe588d1517d0e0017021798"
+    },
+    {
+      "$oid": "5fe588fa517d0e0017021799"
+    },
+    {
+      "$oid": "5fe5891c517d0e001702179a"
+    },
+    {
+      "$oid": "5fe58935517d0e001702179b"
+    },
+    {
+      "$oid": "5fe58957517d0e001702179c"
+    },
+    {
+      "$oid": "5fe58983517d0e001702179d"
+    },
+    {
+      "$oid": "5fe589ac517d0e001702179e"
+    },
+    {
+      "$oid": "5fe890b1a719c60017775cbb"
+    },
+    {
+      "$oid": "5ff27f831502c9001768e0a8"
+    },
+    {
+      "$oid": "5ff2cdda1502c9001768e0bd"
+    }
+  ],
+  "name": "Quận Đống Đa, Hà Nội",
+  "code": "AREA2001",
+  "startPoint": {
+    "latitude": 21.036146481047595,
+    "longitude": 105.8347464193883
+  },
+  "endPoint": {
+    "longitude": 105.81514094496231,
+    "latitude": 21.008601720904295
+  },
+  "maxHeight": 290,
+  "minHeight": 60,
+  "priority": 0,
+  "level": 0,
+  "times": 0,
+  "description": "",
+  "createdAt": {
+    "$date": "2020-12-25T06:35:29.177Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-04T08:12:10.828Z"
+  },
+  "__v": 13
+},{
+  "_id": {
+    "$oid": "5feaa24809b7580017a563fa"
+  },
+  "monitoredZone": [],
+  "name": "Quận Ba ĐÌnh 2",
+  "code": "ZONE6047",
+  "startPoint": {
+    "latitude": 21.035761833985806,
+    "longitude": 105.81676309001507
+  },
+  "endPoint": {
+    "latitude": 21.0271096340389,
+    "longitude": 105.83152596843304
+  },
+  "maxHeight": 15,
+  "minHeight": 11,
+  "priority": 1,
+  "level": 0,
+  "times": 0,
+  "description": "abc",
+  "createdAt": {
+    "$date": "2020-12-29T03:28:09.001Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T18:23:44.073Z"
+  },
+  "__v": 2
+},{
+  "_id": {
+    "$oid": "5feaa54509b7580017a563fb"
+  },
+  "monitoredZone": [],
+  "name": "Quận Ba ĐÌnh 3",
+  "code": "AREA4180",
+  "startPoint": {
+    "latitude": 21.076696628249053,
+    "longitude": 105.76398109406801
+  },
+  "endPoint": {
+    "latitude": 21.050425245813315,
+    "longitude": 105.79488014191958
+  },
+  "maxHeight": 200,
+  "minHeight": 10,
+  "priority": 3,
+  "level": 0,
+  "times": 0,
+  "description": "mmmmmm",
+  "createdAt": {
+    "$date": "2020-12-29T03:40:53.549Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T15:03:51.366Z"
+  },
+  "__v": 4
+},{
+  "_id": {
+    "$oid": "5feb614d09b7580017a5642d"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5febfe9eeeec7500179c9bb4"
+    },
+    {
+      "$oid": "5febff3deeec7500179c9bb8"
+    },
+    {
+      "$oid": "5febff8feeec7500179c9bb9"
+    },
+    {
+      "$oid": "5fec08a6eeec7500179c9bbb"
+    },
+    {
+      "$oid": "5fec08eeeeec7500179c9bbc"
+    },
+    {
+      "$oid": "5fec0951eeec7500179c9bbd"
+    }
+  ],
+  "name": "Dak Lak Farm Area",
+  "code": "AREA1304",
+  "startPoint": {
+    "latitude": 13.046367415721845,
+    "longitude": 108.23553807021881
+  },
+  "endPoint": {
+    "latitude": 13.046200185263139,
+    "longitude": 108.23588139297271
+  },
+  "maxHeight": 300,
+  "minHeight": 60,
+  "priority": 6,
+  "level": 0,
+  "times": 0,
+  "description": "Khu vực đặc thù cây trồng",
+  "createdAt": {
+    "$date": "2020-12-29T17:03:09.194Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T05:00:02.423Z"
+  },
+  "__v": 8
+},{
+  "_id": {
+    "$oid": "5feb67d209b7580017a5644c"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5ff293f21502c9001768e0ac"
+    },
+    {
+      "$oid": "5ff2b4111502c9001768e0b4"
+    }
+  ],
+  "name": "Hà Nội",
+  "code": "AREA8059",
+  "startPoint": {
+    "latitude": 21.329854037021104,
+    "longitude": 105.50393853359196
+  },
+  "endPoint": {
+    "latitude": 20.524325228595597,
+    "longitude": 106.16861138515446
+  },
+  "maxHeight": 455,
+  "minHeight": 355,
+  "priority": 2,
+  "level": 0,
+  "times": 0,
+  "description": "Day la Hà Nội",
+  "createdAt": {
+    "$date": "2020-12-29T17:30:58.525Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-05T15:31:04.208Z"
+  },
+  "__v": 6
+},{
+  "_id": {
+    "$oid": "5febd490eeec7500179c9baf"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5febd512eeec7500179c9bb0"
+    },
+    {
+      "$oid": "5fec86a1f139ff00177a252e"
+    },
+    {
+      "$oid": "5fef33772024870017139e50"
+    },
+    {
+      "$oid": "5ff2a2151502c9001768e0ae"
+    },
+    {
+      "$oid": "5ff2a2dd1502c9001768e0af"
+    },
+    {
+      "$oid": "5ff2a2dd1502c9001768e0b0"
+    },
+    {
+      "$oid": "5ff2c0961502c9001768e0bb"
+    }
+  ],
+  "name": "Khu vực giám sát 1",
+  "code": "AREA6876",
+  "startPoint": {
+    "latitude": 21.296007242345365,
+    "longitude": 105.34953181640627
+  },
+  "endPoint": {
+    "latitude": 20.927046310016674,
+    "longitude": 105.95927302734377
+  },
+  "maxHeight": 30,
+  "minHeight": 10,
+  "priority": 2,
+  "level": 0,
+  "times": 0,
+  "description": "",
+  "createdAt": {
+    "$date": "2020-12-30T01:14:56.544Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-05T14:30:40.145Z"
+  },
+  "__v": 11
+},{
+  "_id": {
+    "$oid": "5ff524e1fc1c170017605fad"
+  },
+  "monitoredZone": [],
+  "name": "Khu vực 1",
+  "code": "AREA1135",
+  "startPoint": {
+    "latitude": 21.521029402571212,
+    "longitude": 105.38249080078127
+  },
+  "endPoint": {
+    "latitude": 21.10139216221332,
+    "longitude": 106.20097224609377
+  },
+  "maxHeight": 30,
+  "minHeight": 10,
+  "priority": 2,
+  "level": 0,
+  "times": 0,
+  "description": "",
+  "createdAt": {
+    "$date": "2021-01-06T02:48:01.618Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T02:48:01.618Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff5424ac84beb0017fea795"
+  },
+  "monitoredZone": [],
+  "name": "khu vực giám sát HBT",
+  "code": "AREA3070",
+  "startPoint": {
+    "latitude": 21.35741126285746,
+    "longitude": 105.39347712890627
+  },
+  "endPoint": {
+    "latitude": 20.695982370537166,
+    "longitude": 106.25590388671877
+  },
+  "maxHeight": 30,
+  "minHeight": 2,
+  "priority": 0,
+  "level": 0,
+  "times": 0,
+  "description": "",
+  "createdAt": {
+    "$date": "2021-01-06T04:53:30.705Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T04:53:30.705Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff5440bc84beb0017fea796"
+  },
+  "monitoredZone": [],
+  "name": "Khu vực Hai bà trưng",
+  "code": "AREA6096",
+  "startPoint": {
+    "latitude": 21.53635918486258,
+    "longitude": 105.39897029296877
+  },
+  "endPoint": {
+    "latitude": 21.116765822384746,
+    "longitude": 105.97575251953127
+  },
+  "maxHeight": 30,
+  "minHeight": 10,
+  "priority": 2,
+  "level": 0,
+  "times": 0,
+  "description": "",
+  "createdAt": {
+    "$date": "2021-01-06T05:00:59.385Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T05:00:59.385Z"
+  },
+  "__v": 0
+}]

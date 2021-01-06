@@ -1,0 +1,2051 @@
+[{
+  "_id": {
+    "$oid": "5fcf488aa065e000176e1f7d"
+  },
+  "itinerary": [
+    {
+      "id": "5fcedb95f2d23319151aa32e",
+      "idDrone": "5fbc93a4b113564759f81c22",
+      "name": "Duong bay zone",
+      "task": 1,
+      "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+      "timeStart": 1608255630606,
+      "timeEnd": 1607391630606,
+      "heightFlight": 100,
+      "flightPoints": [
+        {
+          "id": "5fcfac826ab3ed494026b65f",
+          "locationLat": 20.963741,
+          "locationLng": 105.83742,
+          "idDrone": "5fbc93a4b113564759f81c22",
+          "idFlightPath": "5fcedb95f2d23319151aa32e",
+          "timeStop": 2,
+          "timeCome": 1607445534184,
+          "note": "Điểm bay",
+          "idSupervisedObject": "string"
+        },
+        {
+          "id": "5fcfaca06ab3ed494026b660",
+          "locationLat": 20.968878,
+          "locationLng": 105.83742,
+          "idDrone": "5fbc93a4b113564759f81c22",
+          "idFlightPath": "5fcedb95f2d23319151aa32e",
+          "timeStop": 2,
+          "timeCome": 1607445534184,
+          "note": "Điểm bay",
+          "idSupervisedObject": "string"
+        },
+        {
+          "id": "5fcfacb76ab3ed494026b661",
+          "locationLat": 20.968878,
+          "locationLng": 105.8395,
+          "idDrone": "5fbc93a4b113564759f81c22",
+          "idFlightPath": "5fcedb95f2d23319151aa32e",
+          "timeStop": 2,
+          "timeCome": 1607445534184,
+          "note": "Điểm bay",
+          "idSupervisedObject": "string"
+        }
+      ]
+    },
+    {
+      "id": "5fcedb95f2d23319151aa32e",
+      "idDrone": "5fbc93a4b113564759f81c22",
+      "name": "Duong bay zone",
+      "task": 1,
+      "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+      "timeStart": 1608255630606,
+      "timeEnd": 1607391630606,
+      "heightFlight": 100,
+      "flightPoints": [
+        {
+          "id": "5fcfac826ab3ed494026b65f",
+          "locationLat": 20.963741,
+          "locationLng": 105.83742,
+          "idDrone": "5fbc93a4b113564759f81c22",
+          "idFlightPath": "5fcedb95f2d23319151aa32e",
+          "timeStop": 2,
+          "timeCome": 1607445534184,
+          "note": "Điểm bay",
+          "idSupervisedObject": "string"
+        },
+        {
+          "id": "5fcfaca06ab3ed494026b660",
+          "locationLat": 20.968878,
+          "locationLng": 105.83742,
+          "idDrone": "5fbc93a4b113564759f81c22",
+          "idFlightPath": "5fcedb95f2d23319151aa32e",
+          "timeStop": 2,
+          "timeCome": 1607445534184,
+          "note": "Điểm bay",
+          "idSupervisedObject": "string"
+        },
+        {
+          "id": "5fcfacb76ab3ed494026b661",
+          "locationLat": 20.968878,
+          "locationLng": 105.8395,
+          "idDrone": "5fbc93a4b113564759f81c22",
+          "idFlightPath": "5fcedb95f2d23319151aa32e",
+          "timeStop": 2,
+          "timeCome": 1607445534184,
+          "note": "Điểm bay",
+          "idSupervisedObject": "string"
+        }
+      ]
+    },
+    {
+      "id": "5fcedb95f2d23319151aa32e",
+      "idDrone": "5fbc93a4b113564759f81c22",
+      "name": "Duong bay zone",
+      "task": 1,
+      "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+      "timeStart": 1608255630606,
+      "timeEnd": 1607391630606,
+      "heightFlight": 100,
+      "flightPoints": [
+        {
+          "id": "5fcfac826ab3ed494026b65f",
+          "locationLat": 20.963741,
+          "locationLng": 105.83742,
+          "idDrone": "5fbc93a4b113564759f81c22",
+          "idFlightPath": "5fcedb95f2d23319151aa32e",
+          "timeStop": 2,
+          "timeCome": 1607445534184,
+          "note": "Điểm bay",
+          "idSupervisedObject": "string"
+        },
+        {
+          "id": "5fcfaca06ab3ed494026b660",
+          "locationLat": 20.968878,
+          "locationLng": 105.83742,
+          "idDrone": "5fbc93a4b113564759f81c22",
+          "idFlightPath": "5fcedb95f2d23319151aa32e",
+          "timeStop": 2,
+          "timeCome": 1607445534184,
+          "note": "Điểm bay",
+          "idSupervisedObject": "string"
+        },
+        {
+          "id": "5fcfacb76ab3ed494026b661",
+          "locationLat": 20.968878,
+          "locationLng": 105.8395,
+          "idDrone": "5fbc93a4b113564759f81c22",
+          "idFlightPath": "5fcedb95f2d23319151aa32e",
+          "timeStop": 2,
+          "timeCome": 1607445534184,
+          "note": "Điểm bay",
+          "idSupervisedObject": "string"
+        }
+      ]
+    }
+  ],
+  "area": {
+    "$oid": "5fcf2e3ca065e000176e1f72"
+  },
+  "name": "Phường Hoàng Liệt",
+  "code": "CR0001",
+  "minHeight": 145,
+  "maxHeight": 190,
+  "startPoint": {
+    "latitude": 20.97152866598657,
+    "longitude": 105.83518845465244
+  },
+  "endPoint": {
+    "latitude": 20.959466336920343,
+    "longitude": 105.84387881265792
+  },
+  "priority": 0,
+  "description": null,
+  "active": true,
+  "incidentType": "CAY_TRONG",
+  "times": 1,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-08T09:34:02.432Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-22T15:58:15.225Z"
+  },
+  "__v": 3
+},{
+  "_id": {
+    "$oid": "5fcf48b7a065e000176e1f7f"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf2e3ca065e000176e1f72"
+  },
+  "name": "Hồ Linh Đàm",
+  "code": "DD0003",
+  "minHeight": 123,
+  "maxHeight": 190,
+  "startPoint": {
+    "longitude": 105.83541799998795,
+    "latitude": 20.98313293231395
+  },
+  "endPoint": {
+    "longitude": 105.840578570606,
+    "latitude": 20.975219005402636
+  },
+  "priority": 0,
+  "description": null,
+  "active": true,
+  "incidentType": "CAY_TRONG",
+  "times": 2,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-08T09:34:47.537Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-15T15:36:28.958Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fcf48c1a065e000176e1f80"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcddf6d85a6dc0017e0842d"
+  },
+  "name": "Khu vực bách khoa",
+  "code": "CR0002",
+  "minHeight": 80,
+  "maxHeight": 100,
+  "startPoint": {
+    "longitude": 105.845909,
+    "latitude": 21.004269
+  },
+  "endPoint": {
+    "longitude": 105.859521,
+    "latitude": 21.017374
+  },
+  "priority": 2,
+  "description": null,
+  "active": true,
+  "incidentType": "CAY_TRONG",
+  "times": 0,
+  "level": 0,
+  "createdAt": {
+    "$date": "2020-12-08T09:34:57.854Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-15T15:36:28.958Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fcf48d4a065e000176e1f82"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf2e3ca065e000176e1f72"
+  },
+  "name": "Hồ yên sở",
+  "code": "DD0001",
+  "minHeight": 121,
+  "maxHeight": 211,
+  "startPoint": {
+    "latitude": 20.97437302588459,
+    "longitude": 105.8462021950109
+  },
+  "endPoint": {
+    "longitude": 105.85336905815603,
+    "latitude": 20.963152499701394
+  },
+  "priority": 0,
+  "description": null,
+  "active": true,
+  "incidentType": "DE_DIEU",
+  "times": 1,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-08T09:35:16.963Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-15T15:36:28.959Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fcf4f30a065e000176e1f84"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf4f08a065e000176e1f83"
+  },
+  "name": "Phường Cầu Diễn",
+  "code": "LD0002",
+  "minHeight": 80,
+  "maxHeight": 135,
+  "startPoint": {
+    "longitude": 105.78501121223889,
+    "latitude": 21.043881727683825
+  },
+  "endPoint": {
+    "latitude": 21.017746876374176,
+    "longitude": 105.81454454557223
+  },
+  "priority": 0,
+  "description": null,
+  "active": true,
+  "incidentType": "DE_DIEU",
+  "times": 16,
+  "level": 2,
+  "createdAt": {
+    "$date": "2020-12-08T10:02:24.368Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-15T15:36:28.959Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fcf792ca122370017d3ae24"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf777aa122370017d3ae16"
+  },
+  "name": "Miền cầu Long Biên kéo dài",
+  "code": "ZONE00016",
+  "minHeight": 80,
+  "maxHeight": 220,
+  "startPoint": {
+    "longitude": 105.86266890641053,
+    "latitude": 21.065755014558192
+  },
+  "endPoint": {
+    "latitude": 21.043419504825494,
+    "longitude": 105.88653557307725
+  },
+  "priority": 0,
+  "description": null,
+  "active": true,
+  "times": 5,
+  "level": 0,
+  "createdAt": {
+    "$date": "2020-12-08T13:01:32.387Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-15T15:36:28.960Z"
+  },
+  "__v": 0,
+  "incidentType": "CAY_TRONG"
+},{
+  "_id": {
+    "$oid": "5fcf7945a122370017d3ae26"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf777aa122370017d3ae16"
+  },
+  "name": "Phường Phúc Đồng",
+  "code": "ZONE00016",
+  "minHeight": 67,
+  "maxHeight": 220,
+  "startPoint": {
+    "latitude": 21.050216246126197,
+    "longitude": 105.89177379345267
+  },
+  "endPoint": {
+    "latitude": 21.0248214717799,
+    "longitude": 105.91396102845914
+  },
+  "priority": 0,
+  "description": null,
+  "active": true,
+  "times": 4,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-08T13:01:57.931Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-15T15:36:28.961Z"
+  },
+  "__v": 0,
+  "incidentType": "DE_DIEU"
+},{
+  "_id": {
+    "$oid": "5fcf7965a122370017d3ae27"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf7744a122370017d3ae15"
+  },
+  "name": "Phường Tây Mỗ",
+  "code": "ZONE00018",
+  "minHeight": 60,
+  "maxHeight": 120,
+  "startPoint": {
+    "longitude": 105.73675475441036,
+    "latitude": 21.017026761960224
+  },
+  "endPoint": {
+    "longitude": 105.76062142107696,
+    "latitude": 20.989393376035423
+  },
+  "priority": 0,
+  "description": null,
+  "active": true,
+  "times": 13,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-08T13:02:29.146Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-15T15:36:28.961Z"
+  },
+  "__v": 0,
+  "incidentType": "DE_DIEU"
+},{
+  "_id": {
+    "$oid": "5fcf7984a122370017d3ae29"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf7744a122370017d3ae15"
+  },
+  "name": "Xã An Khánh",
+  "code": "ZONE00013",
+  "minHeight": 70,
+  "maxHeight": 220,
+  "startPoint": {
+    "longitude": 105.70851387863172,
+    "latitude": 21.01921702176395
+  },
+  "endPoint": {
+    "longitude": 105.73291387863173,
+    "latitude": 20.98137597120312
+  },
+  "priority": 0,
+  "description": "Không có",
+  "active": true,
+  "times": 15,
+  "level": 2,
+  "createdAt": {
+    "$date": "2020-12-08T13:03:00.166Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T13:45:00.747Z"
+  },
+  "__v": 0,
+  "incidentType": "LUOI_DIEN"
+},{
+  "_id": {
+    "$oid": "5fe19fb1e40ec00017660153"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcddf6d85a6dc0017e0842d"
+  },
+  "name": "Bắc Hà Đông",
+  "code": "MSG01",
+  "minHeight": 80,
+  "maxHeight": 100,
+  "startPoint": {
+    "longitude": -25.73044,
+    "latitude": 20.2222
+  },
+  "endPoint": {
+    "longitude": 5.73044,
+    "latitude": 20.2222
+  },
+  "priority": 2,
+  "description": "",
+  "active": true,
+  "incidentType": "CAY_TRONG",
+  "times": 0,
+  "level": 0,
+  "createdAt": {
+    "$date": "2020-12-22T07:26:41.559Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-22T07:26:41.559Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe1a1ade40ec00017660154"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcddf6d85a6dc0017e0842d"
+  },
+  "name": "Bắc Hà Đông",
+  "code": "MSG01",
+  "minHeight": 80,
+  "maxHeight": 100,
+  "startPoint": {
+    "longitude": -25.73044,
+    "latitude": 20.2222
+  },
+  "endPoint": {
+    "longitude": 5.73044,
+    "latitude": 20.2222
+  },
+  "priority": 2,
+  "description": "",
+  "active": true,
+  "incidentType": "CAY_TRONG",
+  "times": 0,
+  "level": 0,
+  "createdAt": {
+    "$date": "2020-12-22T07:35:09.955Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-22T07:35:09.955Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe57e8a517d0e001702178b"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe57d35517d0e0017021783"
+  },
+  "name": "P. Tran Hung Dao",
+  "code": "ZONE2342",
+  "minHeight": 130,
+  "maxHeight": 230,
+  "startPoint": {
+    "latitude": 21.05398002552142,
+    "longitude": 105.79346691267016
+  },
+  "endPoint": {
+    "longitude": 105.88994060651781,
+    "latitude": 20.982192388611477
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 5,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-25T05:54:18.934Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-03T13:37:16.363Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe57eb0517d0e001702178c"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe57d35517d0e0017021783"
+  },
+  "name": "P. Trang Tien",
+  "code": "ZONE23410",
+  "minHeight": 60,
+  "maxHeight": 160,
+  "startPoint": {
+    "latitude": 21.031550310838497,
+    "longitude": 105.8451518297801
+  },
+  "endPoint": {
+    "latitude": 21.024086270498685,
+    "longitude": 105.86287586887391
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 1,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-25T05:54:56.418Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T05:54:56.418Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe57edb517d0e001702178d"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe57d35517d0e0017021783"
+  },
+  "name": "Cau Chuong Duong",
+  "code": "ZONE343",
+  "minHeight": 60,
+  "maxHeight": 150,
+  "startPoint": {
+    "longitude": 105.85974569642514,
+    "latitude": 21.043217241798914
+  },
+  "endPoint": {
+    "longitude": 105.86631174504873,
+    "latitude": 21.031587974342074
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 11,
+  "level": 2,
+  "createdAt": {
+    "$date": "2020-12-25T05:55:39.695Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T05:55:39.695Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe57f67517d0e0017021790"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe57d35517d0e0017021783"
+  },
+  "name": "P. Phan Chu Trinh",
+  "code": "ZONE543",
+  "minHeight": 80,
+  "maxHeight": 160,
+  "startPoint": {
+    "longitude": 105.85288438557473,
+    "latitude": 21.023962551153588
+  },
+  "endPoint": {
+    "longitude": 105.87580118338627,
+    "latitude": 21.014134542586987
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 13,
+  "level": 2,
+  "createdAt": {
+    "$date": "2020-12-25T05:57:59.696Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T05:57:59.696Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe58645517d0e0017021791"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe57d35517d0e0017021783"
+  },
+  "name": "P. Bo De",
+  "code": "ZONE298",
+  "minHeight": 60,
+  "maxHeight": 260,
+  "startPoint": {
+    "longitude": 105.86640391599826,
+    "latitude": 21.04022004632006
+  },
+  "endPoint": {
+    "latitude": 21.0315413994945,
+    "longitude": 105.87581668265204
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 4,
+  "level": 2,
+  "createdAt": {
+    "$date": "2020-12-25T06:27:17.870Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T06:27:17.870Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe5867e517d0e0017021792"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe57d35517d0e0017021783"
+  },
+  "name": "P Thach Cau",
+  "code": "ZONE766",
+  "minHeight": 80,
+  "maxHeight": 190,
+  "startPoint": {
+    "longitude": 105.86292599638915,
+    "latitude": 21.031418284716864
+  },
+  "endPoint": {
+    "longitude": 105.87574338128428,
+    "latitude": 21.02394088513563
+  },
+  "priority": 1,
+  "description": "test update",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 12,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-25T06:28:14.301Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T16:46:06.540Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe5885a517d0e0017021794"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "name": "Hồ Giảng Võ",
+  "code": "ZONE23443",
+  "minHeight": 90,
+  "maxHeight": 160,
+  "startPoint": {
+    "longitude": 105.8152168350922,
+    "latitude": 21.036022125915807
+  },
+  "endPoint": {
+    "longitude": 105.82488709384887,
+    "latitude": 21.025954565483644
+  },
+  "priority": 1,
+  "description": "Dang sửa",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 3,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-25T06:36:10.971Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T16:02:17.903Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe58880517d0e0017021796"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "name": "P Cát Linh",
+  "code": "ZONE678",
+  "minHeight": 100,
+  "maxHeight": 180,
+  "startPoint": {
+    "longitude": 105.8249560829396,
+    "latitude": 21.036028035207053
+  },
+  "endPoint": {
+    "longitude": 105.83482661355026,
+    "latitude": 21.028150294368203
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 5,
+  "level": 2,
+  "createdAt": {
+    "$date": "2020-12-25T06:36:48.600Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T06:36:48.600Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe5889f517d0e0017021797"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "name": "P. Hàng Bột",
+  "code": "ZONE234345",
+  "minHeight": 80,
+  "maxHeight": 160,
+  "startPoint": {
+    "longitude": 105.82498137630546,
+    "latitude": 21.028005478491636
+  },
+  "endPoint": {
+    "latitude": 21.020434435901564,
+    "longitude": 105.83480899156564
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 19,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-25T06:37:19.519Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T06:37:19.519Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe588d1517d0e0017021798"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "name": "Phố Láng Hạ",
+  "code": "ZONE564",
+  "minHeight": 95,
+  "maxHeight": 180,
+  "startPoint": {
+    "longitude": 105.8152410924697,
+    "latitude": 21.025826343906274
+  },
+  "endPoint": {
+    "latitude": 21.01603851943287,
+    "longitude": 105.82493996167835
+  },
+  "priority": 1,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 2,
+  "level": 2,
+  "createdAt": {
+    "$date": "2020-12-25T06:38:09.408Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T01:18:34.839Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe588fa517d0e0017021799"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "name": "Khu bệnh viện Đống Đa",
+  "code": "ZONE2056",
+  "minHeight": 100,
+  "maxHeight": 160,
+  "startPoint": {
+    "longitude": 105.82500181387184,
+    "latitude": 21.020298488162766
+  },
+  "endPoint": {
+    "longitude": 105.82966528217571,
+    "latitude": 21.01376864993742
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 9,
+  "level": 0,
+  "createdAt": {
+    "$date": "2020-12-25T06:38:50.938Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T06:38:50.938Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe5891c517d0e001702179a"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "name": "Phố Xã Đàn",
+  "code": "ZONE2687",
+  "minHeight": 120,
+  "maxHeight": 190,
+  "startPoint": {
+    "longitude": 105.82976172041754,
+    "latitude": 21.020342094659583
+  },
+  "endPoint": {
+    "latitude": 21.008617562502423,
+    "longitude": 105.83478281642374
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 13,
+  "level": 2,
+  "createdAt": {
+    "$date": "2020-12-25T06:39:24.235Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T06:39:24.235Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe58935517d0e001702179b"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "name": "P. Trung Liệt",
+  "code": "ZONE852",
+  "minHeight": 80,
+  "maxHeight": 190,
+  "startPoint": {
+    "longitude": 105.81524928037203,
+    "latitude": 21.01596913715251
+  },
+  "endPoint": {
+    "latitude": 21.008664567891373,
+    "longitude": 105.82486231887987
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 15,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-25T06:39:49.593Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T06:39:49.593Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe58957517d0e001702179c"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "name": "P. Trung Oai",
+  "code": "ZONE1864",
+  "minHeight": 100,
+  "maxHeight": 190,
+  "startPoint": {
+    "latitude": 21.013684895631968,
+    "longitude": 105.82499729273388
+  },
+  "endPoint": {
+    "longitude": 105.82973228684017,
+    "latitude": 21.008650445876583
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 18,
+  "level": 0,
+  "createdAt": {
+    "$date": "2020-12-25T06:40:23.744Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T06:40:23.744Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe58983517d0e001702179d"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "name": "Đại học Luật",
+  "code": "ZONE6981",
+  "minHeight": 150,
+  "maxHeight": 230,
+  "startPoint": {
+    "latitude": 21.025705859476332,
+    "longitude": 105.80673423606203
+  },
+  "endPoint": {
+    "longitude": 105.81524578035578,
+    "latitude": 21.01378144362492
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 14,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-25T06:41:07.906Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T06:41:07.906Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe589ac517d0e001702179e"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "name": "Hồ Ngọc Khánh",
+  "code": "ZONE9455",
+  "minHeight": 85,
+  "maxHeight": 195,
+  "startPoint": {
+    "latitude": 21.031349357453593,
+    "longitude": 105.80928191680243
+  },
+  "endPoint": {
+    "latitude": 21.025848161428954,
+    "longitude": 105.81523284562076
+  },
+  "priority": 1,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 10,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-25T06:41:48.369Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-26T07:45:40.515Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe5a4901af3800017815f76"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf7744a122370017d3ae15"
+  },
+  "name": "Xã An Khánh",
+  "code": "ZONE625",
+  "minHeight": 100,
+  "maxHeight": 260,
+  "startPoint": {
+    "longitude": 105.7060476352001,
+    "latitude": 21.027968347753315
+  },
+  "endPoint": {
+    "longitude": 105.73306051826205,
+    "latitude": 21.001361666144746
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 8,
+  "level": 0,
+  "createdAt": {
+    "$date": "2020-12-25T08:36:32.214Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T08:36:32.214Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe5a4aa1af3800017815f77"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf7744a122370017d3ae15"
+  },
+  "name": "Hồ Mừng",
+  "code": "ZONE35656",
+  "minHeight": 95,
+  "maxHeight": 190,
+  "startPoint": {
+    "latitude": 21.02834964440983,
+    "longitude": 105.73307052749794
+  },
+  "endPoint": {
+    "latitude": 21.012753180207156,
+    "longitude": 105.74866310527597
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 6,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-25T08:36:58.060Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T08:36:58.060Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe5a4d81af3800017815f78"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf7744a122370017d3ae15"
+  },
+  "name": "Đường Ngân Hàng",
+  "code": "ZONE5851",
+  "minHeight": 120,
+  "maxHeight": 196,
+  "startPoint": {
+    "longitude": 105.74873549675664,
+    "latitude": 21.02826598222842
+  },
+  "endPoint": {
+    "latitude": 21.004448359516914,
+    "longitude": 105.76340133767428
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 17,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-25T08:37:44.519Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T08:37:44.519Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe5a56d1af3800017815f7b"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf7744a122370017d3ae15"
+  },
+  "name": "Xã An Thương",
+  "code": "ZONE897",
+  "minHeight": 95,
+  "maxHeight": 190,
+  "startPoint": {
+    "longitude": 105.70619626951247,
+    "latitude": 21.00101979269259
+  },
+  "endPoint": {
+    "longitude": 105.72644586755024,
+    "latitude": 20.981738214097362
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 4,
+  "level": 0,
+  "createdAt": {
+    "$date": "2020-12-25T08:40:13.112Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T08:40:13.112Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe5a5961af3800017815f7c"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf7744a122370017d3ae15"
+  },
+  "name": "Đường Lê Trọng Tấn",
+  "code": "ZONE796",
+  "minHeight": 110,
+  "maxHeight": 180,
+  "startPoint": {
+    "latitude": 21.00096359831042,
+    "longitude": 105.7266278482906
+  },
+  "endPoint": {
+    "longitude": 105.74909161640653,
+    "latitude": 20.973863428849583
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 10,
+  "level": 0,
+  "createdAt": {
+    "$date": "2020-12-25T08:40:54.089Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T08:40:54.089Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe5a5ad1af3800017815f7d"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf7744a122370017d3ae15"
+  },
+  "name": "xã La Phú",
+  "code": "ZONE2568",
+  "minHeight": 105,
+  "maxHeight": 195,
+  "startPoint": {
+    "longitude": 105.70593655748041,
+    "latitude": 20.981426879120463
+  },
+  "endPoint": {
+    "latitude": 20.973721051582373,
+    "longitude": 105.72654847435876
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 15,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-25T08:41:17.970Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-25T08:41:17.970Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe5a5db1af3800017815f7e"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf7744a122370017d3ae15"
+  },
+  "name": "Phố Nguyễn Thanh Bình",
+  "code": "ZONE4587",
+  "minHeight": 120,
+  "maxHeight": 180,
+  "startPoint": {
+    "latitude": 20.983333704412217,
+    "longitude": 105.7493979566388
+  },
+  "endPoint": {
+    "latitude": 20.9737108804204,
+    "longitude": 105.76336736143992
+  },
+  "priority": 2,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 3,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-25T08:42:03.083Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T13:43:42.616Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe82f09a719c60017775cb3"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf77a4a122370017d3ae17"
+  },
+  "name": "Miền Tây Hồ",
+  "code": "ZONE2150",
+  "minHeight": 20,
+  "maxHeight": 90,
+  "startPoint": {
+    "longitude": 105.8084798629977,
+    "latitude": 21.065537532398057
+  },
+  "endPoint": {
+    "longitude": 105.79303323727612,
+    "latitude": 21.086170378843633
+  },
+  "priority": 0,
+  "description": "Miền Tây Hồ",
+  "active": true,
+  "incidentType": "DE_DIEU",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-27T06:51:53.817Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-27T06:51:53.817Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe890b1a719c60017775cbb"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "name": "Miền Láng Hạ",
+  "code": "ZONE7006",
+  "minHeight": 90,
+  "maxHeight": 220,
+  "startPoint": {
+    "latitude": 21.020593698467817,
+    "longitude": 105.80328477403212
+  },
+  "endPoint": {
+    "latitude": 21.012100864895434,
+    "longitude": 105.81821931382704
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "DE_DIEU",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-27T13:48:33.553Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-27T13:48:33.553Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fe8923fa719c60017775cc0"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe57d35517d0e0017021783"
+  },
+  "name": "miền Nam Từ LIêm",
+  "code": "ZONE7106",
+  "minHeight": 90,
+  "maxHeight": 220,
+  "startPoint": {
+    "latitude": 21.03349748599526,
+    "longitude": 105.84505867493239
+  },
+  "endPoint": {
+    "latitude": 21.027569090866965,
+    "longitude": 105.85141014587965
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "DE_DIEU",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-27T13:55:11.867Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-27T13:55:11.867Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5feb43c709b7580017a56417"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcddf6d85a6dc0017e0842d"
+  },
+  "name": "Trương Định",
+  "code": "ZONE6447",
+  "minHeight": 10,
+  "maxHeight": 50,
+  "startPoint": {
+    "longitude": 105.80410991804125,
+    "latitude": 21.035075028001103
+  },
+  "endPoint": {
+    "longitude": 105.85560833112719,
+    "latitude": 21.000783573831576
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-29T14:57:11.628Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-03T15:35:30.619Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5feb44b409b7580017a56419"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf77a4a122370017d3ae17"
+  },
+  "name": "Quận Tây Hồ",
+  "code": "ZONE2819",
+  "minHeight": 355,
+  "maxHeight": 455,
+  "startPoint": {
+    "longitude": 105.79303323727612,
+    "latitude": 21.086170378843633
+  },
+  "endPoint": {
+    "longitude": 105.80408456294231,
+    "latitude": 21.077185485130173
+  },
+  "priority": 1,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-29T15:01:08.924Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T15:01:08.924Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5febd512eeec7500179c9bb0"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5febd490eeec7500179c9baf"
+  },
+  "name": "Nguyễn Ngọc Vũ",
+  "code": "ZONE8882",
+  "minHeight": 20,
+  "maxHeight": 60,
+  "startPoint": {
+    "longitude": 105.4333025683594,
+    "latitude": 21.24737752331474
+  },
+  "endPoint": {
+    "longitude": 105.50746028320314,
+    "latitude": 21.178244524098833
+  },
+  "priority": 1,
+  "description": "",
+  "active": true,
+  "incidentType": "ALL_PROJECT",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-30T01:17:06.465Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T01:17:06.465Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5febfe9eeeec7500179c9bb4"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5feb614d09b7580017a5642d"
+  },
+  "name": "Farm Zone 1 at Vuon Dak Lak",
+  "code": "ZONE6820",
+  "minHeight": 232,
+  "maxHeight": 239,
+  "startPoint": {
+    "longitude": 108.25146309077998,
+    "latitude": 13.008344214703161
+  },
+  "endPoint": {
+    "longitude": 108.24974647701045,
+    "latitude": 13.008511470728259
+  },
+  "priority": 0,
+  "description": "Trang trai so 1 tai vuon cay Dak Lak",
+  "active": true,
+  "incidentType": "ALL_PROJECT",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-30T04:14:22.690Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T04:14:22.690Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5febff3deeec7500179c9bb8"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5feb614d09b7580017a5642d"
+  },
+  "name": "Farm Zone 2 tai vuon Dak Lak",
+  "code": "ZONE4100",
+  "minHeight": 60,
+  "maxHeight": 99,
+  "startPoint": {
+    "longitude": 108.2508824473594,
+    "latitude": 13.024763228692908
+  },
+  "endPoint": {
+    "longitude": 108.25493923366328,
+    "latitude": 13.01139661940496
+  },
+  "priority": 0,
+  "description": "Khu vuc so 2 tai vuon Dak Lak",
+  "active": true,
+  "incidentType": "ALL_PROJECT",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-30T04:17:01.891Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T04:17:01.891Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5febff8feeec7500179c9bb9"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5feb614d09b7580017a5642d"
+  },
+  "name": "Farm Zone 3 tai Vuon Dak Lak",
+  "code": "ZONE6298",
+  "minHeight": 68,
+  "maxHeight": 69,
+  "startPoint": {
+    "longitude": 108.25576494369562,
+    "latitude": 13.019797614839911
+  },
+  "endPoint": {
+    "longitude": 108.25559328231867,
+    "latitude": 13.020048487244035
+  },
+  "priority": 0,
+  "description": "Khu vuon cuoi cung tai vuon Dak Lak",
+  "active": true,
+  "incidentType": "ALL_PROJECT",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-30T04:18:23.736Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T04:18:23.736Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec08a6eeec7500179c9bbb"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5feb614d09b7580017a5642d"
+  },
+  "name": "Farm Zone 1 Dak Lak",
+  "code": "ZONE8413",
+  "minHeight": 30,
+  "maxHeight": 500,
+  "startPoint": {
+    "longitude": 108.2393746970568,
+    "latitude": 13.016582751338591
+  },
+  "endPoint": {
+    "longitude": 108.24696071424215,
+    "latitude": 13.014376413905167
+  },
+  "priority": 0,
+  "description": "Farm Zone 1 tai Dak Lak",
+  "active": true,
+  "incidentType": "CAY_TRONG",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-30T04:57:10.570Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T04:57:10.570Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec08eeeeec7500179c9bbc"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5feb614d09b7580017a5642d"
+  },
+  "name": "Farm Zone 2 Dak Lak",
+  "code": "ZONE2514",
+  "minHeight": 30,
+  "maxHeight": 999,
+  "startPoint": {
+    "longitude": 108.24042780102279,
+    "latitude": 12.992968746053196
+  },
+  "endPoint": {
+    "longitude": 108.2425735682347,
+    "latitude": 12.991379709745841
+  },
+  "priority": 0,
+  "description": "Farm Zone 2 tai Dak Lak",
+  "active": true,
+  "incidentType": "CAY_TRONG",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-30T04:58:22.683Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T04:58:22.683Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec0951eeec7500179c9bbd"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5feb614d09b7580017a5642d"
+  },
+  "name": "Farm Zone 3 Dak Lak",
+  "code": "ZONE7698",
+  "minHeight": 30,
+  "maxHeight": 999,
+  "startPoint": {
+    "longitude": 108.26811980143363,
+    "latitude": 13.017894729664635
+  },
+  "endPoint": {
+    "longitude": 108.26159666910941,
+    "latitude": 13.019734468857763
+  },
+  "priority": 0,
+  "description": "Farm Zone 3 tai Dak Lak",
+  "active": true,
+  "incidentType": "CAY_TRONG",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-30T05:00:01.916Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T05:00:01.916Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec86a1f139ff00177a252e"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5febd490eeec7500179c9baf"
+  },
+  "name": "DemoTest",
+  "code": "ZONE5069",
+  "minHeight": 20,
+  "maxHeight": 40,
+  "startPoint": {
+    "longitude": 105.7299963867549,
+    "latitude": 21.094240769296086
+  },
+  "endPoint": {
+    "longitude": 105.6366125976924,
+    "latitude": 21.08911561530182
+  },
+  "priority": 0,
+  "description": "Demo",
+  "active": true,
+  "incidentType": "CAY_TRONG",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2020-12-30T13:54:41.259Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T13:54:41.259Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fef33772024870017139e50"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5febd490eeec7500179c9baf"
+  },
+  "name": "MIền 1",
+  "code": "ZONE7637",
+  "minHeight": 90,
+  "maxHeight": 220,
+  "startPoint": {
+    "latitude": 21.20519392008165,
+    "longitude": 105.55749540890638
+  },
+  "endPoint": {
+    "latitude": 21.068650252479,
+    "longitude": 105.65911894406263
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "DE_DIEU",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2021-01-01T14:36:39.452Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-01T14:36:39.452Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fef34d32024870017139e51"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf77a4a122370017d3ae17"
+  },
+  "name": "miền Tây Hồ",
+  "code": "ZONE3256",
+  "minHeight": 90,
+  "maxHeight": 220,
+  "startPoint": {
+    "latitude": 21.078631886585555,
+    "longitude": 105.79447838177322
+  },
+  "endPoint": {
+    "latitude": 21.06421542652523,
+    "longitude": 105.81095787396072
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CAY_TRONG",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2021-01-01T14:42:27.507Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-01T14:42:27.507Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff180490f8a2700171b7624"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fcf77a4a122370017d3ae17"
+  },
+  "name": "Công viên nước",
+  "code": "ZONE7044",
+  "minHeight": 40,
+  "maxHeight": 80,
+  "startPoint": {
+    "longitude": 105.80074196195478,
+    "latitude": 21.082693818688654
+  },
+  "endPoint": {
+    "longitude": 105.83058411021102,
+    "latitude": 21.064893914766696
+  },
+  "priority": 2,
+  "description": "",
+  "active": true,
+  "incidentType": "DE_DIEU",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2021-01-03T08:28:57.805Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-03T08:28:57.805Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff27f831502c9001768e0a8"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "name": "Ngã tư Lê Văn Lương, Láng",
+  "code": "ZONE12345",
+  "minHeight": 110,
+  "maxHeight": 250,
+  "startPoint": {
+    "longitude": 105.81131969587328,
+    "latitude": 21.057504420587826
+  },
+  "endPoint": {
+    "longitude": 105.85938488142016,
+    "latitude": 21.0168085992985
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 14,
+  "level": 1,
+  "createdAt": {
+    "$date": "2021-01-04T02:37:55.737Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-04T07:48:33.177Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff293f21502c9001768e0ac"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5feb67d209b7580017a5644c"
+  },
+  "name": "miền Thủ đô",
+  "code": "ZONE4367",
+  "minHeight": 90,
+  "maxHeight": 220,
+  "startPoint": {
+    "latitude": 20.796010913954007,
+    "longitude": 105.95702236061366
+  },
+  "endPoint": {
+    "latitude": 21.267712962388405,
+    "longitude": 105.69060390358241
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "DE_DIEU",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2021-01-04T04:05:06.899Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-04T04:05:06.899Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff2a2151502c9001768e0ae"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5febd490eeec7500179c9baf"
+  },
+  "name": "Sông hồng",
+  "code": "Drone111",
+  "minHeight": 10,
+  "maxHeight": 100,
+  "startPoint": {
+    "longitude": 105.82798426048281,
+    "latitude": 21.01007829825781
+  },
+  "endPoint": {
+    "longitude": 105.83141748802187,
+    "latitude": 21.016968840859843
+  },
+  "priority": 0,
+  "description": "Khu vự đê hay sạt lở ",
+  "active": true,
+  "incidentType": "ALL_PROJECT",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2021-01-04T05:05:25.264Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-04T05:05:25.264Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff2a2dd1502c9001768e0af"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5febd490eeec7500179c9baf"
+  },
+  "name": "named",
+  "code": "ZONE2167",
+  "minHeight": 10,
+  "maxHeight": 200,
+  "startPoint": {
+    "longitude": 105.60399298564913,
+    "latitude": 21.160315872443547
+  },
+  "endPoint": {
+    "longitude": 105.85538302556994,
+    "latitude": 21.01312299586897
+  },
+  "priority": 0,
+  "description": "miền mới",
+  "active": true,
+  "incidentType": "ALL_PROJECT",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2021-01-04T05:08:45.173Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-04T05:08:45.173Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff2a2dd1502c9001768e0b0"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5febd490eeec7500179c9baf"
+  },
+  "name": "named",
+  "code": "ZONE2167",
+  "minHeight": 10,
+  "maxHeight": 200,
+  "startPoint": {
+    "longitude": 105.60399298564913,
+    "latitude": 21.160315872443547
+  },
+  "endPoint": {
+    "longitude": 105.85538302556994,
+    "latitude": 21.01312299586897
+  },
+  "priority": 0,
+  "description": "miền mới",
+  "active": true,
+  "incidentType": "ALL_PROJECT",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2021-01-04T05:08:45.362Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-04T05:08:45.362Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff2b4111502c9001768e0b4"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5feb67d209b7580017a5644c"
+  },
+  "name": "Miền 01",
+  "code": "ZONE9513",
+  "minHeight": 10,
+  "maxHeight": 40,
+  "startPoint": {
+    "longitude": 105.82280223266604,
+    "latitude": 21.042124629713776
+  },
+  "endPoint": {
+    "longitude": 105.78881328002932,
+    "latitude": 21.056222832038614
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CAY_TRONG",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2021-01-04T06:22:09.675Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-04T06:22:09.675Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff2c0961502c9001768e0bb"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5febd490eeec7500179c9baf"
+  },
+  "name": "Miền demo",
+  "code": "ZONE7497",
+  "minHeight": 20,
+  "maxHeight": 40,
+  "startPoint": {
+    "longitude": 105.83456103698732,
+    "latitude": 21.028666009699684
+  },
+  "endPoint": {
+    "longitude": 105.34953181640627,
+    "latitude": 21.296007242345365
+  },
+  "priority": 0,
+  "description": "khu vực trồng đào",
+  "active": true,
+  "incidentType": "CAY_TRONG",
+  "times": 0,
+  "level": 1,
+  "createdAt": {
+    "$date": "2021-01-04T07:15:34.891Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-04T07:15:34.891Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff2cdda1502c9001768e0bd"
+  },
+  "itinerary": [],
+  "area": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "name": "P ngã tư sở",
+  "code": "ZONE7823",
+  "minHeight": 100,
+  "maxHeight": 240,
+  "startPoint": {
+    "latitude": 21.008374949351634,
+    "longitude": 105.81531111554852
+  },
+  "endPoint": {
+    "latitude": 21.000144342353437,
+    "longitude": 105.8251742401564
+  },
+  "priority": 0,
+  "description": "",
+  "active": true,
+  "incidentType": "CHAY_RUNG",
+  "times": 11,
+  "level": 1,
+  "createdAt": {
+    "$date": "2021-01-04T08:12:10.316Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T04:29:15.020Z"
+  },
+  "__v": 0
+}]
