@@ -72,6 +72,7 @@ async function receivePushNotification(event) {
   const options = {
     data: ref._link,
     icon: images[ref._type].img,
+    image: images[ref._type].img,
     body: content,
     requireInteraction: true,
     actions: actions
