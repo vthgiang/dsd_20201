@@ -1,16 +1,13 @@
+import { HeatMapOutlined } from "@ant-design/icons";
+import { Input } from "antd";
 import React, { useEffect, useState } from "react";
 import {
   GoogleMap,
-  withScriptjs,
-  withGoogleMap,
-  Marker,
-  InfoWindow,
-  Rectangle,
+  InfoWindow, Marker,
+  Rectangle, withGoogleMap, withScriptjs
 } from "react-google-maps";
 import { removeVietnameseTones } from "../../../../helpers/removeVietnameseTones";
 
-import { Input } from "antd";
-import { HeatMapOutlined } from "@ant-design/icons";
 const axios = require("axios");
 const { Search } = Input;
 
@@ -131,9 +128,9 @@ const Map = ({
       defaultCenter={
         option !== "create" && monitoredObject.lat
           ? {
-              lat: parseFloat(monitoredObject.lat),
-              lng: parseFloat(monitoredObject.lng),
-            }
+            lat: parseFloat(monitoredObject.lat),
+            lng: parseFloat(monitoredObject.lng),
+          }
           : initLocation
       }
     >
@@ -166,19 +163,19 @@ const Map = ({
             }
             options={
               selectedMonitoredZone &&
-              selectedMonitoredZone.indexOf(zone._id) >= 0
+                selectedMonitoredZone.indexOf(zone._id) >= 0
                 ? {
-                    strokeColor: "#d34052",
-                    fillColor: "#d34052",
-                    strokeOpacity: "0.5",
-                    strokeWeight: "2",
-                  }
+                  strokeColor: "#d34052",
+                  fillColor: "#d34052",
+                  strokeOpacity: "0.5",
+                  strokeWeight: "2",
+                }
                 : {
-                    strokeColor: "#d34052",
-                    fillColor: "#70b8fb",
-                    strokeOpacity: "0.5",
-                    strokeWeight: "2",
-                  }
+                  strokeColor: "#d34052",
+                  fillColor: "#70b8fb",
+                  strokeOpacity: "0.5",
+                  strokeWeight: "2",
+                }
             }
           />
         ))}
@@ -247,15 +244,15 @@ const Map = ({
                   <a>Bỏ chọn miền g/s này</a>
                 </button>
               ) : (
-                <button
-                  onClick={(e) =>
-                    handleMonitoredZoneChange(currentMonitoredZone, e)
-                  }
-                >
-                  <HeatMapOutlined /> &ensp;
-                  <a>Chọn miền g/s này</a>
-                </button>
-              )}
+                  <button
+                    onClick={(e) =>
+                      handleMonitoredZoneChange(currentMonitoredZone, e)
+                    }
+                  >
+                    <HeatMapOutlined /> &ensp;
+                    <a>Chọn miền g/s này</a>
+                  </button>
+                )}
             </div>
           </div>
         </InfoWindow>

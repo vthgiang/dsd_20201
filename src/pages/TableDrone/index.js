@@ -1,6 +1,7 @@
-import PropTypes from "prop-types";
-import clsx from "clsx";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Paper from "@material-ui/core/Paper";
 import { lighten, makeStyles } from "@material-ui/core/styles";
+import Switch from "@material-ui/core/Switch";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -11,20 +12,15 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import React, { useEffect, useState, useMemo } from "react";
-import useFullPageLoader from "../../components/hooks/useFullPageLoader";
+import { Tag } from 'antd';
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import ModalAddDataTable from '../../containers/ModalAddDataTable'
+import { CRUD_DRONE, isAuthorised } from "../../components/Drone/Common/role";
+import useFullPageLoader from "../../components/hooks/useFullPageLoader";
+import ModalAddDataTable from '../../containers/ModalAddDataTable';
 import ModalEditDataTable from '../../containers/ModalEditDataTable';
-import {Tag} from 'antd';
-
-import { isAuthorised, DRONE_SEARCH, CRUD_DRONE } from "../../components/Drone/Common/role";
-
-
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -217,7 +213,7 @@ const dronesData = useMemo(() => {
     if (search) {
         computedDrones = computedDrones.filter(
             (comment) =>
-                comment.id.toLowerCase().includes(search.toLowerCase())
+                comment.id.toLowerCase().includes(search.toLowerCase()) || comment.name.toLowerCase().includes(search.toLowerCase())
         );
     } 
     return computedDrones;
@@ -260,40 +256,31 @@ const dronesData = useMemo(() => {
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, dronesData.length - page * rowsPerPage);
-    const EnhancedTableToolbar = (props) => {
-        const classes = useToolbarStyles();
-        const { numSelected } = props;
 
+  const EnhancedTableToolbar = (props) => {
+        const classes = useToolbarStyles();
         return (
-          <Toolbar
-            className={clsx(classes.root, {
-              [classes.highlight]: numSelected > 0
-            })}
-          >
+          <Toolbar>
            
            <Typography   className={classes.title}> <ModalAddDataTable></ModalAddDataTable> </Typography>
-             <input
-                type="text"
-                className="form-control"
-                style={{ width: "240px", marginRight: '1rem', marginLeft: '2rem' }}
-                placeholder="Tìm kiếm ID"
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-            />
-              
               <Typography> {numDrone}drone </Typography>
           </Toolbar>
         );
       };
 
-      EnhancedTableToolbar.propTypes = {
-        numSelected: PropTypes.number.isRequired
-      };
-
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+      <input
+                key="111"
+                type="text"
+                className="form-control"
+                style={{ width: "400px", marginRight: '1rem', marginLeft: '2rem' }}
+                placeholder="Tìm kiếm ID hoặc tên drone"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+            />
+        <EnhancedTableToolbar />
         <TableContainer className={classes.container}>
         {loader}
           <Table

@@ -40,7 +40,6 @@ const PayloadStatistic = ({ history }) => {
         </div>
       </StyleList>
       )
-
 };
 
 export default PayloadStatistic;
