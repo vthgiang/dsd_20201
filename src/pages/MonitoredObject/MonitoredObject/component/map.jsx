@@ -168,31 +168,17 @@ const Map = ({
               selectedMonitoredZone &&
                 selectedMonitoredZone.indexOf(zone._id) >= 0
                 ? {
-<<<<<<< HEAD
-                    strokeColor: "#d34052",
-                    fillColor: "#d34052",
-                    strokeOpacity: "0.5",
-                    strokeWeight: "2",
-                  }
-                : {
-                    strokeColor: "#d34052",
-                    fillColor: "#70b8fb",
-                    strokeOpacity: "0.5",
-                    strokeWeight: "2",
-                  }
-=======
-                  strokeColor: '#d34052',
-                  fillColor: '#d34052',
-                  strokeOpacity: '0.5',
-                  strokeWeight: '2',
+                  strokeColor: "#d34052",
+                  fillColor: "#d34052",
+                  strokeOpacity: "0.5",
+                  strokeWeight: "2",
                 }
                 : {
-                  strokeColor: '#d34052',
-                  fillColor: '#70b8fb',
-                  strokeOpacity: '0.5',
-                  strokeWeight: '2',
+                  strokeColor: "#d34052",
+                  fillColor: "#70b8fb",
+                  strokeOpacity: "0.5",
+                  strokeWeight: "2",
                 }
->>>>>>> dev
             }
           />
         ))}

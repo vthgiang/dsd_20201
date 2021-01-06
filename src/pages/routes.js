@@ -141,13 +141,8 @@ export const routes = [
     component: MapTest,
   },
   {
-<<<<<<< HEAD
     path: '/flight-path',
     component: FlightPath,
-=======
-    path: "/flight-path",
-    component: FlightPathManagement,
->>>>>>> dev
   },
   {
     path: "/flight-point",
@@ -208,7 +203,6 @@ export const routes = [
     path: "/payload-configuration",
     component: PayloadSetting,
   },
-<<<<<<< HEAD
   {
     path: '/sucodedieu-statistics',
     component: StatisticDeDieu,
@@ -231,8 +225,6 @@ export const routes = [
   },
  */
   //Payload statistic
-=======
->>>>>>> dev
   {
     path: "/payload-statistic",
     component: PayloadStatistic,
