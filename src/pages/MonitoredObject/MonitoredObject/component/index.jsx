@@ -42,6 +42,7 @@ function AreaMonitored(props) {
     code: "",
     name: "",
     status: [],
+    type: "",
   });
 
   const postLogMonitorObjectDelete = async () => {
@@ -262,6 +263,33 @@ function AreaMonitored(props) {
               onChange={setSelected}
             />
           </div>
+          {role === "SUPER_ADMIN" ? (
+            <div className="form-group col-4">
+              <label className="form-control-static" style={{ margin: "10px" }}>
+                Loại
+              </label>
+              <select
+                className="custom-select"
+                name="type"
+                value={itemSearch.type}
+                onChange={(e) => {
+                  e.persist();
+                  setItemSearch((prev) => ({
+                    ...prev,
+                    type: e.target.value,
+                  }));
+                }}
+              >
+                <option value="" disabled>
+                  Chọn loại
+                </option>
+                <option value="DE_DIEU">Đê Điều</option>
+                <option value="CHAY_RUNG">Cháy rừng</option>
+                <option value="LUOI_DIEN">Lưới điện</option>
+                <option value="CAY_TRONG">Cây trồng</option>
+              </select>
+            </div>
+          ) : null}
           <div className="form-group">
             <button
               type="button"
