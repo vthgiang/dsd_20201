@@ -14,7 +14,6 @@ import { prototype } from "javascript-time-ago";
 const axios = require("axios");
 
 function MonitoredObjectView({ history }) {
-
   let { id, option } = useParams();
   const dispatch = useDispatch();
   const category = useSelector((state) => state.category);
@@ -108,16 +107,19 @@ function MonitoredObjectView({ history }) {
       .catch((error) => console.log(error));
   };
   const postLogMonitorObjectAdd = async () => {
+    var user = JSON.parse(
+      JSON.parse(localStorage.getItem("persist:root")).user
+    );
     await axios({
       method: "POST",
       url: `http://14.248.5.197:5012/api/monitor-object/add`,
       data: {
-        regionId: monitoredObject.monitoredZone,
+        regionId: monitoredObject.monitoredZone[0],
         entityId: monitoredObject._id,
-        description: "edit monitor object",
-        authorId: "",
+        description: "add monitor object",
+        authorId: user.user.username,
         projectType: localStorage.getItem("project-type"),
-        state: "",
+        state: "add",
         name: monitoredObject.name,
       },
     })
@@ -143,8 +145,16 @@ function MonitoredObjectView({ history }) {
       .catch((error) => console.log(error));
   };
   useEffect(() => {
-    dispatch(CategoryActions.getAllCategories({ type: localStorage.getItem("project-type") }));
-    dispatch(MonitoredObjectActions.getAllMonitoredObjects({ type: localStorage.getItem("project-type") }));
+    dispatch(
+      CategoryActions.getAllCategories({
+        type: localStorage.getItem("project-type"),
+      })
+    );
+    dispatch(
+      MonitoredObjectActions.getAllMonitoredObjects({
+        type: localStorage.getItem("project-type"),
+      })
+    );
     getZoneAll();
     getArea();
   }, []);
@@ -196,22 +206,6 @@ function MonitoredObjectView({ history }) {
         status: monitoredObject.status === "" ? "1" : monitoredObject.status,
       })
     );
-    setMonitoredObject({
-      code: "",
-      name: "",
-      status: "1",
-      description: "",
-      managementUnit: null,
-      category: null,
-      areaMonitored: null,
-      parent: null,
-      lat: "", //Vĩ độ
-      lng: "", //Kinh độ
-      height: "",
-      drones: [],
-      images: null,
-      videos: null,
-    });
   };
 
   const getCoodinate = (zone) => {
@@ -276,7 +270,7 @@ function MonitoredObjectView({ history }) {
                 </select>
               </div>
             </div>
-         
+
             <div className="form-group row">
               <label
                 htmlFor="inputAreaName"
