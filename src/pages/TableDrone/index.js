@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
@@ -23,6 +24,14 @@ import ModalEditDataTable from '../../containers/ModalEditDataTable';
 import {Tag} from 'antd';
 
 import { isAuthorised, DRONE_SEARCH, CRUD_DRONE } from "../../components/Drone/Common/role";
+=======
+import React, { useEffect, useMemo, useState } from "react";
+import styled from "styled-components";
+import { Pagination, Search, TableHeader } from "../../components/DataTable";
+import useFullPageLoader from "../../components/hooks/useFullPageLoader";
+import ModalAddDataTable from '../../containers/ModalAddDataTable';
+import ModalEditDataTable from '../../containers/ModalEditDataTable';
+>>>>>>> dev
 
 
 

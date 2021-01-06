@@ -131,9 +131,9 @@ const Map = ({
       defaultCenter={
         option !== "create" && monitoredObject.lat
           ? {
-              lat: parseFloat(monitoredObject.lat),
-              lng: parseFloat(monitoredObject.lng),
-            }
+            lat: parseFloat(monitoredObject.lat),
+            lng: parseFloat(monitoredObject.lng),
+          }
           : initLocation
       }
     >
@@ -166,8 +166,9 @@ const Map = ({
             }
             options={
               selectedMonitoredZone &&
-              selectedMonitoredZone.indexOf(zone._id) >= 0
+                selectedMonitoredZone.indexOf(zone._id) >= 0
                 ? {
+<<<<<<< HEAD
                     strokeColor: "#d34052",
                     fillColor: "#d34052",
                     strokeOpacity: "0.5",
@@ -179,6 +180,19 @@ const Map = ({
                     strokeOpacity: "0.5",
                     strokeWeight: "2",
                   }
+=======
+                  strokeColor: '#d34052',
+                  fillColor: '#d34052',
+                  strokeOpacity: '0.5',
+                  strokeWeight: '2',
+                }
+                : {
+                  strokeColor: '#d34052',
+                  fillColor: '#70b8fb',
+                  strokeOpacity: '0.5',
+                  strokeWeight: '2',
+                }
+>>>>>>> dev
             }
           />
         ))}
@@ -247,15 +261,15 @@ const Map = ({
                   <a>Bỏ chọn miền g/s này</a>
                 </button>
               ) : (
-                <button
-                  onClick={(e) =>
-                    handleMonitoredZoneChange(currentMonitoredZone, e)
-                  }
-                >
-                  <HeatMapOutlined /> &ensp;
-                  <a>Chọn miền g/s này</a>
-                </button>
-              )}
+                  <button
+                    onClick={(e) =>
+                      handleMonitoredZoneChange(currentMonitoredZone, e)
+                    }
+                  >
+                    <HeatMapOutlined /> &ensp;
+                    <a>Chọn miền g/s này</a>
+                  </button>
+                )}
             </div>
           </div>
         </InfoWindow>
