@@ -25,6 +25,9 @@ const initialState = {
   isObjectSuccess: false,
   isObjectFailure: false,
   objectMessages: "",
+  isDeleteMonitored: false,
+  idMonitoredCreate: "",
+  isLoading: false,
 };
 
 export function monitoredObjects(state = initialState, action) {
@@ -33,7 +36,15 @@ export function monitoredObjects(state = initialState, action) {
 
   switch (action.type) {
     case MonitoredObjectConstants.GET_ALL_MONITORED_OBJECT_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
     case MonitoredObjectConstants.GET_PAGINATE_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
     case MonitoredObjectConstants.CREATE_MONITORED_REQUEST:
     case MonitoredObjectConstants.DELETE_MONITORED_REQUEST:
     case MonitoredObjectConstants.EDIT_MONITORED_REQUEST:
@@ -45,6 +56,7 @@ export function monitoredObjects(state = initialState, action) {
       return {
         ...state,
         list: action.payload,
+        isLoading: false,
       };
 
     case MonitoredObjectConstants.GET_PAGINATE_SUCCESS:
@@ -60,6 +72,7 @@ export function monitoredObjects(state = initialState, action) {
         hasNextPage: action.payload.hasNextPage,
         prevPage: action.payload.prevPage,
         nextPage: action.payload.nextPage,
+        isLoading: false,
       };
 
     case MonitoredObjectConstants.CREATE_MONITORED_SUCCESS:
@@ -67,6 +80,7 @@ export function monitoredObjects(state = initialState, action) {
         ...state,
         list: [...state.list, action.payload],
         listPaginate: [...state.listPaginate, action.payload],
+        idMonitoredCreate: action.payload,
       };
     case MonitoredObjectConstants.OBJECT_SUCCESS:
       return {
@@ -98,6 +112,7 @@ export function monitoredObjects(state = initialState, action) {
       // );
       return {
         ...state,
+        isDeleteMonitored: action.payload,
       };
     case MonitoredObjectConstants.OBJECT_FAILURE:
       return {
@@ -105,7 +120,15 @@ export function monitoredObjects(state = initialState, action) {
         isObjectFailure: action.payload,
       };
     case MonitoredObjectConstants.GET_ALL_MONITORED_OBJECT_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+      };
     case MonitoredObjectConstants.GET_PAGINATE_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+      };
     case MonitoredObjectConstants.CREATE_MONITORED_FAILURE:
     case MonitoredObjectConstants.DELETE_MONITORED_FAILURE:
     case MonitoredObjectConstants.GET_ALL_MONITORED_OBJECT_FAILURE:

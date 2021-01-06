@@ -1,40 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import {Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Select} from 'antd';
+import React, { useEffect, useState, useRef } from 'react';
+import { Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Select } from 'antd';
 import Highlighter from 'react-highlight-words';
-import {SearchOutlined} from '@ant-design/icons';
-import {useSelector} from "react-redux";
+import { SearchOutlined } from '@ant-design/icons';
 import DroneActivity from './DroneActivity';
+import { useDispatch, useSelector } from "react-redux";
+import moment from 'moment';
 
 var axios = require('axios');
-const {RangePicker} = DatePicker;
+const { RangePicker } = DatePicker;
 const {Option} = Select;
 
-const App = (props) => {
+function App (props) {
+
   const user = useSelector(state => state.user.user);
 
-  const [projectType, setProjectType] = useState(user.type.toLowerCase());
+  const [projectType, setProjectType] = useState(props.projectType? props.projectType: user.type === 'ALL_PROJECT' ? 'de_dieu' : user.type.toLowerCase());
   const [logActivityData, setLogActivityData] = useState(null);
   const [isLoadedLogActivityData, setIsLoadedLogActivity] = useState(false);
+  const [rangeTime, setRangeTime] = useState(props.rangeTime ? props.rangeTime : {fromDate: '', toDate: ''}) 
 
   useEffect(() => {
-    fetchData();
-  }, []);
+      fetchData();
+  },[projectType, rangeTime]);
 
-  const fetchData = (fromDate, toDate) => {
-    console.log("hahahahahahaaaaaaaaaaaa")
-    console.log(props)
-    
-    let url = null;
-    if (fromDate && toDate && projectType === 'all_project') {  
-      url = 'https://it4883logging.herokuapp.com/api/drones?minDate=' + fromDate +'&maxDate=' + toDate;
-    } else if (fromDate && toDate && projectType !== 'all_project') {
-      url = 'https://it4883logging.herokuapp.com/api/drones?minDate=' + fromDate +'&maxDate=' + toDate +'&projectType=' + projectType;
-    } else if (projectType === 'all_project') {
-      url = 'https://it4883logging.herokuapp.com/api/drones?projectType=de_dieu';
-    } else {
-      url = 'https://it4883logging.herokuapp.com/api/drones?projectType=' + projectType;
-    }
+  const fetchData = () => {
+    setIsLoadedLogActivity(false);
+    let url = 'https://it4883logging.herokuapp.com/api/drones?';
+    let fromDate  = rangeTime.fromDate;
+    let toDate = rangeTime.toDate;
+
+    if (fromDate) url += '&minDate=' + fromDate;
+    if (toDate) url += '&maxDate=' + toDate;
+    url += '&projectType=' + projectType;
     if (props.regionId) url = url + "&regionId=" + props.regionId;
+     
     let config = {
       method: 'get',
       url: url,
@@ -60,11 +59,8 @@ const App = (props) => {
       });
   }
 
-  const onRangePickerChange = async (dates, dateStrings) => {
-    setIsLoadedLogActivity(false);
-    if (dates) 
-      await fetchData(dates[0].format('YYYY-MM-DDT00:00:00'), dates[1].format('YYYY-MM-DDT23:59:59'));
-    else await fetchData();
+  const onRangePickerChange = (dates, dateStrings) => {
+    if (dates) setRangeTime({fromDate: dates[0].format('YYYY-MM-DDT00:00:00'), toDate: dates[1].format('YYYY-MM-DDT23:59:59') });
   }
 
   const onProjectTypeChange = (projectType) => {
@@ -74,33 +70,24 @@ const App = (props) => {
   return (
     <>
       <Col style={{ marginRight: '4%', marginTop: 20 }}>
-        <Card
-          hoverable
-          style={{ width: '100', marginLeft: 40 }}
-          cover={
-            <img
-              style={{ height: 400 }}
-              alt="example"
-              src="https://i.pinimg.com/originals/11/9d/e3/119de34b79d90fc7ee2c175525726741.jpg"
-            />
-          }
-        >
+        
           <h2>
-            Lịch sử hoạt động của Drone
+            Lịch sử log drone
           </h2>
           <br />
           <Form layout="inline">
             <Form.Item
               label="Chọn khoảng thời gian"
             >
-              <RangePicker format='DD/MM/YYYY' onChange={(dates, dateStrings) => onRangePickerChange(dates, dateStrings)} />
+              <RangePicker defaultValue={rangeTime.fromDate ? [moment(rangeTime.fromDate, 'YYYY-MM-DDTHH:mm:ss'), moment(rangeTime.toDate, 'YYYY-MM-DDTHH:mm:ss')] : null}
+              format='MM/DD/YYYY' 
+                onChange={(dates, dateStrings) => onRangePickerChange(dates, dateStrings)} 
+              />
             </Form.Item>
             {user.role === 'SUPER_ADMIN' ? 
               <Form.Item label="Chọn loại dự án">
-                <Select defaultValue="de_dieu" style={{width: 120}} onChange={(value) => {
-                  setIsLoadedLogActivity(false);
+                <Select defaultValue={projectType} style={{width: 120}} onChange={(value) => {
                   onProjectTypeChange(value);
-                  fetchData();
                 }}>
                   <Option value="de_dieu">Đê điều</Option>
                   <Option value="luoi_dien">Lưới điện</Option>
@@ -113,8 +100,9 @@ const App = (props) => {
               
           </Form>
           <br />
-            <DroneActivity data={logActivityData} loading={!isLoadedLogActivityData}/>
-        </Card>
+            <DroneActivity data={logActivityData} loading={!isLoadedLogActivityData} rangeTime={rangeTime} projectType={projectType} />
+          
+        
       </Col>
       <BackTop/>
     </>

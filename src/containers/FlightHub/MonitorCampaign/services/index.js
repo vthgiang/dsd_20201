@@ -14,35 +14,46 @@ export const convertTimeRangeToData = (timeRange) => {
 
 export const convertDateToTimeRange = ({ startTime, endTime }) => {
   return [
-    moment(startTime, DATE_TIME_FORMAT),
-    moment(endTime, DATE_TIME_FORMAT),
+    moment(moment(startTime).local(), DATE_TIME_FORMAT),
+    moment(moment(endTime).local(), DATE_TIME_FORMAT),
   ];
 };
 
+export const formatMomentDateToDateTimeString = (momentDate) => {
+  return moment(momentDate).local().format(DATE_TIME_FORMAT);
+};
+
 export const convertInitialDataToFieldValues = (data) => {
-  const { startTime, endTime, monitoredZone, monitoredObjects, labels } = data;
+  const fields = { ...data };
+  const {
+    startTime,
+    endTime,
+    monitoredZone,
+    monitoredObjects,
+    labels,
+  } = fields;
   if (startTime && endTime) {
     const timeRange = convertDateToTimeRange({ startTime, endTime });
-    data.timeRange = timeRange;
-    delete data.startTime;
-    delete data.endTime;
+    fields.timeRange = timeRange;
+    delete fields.startTime;
+    delete fields.endTime;
   }
 
   if (monitoredZone) {
-    data.monitoredZone = data.monitoredZone._id;
+    fields.monitoredZone = fields.monitoredZone._id;
   }
 
   if (monitoredObjects) {
-    data.monitoredObjects = data.monitoredObjects.map((element) => {
-      return element._id;
+    fields.monitoredObjects = fields.monitoredObjects.map((element) => {
+      return element._id || element;
     });
   }
 
   if (labels) {
-    data.labels = labels.map((label) => label._id);
+    fields.labels = labels.map((label) => label._id || label);
   }
 
-  return data;
+  return fields;
 };
 
 export const convertFieldValuesToDataSubmit = (fieldValues) => {
@@ -56,10 +67,6 @@ export const convertFieldValuesToDataSubmit = (fieldValues) => {
   }
 
   return dataSubmit;
-};
-
-export const formatMomentDateToDateTimeString = (momentDate) => {
-  return moment(momentDate).format(DATE_TIME_FORMAT);
 };
 
 export const randomDateTime = (start, end) => {

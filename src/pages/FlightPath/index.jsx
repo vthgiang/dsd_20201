@@ -8,7 +8,9 @@ import Search from '../../components/Drone/Search';
 import axios from 'axios';
 import {getToken, getProjectType, getRole} from '../../components/Drone/Common/info';
 
-function FlightPathManagement(props) {
+import {FLIGHT_PATH_MANAGEMENT, isAuthorised} from '../../components/Drone/Common/role';
+
+function FlightPath(props) {
 
     const [flightPathView, setFlightPathView] = useState(null);
     // const [flightPaths, setFlightPaths] = useState(flightPathsData.slice(0, 10));
@@ -91,7 +93,6 @@ function FlightPathManagement(props) {
                         let result = await axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone/zoneinfo/${item.idSupervisedArea}`,{
                             headers: headers
                         })
-                        // if(!result.success) remove.push(item); // ko thuộc nghiệp vụ hiện tại
                         console.log('result load monitoredZone: ', result);
                         let newItem = {...item, 
                             monitoredZoneName: result.data.content.zone.name, 
@@ -159,7 +160,7 @@ function FlightPathManagement(props) {
                     }
                 })
             }))
-            console.log('all Flight Path: ', data)
+            // console.log('all Flight Path: ', data)
             allFlightPath.current = data;
             flightPathFilter.current = allFlightPath.current;
             // lấy dữ liệu cho page hiện tại
@@ -168,7 +169,7 @@ function FlightPathManagement(props) {
             // tính lại tổng page
             const totalPage = Math.ceil(allFlightPath.current.length/pagination.perPage);
             if(totalPage != pagination.totalPage) setPagination({...pagination, totalPage: totalPage});
-            console.log(totalPage)
+            // console.log(totalPage)
             // console.log(allFlightPath);
             setLoading(false);
         }
@@ -254,7 +255,7 @@ function FlightPathManagement(props) {
     return (
         <Container>
             <Row>
-                <Col md={3}><AddFlightPathModel addFlightPath={addFlightPath} pageReload={pageReload}/></Col>
+                <Col md={3}>{isAuthorised(FLIGHT_PATH_MANAGEMENT) && <AddFlightPathModel addFlightPath={addFlightPath} pageReload={pageReload}/>}</Col>
                 <Col md={4}><Pagination pagination={pagination} pageChange={pageChange}/></Col>
                 <Col md={5}>
                     <Search 
@@ -285,7 +286,7 @@ function FlightPathManagement(props) {
     );
 }
 
-export default FlightPathManagement;
+export default FlightPath;
 
 function removeVietnameseTones(str) {
     str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 

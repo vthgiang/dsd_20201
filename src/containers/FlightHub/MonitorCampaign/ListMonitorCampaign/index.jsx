@@ -92,11 +92,13 @@ const ListMonitorCampaign = () => {
     history.push(`/flight-hub-monitor-campaigns/create`);
   };
 
-  const handleDeleteMonitorCampaign = (item, index) => async () => {
+  const handleDeleteMonitorCampaign = (item) => async () => {
     try {
       await monitorCampaignApi.deleteMonitorCampaign(item._id);
-      const newListMonitorCampaignsData = [...listMonitorCampaignsData];
-      newListMonitorCampaignsData.splice(index, 1);
+      let newListMonitorCampaignsData = [...listMonitorCampaignsData];
+      newListMonitorCampaignsData = newListMonitorCampaignsData.filter(
+        (elem) => elem._id !== item._id
+      );
       setListMonitorCampaignsData(newListMonitorCampaignsData);
       notification.info({
         message: 'Xóa thành công!',
@@ -108,7 +110,7 @@ const ListMonitorCampaign = () => {
     }
   };
 
-  const deleteConfirm = (item, index) => () => {
+  const deleteConfirm = (item) => () => {
     const { name } = item;
     Modal.confirm({
       title: 'Cảnh báo',
@@ -120,7 +122,7 @@ const ListMonitorCampaign = () => {
       ),
       okText: 'Đồng ý',
       cancelText: 'Hủy',
-      onOk: handleDeleteMonitorCampaign(item, index),
+      onOk: handleDeleteMonitorCampaign(item),
     });
   };
 
@@ -130,7 +132,7 @@ const ListMonitorCampaign = () => {
       title: 'Mã đợt giám sát',
       width: '7.5%',
       align: 'center',
-      sorter: (a, b) => a.id.localeCompare(b.id),
+      // sorter: (a, b) => a._id.localeCompare(b._id),
     },
     {
       dataIndex: 'name',
@@ -142,7 +144,7 @@ const ListMonitorCampaign = () => {
       dataIndex: 'task',
       title: 'Loại sự cố',
       width: '15%',
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      sorter: (a, b) => a.task.localeCompare(b.task),
     },
     {
       dataIndex: 'startTime',
@@ -157,7 +159,7 @@ const ListMonitorCampaign = () => {
       width: '12.5%',
       title: 'Thời gian kết thúc',
       align: 'center',
-      sorter: (a, b) => moment(a.startTime).diff(moment(b.startTime)),
+      sorter: (a, b) => moment(a.endTime).diff(moment(b.endTime)),
       render: formatMomentDateToDateTimeString,
     },
     {
@@ -167,8 +169,8 @@ const ListMonitorCampaign = () => {
       sorter: (a, b) => 1,
       render: (data = []) => {
         return data.map((elem) => {
-          const { name, createdAt } = elem;
-          return <div key={createdAt.toString()}>{name}</div>;
+          const { name, _id } = elem;
+          return <div key={_id}>{name}</div>;
         });
       },
     },
@@ -351,20 +353,15 @@ const ListMonitorCampaign = () => {
       </StyleSearchForm>
 
       <StyleSeparator />
-      {loading ? (
-        <StyleSpinContainer>
-          <Spin />
-        </StyleSpinContainer>
-      ) : (
-        <StyleTable>
-          <Table
-            rowKey='_id'
-            columns={columns}
-            dataSource={listMonitorCampaignsData}
-            scroll={{ x: 1560 }}
-          />
-        </StyleTable>
-      )}
+      <StyleTable>
+        <Table
+          loading={loading}
+          rowKey='_id'
+          columns={columns}
+          dataSource={listMonitorCampaignsData}
+          scroll={{ x: 1560 }}
+        />
+      </StyleTable>
     </StyleListMonitorCampaign>
   );
 };

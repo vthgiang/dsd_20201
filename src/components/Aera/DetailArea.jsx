@@ -144,6 +144,8 @@ class DetailArea extends React.PureComponent {
             openModalAdd: false,
             openModalDelete: false,
             pathCoordinates: [],
+            token: localStorage.getItem('token'),
+            projecttype: localStorage.getItem('project-type'),
     
         }
         this._handleChange = this._handleChange.bind(this);
@@ -151,7 +153,7 @@ class DetailArea extends React.PureComponent {
     
     componentDidMount() {
         this.setArea(this.state.id);
-        setTimeout(300);
+        this.showDomain();
         this.getZoneByArea(this.state.id);
     }
     
@@ -221,7 +223,12 @@ class DetailArea extends React.PureComponent {
         }
     }
     setArea(id) {
-        axios.get(`https://monitoredzoneserver.herokuapp.com/area/areainfo/${id}`)
+        axios.get(`https://monitoredzoneserver.herokuapp.com/area/areainfo/${id}`, {
+            headers: {
+                token: this.state.token,
+                projecttype: this.state.projecttype
+            }
+        })
             .then(res => {
                     const area = res.data.content.area;
                     let newarea = {};
@@ -241,7 +248,12 @@ class DetailArea extends React.PureComponent {
             {lat: Area.endPoint.latitude, lng: Area.startPoint.longitude}
         ];
         listDomainToShow.push(area);
-        axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone/area/${id}`)
+        axios.get(`https://monitoredzoneserver.herokuapp.com/monitoredzone/area/${id}`, {
+            headers: {
+                token: this.state.token,
+                projecttype: this.state.projecttype
+            }
+        })
             .then(res => {
                 const list = res.data.content.zone;
                 let listDomain =[];
@@ -263,6 +275,75 @@ class DetailArea extends React.PureComponent {
             .catch(error => console.log(error));
     }
 
+    /* handleMarkerClick = (e) => {
+        let lat = e.latLng.lat();
+        let lng = e.latLng.lng();
+        let latStartPoint = this.state.newarea.startPoint.latitude;
+        let latEndPoint = this.state.newarea.endPoint.latitude;
+        if (!latStartPoint) {
+            this.setState(prevState => {
+                let newarea = Object.assign({}, prevState.newarea);
+                newarea.startPoint.latitude = lat;
+                newarea.startPoint.longitude = lng;
+                return {newarea};
+            });
+        } else if (!latEndPoint) {
+            this.setState(prevState => {
+                let newarea = Object.assign({}, prevState.newarea);
+                newarea.endPoint.latitude = lat;
+                newarea.endPoint.longitude = lng;
+                return {newarea};
+            });
+        } else {
+            this.setState(prevState => {
+                let newarea = Object.assign({}, prevState.newarea);
+                newarea.startPoint.latitude = lat;
+                newarea.startPoint.longitude = lng;
+                newarea.endPoint.latitude = '';
+                newarea.endPoint.longitude = '';
+                return {newarea};
+            });
+        }
+        if (this.state.newarea.startPoint.latitude && this.state.newarea.endPoint.latitude) {
+            let triangleCoords = [
+                {lat: this.state.newarea.startPoint.latitude, lng: this.state.newarea.startPoint.longitude},
+                {lat: this.state.newarea.startPoint.latitude, lng: this.state.newarea.endPoint.longitude},
+                {lat: this.state.newarea.endPoint.latitude, lng: this.state.newarea.endPoint.longitude},
+                {lat: this.state.newarea.endPoint.latitude, lng: this.state.newarea.startPoint.longitude},
+            ];
+            this.setState({triangleCoords});
+        } else {
+            let triangleCoords = [];
+            this.setState({triangleCoords});
+        }
+    } */
+
+    save() {
+        let dataEdit = {
+            "startPoint": this.state.newarea.startPoint,
+            "endPoint": this.state.newarea.endPoint,
+            "priority": this.state.newarea.priority,
+            "description": this.state.newarea.description,
+            "code": this.state.newarea.code,
+        }
+        let id = this.state.newarea._id;
+        let token = localStorage.getItem('token');
+        let projecttype = localStorage.getItem('project-type');
+        axios.put(`https://monitoredzoneserver.herokuapp.com/area/${id}`, dataEdit, {
+                headers: {
+                    "Content-Type": "application/json",
+                    token: token,
+                    projecttype: projecttype
+                }
+            })
+            .then(res => {
+                this.props.history.push({
+                    pathname: '/surveillance-area-detail',
+                });
+            })
+            .catch(error => console.log(error));
+    }
+
     
     render() {
         return (
@@ -276,6 +357,9 @@ class DetailArea extends React.PureComponent {
                                     <td style= {{width:'20%'}}>
                                         {this.state.newarea.code}
                                     </td>
+
+                                </tr>
+                                <tr>
                                     <td style= {{width:'20%', fontWeight: '700'}}>
                                         Tên khu vực giám sát:
                                     </td>
@@ -290,6 +374,9 @@ class DetailArea extends React.PureComponent {
                                         <Input name="maxH" style={{width: 200}} placeholder="Nhập"
                                                value={this.state.newarea.maxHeight} onChange={this._handleChange}/>    
                                     </td>
+
+                                </tr>
+                                <tr>
                                     <td style= {{width:'20%', fontWeight: '700'}}>Chiều cao tối thiểu:</td>
                                     <td style= {{width:'20%'}}>
                                         <Input name="minH" style={{width: 200}} placeholder="Nhập"
@@ -298,7 +385,7 @@ class DetailArea extends React.PureComponent {
                                 </tr>
                                 <tr>
                                     <th style= {{width:'20%'}}>Mô tả:</th>
-                                    <td colSpan ="3">
+                                    <td>
                                     <   Input name="description" style={{width: 200}} placeholder="Nhập"
                                                value={this.state.newarea.description} onChange={this._handleChange}/>  
                                     </td>
@@ -309,6 +396,8 @@ class DetailArea extends React.PureComponent {
                                         <Input name="priority" style={{width: 200}} placeholder="Nhập"
                                                value={this.state.newarea.priority} onChange={this._handleChange}/>
                                     </td>
+                                </tr>
+                                <tr>
                                     <td style= {{width:'20%', fontWeight: '700'}}>Số lần đã xảy ra sự cố:</td>
                                     <td style= {{width:'20%'}}>
                                         {this.state.newarea.times}
@@ -346,10 +435,10 @@ class DetailArea extends React.PureComponent {
                             <br/>
                             <div className="save">
                                 {
-                                    !this.diff(this.state.oldarea, this.state.newarea) && <Button type="primary">Lưu</Button>
+                                    this.diff(this.state.oldarea, this.state.newarea) && <Button type="primary" onClick={() => this.save()}>Lưu</Button>
                                 }
                                 {
-                                    (this.diff(this.state.oldarea, this.state.newarea)) && <Button disabled>Lưu</Button>
+                                    !(this.diff(this.state.oldarea, this.state.newarea)) && <Button disabled>Lưu</Button>
                                 }
                             </div>
                             

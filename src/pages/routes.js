@@ -1,93 +1,91 @@
-import React, { Fragment } from "react";
+
+import React from "react";
 import { useSelector } from "react-redux";
-import { Switch, Route, Redirect } from "react-router-dom";
-import ListUser from "../modules/user/components/listUser";
-import ListDepartment from "../modules/user/components/listDepartment";
-import ListUserMeta from "../modules/user/components/listUserMeta";
-import ListRole from "../modules/user/components/listRole";
-import ListPermission from "../modules/user/components/listPermission";
-import ListRolePermission from "../modules/user/components/listRolePermission";
-
-import ListMonitorCampaignPage from "./FlightHub/ListMonitorCampaign";
-import CreateMonitorCampaignPage from "./FlightHub/CreateMonitorCampaign";
-import UpdateMonitorCampaignPage from "./FlightHub/UpdateMonitorCampaign";
-
-import ListLabelsPage from "./FlightHub/Labels";
+import { Redirect, Route, Switch } from "react-router-dom";
 import DetailArea from "../components/Aera/DetailArea";
 import ManageArea from "../components/Aera/ManageArea";
+import DetailedNotification from "../components/Group4/DetailedNotification";
+import MyList from "../components/Group4/Notification";
 import Manage from "../components/SurveillanceDomain/Manage";
 import ManageEdit from "../components/SurveillanceDomain/ManageEdit";
+import ListDepartment from "../modules/user/components/listDepartment";
+import ListPermission from "../modules/user/components/listPermission";
+import ListRole from "../modules/user/components/listRole";
+import ListRolePermission from "../modules/user/components/listRolePermission";
+import ListUser from "../modules/user/components/listUser";
+import ListUserMeta from "../modules/user/components/listUserMeta";
 import Dashboard from "./Dashboard";
-import CreateReport from "./Report/CreateReport";
-import ViewReport from "./Report/ViewReport";
-import ManageReportTemplate from "./Report/ManageReportTemplate";
-import Incident from "./Incident";
-import MyList from "../components/Group4/Notification";
-import DetailedNotification from "../components/Group4/DetailedNotification";
-
-import LogUser from "./LogUser";
-import LogDrone from "./LogDrone";
-import LogWarn from "./LogWarn";
-import LogProblem from "./LogProblem";
-import LogVideo from "./LogVideo";
-import LogPayLoad from "./LogPayLoad";
-import LogImage from "./LogImage";
-import LogIncident from "./LogIncident";
-import LogObjMonitor from "./LogObjMonitor";
-import LogRegion from "./LogRegion";
-import LogStatistic from "./LogStatistic";
-import LogUAV from "./LogUAV";
-import LogDashboardPage from "./LogTreeProject";
-//Payload
-import ListPayload from "./Payload/PayloadManagement/List";
-import ListTypePayload from "./Payload/PayloadType/List";
-import PayloadMaintenance from "./Payload/PayloadMaintenance/List";
-import EditSchedule from "./Payload/PayloadMaintenance/Edit";
-import AddSchedule from "./Payload/PayloadMaintenance/Add";
-import PayloadSetting from "./Payload/PayloadSetting";
-//Payload  Statistic
-import PayloadStatistic from "./Payload/PayloadStatistic";
-import PayloadStatisticFrequency from "./Payload/PayloadStatistic/PayloadStatisticFrequency";
-import PayloadStatisticTime from "./Payload/PayloadStatistic/PayloadStatisticTime";
-import PayloadStatisticStatus from "./Payload/PayloadStatistic/PayloadStatisticStatus";
-import PayloadStatisticWorking from "./Payload/PayloadStatistic/PayloadStatisticWorking";
-import PayloadStatisticDroneFixing from "./Payload/PayloadStatistic/PayloadStatisticDroneFixing";
-
-import PayloadDroneHistory from "./Payload/PayloadToDrone/List";
-import EditSignupPayloadDrone from "./Payload/PayloadToDrone/Edit";
-import AddSignupPayloadDrone from "./Payload/PayloadToDrone/Add";
-import DScard from "./Payload/PayloadSDcard";
+import StatisticDeDieu from './Dashboard/IncidentDashboard';
+import CreateMonitorCampaignPage from "./FlightHub/CreateMonitorCampaign";
+import DetailMonitorCampaignPage from "./FlightHub/DetailMonitorCampaign";
+import ListLabelsPage from "./FlightHub/Labels";
+import ListMonitorCampaignPage from "./FlightHub/ListMonitorCampaign";
+import UpdateMonitorCampaignPage from "./FlightHub/UpdateMonitorCampaign";
+import FlightPath from './FlightPath';
+import FlightPoint from "./FlightPoint";
+//DE DIEU
+import HomeDeDieu from "./Home/DeDieu";
+import DeDieuNcn3 from "./Home/DeDieu/indexncn3";
+import Task1 from './Home/DeDieu/Task1/index';
+import Task5 from './Home/DeDieu/Task5/index';
 import ImageVideo from "./ImageVideo";
 import Detail from "./ImageVideo/detail";
 import Stream from "./ImageVideo/stream";
+import Incident from "./Incident";
+import ImageGallery from "./Incident/ImageGallery";
+// incident group 09
+import IncidentGroup9 from "./Incident/Incident";
+import IncidentEdit from "./Incident/Incident/edit";
+import VideoGallery from "./Incident/VideoGallery";
+import LogDrone from "./LogDrone";
+import LogImage from "./LogImage";
+import LogIncident from "./LogIncident";
+import LogObjMonitor from "./LogObjMonitor";
+import LogPayLoad from "./LogPayLoad";
+import LogProblem from "./LogProblem";
+import LogRegion from "./LogRegion";
+import LogStatistic from "./LogStatistic";
+import LogDashboardPage from "./LogTreeProject";
+import LogUAV from "./LogUAV";
+import LogUser from "./LogUser";
+import LogVideo from "./LogVideo";
+import LogWarn from "./LogWarn";
+import MapTest from "./MapTest";
 //monitored Object Group 05
 import CategoryMonitored from "./MonitoredObject/Category/component";
 import MonitoredObject from "./MonitoredObject/MonitoredObject/component";
 import MonitoredObjectCreate from "./MonitoredObject/MonitoredObject/component/monitoredObjectCreate";
 import MonitoredObjectView from "./MonitoredObject/MonitoredObject/component/MonitoredObjectView";
-// incident group 09
-import IncidentGroup9 from "./Incident/Incident";
-import ImageGallery from "./Incident/ImageGallery";
-import VideoGallery from "./Incident/VideoGallery";
-import IncidentEdit from "./Incident/Incident/edit";
-
-// dsd_01 drone
-import TableDrone from "./TableDrone";
-import FlightPathDrone from "./FLightPathDrone";
-import FlightPoint from "./FlightPoint";
-import TableDroneState from "./TableDroneState";
-import MapTest from "./MapTest";
-import FlightPathManagement from "./FlightPathManagement";
-import FlightSchedule from "./FlightSchedule";
-import DetailMonitorCampaignPage from "./FlightHub/DetailMonitorCampaign";
-
+//Payload
+import ListPayload from "./Payload/PayloadManagement/List";
+import DScard from "./Payload/PayloadSDcard";
+import PayloadSetting from "./Payload/PayloadSetting";
+//Payload  Statistic
+import PayloadStatistic from "./Payload/PayloadStatistic";
+import PayloadStatisticDroneFixing from "./Payload/PayloadStatistic/PayloadStatisticDroneFixing";
+import PayloadStatisticFrequency from "./Payload/PayloadStatistic/PayloadStatisticFrequency";
+import PayloadStatisticStatus from "./Payload/PayloadStatistic/PayloadStatisticStatus";
+import PayloadStatisticTime from "./Payload/PayloadStatistic/PayloadStatisticTime";
+import PayloadStatisticWorking from "./Payload/PayloadStatistic/PayloadStatisticWorking";
+import AddSignupPayloadDrone from "./Payload/PayloadToDrone/Add";
+import EditSignupPayloadDrone from "./Payload/PayloadToDrone/Edit";
+import PayloadDroneHistory from "./Payload/PayloadToDrone/List";
+import ListTypePayload from "./Payload/PayloadType/List";
+import CreateReport from "./Report/CreateReport";
+import ManageReportTemplate from "./Report/ManageReportTemplate";
+import ViewReport from "./Report/ViewReport";
 // Statistic
 import DroneStatistic from "./Statistic/DroneStatistic";
-import StatisticPayload from "./Statistic/StatisticPayload";
-import StatisticObjectMonitor from "./Statistic/StatisticObjectMonitor";
 import ImageVideoStatistic from "./Statistic/ImageVideoStatistic";
 import IncidentStatistic from "./Statistic/IncidentStatistic";
 import IncidentStatisticWorking from "./Statistic/IncidentStatisticWorking";
+import StatisticObjectMonitor from "./Statistic/StatisticObjectMonitor";
+import StatisticPayload from "./Statistic/StatisticPayload";
+// dsd_01 drone
+import TableDrone from "./TableDrone";
+import TableDroneState from "./TableDroneState";
+import UAVMana from './UAVMana';
+
 
 export const routes = [ 
   {
@@ -96,7 +94,23 @@ export const routes = [
     exact: true,
   },
   {
-    path: "/dashboard",
+    path: '/dedieu',
+    component: HomeDeDieu,
+  },
+  {
+    path: '/dedieu-ncn1',
+    component: Task1,
+  },
+  {
+    path: '/dedieu-ncn5',
+    component: Task5,
+  },
+  {
+    path: '/dedieu-ncn3',
+    component: DeDieuNcn3,
+  },
+  {
+    path: '/dashboard',
     component: Dashboard,
     exact: true,
   },
@@ -105,7 +119,11 @@ export const routes = [
     component: () => <div>DroneManagement</div>,
   },
   {
-    path: "/drone-list",
+    path: '/dedieu-uav-mana',
+    component: UAVMana,
+  },
+  {
+    path: '/drone-list',
     component: TableDrone,
   },
   {
@@ -117,8 +135,8 @@ export const routes = [
     component: MapTest,
   },
   {
-    path: "/flight-path",
-    component: FlightPathManagement,
+    path: '/flight-path',
+    component: FlightPath,
   },
   {
     path: "/flight-point",
@@ -179,6 +197,28 @@ export const routes = [
     path: "/payload-configuration",
     component: PayloadSetting,
   },
+  {
+    path: '/sucodedieu-statistics',
+    component: StatisticDeDieu,
+  },
+  {
+    path: '/sucodedieu-report',
+    component: CreateReport,
+  },
+  /* {
+    path: '/payload-maintenance',
+    component: PayloadMaintenance,
+  }, */
+  /* {
+    path: '/edit-schedule',
+    component: EditSchedule,
+  },
+  {
+    path: '/add-schedule',
+    component: AddSchedule,
+  },
+ */
+  //Payload statistic
   {
     path: "/payload-statistic",
     component: PayloadStatistic,
@@ -447,7 +487,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        isLogin ? <Component {...props} /> : <Redirect to="/login" />
+        isLogin ? <Component {...props} /> : <Redirect to='/login' />
       }
     />
   );

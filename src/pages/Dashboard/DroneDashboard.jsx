@@ -63,7 +63,7 @@ const columns = [
     title: "Hành động",
     key: "action",
     render: () => (
-      <a href="http://123.30.235.196:5599/drone-state">Chi tiết</a>
+      <a href="/drone-state">Chi tiết</a>
     ),
   },
 ];
@@ -152,7 +152,7 @@ export default function DroneDashboard() {
       <Button
         type="primary"
         style={{ position: 'absolute', top: 0, right: 0 }}
-        onClick={() => history.push('/create-report?templateId=5fe8d670cddeec0017e7a08e')}
+        onClick={() => history.push('/create-report?templateId=5fb3fba96054ef2d1899ccb5')}
       >
         Tạo báo cáo
       </Button>

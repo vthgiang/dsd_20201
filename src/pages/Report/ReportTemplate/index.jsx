@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Card, Spin, Space } from 'antd';
 import Axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import { useSelector } from "react-redux";
 
 import ReportRenderer from './ReportRenderer';
 import {
@@ -27,6 +28,7 @@ export default function ReportTemplate({
   currentTemplateId,
   setReport,
 }) {
+  const { user: { api_token, type } } = useSelector(state => state.user);
   const [currentTemplate, setCurrentTemplate] = useState(null);
   const [dataSources, setDataSources] = useState(null);
 
@@ -53,6 +55,8 @@ export default function ReportTemplate({
     Axios.get(`https://dsd07.herokuapp.com/api/reports/templates/${currentTemplateId}`, {
       headers: {
         'Access-Control-Allow-Origin': true,
+        "api-token": api_token,
+        "project-type": type,
       },
     })
       .then(response => {

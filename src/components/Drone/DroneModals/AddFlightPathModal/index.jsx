@@ -1,23 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import FlightPathInput from '../FlightPathInput';
 import './FlightPathModal.css';
 import Map from '../Map';
 import PointInput from '../PointInput';
 import axios from 'axios';
-
-AddFlightPathModal.propTypes = {
-    
-};
+import {getDistance} from '../../Common/MapHelper'
 
 function AddFlightPathModal(props) {
 
     const [name, setName] = useState('');
     const [height, setHeight] = useState('');
     const [task, setTask] = useState('');
-    const [timeCome, setTimeCome] = useState('');
+    // const [timeCome, setTimeCome] = useState('');
     const [timeStop, setTimeStop] = useState('');
+    const [flightHeightDown, setFlightHeightDown] = useState('');
     
     const [newPoint, setNewPoint] = useState({});
     const [flightPoints, setFlightPoints] = useState([]);
@@ -29,6 +26,10 @@ function AddFlightPathModal(props) {
     const [selectedZone, setSelectedZone] = useState(null);
     const [monitoredObjectList, setMonitoredObjectList] = useState([]);
     const [monitoredObjectListLoading, setMonitoredObjectListLoading] = useState(false);
+
+    const [totalDistance, setTotalDistance] = useState(0);
+
+    const [speed, setSpeed] = useState('');
 
     const [show, setShow] = useState(false);
     const toggle = () => setShow(!show);
@@ -63,9 +64,24 @@ function AddFlightPathModal(props) {
         
     const handleOkClick = () => {
         // xử lý đồng ý thêm đường bay
-        if(!name || flightPoints.length===0 || !selectedZone) return setError('Bạn chưa nhập đủ thông tin');
+        if(!name || flightPoints.length===0 || !selectedZone || !speed) return setError('Bạn chưa nhập đủ thông tin');
+
+        if(speed < 1) return setError('Vận tốc không hợp lệ');
+        // tính timecome cho flightPoint
+        let totalDistance = 0
+        let distance = 0;
+        let time = 0;
+        for(let i=1; i<flightPoints.length; i++){
+            distance = getDistance(flightPoints[i], flightPoints[i-1]);
+            time = Math.ceil(distance/parseInt(speed))
+            // console.log(distance, time, speed);
+            flightPoints[i].timeCome = time/60;
+            totalDistance += distance;
+        }
+        // console.log(flightPoints);
         // let id = Math.trunc(Math.random()*2000);
-        let newFlightPath = {name, flightPoints,
+        let newFlightPath = {name, speed, flightPoints,
+            distance: totalDistance,
             // heightFlight :height,
             idSupervisedArea: selectedZone._id //~~~~
             // idSupervisedArea: selectedArea._id,
@@ -73,7 +89,7 @@ function AddFlightPathModal(props) {
             // monitoredZoneId: selectedZone._id,
             // monitoredZoneCode: selectedZone.code
         };
-        console.log(newFlightPath);
+        // console.log(newFlightPath);
         axios.post('http://skyrone.cf:6789/flightPath/save', newFlightPath)
             .then(response => {
                 console.log(response);
@@ -96,23 +112,41 @@ function AddFlightPathModal(props) {
     const addPoint = () => {
         // thêm point vào pointPath
         if(!newPoint.locationLat) return;
+        let objectId = '';
+        if(selectedObject) objectId = selectedObject._id;
         let point = {
             locationLat: newPoint.locationLat,
             locationLng: newPoint.locationLng,
-            timeCome: timeCome,
+            // timeCome: timeCome,
             timeStop: timeStop,
-            flightHeight: heightPoint != '' ? heightPoint : 30,
-            idSupervisedObject: monitoredObjectId
+            flightHeight: heightPoint,
+            idSupervisedObject: objectId,
+            flightHeightDown: flightHeightDown
         }
-        setFlightPoints([...flightPoints, point]);
+        const newFlightPoints = [...flightPoints, point]
+
+        setFlightPoints(newFlightPoints);
+        
+        setTotalDistance(caculatorDistance(newFlightPoints));
         resetPoint();
     }
-    
+
+    const caculatorDistance = (flightPoints) => {
+        let totalDistance = 0
+        let distance = 0;
+        for(let i=1; i<flightPoints.length; i++){
+            distance = getDistance(flightPoints[i], flightPoints[i-1]);
+            totalDistance += distance;
+        }
+        return totalDistance;
+    }
+
     const resetPoint = () => {
-        setTimeCome('');
+        // setTimeCome('');
         setTimeStop('');
         setNewPoint({});
         setSelectedObject(null);
+        setMonitoredObjectId('');
         if(selectedZone) setHeightPoint(selectedZone.minHeight != undefined ? selectedZone.minHeight : '');
     }
 
@@ -126,7 +160,7 @@ function AddFlightPathModal(props) {
         setMonitoredObjectList([]);
         setMonitoredObjectId('');
         setError('');
-
+        setSpeed('');
         resetPoint();
     }
 
@@ -155,12 +189,15 @@ function AddFlightPathModal(props) {
                         selectedArea={selectedArea} setSelectedArea={setSelectedArea}
                         selectedZone={selectedZone} setSelectedZone={setSelectedZone}
                         resetPoint={resetPoint}
+                        speed={speed} setSpeed={setSpeed}
+                        totalDistance={totalDistance}
                     />
                     <Row>
                         <Col md={4}>
                             {monitoredObjectListLoading && <p>Loading...</p>}
                             {!monitoredObjectListLoading && newPoint.locationLat && <PointInput 
-                                timeCome={timeCome} setTimeCome={setTimeCome}
+                                // timeCome={timeCome} setTimeCome={setTimeCome}
+                                flightHeightDown={flightHeightDown} setFlightHeightDown={setFlightHeightDown}
                                 timeStop={timeStop} setTimeStop={setTimeStop}
                                 newPoint={newPoint} addPoint={addPoint}
                                 heightPoint={heightPoint} setHeightPoint={setHeightPoint}
