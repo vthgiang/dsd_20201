@@ -155,6 +155,56 @@ export const sidebarMenu = [
     ],
   },
   {
+    key: 'Statistic',
+    heading: 'Thống kê',
+    icon: 'fas fa-chart-line',
+    route: '/statistic',
+    subMenu: [
+      {
+        key: 'StatisticDrone',
+        heading: 'Thống kê drone',
+        icon: 'fas fa-drone-alt',
+        route: '/statistic-drone',
+      },
+      {
+        key: 'PayloadStatistic',
+        heading: 'Thống kê payload',
+        icon: 'fas fa-layer-group',
+        route: '/statistic-payload',
+      },
+      {
+        key: 'StatisticMonitorObject',
+        heading: 'Thống kê đối tượng giám sát',
+        icon: 'fas fa-binoculars',
+        route: '/statistic-monitor-object',
+      },
+      {
+        key: 'StatisticImageVideo',
+        heading: 'Thống kê Hình ảnh và Video',
+        icon: 'fas fa-images',
+        route: '/statistic-image-video',
+      },
+      // {
+      //   key: 'ManageReportTemplate',
+      //   heading: 'Thống kê đối tượng giám sát',
+      //   icon: 'fas fa-drone-alt',
+      //   route: '/statistic-drone',
+      // },
+      {
+        key: 'IncidentStatistic',
+        heading: 'Thống kê sự cố',
+        icon: 'fas fa-times-octagon',
+        route: '/incident-statistic',
+      },
+      {
+        key: 'HandleProblemStatistic',
+        heading: 'Thống kê xử lý sự cố',
+        icon: 'fas fa-toolbox',
+        route: '/incident-statistic-working',
+      }
+    ],
+  },
+  {
     key: 'GeneralReport',
     heading: 'Báo cáo',
     icon: 'fas fa-book',

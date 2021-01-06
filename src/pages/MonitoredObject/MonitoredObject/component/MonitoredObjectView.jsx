@@ -232,17 +232,22 @@ function MonitoredObjectView({ history }) {
         });
     }
   };
+
   const postLogMonitorObjectEdit = async () => {
+    var user = JSON.parse(
+      JSON.parse(localStorage.getItem("persist:root")).user
+    );
+    console.log("user", user);
     await axios({
       method: "POST",
       url: `http://14.248.5.197:5012/api/monitor-object/edit`,
       data: {
-        regionId: monitoredObject.monitoredZone,
+        regionId: monitoredObject.monitoredZone[0],
         entityId: monitoredObject._id,
         description: "edit monitor object",
-        authorId: "",
+        authorId: user.user.username,
         projectType: localStorage.getItem("project-type"),
-        state: "",
+        state: "edit",
         name: monitoredObject.name,
       },
     })
@@ -323,23 +328,6 @@ function MonitoredObjectView({ history }) {
         status: monitoredObject.status === "" ? "1" : monitoredObject.status,
       })
     );
-    setMonitoredObject({
-      code: "",
-      name: "",
-      status: 1,
-      description: "",
-      managementUnit: null,
-      category: "",
-      areaMonitored: "",
-      parent: "",
-      type: "",
-      lat: "", //Vĩ độ
-      lng: "", //Kinh độ
-      height: "",
-      drones: "",
-      images: null,
-      videos: null,
-    });
   };
 
   const getCoodinate = (zone) => {
@@ -560,11 +548,11 @@ function MonitoredObjectView({ history }) {
                       className="mr-3"
                       style={{ listStyle: "none" }}
                       key={index}
-                      onClick={()=>{
+                      onClick={() => {
                         history.push({
-                          pathname:  `/image-video-detail/${item.id}`,
+                          pathname: `/image-video-detail/${item.id}`,
                         });
-                      }} 
+                      }}
                     >
                       <video width="320" height="240" controls>
                         <source src={item.link} type="video/mp4" />

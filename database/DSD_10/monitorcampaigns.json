@@ -1,0 +1,2549 @@
+[{
+  "_id": {
+    "$oid": "5fea009ae641c0726a57b414"
+  },
+  "monitoredObjects": [
+    "5feadc344decb80017c5ebaf",
+    "5fe9d0bbf2e7ff00178f4d30",
+    "5feab4884decb80017c5eb9c"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    },
+    {
+      "$oid": "5fcf41aba610880021331632"
+    },
+    {
+      "$oid": "5fcf41aba610880021331633"
+    },
+    {
+      "$oid": "5fcf41aba610880021331634"
+    },
+    {
+      "$oid": "5fcfa6df2fa6e00017d4b2ef"
+    },
+    {
+      "$oid": "5fcfa6e52fa6e00017d4b2f0"
+    }
+  ],
+  "description": "Đê vỡ đến nơi rồi",
+  "task": "Đê điều",
+  "drones": [
+    {
+      "payloads": [
+        "5feb3bf45755cd0017f02e14"
+      ],
+      "flightPaths": [
+        "5fe9aaa0ef4a52482dcea505"
+      ],
+      "id": "5fe1bde849a67836a9849729"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-04T15:57:34.819Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fcf4f30a065e000176e1f84",
+  "name": "Đợt giám sát quý 3",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-02T15:57:34.819Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-28T15:58:18.094Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T15:19:51.859Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fea92f1e641c0726a57b415"
+  },
+  "monitoredObjects": [
+    "5fea0003b549d70017439fe2"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331633"
+    },
+    {
+      "$oid": "5fcf41aba610880021331632"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    },
+    {
+      "$oid": "5fcfa6e52fa6e00017d4b2f0"
+    }
+  ],
+  "description": "Cháy to lắm rồi",
+  "task": "Đê điều",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338",
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fe8a8b81dce632a089ff6f9",
+        "5fe8bdacef4a52482dcea500"
+      ],
+      "id": "5fe1bccf4a189f2b2676dd73"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-04T02:21:44.158Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fe82f09a719c60017775cb3",
+  "name": "Đợt giám giám quý 4",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2020-12-02T02:21:44.158Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-29T02:22:41.101Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T02:22:41.101Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fea94e9e641c0726a57b417"
+  },
+  "monitoredObjects": [
+    "5fe9cf9bf2e7ff00178f4d2d",
+    "5fe9cfd4f2e7ff00178f4d2e"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    }
+  ],
+  "task": "Cây trồng",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338",
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fe2355a88fdc948f4b2b967"
+      ],
+      "id": "5fe1bccf4a189f2b2676dd74"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-05T02:30:30.467Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fcf488aa065e000176e1f7d",
+  "name": "Đợt giám giám quý 4",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-03T02:30:30.467Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-29T02:31:05.509Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T02:31:05.509Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5feaa93ee641c0726a57b419"
+  },
+  "monitoredObjects": [
+    "5fe9cf9bf2e7ff00178f4d2d",
+    "5fe9cfd4f2e7ff00178f4d2e",
+    "5fe9cf6bf2e7ff00178f4d2c"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331632"
+    }
+  ],
+  "task": "Cây trồng",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fe2355a88fdc948f4b2b967"
+      ],
+      "id": "5fcfa99c6ab3ed494026b65e"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-29T03:56:37.279Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fcf488aa065e000176e1f7d",
+  "name": "Đợt giám sát tháng 12",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2020-12-27T03:56:37.279Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-29T03:57:50.766Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T03:57:50.766Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5feaae9ee641c0726a57b41b"
+  },
+  "monitoredObjects": [
+    "5fea0003b549d70017439fe2"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331633"
+    }
+  ],
+  "description": "Giám sát đê ",
+  "task": "Đê điều",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3753854b4a00176e0337"
+      ],
+      "flightPaths": [
+        "5fe84eb31dce632a089ff6b4"
+      ],
+      "id": "5fce4e8bfeae48098869a2d1"
+    },
+    {
+      "payloads": [
+        "5fcf3753854b4a00176e0337"
+      ],
+      "flightPaths": [
+        "5fe8a8b81dce632a089ff6f9"
+      ],
+      "id": "5fce4e8bfeae48098869a2d2"
+    },
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338"
+      ],
+      "flightPaths": [
+        "5fe8bdacef4a52482dcea500"
+      ],
+      "id": "5fce4eaefeae48098869a2d3"
+    },
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338"
+      ],
+      "flightPaths": [
+        "5fe8c557ef4a52482dcea501"
+      ],
+      "id": "5fce4eaffeae48098869a2d5"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-07T04:19:06.991Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fe82f09a719c60017775cb3",
+  "name": " Giám sát đê sông hồng ",
+  "resolution": "1080p",
+  "startTime": {
+    "$date": "2020-12-29T04:19:06.991Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-29T04:20:46.018Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T04:20:46.018Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5feadf3be641c0726a57b429"
+  },
+  "monitoredObjects": [
+    "5fe9cf9bf2e7ff00178f4d2d"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    }
+  ],
+  "description": "Cây trồng",
+  "task": "Cây trồng",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3753854b4a00176e0337"
+      ],
+      "flightPaths": [
+        "5fe2355a88fdc948f4b2b967"
+      ],
+      "id": "5fe1bde649a67836a9849723"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-05T07:47:12.482Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fcf488aa065e000176e1f7d",
+  "name": "Đợt giám giám quý 2",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-02T07:47:12.482Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-29T07:48:11.176Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T07:48:11.176Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5feae982e641c0726a57b42e"
+  },
+  "monitoredObjects": [
+    "5feae1904decb80017c5ebd5"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    },
+    {
+      "$oid": "5fcf41aba610880021331632"
+    }
+  ],
+  "task": "Điện",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338",
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fe9fc16ef4a52482dcea50b"
+      ],
+      "id": "5fe1bde749a67836a9849726"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-04T15:31:24.764Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fcf7984a122370017d3ae29",
+  "name": "Đợt giám giám quý 1",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-02T15:31:24.764Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-29T08:32:02.805Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T08:32:02.805Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5feaebf3e641c0726a57b42f"
+  },
+  "monitoredObjects": [
+    "5feae22b4decb80017c5ebda",
+    "5feae20c4decb80017c5ebd9"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    },
+    {
+      "$oid": "5fcf41aba610880021331632"
+    }
+  ],
+  "task": "Điện",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3753854b4a00176e0337",
+        "5fcf3771854b4a00176e0338"
+      ],
+      "flightPaths": [
+        "5fe9fc16ef4a52482dcea50b",
+        "5fe29d0988fdc948f4b2b97c"
+      ],
+      "id": "5fe1bde749a67836a9849727"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-04T15:41:34.007Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fcf7984a122370017d3ae29",
+  "name": "Đợt giám sát quý 4",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-02T15:41:34.007Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-29T08:42:27.763Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T08:42:27.763Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5feb2c8660820e41bf438b2e"
+  },
+  "monitoredObjects": [
+    "5feae0ba4decb80017c5ebcd"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    }
+  ],
+  "task": "Điện",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fe29d0988fdc948f4b2b97c"
+      ],
+      "id": "5fe1bccf4a189f2b2676dd76"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-04T13:10:14.333Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fcf7984a122370017d3ae29",
+  "name": "đợt giám sát 1",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2020-12-02T13:10:14.333Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-29T13:17:58.607Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T13:17:58.607Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5feb3e9960820e41bf438b31"
+  },
+  "monitoredObjects": [
+    "5feade204decb80017c5ebba",
+    "5feade414decb80017c5ebbc"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcfa6e52fa6e00017d4b2f0"
+    }
+  ],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5feb3bf45755cd0017f02e14"
+      ],
+      "flightPaths": [
+        "5fe5968b1dce632a089ff6a5"
+      ],
+      "id": "5fbdad624e0fc003db237c67nhom11"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-31T14:32:32.025Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fe57f67517d0e0017021790",
+  "name": "Đợt giám sát cây trồng 29/12",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-30T14:32:32.025Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-29T14:35:05.976Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T14:35:05.976Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5feb3f7660820e41bf438b32"
+  },
+  "monitoredObjects": [
+    "5feade204decb80017c5ebba",
+    "5feade414decb80017c5ebbc"
+  ],
+  "labels": [],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fe5968b1dce632a089ff6a5"
+      ],
+      "id": "5fbdad744e0fc003db237c6c"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-01T14:36:42.002Z"
+  },
+  "mechanism": "MANUALLY",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fe57f67517d0e0017021790",
+  "name": "Đợt giám sát cháy rừng tại núi Ba Vì ngày 29",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-30T14:36:42.002Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-29T14:38:46.621Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T14:38:46.621Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5feb6a4d60820e41bf438b35"
+  },
+  "monitoredObjects": [
+    "5fe70ad7b92bbe00170a238d",
+    "5fe6c19eafcbb900175b9b94"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba61088002133162f"
+    },
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    }
+  ],
+  "description": "Đợt cháy rừng này rất nguy hiểm và cách bách",
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338",
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bde849a67836a9849729"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-03T17:39:33.400Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "Đợt giám sát rừng phòng hộ quý 4",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-01T17:39:33.400Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-29T17:41:33.479Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T17:43:25.733Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec0ba660820e41bf438b37"
+  },
+  "monitoredObjects": [
+    "5fec0aff68ddcd00177274cf"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331634"
+    }
+  ],
+  "description": "Thời tiết xấu",
+  "task": "Cây trồng",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338"
+      ],
+      "flightPaths": [
+        "5fec09cf3dcd980f14e66620",
+        "5fec099a3dcd980f14e6661f"
+      ],
+      "id": "5fe1bcc94a189f2b2676dd64"
+    },
+    {
+      "payloads": [
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fec099a3dcd980f14e6661f"
+      ],
+      "id": "5fe1bccb4a189f2b2676dd65"
+    },
+    {
+      "payloads": [
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fec09cf3dcd980f14e66620"
+      ],
+      "id": "5fe1bccb4a189f2b2676dd66"
+    },
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338",
+        "5fcf3851854b4a00176e0339",
+        "5fcf38a2854b4a00176e033a",
+        "5fcf3953854b4a00176e033b"
+      ],
+      "flightPaths": [
+        "5fec099a3dcd980f14e6661f"
+      ],
+      "id": "5fcfa99c6ab3ed494026b65e"
+    },
+    {
+      "payloads": [
+        "5feb3bf45755cd0017f02e14"
+      ],
+      "flightPaths": [
+        "5fec09cf3dcd980f14e66620"
+      ],
+      "id": "5fd88d3eb94e272f3f9e8ffd"
+    },
+    {
+      "payloads": [
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fec099a3dcd980f14e6661f"
+      ],
+      "id": "5fe0662430223238de7bd16e"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-31T05:08:20.647Z"
+  },
+  "mechanism": "MANUALLY",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fec08a6eeec7500179c9bbb",
+  "name": "Đợt giám sát Cây trông 1",
+  "resolution": "1080p",
+  "startTime": {
+    "$date": "2020-12-29T05:08:20.647Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-30T05:09:58.516Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T05:09:58.516Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec305060820e41bf438b3b"
+  },
+  "monitoredObjects": [
+    "5fe6c19eafcbb900175b9b94"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331632"
+    },
+    {
+      "$oid": "5fcfa6e52fa6e00017d4b2f0"
+    }
+  ],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bde949a67836a984972d"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-17T07:45:50.662Z"
+  },
+  "mechanism": "MANUALLY",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "Đợt giám sát trọng điểm mùa cháy 2",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-01T07:45:50.662Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-30T07:46:24.977Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T07:46:24.977Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec30e060820e41bf438b3c"
+  },
+  "monitoredObjects": [
+    "5fe6c19eafcbb900175b9b94",
+    "5fe2122161d37d00175d9b6b"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcfa6df2fa6e00017d4b2ef"
+    }
+  ],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bde949a67836a984972e"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-10T07:48:03.500Z"
+  },
+  "mechanism": "MANUALLY",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "Đợt giám sát trọng điểm mùa cháy 2",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-01T07:48:03.500Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-30T07:48:48.679Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T07:48:48.679Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec6450fed0772effddfded"
+  },
+  "monitoredObjects": [
+    "5fe6c19eafcbb900175b9b94",
+    "5fe2122161d37d00175d9b6b"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba61088002133162f"
+    }
+  ],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf38a2854b4a00176e033a"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bdeb49a67836a9849735"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-04T11:26:47.148Z"
+  },
+  "mechanism": "MANUALLY",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "ĐGS lưới điện 01/12",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-01T11:26:47.148Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-30T11:28:16.264Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T11:28:16.264Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec65ab605d5f0017bec93c"
+  },
+  "monitoredObjects": [
+    "5fe2122161d37d00175d9b6b"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331633"
+    }
+  ],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bccf4a189f2b2676dd73"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-17T11:33:11.697Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "ĐGS lưới điện 01/12",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-08T11:33:11.697Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-30T11:34:03.989Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T11:34:03.989Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec66f9605d5f0017bec93d"
+  },
+  "monitoredObjects": [
+    "5fe6c19eafcbb900175b9b94"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331631"
+    }
+  ],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fe5e65fa9bf780017b4345a"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bdeb49a67836a9849735"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-10T11:38:56.980Z"
+  },
+  "mechanism": "MANUALLY",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "Đợt giám sát rừng phòng hộ tuần 1 tháng 12",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-01T11:38:56.980Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-30T11:39:37.156Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T11:39:37.156Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec7d0b0b147526cea8b70e"
+  },
+  "monitoredObjects": [
+    "5fe2122161d37d00175d9b6b"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba61088002133162f"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    },
+    {
+      "$oid": "5fcf41aba610880021331633"
+    },
+    {
+      "$oid": "5fcfa6df2fa6e00017d4b2ef"
+    }
+  ],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fbdad624e0fc003db237c67nhom11"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-30T13:16:04.036Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "Đợt giám sát trọng điểm mùa cháy 2020",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-30T13:14:53.112Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-30T13:13:47.335Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T13:13:47.335Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec7f990b147526cea8b70f"
+  },
+  "monitoredObjects": [
+    "5fe9d0bbf2e7ff00178f4d30"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    }
+  ],
+  "task": "Đê điều",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fe9aaa0ef4a52482dcea505"
+      ],
+      "id": "5fbdad624e0fc003db237c67nhom11"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-30T13:26:00.111Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fcf4f30a065e000176e1f84",
+  "name": "asdf",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2020-12-30T13:23:38.180Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-30T13:24:41.176Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T13:24:41.176Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec80ad0b147526cea8b711"
+  },
+  "monitoredObjects": [
+    "5fe6c19eafcbb900175b9b94",
+    "5fe70ad7b92bbe00170a238d"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331631"
+    },
+    {
+      "$oid": "5fcf41aba610880021331632"
+    }
+  ],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fe5e728a9bf780017b4345d"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fbdad624e0fc003db237c67nhom11"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-30T13:30:17.328Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "Đợt giám sát trọng điểm mùa cháy 2012",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-30T13:28:17.328Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-30T13:29:17.855Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T13:29:17.855Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec81d79023da3a9ad595fb"
+  },
+  "monitoredObjects": [
+    "5fe9d0bbf2e7ff00178f4d30"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba61088002133162f"
+    }
+  ],
+  "task": "Đê điều",
+  "drones": [
+    {
+      "payloads": [
+        "5fe5e817a9bf780017b4345f"
+      ],
+      "flightPaths": [
+        "5fe9aaa0ef4a52482dcea505"
+      ],
+      "id": "5fbdad624e0fc003db237c67nhom11"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-30T13:36:28.597Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fcf4f30a065e000176e1f84",
+  "name": "ethj",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2020-12-30T13:33:28.597Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-30T13:34:15.884Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T13:34:15.884Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec82f99023da3a9ad595fc"
+  },
+  "monitoredObjects": [
+    "5fe9d0bbf2e7ff00178f4d30"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba61088002133162f"
+    }
+  ],
+  "task": "Đê điều",
+  "drones": [
+    {
+      "payloads": [
+        "5fe5e89da9bf780017b43461"
+      ],
+      "flightPaths": [
+        "5fe9aaa0ef4a52482dcea505"
+      ],
+      "id": "5fbdad624e0fc003db237c67nhom11"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-30T13:42:05.843Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fcf4f30a065e000176e1f84",
+  "name": "asdf33333",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2020-12-30T13:40:05.843Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-30T13:39:05.515Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T13:39:05.515Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec84d7dec1ca453544b588"
+  },
+  "monitoredObjects": [
+    "5fe9d0bbf2e7ff00178f4d30"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba61088002133162f"
+    }
+  ],
+  "task": "Đê điều",
+  "drones": [
+    {
+      "payloads": [
+        "5fe9f656f1b22f001720d7f0"
+      ],
+      "flightPaths": [
+        "5fe9aaa0ef4a52482dcea505"
+      ],
+      "id": "5fbdad624e0fc003db237c67nhom11"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-30T13:48:13.701Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fcf4f30a065e000176e1f84",
+  "name": "Đợt giám giám quý 17",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2020-12-30T13:48:13.701Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-30T13:47:03.974Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T13:47:03.974Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fec84d8dec1ca453544b589"
+  },
+  "monitoredObjects": [
+    "5fe6c19eafcbb900175b9b94",
+    "5fe2122161d37d00175d9b6b"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcfa6df2fa6e00017d4b2ef"
+    },
+    {
+      "$oid": "5fcfa6e52fa6e00017d4b2f0"
+    }
+  ],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fe5e851a9bf780017b43460"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bccc4a189f2b2676dd6a"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-30T13:48:15.548Z"
+  },
+  "mechanism": "MANUALLY",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "Đợt giám sát trọng điểm mùa cháy 2020",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2020-12-29T17:47:00.152Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-30T13:47:04.520Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-30T13:47:04.520Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fed90cf0a861f4379294888"
+  },
+  "monitoredObjects": [
+    "5fe2122161d37d00175d9b6b"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    }
+  ],
+  "description": "test",
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fe5e8e1a9bf780017b43462"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bdeb49a67836a9849737"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-03T08:49:40.943Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "Đợt giám sát trọng điểm mùa cháy 2020",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2020-12-01T08:49:40.943Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-31T08:50:23.582Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-31T08:50:23.582Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fed92da0a861f4379294889"
+  },
+  "monitoredObjects": [
+    "5fe2122161d37d00175d9b6b"
+  ],
+  "labels": [],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fe5e915a9bf780017b43463"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bdec49a67836a9849738"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-05T08:58:37.399Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "ĐGS Superadmin",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2020-12-01T08:58:37.399Z"
+  },
+  "createdAt": {
+    "$date": "2020-12-31T08:59:06.727Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-31T08:59:06.727Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff043260a861f437929488b"
+  },
+  "monitoredObjects": [
+    "5feae0ba4decb80017c5ebcd"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    },
+    {
+      "$oid": "5fcf41aba610880021331632"
+    }
+  ],
+  "task": "Điện",
+  "drones": [
+    {
+      "payloads": [
+        "5feb646b5755cd0017f02e6d"
+      ],
+      "flightPaths": [
+        "5fe9fc16ef4a52482dcea50b"
+      ],
+      "id": "5fe1bccc4a189f2b2676dd68"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-09T09:55:03.852Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fcf7984a122370017d3ae29",
+  "name": "Đợt giám sát cột điện thôn ",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2021-01-05T09:55:03.852Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-02T09:55:50.464Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-04T02:46:12.692Z"
+  },
+  "__v": 0,
+  "description": null
+},{
+  "_id": {
+    "$oid": "5ff089344b1c937b00ec1fba"
+  },
+  "monitoredObjects": [
+    "5fea0003b549d70017439fe2"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    },
+    {
+      "$oid": "5fcf41aba610880021331632"
+    }
+  ],
+  "task": "Đê điều",
+  "drones": [
+    {
+      "payloads": [
+        "5feb3f1a5755cd0017f02e19",
+        "5feb53665755cd0017f02e41"
+      ],
+      "flightPaths": [
+        "5fe8a8b81dce632a089ff6f9"
+      ],
+      "id": "5fbdad624e0fc003db237c67nhom11"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-02T14:56:00.224Z"
+  },
+  "mechanism": "MANUALLY",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fe82f09a719c60017775cb3",
+  "name": "Đợt giám giám quý 4",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2021-01-02T14:50:46.956Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-02T14:54:44.288Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-02T14:54:44.288Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff11bd23f00fdfa1872138f"
+  },
+  "monitoredObjects": [
+    "5fe2122161d37d00175d9b6b"
+  ],
+  "labels": [],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3eca854b4a00176e0346"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bccd4a189f2b2676dd6b"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-31T01:19:38.295Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "Duy 123",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2020-12-27T01:19:38.295Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-03T01:20:18.886Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-03T01:20:18.886Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff11de24b1c937b00ec1fbd"
+  },
+  "monitoredObjects": [
+    "5fe2122161d37d00175d9b6b"
+  ],
+  "labels": [],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fe5e728a9bf780017b4345d"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bccd4a189f2b2676dd6d"
+    }
+  ],
+  "endTime": {
+    "$date": "2020-12-31T01:28:14.482Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "Test ghi log",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2020-12-27T01:28:14.482Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-03T01:29:06.233Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-03T01:29:06.233Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff19ef139dba5302ecb13ec"
+  },
+  "monitoredObjects": [
+    "5fe9d0bbf2e7ff00178f4d30",
+    "5feab4214decb80017c5eb9a",
+    "5feab4884decb80017c5eb9c",
+    "5feadc344decb80017c5ebaf"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331631"
+    }
+  ],
+  "description": "ghi chu test",
+  "task": "Đê điều",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338",
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5feb4b3eef4a52482dcea553"
+      ],
+      "id": "5fbdad744e0fc003db237c6c"
+    },
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338",
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fe9aaa0ef4a52482dcea505"
+      ],
+      "id": "5fce4e8afeae48098869a2ce"
+    },
+    {
+      "payloads": [
+        "5fcf38a2854b4a00176e033a",
+        "5fcf3953854b4a00176e033b"
+      ],
+      "flightPaths": [
+        "5ff18b955dfc675979b00f74"
+      ],
+      "id": "5fce4e8afeae48098869a2d0"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-08T10:36:46.003Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fcf4f30a065e000176e1f84",
+  "name": " Giám sát đê sông hồng ",
+  "resolution": "1080p",
+  "startTime": {
+    "$date": "2021-01-03T10:36:46.003Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-03T10:39:45.517Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-03T10:39:45.517Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff1a2e139dba5302ecb13ed"
+  },
+  "monitoredObjects": [
+    "5fe9d0bbf2e7ff00178f4d30",
+    "5feab4214decb80017c5eb9a",
+    "5feab4884decb80017c5eb9c",
+    "5feadc344decb80017c5ebaf"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331631"
+    }
+  ],
+  "description": "ghi chu test",
+  "task": "Đê điều",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338",
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5feb4b3eef4a52482dcea553"
+      ],
+      "id": "5fbdad744e0fc003db237c6c"
+    },
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338",
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5fe9aaa0ef4a52482dcea505"
+      ],
+      "id": "5fce4e8afeae48098869a2ce"
+    },
+    {
+      "payloads": [
+        "5fcf38a2854b4a00176e033a",
+        "5fcf3953854b4a00176e033b"
+      ],
+      "flightPaths": [
+        "5ff18b955dfc675979b00f74"
+      ],
+      "id": "5fce4e8afeae48098869a2d0"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-08T10:36:46.003Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fcf4f30a065e000176e1f84",
+  "name": " Giám sát đê sông hồng ",
+  "resolution": "1080p",
+  "startTime": {
+    "$date": "2021-01-03T10:36:46.003Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-03T10:56:33.540Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-03T10:56:33.540Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff1a36039dba5302ecb13ee"
+  },
+  "monitoredObjects": [
+    "5fe9d0bbf2e7ff00178f4d30",
+    "5feab4214decb80017c5eb9a",
+    "5feab4884decb80017c5eb9c",
+    "5feadc344decb80017c5ebaf"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba61088002133162f"
+    },
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    }
+  ],
+  "description": "d",
+  "task": "Đê điều",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338"
+      ],
+      "flightPaths": [
+        "5fe9aaa0ef4a52482dcea505"
+      ],
+      "id": "5fce4eaffeae48098869a2d7"
+    },
+    {
+      "payloads": [
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5feb4b3eef4a52482dcea553"
+      ],
+      "id": "5fcfa99c6ab3ed494026b65e"
+    },
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338"
+      ],
+      "flightPaths": [
+        "5fe9aaa0ef4a52482dcea505"
+      ],
+      "id": "5fd88d3eb94e272f3f9e8ffd"
+    },
+    {
+      "payloads": [
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5feb4b3eef4a52482dcea553"
+      ],
+      "id": "5fe0662430223238de7bd16e"
+    },
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338"
+      ],
+      "flightPaths": [
+        "5feb4b3eef4a52482dcea553"
+      ],
+      "id": "5fe06c0030223238de7bd16f"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-09T10:57:18.961Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fcf4f30a065e000176e1f84",
+  "name": " Giám sát đê sông tam kì",
+  "resolution": "1080p",
+  "startTime": {
+    "$date": "2021-01-03T10:57:18.961Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-03T10:58:40.977Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-03T10:58:40.977Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff1a3e339dba5302ecb13ef"
+  },
+  "monitoredObjects": [
+    "5fe9d0bbf2e7ff00178f4d30",
+    "5feab4214decb80017c5eb9a",
+    "5feab4884decb80017c5eb9c",
+    "5feadc344decb80017c5ebaf"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba61088002133162f"
+    },
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    }
+  ],
+  "description": "d",
+  "task": "Đê điều",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338"
+      ],
+      "flightPaths": [
+        "5fe9aaa0ef4a52482dcea505"
+      ],
+      "id": "5fce4eaffeae48098869a2d7"
+    },
+    {
+      "payloads": [
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5feb4b3eef4a52482dcea553"
+      ],
+      "id": "5fcfa99c6ab3ed494026b65e"
+    },
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338"
+      ],
+      "flightPaths": [
+        "5fe9aaa0ef4a52482dcea505"
+      ],
+      "id": "5fd88d3eb94e272f3f9e8ffd"
+    },
+    {
+      "payloads": [
+        "5fcf3851854b4a00176e0339"
+      ],
+      "flightPaths": [
+        "5feb4b3eef4a52482dcea553"
+      ],
+      "id": "5fe0662430223238de7bd16e"
+    },
+    {
+      "payloads": [
+        "5fcf3771854b4a00176e0338"
+      ],
+      "flightPaths": [
+        "5feb4b3eef4a52482dcea553"
+      ],
+      "id": "5fe06c0030223238de7bd16f"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-09T10:57:18.961Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fcf4f30a065e000176e1f84",
+  "name": " Giám sát đê sông tam kì",
+  "resolution": "1080p",
+  "startTime": {
+    "$date": "2021-01-03T10:57:18.961Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-03T11:00:51.296Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-03T11:00:51.296Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff1a44c39dba5302ecb13f0"
+  },
+  "monitoredObjects": [
+    "5feae1904decb80017c5ebd5",
+    "5feae1e34decb80017c5ebd7"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba61088002133162f"
+    },
+    {
+      "$oid": "5fcf41aba610880021331630"
+    }
+  ],
+  "task": "Điện",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3eca854b4a00176e0346",
+        "5feb60ec5755cd0017f02e4c"
+      ],
+      "flightPaths": [
+        "5fe29d0988fdc948f4b2b97c"
+      ],
+      "id": "5fbdad744e0fc003db237c6c"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-09T11:01:42.411Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fcf7984a122370017d3ae29",
+  "name": "Đợt giám giám quý 3",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2021-01-08T11:01:42.411Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-03T11:02:36.132Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-03T11:02:36.132Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff1c23039dba5302ecb13f3"
+  },
+  "monitoredObjects": [
+    "5feaee4b4decb80017c5ebfc",
+    "5feaeb464decb80017c5ebf2"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    },
+    {
+      "$oid": "5fcf41aba610880021331632"
+    }
+  ],
+  "task": "Cây trồng",
+  "drones": [
+    {
+      "payloads": [
+        "5feb61495755cd0017f02e51",
+        "5feb622c5755cd0017f02e54"
+      ],
+      "flightPaths": [
+        "5fe2355a88fdc948f4b2b967"
+      ],
+      "id": "5fe1bccc4a189f2b2676dd69"
+    },
+    {
+      "payloads": [
+        "5feb61495755cd0017f02e51",
+        "5feb622c5755cd0017f02e54"
+      ],
+      "flightPaths": [
+        "5fe2355a88fdc948f4b2b967"
+      ],
+      "id": "5fe1bccc4a189f2b2676dd6a"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-06T13:08:55.758Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fcf488aa065e000176e1f7d",
+  "name": "Giám sát cây trồng thềm lục địa",
+  "resolution": "1080p",
+  "startTime": {
+    "$date": "2021-01-02T13:08:55.758Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-03T13:10:08.629Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-03T13:10:08.629Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff1c29739dba5302ecb13f4"
+  },
+  "monitoredObjects": [
+    "5fe2122161d37d00175d9b6b"
+  ],
+  "labels": [],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5feb60805755cd0017f02e4b"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fbdad624e0fc003db237c67nhom11"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-01T14:00:00.989Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "ĐGS 20h11",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2021-01-01T13:11:08.545Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-03T13:11:51.286Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-03T13:11:51.286Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff1d4b09462c20017cbc02c"
+  },
+  "monitoredObjects": [
+    "5fe9cf9bf2e7ff00178f4d2d",
+    "5fe9cfd4f2e7ff00178f4d2e"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    },
+    {
+      "$oid": "5fcf41aba610880021331632"
+    }
+  ],
+  "task": "Cây trồng",
+  "drones": [
+    {
+      "payloads": [
+        "5feb63755755cd0017f02e5d",
+        "5feb629b5755cd0017f02e57"
+      ],
+      "flightPaths": [
+        "5fe2355a88fdc948f4b2b967"
+      ],
+      "id": "5fe1bccc4a189f2b2676dd68"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-03T14:30:21.240Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fcf488aa065e000176e1f7d",
+  "name": "Giám sát cây",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2021-01-02T14:28:21.240Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-03T14:29:04.723Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-03T14:29:04.723Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff1e98784ce9a6f9d1ee4de"
+  },
+  "monitoredObjects": [
+    "5fe6c19eafcbb900175b9b94",
+    "5fe2122161d37d00175d9b6b"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331631"
+    },
+    {
+      "$oid": "5fcf41aba610880021331634"
+    },
+    {
+      "$oid": "5fcfa6e52fa6e00017d4b2f0"
+    }
+  ],
+  "description": "Cháy rất lớn",
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3eca854b4a00176e0346"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bccd4a189f2b2676dd6b"
+    },
+    {
+      "payloads": [
+        "5feb629b5755cd0017f02e57"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bccd4a189f2b2676dd6c"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-03T15:59:32.442Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "Giám sát cháy rừng Amazon",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2021-01-01T15:56:32.442Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-03T15:57:59.974Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-03T15:57:59.974Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff26f0384ce9a6f9d1ee4e0"
+  },
+  "monitoredObjects": [
+    "5feadd604decb80017c5ebb3",
+    "5feae0544decb80017c5ebcb"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    }
+  ],
+  "task": "Đê điều",
+  "drones": [
+    {
+      "payloads": [
+        "5feb63865755cd0017f02e5e"
+      ],
+      "flightPaths": [
+        "5fe0dc2930223238de7bd173"
+      ],
+      "id": "5fbdad624e0fc003db237c67nhom11"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-05T01:26:08.070Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fcf7965a122370017d3ae27",
+  "name": "Đợt giám sát tháng 12",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2021-01-04T01:26:08.070Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-04T01:27:31.494Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-04T01:27:31.494Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff27b8b84ce9a6f9d1ee4e1"
+  },
+  "monitoredObjects": [
+    "5fe6c19eafcbb900175b9b94"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    }
+  ],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3eca854b4a00176e0346"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bccd4a189f2b2676dd6d"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-04T03:20:17.928Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "Giám sát rừng cao su Thanh Miện",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2021-01-01T02:20:17.928Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-04T02:20:59.168Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-04T02:20:59.168Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff29efd84ce9a6f9d1ee4e2"
+  },
+  "monitoredObjects": [
+    "5fe6c19eafcbb900175b9b94",
+    "5fe2122161d37d00175d9b6b"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    },
+    {
+      "$oid": "5fcf41aba610880021331632"
+    }
+  ],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3eca854b4a00176e0346"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bccd4a189f2b2676dd6e"
+    },
+    {
+      "payloads": [
+        "5feb612d5755cd0017f02e50"
+      ],
+      "flightPaths": [
+        "5fea9725ef4a52482dcea531"
+      ],
+      "id": "5fe1bcce4a189f2b2676dd70"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-04T04:55:12.920Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fe5a56d1af3800017815f7b",
+  "name": "Giám sát cháy rừng thông",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2021-01-03T04:50:12.920Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-04T04:52:13.784Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-04T04:52:13.784Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff2a6c884ce9a6f9d1ee4e3"
+  },
+  "monitoredObjects": [
+    "5ff28e725f830741703877af"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331634"
+    },
+    {
+      "$oid": "5fcfa6e52fa6e00017d4b2f0"
+    },
+    {
+      "$oid": "5feab4fee641c0726a57b420"
+    }
+  ],
+  "description": "Giám sát quí 1",
+  "task": "Đê điều",
+  "drones": [
+    {
+      "payloads": [
+        "5fcf3eca854b4a00176e0346",
+        "5feb612d5755cd0017f02e50",
+        "5feb629b5755cd0017f02e57",
+        "5feb63755755cd0017f02e5d",
+        "5feb63b45755cd0017f02e61",
+        "5feb63be5755cd0017f02e62"
+      ],
+      "flightPaths": [
+        "5ff2a60ef27789452dbd4ce0"
+      ],
+      "id": "5fe1bccc4a189f2b2676dd68"
+    },
+    {
+      "payloads": [
+        "5feb63b45755cd0017f02e61",
+        "5feb63be5755cd0017f02e62",
+        "5feb63d25755cd0017f02e64",
+        "5feb612d5755cd0017f02e50"
+      ],
+      "flightPaths": [
+        "5ff2a60ef27789452dbd4ce0"
+      ],
+      "id": "5fe1bccd4a189f2b2676dd6b"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-08T05:22:45.633Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5ff293f21502c9001768e0ac",
+  "name": " Giám sát đê sông hồng 2020",
+  "resolution": "1080p",
+  "startTime": {
+    "$date": "2021-01-04T05:22:45.633Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-04T05:25:28.115Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-04T07:35:24.460Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff2c6ed84ce9a6f9d1ee4e5"
+  },
+  "monitoredObjects": [
+    "5febdbd468ddcd00177274c9"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    }
+  ],
+  "description": "Giám sát rừng Cúc Phương trong mua đồng giá lạnh",
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5feb63865755cd0017f02e5e"
+      ],
+      "flightPaths": [
+        "5ff1e088f27789452dbd4cd5"
+      ],
+      "id": "5fe1bccf4a189f2b2676dd74"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-04T07:44:58.559Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fe57e8a517d0e001702178b",
+  "name": "Đợt giám sát cháy rừng Cúc Phương",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2021-01-01T07:40:58.559Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-04T07:42:37.329Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-05T17:35:40.635Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff2caa484ce9a6f9d1ee4e6"
+  },
+  "monitoredObjects": [
+    "5feae1b54decb80017c5ebd6"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331634"
+    },
+    {
+      "$oid": "5fcfa6e52fa6e00017d4b2f0"
+    }
+  ],
+  "task": "Đê điều",
+  "drones": [
+    {
+      "payloads": [
+        "5feb63f95755cd0017f02e68"
+      ],
+      "flightPaths": [
+        "5fd87500b94e272f3f9e8ffc"
+      ],
+      "id": "5fe1bcce4a189f2b2676dd72"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-16T07:56:53.461Z"
+  },
+  "mechanism": "MANUALLY",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fcf7945a122370017d3ae26",
+  "name": "Đợt giám sát kè đê sông Hồng khu vực Minh Khai",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2021-01-03T07:56:53.461Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-04T07:58:28.543Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-04T07:58:28.543Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff2ec9684ce9a6f9d1ee4e7"
+  },
+  "monitoredObjects": [
+    "5febdbd468ddcd00177274c9"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    },
+    {
+      "$oid": "5fcf41aba610880021331632"
+    }
+  ],
+  "description": "Giám sát cháy rừng cấp bách, cần thực hiện ngay",
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5feb63865755cd0017f02e5e"
+      ],
+      "flightPaths": [
+        "5ff1dafaf27789452dbd4cd4"
+      ],
+      "id": "5fe1bccf4a189f2b2676dd74"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-04T10:26:30.036Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fe57e8a517d0e001702178b",
+  "name": "Giám sát cháy rừng thông",
+  "resolution": "1080p",
+  "startTime": {
+    "$date": "2021-01-03T10:21:30.036Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-04T10:23:18.579Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-05T17:28:29.968Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff49f1984ce9a6f9d1ee4e9"
+  },
+  "monitoredObjects": [
+    "5febdbd468ddcd00177274c9"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba610880021331630"
+    },
+    {
+      "$oid": "5fcf41aba610880021331631"
+    },
+    {
+      "$oid": "5fcf41aba610880021331632"
+    }
+  ],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5fe5e6d2a9bf780017b4345c"
+      ],
+      "flightPaths": [
+        "5ff1e088f27789452dbd4cd5",
+        "5ff1dafaf27789452dbd4cd4"
+      ],
+      "id": "5fe1bccd4a189f2b2676dd6c"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-06T17:15:59.782Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "PHOTO",
+  "monitoredZone": "5fe57e8a517d0e001702178b",
+  "name": "dot giam sat 1",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2021-01-05T17:15:59.782Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-05T17:17:13.938Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-05T17:17:13.938Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4a49684ce9a6f9d1ee4ea"
+  },
+  "monitoredObjects": [
+    "5febdbd468ddcd00177274c9"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba61088002133162f"
+    }
+  ],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5feb63865755cd0017f02e5e"
+      ],
+      "flightPaths": [
+        "5ff1e088f27789452dbd4cd5",
+        "5ff1dafaf27789452dbd4cd4",
+        "5ff1e105f27789452dbd4cd6"
+      ],
+      "id": "5fe1bccd4a189f2b2676dd6c"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-07T17:39:21.290Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5fe57e8a517d0e001702178b",
+  "name": "dot giam sat 2",
+  "resolution": "720p",
+  "startTime": {
+    "$date": "2021-01-05T17:39:21.290Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-05T17:40:38.123Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-05T17:42:02.011Z"
+  },
+  "__v": 0,
+  "description": null
+},{
+  "_id": {
+    "$oid": "5ff5189e84ce9a6f9d1ee4eb"
+  },
+  "monitoredObjects": [
+    "5ff2c824d835750017175576"
+  ],
+  "labels": [
+    {
+      "$oid": "5fcf41aba61088002133162f"
+    }
+  ],
+  "task": "Cháy rừng",
+  "drones": [
+    {
+      "payloads": [
+        "5feb63da5755cd0017f02e65"
+      ],
+      "flightPaths": [
+        "5ff51843f27789452dbd4cf6"
+      ],
+      "id": "5fe1bccf4a189f2b2676dd74"
+    }
+  ],
+  "endTime": {
+    "$date": "2021-01-14T01:55:03.663Z"
+  },
+  "mechanism": "AUTO",
+  "metadataType": "VIDEO",
+  "monitoredZone": "5ff2cdda1502c9001768e0bd",
+  "name": "đợt 1 6/1",
+  "resolution": "480p",
+  "startTime": {
+    "$date": "2021-01-04T01:55:03.663Z"
+  },
+  "createdAt": {
+    "$date": "2021-01-06T01:55:42.963Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T01:55:42.963Z"
+  },
+  "__v": 0
+}]

@@ -132,7 +132,7 @@ function AddFlightPathModal(props) {
                         .catch(err => {
                             console.log('err log', err);
                         })
-                    // props.pageReload();
+                    props.pageReload();
                 }
             })
             .catch(err => {

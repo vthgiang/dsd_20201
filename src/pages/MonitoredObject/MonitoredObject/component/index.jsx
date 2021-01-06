@@ -9,7 +9,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import SuccessNotification from "./SuccessNotification";
 import { MonitoredObjectConstants } from "../redux/constants";
 import { Spin } from "antd";
-import MonitorObjectHistory from './monitorObjectHistory';
+import MonitorObjectHistory from "./monitorObjectHistory";
 
 const axios = require("axios");
 
@@ -37,11 +37,12 @@ function AreaMonitored(props) {
   const [formatStyle, setFormatStyle] = useState("");
   const [selected, setSelected] = useState([]);
   const [selectItemDelete, setSelectItemDelete] = useState({});
-  const [selectItemHistory, setSelectItemHistory]=useState({}); 
+  const [selectItemHistory, setSelectItemHistory] = useState({});
   const [itemSearch, setItemSearch] = useState({
     code: "",
     name: "",
     status: [],
+    type: "",
   });
 
   const postLogMonitorObjectDelete = async () => {
@@ -49,8 +50,7 @@ function AreaMonitored(props) {
       method: "POST",
       url: `http://14.248.5.197:5012/api/monitor-object/delete`,
       data: {
-       
-        regionId: monitoredObjects.monitoredZone[0],         // monitoredObjects.monitoredZone[0],
+        regionId: monitoredObjects.monitoredZone[0], // monitoredObjects.monitoredZone[0],
         entityId: monitoredObjects._id,
         description: "delete monitor object",
         authorId: "",
@@ -65,20 +65,22 @@ function AreaMonitored(props) {
       });
   };
   useEffect(() => {
-  {role === "SUPER_ADMIN" ? 
-    dispatch(
-      MonitoredObjectActions.getAllMonitoredObjects({
-        page,
-        limit,
-      })
-    ):
-    dispatch(
-      MonitoredObjectActions.getAllMonitoredObjects({
-        page,
-        limit,
-        type: localStorage.getItem("project-type"),
-      })
-    )};
+    {
+      role === "SUPER_ADMIN"
+        ? dispatch(
+            MonitoredObjectActions.getAllMonitoredObjects({
+              page,
+              limit,
+            })
+          )
+        : dispatch(
+            MonitoredObjectActions.getAllMonitoredObjects({
+              page,
+              limit,
+              type: localStorage.getItem("project-type"),
+            })
+          );
+    }
   }, [page]);
   useEffect(() => {
     let arr = [];
@@ -96,14 +98,40 @@ function AreaMonitored(props) {
     if (isObjectSuccess) {
       setFormatStyle("btn btn-success");
       window.$("#modalSuccessNotification").modal("show");
-      dispatch(MonitoredObjectActions.getAllMonitoredObjects({ page, limit,type: localStorage.getItem("project-type"), }));
+      role === "SUPER_ADMIN"
+        ? dispatch(
+            MonitoredObjectActions.getAllMonitoredObjects({
+              page,
+              limit,
+            })
+          )
+        : dispatch(
+            MonitoredObjectActions.getAllMonitoredObjects({
+              page,
+              limit,
+              type: localStorage.getItem("project-type"),
+            })
+          );
     }
     if (isDeleteMonitored) {
       //gọi log khi xóa đối tượng giám sát
       postLogMonitorObjectDelete();
       setFormatStyle("btn btn-success");
       window.$("#modalSuccessNotification").modal("show");
-      dispatch(MonitoredObjectActions.getAllMonitoredObjects({ page, limit,type: localStorage.getItem("project-type"), }));
+      role === "SUPER_ADMIN"
+        ? dispatch(
+            MonitoredObjectActions.getAllMonitoredObjects({
+              page,
+              limit,
+            })
+          )
+        : dispatch(
+            MonitoredObjectActions.getAllMonitoredObjects({
+              page,
+              limit,
+              type: localStorage.getItem("project-type"),
+            })
+          );
     }
     dispatch({
       type: MonitoredObjectConstants.DELETE_MONITORED_SUCCESS,
@@ -120,14 +148,22 @@ function AreaMonitored(props) {
   }, [isObjectSuccess, isObjectFailure]);
 
   const handleSubmitSearch = () => {
-    dispatch(
-      MonitoredObjectActions.getAllMonitoredObjects({
-        ...itemSearch,
-        page: page,
-        limit: limit,
-        type: localStorage.getItem("project-type"),
-      })
-    );
+    role === "SUPER_ADMIN"
+      ? dispatch(
+          MonitoredObjectActions.getAllMonitoredObjects({
+            ...itemSearch,
+            page,
+            limit,
+          })
+        )
+      : dispatch(
+          MonitoredObjectActions.getAllMonitoredObjects({
+            ...itemSearch,
+            page: page,
+            limit: limit,
+            type: localStorage.getItem("project-type"),
+          })
+        );
   };
   const onChangePagination = (event, value) => {
     setPagination({
@@ -158,7 +194,7 @@ function AreaMonitored(props) {
     setSelectItemDelete(item);
     window.$("#modal").modal("show");
   };
-  
+
   const menu = (
     <Menu>
       <Menu.Item>
@@ -227,6 +263,33 @@ function AreaMonitored(props) {
               onChange={setSelected}
             />
           </div>
+          {role === "SUPER_ADMIN" ? (
+            <div className="form-group col-4">
+              <label className="form-control-static" style={{ margin: "10px" }}>
+                Loại
+              </label>
+              <select
+                className="custom-select"
+                name="type"
+                value={itemSearch.type}
+                onChange={(e) => {
+                  e.persist();
+                  setItemSearch((prev) => ({
+                    ...prev,
+                    type: e.target.value,
+                  }));
+                }}
+              >
+                <option value="" disabled>
+                  Chọn loại
+                </option>
+                <option value="DE_DIEU">Đê Điều</option>
+                <option value="CHAY_RUNG">Cháy rừng</option>
+                <option value="LUOI_DIEN">Lưới điện</option>
+                <option value="CAY_TRONG">Cây trồng</option>
+              </select>
+            </div>
+          ) : null}
           <div className="form-group">
             <button
               type="button"
@@ -256,11 +319,14 @@ function AreaMonitored(props) {
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{item.name}</td>
-                  { item.status === "1" ? <td style={{ color: "green"}}>Bình thường</td> : 
-                    item.status === "2" ? <td style={{ color: "red"}}>Đã hỏng</td> :
+                  {item.status === "1" ? (
+                    <td style={{ color: "green" }}>Bình thường</td>
+                  ) : item.status === "2" ? (
+                    <td style={{ color: "red" }}>Đã hỏng</td>
+                  ) : (
                     <td style={{ color: "blue" }}>Đang được sửa chữa</td>
-                  }
-                  
+                  )}
+
                   <td>{item.description}</td>
                   <td>
                     {!!item.category ? item.category.name : "Chưa có giá trị"}

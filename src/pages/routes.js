@@ -1,99 +1,101 @@
-import React, { Fragment } from 'react';
-import { useSelector } from 'react-redux';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import ListUser from '../modules/user/components/listUser';
-import ListDepartment from '../modules/user/components/listDepartment';
-import ListUserMeta from '../modules/user/components/listUserMeta';
-import ListRole from '../modules/user/components/listRole';
-import ListPermission from '../modules/user/components/listPermission';
-import ListRolePermission from '../modules/user/components/listRolePermission';
 
-import ListMonitorCampaignPage from './FlightHub/ListMonitorCampaign';
-import CreateMonitorCampaignPage from './FlightHub/CreateMonitorCampaign';
-import UpdateMonitorCampaignPage from './FlightHub/UpdateMonitorCampaign';
-
-import ListLabelsPage from './FlightHub/Labels';
-import DetailArea from '../components/Aera/DetailArea';
-import ManageArea from '../components/Aera/ManageArea';
-import Manage from '../components/SurveillanceDomain/Manage';
-import ManageEdit from '../components/SurveillanceDomain/ManageEdit';
-import Dashboard from './Dashboard';
-import CreateReport from './Report/CreateReport';
-import ViewReport from './Report/ViewReport';
-import ManageReportTemplate from './Report/ManageReportTemplate';
+import React from "react";
+import { useSelector } from "react-redux";
+import { Redirect, Route, Switch } from "react-router-dom";
+import DetailArea from "../components/Aera/DetailArea";
+import ManageArea from "../components/Aera/ManageArea";
+import FlightCreateZone from '../components/Drone/FlightCreateZone';
+import DetailedNotification from "../components/Group4/DetailedNotification";
+import MyList from "../components/Group4/Notification";
+import Manage from "../components/SurveillanceDomain/Manage";
+import ManageEdit from "../components/SurveillanceDomain/ManageEdit";
+import ListDepartment from "../modules/user/components/listDepartment";
+import ListPermission from "../modules/user/components/listPermission";
+import ListRole from "../modules/user/components/listRole";
+import ListRolePermission from "../modules/user/components/listRolePermission";
+import ListUser from "../modules/user/components/listUser";
+import ListUserMeta from "../modules/user/components/listUserMeta";
+import Dashboard from "./Dashboard";
+import StatisticDeDieu from './Dashboard/IncidentDashboard';
+import CreateMonitorCampaignPage from "./FlightHub/CreateMonitorCampaign";
+import DetailMonitorCampaignPage from "./FlightHub/DetailMonitorCampaign";
+import ListLabelsPage from "./FlightHub/Labels";
+import ListMonitorCampaignPage from "./FlightHub/ListMonitorCampaign";
+import UpdateMonitorCampaignPage from "./FlightHub/UpdateMonitorCampaign";
+import FlightPath from './FlightPath';
+import FlightPoint from "./FlightPoint";
+//DE DIEU
+import HomeDeDieu from "./Home/DeDieu";
+import DeDieuNcn3 from "./Home/DeDieu/indexncn3";
+import Task1 from './Home/DeDieu/Task1/index';
+import Task5 from './Home/DeDieu/Task5/index';
+import ImageVideo from './ImageVideo';
+import Detail from './ImageVideo/detail';
+import Stream from './ImageVideo/stream';
 import Incident from './Incident';
-import MyList from '../components/Group4/Notification';
-import DetailedNotification from '../components/Group4/DetailedNotification';
-
-import LogUser from './LogUser';
+import ImageGallery from './Incident/ImageGallery';
+// incident group 09
+import IncidentGroup9 from './Incident/Incident';
+import IncidentEdit from './Incident/Incident/edit';
+import VideoGallery from './Incident/VideoGallery';
 import LogDrone from './LogDrone';
-import LogWarn from './LogWarn';
-import LogProblem from './LogProblem';
-import LogVideo from './LogVideo';
-import LogPayLoad from './LogPayLoad';
 import LogImage from './LogImage';
 import LogIncident from './LogIncident';
 import LogObjMonitor from './LogObjMonitor';
+import LogPayLoad from './LogPayLoad';
+import LogProblem from './LogProblem';
 import LogRegion from './LogRegion';
 import LogStatistic from './LogStatistic';
-import LogUAV from './LogUAV';
 import LogDashboardPage from './LogTreeProject';
-import LogBusiness from './LogBusiness';
-//Payload
-import ListPayload from './Payload/PayloadManagement/List';
-import ListTypePayload from './Payload/PayloadType/List';
-import PayloadMaintenance from './Payload/PayloadMaintenance/List';
-import EditSchedule from './Payload/PayloadMaintenance/Edit';
-import AddSchedule from './Payload/PayloadMaintenance/Add';
-import PayloadSetting from './Payload/PayloadSetting';
-//Payload  Statistic
-import PayloadStatistic from './Payload/PayloadStatistic';
-import PayloadStatisticFrequency from './Payload/PayloadStatistic/PayloadStatisticFrequency';
-import PayloadStatisticTime from './Payload/PayloadStatistic/PayloadStatisticTime';
-import PayloadStatisticStatus from './Payload/PayloadStatistic/PayloadStatisticStatus';
-import PayloadStatisticWorking from './Payload/PayloadStatistic/PayloadStatisticWorking';
-import PayloadStatisticDroneFixing from './Payload/PayloadStatistic/PayloadStatisticDroneFixing';
-import PayloadDroneHistory from './Payload/PayloadToDrone/List';
-import EditSignupPayloadDrone from './Payload/PayloadToDrone/Edit';
-import AddSignupPayloadDrone from './Payload/PayloadToDrone/Add';
-import DScard from './Payload/PayloadSDcard';
-import ImageVideo from './ImageVideo';
-import Tracking from './ImageVideo/tracking';
-import Detail from './ImageVideo/detail';
-import Stream from './ImageVideo/stream';
+import LogUAV from './LogUAV';
+import LogUser from './LogUser';
+import LogVideo from './LogVideo';
+import LogWarn from './LogWarn';
+import MapTest from './MapTest';
 //monitored Object Group 05
 import CategoryMonitored from './MonitoredObject/Category/component';
 import MonitoredObject from './MonitoredObject/MonitoredObject/component';
 import MonitoredObjectCreate from './MonitoredObject/MonitoredObject/component/monitoredObjectCreate';
 import MonitoredObjectView from './MonitoredObject/MonitoredObject/component/MonitoredObjectView';
 import MonitoredObjectHistory from './MonitoredObject/MonitoredObject/component/monitorObjectHistory';
-// incident group 09
-import IncidentGroup9 from './Incident/Incident';
-import ImageGallery from './Incident/ImageGallery';
-import VideoGallery from './Incident/VideoGallery';
-import IncidentEdit from './Incident/Incident/edit';
+//Payload
+import ListPayload from './Payload/PayloadManagement/List';
+import DScard from './Payload/PayloadSDcard';
+import PayloadSetting from './Payload/PayloadSetting';
+//Payload  Statistic
+import PayloadStatistic from './Payload/PayloadStatistic';
+import PayloadStatisticDroneFixing from './Payload/PayloadStatistic/PayloadStatisticDroneFixing';
+import PayloadStatisticFrequency from './Payload/PayloadStatistic/PayloadStatisticFrequency';
+import PayloadStatisticStatus from './Payload/PayloadStatistic/PayloadStatisticStatus';
+import PayloadStatisticTime from './Payload/PayloadStatistic/PayloadStatisticTime';
+import PayloadStatisticWorking from './Payload/PayloadStatistic/PayloadStatisticWorking';
+import AddSignupPayloadDrone from './Payload/PayloadToDrone/Add';
+import EditSignupPayloadDrone from './Payload/PayloadToDrone/Edit';
+import PayloadDroneHistory from './Payload/PayloadToDrone/List';
+import ListTypePayload from './Payload/PayloadType/List';
+import CreateReport from './Report/CreateReport';
+import ManageReportTemplate from './Report/ManageReportTemplate';
+import ViewReport from './Report/ViewReport';
+// Statistic
+import DroneStatistic from "./Statistic/DroneStatistic";
+import ImageVideoStatistic from "./Statistic/ImageVideoStatistic";
+import IncidentStatistic from "./Statistic/IncidentStatistic";
+import IncidentStatisticWorking from "./Statistic/IncidentStatisticWorking";
+import StatisticObjectMonitor from "./Statistic/StatisticObjectMonitor";
+import StatisticPayload from "./Statistic/StatisticPayload";
 // dsd_01 drone
 import TableDrone from './TableDrone';
-import FlightPathDrone from './FLightPathDrone';
-import FlightPoint from './FlightPoint';
 import TableDroneState from './TableDroneState';
-import MapTest from './MapTest';
-import FlightPath from './FlightPath';
-import FlightSchedule from './FlightSchedule';
-import DetailMonitorCampaignPage from './FlightHub/DetailMonitorCampaign';
-import FlightCreateZone from '../components/Drone/FlightCreateZone';
-
-//DE DIEU
-import HomeDeDieu from "./Home/DeDieu";
-import StatisticDeDieu from './Dashboard/IncidentDashboard'
-import Task1 from './Home/DeDieu/Task1/index'
-import Task5 from './Home/DeDieu/Task5/index'
-import DeDieuNcn3 from "./Home/DeDieu/indexncn3";
 import UAVMana from './UAVMana';
+import Tracking from './ImageVideo/tracking'
+import LogBusiness from './LogBusiness'
 
-export const routes = [
+
+
+
+export const routes = [ 
   {
-    path: '/',
+    path: "/",
     component: Dashboard,
     exact: true,
   },
@@ -119,7 +121,7 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/drones',
+    path: "/drones",
     component: () => <div>DroneManagement</div>,
   },
   {
@@ -139,79 +141,74 @@ export const routes = [
     component: TableDrone,
   },
   {
-    path: '/drone-state',
+    path: "/drone-state",
     component: TableDroneState,
   },
   {
-    path: '/my-map-test',
+    path: "/my-map-test",
     component: MapTest,
   },
   {
     path: '/flight-path',
     component: FlightPath,
   },
-  // {
-  //   path: '/flight-schedule',
-  //   component: FlightSchedule,
-  // },
-
   {
-    path: '/flight-point',
+    path: "/flight-point",
     component: FlightPoint,
   },
   {
-    path: '/flight-hub-monitor-campaigns/create',
+    path: "/flight-hub-monitor-campaigns/create",
     component: CreateMonitorCampaignPage,
   },
   {
-    path: '/flight-hub-monitor-campaigns/update/:id',
+    path: "/flight-hub-monitor-campaigns/update/:id",
     component: UpdateMonitorCampaignPage,
   },
   {
-    path: '/flight-hub-monitor-campaigns/:id',
+    path: "/flight-hub-monitor-campaigns/:id",
     component: DetailMonitorCampaignPage,
   },
   {
-    path: '/flight-hub-monitor-campaigns',
+    path: "/flight-hub-monitor-campaigns",
     component: ListMonitorCampaignPage,
   },
 
   {
-    path: '/flight-hub-other-params',
+    path: "/flight-hub-other-params",
     component: ListLabelsPage,
   },
   //PAYLOAD
   {
-    path: '/payloads',
+    path: "/payloads",
     component: () => <div>PayloadManagement</div>,
   },
   {
-    path: '/payload-management',
+    path: "/payload-management",
     component: ListPayload,
   },
   {
-    path: '/payload-dscard',
+    path: "/payload-dscard",
     component: DScard,
   },
   {
-    path: '/payload-type',
+    path: "/payload-type",
     component: ListTypePayload,
   },
 
   {
-    path: '/payload-drone',
+    path: "/payload-drone",
     component: PayloadDroneHistory,
   },
   {
-    path: '/edit-signup-payload-drone',
+    path: "/edit-signup-payload-drone",
     component: EditSignupPayloadDrone,
   },
   {
-    path: '/add-signup-payload-drone',
+    path: "/add-signup-payload-drone",
     component: AddSignupPayloadDrone,
   },
   {
-    path: '/payload-configuration',
+    path: "/payload-configuration",
     component: PayloadSetting,
   },
   {
@@ -237,32 +234,32 @@ export const routes = [
  */
   //Payload statistic
   {
-    path: '/payload-statistic',
+    path: "/payload-statistic",
     component: PayloadStatistic,
   },
   {
-    path: '/payload-statistic-type',
+    path: "/payload-statistic-type",
     component: PayloadStatisticFrequency,
   },
   {
-    path: '/payload-statistic-time',
+    path: "/payload-statistic-time",
     component: PayloadStatisticTime,
   },
   {
-    path: '/payload-statistic-work',
+    path: "/payload-statistic-work",
     component: PayloadStatisticWorking,
   },
   {
-    path: '/payload-statistic-status',
+    path: "/payload-statistic-status",
     component: PayloadStatisticStatus,
   },
   {
-    path: '/payload-statistic-fix',
+    path: "/payload-statistic-fix",
     component: PayloadStatisticDroneFixing,
   },
 
   {
-    path: '/metadata',
+    path: "/metadata",
     component: () => <ImageVideo />,
   },
   {
@@ -274,20 +271,20 @@ export const routes = [
     component: () => <Stream />,
   },
   {
-    path: '/image-video-detail/:id',
+    path: "/image-video-detail/:id",
     component: () => <Detail />,
   },
   {
-    path: '/problem',
+    path: "/problem",
     component: () => <div>Problem</div>,
   },
   {
-    path: '/supervised-object',
+    path: "/supervised-object",
     component: () => <div>Đối tượng giám sát</div>,
   },
   // view monitored Object
   {
-    path: '/monitored-object-management/:option/:id',
+    path: "/monitored-object-management/:option/:id",
     component: MonitoredObjectView,
     exact: true,
   },
@@ -300,100 +297,128 @@ export const routes = [
   },
   // create monitored Object
   {
-    path: '/monitored-object-management/:option',
+    path: "/monitored-object-management/:option",
     component: MonitoredObjectCreate,
     exact: true,
   },
   //view List Monitored Object
   {
-    path: '/monitored-object-management',
+    path: "/monitored-object-management",
     component: MonitoredObject,
     exact: true,
   },
   //View Category Monitored
   {
-    path: '/category-monitored-object-management',
+    path: "/category-monitored-object-management",
     component: CategoryMonitored,
     exact: true,
   },
   {
-    path: '/report',
+    path: "/statistic",
     component: () => <div>Thống kê</div>,
   },
   {
-    path: '/create-report',
+    path: "/statistic-drone",
+    component: DroneStatistic,
+  },
+  {
+    path: "/statistic-payload",
+    component: StatisticPayload,
+  },
+  {
+    path: "/statistic-monitor-object",
+    component: StatisticObjectMonitor,
+  },
+  {
+    path: "/statistic-image-video",
+    component: ImageVideoStatistic,
+  },
+  {
+    path: "/incident-statistic",
+    component: IncidentStatistic,
+  },
+  {
+    path: "/incident-statistic-working",
+    component: IncidentStatisticWorking,
+  },
+  {
+    path: "/report",
+    component: () => <div>Báo cáo</div>,
+  },
+  {
+    path: "/create-report",
     component: CreateReport,
   },
   {
-    path: '/view-report',
+    path: "/view-report",
     component: ViewReport,
   },
   {
-    path: '/manage-report-template',
+    path: "/manage-report-template",
     component: ManageReportTemplate,
   },
   {
-    path: '/problems',
+    path: "/problems",
     component: () => <div>Sự cố</div>,
   },
   {
-    path: '/warning',
+    path: "/warning",
     component: () => <MyList />,
   },
   {
-    path: '/warning-detail/:id',
+    path: "/warning-detail/:id",
     component: () => <DetailedNotification />,
   },
   {
-    path: '/activity-log',
+    path: "/activity-log",
     component: () => <div>Lịch sử hoạt động</div>,
   },
   {
-    path: '/log-user',
+    path: "/log-user",
     component: LogUser,
   },
   {
-    path: '/log-drone',
+    path: "/log-drone",
     component: LogDrone,
   },
   {
-    path: '/log-problem',
+    path: "/log-problem",
     component: LogProblem,
   },
   {
-    path: '/log-warn',
+    path: "/log-warn",
     component: LogWarn,
   },
   {
-    path: '/log-payload',
+    path: "/log-payload",
     component: LogPayLoad,
   },
   {
-    path: '/log-image',
+    path: "/log-image",
     component: LogImage,
   },
   {
-    path: '/log-video',
+    path: "/log-video",
     component: LogVideo,
   },
   {
-    path: '/log-incident',
+    path: "/log-incident",
     component: LogIncident,
   },
   {
-    path: '/log-objmonitor',
+    path: "/log-objmonitor",
     component: LogObjMonitor,
   },
   {
-    path: '/log-region',
+    path: "/log-region",
     component: LogRegion,
   },
   {
-    path: '/log-statistic',
+    path: "/log-statistic",
     component: LogStatistic,
   },
   {
-    path: '/log-uav',
+    path: "/log-uav",
     component: LogUAV,
   },
   {
@@ -405,79 +430,79 @@ export const routes = [
     component: LogDashboardPage,
   },
   {
-    path: '/surveillance-domain-area',
+    path: "/surveillance-domain-area",
     component: () => <div>Quản lý khu vực</div>,
   },
   {
-    path: '/surveillance-domain-manage/edit',
+    path: "/surveillance-domain-manage/edit",
     component: () => <ManageEdit />,
     exact: true,
   },
   {
-    path: '/surveillance-domain-manage',
+    path: "/surveillance-domain-manage",
     component: () => <Manage />,
     exact: true,
   },
   {
-    path: '/surveillance-area',
+    path: "/surveillance-area",
     component: () => <ManageArea />,
   },
   {
-    path: '/surveillance-area-detail',
+    path: "/surveillance-area-detail",
     component: () => <DetailArea />,
   },
   {
-    path: '/handle-problem',
+    path: "/handle-problem",
     component: Incident,
     exact: true,
   },
   {
-    path: '/user-management',
+    path: "/user-management",
     component: ListUser,
   },
   {
-    path: '/user',
+    path: "/user",
     component: ListUser,
   },
   {
-    path: '/department',
+    path: "/department",
     component: ListDepartment,
   },
   {
-    path: '/user-meta',
+    path: "/user-meta",
     component: ListUserMeta,
   },
   {
-    path: '/incidents',
+    path: "/incidents",
     component: () => <IncidentGroup9 />,
     exact: true,
   },
 
   {
-    path: '/incidents/:id',
+    path: "/incidents/:id",
     component: () => <IncidentEdit />,
     exact: true,
   },
   {
-    path: '/imageGallery',
+    path: "/imageGallery",
     component: () => <ImageGallery />,
     exact: true,
   },
   {
-    path: '/videoGallery',
+    path: "/videoGallery",
     component: () => <VideoGallery />,
   },
   {
     exact: true,
-    path: '/role',
+    path: "/role",
     component: ListRole,
   },
   {
-    path: '/permission',
+    path: "/permission",
     component: ListPermission,
   },
   {
-    path: '/role-permission',
+    path: "/role-permission",
     component: ListRolePermission,
   },
 ];

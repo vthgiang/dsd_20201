@@ -11,6 +11,9 @@ import React, { useEffect, useState, useMemo } from "react";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Image from 'react-bootstrap/Image'
 import { Spin } from 'antd';
+import { getProjectType, getUser } from '../../components/Drone/Common/info';
+import axios from 'axios';
+import { logEdit, logDelete } from '../../apis/drone';
 
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -88,6 +91,23 @@ export default function TransitionsModal(props) {
         setDrones(json);
         alert("Đã xóa thành công")
         setOpen(false);
+
+        // console.log('response delete drone', json);
+        //ghi log
+        const user = getUser();
+        const logData = {
+          projectType: getProjectType(),
+          authorId: user.id.toString(),
+          entityId: props.id,
+          description: "DELETE DRONE",
+          name: drones.name,
+          regionId: "NONE",
+          longitude: 0,
+          latitude: 0,  
+          uavConnectId: "NONE"
+        };
+        logDelete(logData)
+
         window.location.reload();
       });
   };
@@ -148,15 +168,34 @@ export default function TransitionsModal(props) {
       })
     };
     fetch('http://skyrone.cf:6789/drone/save', requestOptions)
-    .then(response => response.text())
+    .then(response => response.json())
     .then(contents =>  {
       alert("Đã cập nhật thành công"); 
       setOpen(false);
+
+      // console.log('drone edit', contents)
+      //ghi log
+      const user = getUser();
+      const logData = {
+        projectType: getProjectType(),
+        authorId: user.id.toString(),
+        entityId: contents.id,
+        description: "EDIT DRONE",
+        name: contents.name,
+        regionId: "NONE",
+        longitude: 0,
+        latitude: 0,  
+        uavConnectId: "NONE"
+      };
+      logEdit(logData);
+
       window.location.reload();
     })
 
-    .catch(() => console.log("Can’t access response. Blocked by browser?"))
-      
+    .catch((err) => {
+      console.log(err)
+      console.log("Can’t access response. Blocked by browser?")
+    })
   }
 
   return (

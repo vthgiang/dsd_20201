@@ -31,6 +31,7 @@ function AreaMonitored(props) {
   const [itemSearch, setItemSearch] = useState({
     code: "",
     name: "",
+    type: "",
   });
 
   const [option, setOption] = useState("");
@@ -38,6 +39,7 @@ function AreaMonitored(props) {
     code: "",
     name: "",
     description: "",
+    type: "",
   });
   useEffect(() => {
     {
@@ -67,13 +69,20 @@ function AreaMonitored(props) {
     if (isCatSuccess) {
       setFormatStyle("btn btn-success");
       window.$("#modalSuccessNotification").modal("show");
-      dispatch(
-        CategoryActions.getAllCategories({
-          page,
-          limit,
-          type: localStorage.getItem("project-type"),
-        })
-      );
+      role === "SUPER_ADMIN"
+        ? dispatch(
+            CategoryActions.getAllCategories({
+              page,
+              limit,
+            })
+          )
+        : dispatch(
+            CategoryActions.getAllCategories({
+              page,
+              limit,
+              type: localStorage.getItem("project-type"),
+            })
+          );
     }
     dispatch({
       type: CategoryConstants.CAT_MONITORED_FAILURE,
@@ -101,17 +110,24 @@ function AreaMonitored(props) {
     window.$("#modalCreateCatObject").modal("show");
     setOption("add");
   };
-  
 
   const handleSubmitSearch = () => {
-    dispatch(
-      CategoryActions.getAllCategories({
-        ...itemSearch,
-        page: page,
-        limit: limit,
-        type: localStorage.getItem("project-type"),
-      })
-    );
+    role === "SUPER_ADMIN"
+      ? dispatch(
+          CategoryActions.getAllCategories({
+            ...itemSearch,
+            page: page,
+            limit: limit,
+          })
+        )
+      : dispatch(
+          CategoryActions.getAllCategories({
+            ...itemSearch,
+            page: page,
+            limit: limit,
+            type: localStorage.getItem("project-type"),
+          })
+        );
   };
   const handleACatView = (item) => {
     setCatMonitored(item);
@@ -157,8 +173,8 @@ function AreaMonitored(props) {
             </Button>
           </Dropdown>
         </div>
-        <div className="form-inline" style={{ margin: "15px" }}>
-          <div className="form-group">
+        <div className="form-inline row" style={{ margin: "15px" }}>
+          <div className="form-group col-4">
             <label className="form-control-static" style={{ margin: "10px" }}>
               <b>Tên danh mục</b>
             </label>
@@ -178,7 +194,34 @@ function AreaMonitored(props) {
               autoComplete="off"
             />
           </div>
-          <div className="form-group ml-3">
+          {role === "SUPER_ADMIN" ? (
+            <div className="form-group col-4">
+              <label className="form-control-static" style={{ margin: "10px" }}>
+                Loại
+              </label>
+              <select
+                className="custom-select"
+                name="type"
+                value={itemSearch.type}
+                onChange={(e) => {
+                  e.persist();
+                  setItemSearch((prev) => ({
+                    ...prev,
+                    type: e.target.value,
+                  }));
+                }}
+              >
+                <option value="" disabled>
+                  Chọn loại
+                </option>
+                <option value="DE_DIEU">Đê Điều</option>
+                <option value="CHAY_RUNG">Cháy rừng</option>
+                <option value="LUOI_DIEN">Lưới điện</option>
+                <option value="CAY_TRONG">Cây trồng</option>
+              </select>
+            </div>
+          ) : null}
+          <div className="form-group ml-3 col-4">
             <button
               type="button"
               className="btn btn-success"

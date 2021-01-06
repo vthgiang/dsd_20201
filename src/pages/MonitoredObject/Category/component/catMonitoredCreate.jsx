@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CategoryActions } from "../redux/actions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -7,6 +7,16 @@ function CatMonitorCreate({ value, handleChange, setCatMonitored, option }) {
   const user = useSelector((state) => state.user.user);
   const role = user.role;
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (option === "add") {
+      setCatMonitored({
+        code: "",
+        name: "",
+        description: "",
+        type: "",
+      });
+    }
+  }, [option]);
   const handleChangeCatMonitored = () => {
     if (!!value._id) {
       dispatch(
@@ -14,7 +24,10 @@ function CatMonitorCreate({ value, handleChange, setCatMonitored, option }) {
           code: "1",
           name: value.name,
           description: value.description,
-          type: localStorage.getItem("project-type"),
+          type:
+            role === "SUPER_ADMIN"
+              ? value.type
+              : localStorage.getItem("project-type"),
         })
       );
     } else {
@@ -23,7 +36,10 @@ function CatMonitorCreate({ value, handleChange, setCatMonitored, option }) {
           code: "1",
           name: value.name,
           description: value.description,
-          type: localStorage.getItem("project-type"),
+          type:
+            role === "SUPER_ADMIN"
+              ? value.type
+              : localStorage.getItem("project-type"),
         })
       );
     }
@@ -31,6 +47,7 @@ function CatMonitorCreate({ value, handleChange, setCatMonitored, option }) {
       code: "",
       name: "",
       description: "",
+      type: "",
     });
   };
   return (
