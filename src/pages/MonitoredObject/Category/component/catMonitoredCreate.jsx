@@ -14,7 +14,10 @@ function CatMonitorCreate({ value, handleChange, setCatMonitored, option }) {
           code: "1",
           name: value.name,
           description: value.description,
-          type: localStorage.getItem("project-type"),
+          type:
+            role === "SUPER_ADMIN"
+              ? value.type
+              : localStorage.getItem("project-type"),
         })
       );
     } else {
@@ -23,7 +26,10 @@ function CatMonitorCreate({ value, handleChange, setCatMonitored, option }) {
           code: "1",
           name: value.name,
           description: value.description,
-          type: localStorage.getItem("project-type"),
+          type:
+            role === "SUPER_ADMIN"
+              ? value.type
+              : localStorage.getItem("project-type"),
         })
       );
     }

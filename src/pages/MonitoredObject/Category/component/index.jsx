@@ -38,6 +38,7 @@ function AreaMonitored(props) {
     code: "",
     name: "",
     description: "",
+    type: "",
   });
   useEffect(() => {
     {
@@ -67,13 +68,20 @@ function AreaMonitored(props) {
     if (isCatSuccess) {
       setFormatStyle("btn btn-success");
       window.$("#modalSuccessNotification").modal("show");
-      dispatch(
-        CategoryActions.getAllCategories({
-          page,
-          limit,
-          type: localStorage.getItem("project-type"),
-        })
-      );
+      role === "SUPER_ADMIN"
+        ? dispatch(
+            CategoryActions.getAllCategories({
+              page,
+              limit,
+            })
+          )
+        : dispatch(
+            CategoryActions.getAllCategories({
+              page,
+              limit,
+              type: localStorage.getItem("project-type"),
+            })
+          );
     }
     dispatch({
       type: CategoryConstants.CAT_MONITORED_FAILURE,
@@ -101,17 +109,24 @@ function AreaMonitored(props) {
     window.$("#modalCreateCatObject").modal("show");
     setOption("add");
   };
-  
 
   const handleSubmitSearch = () => {
-    dispatch(
-      CategoryActions.getAllCategories({
-        ...itemSearch,
-        page: page,
-        limit: limit,
-        type: localStorage.getItem("project-type"),
-      })
-    );
+    role === "SUPER_ADMIN"
+      ? dispatch(
+          CategoryActions.getAllCategories({
+            ...itemSearch,
+            page: page,
+            limit: limit,
+          })
+        )
+      : dispatch(
+          CategoryActions.getAllCategories({
+            ...itemSearch,
+            page: page,
+            limit: limit,
+            type: localStorage.getItem("project-type"),
+          })
+        );
   };
   const handleACatView = (item) => {
     setCatMonitored(item);
