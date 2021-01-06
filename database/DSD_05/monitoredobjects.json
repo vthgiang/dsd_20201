@@ -1,0 +1,270 @@
+[{
+  "_id": {
+    "$oid": "5ff529520d3ec43cb401775b"
+  },
+  "monitoredZone": [],
+  "images": [],
+  "videos": [],
+  "drones": [],
+  "areaMonitored": {
+    "$oid": "5febd490eeec7500179c9baf"
+  },
+  "category": {
+    "$oid": "5feaddbe4decb80017c5ebae"
+  },
+  "code": "123",
+  "name": "abcd",
+  "type": "DE_DIEU",
+  "createdAt": {
+    "$date": "2021-01-06T03:06:58.651Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T03:06:58.651Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff53b406a02b00017f39915"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5ff2cdda1502c9001768e0bd"
+    }
+  ],
+  "images": null,
+  "videos": null,
+  "drones": null,
+  "parent": null,
+  "areaMonitored": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "category": {
+    "$oid": "5ff53aee6a02b00017f39914"
+  },
+  "code": "1",
+  "name": "Cây thông",
+  "lat": "21.005217719513677",
+  "lng": "105.81981357774353",
+  "height": 100,
+  "managementUnit": null,
+  "status": "1",
+  "type": "CHAY_RUNG",
+  "description": "",
+  "createdAt": {
+    "$date": "2021-01-06T04:23:28.339Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T04:23:28.339Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff53c676a02b00017f39917"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5ff2cdda1502c9001768e0bd"
+    }
+  ],
+  "images": null,
+  "videos": null,
+  "drones": null,
+  "parent": null,
+  "areaMonitored": {
+    "$oid": "5fe58831517d0e0017021793"
+  },
+  "category": {
+    "$oid": "5ff53aee6a02b00017f39914"
+  },
+  "code": "1",
+  "name": "Cây chanh",
+  "lat": "21.005858734531344",
+  "lng": "105.8184402867279",
+  "height": 100,
+  "managementUnit": null,
+  "status": "1",
+  "type": "CHAY_RUNG",
+  "description": "",
+  "createdAt": {
+    "$date": "2021-01-06T04:28:23.361Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T04:28:23.361Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff53e3d6a02b00017f3991a"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5fef33772024870017139e50"
+    }
+  ],
+  "images": null,
+  "videos": null,
+  "drones": null,
+  "parent": null,
+  "areaMonitored": {
+    "$oid": "5febd490eeec7500179c9baf"
+  },
+  "category": {
+    "$oid": "5ff53b646a02b00017f39916"
+  },
+  "code": "1",
+  "name": "kè đê",
+  "lat": "21.127419409418668",
+  "lng": "105.58696652681185",
+  "height": 100,
+  "managementUnit": null,
+  "status": "1",
+  "type": "DE_DIEU",
+  "description": "",
+  "createdAt": {
+    "$date": "2021-01-06T04:36:13.312Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T04:36:13.312Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff53e946a02b00017f3991b"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5fef33772024870017139e50"
+    }
+  ],
+  "images": null,
+  "videos": null,
+  "drones": null,
+  "parent": null,
+  "areaMonitored": {
+    "$oid": "5febd490eeec7500179c9baf"
+  },
+  "category": {
+    "$oid": "5ff53b646a02b00017f39916"
+  },
+  "code": "1",
+  "name": "Cột mốc 1",
+  "lat": "21.154702469346677",
+  "lng": "105.58902254004731",
+  "height": 100,
+  "managementUnit": null,
+  "status": "1",
+  "type": "DE_DIEU",
+  "description": "Cột mốc đo mực nước thì 0-2m",
+  "createdAt": {
+    "$date": "2021-01-06T04:37:40.745Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T04:37:40.745Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff53eb86a02b00017f3991c"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5fef33772024870017139e50"
+    }
+  ],
+  "images": null,
+  "videos": null,
+  "drones": null,
+  "parent": null,
+  "areaMonitored": {
+    "$oid": "5febd490eeec7500179c9baf"
+  },
+  "category": {
+    "$oid": "5ff53b646a02b00017f39916"
+  },
+  "code": "1",
+  "name": "Cột mốc 2",
+  "lat": "21.154661977845624",
+  "lng": "105.59250747177634",
+  "height": 100,
+  "managementUnit": null,
+  "status": "1",
+  "type": "DE_DIEU",
+  "description": "Cột mốc đo mực nước 2-3m",
+  "createdAt": {
+    "$date": "2021-01-06T04:38:16.569Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T04:38:16.569Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff53fd96a02b00017f3991e"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5fcf7984a122370017d3ae29"
+    }
+  ],
+  "images": null,
+  "videos": null,
+  "drones": null,
+  "parent": null,
+  "areaMonitored": {
+    "$oid": "5fcf7744a122370017d3ae15"
+  },
+  "category": {
+    "$oid": "5ff529c20d3ec43cb401775c"
+  },
+  "code": "1",
+  "name": "Trụ sứ 1",
+  "lat": "21.007539227121203",
+  "lng": "105.72037765809634",
+  "height": 80,
+  "managementUnit": null,
+  "status": "1",
+  "type": "LUOI_DIEN",
+  "description": "Trụ sứ phía tây của cột điện cao áp số 2",
+  "createdAt": {
+    "$date": "2021-01-06T04:43:05.299Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T04:43:05.299Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff540086a02b00017f3991f"
+  },
+  "monitoredZone": [
+    {
+      "$oid": "5fcf7984a122370017d3ae29"
+    }
+  ],
+  "images": null,
+  "videos": null,
+  "drones": null,
+  "parent": null,
+  "areaMonitored": {
+    "$oid": "5fcf7744a122370017d3ae15"
+  },
+  "category": {
+    "$oid": "5ff529c20d3ec43cb401775c"
+  },
+  "code": "1",
+  "name": "Trụ sứ 2",
+  "lat": "21.003916183720435",
+  "lng": "105.7221875996606",
+  "height": 100,
+  "managementUnit": null,
+  "status": "1",
+  "type": "LUOI_DIEN",
+  "description": "Trụ sứ phía bắc cột điện số 2",
+  "createdAt": {
+    "$date": "2021-01-06T04:43:52.893Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T04:43:52.893Z"
+  },
+  "__v": 0
+}]
