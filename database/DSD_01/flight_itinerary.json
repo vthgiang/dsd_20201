@@ -1,0 +1,4344 @@
+[{
+  "_id": {
+    "$oid": "5fd48608a51da874403aafec"
+  },
+  "idCampaign": "5fd486060edc06777fca03c4",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8afeae48098869a2d0",
+      "listIdFlightPath": [
+        "5fcf59a20822b8321cb1d1f7",
+        "5fce4e8afeae48098869a2d0"
+      ]
+    },
+    {
+      "idDrone": "5fce4e8afeae48098869a2ce",
+      "listIdFlightPath": [
+        "5fcf59a20822b8321cb1d1f7"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fd48cc1a51da874403aafed"
+  },
+  "idCampaign": "5fd48cc03b30da00173fd3ee",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fc676825bda1750f812b324pathnhom11"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-07T09:25:00.276Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-28T09:25:00.276Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fd6de22a51da874403aafee"
+  },
+  "idCampaign": "5fd6de21bf36180017baae99",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbc93a4b113564759f81c22",
+      "listIdFlightPath": [
+        "5fc676825bda1750f812b324",
+        "string",
+        "5fcedb95f2d23319151aa32e"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 5",
+  "task": 3,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-09T03:37:00.128Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T03:37:00.128Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fd6deada51da874403aafef"
+  },
+  "idCampaign": "5fd6deacbf36180017baae9a",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "string",
+        "5fc676825bda1750f812b324pathnhom11",
+        "5fc31fc16fe2d8632471eca7"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 4,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-11-30T17:41:00.749Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-01T03:39:33.396Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fd6def9a51da874403aaff0"
+  },
+  "idCampaign": "5fd6def7bf36180017baae9b",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8afeae48098869a2ce",
+      "listIdFlightPath": [
+        "5fc676825bda1750f812b324",
+        "5fcedb95f2d23319151aa32e"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-11-30T17:00:10.785Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-01T03:41:06.185Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fd739710edb664c50eb567f"
+  },
+  "idCampaign": "5fd7396f083f38001720956e",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fc676825bda1750f812b324"
+      ]
+    }
+  ],
+  "name": "Đợt giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-16T10:07:01.508Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T10:07:01.508Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fd73a3a0edb664c50eb5680"
+  },
+  "idCampaign": "5fd73a38083f38001720956f",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8afeae48098869a2ce",
+      "listIdFlightPath": [
+        "5fc676825bda1750f812b324"
+      ]
+    },
+    {
+      "idDrone": "5fce4e8afeae48098869a2d0",
+      "listIdFlightPath": [
+        "5fc676825bda1750f812b324"
+      ]
+    }
+  ],
+  "name": "Đợt giám quý 2",
+  "task": 3,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-07T10:10:08.287Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-25T10:10:08.287Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fd8e59ab94e272f3f9e9001"
+  },
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c66",
+      "listIdFlightPath": [
+        "5fc676825bda1750f812b324"
+      ]
+    }
+  ],
+  "name": "Giám sát sông hồng",
+  "task": 2,
+  "timeStart": {
+    "$date": "2020-11-15T16:26:29.105Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-31T16:26:29.105Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fd8f030b94e272f3f9e9002"
+  },
+  "idCampaign": "5fd8f02f0945890017212b8b",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fc676825bda1750f812b324",
+        "5fc676825bda1750f812b324pathnhom11"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-08T17:19:02.546Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-08T19:00:00.708Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fd95568c0d85a2b08aff2c6"
+  },
+  "idCampaign": "5fd95567cb89980017b61435",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8bfeae48098869a2d1",
+      "listIdFlightPath": [
+        "5fc676825bda1750f812b324pathnhom11",
+        "5fcedb95f2d23319151aa32e"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-01T00:30:43.782Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-11T00:30:43.782Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fd956fec0d85a2b08aff2c7"
+  },
+  "idCampaign": "5fd956fdcb89980017b61436",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8bfeae48098869a2d2",
+      "listIdFlightPath": [
+        "5fcedd09fb7e042bf8458e26"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 4",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "timeStart": {
+    "$date": "2020-12-16T17:42:00.668Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-17T00:37:29.442Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fd957a8c0d85a2b08aff2c8"
+  },
+  "idCampaign": "5fd957a6cb89980017b61437",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4eaffeae48098869a2d7",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 3,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-04T00:40:14.433Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T00:40:14.433Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe08e5230223238de7bd170"
+  },
+  "idCampaign": "5fe08e51ac41ad00178233b5",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad604e0fc003db237c64",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-01T11:58:26.045Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-12T11:58:26.045Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe0ac1430223238de7bd171"
+  },
+  "idCampaign": "5fe0ac13e7983d0017237fde",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad604e0fc003db237c64",
+      "listIdFlightPath": [
+        "5fd825d2b94e272f3f9e8ffa"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-11-30T14:06:39.181Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T14:06:39.181Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe0c56e30223238de7bd172"
+  },
+  "idCampaign": "5fe0c56de1b04800179c280a",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad604e0fc003db237c64",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9",
+        "5fd825d2b94e272f3f9e8ffa"
+      ]
+    }
+  ],
+  "name": "giám sát sự cố",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-09T15:53:47.641Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-26T15:53:47.641Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe195b548178829f717e4c6"
+  },
+  "idCampaign": "5fe195b4a00d22001742938c",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8bfeae48098869a2d2",
+      "listIdFlightPath": [
+        "5fd825d2b94e272f3f9e8ffa"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 3,
+  "idSupervisedArea": "5fcf784aa122370017d3ae1a",
+  "timeStart": {
+    "$date": "2020-12-04T06:41:07.210Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-12T06:41:07.210Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe1960048178829f717e4c7"
+  },
+  "idCampaign": "5fe195ffa00d22001742938d",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 4",
+  "task": 3,
+  "idSupervisedArea": "5fcf784aa122370017d3ae1a",
+  "timeStart": {
+    "$date": "2020-12-01T06:44:40.200Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-02T06:44:40.200Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe1967148178829f717e4c8"
+  },
+  "idCampaign": "5fe19670a00d22001742938e",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9",
+        "5fd825d2b94e272f3f9e8ffa"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 4",
+  "task": 3,
+  "idSupervisedArea": "5fcf784aa122370017d3ae1a",
+  "timeStart": {
+    "$date": "2020-12-29T06:46:11.921Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-30T06:46:11.921Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe207c788fdc948f4b2b957"
+  },
+  "idCampaign": "5fe207c6dc12e8001786e2f3",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8bfeae48098869a2d2",
+      "listIdFlightPath": [
+        "5fd825d2b94e272f3f9e8ffa",
+        "5fd82582b94e272f3f9e8ff9"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-01T14:47:14.153Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-03T14:47:14.153Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2163588fdc948f4b2b958"
+  },
+  "idCampaign": "5fe21634dc12e8001786e2f4",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4eaefeae48098869a2d3",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 4",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-01T15:51:10.367Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-17T15:51:10.367Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe225a788fdc948f4b2b959"
+  },
+  "idCampaign": "5fe225a6dc12e8001786e2f7",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4eaffeae48098869a2d5",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "timeStart": {
+    "$date": "2020-12-01T16:56:43.277Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-02T16:56:43.277Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe225fc88fdc948f4b2b95a"
+  },
+  "idCampaign": "5fe225fbdc12e8001786e2f8",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fcfa99c6ab3ed494026b65e",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-01T16:58:23.859Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-10T16:58:23.859Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2263488fdc948f4b2b95b"
+  },
+  "idCampaign": "5fe22633dc12e8001786e2f9",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9",
+        "5fd82628b94e272f3f9e8ffb",
+        "5fd825d2b94e272f3f9e8ffa"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 4",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "timeStart": {
+    "$date": "2020-12-02T16:59:27.680Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T16:59:27.680Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2263f88fdc948f4b2b95c"
+  },
+  "idCampaign": "5fe2263fdc12e8001786e2fa",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fcfa99c6ab3ed494026b65e",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-01T16:58:23.859Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-10T16:58:23.859Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2269c88fdc948f4b2b95d"
+  },
+  "idCampaign": "5fe2269bdc12e8001786e2fb",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fcfa99c6ab3ed494026b65e",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-01T16:58:23.859Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-10T16:58:23.859Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe22c9d88fdc948f4b2b95e"
+  },
+  "idCampaign": "5fe22c9cdc12e8001786e2fc",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe0662430223238de7bd16e",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát rừng phòng hộ tuần 1 tháng 12",
+  "task": 4,
+  "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+  "timeStart": {
+    "$date": "2020-11-30T17:25:50.849Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-06T17:25:50.849Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe22d0e88fdc948f4b2b95f"
+  },
+  "idCampaign": "5fe22d0ddc12e8001786e2fd",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe0662430223238de7bd16e",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    },
+    {
+      "idDrone": "5fe06c0030223238de7bd16f",
+      "listIdFlightPath": [
+        "5fd87500b94e272f3f9e8ffc"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát rừng phòng hộ tuần 2 tháng 12",
+  "task": 4,
+  "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+  "timeStart": {
+    "$date": "2020-12-07T17:28:30.583Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-13T17:28:30.583Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe22d4688fdc948f4b2b960"
+  },
+  "idCampaign": "5fe22d45dc12e8001786e2fe",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bcc94a189f2b2676dd64",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccb4a189f2b2676dd65",
+      "listIdFlightPath": [
+        "5fe1bfeb88fdc948f4b2b956"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát rừng phòng hộ tuần 3 tháng 12",
+  "task": 4,
+  "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+  "timeStart": {
+    "$date": "2020-12-14T17:30:05.427Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-20T17:30:05.427Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe22d8288fdc948f4b2b961"
+  },
+  "idCampaign": "5fe22d81dc12e8001786e2ff",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4eaefeae48098869a2d3",
+      "listIdFlightPath": [
+        "5fd82628b94e272f3f9e8ffb",
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    },
+    {
+      "idDrone": "5fce4eaffeae48098869a2d5",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    },
+    {
+      "idDrone": "5fce4eaffeae48098869a2d7",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát rừng phòng hộ tuần 4 tháng 12",
+  "task": 4,
+  "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+  "timeStart": {
+    "$date": "2020-12-21T17:30:55.780Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-27T17:30:55.780Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2307888fdc948f4b2b962"
+  },
+  "idCampaign": "5fe230774b3fe53bdc43f607",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4eaffeae48098869a2d7",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-11-30T17:43:38.133Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-02T17:43:38.133Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe230f788fdc948f4b2b963"
+  },
+  "idCampaign": "5fe230f64b3fe53bdc43f608",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fd88d3eb94e272f3f9e8ffd",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-07T17:45:41.189Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-24T17:45:41.189Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2343088fdc948f4b2b965"
+  },
+  "idCampaign": "5fe234304b3fe53bdc43f609",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fd88d3eb94e272f3f9e8ffd",
+      "listIdFlightPath": [
+        "5fd825d2b94e272f3f9e8ffa"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-11-30T17:59:32.188Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-03T17:59:32.188Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2354e88fdc948f4b2b966"
+  },
+  "idCampaign": "5fe2354d4b3fe53bdc43f60a",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccb4a189f2b2676dd66",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-01T18:03:34.332Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-24T18:03:34.332Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe239a688fdc948f4b2b968"
+  },
+  "idCampaign": "5fe239a5dc12e8001786e300",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe06c0030223238de7bd16f",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    }
+  ],
+  "name": "ĐGS lưới điện 01/12",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-11-30T18:22:05.286Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-06T18:22:05.286Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe239c188fdc948f4b2b969"
+  },
+  "idCampaign": "5fe239c04b3fe53bdc43f60f",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe06c0030223238de7bd16f",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9",
+        "5fd825d2b94e272f3f9e8ffa",
+        "5fd82628b94e272f3f9e8ffb"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-11-30T18:22:13.768Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-03T18:22:13.768Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe239dd88fdc948f4b2b96a"
+  },
+  "idCampaign": "5fe239dcdc12e8001786e301",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd69",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd6a",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9"
+      ]
+    }
+  ],
+  "name": "ĐGS lưới điện 02/12",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-07T18:23:44.325Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-13T18:23:44.325Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe23a0d88fdc948f4b2b96b"
+  },
+  "idCampaign": "5fe23a0cdc12e8001786e302",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe0662430223238de7bd16e",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    }
+  ],
+  "name": "ĐGS lưới điện 03/12",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-14T18:24:39.027Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-20T18:24:39.027Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe23a4688fdc948f4b2b96c"
+  },
+  "idCampaign": "5fe23a46dc12e8001786e303",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8bfeae48098869a2d2",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    }
+  ],
+  "name": "ĐGS lưới điện 04/12",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-21T18:25:32.993Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-27T18:25:32.993Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe23caa88fdc948f4b2b96d"
+  },
+  "idCampaign": "5fe23ca941c45e00177f9e5e",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4eaffeae48098869a2d5",
+      "listIdFlightPath": [
+        "5fd82628b94e272f3f9e8ffb",
+        "5fd87500b94e272f3f9e8ffc"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-08T18:35:35.535Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-11T18:35:35.535Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe23cbc88fdc948f4b2b96e"
+  },
+  "idCampaign": "5fe23cbc41c45e00177f9e5f",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4eaffeae48098869a2d5",
+      "listIdFlightPath": [
+        "5fd82628b94e272f3f9e8ffb",
+        "5fd87500b94e272f3f9e8ffc"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-08T18:35:35.535Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-11T18:35:35.535Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe23d7688fdc948f4b2b96f"
+  },
+  "idCampaign": "5fe23d7541c45e00177f9e60",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8afeae48098869a2d0",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9",
+        "5fd825d2b94e272f3f9e8ffa"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-11-30T18:39:16.726Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-01T18:39:16.726Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe23d9888fdc948f4b2b970"
+  },
+  "idCampaign": "5fe23d9741c45e00177f9e61",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8afeae48098869a2d0",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9",
+        "5fd825d2b94e272f3f9e8ffa"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-11-30T18:39:16.726Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-01T18:39:16.726Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe23e3288fdc948f4b2b971"
+  },
+  "idCampaign": "5fe23e3141c45e00177f9e62",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccb4a189f2b2676dd65",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8",
+        "5fd82582b94e272f3f9e8ff9"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-11-30T18:42:24.897Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-02T18:42:24.897Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe23e8988fdc948f4b2b972"
+  },
+  "idCampaign": "5fe23e8841c45e00177f9e63",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bcc94a189f2b2676dd64",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9",
+        "5fd825d2b94e272f3f9e8ffa"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd67",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 2,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-11-30T18:43:31.350Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-03T18:43:31.350Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe29a4988fdc948f4b2b975"
+  },
+  "idCampaign": "5fe29a48a533ec7f2bafa702",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8bfeae48098869a2d1",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    },
+    {
+      "idDrone": "5fcfa99c6ab3ed494026b65e",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    },
+    {
+      "idDrone": "5fe0662430223238de7bd16e",
+      "listIdFlightPath": [
+        "5fd824f4b94e272f3f9e8ff8"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát cháy rừng 1",
+  "task": 1,
+  "idSupervisedArea": "5fcf7892a122370017d3ae1d",
+  "timeStart": {
+    "$date": "2020-12-23T02:11:23.420Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-23T03:00:00.532Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2ab2f88fdc948f4b2b984"
+  },
+  "idCampaign": "5fe2ab2ec7ea0b2606fad73d",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8afeae48098869a2ce",
+      "listIdFlightPath": [
+        "5fe2a62d88fdc948f4b2b982"
+      ]
+    },
+    {
+      "idDrone": "5fce4e8afeae48098869a2d0",
+      "listIdFlightPath": [
+        "5fe2a62d88fdc948f4b2b982"
+      ]
+    }
+  ],
+  "name": "Giams sat cot dien bach khoa",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-29T02:26:19.216Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-31T02:26:19.216Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2ab6288fdc948f4b2b985"
+  },
+  "idCampaign": "5fe2ab61c7ea0b2606fad73e",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd68",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-01T02:25:54.396Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-09T02:25:54.396Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2abfe88fdc948f4b2b986"
+  },
+  "idCampaign": "5fe2abfdc7ea0b2606fad73f",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd69",
+      "listIdFlightPath": [
+        "5fd825d2b94e272f3f9e8ffa"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd68",
+      "listIdFlightPath": [
+        "5fd825d2b94e272f3f9e8ffa"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd67",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9"
+      ]
+    },
+    {
+      "idDrone": "5fe06c0030223238de7bd16f",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9"
+      ]
+    }
+  ],
+  "name": "sdfad",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-20T02:28:45.068Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-30T02:28:45.068Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2b6ed88fdc948f4b2b987"
+  },
+  "idCampaign": "5fe2b6ecc7ea0b2606fad740",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8afeae48098869a2ce",
+      "listIdFlightPath": [
+        "5fd825d2b94e272f3f9e8ffa",
+        "5fd82628b94e272f3f9e8ffb"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fcf4f6fa065e000176e1f86",
+  "timeStart": {
+    "$date": "2020-12-01T03:17:33.634Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-02T03:17:33.634Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2b73288fdc948f4b2b988"
+  },
+  "idCampaign": "5fe2b732c7ea0b2606fad741",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd69",
+      "listIdFlightPath": [
+        "5fd825d2b94e272f3f9e8ffa",
+        "5fd82628b94e272f3f9e8ffb"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fd8e9773853ed001729e49f",
+  "timeStart": {
+    "$date": "2020-12-01T03:18:15.807Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T03:18:15.807Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2b80188fdc948f4b2b989"
+  },
+  "idCampaign": "5fe2b800c7ea0b2606fad742",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd6a",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9",
+        "5fd82628b94e272f3f9e8ffb",
+        "5fd825d2b94e272f3f9e8ffa"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6b",
+      "listIdFlightPath": [
+        "5fd825d2b94e272f3f9e8ffa"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 4,
+  "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+  "timeStart": {
+    "$date": "2020-12-01T03:21:34.728Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-02T03:21:34.728Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2b87288fdc948f4b2b98a"
+  },
+  "idCampaign": "5fe2b871c7ea0b2606fad743",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd6a",
+      "listIdFlightPath": [
+        "5fd825d2b94e272f3f9e8ffa",
+        "5fd82628b94e272f3f9e8ffb"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 4",
+  "task": 4,
+  "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+  "timeStart": {
+    "$date": "2020-12-02T03:23:50.774Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T03:23:50.774Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2b8b388fdc948f4b2b98b"
+  },
+  "idCampaign": "5fe2b8b2c7ea0b2606fad744",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6b",
+      "listIdFlightPath": [
+        "5fd82628b94e272f3f9e8ffb"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 4,
+  "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+  "timeStart": {
+    "$date": "2020-12-19T03:24:52.969Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-26T03:24:52.969Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2b90588fdc948f4b2b98c"
+  },
+  "idCampaign": "5fe2b904c7ea0b2606fad745",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4eaffeae48098869a2d5",
+      "listIdFlightPath": [
+        "5fd82628b94e272f3f9e8ffb"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 2",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-03T03:26:13.277Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-05T03:26:13.277Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2b9b188fdc948f4b2b98d"
+  },
+  "idCampaign": "5fe2b9b0c7ea0b2606fad746",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6b",
+      "listIdFlightPath": [
+        "5fd825d2b94e272f3f9e8ffa",
+        "5fd82628b94e272f3f9e8ffb"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 4",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "timeStart": {
+    "$date": "2020-12-02T03:28:03.663Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T03:28:03.663Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2bc4e88fdc948f4b2b98e"
+  },
+  "idCampaign": "5fe2bc4dc7ea0b2606fad747",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bcc94a189f2b2676dd64",
+      "listIdFlightPath": [
+        "5fd825d2b94e272f3f9e8ffa",
+        "5fd82628b94e272f3f9e8ffb"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "timeStart": {
+    "$date": "2020-12-09T03:39:46.803Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-12T03:39:46.803Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2c11e88fdc948f4b2b98f"
+  },
+  "idCampaign": "5fe2c118c7ea0b2606fad748",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fe29d0988fdc948f4b2b97c"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-11-03T04:00:31.904Z"
+  },
+  "timeEnd": {
+    "$date": "2020-11-19T04:00:31.904Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe2ef0488fdc948f4b2b990"
+  },
+  "idCampaign": "5fe2ef0300c05800177fc880",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6c",
+      "listIdFlightPath": [
+        "5fe29d0988fdc948f4b2b97c"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-02T07:16:35.733Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T07:16:35.733Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe5aa441dce632a089ff6a6"
+  },
+  "idCampaign": "5fe5aa43a8164c2c180574e0",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6d",
+      "listIdFlightPath": [
+        "5fd82582b94e272f3f9e8ff9"
+      ]
+    }
+  ],
+  "name": "Tên đợt giám sát",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-01T08:58:03.671Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-25T08:58:03.671Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe6c0ed1dce632a089ff6a8"
+  },
+  "idCampaign": "5fe6c0eca8164c2c180574e1",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6e",
+      "listIdFlightPath": [
+        "5fe5968b1dce632a089ff6a5"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe57f67517d0e0017021790",
+  "timeStart": {
+    "$date": "2020-12-01T04:42:40.031Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-02T04:42:40.031Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe6ec781dce632a089ff6a9"
+  },
+  "idCampaign": "5fe6ec77a8164c2c180574e2",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6e",
+      "listIdFlightPath": [
+        "5fe5968b1dce632a089ff6a5"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fe57f67517d0e0017021790",
+  "timeStart": {
+    "$date": "2020-12-02T07:54:11.456Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-17T07:54:11.456Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe6fa941dce632a089ff6aa"
+  },
+  "idCampaign": "5fe6fa93a8164c2c180574e3",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bcce4a189f2b2676dd70",
+      "listIdFlightPath": [
+        "5fe5968b1dce632a089ff6a5"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fe57f67517d0e0017021790",
+  "timeStart": {
+    "$date": "2020-12-01T08:54:56.318Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-24T08:54:56.318Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe84f4d1dce632a089ff6b5"
+  },
+  "idCampaign": "5fe84f4ca8164c2c180574e5",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad734e0fc003db237c69",
+      "listIdFlightPath": [
+        "5fe84eb31dce632a089ff6b4"
+      ]
+    }
+  ],
+  "name": "Giám sát đường dây",
+  "task": 2,
+  "idSupervisedArea": "5fcf7945a122370017d3ae26",
+  "timeStart": {
+    "$date": "2020-12-26T17:00:00.359Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-30T17:00:00.359Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe8ca4def4a52482dcea502"
+  },
+  "idCampaign": "5fe8ca4ca8164c2c180574e7",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad734e0fc003db237c69",
+      "listIdFlightPath": [
+        "5fe5968b1dce632a089ff6a5"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 4",
+  "task": 1,
+  "idSupervisedArea": "5fe57f67517d0e0017021790",
+  "timeStart": {
+    "$date": "2020-12-02T17:48:41.470Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-03T17:48:41.470Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe95b0aef4a52482dcea504"
+  },
+  "idCampaign": "5fe95b09a8164c2c180574e8",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bcce4a189f2b2676dd71",
+      "listIdFlightPath": [
+        "5fe5968b1dce632a089ff6a5"
+      ]
+    }
+  ],
+  "name": "ssdsdsd",
+  "task": 1,
+  "idSupervisedArea": "5fe57f67517d0e0017021790",
+  "timeStart": {
+    "$date": "2020-12-01T04:10:13.154Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T04:10:13.154Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe9fee3ef4a52482dcea50c"
+  },
+  "idCampaign": "5fe9fee1e641c0726a57b411",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bcc94a189f2b2676dd64",
+      "listIdFlightPath": [
+        "5fe29d0988fdc948f4b2b97c",
+        "5fe9fc16ef4a52482dcea50b"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 4",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-04T15:47:36.181Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-07T15:47:36.181Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fe9ff6cef4a52482dcea50d"
+  },
+  "idCampaign": "5fe9ff6ae641c0726a57b412",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccb4a189f2b2676dd65",
+      "listIdFlightPath": [
+        "5fe9fc16ef4a52482dcea50b"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 4",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-02T15:51:12.386Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T15:51:12.386Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fea009bef4a52482dcea50f"
+  },
+  "idCampaign": "5fea009ae641c0726a57b414",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bcce4a189f2b2676dd72",
+      "listIdFlightPath": [
+        "5fe9aaa0ef4a52482dcea505"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "timeStart": {
+    "$date": "2020-12-02T15:57:34.819Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T15:57:34.819Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fea92f2ef4a52482dcea510"
+  },
+  "idCampaign": "5fea92f1e641c0726a57b415",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd73",
+      "listIdFlightPath": [
+        "5fe8a8b81dce632a089ff6f9",
+        "5fe8bdacef4a52482dcea500"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 4",
+  "task": 2,
+  "idSupervisedArea": "5fe82f09a719c60017775cb3",
+  "timeStart": {
+    "$date": "2020-12-02T02:21:44.158Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T02:21:44.158Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fea9392ef4a52482dcea511"
+  },
+  "idCampaign": "5fea9391e641c0726a57b416",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd67",
+      "listIdFlightPath": [
+        "5fe9fc16ef4a52482dcea50b"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 4",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-08T02:24:37.135Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-10T02:24:37.135Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fea94eaef4a52482dcea512"
+  },
+  "idCampaign": "5fea94e9e641c0726a57b417",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd74",
+      "listIdFlightPath": [
+        "5fe2355a88fdc948f4b2b967"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 4",
+  "task": 4,
+  "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+  "timeStart": {
+    "$date": "2020-12-03T02:30:30.467Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-05T02:30:30.467Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fea9784ef4a52482dcea532"
+  },
+  "idCampaign": "5fea9783e641c0726a57b418",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 4",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T02:41:25.067Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-05T02:41:25.067Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fea98edef4a52482dcea533"
+  },
+  "idCampaign": "5fea98ecaf17f7572579bf42",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fea9905ef4a52482dcea534"
+  },
+  "idCampaign": "5fea9904727f3a0017bbb655",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feaa93fef4a52482dcea536"
+  },
+  "idCampaign": "5feaa93ee641c0726a57b419",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fcfa99c6ab3ed494026b65e",
+      "listIdFlightPath": [
+        "5fe2355a88fdc948f4b2b967"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát tháng 12",
+  "task": 4,
+  "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+  "timeStart": {
+    "$date": "2020-12-27T03:56:37.279Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-29T03:56:37.279Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feaae4cef4a52482dcea537"
+  },
+  "idCampaign": "5feaae4be641c0726a57b41a",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bcce4a189f2b2676dd72",
+      "listIdFlightPath": [
+        "5fe29d0988fdc948f4b2b97c"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd74",
+      "listIdFlightPath": [
+        "5fe29d0988fdc948f4b2b97c"
+      ]
+    }
+  ],
+  "name": "Tên đợt giám sát",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-01T04:15:05.730Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-02T04:15:05.730Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feaaea0ef4a52482dcea538"
+  },
+  "idCampaign": "5feaae9ee641c0726a57b41b",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8bfeae48098869a2d1",
+      "listIdFlightPath": [
+        "5fe84eb31dce632a089ff6b4"
+      ]
+    },
+    {
+      "idDrone": "5fce4e8bfeae48098869a2d2",
+      "listIdFlightPath": [
+        "5fe8a8b81dce632a089ff6f9"
+      ]
+    },
+    {
+      "idDrone": "5fce4eaefeae48098869a2d3",
+      "listIdFlightPath": [
+        "5fe8bdacef4a52482dcea500"
+      ]
+    },
+    {
+      "idDrone": "5fce4eaffeae48098869a2d5",
+      "listIdFlightPath": [
+        "5fe8c557ef4a52482dcea501"
+      ]
+    }
+  ],
+  "name": " Giám sát đê sông hồng ",
+  "task": 2,
+  "idSupervisedArea": "5fe82f09a719c60017775cb3",
+  "timeStart": {
+    "$date": "2020-12-29T04:19:06.991Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-07T04:19:06.991Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feaccfeef4a52482dcea53a"
+  },
+  "idCampaign": "5feaccfde641c0726a57b421",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad734e0fc003db237c6a",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 4",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T06:00:00.174Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-03T06:00:00.174Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fead196ef4a52482dcea53b"
+  },
+  "idCampaign": "5fead195e641c0726a57b422",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad734e0fc003db237c6a",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 4",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-11-30T23:49:11.279Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-01T00:01:00.369Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fead3d6ef4a52482dcea53c"
+  },
+  "idCampaign": "5fead3d6e641c0726a57b423",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd76",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 4",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-11-30T17:58:34.484Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-02T17:58:34.484Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fead5e9ef4a52482dcea53e"
+  },
+  "idCampaign": "5fead5e8e641c0726a57b424",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bcd04a189f2b2676dd77",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T00:07:28.098Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-17T00:07:28.098Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fead68def4a52482dcea540"
+  },
+  "idCampaign": "5fead68ce641c0726a57b425",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde449a67836a9849720",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T14:10:25.392Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T14:10:25.392Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fead74fef4a52482dcea541"
+  },
+  "idCampaign": "5fead74ee641c0726a57b426",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde649a67836a9849721",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 4",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T14:13:24.420Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-17T14:13:24.420Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feadceeef4a52482dcea542"
+  },
+  "idCampaign": "5feadceee641c0726a57b427",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde649a67836a9849722",
+      "listIdFlightPath": [
+        "5fe9fc16ef4a52482dcea50b"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 4",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-01T07:37:50.010Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T07:37:50.010Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feade58ef4a52482dcea543"
+  },
+  "idCampaign": "5feade57e641c0726a57b428",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8bfeae48098869a2d2",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T14:00:00.037Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-01T14:43:42.833Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feadf3cef4a52482dcea544"
+  },
+  "idCampaign": "5feadf3be641c0726a57b429",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde649a67836a9849723",
+      "listIdFlightPath": [
+        "5fe2355a88fdc948f4b2b967"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 2",
+  "task": 4,
+  "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+  "timeStart": {
+    "$date": "2020-12-02T07:47:12.482Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-05T07:47:12.482Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feae0f2ef4a52482dcea545"
+  },
+  "idCampaign": "5feae0f1e641c0726a57b42a",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8bfeae48098869a2d2",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 4",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T14:00:00.442Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-01T14:54:24.623Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feae6b9ef4a52482dcea546"
+  },
+  "idCampaign": "5feae6b8e641c0726a57b42b",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde749a67836a9849724",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 4",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T15:19:22.175Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-10T15:00:00.247Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feae7ccef4a52482dcea547"
+  },
+  "idCampaign": "5feae7cce641c0726a57b42c",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde749a67836a9849725",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát rừng phòng hộ quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T15:23:48.850Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T15:23:48.850Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feae840ef4a52482dcea548"
+  },
+  "idCampaign": "5feae83fe641c0726a57b42d",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6b",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 4",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-08T08:26:09.588Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-10T08:26:09.588Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feae983ef4a52482dcea549"
+  },
+  "idCampaign": "5feae982e641c0726a57b42e",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde749a67836a9849726",
+      "listIdFlightPath": [
+        "5fe9fc16ef4a52482dcea50b"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-02T15:31:24.764Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T15:31:24.764Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feaebf4ef4a52482dcea54a"
+  },
+  "idCampaign": "5feaebf3e641c0726a57b42f",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde749a67836a9849727",
+      "listIdFlightPath": [
+        "5fe9fc16ef4a52482dcea50b",
+        "5fe29d0988fdc948f4b2b97c"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 4",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-02T15:41:34.007Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T15:41:34.007Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feaed49ef4a52482dcea54b"
+  },
+  "idCampaign": "5feaed48e641c0726a57b430",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde849a67836a9849728",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 4",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T08:46:51.335Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-03T08:46:51.335Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feaef72ef4a52482dcea54c"
+  },
+  "idCampaign": "5feaef71e641c0726a57b431",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad744e0fc003db237c6c",
+      "listIdFlightPath": [
+        "5fe9efe8ef4a52482dcea506"
+      ]
+    }
+  ],
+  "name": "Test",
+  "task": 1,
+  "idSupervisedArea": "5fe588d1517d0e0017021798",
+  "timeStart": {
+    "$date": "2020-12-29T08:55:41.359Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-30T08:55:41.359Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feaf123ef4a52482dcea54d"
+  },
+  "idCampaign": "5feaf121e641c0726a57b432",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad744e0fc003db237c6c",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát quý 4",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T09:04:00.708Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-17T09:04:00.708Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feb2c87ef4a52482dcea54e"
+  },
+  "idCampaign": "5feb2c8660820e41bf438b2e",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd76",
+      "listIdFlightPath": [
+        "5fe29d0988fdc948f4b2b97c"
+      ]
+    }
+  ],
+  "name": "đợt giám sát 1",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2020-12-02T13:10:14.333Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-04T13:10:14.333Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feb354def4a52482dcea54f"
+  },
+  "idCampaign": "5feb354b60820e41bf438b2f",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4eaffeae48098869a2d7",
+      "listIdFlightPath": [
+        "5fd82628b94e272f3f9e8ffb"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát SUPER ADMIN - Quốc",
+  "task": 4,
+  "idSupervisedArea": "5fe588d1517d0e0017021798",
+  "timeStart": {
+    "$date": "2020-12-29T13:54:04.301Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-31T13:54:04.301Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feb3e9bef4a52482dcea550"
+  },
+  "idCampaign": "5feb3e9960820e41bf438b31",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fe5968b1dce632a089ff6a5"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát cây trồng 29/12",
+  "task": 1,
+  "idSupervisedArea": "5fe57f67517d0e0017021790",
+  "timeStart": {
+    "$date": "2020-12-30T14:32:32.025Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-31T14:32:32.025Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feb3f77ef4a52482dcea551"
+  },
+  "idCampaign": "5feb3f7660820e41bf438b32",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad744e0fc003db237c6c",
+      "listIdFlightPath": [
+        "5fe5968b1dce632a089ff6a5"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát cháy rừng tại núi Ba Vì ngày 29",
+  "task": 1,
+  "idSupervisedArea": "5fe57f67517d0e0017021790",
+  "timeStart": {
+    "$date": "2020-12-30T14:36:42.002Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-01T14:36:42.002Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feb4a64ef4a52482dcea552"
+  },
+  "idCampaign": "5feb4a6460820e41bf438b34",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6c",
+      "listIdFlightPath": [
+        "5fe0dc2930223238de7bd173"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát sự cố đê quý 2",
+  "task": 2,
+  "idSupervisedArea": "5fcf7965a122370017d3ae27",
+  "timeStart": {
+    "$date": "2020-12-08T15:22:35.291Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-29T15:22:35.291Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feb6a4e3dcd980f14e66618"
+  },
+  "idCampaign": "5feb6a4d60820e41bf438b35",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde849a67836a9849729",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát rừng phòng hộ quý 2",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T17:39:33.400Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-03T17:39:33.400Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec0bad3dcd980f14e66623"
+  },
+  "idCampaign": "5fec0ba660820e41bf438b37",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bcc94a189f2b2676dd64",
+      "listIdFlightPath": [
+        "5fec09cf3dcd980f14e66620",
+        "5fec099a3dcd980f14e6661f"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccb4a189f2b2676dd65",
+      "listIdFlightPath": [
+        "5fec099a3dcd980f14e6661f"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccb4a189f2b2676dd66",
+      "listIdFlightPath": [
+        "5fec09cf3dcd980f14e66620"
+      ]
+    },
+    {
+      "idDrone": "5fcfa99c6ab3ed494026b65e",
+      "listIdFlightPath": [
+        "5fec099a3dcd980f14e6661f"
+      ]
+    },
+    {
+      "idDrone": "5fd88d3eb94e272f3f9e8ffd",
+      "listIdFlightPath": [
+        "5fec09cf3dcd980f14e66620"
+      ]
+    },
+    {
+      "idDrone": "5fe0662430223238de7bd16e",
+      "listIdFlightPath": [
+        "5fec099a3dcd980f14e6661f"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát Cây trông 1",
+  "task": 4,
+  "idSupervisedArea": "5fec08a6eeec7500179c9bbb",
+  "timeStart": {
+    "$date": "2020-12-29T05:08:20.647Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-31T05:08:20.647Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec2c233dcd980f14e66624"
+  },
+  "idCampaign": "5fec2c2160820e41bf438b38",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde849a67836a984972a",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát trọng điểm mùa cháy",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T07:25:04.984Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-09T07:25:04.984Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec2ebb3dcd980f14e66625"
+  },
+  "idCampaign": "5fec2eba60820e41bf438b39",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde849a67836a984972b",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát trọng điểm mùa cháy",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T07:38:56.471Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-17T07:38:56.471Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec2fb13dcd980f14e66626"
+  },
+  "idCampaign": "5fec2faf60820e41bf438b3a",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde949a67836a984972c",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát trọng điểm mùa cháy 2",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T07:42:58.942Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-05T07:42:58.942Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec30523dcd980f14e66627"
+  },
+  "idCampaign": "5fec305060820e41bf438b3b",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde949a67836a984972d",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát trọng điểm mùa cháy 2",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T07:45:50.662Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-17T07:45:50.662Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec30e23dcd980f14e66628"
+  },
+  "idCampaign": "5fec30e060820e41bf438b3c",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde949a67836a984972e",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát trọng điểm mùa cháy 2",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T07:48:03.500Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-10T07:48:03.500Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec43853dcd980f14e66629"
+  },
+  "idCampaign": "5fec4384946f581d26847cdd",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec43cb3dcd980f14e6662a"
+  },
+  "idCampaign": "5fec43cacc58251d7d014237",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec43f03dcd980f14e6662b"
+  },
+  "idCampaign": "5fec43ef85996d1dbad92a2f",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec44003dcd980f14e6662c"
+  },
+  "idCampaign": "5fec43fe0283461de69a9ebf",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec44523dcd980f14e6662d"
+  },
+  "idCampaign": "5fec44515ae0af1e19f1ed96",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec44cf3dcd980f14e6662e"
+  },
+  "idCampaign": "5fec44cfc53e341e70d7ddbb",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec50bf3dcd980f14e6662f"
+  },
+  "idCampaign": "5fec50be265432517f6bf5d3",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bde949a67836a984972f",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "ĐGS 30/12",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T10:03:53.640Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-05T10:03:53.640Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec5c743dcd980f14e66630"
+  },
+  "idCampaign": "5fec5c733b8b186654a0a024",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bdea49a67836a9849731",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát logging",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T10:54:09.920Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-31T10:54:09.920Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec5dab3dcd980f14e66631"
+  },
+  "idCampaign": "5fec5daa5c4c1767fcc73672",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bdea49a67836a9849733",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "đasa",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T10:59:13.590Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-30T10:59:13.590Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec5e2d3dcd980f14e66632"
+  },
+  "idCampaign": "5fec5e2c5c4c1767fcc73673",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bdeb49a67836a9849734",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "delete",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T11:01:34.297Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-10T11:01:34.297Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec5ea33dcd980f14e66633"
+  },
+  "idCampaign": "5fec5ea260820e41bf438b3d",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bcce4a189f2b2676dd71",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát trọng điểm mùa cháy 2",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-08T11:03:25.700Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-17T11:03:25.700Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec5f553dcd980f14e66634"
+  },
+  "idCampaign": "5fec5f5460820e41bf438b3e",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bcce4a189f2b2676dd72",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát trọng điểm mùa cháy",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-08T11:06:07.518Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-17T11:06:07.518Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec608a3dcd980f14e66635"
+  },
+  "idCampaign": "5fec6089e40aa4248fc60252",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec61243dcd980f14e66636"
+  },
+  "idCampaign": "5fec612345f781255e1b8b88",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec616b3dcd980f14e66637"
+  },
+  "idCampaign": "5fec616b937783259008274c",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec61883dcd980f14e66638"
+  },
+  "idCampaign": "5fec6187bf3a3425b7de5bc4",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec62103dcd980f14e66639"
+  },
+  "idCampaign": "5fec6210bf3a3425b7de5bc5",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec626d3dcd980f14e6663a"
+  },
+  "idCampaign": "5fec626c23145125f8a3a957",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec63f33dcd980f14e6663b"
+  },
+  "idCampaign": "5fec63f223145125f8a3a958",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec65ad3dcd980f14e6663c"
+  },
+  "idCampaign": "5fec65ab605d5f0017bec93c",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd73",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "ĐGS lưới điện 01/12",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-08T11:33:11.697Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-17T11:33:11.697Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec660d3dcd980f14e6663d"
+  },
+  "idCampaign": "5fec660d0959fd3180d7971b",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec66fa3dcd980f14e6663e"
+  },
+  "idCampaign": "5fec66f9605d5f0017bec93d",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bdeb49a67836a9849735",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát rừng phòng hộ tuần 1 tháng 12",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T11:38:56.980Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-10T11:38:56.980Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec7d0c3dcd980f14e6663f"
+  },
+  "idCampaign": "5fec7d0b0b147526cea8b70e",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát trọng điểm mùa cháy 2020",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-30T13:14:53.112Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-30T13:16:04.036Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec7f9a3dcd980f14e66640"
+  },
+  "idCampaign": "5fec7f990b147526cea8b70f",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fe9aaa0ef4a52482dcea505"
+      ]
+    }
+  ],
+  "name": "asdf",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "timeStart": {
+    "$date": "2020-12-30T13:23:38.180Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-30T13:26:00.111Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec800b3dcd980f14e66641"
+  },
+  "idCampaign": "5fec800a0b147526cea8b710",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fe9aaa0ef4a52482dcea505"
+      ]
+    }
+  ],
+  "name": "asdf",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "timeStart": {
+    "$date": "2020-12-30T13:23:38.180Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-30T13:26:00.111Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec80af3dcd980f14e66642"
+  },
+  "idCampaign": "5fec80ad0b147526cea8b711",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát trọng điểm mùa cháy 2012",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-30T13:28:17.328Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-30T13:30:17.328Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec81d93dcd980f14e66644"
+  },
+  "idCampaign": "5fec81d79023da3a9ad595fb",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fe9aaa0ef4a52482dcea505"
+      ]
+    }
+  ],
+  "name": "ethj",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "timeStart": {
+    "$date": "2020-12-30T13:33:28.597Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-30T13:36:28.597Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec82fa3dcd980f14e66645"
+  },
+  "idCampaign": "5fec82f99023da3a9ad595fc",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fe9aaa0ef4a52482dcea505"
+      ]
+    }
+  ],
+  "name": "asdf33333",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "timeStart": {
+    "$date": "2020-12-30T13:40:05.843Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-30T13:42:05.843Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec84d83dcd980f14e66646"
+  },
+  "idCampaign": "5fec84d7dec1ca453544b588",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fe9aaa0ef4a52482dcea505"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 17",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "timeStart": {
+    "$date": "2020-12-30T13:48:13.701Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-30T13:48:13.701Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fec84d93dcd980f14e66647"
+  },
+  "idCampaign": "5fec84d8dec1ca453544b589",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd6a",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát trọng điểm mùa cháy 2020",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-29T17:47:00.152Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-30T13:48:15.548Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5feca6733dcd980f14e66649"
+  },
+  "idCampaign": "5feca67222f52780d2ef859f",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bdeb49a67836a9849736",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "ĐGS Test",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T16:09:54.101Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-30T16:09:54.101Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fed39833dcd980f14e6664a"
+  },
+  "idCampaign": "5fed398352c187a5a951d982",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4e8afeae48098869a2ce",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "ĐGS Tesss",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-31T02:37:20.962Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-02T02:37:20.962Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fed3a153dcd980f14e6664b"
+  },
+  "idCampaign": "5fed3a1352c187a5a951d983",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bdeb49a67836a9849737",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    },
+    {
+      "idDrone": "5fe1bde849a67836a9849729",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "ĐGS Phúc",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-04T02:39:19.108Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-31T02:39:19.108Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fed3aa73dcd980f14e6664c"
+  },
+  "idCampaign": "5fed3aa652c187a5a951d984",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bdeb49a67836a9849737",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    },
+    {
+      "idDrone": "5fe1bde849a67836a9849729",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "ĐGS Phúc 2",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-04T02:39:19.108Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-31T02:39:19.108Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fed3bf53dcd980f14e6664d"
+  },
+  "idCampaign": "5fed3bf323b8d8a6bf2429db",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bdeb49a67836a9849737",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    },
+    {
+      "idDrone": "5fe1bde849a67836a9849729",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "ĐGS Phúc 2",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-04T02:39:19.108Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-31T02:39:19.108Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fed3c953dcd980f14e6664e"
+  },
+  "idCampaign": "5fed3c933e9128a745b875b7",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bdeb49a67836a9849737",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    },
+    {
+      "idDrone": "5fe1bde849a67836a9849729",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "ĐGS Phúc 2",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-04T02:39:19.108Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-31T02:39:19.108Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fed40883dcd980f14e6664f"
+  },
+  "idCampaign": "5fed40860a861f4379294885",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bdeb49a67836a9849737",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    },
+    {
+      "idDrone": "5fe1bde849a67836a9849729",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "ĐGS Test 31/12",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-04T02:39:19.108Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-31T02:39:19.108Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fed90d03dcd980f14e66650"
+  },
+  "idCampaign": "5fed90cf0a861f4379294888",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bdeb49a67836a9849737",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát trọng điểm mùa cháy 2020",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T08:49:40.943Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-03T08:49:40.943Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fed92db3dcd980f14e66651"
+  },
+  "idCampaign": "5fed92da0a861f4379294889",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bdec49a67836a9849738",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "ĐGS Superadmin",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-01T08:58:37.399Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-05T08:58:37.399Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5fed9c0c3dcd980f14e66652"
+  },
+  "idCampaign": "5fed9c0b0a861f437929488a",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd74",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát trọng điểm mùa cháy 2020",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-08T09:37:46.456Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-16T09:37:46.456Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff043275dfc675979b00f6b"
+  },
+  "idCampaign": "5ff043260a861f437929488b",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fe29d0988fdc948f4b2b97c"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát cột điện thôn ",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2021-01-05T09:55:03.852Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-09T09:55:03.852Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff089355dfc675979b00f6d"
+  },
+  "idCampaign": "5ff089344b1c937b00ec1fba",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fe8a8b81dce632a089ff6f9"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 4",
+  "task": 2,
+  "idSupervisedArea": "5fe82f09a719c60017775cb3",
+  "timeStart": {
+    "$date": "2021-01-02T14:50:46.956Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-02T14:56:00.224Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff08c765dfc675979b00f6e"
+  },
+  "idCampaign": "5ff08c754b1c937b00ec1fbb",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fe9fc16ef4a52482dcea50b"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát chim Phúc",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2021-01-02T15:06:32.217Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-02T15:10:32.217Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff0904d5dfc675979b00f6f"
+  },
+  "idCampaign": "5ff0904c4b1c937b00ec1fbc",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bdeb49a67836a9849737",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    },
+    {
+      "idDrone": "5fe1bde849a67836a9849729",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "ĐGS Test 2/1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-04T02:39:19.108Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-31T02:39:19.108Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff11b9a5dfc675979b00f70"
+  },
+  "idCampaign": "5ff11b9998a3520c15a2efa3",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd75",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff11bd35dfc675979b00f71"
+  },
+  "idCampaign": "5ff11bd23f00fdfa1872138f",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6b",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Duy 123",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-27T01:19:38.295Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-31T01:19:38.295Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff11de35dfc675979b00f72"
+  },
+  "idCampaign": "5ff11de24b1c937b00ec1fbd",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6d",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Test ghi log",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-27T01:28:14.482Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-31T01:28:14.482Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff19ef3b30ae5404d6c3a4e"
+  },
+  "idCampaign": "5ff19ef139dba5302ecb13ec",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad744e0fc003db237c6c",
+      "listIdFlightPath": [
+        "5feb4b3eef4a52482dcea553"
+      ]
+    },
+    {
+      "idDrone": "5fce4e8afeae48098869a2ce",
+      "listIdFlightPath": [
+        "5fe9aaa0ef4a52482dcea505"
+      ]
+    },
+    {
+      "idDrone": "5fce4e8afeae48098869a2d0",
+      "listIdFlightPath": [
+        "5ff18b955dfc675979b00f74"
+      ]
+    }
+  ],
+  "name": " Giám sát đê sông hồng ",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "timeStart": {
+    "$date": "2021-01-03T10:36:46.003Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-08T10:36:46.003Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff1a2e3b30ae5404d6c3a4f"
+  },
+  "idCampaign": "5ff1a2e139dba5302ecb13ed",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad744e0fc003db237c6c",
+      "listIdFlightPath": [
+        "5feb4b3eef4a52482dcea553"
+      ]
+    },
+    {
+      "idDrone": "5fce4e8afeae48098869a2ce",
+      "listIdFlightPath": [
+        "5fe9aaa0ef4a52482dcea505"
+      ]
+    },
+    {
+      "idDrone": "5fce4e8afeae48098869a2d0",
+      "listIdFlightPath": [
+        "5ff18b955dfc675979b00f74"
+      ]
+    }
+  ],
+  "name": " Giám sát đê sông hồng ",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "timeStart": {
+    "$date": "2021-01-03T10:36:46.003Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-08T10:36:46.003Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff1a3e6b30ae5404d6c3a51"
+  },
+  "idCampaign": "5ff1a3e339dba5302ecb13ef",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fce4eaffeae48098869a2d7",
+      "listIdFlightPath": [
+        "5fe9aaa0ef4a52482dcea505"
+      ]
+    },
+    {
+      "idDrone": "5fcfa99c6ab3ed494026b65e",
+      "listIdFlightPath": [
+        "5feb4b3eef4a52482dcea553"
+      ]
+    },
+    {
+      "idDrone": "5fd88d3eb94e272f3f9e8ffd",
+      "listIdFlightPath": [
+        "5fe9aaa0ef4a52482dcea505"
+      ]
+    },
+    {
+      "idDrone": "5fe0662430223238de7bd16e",
+      "listIdFlightPath": [
+        "5feb4b3eef4a52482dcea553"
+      ]
+    },
+    {
+      "idDrone": "5fe06c0030223238de7bd16f",
+      "listIdFlightPath": [
+        "5feb4b3eef4a52482dcea553"
+      ]
+    }
+  ],
+  "name": " Giám sát đê sông tam kì",
+  "task": 2,
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "timeStart": {
+    "$date": "2021-01-03T10:57:18.961Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-09T10:57:18.961Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff1a44db30ae5404d6c3a52"
+  },
+  "idCampaign": "5ff1a44c39dba5302ecb13f0",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad744e0fc003db237c6c",
+      "listIdFlightPath": [
+        "5fe29d0988fdc948f4b2b97c"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 3",
+  "task": 3,
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "timeStart": {
+    "$date": "2021-01-08T11:01:42.411Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-09T11:01:42.411Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff1a52bb30ae5404d6c3a53"
+  },
+  "idCampaign": "5ff1a52839dba5302ecb13f1",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bcc94a189f2b2676dd64",
+      "listIdFlightPath": [
+        "5fe84eb31dce632a089ff6b4",
+        "5fe8a8b81dce632a089ff6f9"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccb4a189f2b2676dd65",
+      "listIdFlightPath": [
+        "5fe8c557ef4a52482dcea501",
+        "5fe8a8b81dce632a089ff6f9"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccb4a189f2b2676dd66",
+      "listIdFlightPath": [
+        "5fe84eb31dce632a089ff6b4"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd67",
+      "listIdFlightPath": [
+        "5fe8a8b81dce632a089ff6f9"
+      ]
+    }
+  ],
+  "name": " Giám sát đê sông tam kì",
+  "task": 2,
+  "idSupervisedArea": "5fe82f09a719c60017775cb3",
+  "timeStart": {
+    "$date": "2021-01-03T11:04:30.700Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-08T11:04:30.700Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff1c232f27789452dbd4cca"
+  },
+  "idCampaign": "5ff1c23039dba5302ecb13f3",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd69",
+      "listIdFlightPath": [
+        "5fe2355a88fdc948f4b2b967"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd6a",
+      "listIdFlightPath": [
+        "5fe2355a88fdc948f4b2b967"
+      ]
+    }
+  ],
+  "name": "Giám sát cây trồng thềm lục địa",
+  "task": 4,
+  "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+  "timeStart": {
+    "$date": "2021-01-02T13:08:55.758Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-06T13:08:55.758Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff1c298f27789452dbd4ccb"
+  },
+  "idCampaign": "5ff1c29739dba5302ecb13f4",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "ĐGS 20h11",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2021-01-01T13:11:08.545Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-01T14:00:00.989Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff1ca95f27789452dbd4ccc"
+  },
+  "idCampaign": "5ff1ca935edf375e20947ac0",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd68",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6b",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff1d4b2f27789452dbd4ccf"
+  },
+  "idCampaign": "5ff1d4b09462c20017cbc02c",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd68",
+      "listIdFlightPath": [
+        "5fe2355a88fdc948f4b2b967"
+      ]
+    }
+  ],
+  "name": "Giám sát cây",
+  "task": 4,
+  "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+  "timeStart": {
+    "$date": "2021-01-02T14:28:21.240Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-03T14:30:21.240Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff1d677f27789452dbd4cd0"
+  },
+  "idCampaign": "5ff1d67525c01472557de566",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd68",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6b",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám giám quý 1",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2020-12-02T17:30:14.770Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-19T17:30:14.770Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff1e989f27789452dbd4cd8"
+  },
+  "idCampaign": "5ff1e98784ce9a6f9d1ee4de",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6b",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6c",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Giám sát cháy rừng Amazon",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2021-01-01T15:56:32.442Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-03T15:59:32.442Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff26f04f27789452dbd4cdb"
+  },
+  "idCampaign": "5ff26f0384ce9a6f9d1ee4e0",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fbdad624e0fc003db237c67nhom11",
+      "listIdFlightPath": [
+        "5fe0dc2930223238de7bd173"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát tháng 12",
+  "task": 2,
+  "idSupervisedArea": "5fcf7965a122370017d3ae27",
+  "timeStart": {
+    "$date": "2021-01-04T01:26:08.070Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-05T01:26:08.070Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff27b8cf27789452dbd4cdd"
+  },
+  "idCampaign": "5ff27b8b84ce9a6f9d1ee4e1",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6d",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Giám sát rừng cao su Thanh Miện",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2021-01-01T02:20:17.928Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-04T03:20:17.928Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff29efff27789452dbd4cde"
+  },
+  "idCampaign": "5ff29efd84ce9a6f9d1ee4e2",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6e",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    },
+    {
+      "idDrone": "5fe1bcce4a189f2b2676dd70",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Giám sát cháy rừng thông",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2021-01-03T04:50:12.920Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-04T04:55:12.920Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff2a6caf27789452dbd4ce1"
+  },
+  "idCampaign": "5ff2a6c884ce9a6f9d1ee4e3",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccc4a189f2b2676dd68",
+      "listIdFlightPath": [
+        "5ff2a60ef27789452dbd4ce0"
+      ]
+    },
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6b",
+      "listIdFlightPath": [
+        "5ff2a60ef27789452dbd4ce0"
+      ]
+    }
+  ],
+  "name": " Giám sát đê sông hồng 2021",
+  "task": 2,
+  "idSupervisedArea": "5ff293f21502c9001768e0ac",
+  "timeStart": {
+    "$date": "2021-01-04T05:22:45.633Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-08T05:22:45.633Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff2c6eef27789452dbd4ce6"
+  },
+  "idCampaign": "5ff2c6ed84ce9a6f9d1ee4e5",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bcce4a189f2b2676dd71",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát cháy rừng Cúc Phương",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2021-01-01T07:40:58.559Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-04T07:44:58.559Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff2caa5f27789452dbd4ce7"
+  },
+  "idCampaign": "5ff2caa484ce9a6f9d1ee4e6",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bcce4a189f2b2676dd72",
+      "listIdFlightPath": [
+        "5fd87500b94e272f3f9e8ffc"
+      ]
+    }
+  ],
+  "name": "Đợt giám sát kè đê sông Hồng khu vực Minh Khai",
+  "task": 2,
+  "idSupervisedArea": "5fcf7945a122370017d3ae26",
+  "timeStart": {
+    "$date": "2021-01-03T07:56:53.461Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-16T07:56:53.461Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff2ec97f27789452dbd4cea"
+  },
+  "idCampaign": "5ff2ec9684ce9a6f9d1ee4e7",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd73",
+      "listIdFlightPath": [
+        "5fea9725ef4a52482dcea531"
+      ]
+    }
+  ],
+  "name": "Giám sát cháy rừng thông",
+  "task": 1,
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "timeStart": {
+    "$date": "2021-01-03T10:21:30.036Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-04T10:26:30.036Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff49f1bf27789452dbd4cf4"
+  },
+  "idCampaign": "5ff49f1984ce9a6f9d1ee4e9",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6c",
+      "listIdFlightPath": [
+        "5ff1e088f27789452dbd4cd5",
+        "5ff1dafaf27789452dbd4cd4"
+      ]
+    }
+  ],
+  "name": "dot giam sat 1",
+  "task": 1,
+  "idSupervisedArea": "5fe57e8a517d0e001702178b",
+  "timeStart": {
+    "$date": "2021-01-05T17:15:59.782Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-06T17:15:59.782Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff4a498f27789452dbd4cf5"
+  },
+  "idCampaign": "5ff4a49684ce9a6f9d1ee4ea",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccd4a189f2b2676dd6c",
+      "listIdFlightPath": [
+        "5ff1e088f27789452dbd4cd5",
+        "5ff1dafaf27789452dbd4cd4",
+        "5ff1e105f27789452dbd4cd6"
+      ]
+    }
+  ],
+  "name": "dot giam sat 2",
+  "task": 1,
+  "idSupervisedArea": "5fe57e8a517d0e001702178b",
+  "timeStart": {
+    "$date": "2021-01-03T17:39:21.290Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-04T17:39:21.290Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+},{
+  "_id": {
+    "$oid": "5ff518a0f27789452dbd4cf7"
+  },
+  "idCampaign": "5ff5189e84ce9a6f9d1ee4eb",
+  "linkDronePaths": [
+    {
+      "idDrone": "5fe1bccf4a189f2b2676dd74",
+      "listIdFlightPath": [
+        "5ff51843f27789452dbd4cf6"
+      ]
+    }
+  ],
+  "name": "đợt 1 6/1",
+  "task": 1,
+  "idSupervisedArea": "5ff2cdda1502c9001768e0bd",
+  "timeStart": {
+    "$date": "2021-01-04T01:55:03.663Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-14T01:55:03.663Z"
+  },
+  "_class": "com.skyrone.drone.demo.model.FlightItinerary"
+}]

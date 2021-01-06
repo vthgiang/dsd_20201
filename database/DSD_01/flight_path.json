@@ -1,0 +1,2687 @@
+[{
+  "_id": {
+    "$oid": "5fd82582b94e272f3f9e8ff9"
+  },
+  "name": "Lăng Bác",
+  "idSupervisedArea": "5fcf79eda122370017d3ae2b",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.037137985229492,
+      "locationLng": 105.81497192382812,
+      "timeStop": 4,
+      "timeCome": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.028486251831055,
+      "locationLng": 105.81505584716797,
+      "timeStop": 3,
+      "timeCome": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.028806686401367,
+      "locationLng": 105.82437133789062,
+      "timeStop": 3,
+      "timeCome": 6,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.03341293334961,
+      "locationLng": 105.81930541992188,
+      "timeStop": 4,
+      "timeCome": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.037057876586914,
+      "locationLng": 105.82476043701172,
+      "timeStop": 2,
+      "timeCome": 6,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fd825d2b94e272f3f9e8ffa"
+  },
+  "name": "Hồ Tây",
+  "idSupervisedArea": "5fd340adfb276d0017ec7aea",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.041397094726562,
+      "locationLng": 105.81290435791016,
+      "timeStop": 3,
+      "timeCome": 6,
+      "idSupervisedObject": "",
+      "flightHeight": 12,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.042678833007812,
+      "locationLng": 105.81685638427734,
+      "timeStop": 3,
+      "timeCome": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 12,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.041797637939453,
+      "locationLng": 105.82101440429688,
+      "timeStop": 1,
+      "timeCome": 3,
+      "idSupervisedObject": "",
+      "flightHeight": 12,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.04275894165039,
+      "locationLng": 105.82444763183594,
+      "timeStop": 4,
+      "timeCome": 6,
+      "idSupervisedObject": "",
+      "flightHeight": 12,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.042158126831055,
+      "locationLng": 105.82707214355469,
+      "timeStop": 4,
+      "timeCome": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 12,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fd82628b94e272f3f9e8ffb"
+  },
+  "name": "Ven sông Hồng",
+  "idSupervisedArea": "5fcf7867a122370017d3ae1c",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 20.99848175048828,
+      "locationLng": 105.86917114257812,
+      "timeStop": 3,
+      "timeCome": 8,
+      "idSupervisedObject": "5fcf868be5a52d0017f41566",
+      "flightHeight": 120,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.003807067871094,
+      "locationLng": 105.87352752685547,
+      "timeStop": 2,
+      "timeCome": 3,
+      "idSupervisedObject": "5fcf850fe5a52d0017f41565",
+      "flightHeight": 120,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.01119613647461,
+      "locationLng": 105.8680191040039,
+      "timeStop": 1,
+      "timeCome": 3,
+      "idSupervisedObject": "5fcf850fe5a52d0017f41565",
+      "flightHeight": 120,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.01071548461914,
+      "locationLng": 105.87857055664062,
+      "timeStop": 1,
+      "timeCome": 2,
+      "idSupervisedObject": "5fcf850fe5a52d0017f41565",
+      "flightHeight": 120,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fd87500b94e272f3f9e8ffc"
+  },
+  "name": "Phúc Đồng - Long Biên 1",
+  "idSupervisedArea": "5fcf7945a122370017d3ae26",
+  "distance": 3003.515869140625,
+  "speed": 25,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.048093795776367,
+      "locationLng": 105.8929443359375,
+      "timeStop": 2,
+      "timeCome": 8,
+      "idSupervisedObject": "",
+      "flightHeight": 67,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.042646408081055,
+      "locationLng": 105.89688873291016,
+      "timeStop": 3,
+      "timeCome": 0.36666667461395264,
+      "idSupervisedObject": "",
+      "flightHeight": 67,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.03816032409668,
+      "locationLng": 105.8987808227539,
+      "timeStop": 2,
+      "timeCome": 0.2666666805744171,
+      "idSupervisedObject": "",
+      "flightHeight": 68,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.0355167388916,
+      "locationLng": 105.90255737304688,
+      "timeStop": 3,
+      "timeCome": 0.25,
+      "idSupervisedObject": "",
+      "flightHeight": 67,
+      "flightHeightDown": 11
+    },
+    {
+      "locationLat": 21.0303897857666,
+      "locationLng": 105.91320037841797,
+      "timeStop": 2,
+      "timeCome": 0.6166666746139526,
+      "idSupervisedObject": "",
+      "flightHeight": 67,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fdd7269c0d85a2b08aff2cf"
+  },
+  "name": "Ngã Tư Sở",
+  "idSupervisedArea": "5fcf78d2a122370017d3ae20",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.003084182739258,
+      "locationLng": 105.82018280029297,
+      "timeStop": 2,
+      "timeCome": 6,
+      "idSupervisedObject": "",
+      "flightHeight": 100,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.011898040771484,
+      "locationLng": 105.82601928710938,
+      "timeStop": 1,
+      "timeCome": 6,
+      "idSupervisedObject": "",
+      "flightHeight": 100,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.01029396057129,
+      "locationLng": 105.83615112304688,
+      "timeStop": 2,
+      "timeCome": 3,
+      "idSupervisedObject": "",
+      "flightHeight": 100,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.00115966796875,
+      "locationLng": 105.82910919189453,
+      "timeStop": 3,
+      "timeCome": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 100,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe0dc2930223238de7bd173"
+  },
+  "name": "Tây Mỗ - Từ Liêm",
+  "idSupervisedArea": "5fcf7965a122370017d3ae27",
+  "distance": 6202.80126953125,
+  "speed": 25,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.01250457763672,
+      "locationLng": 105.74156188964844,
+      "timeStop": 3,
+      "timeCome": 5,
+      "idSupervisedObject": "5fd797fc0f313f00175ab42c",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.012664794921875,
+      "locationLng": 105.75701141357422,
+      "timeStop": 2,
+      "timeCome": 1.0333333015441895,
+      "idSupervisedObject": "5fd797fc0f313f00175ab42c",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.995197296142578,
+      "locationLng": 105.7547836303711,
+      "timeStop": 4,
+      "timeCome": 1.2666666507720947,
+      "idSupervisedObject": "5fd797fc0f313f00175ab42c",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.996318817138672,
+      "locationLng": 105.74121856689453,
+      "timeStop": 3,
+      "timeCome": 0.9166666865348816,
+      "idSupervisedObject": "5fd797fc0f313f00175ab42c",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.00513458251953,
+      "locationLng": 105.74826049804688,
+      "timeStop": 3,
+      "timeCome": 0.800000011920929,
+      "idSupervisedObject": "5fd797fc0f313f00175ab42c",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe1bfeb88fdc948f4b2b956"
+  },
+  "name": "Quỳnh Mai",
+  "idSupervisedArea": "5fd8e9053853ed001729e49e",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.002185821533203,
+      "locationLng": 105.8557357788086,
+      "timeStop": 3,
+      "timeCome": 6,
+      "idSupervisedObject": "",
+      "flightHeight": 355,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.001323699951172,
+      "locationLng": 105.85774993896484,
+      "timeStop": 4,
+      "timeCome": 6,
+      "idSupervisedObject": "",
+      "flightHeight": 355,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.002164840698242,
+      "locationLng": 105.8603286743164,
+      "timeStop": 3,
+      "timeCome": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 355,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.9997615814209,
+      "locationLng": 105.86080169677734,
+      "timeStop": 3,
+      "timeCome": 6,
+      "idSupervisedObject": "",
+      "flightHeight": 355,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.000762939453125,
+      "locationLng": 105.85547637939453,
+      "timeStop": 4,
+      "timeCome": 8,
+      "idSupervisedObject": "",
+      "flightHeight": 355,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.99888038635254,
+      "locationLng": 105.855712890625,
+      "timeStop": 4,
+      "timeCome": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 355,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe2355a88fdc948f4b2b967"
+  },
+  "name": "Hoàng Liệt",
+  "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 20.9688777923584,
+      "locationLng": 105.83741760253906,
+      "timeStop": 4,
+      "timeCome": 8,
+      "idSupervisedObject": "5fcf499d4f6db90017ce7a41",
+      "flightHeight": 145,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.9688777923584,
+      "locationLng": 105.8395004272461,
+      "timeStop": 4,
+      "timeCome": 4,
+      "idSupervisedObject": "5fcf49b54f6db90017ce7a42",
+      "flightHeight": 145,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.965858459472656,
+      "locationLng": 105.84090423583984,
+      "timeStop": 4,
+      "timeCome": 6,
+      "idSupervisedObject": "",
+      "flightHeight": 145,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.963741302490234,
+      "locationLng": 105.83741760253906,
+      "timeStop": 5,
+      "timeCome": 5,
+      "idSupervisedObject": "5fcf49594f6db90017ce7a40",
+      "flightHeight": 145,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe29acd88fdc948f4b2b976"
+  },
+  "name": "đường bay mẫu 1",
+  "idSupervisedArea": "5fe1a431e40ec00017660159",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 20.93824577331543,
+      "locationLng": 105.75945281982422,
+      "timeStop": 3,
+      "timeCome": 2,
+      "idSupervisedObject": "",
+      "flightHeight": 140,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.939729690551758,
+      "locationLng": 105.75694274902344,
+      "timeStop": 3,
+      "timeCome": 2,
+      "idSupervisedObject": "",
+      "flightHeight": 140,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.94089126586914,
+      "locationLng": 105.75951385498047,
+      "timeStop": 3,
+      "timeCome": 2,
+      "idSupervisedObject": "",
+      "flightHeight": 140,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe29c0688fdc948f4b2b97a"
+  },
+  "name": "NamDL",
+  "idSupervisedArea": "5fd340adfb276d0017ec7aea",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.041484832763672,
+      "locationLng": 105.81379699707031,
+      "timeStop": 1,
+      "timeCome": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 12,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.040603637695312,
+      "locationLng": 105.8182601928711,
+      "timeStop": 2,
+      "timeCome": 32,
+      "idSupervisedObject": "",
+      "flightHeight": 12,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe29d0988fdc948f4b2b97c"
+  },
+  "name": "Hoai Duc",
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "speed": 25,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.01561737060547,
+      "locationLng": 105.7223892211914,
+      "timeStop": 2,
+      "timeCome": 23,
+      "idSupervisedObject": "",
+      "flightHeight": 70,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.001035690307617,
+      "locationLng": 105.7122573852539,
+      "timeStop": 21,
+      "timeCome": 322,
+      "idSupervisedObject": "",
+      "flightHeight": 70,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.98917579650879,
+      "locationLng": 105.71998596191406,
+      "timeStop": 3,
+      "timeCome": 123,
+      "idSupervisedObject": "",
+      "flightHeight": 70,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.00215721130371,
+      "locationLng": 105.7232437133789,
+      "timeStop": 23,
+      "timeCome": -11,
+      "idSupervisedObject": "",
+      "flightHeight": 70,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.991579055786133,
+      "locationLng": 105.7271957397461,
+      "timeStop": -5,
+      "timeCome": 23,
+      "idSupervisedObject": "",
+      "flightHeight": 70,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.99254035949707,
+      "locationLng": 105.71311950683594,
+      "timeStop": -32,
+      "timeCome": -234,
+      "idSupervisedObject": "",
+      "flightHeight": 170,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe29d1388fdc948f4b2b97d"
+  },
+  "name": "Đường bay giám sát",
+  "idSupervisedArea": "5fcf7867a122370017d3ae1c",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.00967788696289,
+      "locationLng": 105.87010192871094,
+      "timeStop": 2,
+      "timeCome": 4,
+      "idSupervisedObject": "",
+      "flightHeight": 150,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.00847625732422,
+      "locationLng": 105.87559509277344,
+      "timeStop": 2,
+      "timeCome": 3,
+      "idSupervisedObject": "",
+      "flightHeight": 120,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.005470275878906,
+      "locationLng": 105.87078857421875,
+      "timeStop": 23,
+      "timeCome": 23,
+      "idSupervisedObject": "",
+      "flightHeight": 120,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe29e2688fdc948f4b2b97e"
+  },
+  "name": "Đường bay lòng sông",
+  "idSupervisedArea": "5fcf7892a122370017d3ae1d",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.023155212402344,
+      "locationLng": 105.8592300415039,
+      "timeStop": 11,
+      "timeCome": 11,
+      "idSupervisedObject": "",
+      "flightHeight": 70,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.023395538330078,
+      "locationLng": 105.86712646484375,
+      "timeStop": 12,
+      "timeCome": 12,
+      "idSupervisedObject": "",
+      "flightHeight": 70,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.01898956298828,
+      "locationLng": 105.8655776977539,
+      "timeStop": 22,
+      "timeCome": 22,
+      "idSupervisedObject": "",
+      "flightHeight": 70,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe29fa388fdc948f4b2b97f"
+  },
+  "name": "Đường bay nông thôn",
+  "idSupervisedArea": "5fe1a44ae40ec0001766015a",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 20.929670333862305,
+      "locationLng": 105.77254486083984,
+      "timeStop": 22,
+      "timeCome": 22,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.92943000793457,
+      "locationLng": 105.77890014648438,
+      "timeStop": 22,
+      "timeCome": 22,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.926301956176758,
+      "locationLng": 105.77546691894531,
+      "timeStop": 21,
+      "timeCome": 23,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.925981521606445,
+      "locationLng": 105.78267669677734,
+      "timeStop": 45,
+      "timeCome": 4,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.921493530273438,
+      "locationLng": 105.78181457519531,
+      "timeStop": 8,
+      "timeCome": 8,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe2a53a88fdc948f4b2b981"
+  },
+  "name": "Lên Thiên Đàng",
+  "idSupervisedArea": "5fcf784aa122370017d3ae1a",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.00105857849121,
+      "locationLng": 105.84619140625,
+      "timeStop": 159,
+      "timeCome": 156,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe2a62d88fdc948f4b2b982"
+  },
+  "name": "Cot dien",
+  "idSupervisedArea": "5fcf7867a122370017d3ae1c",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.001209259033203,
+      "locationLng": 105.87217712402344,
+      "timeStop": -1,
+      "timeCome": -1,
+      "idSupervisedObject": "",
+      "flightHeight": 120,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 20.99848175048828,
+      "locationLng": 105.86917114257812,
+      "timeStop": 2,
+      "timeCome": 3,
+      "idSupervisedObject": "5fcf868be5a52d0017f41566",
+      "flightHeight": 120,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.003807067871094,
+      "locationLng": 105.87352752685547,
+      "timeStop": 4,
+      "timeCome": 3,
+      "idSupervisedObject": "5fcf850fe5a52d0017f41565",
+      "flightHeight": 120,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe2a85b88fdc948f4b2b983"
+  },
+  "name": "aaa",
+  "idSupervisedArea": "5fcf784aa122370017d3ae1a",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 20.999067306518555,
+      "locationLng": 105.84345245361328,
+      "timeStop": 4,
+      "timeCome": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.0001277923584,
+      "locationLng": 105.84881591796875,
+      "timeStop": 1,
+      "timeCome": 1,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.00525665283203,
+      "locationLng": 105.84877014160156,
+      "timeStop": 1,
+      "timeCome": 1,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.006057739257812,
+      "locationLng": 105.84422302246094,
+      "timeStop": 1,
+      "timeCome": 1,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe3f33b88fdc948f4b2b991"
+  },
+  "name": "duong bay 1",
+  "idSupervisedArea": "5fcf78f5a122370017d3ae21",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.06462287902832,
+      "locationLng": 105.8154067993164,
+      "timeStop": 10,
+      "timeCome": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 80,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.057334899902344,
+      "locationLng": 105.81566619873047,
+      "timeStop": 10,
+      "timeCome": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 80,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.061017990112305,
+      "locationLng": 105.82279205322266,
+      "timeStop": 1,
+      "timeCome": 1,
+      "idSupervisedObject": "",
+      "flightHeight": 80,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.067346572875977,
+      "locationLng": 105.82107543945312,
+      "timeStop": 5,
+      "timeCome": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 80,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe5968b1dce632a089ff6a5"
+  },
+  "name": "Đường bay giám sát bìa rừng",
+  "idSupervisedArea": "5fe57f67517d0e0017021790",
+  "distance": 2645.55810546875,
+  "speed": 25,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.0216121673584,
+      "locationLng": 105.85647583007812,
+      "timeStop": 10,
+      "timeCome": 10,
+      "idSupervisedObject": "",
+      "flightHeight": 100,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.02031135559082,
+      "locationLng": 105.86991882324219,
+      "timeStop": 15,
+      "timeCome": 0.949999988079071,
+      "idSupervisedObject": "5fe5964a646b820017880d2d",
+      "flightHeight": 110,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.0168399810791,
+      "locationLng": 105.85856628417969,
+      "timeStop": 3,
+      "timeCome": 0.8333333134651184,
+      "idSupervisedObject": "5fe595ff646b820017880d2c",
+      "flightHeight": 100,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe617411dce632a089ff6a7"
+  },
+  "name": "TestDuongbay",
+  "idSupervisedArea": "5fcf488aa065e000176e1f7d",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 20.9688777923584,
+      "locationLng": 105.8395004272461,
+      "timeStop": 60,
+      "timeCome": 20,
+      "idSupervisedObject": "5fcf49b54f6db90017ce7a42",
+      "flightHeight": 145,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe7256d1dce632a089ff6b3"
+  },
+  "name": "tét",
+  "idSupervisedArea": "5fe5889f517d0e0017021797",
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.025341033935547,
+      "locationLng": 105.83038330078125,
+      "timeStop": 5,
+      "timeCome": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 80,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe84eb31dce632a089ff6b4"
+  },
+  "name": "Kiểm tra đường dây",
+  "idSupervisedArea": "5fe82f09a719c60017775cb3",
+  "distance": 15112.517578125,
+  "speed": 25,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.078649520874023,
+      "locationLng": 105.79541778564453,
+      "timeStop": 2,
+      "timeCome": 1,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.075687408447266,
+      "locationLng": 105.8027114868164,
+      "timeStop": 1,
+      "timeCome": 0.5666666626930237,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.069438934326172,
+      "locationLng": 105.79833984375,
+      "timeStop": 1,
+      "timeCome": 0.5666666626930237,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.073043823242188,
+      "locationLng": 105.79447174072266,
+      "timeStop": 1,
+      "timeCome": 0.38333332538604736,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.08441734313965,
+      "locationLng": 105.79515838623047,
+      "timeStop": 2,
+      "timeCome": 0.8500000238418579,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.08305549621582,
+      "locationLng": 105.80030822753906,
+      "timeStop": 2,
+      "timeCome": 0.38333332538604736,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.0780086517334,
+      "locationLng": 105.80648803710938,
+      "timeStop": 2,
+      "timeCome": 0.5833333134651184,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.068239212036133,
+      "locationLng": 105.80623626708984,
+      "timeStop": 3,
+      "timeCome": 0.7333333492279053,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.06743812561035,
+      "locationLng": 105.80056762695312,
+      "timeStop": 1,
+      "timeCome": 0.4000000059604645,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.06671714782715,
+      "locationLng": 105.79515838623047,
+      "timeStop": 1,
+      "timeCome": 0.38333332538604736,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.072322845458984,
+      "locationLng": 105.793701171875,
+      "timeStop": 1,
+      "timeCome": 0.4333333373069763,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.085296630859375,
+      "locationLng": 105.79421997070312,
+      "timeStop": 1,
+      "timeCome": 0.9666666388511658,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.083696365356445,
+      "locationLng": 105.80537414550781,
+      "timeStop": 1,
+      "timeCome": 0.7833333611488342,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.078649520874023,
+      "locationLng": 105.80760955810547,
+      "timeStop": 1,
+      "timeCome": 0.4166666567325592,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.066877365112305,
+      "locationLng": 105.80760955810547,
+      "timeStop": 1,
+      "timeCome": 0.8833333253860474,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.066476821899414,
+      "locationLng": 105.80159759521484,
+      "timeStop": 1,
+      "timeCome": 0.4333333373069763,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.076007843017578,
+      "locationLng": 105.80545806884766,
+      "timeStop": 1,
+      "timeCome": 0.7666666507720947,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.081693649291992,
+      "locationLng": 105.79773712158203,
+      "timeStop": 1,
+      "timeCome": 0.6833333373069763,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe8a8b81dce632a089ff6f9"
+  },
+  "name": "CDE",
+  "idSupervisedArea": "5fe82f09a719c60017775cb3",
+  "distance": 1370.0499267578125,
+  "speed": 25,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.08049964904785,
+      "locationLng": 105.79719543457031,
+      "timeStop": 3,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.069847106933594,
+      "locationLng": 105.80380249023438,
+      "timeStop": 4,
+      "timeCome": 0.9166666865348816,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe8bdacef4a52482dcea500"
+  },
+  "name": "DK",
+  "idSupervisedArea": "5fe82f09a719c60017775cb3",
+  "distance": 1622.7364501953125,
+  "speed": 25,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.085464477539062,
+      "locationLng": 105.79745483398438,
+      "timeStop": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.071128845214844,
+      "locationLng": 105.80028533935547,
+      "timeStop": 2,
+      "timeCome": 1.0833333730697632,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe8c557ef4a52482dcea501"
+  },
+  "name": "dfalkjl",
+  "idSupervisedArea": "5fe82f09a719c60017775cb3",
+  "distance": 1235.1402587890625,
+  "speed": 1,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.080820083618164,
+      "locationLng": 105.79776763916016,
+      "timeStop": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 15
+    },
+    {
+      "locationLat": 21.070568084716797,
+      "locationLng": 105.79322052001953,
+      "timeStop": 1,
+      "timeCome": 20.600000381469727,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 11
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe94693ef4a52482dcea503"
+  },
+  "name": "test 1",
+  "idSupervisedArea": "5fcf7945a122370017d3ae26",
+  "distance": 2192.013671875,
+  "speed": 30,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.0457706451416,
+      "locationLng": 105.89335632324219,
+      "timeStop": 2,
+      "idSupervisedObject": "",
+      "flightHeight": 67,
+      "flightHeightDown": 9
+    },
+    {
+      "locationLat": 21.043367385864258,
+      "locationLng": 105.89833068847656,
+      "timeStop": 7,
+      "timeCome": 0.3333333432674408,
+      "idSupervisedObject": "",
+      "flightHeight": 67,
+      "flightHeightDown": 9
+    },
+    {
+      "locationLat": 21.03904151916504,
+      "locationLng": 105.9000473022461,
+      "timeStop": 6,
+      "timeCome": 0.30000001192092896,
+      "idSupervisedObject": "",
+      "flightHeight": 67,
+      "flightHeightDown": 9
+    },
+    {
+      "locationLat": 21.035837173461914,
+      "locationLng": 105.90416717529297,
+      "timeStop": 9,
+      "timeCome": 0.3166666626930237,
+      "idSupervisedObject": "",
+      "flightHeight": 67,
+      "flightHeightDown": 9
+    },
+    {
+      "locationLat": 21.032793045043945,
+      "locationLng": 105.908203125,
+      "timeStop": 9,
+      "timeCome": 0.30000001192092896,
+      "idSupervisedObject": "",
+      "flightHeight": 67,
+      "flightHeightDown": 9
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe9aaa0ef4a52482dcea505"
+  },
+  "name": "Bay zikzak",
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "speed": 25,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.030792236328125,
+      "locationLng": 105.79915618896484,
+      "timeStop": 14,
+      "timeCome": 12,
+      "idSupervisedObject": "",
+      "flightHeight": 80
+    },
+    {
+      "locationLat": 21.02294158935547,
+      "locationLng": 105.79469299316406,
+      "timeStop": 56,
+      "timeCome": 34,
+      "idSupervisedObject": "",
+      "flightHeight": 80
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe9efe8ef4a52482dcea506"
+  },
+  "name": "AB",
+  "idSupervisedArea": "5fe890b1a719c60017775cbb",
+  "speed": 25,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.012821197509766,
+      "locationLng": 105.81254577636719,
+      "timeStop": 10,
+      "timeCome": 10,
+      "idSupervisedObject": "",
+      "flightHeight": 90
+    },
+    {
+      "locationLat": 21.016708374023438,
+      "locationLng": 105.81464385986328,
+      "timeStop": 10,
+      "timeCome": 10,
+      "idSupervisedObject": "",
+      "flightHeight": 90
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe9fae0ef4a52482dcea50a"
+  },
+  "name": "SDAV",
+  "idSupervisedArea": "5fe82f09a719c60017775cb3",
+  "distance": 2176.140869140625,
+  "speed": 33,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.081701278686523,
+      "locationLng": 105.7973403930664,
+      "timeStop": 0,
+      "idSupervisedObject": "",
+      "flightHeight": 20
+    },
+    {
+      "locationLat": 21.07721519470215,
+      "locationLng": 105.79485321044922,
+      "timeStop": 0,
+      "timeCome": 0.30000001192092896,
+      "idSupervisedObject": "",
+      "flightHeight": 20
+    },
+    {
+      "locationLat": 21.066965103149414,
+      "locationLng": 105.80583953857422,
+      "timeStop": 0,
+      "timeCome": 0.8166666626930237,
+      "idSupervisedObject": "",
+      "flightHeight": 20
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fe9fc16ef4a52482dcea50b"
+  },
+  "name": "Bay tung tăng",
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "speed": 25,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.005563735961914,
+      "locationLng": 105.71906280517578,
+      "timeStop": 49,
+      "timeCome": 45,
+      "idSupervisedObject": "",
+      "flightHeight": 70
+    },
+    {
+      "locationLat": 21.001237869262695,
+      "locationLng": 105.72335815429688,
+      "timeStop": 79,
+      "timeCome": 78,
+      "idSupervisedObject": "",
+      "flightHeight": 70
+    },
+    {
+      "locationLat": 20.996749877929688,
+      "locationLng": 105.7200927734375,
+      "timeStop": 85,
+      "timeCome": 80,
+      "idSupervisedObject": "",
+      "flightHeight": 70
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fea9725ef4a52482dcea531"
+  },
+  "name": "Bay xiên xẹo",
+  "idSupervisedArea": "5fe5a56d1af3800017815f7b",
+  "speed": 25,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 20.99477195739746,
+      "locationLng": 105.71076202392578,
+      "timeStop": 67,
+      "timeCome": 56,
+      "idSupervisedObject": "",
+      "flightHeight": 95
+    },
+    {
+      "locationLat": 20.992849349975586,
+      "locationLng": 105.72037506103516,
+      "timeStop": 89,
+      "timeCome": 67,
+      "idSupervisedObject": "",
+      "flightHeight": 95
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5feaa1f0ef4a52482dcea535"
+  },
+  "name": "Test",
+  "idSupervisedArea": "5fcf7984a122370017d3ae29",
+  "speed": 25,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.01103401184082,
+      "locationLng": 105.72314453125,
+      "timeStop": 2,
+      "timeCome": 20,
+      "idSupervisedObject": "",
+      "flightHeight": 70
+    },
+    {
+      "locationLat": 21.010393142700195,
+      "locationLng": 105.7118148803711,
+      "timeStop": 1,
+      "timeCome": 9,
+      "idSupervisedObject": "",
+      "flightHeight": 70
+    },
+    {
+      "locationLat": 20.99629020690918,
+      "locationLng": 105.71508026123047,
+      "timeStop": 1,
+      "timeCome": 3,
+      "idSupervisedObject": "",
+      "flightHeight": 70
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5feb4b3eef4a52482dcea553"
+  },
+  "name": "Cầu diễn",
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "distance": 2712.429443359375,
+  "speed": 25,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.03911590576172,
+      "locationLng": 105.791015625,
+      "timeStop": 4,
+      "timeCome": 2,
+      "idSupervisedObject": "",
+      "flightHeight": 80
+    },
+    {
+      "locationLat": 21.038795471191406,
+      "locationLng": 105.79943084716797,
+      "timeStop": 10,
+      "timeCome": 0.5833333134651184,
+      "idSupervisedObject": "",
+      "flightHeight": 80
+    },
+    {
+      "locationLat": 21.03302764892578,
+      "locationLng": 105.80406188964844,
+      "timeStop": 8,
+      "timeCome": 0.550000011920929,
+      "idSupervisedObject": "",
+      "flightHeight": 80
+    },
+    {
+      "locationLat": 21.023895263671875,
+      "locationLng": 105.80217742919922,
+      "timeStop": 7,
+      "timeCome": 0.699999988079071,
+      "idSupervisedObject": "",
+      "flightHeight": 80,
+      "flightHeightDown": 5
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5febc8533dcd980f14e66619"
+  },
+  "name": "Đường bay số 1",
+  "idSupervisedArea": "5fe588d1517d0e0017021798",
+  "distance": 1566.977294921875,
+  "speed": 20,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.017606735229492,
+      "locationLng": 105.82048797607422,
+      "timeStop": 20,
+      "idSupervisedObject": "",
+      "flightHeight": 95,
+      "flightHeightDown": 20
+    },
+    {
+      "locationLat": 21.021333694458008,
+      "locationLng": 105.81597900390625,
+      "timeStop": 10,
+      "timeCome": 0.5333333611488342,
+      "idSupervisedObject": "",
+      "flightHeight": 95,
+      "flightHeightDown": 20
+    },
+    {
+      "locationLat": 21.024017333984375,
+      "locationLng": 105.82001495361328,
+      "timeStop": 15,
+      "timeCome": 0.4333333373069763,
+      "idSupervisedObject": "",
+      "flightHeight": 95,
+      "flightHeightDown": 20
+    },
+    {
+      "locationLat": 21.021854400634766,
+      "locationLng": 105.82340240478516,
+      "timeStop": 10,
+      "timeCome": 0.36666667461395264,
+      "idSupervisedObject": "",
+      "flightHeight": 95,
+      "flightHeightDown": 20
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5febd9f13dcd980f14e6661b"
+  },
+  "name": "Đường bay 1102",
+  "idSupervisedArea": "5febd512eeec7500179c9bb0",
+  "distance": 4091.7119140625,
+  "speed": 30,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.235271453857422,
+      "locationLng": 105.44207000732422,
+      "timeStop": 3,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.232711791992188,
+      "locationLng": 105.45820617675781,
+      "timeStop": 23,
+      "timeCome": 0.949999988079071,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.217670440673828,
+      "locationLng": 105.47468566894531,
+      "timeStop": 2,
+      "timeCome": 1.3333333730697632,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fec02f23dcd980f14e6661c"
+  },
+  "name": "Flight Path Farm 1",
+  "idSupervisedArea": "5febfe9eeeec7500179c9bb4",
+  "distance": 123.7736587524414,
+  "speed": 4,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 13.008390426635742,
+      "locationLng": 108.2498779296875,
+      "timeStop": 1,
+      "idSupervisedObject": "",
+      "flightHeight": 233,
+      "flightHeightDown": 1
+    },
+    {
+      "locationLat": 13.008489608764648,
+      "locationLng": 108.25027465820312,
+      "timeStop": 4,
+      "timeCome": 0.20000000298023224,
+      "idSupervisedObject": "",
+      "flightHeight": 234,
+      "flightHeightDown": 2
+    },
+    {
+      "locationLat": 13.008383750915527,
+      "locationLng": 108.25050354003906,
+      "timeStop": 7,
+      "timeCome": 0.11666666716337204,
+      "idSupervisedObject": "",
+      "flightHeight": 232,
+      "flightHeightDown": 2
+    },
+    {
+      "locationLat": 13.008472442626953,
+      "locationLng": 108.25096893310547,
+      "timeStop": 12,
+      "timeCome": 0.21666666865348816,
+      "idSupervisedObject": "",
+      "flightHeight": 235,
+      "flightHeightDown": 1
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fec03e03dcd980f14e6661d"
+  },
+  "name": "Flight Path 2 _ Farm",
+  "idSupervisedArea": "5febff3deeec7500179c9bb8",
+  "distance": 1600.2879638671875,
+  "speed": 600,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 13.023829460144043,
+      "locationLng": 108.25145721435547,
+      "timeStop": 6,
+      "idSupervisedObject": "",
+      "flightHeight": 70,
+      "flightHeightDown": 2
+    },
+    {
+      "locationLat": 13.020108222961426,
+      "locationLng": 108.25390625,
+      "timeStop": 15,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 62,
+      "flightHeightDown": 2
+    },
+    {
+      "locationLat": 13.020233154296875,
+      "locationLng": 108.25154876708984,
+      "timeStop": 16,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 70,
+      "flightHeightDown": 1
+    },
+    {
+      "locationLat": 13.012581825256348,
+      "locationLng": 108.25171661376953,
+      "timeStop": 6,
+      "timeCome": 0.03333333507180214,
+      "idSupervisedObject": "",
+      "flightHeight": 65,
+      "flightHeightDown": 1
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fec04353dcd980f14e6661e"
+  },
+  "name": "Flight Path 3 _ Farm",
+  "idSupervisedArea": "5febff8feeec7500179c9bb9",
+  "distance": 54.00797653198242,
+  "speed": 700,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 13.02002239227295,
+      "locationLng": 108.255615234375,
+      "timeStop": 3,
+      "idSupervisedObject": "",
+      "flightHeight": 68,
+      "flightHeightDown": 1
+    },
+    {
+      "locationLat": 13.020033836364746,
+      "locationLng": 108.2557373046875,
+      "timeStop": 5,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 68,
+      "flightHeightDown": 1
+    },
+    {
+      "locationLat": 13.019972801208496,
+      "locationLng": 108.25567626953125,
+      "timeStop": 7,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 68,
+      "flightHeightDown": 1
+    },
+    {
+      "locationLat": 13.019834518432617,
+      "locationLng": 108.25567626953125,
+      "timeStop": 9,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 68,
+      "flightHeightDown": 1
+    },
+    {
+      "locationLat": 13.01994514465332,
+      "locationLng": 108.25575256347656,
+      "timeStop": 10,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 69,
+      "flightHeightDown": 1
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fec099a3dcd980f14e6661f"
+  },
+  "name": "Flight Path 1 for Vuon Dak Lak",
+  "idSupervisedArea": "5fec08a6eeec7500179c9bbb",
+  "distance": 472.31427001953125,
+  "speed": 999,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 13.016002655029297,
+      "locationLng": 108.2398910522461,
+      "timeStop": 1,
+      "idSupervisedObject": "",
+      "flightHeight": 33,
+      "flightHeightDown": 1
+    },
+    {
+      "locationLat": 13.015040397644043,
+      "locationLng": 108.24010467529297,
+      "timeStop": 2,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 40,
+      "flightHeightDown": 1
+    },
+    {
+      "locationLat": 13.016274452209473,
+      "locationLng": 108.24140930175781,
+      "timeStop": 4,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 50,
+      "flightHeightDown": 2
+    },
+    {
+      "locationLat": 13.014789581298828,
+      "locationLng": 108.24139404296875,
+      "timeStop": 6,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 90,
+      "flightHeightDown": 2
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fec09cf3dcd980f14e66620"
+  },
+  "name": "Flight Path 2 for Vuon Dak Lak",
+  "idSupervisedArea": "5fec08a6eeec7500179c9bbb",
+  "distance": 642.83056640625,
+  "speed": 678,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 13.016253471374512,
+      "locationLng": 108.24317169189453,
+      "timeStop": 2,
+      "idSupervisedObject": "",
+      "flightHeight": 50,
+      "flightHeightDown": 2
+    },
+    {
+      "locationLat": 13.014810562133789,
+      "locationLng": 108.24209594726562,
+      "timeStop": 9,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 70,
+      "flightHeightDown": 2
+    },
+    {
+      "locationLat": 13.016085624694824,
+      "locationLng": 108.24597930908203,
+      "timeStop": 60,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 150,
+      "flightHeightDown": 1
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fec0a133dcd980f14e66621"
+  },
+  "name": "Flight Path 3 for Vuon Dak Lak",
+  "idSupervisedArea": "5fec08eeeeec7500179c9bbc",
+  "distance": 470.9378356933594,
+  "speed": 555,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 12.992717742919922,
+      "locationLng": 108.24067687988281,
+      "timeStop": 1,
+      "idSupervisedObject": "",
+      "flightHeight": 600,
+      "flightHeightDown": 1
+    },
+    {
+      "locationLat": 12.991578102111816,
+      "locationLng": 108.24114227294922,
+      "timeStop": 7,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 70,
+      "flightHeightDown": 1
+    },
+    {
+      "locationLat": 12.992827415466309,
+      "locationLng": 108.24231719970703,
+      "timeStop": 14,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 500,
+      "flightHeightDown": 1
+    },
+    {
+      "locationLat": 12.991525650024414,
+      "locationLng": 108.24217224121094,
+      "timeStop": 70,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 400,
+      "flightHeightDown": 1
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fec0a473dcd980f14e66622"
+  },
+  "name": "Flight Path 4 for Vuon Dak Lak",
+  "idSupervisedArea": "5fec0951eeec7500179c9bbd",
+  "distance": 1637.357177734375,
+  "speed": 1000,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 13.01962947845459,
+      "locationLng": 108.261962890625,
+      "timeStop": 1,
+      "idSupervisedObject": "",
+      "flightHeight": 30,
+      "flightHeightDown": 1
+    },
+    {
+      "locationLat": 13.01933765411377,
+      "locationLng": 108.26728820800781,
+      "timeStop": 40,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 40,
+      "flightHeightDown": 1
+    },
+    {
+      "locationLat": 13.018333435058594,
+      "locationLng": 108.26254272460938,
+      "timeStop": 60,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 60,
+      "flightHeightDown": 1
+    },
+    {
+      "locationLat": 13.018375396728516,
+      "locationLng": 108.2674560546875,
+      "timeStop": 90,
+      "timeCome": 0.01666666753590107,
+      "idSupervisedObject": "",
+      "flightHeight": 90,
+      "flightHeightDown": 1
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fec81663dcd980f14e66643"
+  },
+  "name": "Test đường bay",
+  "idSupervisedArea": "5febd512eeec7500179c9bb0",
+  "distance": 9759.1240234375,
+  "speed": 30,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.23297691345215,
+      "locationLng": 105.44435119628906,
+      "timeStop": 20,
+      "idSupervisedObject": "",
+      "flightHeight": 20
+    },
+    {
+      "locationLat": 21.198091506958008,
+      "locationLng": 105.48657989501953,
+      "timeStop": 12,
+      "timeCome": 3.2666666507720947,
+      "idSupervisedObject": "",
+      "flightHeight": 20
+    },
+    {
+      "locationLat": 21.194570541381836,
+      "locationLng": 105.44915771484375,
+      "timeStop": 20,
+      "timeCome": 2.183333396911621,
+      "idSupervisedObject": "",
+      "flightHeight": 20
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5fec873a3dcd980f14e66648"
+  },
+  "name": "Duongbaytest",
+  "idSupervisedArea": "5fec86a1f139ff00177a252e",
+  "distance": 6577.61083984375,
+  "speed": 80,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.090396881103516,
+      "locationLng": 105.65332794189453,
+      "timeStop": 20,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.093120574951172,
+      "locationLng": 105.67169189453125,
+      "timeStop": 20,
+      "timeCome": 0.4166666567325592,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.08975601196289,
+      "locationLng": 105.69194793701172,
+      "timeStop": 20,
+      "timeCome": 0.44999998807907104,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.093278884887695,
+      "locationLng": 105.71581268310547,
+      "timeStop": 20,
+      "timeCome": 0.5333333611488342,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff188815dfc675979b00f73"
+  },
+  "name": "Hồ yên sở",
+  "idSupervisedArea": "5fcf48d4a065e000176e1f82",
+  "distance": 1564.1815185546875,
+  "speed": 60,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 20.973411560058594,
+      "locationLng": 105.84734344482422,
+      "timeStop": 0,
+      "idSupervisedObject": "",
+      "flightHeight": 121
+    },
+    {
+      "locationLat": 20.972490310668945,
+      "locationLng": 105.85275268554688,
+      "timeStop": 0,
+      "timeCome": 0.1666666716337204,
+      "idSupervisedObject": "",
+      "flightHeight": 121
+    },
+    {
+      "locationLat": 20.97052574157715,
+      "locationLng": 105.85305786132812,
+      "timeStop": 0,
+      "timeCome": 0.06666667014360428,
+      "idSupervisedObject": "",
+      "flightHeight": 121
+    },
+    {
+      "locationLat": 20.969324111938477,
+      "locationLng": 105.84974670410156,
+      "timeStop": 0,
+      "timeCome": 0.11666666716337204,
+      "idSupervisedObject": "",
+      "flightHeight": 121
+    },
+    {
+      "locationLat": 20.966278076171875,
+      "locationLng": 105.85185241699219,
+      "timeStop": 0,
+      "timeCome": 0.11666666716337204,
+      "idSupervisedObject": "",
+      "flightHeight": 121
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff18b955dfc675979b00f74"
+  },
+  "name": "Công viên thủ lệ",
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "distance": 6043.9814453125,
+  "speed": 50,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.040252685546875,
+      "locationLng": 105.78861999511719,
+      "timeStop": 2,
+      "idSupervisedObject": "",
+      "flightHeight": 80
+    },
+    {
+      "locationLat": 21.041213989257812,
+      "locationLng": 105.81050872802734,
+      "timeStop": 0,
+      "timeCome": 0.7666666507720947,
+      "idSupervisedObject": "",
+      "flightHeight": 80
+    },
+    {
+      "locationLat": 21.024869918823242,
+      "locationLng": 105.80947875976562,
+      "timeStop": 3,
+      "timeCome": 0.6166666746139526,
+      "idSupervisedObject": "",
+      "flightHeight": 80
+    },
+    {
+      "locationLat": 21.0301570892334,
+      "locationLng": 105.80020904541016,
+      "timeStop": 2,
+      "timeCome": 0.38333332538604736,
+      "idSupervisedObject": "",
+      "flightHeight": 80
+    },
+    {
+      "locationLat": 21.026071548461914,
+      "locationLng": 105.79368591308594,
+      "timeStop": 3,
+      "timeCome": 0.28333333134651184,
+      "idSupervisedObject": "",
+      "flightHeight": 80,
+      "flightHeightDown": 40
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff18cae5dfc675979b00f75"
+  },
+  "name": "Tây Mỗ",
+  "idSupervisedArea": "5fcf7965a122370017d3ae27",
+  "distance": 7356.404296875,
+  "speed": 60,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.015871047973633,
+      "locationLng": 105.7557601928711,
+      "timeStop": 0,
+      "idSupervisedObject": "",
+      "flightHeight": 60
+    },
+    {
+      "locationLat": 21.011863708496094,
+      "locationLng": 105.73979187011719,
+      "timeStop": 0,
+      "timeCome": 0.4833333194255829,
+      "idSupervisedObject": "",
+      "flightHeight": 60
+    },
+    {
+      "locationLat": 21.009620666503906,
+      "locationLng": 105.7396240234375,
+      "timeStop": 0,
+      "timeCome": 0.0833333358168602,
+      "idSupervisedObject": "",
+      "flightHeight": 60
+    },
+    {
+      "locationLat": 21.007217407226562,
+      "locationLng": 105.75919342041016,
+      "timeStop": 0,
+      "timeCome": 0.5833333134651184,
+      "idSupervisedObject": "",
+      "flightHeight": 60
+    },
+    {
+      "locationLat": 20.995037078857422,
+      "locationLng": 105.75901794433594,
+      "timeStop": 0,
+      "timeCome": 0.38333332538604736,
+      "idSupervisedObject": "",
+      "flightHeight": 60
+    },
+    {
+      "locationLat": 20.994556427001953,
+      "locationLng": 105.7399673461914,
+      "timeStop": 0,
+      "timeCome": 0.5666666626930237,
+      "idSupervisedObject": "",
+      "flightHeight": 60
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff18d6d5dfc675979b00f76"
+  },
+  "name": "Nhà thờ - Nam từ liêm",
+  "idSupervisedArea": "5fe8923fa719c60017775cc0",
+  "distance": 538.8233642578125,
+  "speed": 30,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.028379440307617,
+      "locationLng": 105.84552001953125,
+      "timeStop": 0,
+      "idSupervisedObject": "",
+      "flightHeight": 90
+    },
+    {
+      "locationLat": 21.02849006652832,
+      "locationLng": 105.84901428222656,
+      "timeStop": 6,
+      "timeCome": 0.21666666865348816,
+      "idSupervisedObject": "",
+      "flightHeight": 90,
+      "flightHeightDown": 30
+    },
+    {
+      "locationLat": 21.029260635375977,
+      "locationLng": 105.8504867553711,
+      "timeStop": 0,
+      "timeCome": 0.10000000149011612,
+      "idSupervisedObject": "",
+      "flightHeight": 90,
+      "flightHeightDown": 30
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff18ec85dfc675979b00f77"
+  },
+  "name": "Cầu giấy 2",
+  "idSupervisedArea": "5fcf4f30a065e000176e1f84",
+  "distance": 2763.167236328125,
+  "speed": 40,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.043392181396484,
+      "locationLng": 105.80647277832031,
+      "timeStop": 0,
+      "idSupervisedObject": "",
+      "flightHeight": 80
+    },
+    {
+      "locationLat": 21.03626251220703,
+      "locationLng": 105.80673217773438,
+      "timeStop": 0,
+      "timeCome": 0.3333333432674408,
+      "idSupervisedObject": "",
+      "flightHeight": 80
+    },
+    {
+      "locationLat": 21.025527954101562,
+      "locationLng": 105.79805755615234,
+      "timeStop": 0,
+      "timeCome": 0.6333333253860474,
+      "idSupervisedObject": "",
+      "flightHeight": 80
+    },
+    {
+      "locationLat": 21.026260375976562,
+      "locationLng": 105.7935791015625,
+      "timeStop": 3,
+      "timeCome": 0.20000000298023224,
+      "idSupervisedObject": "5fe9d0bbf2e7ff00178f4d30",
+      "flightHeight": 135,
+      "flightHeightDown": 120
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff1d72af27789452dbd4cd2"
+  },
+  "name": "duongbay1",
+  "idSupervisedArea": "5fe5885a517d0e0017021794",
+  "distance": 0,
+  "speed": 2312,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.034473419189453,
+      "locationLng": 105.8182144165039,
+      "timeStop": 123,
+      "idSupervisedObject": "",
+      "flightHeight": 90,
+      "flightHeightDown": 11
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff1d8caf27789452dbd4cd3"
+  },
+  "name": "duonbay1",
+  "idSupervisedArea": "5fe5885a517d0e0017021794",
+  "distance": 0,
+  "speed": 3212,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.033512115478516,
+      "locationLng": 105.82083129882812,
+      "timeStop": 12,
+      "idSupervisedObject": "",
+      "flightHeight": 90,
+      "flightHeightDown": 11
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff1dafaf27789452dbd4cd4"
+  },
+  "name": "duonbay1",
+  "idSupervisedArea": "5fe57e8a517d0e001702178b",
+  "distance": 0,
+  "speed": 12,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.03154945373535,
+      "locationLng": 105.83352661132812,
+      "timeStop": 1,
+      "idSupervisedObject": "",
+      "flightHeight": 130,
+      "flightHeightDown": 12
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff1e088f27789452dbd4cd5"
+  },
+  "name": "quanhoankiem",
+  "idSupervisedArea": "5fe57e8a517d0e001702178b",
+  "distance": 0,
+  "speed": 3213,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.031869888305664,
+      "locationLng": 105.83489990234375,
+      "timeStop": 1,
+      "idSupervisedObject": "",
+      "flightHeight": 130,
+      "flightHeightDown": 12
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff1e105f27789452dbd4cd6"
+  },
+  "name": "duongbay3",
+  "idSupervisedArea": "5fe57e8a517d0e001702178b",
+  "distance": 0,
+  "speed": 123,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 20.990846633911133,
+      "locationLng": 105.7988510131836,
+      "timeStop": 12,
+      "idSupervisedObject": "",
+      "flightHeight": 130,
+      "flightHeightDown": 123
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff1e493f27789452dbd4cd7"
+  },
+  "name": "duongbay3",
+  "idSupervisedArea": "5fe57e8a517d0e001702178b",
+  "distance": 0,
+  "speed": 21321,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.051095962524414,
+      "locationLng": 105.79816436767578,
+      "timeStop": 1,
+      "idSupervisedObject": "",
+      "flightHeight": 130,
+      "flightHeightDown": 12
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff27100f27789452dbd4cdc"
+  },
+  "name": "Đường bay 1",
+  "idSupervisedArea": "5ff270661502c9001768e0a6",
+  "distance": 2955.29833984375,
+  "speed": 20,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.07752799987793,
+      "locationLng": 105.8053207397461,
+      "timeStop": 10,
+      "idSupervisedObject": "",
+      "flightHeight": 10,
+      "flightHeightDown": 5
+    },
+    {
+      "locationLat": 21.07704734802246,
+      "locationLng": 105.82060241699219,
+      "timeStop": 10,
+      "timeCome": 1.3333333730697632,
+      "idSupervisedObject": "",
+      "flightHeight": 10,
+      "flightHeightDown": 5
+    },
+    {
+      "locationLat": 21.065032958984375,
+      "locationLng": 105.82334899902344,
+      "timeStop": 10,
+      "timeCome": 1.149999976158142,
+      "idSupervisedObject": "",
+      "flightHeight": 10,
+      "flightHeightDown": 5
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff2a3d3f27789452dbd4cdf"
+  },
+  "name": "Giám sát đê sông hồng ",
+  "idSupervisedArea": "5ff2a2dd1502c9001768e0af",
+  "distance": 5524.58056640625,
+  "speed": 20,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.14054298400879,
+      "locationLng": 105.66458129882812,
+      "timeStop": 1,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 11
+    },
+    {
+      "locationLat": 21.14182472229004,
+      "locationLng": 105.68174743652344,
+      "timeStop": 1,
+      "timeCome": 1.5,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 11
+    },
+    {
+      "locationLat": 21.14374542236328,
+      "locationLng": 105.69273376464844,
+      "timeStop": 1,
+      "timeCome": 0.9833333492279053,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 11
+    },
+    {
+      "locationLat": 21.144386291503906,
+      "locationLng": 105.70303344726562,
+      "timeStop": 1,
+      "timeCome": 0.8999999761581421,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 11
+    },
+    {
+      "locationLat": 21.14374542236328,
+      "locationLng": 105.71195983886719,
+      "timeStop": 1,
+      "timeCome": 0.7833333611488342,
+      "idSupervisedObject": "",
+      "flightHeight": 15,
+      "flightHeightDown": 11
+    },
+    {
+      "locationLat": 21.141183853149414,
+      "locationLng": 105.71676635742188,
+      "timeStop": 1,
+      "timeCome": 0.4833333194255829,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 11
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff2a60ef27789452dbd4ce0"
+  },
+  "name": "Đường bay kiểm tra đê sông hồng",
+  "idSupervisedArea": "5ff293f21502c9001768e0ac",
+  "distance": 3859.854248046875,
+  "speed": 30,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.093242645263672,
+      "locationLng": 105.79194641113281,
+      "timeStop": 1,
+      "idSupervisedObject": "",
+      "flightHeight": 90,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.090679168701172,
+      "locationLng": 105.80567932128906,
+      "timeStop": 1,
+      "timeCome": 0.8166666626930237,
+      "idSupervisedObject": "",
+      "flightHeight": 100,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.090038299560547,
+      "locationLng": 105.81426239013672,
+      "timeStop": 1,
+      "timeCome": 0.5,
+      "idSupervisedObject": "",
+      "flightHeight": 90,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.08747673034668,
+      "locationLng": 105.82353210449219,
+      "timeStop": 1,
+      "timeCome": 0.5666666626930237,
+      "idSupervisedObject": "",
+      "flightHeight": 90,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.083951950073242,
+      "locationLng": 105.82662200927734,
+      "timeStop": 1,
+      "timeCome": 0.28333333134651184,
+      "idSupervisedObject": "",
+      "flightHeight": 90,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff2b581f27789452dbd4ce2"
+  },
+  "name": "QA01",
+  "idSupervisedArea": "5ff2b4111502c9001768e0b4",
+  "distance": 4851.47998046875,
+  "speed": 30,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.055753707885742,
+      "locationLng": 105.78889465332031,
+      "timeStop": 15,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.0559139251709,
+      "locationLng": 105.82211303710938,
+      "timeStop": 15,
+      "timeCome": 1.9333332777023315,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    },
+    {
+      "locationLat": 21.043338775634766,
+      "locationLng": 105.8216781616211,
+      "timeStop": 15,
+      "timeCome": 0.7833333611488342,
+      "idSupervisedObject": "",
+      "flightHeight": 20,
+      "flightHeightDown": 10
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff2c153f27789452dbd4ce3"
+  },
+  "name": "đường bay 1",
+  "idSupervisedArea": "5ff27f831502c9001768e0a8",
+  "distance": 944.752685546875,
+  "speed": 20,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.013792037963867,
+      "locationLng": 105.80516815185547,
+      "timeStop": 10,
+      "idSupervisedObject": "",
+      "flightHeight": 110,
+      "flightHeightDown": 100
+    },
+    {
+      "locationLat": 21.01243019104004,
+      "locationLng": 105.81009674072266,
+      "timeStop": 10,
+      "timeCome": 0.44999998807907104,
+      "idSupervisedObject": "",
+      "flightHeight": 110,
+      "flightHeightDown": 100
+    },
+    {
+      "locationLat": 21.008785247802734,
+      "locationLng": 105.81066131591797,
+      "timeStop": 5,
+      "timeCome": 0.3499999940395355,
+      "idSupervisedObject": "",
+      "flightHeight": 110,
+      "flightHeightDown": 100
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff2c269f27789452dbd4ce4"
+  },
+  "name": "test1",
+  "idSupervisedArea": "5ff27f831502c9001768e0a8",
+  "distance": 1488.531494140625,
+  "speed": 20,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.01579475402832,
+      "locationLng": 105.80374908447266,
+      "timeStop": 10,
+      "idSupervisedObject": "",
+      "flightHeight": 110,
+      "flightHeightDown": 20
+    },
+    {
+      "locationLat": 21.009906768798828,
+      "locationLng": 105.80868530273438,
+      "timeStop": 10,
+      "timeCome": 0.699999988079071,
+      "idSupervisedObject": "",
+      "flightHeight": 110,
+      "flightHeightDown": 50
+    },
+    {
+      "locationLat": 21.012590408325195,
+      "locationLng": 105.8143081665039,
+      "timeStop": 5,
+      "timeCome": 0.550000011920929,
+      "idSupervisedObject": "",
+      "flightHeight": 110,
+      "flightHeightDown": 50
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff2cd8ff27789452dbd4ce8"
+  },
+  "name": "Đường bay cầu giấy",
+  "idSupervisedArea": "5ff293f21502c9001768e0ac",
+  "distance": 0,
+  "speed": 30,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 20.911823272705078,
+      "locationLng": 105.85933685302734,
+      "timeStop": 20,
+      "idSupervisedObject": "",
+      "flightHeight": 90,
+      "flightHeightDown": 0
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff51843f27789452dbd4cf6"
+  },
+  "name": "Đường bay P Ngã tư ",
+  "idSupervisedArea": "5ff2cdda1502c9001768e0bd",
+  "distance": 823.8095703125,
+  "speed": 10,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.006744384765625,
+      "locationLng": 105.81742095947266,
+      "timeStop": 10,
+      "idSupervisedObject": "",
+      "flightHeight": 100,
+      "flightHeightDown": 50
+    },
+    {
+      "locationLat": 21.005701065063477,
+      "locationLng": 105.82097625732422,
+      "timeStop": 10,
+      "timeCome": 0.6499999761581421,
+      "idSupervisedObject": "",
+      "flightHeight": 100,
+      "flightHeightDown": 50
+    },
+    {
+      "locationLat": 21.001815795898438,
+      "locationLng": 105.82046508789062,
+      "timeStop": 20,
+      "timeCome": 0.7333333492279053,
+      "idSupervisedObject": "",
+      "flightHeight": 100,
+      "flightHeightDown": 50
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+},{
+  "_id": {
+    "$oid": "5ff51cf4f27789452dbd4cf8"
+  },
+  "name": "hành trình bay 6/1",
+  "idSupervisedArea": "5ff2cdda1502c9001768e0bd",
+  "distance": 934.533935546875,
+  "speed": 15,
+  "isDelete": false,
+  "flightPoints": [
+    {
+      "locationLat": 21.00694465637207,
+      "locationLng": 105.81797790527344,
+      "timeStop": 5,
+      "idSupervisedObject": "",
+      "flightHeight": 100,
+      "flightHeightDown": 20
+    },
+    {
+      "locationLat": 21.004138946533203,
+      "locationLng": 105.82183837890625,
+      "timeStop": 10,
+      "timeCome": 0.5666666626930237,
+      "idSupervisedObject": "",
+      "flightHeight": 100,
+      "flightHeightDown": 15
+    },
+    {
+      "locationLat": 21.00133514404297,
+      "locationLng": 105.81904602050781,
+      "timeStop": 10,
+      "timeCome": 0.4833333194255829,
+      "idSupervisedObject": "",
+      "flightHeight": 100,
+      "flightHeightDown": 15
+    }
+  ],
+  "_class": "com.skyrone.drone.demo.model.FlightPath"
+}]
