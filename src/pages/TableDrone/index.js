@@ -1,6 +1,7 @@
-import PropTypes from "prop-types";
-import clsx from "clsx";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Paper from "@material-ui/core/Paper";
 import { lighten, makeStyles } from "@material-ui/core/styles";
+import Switch from "@material-ui/core/Switch";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -11,20 +12,15 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import React, { useEffect, useState, useMemo } from "react";
-import useFullPageLoader from "../../components/hooks/useFullPageLoader";
+import { Tag } from 'antd';
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import ModalAddDataTable from '../../containers/ModalAddDataTable'
+import { CRUD_DRONE, isAuthorised } from "../../components/Drone/Common/role";
+import useFullPageLoader from "../../components/hooks/useFullPageLoader";
+import ModalAddDataTable from '../../containers/ModalAddDataTable';
 import ModalEditDataTable from '../../containers/ModalEditDataTable';
-import {Tag} from 'antd';
-
-import { isAuthorised, DRONE_SEARCH, CRUD_DRONE } from "../../components/Drone/Common/role";
-
-
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
