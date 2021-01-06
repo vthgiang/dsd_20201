@@ -97,26 +97,40 @@ function AreaMonitored(props) {
     if (isObjectSuccess) {
       setFormatStyle("btn btn-success");
       window.$("#modalSuccessNotification").modal("show");
-      dispatch(
-        MonitoredObjectActions.getAllMonitoredObjects({
-          page,
-          limit,
-          type: localStorage.getItem("project-type"),
-        })
-      );
+      role === "SUPER_ADMIN"
+        ? dispatch(
+            MonitoredObjectActions.getAllMonitoredObjects({
+              page,
+              limit,
+            })
+          )
+        : dispatch(
+            MonitoredObjectActions.getAllMonitoredObjects({
+              page,
+              limit,
+              type: localStorage.getItem("project-type"),
+            })
+          );
     }
     if (isDeleteMonitored) {
       //gọi log khi xóa đối tượng giám sát
       postLogMonitorObjectDelete();
       setFormatStyle("btn btn-success");
       window.$("#modalSuccessNotification").modal("show");
-      dispatch(
-        MonitoredObjectActions.getAllMonitoredObjects({
-          page,
-          limit,
-          type: localStorage.getItem("project-type"),
-        })
-      );
+      role === "SUPER_ADMIN"
+        ? dispatch(
+            MonitoredObjectActions.getAllMonitoredObjects({
+              page,
+              limit,
+            })
+          )
+        : dispatch(
+            MonitoredObjectActions.getAllMonitoredObjects({
+              page,
+              limit,
+              type: localStorage.getItem("project-type"),
+            })
+          );
     }
     dispatch({
       type: MonitoredObjectConstants.DELETE_MONITORED_SUCCESS,
@@ -133,14 +147,22 @@ function AreaMonitored(props) {
   }, [isObjectSuccess, isObjectFailure]);
 
   const handleSubmitSearch = () => {
-    dispatch(
-      MonitoredObjectActions.getAllMonitoredObjects({
-        ...itemSearch,
-        page: page,
-        limit: limit,
-        type: localStorage.getItem("project-type"),
-      })
-    );
+    role === "SUPER_ADMIN"
+      ? dispatch(
+          MonitoredObjectActions.getAllMonitoredObjects({
+            ...itemSearch,
+            page,
+            limit,
+          })
+        )
+      : dispatch(
+          MonitoredObjectActions.getAllMonitoredObjects({
+            ...itemSearch,
+            page: page,
+            limit: limit,
+            type: localStorage.getItem("project-type"),
+          })
+        );
   };
   const onChangePagination = (event, value) => {
     setPagination({
