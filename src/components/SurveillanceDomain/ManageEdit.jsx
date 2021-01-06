@@ -1,19 +1,36 @@
 import React from 'react';
 import {compose, withProps} from "recompose"
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import 'antd/dist/antd.css';
-import CustomMarker from "./CustomMaker";
-import {Input, Select, Tabs, Button, Checkbox, Table, Modal} from 'antd';
+import {Input, Select, Tabs, Button, Table, Modal, Tag} from 'antd';
 import {GoogleMap, withGoogleMap, withScriptjs, Polygon, Polyline, Marker} from "react-google-maps";
 import axios from "axios";
 import moment from 'moment';
 import AddFlightPathModel from '../../components/Drone/DroneModals/AddFlightPathModal';
+import {StyleTable} from "../../themes/default";
+import {formatMomentDateToDateTimeString} from "../../containers/FlightHub/MonitorCampaign/services";
+import {MECHANISM, METADATA_TYPES} from "../../constants";
 const {TabPane} = Tabs
 const {Option} = Select;
 
-function callback(key) {
-    console.log(key);
-}
+const checkTask = (monitorCampaign) => {
+    const { startTime, endTime } = monitorCampaign;
+    const now = Date.now();
+    const COLORS = {
+        success: 'success',
+        processing: 'processing',
+        error: 'error',
+        default: 'default',
+        warning: 'warning',
+    };
+    monitorCampaign.status =
+        moment(now).diff(startTime) < 0
+            ? { color: COLORS.default, content: 'Chưa diễn ra' }
+            : moment(now).diff(endTime) <= 0
+            ? { color: COLORS.success, content: 'Đang diễn ra' }
+            : { color: COLORS.warning, content: 'Đã đóng' };
+    return monitorCampaign;
+};
 
 const MyMapComponent = compose(
     withProps({
@@ -48,6 +65,10 @@ const MyMapComponent = compose(
         })}
     </GoogleMap>
 )
+
+const renderStatus = (status) => {
+    return status && <Tag color={status.color}>{status.content}</Tag>;
+};
 
 
 const MyMapComponent1 = compose(
@@ -147,6 +168,79 @@ class ManageEdit extends React.PureComponent {
             user: {},
             changePoint: false,
             reload: false,
+            columnsCamPaign : [
+                {
+                    dataIndex: 'name',
+                    title: 'Tên đợt giám sát',
+                    width: '15%',
+                    sorter: (a, b) => a.name.localeCompare(b.name),
+                    render: (data, record) => {
+                        const { _id } = record;
+                        return <Link to={`/flight-hub-monitor-campaigns/${_id}`}>{data}</Link>;
+                    },
+                },
+                {
+                    dataIndex: 'task',
+                    title: 'Loại sự cố',
+                    width: '10%',
+                    sorter: (a, b) => a.task.localeCompare(b.task),
+                },
+                {
+                    dataIndex: 'status',
+                    title: 'Trạng thái',
+                    width: '10%',
+                    sorter: (a, b) => {
+                        return a.status.content.localeCompare(b.status.content);
+                    },
+                    render: renderStatus,
+                },
+                {
+                    dataIndex: 'mechanism',
+                    width: '7.5%',
+                    title: 'Chế độ điều kiển',
+                    align: 'center',
+                    sorter: (a, b) => a.mechanism.localeCompare(b.mechanism),
+                    render: (data) => (
+                        <span>{data === MECHANISM.AUTO ? 'Tự động' : 'Thủ công'}</span>
+                    ),
+                },
+                {
+                    dataIndex: 'metadataType',
+                    width: '7.5%',
+                    title: 'Dạng dữ liệu',
+                    align: 'center',
+                    sorter: (a, b) => a.metadataType.localeCompare(b.metadataType),
+                    render: (data) => (
+                        <span>{data === METADATA_TYPES.VIDEO ? 'Video' : 'Ảnh'}</span>
+                    ),
+                },
+                {
+                    dataIndex: 'resolution',
+                    width: '7.5%',
+                    title: 'Dạng dữ liệu',
+                    align: 'center',
+                    sorter: (a, b) =>
+                        parseInt(a.resolution.substring(0, a.resolution.length - 2), 10) -
+                        parseInt(b.resolution.substring(0, b.resolution.length - 2), 10),
+                    render: (data) => <span>{data}</span>,
+                },
+                {
+                    dataIndex: 'startTime',
+                    width: '12.5%',
+                    title: 'Thời gian bắt đầu',
+                    align: 'center',
+                    sorter: (a, b) => moment(a.startTime).diff(moment(b.startTime)),
+                    render: formatMomentDateToDateTimeString,
+                },
+                {
+                    dataIndex: 'endTime',
+                    width: '12.5%',
+                    title: 'Thời gian kết thúc',
+                    align: 'center',
+                    sorter: (a, b) => moment(a.endTime).diff(moment(b.endTime)),
+                    render: formatMomentDateToDateTimeString,
+                },
+            ],
         }
         this._handleChange = this._handleChange.bind(this);
     }
@@ -166,6 +260,7 @@ class ManageEdit extends React.PureComponent {
             this.setState({triangleCoords});
         }
         this.getAllBySupervisedArea(this.state.id);
+        this.getMonitorCampaignsByZoneId(this.state.id);
     }
     
     showDetail(val) {
@@ -323,6 +418,23 @@ class ManageEdit extends React.PureComponent {
             .catch(error => console.log(error));
     }
     
+    getMonitorCampaignsByZoneId(idZone) {
+        axios.get(`https://flight-hub-api.herokuapp.com/api/monitor-campaigns/zone/${idZone}`)
+            .then(res => {
+                let monitorCampaigns = res.data.result.monitorCampaigns;
+                monitorCampaigns = monitorCampaigns
+                    .map((monitorCampaign) => {
+                        const isValidMonitorCampaign = checkTask(monitorCampaign);
+                        return isValidMonitorCampaign;
+                    })
+                    .filter((elem) => !!elem);
+                let reload = false;
+                this.setState({monitorCampaigns});
+                this.setState({reload});
+            })
+            .catch(error => console.log(error));
+    }
+    
     taodoituong() {
         this.props.history.push({
             pathname: '/monitored-object-management/create',
@@ -338,7 +450,7 @@ class ManageEdit extends React.PureComponent {
     render() {
         return (
             <div className="main">
-                <Tabs defaultActiveKey="1" onChange={callback}>
+                <Tabs defaultActiveKey="1">
                     <TabPane tab="Cấu hình miền giám sát" key="1">
                         <div className="content">
                             <table className="table table-hover table-responsive table-borderless">
@@ -465,6 +577,16 @@ class ManageEdit extends React.PureComponent {
                                 </div>
                             )
                         }
+                    </TabPane>
+                    <TabPane tab="Danh sách đợt giám sát" key="3" id="listcampaign">
+                        <StyleTable>
+                            <Table
+                                loading={this.state.reload}
+                                rowKey='_id'
+                                columns={this.state.columnsCamPaign}
+                                dataSource={this.state.monitorCampaigns}
+                            />
+                        </StyleTable>
                     </TabPane>
                 </Tabs>
                 <Modal
