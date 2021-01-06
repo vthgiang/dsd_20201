@@ -1,0 +1,91 @@
+[{
+  "_id": {
+    "$oid": "5ff529c20d3ec43cb401775c"
+  },
+  "code": "2",
+  "name": "Cột điện cao áp số 2",
+  "type": "LUOI_DIEN",
+  "description": "abc",
+  "createdAt": {
+    "$date": "2021-01-06T03:08:50.628Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T03:08:50.628Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff537be6a02b00017f39913"
+  },
+  "code": "1",
+  "name": "Nông trại canh tác",
+  "type": "CAY_TRONG",
+  "description": "Nông trại canh tác",
+  "createdAt": {
+    "$date": "2021-01-06T04:08:30.395Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T04:25:51.525Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff53aee6a02b00017f39914"
+  },
+  "code": "1",
+  "name": "Rừng Cúc Phương",
+  "type": "CHAY_RUNG",
+  "description": "Đối tượng cháy rừng",
+  "createdAt": {
+    "$date": "2021-01-06T04:22:06.963Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T04:33:24.569Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff53b646a02b00017f39916"
+  },
+  "code": "1",
+  "name": "Công trình phụ trợ 1",
+  "type": "DE_DIEU",
+  "description": "Công trình phụ trợ  đê",
+  "createdAt": {
+    "$date": "2021-01-06T04:24:04.939Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T04:34:44.850Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff53f016a02b00017f3991d"
+  },
+  "code": "1",
+  "name": "Rừng Cúc Phương",
+  "type": "CHAY_RUNG",
+  "description": "Khu vực Rừng Cúc Phương",
+  "createdAt": {
+    "$date": "2021-01-06T04:39:29.850Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T04:39:29.850Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff542756a02b00017f39920"
+  },
+  "code": "1",
+  "name": "Công trình phụ trợ 2",
+  "type": "DE_DIEU",
+  "description": "",
+  "createdAt": {
+    "$date": "2021-01-06T04:54:13.358Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-06T04:54:13.358Z"
+  },
+  "__v": 0
+}]
