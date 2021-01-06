@@ -1,0 +1,151 @@
+[{
+  "_id": {
+    "$oid": "5fcf41aba61088002133162f"
+  },
+  "name": "Nguồn UAV",
+  "description": "Nguồn UAV",
+  "isDefault": true,
+  "type": "Sự cố",
+  "createdAt": {
+    "$date": "2020-12-08T09:04:43.370Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-08T16:28:16.965Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fcf41aba610880021331630"
+  },
+  "name": "Thời gian",
+  "description": "Thời gian",
+  "type": "Sự cố",
+  "isDefault": true,
+  "createdAt": {
+    "$date": "2020-12-08T09:04:43.377Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-08T16:28:24.511Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fcf41aba610880021331631"
+  },
+  "name": "Độ ẩm",
+  "description": "Độ ẩm",
+  "type": "Sự cố",
+  "isDefault": true,
+  "createdAt": {
+    "$date": "2020-12-08T09:04:43.381Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-08T16:28:33.961Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fcf41aba610880021331632"
+  },
+  "name": "Toạ độ",
+  "description": "Tọa độ",
+  "type": "Sự cố",
+  "isDefault": true,
+  "createdAt": {
+    "$date": "2020-12-08T09:04:43.385Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-08T16:28:43.693Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fcf41aba610880021331633"
+  },
+  "name": "Hành trình",
+  "type": "Sự cố",
+  "description": "Hành trình",
+  "isDefault": true,
+  "createdAt": {
+    "$date": "2020-12-08T09:04:43.389Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-08T16:28:51.504Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fcf41aba610880021331634"
+  },
+  "name": "Thời tiết",
+  "description": "Thời tiết",
+  "type": "Sự cố",
+  "isDefault": true,
+  "createdAt": {
+    "$date": "2020-12-08T09:04:43.394Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-08T16:28:58.374Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fcfa6df2fa6e00017d4b2ef"
+  },
+  "name": "Độ cao",
+  "description": "Độ cao",
+  "type": "Payload",
+  "isDefault": false,
+  "createdAt": {
+    "$date": "2020-12-08T16:16:31.092Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-29T02:33:24.588Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fcfa6e52fa6e00017d4b2f0"
+  },
+  "name": "Sức gió",
+  "description": "Sức gió",
+  "type": "Sự cố",
+  "isDefault": false,
+  "createdAt": {
+    "$date": "2020-12-08T16:16:37.223Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-08T16:29:42.394Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fed8adb0a861f4379294886"
+  },
+  "name": "Tên nhãn sample",
+  "description": "Tên nhãn sample",
+  "isDefault": false,
+  "type": "Sự cố",
+  "createdAt": {
+    "$date": "2020-12-31T08:24:59.192Z"
+  },
+  "updatedAt": {
+    "$date": "2020-12-31T08:24:59.192Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff2ee6584ce9a6f9d1ee4e8"
+  },
+  "name": "Độ cao 2",
+  "description": "Độ cao này rất cao",
+  "isDefault": false,
+  "type": "Sự cố",
+  "createdAt": {
+    "$date": "2021-01-04T10:31:01.299Z"
+  },
+  "updatedAt": {
+    "$date": "2021-01-04T10:31:01.299Z"
+  },
+  "__v": 0
+}]
