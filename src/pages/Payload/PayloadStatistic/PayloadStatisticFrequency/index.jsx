@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Space, Input, Form, Select, Modal, DatePicker, Row, Col } from 'antd';
+import {Table, Space, Input, Form, Select, Modal, DatePicker, Row, Col, Spin} from 'antd';
 import { Button } from 'antd';
 import StyleList from './index.style';
 import { useState } from 'react';
@@ -64,11 +64,13 @@ class List extends Component {
   }
 
   loadAllPayload() {
+      this.setState({modalLoading: true});
     axios.get(`http://dsd06.herokuapp.com/api/payload`)
         .then(res => {
             if (res.status == 500) {
                 this.openNotificationError(res.data.message || "")
             } else {
+                this.setState({modalLoading: false});
                 let arr = res.data.filter((item) => {return item.type != null});
                 this.setState({ tables: arr });
             }
@@ -155,9 +157,11 @@ class List extends Component {
 
 
   searchPayload(values) {
+      this.setState({modalLoading: true});
     axios.get(`http://dsd06.herokuapp.com/api/payload`, { params: { type: values.type, status: values.status } })
         .then(res => {
           //const persons = res.data;
+            this.setState({modalLoading: false});
           this.setState({ tables: res.data });
         })
   }
@@ -228,7 +232,7 @@ class List extends Component {
       },
     ];
 
-    const { visible, visibleAdd, visibleDelete, currentTable, tables, typeData } = this.state;
+    const { visible, visibleAdd, visibleDelete, currentTable, tables, typeData, modalLoading } = this.state;
 
     return (
         <StyleList>
@@ -277,7 +281,10 @@ class List extends Component {
                 </Col>
               </Row>
             </Form>
+
+              <Spin spinning={modalLoading} tip="Loading...">
             <Table dataSource={dataSource} columns={columns} />
+              </Spin>
           </div>
 
 

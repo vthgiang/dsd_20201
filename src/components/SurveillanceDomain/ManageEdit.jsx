@@ -7,7 +7,7 @@ import {Input, Select, Tabs, Button, Checkbox, Table, Modal} from 'antd';
 import {GoogleMap, withGoogleMap, withScriptjs, Polygon, Polyline, Marker} from "react-google-maps";
 import axios from "axios";
 import moment from 'moment';
-
+import AddFlightPathModel from '../../components/Drone/DroneModals/AddFlightPathModal';
 const {TabPane} = Tabs
 const {Option} = Select;
 
@@ -124,6 +124,10 @@ class ManageEdit extends React.PureComponent {
                     render: val => <p>{val.averageHeight}</p>
                 },
                 {
+                    title: 'Vận tốc bay',
+                    render: val => <p>{val.speed} m/s</p>
+                },
+                {
                     title: 'Chi tiết',
                     render: val => (
                         <Button type="primary" style={{marginRight: 10}}
@@ -141,8 +145,9 @@ class ManageEdit extends React.PureComponent {
             pathCoordinates: [],
             forceUpdate: 0,
             user: {},
+            changePoint: false,
+            reload: false,
         }
-        this.myRef = React.createRef();
         this._handleChange = this._handleChange.bind(this);
     }
     
@@ -185,7 +190,7 @@ class ManageEdit extends React.PureComponent {
     setModalshow(openModalshow) {
         this.setState({openModalshow});
         if (!openModalshow) {
-            window.location.reload();
+            this.pageReload();
         }
     }
     
@@ -277,8 +282,9 @@ class ManageEdit extends React.PureComponent {
             let triangleCoords = [];
             this.setState({triangleCoords});
         }
+        let changePoint = true;
+        this.setState({changePoint});
     }
-    
     
     save() {
         let dataEdit = {
@@ -310,9 +316,23 @@ class ManageEdit extends React.PureComponent {
         axios.get(`http://skyrone.cf:6789/flightPath/getAllBySupervisedArea/${idZone}`)
             .then(res => {
                 const listDrone = res.data;
+                let reload = false;
                 this.setState({listDrone});
+                this.setState({reload});
             })
             .catch(error => console.log(error));
+    }
+    
+    taodoituong() {
+        this.props.history.push({
+            pathname: '/monitored-object-management/create',
+        });
+    }
+    
+    pageReload = () => {
+        let reload = true;
+        this.setState({reload});
+        this.getAllBySupervisedArea(this.state.id);
     }
     
     render() {
@@ -322,6 +342,14 @@ class ManageEdit extends React.PureComponent {
                     <TabPane tab="Cấu hình miền giám sát" key="1">
                         <div className="content">
                             <table className="table table-hover table-responsive table-borderless">
+                                <tr>
+                                    <th style={{width: '50%'}}>
+                                        <Button type="primary" onClick={() => this.taodoituong()}>Thêm đối tượng</Button>
+                                    </th>
+                                    <td>
+
+                                    </td>
+                                </tr>
                                 <tr>
                                     <th style={{width: '50%'}}>Khu vực giám sát</th>
                                     <td>
@@ -413,11 +441,11 @@ class ManageEdit extends React.PureComponent {
                             (this.state.user.role === 'ADMIN' || this.state.user.role === 'SUPER_ADMIN') && (<div className="action center" >
                                 <div className="save">
                                     {
-                                        !this.diff(this.state.olddomain, this.state.newdomain) &&
+                                        (!this.diff(this.state.olddomain, this.state.newdomain) || this.state.changePoint) &&
                                         <Button type="primary" onClick={() => this.save()}>Lưu</Button>
                                     }
                                     {
-                                        (this.diff(this.state.olddomain, this.state.newdomain)) &&
+                                        (this.diff(this.state.olddomain, this.state.newdomain) && !this.state.changePoint) &&
                                         <Button disabled>Lưu</Button>
                                     }
                                 </div>
@@ -426,9 +454,17 @@ class ManageEdit extends React.PureComponent {
                         }
                     </TabPane>
                     <TabPane tab="Danh sách hành trình bay" key="2" id="list">
-                        <div className="content">
-                            <Table columns={this.state.columnsDrone} dataSource={this.state.listDrone} rowKey="key"/>
+                        <div>
+                            <AddFlightPathModel pageReload={this.pageReload}/>
                         </div>
+                        <br/>
+                        {
+                            (!this.state.reload) && (
+                                <div className="content">
+                                    <Table columns={this.state.columnsDrone} dataSource={this.state.listDrone} rowKey="key"/>
+                                </div>
+                            )
+                        }
                     </TabPane>
                 </Tabs>
                 <Modal

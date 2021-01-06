@@ -22,7 +22,13 @@ import { getListLabelsApi } from '../../../../apis/label';
 
 const { TextArea } = Input;
 
-const Step5 = ({ prevStep, data, handleChangeData, handleSubmit }) => {
+const Step5 = ({
+  prevStep,
+  data,
+  handleChangeData,
+  handleSubmit,
+  isUpdate = false,
+}) => {
   const [labelsData, setLabelsData] = useState([]);
 
   const [form] = Form.useForm();
@@ -47,6 +53,7 @@ const Step5 = ({ prevStep, data, handleChangeData, handleSubmit }) => {
       } catch (error) {
         notification.error({
           message: 'Máy chủ lỗi, vui lòng thử lại sau',
+          description: error.message,
         });
       }
     };
@@ -64,7 +71,7 @@ const Step5 = ({ prevStep, data, handleChangeData, handleSubmit }) => {
       icon: <ExclamationCircleOutlined />,
       content: (
         <span>
-          Bạn có muốn {data.description ? 'sửa' : 'tạo'} đợt giám sát{' '}
+          Bạn có muốn {isUpdate ? 'sửa' : 'tạo'} đợt giám sát{' '}
           <strong>{name}</strong>?
         </span>
       ),

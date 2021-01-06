@@ -30,6 +30,7 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
     } catch (error) {
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại.',
+        description: 'Drones: ' + error.message,
       });
     }
   };
@@ -41,6 +42,7 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
     } catch (error) {
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại.',
+        description: 'Payloads: ' + error.message,
       });
     }
   };
@@ -52,7 +54,8 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
       setFlightPathsData(resp.data);
     } catch (error) {
       notification.error({
-        message: 'Có lỗi xảy ra! Xin thử lại.',
+        message: 'Có lỗi xảy ra.',
+        description: 'Drones: ' + error.message,
       });
     }
   };
@@ -62,7 +65,9 @@ const Step3 = ({ nextStep, prevStep, handleChangeData, data }) => {
     const timeEnd = formatMomentDateToDateTimeString(timeRange[1]);
     const params = { timeStart, timeEnd };
     fetchDronesData(params);
-    fetchPayloadsData();
+    fetchPayloadsData({
+      status: 'idle',
+    });
     fetchFlightPathsData();
   }, [timeRange]);
 

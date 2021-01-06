@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { Button, Col, Input, List, Row, Form, Tabs, Tag } from 'antd';
+import { Button, Col, Input, List, Row, Form, Tabs, Tag, Space } from 'antd';
+import Select from "react-select";
 import { DownloadOutlined } from '@ant-design/icons';
 import axios from 'axios';
-import VideoPlayer from './VideoPlayer';
+import Map from '../../containers/ModalFlight/Map';
 
 const { TabPane } = Tabs;
+const { Option } = Select;
 const { Item } = List;
 const WS_STREAM_HOST = 'ws://192.168.1.102:7002';
 // const WS_STREAM_HOST = 'ws://localhost:7002';
@@ -20,18 +22,90 @@ function Stream() {
   const refVideo = useRef(null);
   const [form] = Form.useForm();
   const [streamId, setStreamId] = useState(null);
+  const [payload, setPayload] = useState(null);
   const [downloadLink, setDownloadLink] = useState(null);
   const [cropLink, setCropLink] = useState(null);
-  const [currentDrone, setCurrentDrone] = useState({});
+  const [currentDrone, setCurrentDrone] = useState({ flightPath: { flightPoints: [] } });
   const [drones, setDrones] = useState([]);
   const [cropLoading, setCropLoading] = useState(false);
-  const [loadList, setLoadList] = useState(false);
+  const [campaign, setCampaign] = useState([]);
+  const [drone, setDrone] = useState("");
+
+  const [obj, setObj] = useState([]);
+
+  const handleObjs = (type) => {
+    axios({
+      method: "GET",
+      url: "https://dsd05-monitored-object.herokuapp.com/monitored-object/",
+      params: {
+        "type": type
+      },
+      headers: {
+      },
+
+      data: {
+      }
+    }).then(({ data }) => {
+      setObj(data.content[0]);
+
+    })
+  };
+
   useEffect(() => {
     form.setFieldsValue({
       startTime: '00:00:00',
       duration: 10
     });
   }, [form]);
+  useEffect(() => {
+
+    handleObjs(localStorage.getItem("project-type"))
+    axios({
+      method: "GET",
+      url: "http://dsd06.herokuapp.com/api/payload",
+      params: {
+        "droneId": currentDrone.idDrone,
+      },
+      data: {
+
+      }
+    }, [currentDrone]).then(({ data }) => {
+      axios({
+        method: "GET",
+        url: "https://dsd06.herokuapp.com/api/payload/" + data[0]?._id,
+        params: {
+        },
+        data: {
+
+        }
+      }).then(({ data }) => {
+        setPayload(data)
+      })
+    })
+
+    axios({
+      method: "GET",
+      url: "http://skyrone.cf:6789/drone/getById/" + currentDrone.idDrone,
+      params: {
+      },
+      headers: {
+        "api-token": localStorage.getItem("token"),
+        "project-type": localStorage.getItem("project-type")
+      },
+
+      data: {
+      }
+    }).then(({ data }) => {
+      setDrone(data)
+    })
+
+    axios({
+      method: "GET",
+      url: "http://skyrone.cf:6789/flightItinerary/getByIdDrone/" + currentDrone.idDrone,
+    }).then((res) => { if (res?.data?.data != null) setCampaign(res?.data?.data[0]) })
+
+  }, [currentDrone])
+
   // const videoJsOptions = {
   //     autoplay: true,
   //     controls: true,
@@ -107,10 +181,9 @@ function Stream() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoadList(true);
       const { data } = await axios({
         method: 'GET',
-        url: 'http://skyrone.cf:6789/droneState/getAllDroneActive'
+        url: 'http://skyrone.cf:6789/droneState/getAllDroneActiveRealTime'
       });
 
       const res = await axios({
@@ -118,17 +191,20 @@ function Stream() {
         url: `http://skyrone.cf:6789/droneState/getParameterFlightRealTime/${data[0].idDrone}`
       });
 
-      setLoadList(false);
-      setDrones(
-        data.map((drone) => ({
-          ...drone,
-          urlStream: urlStreams[Math.floor(Math.random() * urlStreams.length)]
-        }))
-      );
-      setCurrentDrone({
-        ...data[0],
+      const lstDrones = data.map((drone) => ({
+        ...drone,
         urlStream: urlStreams[Math.floor(Math.random() * urlStreams.length)],
-        ...res.data.data
+        label: drone.name,
+        value: drone.idDrone
+      }));
+
+      setDrones(lstDrones);
+      setCurrentDrone({
+        ...lstDrones[0],
+        urlStream: urlStreams[Math.floor(Math.random() * urlStreams.length)],
+        ...res.data.data,
+        label: lstDrones[0].name,
+        value: lstDrones[0].idDrone
       });
     };
 
@@ -138,8 +214,10 @@ function Stream() {
   const fetchCurrentDrone = async (drone) => {
     const res = await axios({
       method: 'GET',
-      url: `http://skyrone.cf:6789/droneState/getParameterFlightRealTime/${drone.idDrone}`
+      url: `http://skyrone.cf:6789/droneState/getParameterFlightRealTime/${drone?.idDrone}`
     });
+
+    console.log({ res });
 
     setCurrentDrone({
       ...res.data.data,
@@ -153,7 +231,6 @@ function Stream() {
     var element = document.createElement('a');
     element.setAttribute('href', link);
     element.setAttribute('target', '_blank');
-    element.setAttribute('download', filename);
 
     element.style.display = 'none';
     document.body.appendChild(element);
@@ -162,6 +239,33 @@ function Stream() {
 
     document.body.removeChild(element);
   };
+
+  const cutImage = ()=>{
+    axios({
+      url:"https://it4483team2.herokuapp.com/api/records",
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        "api-token": localStorage.getItem("token"),
+        "project-type": localStorage.getItem("project-type"),      
+      },
+      data: {
+      "title": "Ảnh theo dõi "+ obj.name +" " +Date.now(),
+      "description":obj.description,
+      "type": 0,
+      "problemType": 3,
+      "isTraining": Math.floor(Math.random() * 10)<7,
+      "link":"https://res.cloudinary.com/webtt20191/image/upload/v1607244077/cay-trong/cay-trong-16.jpg",
+      "monitoredObjectId": obj._id,
+      "idSupervisedArea": "",
+      "idDrone": drone.id,
+      "idFlightPath": "",
+      "metaData": "",
+      "idCampaign": campaign.idCampaign,
+  }
+    });
+  }
 
   const onCropVideo = async ({ startTime, duration }) => {
     form.getFieldValue('duration');
@@ -174,11 +278,36 @@ function Stream() {
     //     parseDuration > validDuration ? validDuration : parseDuration
     //   }`
     // );
+    console.log(obj);
+    axios({
+      url:"https://it4483team2.herokuapp.com/api/records",
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        "api-token": localStorage.getItem("token"),
+        "project-type": localStorage.getItem("project-type"),      
+      },
+      data: {
+      "title": "Video theo dõi "+ obj.name +" " +Date.now(),
+      "description":obj.description,
+      "type": 1,
+      "problemType": 3,
+      "isTraining": Math.floor(Math.random() * 10)<7,
+      "link":"https://media.istockphoto.com/videos/aerial-view-of-amazon-rainforest-in-brazil-video-id1169794330",
+      "monitoredObjectId": obj._id,
+      "idSupervisedArea": "",
+      "idDrone": drone.id,
+      "idFlightPath": "",
+      "metaData": "",
+      "idCampaign": campaign.idCampaign,
+  }
+    });
     const { data } = await axios.get(
-      `http://192.168.1.102:7002/stream/crop/${streamId}/${startTime}/${
-        parseDuration > validDuration ? validDuration : parseDuration
+      `http://192.168.1.102:7002/stream/crop/${streamId}/${startTime}/${parseDuration > validDuration ? validDuration : parseDuration
       }`
     );
+
     const { src } = data;
     setCropLoading(false);
     setCropLink(src);
@@ -187,7 +316,7 @@ function Stream() {
   return (
     <Container>
       <Row gutter={16}>
-        <Col md={16}>
+        <Col md={14}>
           <HeaderList>
             {currentDrone.name
               ? `Stream từ ${currentDrone.name}`
@@ -195,16 +324,18 @@ function Stream() {
           </HeaderList>
 
           <Row>
+            <Col md={24}>
+              <strong>Thông tin Drone:</strong>{' '}
+            </Col>
             <Col md={12}>
-              <strong>Drone ID:</strong>{' '}
-              <span>{currentDrone.idDrone ? currentDrone.idDrone : '...'}</span>
+              <strong>Drone: </strong>{' '}
+              <span>{drone.name ? drone.name : '...'}</span>
             </Col>
             <Col md={12}>
               <strong>Pin:</strong>{' '}
               <span>
                 {currentDrone.percentBattery
-                  ? currentDrone.percentBattery
-                  : '...'}
+                  ?? '...'}
                 %
               </span>
             </Col>
@@ -218,6 +349,28 @@ function Stream() {
                 {currentDrone.heightFlight ? currentDrone.heightFlight : '...'}m
               </span>
             </Col>
+            <Col md={24}>
+              <strong>Thông tin giám sát:</strong>{' '}
+            </Col>
+            <Col md={12}>
+              <strong>Payload: </strong>{' '}
+              <span>
+                {payload?.name ? payload?.name : '...'}m
+              </span>
+            </Col>
+            <Col md={12}>
+              <strong>Đợt giám sát:</strong>{' '}
+              <span>{campaign?.name}</span>
+            </Col>
+            <Col md={12}>
+              <strong>Đối tượng: </strong>{' '}
+              <span>
+                {obj.name
+                  ? obj.name
+                  : '...'}
+              </span>
+            </Col>
+
           </Row>
 
           <div
@@ -273,6 +426,12 @@ function Stream() {
                 </Button>
               )}
             </Form.Item>
+            <Button
+                  type="primary"
+                  onClick={() => cutImage()}
+                >
+                  Cắt ảnh
+                </Button>
             {cropLink && (
               <Form.Item shouldUpdate={true}>
                 <Button
@@ -287,6 +446,7 @@ function Stream() {
           </Form>
           {downloadLink && (
             <Button
+              style={{ marginTop: 16 }}
               type="primary"
               shape="round"
               icon={<DownloadOutlined />}
@@ -295,41 +455,57 @@ function Stream() {
               Download full stream
             </Button>
           )}
+
+
         </Col>
-        <Col md={8}>
-          <TitleList>Danh sách drones</TitleList>
-          <List
-            loading={loadList}
-            bordered
+
+        <Col md={10}>
+          <TitleList>Danh sách drone đang bay</TitleList>
+          <Select
+            placeholder="Chọn drone"
+            value={currentDrone}
+            options={drones}
+            style={{ minWidth: 300 }}
+            onChange={(curDrone) => {
+              fetchCurrentDrone(drones.find(drone => drone.idDrone === curDrone.value));
+            }}
+          >
+            {drones.map(drone => <Option value={drone.value}>{drone.label} - <span>
+              {drone.message === "Đang Bay" ? (
+                <Tag color="green">Đang bay</Tag>
+              ) : (
+                  <Tag color="red">Không hoạt động</Tag>
+                )}
+            </span></Option>)}
+          </Select>
+          <TitleList style={{ marginTop: "10px" }} >
+            Miền giám sát
+          </TitleList>
+          {/* <List
             dataSource={drones}
             renderItem={(drone) =>
               currentDrone && currentDrone.idDrone === drone.idDrone ? (
-                <ActiveItemCustom onClick={() => fetchCurrentDrone(drone)}>
-                  <div>{drone.name}</div>
-                  <div>
-                    {drone.used ? (
-                      <Tag color="green">Active</Tag>
-                    ) : (
-                      <Tag color="red">Not Active</Tag>
-                    )}
-                  </div>
+                <ActiveItemCustom onClick={() => }>
                 </ActiveItemCustom>
               ) : (
-                <ItemCustom onClick={() => fetchCurrentDrone(drone)}>
-                  <div>{drone.name}</div>
-                  <div>
-                    {drone.used ? (
-                      <Tag color="green">Active</Tag>
-                    ) : (
-                      <Tag color="red">Not Active</Tag>
-                    )}
-                  </div>
-                </ItemCustom>
-              )
+                  <ItemCustom onClick={() => fetchCurrentDrone(drone)}>
+                    <div>{drone.name}</div>
+                    <div>
+                      {drone.message === "Đang Bay" ? (
+                        <Tag color="green">Đang bay</Tag>
+                      ) : (
+                          <Tag color="red">Không hoạt động</Tag>
+                        )}
+                    </div>
+                  </ItemCustom>
+                )
             }
-          />
+          /> */}
+
+          <Map flightPath={currentDrone.flightPath} />
         </Col>
       </Row>
+
     </Container>
   );
 }

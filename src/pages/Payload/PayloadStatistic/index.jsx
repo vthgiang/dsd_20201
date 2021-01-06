@@ -25,10 +25,10 @@ const PayloadStatistic = ({ history }) => {
                   <TabPane tab={<span>Thống kê theo loại Payload</span>} key="1">
                       <PayloadStatisticFrequency />
                   </TabPane>
-                  <TabPane tab={<span> Thống kê theo Lịch sử hoạt động</span>} key="2">
+                  <TabPane tab={<span> Thống kê theo Lịch sử hoạt động</span>} key="3">
                       <PayloadStatisticWorking />
                   </TabPane>
-                  <TabPane tab={<span>Thống kê theo trạng thái </span>} key="3">
+                  <TabPane tab={<span>Thống kê theo trạng thái </span>} key="2">
                       <PayloadStatisticStatus />
                   </TabPane>
                   <TabPane tab={<span> Thống kê theo Lịch sử sửa chữa </span>} key="4">

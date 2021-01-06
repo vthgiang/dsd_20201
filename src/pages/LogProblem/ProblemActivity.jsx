@@ -1,7 +1,8 @@
 import React from 'react';
-import { Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Select } from 'antd';
+import {Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Select} from 'antd';
 import Highlighter from 'react-highlight-words';
-import { SearchOutlined } from '@ant-design/icons';
+import {SearchOutlined} from '@ant-design/icons';
+import {truncate} from "../../services/utils";
 
 export default class ProblemActivity extends React.Component {
   state = {
@@ -20,7 +21,7 @@ export default class ProblemActivity extends React.Component {
   };
 
   clearFilters = () => {
-    this.setState({ filteredInfo: null });
+    this.setState({filteredInfo: null});
   };
 
   clearAll = () => {
@@ -39,55 +40,55 @@ export default class ProblemActivity extends React.Component {
     });
   };
   getColumnSearchProps = dataIndex => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={node => {
-            this.searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
-            Reset
-          </Button>
-        </Space>
-      </div>
+    filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
+        <div style={{padding: 8}}>
+          <Input
+              ref={node => {
+                this.searchInput = node;
+              }}
+              placeholder={`Search ${dataIndex}`}
+              value={selectedKeys[0]}
+              onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+              onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+              style={{width: 188, marginBottom: 8, display: 'block'}}
+          />
+          <Space>
+            <Button
+                type="primary"
+                onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+                icon={<SearchOutlined/>}
+                size="small"
+                style={{width: 90}}
+            >
+              Search
+            </Button>
+            <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{width: 90}}>
+              Reset
+            </Button>
+          </Space>
+        </div>
     ),
-    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    filterIcon: filtered => <SearchOutlined style={{color: filtered ? '#1890ff' : undefined}}/>,
     onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
-        : '',
+        record[dataIndex]
+            ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+            : '',
     onFilterDropdownVisibleChange: visible => {
       if (visible) {
         setTimeout(() => this.searchInput.select(), 100);
       }
     },
     render: text =>
-      this.state.searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-          searchWords={[this.state.searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ''}
-        />
-      ) : (
-        text
-      ),
+        this.state.searchedColumn === dataIndex ? (
+            <Highlighter
+                highlightStyle={{backgroundColor: '#ffc069', padding: 0}}
+                searchWords={[this.state.searchText]}
+                autoEscape
+                textToHighlight={text ? text.toString() : ''}
+            />
+        ) : (
+            text
+        ),
   });
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -100,46 +101,25 @@ export default class ProblemActivity extends React.Component {
 
   handleReset = clearFilters => {
     clearFilters();
-    this.setState({ searchText: '' });
+    this.setState({searchText: ''});
   };
 
   render() {
-    
+
     const columns = [
       {
         title: 'sự cố',
         dataIndex: 'name',
         key: 'name',
         ...this.getColumnSearchProps('name'),
-    
+
       },
       {
         title: 'Id sự cố',
         dataIndex: 'entityId',
         key: 'entityId',
         sorter: (a, b) => a.entityId - b.entityId,
-    
-      },
-      {
-        title: 'Id hình ảnh',
-        dataIndex: 'imageId',
-        key: 'imageId',
-        sorter: (a, b) => a.imageId - b.imageId,
-    
-      },
-      {
-        title: 'Id video',
-        dataIndex: 'videoId',
-        key: 'videoId',
-        sorter: (a, b) => a.videoId - b.videoId,
-    
-      },
-      {
-        title: 'Id miền giám sát',
-        dataIndex: 'regionId',
-        key: 'regionId',
-        sorter: (a, b) => a.regionId - b.regionId,
-    
+        render: entityId => truncate(entityId, 10)
       },
       {
         title: 'trạng thái',
@@ -152,11 +132,12 @@ export default class ProblemActivity extends React.Component {
         dataIndex: 'type',
         key: 'type',
         ...this.getColumnSearchProps('type'),
-        
+
       },
       {
         title: 'Mô tả',
         dataIndex: 'description',
+        width: "30%",
         key: 'description',
         ...this.getColumnSearchProps('description'),
       },
@@ -164,19 +145,20 @@ export default class ProblemActivity extends React.Component {
         title: 'Thời gian',
         dataIndex: 'timestamp',
         key: 'timestamp',
-        sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1: -1
+        sorter: (a, b) => new Date(a.timestamp) >= new Date(b.timestamp) ? 1 : -1
       },
-      {
-        title: 'Id người thực hiện',
-        dataIndex: 'authorId',
-        key: 'authorId',
-        ...this.getColumnSearchProps('authorId'),
-      },
+      // {
+      //   title: 'Id người thực hiện',
+      //   dataIndex: 'authorId',
+      //   key: 'authorId',
+      //   ...this.getColumnSearchProps('authorId'),
+      // },
     ];
     return (
-      <>
-        <Table columns={columns} dataSource={this.props.data} loading={this.props.loading} onChange={this.handleChange} />
-      </>
+        <>
+          <Table columns={columns} dataSource={this.props.data} loading={this.props.loading}
+                 onChange={this.handleChange}/>
+        </>
     );
   }
 }

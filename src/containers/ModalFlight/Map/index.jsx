@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, Polyline, Polygon, Circle, InfoWindow} from "react-google-maps"
+import { getZoneById } from '../../../apis/zone';
 
 const MyMapComponent = compose(
   withProps({
@@ -17,6 +18,7 @@ const MyMapComponent = compose(
     const {flightPoints} = flightPath;
 
     const [location, setLocation] = useState(null);
+    const [zone, setZone] = useState(null);
     
     
     // const [open, setOpen] = useState(false);
@@ -54,9 +56,18 @@ const MyMapComponent = compose(
         }
 
         mapRef.current.fitBounds(bounds);
-    }, [])
+        getZoneById(flightPath.idSupervisedArea)
+            .then(zone => {
+                // console.log('zone', zone);
+                setZone(zone);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }, [flightPath])
 
     useEffect(() => {
+        // random vi tri bay
         if(!flightPoints || flightPoints.length < 2) return;
         const index = Math.trunc(Math.random()*(flightPoints.length-1));
         const startPoint = flightPoints[index];
@@ -65,7 +76,7 @@ const MyMapComponent = compose(
             lat: (startPoint.locationLat + endPoint.locationLat)/2,
             lng: (startPoint.locationLng + endPoint.locationLng)/2
         })
-    }, [])
+    }, [flightPath])
 
     return (
         <GoogleMap
@@ -77,6 +88,7 @@ const MyMapComponent = compose(
             {flightPoints.length !== 0 && flightPoints.map( (point, index) => 
             <Marker
                 key={index}
+                label={(index+1).toString()}
                 position={{lat: point.locationLat, lng: point.locationLng}}
             />)}
             {flightPoints.length >= 2 && 
@@ -98,6 +110,16 @@ const MyMapComponent = compose(
                     fillOpacity: 1,
                 }}
                 // onClick={openInfo}    
+            />}
+            {zone && <Polygon
+                path={getPathFromZone(zone)}
+                options={{
+                    strokeColor: "#0000FF",
+                    strokeOpacity: 1,
+                    strokeWeight: 1,
+                    fillColor: "#fff",
+                    fillOpacity: 0.2
+                }}
             />}
             {/* { open && <InfoWindow onCloseClick={closeInfo} position={location}>
                     <div>
@@ -132,9 +154,9 @@ function getPathFromPoints(flightPoints){
 }
 function getPathFromZone(zone){
     return [
-        {lat: zone.startPoint.latitude, lng: zone.startPoint.longitude},
-        {lat: zone.endPoint.latitude, lng: zone.startPoint.longitude},
-        {lat: zone.endPoint.latitude, lng: zone.endPoint.longitude},
-        {lat: zone.startPoint.latitude, lng: zone.endPoint.longitude}
+        {lat: zone.startPoint.lat, lng: zone.startPoint.lng},
+        {lat: zone.endPoint.lat, lng: zone.startPoint.lng},
+        {lat: zone.endPoint.lat, lng: zone.endPoint.lng},
+        {lat: zone.startPoint.lat, lng: zone.endPoint.lng}
     ];
 }

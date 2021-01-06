@@ -213,7 +213,7 @@ const dronesData = useMemo(() => {
     if (search) {
         computedDrones = computedDrones.filter(
             (comment) =>
-                comment.id.toLowerCase().includes(search.toLowerCase())
+                comment.id.toLowerCase().includes(search.toLowerCase()) || comment.name.toLowerCase().includes(search.toLowerCase())
         );
     } 
     return computedDrones;
@@ -256,40 +256,31 @@ const dronesData = useMemo(() => {
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, dronesData.length - page * rowsPerPage);
-    const EnhancedTableToolbar = (props) => {
-        const classes = useToolbarStyles();
-        const { numSelected } = props;
 
+  const EnhancedTableToolbar = (props) => {
+        const classes = useToolbarStyles();
         return (
-          <Toolbar
-            className={clsx(classes.root, {
-              [classes.highlight]: numSelected > 0
-            })}
-          >
+          <Toolbar>
            
            <Typography   className={classes.title}> <ModalAddDataTable></ModalAddDataTable> </Typography>
-             <input
-                type="text"
-                className="form-control"
-                style={{ width: "240px", marginRight: '1rem', marginLeft: '2rem' }}
-                placeholder="Tìm kiếm ID"
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-            />
-              
               <Typography> {numDrone}drone </Typography>
           </Toolbar>
         );
       };
 
-      EnhancedTableToolbar.propTypes = {
-        numSelected: PropTypes.number.isRequired
-      };
-
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+      <input
+                key="111"
+                type="text"
+                className="form-control"
+                style={{ width: "400px", marginRight: '1rem', marginLeft: '2rem' }}
+                placeholder="Tìm kiếm ID hoặc tên drone"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+            />
+        <EnhancedTableToolbar />
         <TableContainer className={classes.container}>
         {loader}
           <Table

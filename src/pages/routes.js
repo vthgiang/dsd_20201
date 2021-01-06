@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import DetailArea from "../components/Aera/DetailArea";
 import ManageArea from "../components/Aera/ManageArea";
+import FlightCreateZone from '../components/Drone/FlightCreateZone';
 import DetailedNotification from "../components/Group4/DetailedNotification";
 import MyList from "../components/Group4/Notification";
 import Manage from "../components/SurveillanceDomain/Manage";
@@ -28,52 +29,53 @@ import HomeDeDieu from "./Home/DeDieu";
 import DeDieuNcn3 from "./Home/DeDieu/indexncn3";
 import Task1 from './Home/DeDieu/Task1/index';
 import Task5 from './Home/DeDieu/Task5/index';
-import ImageVideo from "./ImageVideo";
-import Detail from "./ImageVideo/detail";
-import Stream from "./ImageVideo/stream";
-import Incident from "./Incident";
-import ImageGallery from "./Incident/ImageGallery";
+import ImageVideo from './ImageVideo';
+import Detail from './ImageVideo/detail';
+import Stream from './ImageVideo/stream';
+import Incident from './Incident';
+import ImageGallery from './Incident/ImageGallery';
 // incident group 09
-import IncidentGroup9 from "./Incident/Incident";
-import IncidentEdit from "./Incident/Incident/edit";
-import VideoGallery from "./Incident/VideoGallery";
-import LogDrone from "./LogDrone";
-import LogImage from "./LogImage";
-import LogIncident from "./LogIncident";
-import LogObjMonitor from "./LogObjMonitor";
-import LogPayLoad from "./LogPayLoad";
-import LogProblem from "./LogProblem";
-import LogRegion from "./LogRegion";
-import LogStatistic from "./LogStatistic";
-import LogDashboardPage from "./LogTreeProject";
-import LogUAV from "./LogUAV";
-import LogUser from "./LogUser";
-import LogVideo from "./LogVideo";
-import LogWarn from "./LogWarn";
-import MapTest from "./MapTest";
+import IncidentGroup9 from './Incident/Incident';
+import IncidentEdit from './Incident/Incident/edit';
+import VideoGallery from './Incident/VideoGallery';
+import LogDrone from './LogDrone';
+import LogImage from './LogImage';
+import LogIncident from './LogIncident';
+import LogObjMonitor from './LogObjMonitor';
+import LogPayLoad from './LogPayLoad';
+import LogProblem from './LogProblem';
+import LogRegion from './LogRegion';
+import LogStatistic from './LogStatistic';
+import LogDashboardPage from './LogTreeProject';
+import LogUAV from './LogUAV';
+import LogUser from './LogUser';
+import LogVideo from './LogVideo';
+import LogWarn from './LogWarn';
+import MapTest from './MapTest';
 //monitored Object Group 05
-import CategoryMonitored from "./MonitoredObject/Category/component";
-import MonitoredObject from "./MonitoredObject/MonitoredObject/component";
-import MonitoredObjectCreate from "./MonitoredObject/MonitoredObject/component/monitoredObjectCreate";
-import MonitoredObjectView from "./MonitoredObject/MonitoredObject/component/MonitoredObjectView";
+import CategoryMonitored from './MonitoredObject/Category/component';
+import MonitoredObject from './MonitoredObject/MonitoredObject/component';
+import MonitoredObjectCreate from './MonitoredObject/MonitoredObject/component/monitoredObjectCreate';
+import MonitoredObjectView from './MonitoredObject/MonitoredObject/component/MonitoredObjectView';
+import MonitoredObjectHistory from './MonitoredObject/MonitoredObject/component/monitorObjectHistory';
 //Payload
-import ListPayload from "./Payload/PayloadManagement/List";
-import DScard from "./Payload/PayloadSDcard";
-import PayloadSetting from "./Payload/PayloadSetting";
+import ListPayload from './Payload/PayloadManagement/List';
+import DScard from './Payload/PayloadSDcard';
+import PayloadSetting from './Payload/PayloadSetting';
 //Payload  Statistic
-import PayloadStatistic from "./Payload/PayloadStatistic";
-import PayloadStatisticDroneFixing from "./Payload/PayloadStatistic/PayloadStatisticDroneFixing";
-import PayloadStatisticFrequency from "./Payload/PayloadStatistic/PayloadStatisticFrequency";
-import PayloadStatisticStatus from "./Payload/PayloadStatistic/PayloadStatisticStatus";
-import PayloadStatisticTime from "./Payload/PayloadStatistic/PayloadStatisticTime";
-import PayloadStatisticWorking from "./Payload/PayloadStatistic/PayloadStatisticWorking";
-import AddSignupPayloadDrone from "./Payload/PayloadToDrone/Add";
-import EditSignupPayloadDrone from "./Payload/PayloadToDrone/Edit";
-import PayloadDroneHistory from "./Payload/PayloadToDrone/List";
-import ListTypePayload from "./Payload/PayloadType/List";
-import CreateReport from "./Report/CreateReport";
-import ManageReportTemplate from "./Report/ManageReportTemplate";
-import ViewReport from "./Report/ViewReport";
+import PayloadStatistic from './Payload/PayloadStatistic';
+import PayloadStatisticDroneFixing from './Payload/PayloadStatistic/PayloadStatisticDroneFixing';
+import PayloadStatisticFrequency from './Payload/PayloadStatistic/PayloadStatisticFrequency';
+import PayloadStatisticStatus from './Payload/PayloadStatistic/PayloadStatisticStatus';
+import PayloadStatisticTime from './Payload/PayloadStatistic/PayloadStatisticTime';
+import PayloadStatisticWorking from './Payload/PayloadStatistic/PayloadStatisticWorking';
+import AddSignupPayloadDrone from './Payload/PayloadToDrone/Add';
+import EditSignupPayloadDrone from './Payload/PayloadToDrone/Edit';
+import PayloadDroneHistory from './Payload/PayloadToDrone/List';
+import ListTypePayload from './Payload/PayloadType/List';
+import CreateReport from './Report/CreateReport';
+import ManageReportTemplate from './Report/ManageReportTemplate';
+import ViewReport from './Report/ViewReport';
 // Statistic
 import DroneStatistic from "./Statistic/DroneStatistic";
 import ImageVideoStatistic from "./Statistic/ImageVideoStatistic";
@@ -82,9 +84,12 @@ import IncidentStatisticWorking from "./Statistic/IncidentStatisticWorking";
 import StatisticObjectMonitor from "./Statistic/StatisticObjectMonitor";
 import StatisticPayload from "./Statistic/StatisticPayload";
 // dsd_01 drone
-import TableDrone from "./TableDrone";
-import TableDroneState from "./TableDroneState";
+import TableDrone from './TableDrone';
+import TableDroneState from './TableDroneState';
 import UAVMana from './UAVMana';
+
+
+
 
 
 export const routes = [ 
@@ -119,8 +124,16 @@ export const routes = [
     component: () => <div>DroneManagement</div>,
   },
   {
+    path: '/flight-create-zone/:areaId',
+    component: FlightCreateZone,
+  },
+  {
     path: '/dedieu-uav-mana',
     component: UAVMana,
+  },
+  {
+    path: '/dedieu-ncn4',
+    component: TableDroneState,
   },
   {
     path: '/drone-list',
@@ -249,7 +262,11 @@ export const routes = [
     component: () => <ImageVideo />,
   },
   {
-    path: "/stream",
+    path: '/tracking',
+    component: () => <Tracking />,
+  },
+  {
+    path: '/stream',
     component: () => <Stream />,
   },
   {
@@ -269,6 +286,13 @@ export const routes = [
     path: "/monitored-object-management/:option/:id",
     component: MonitoredObjectView,
     exact: true,
+  },
+  //view history incident
+  {
+    path: '/monitored-object-management/history/',
+    component: MonitoredObjectHistory,
+    exact: true,
+
   },
   // create monitored Object
   {
@@ -397,7 +421,11 @@ export const routes = [
     component: LogUAV,
   },
   {
-    path: "/log-dash-board-page",
+    path: '/log-business',
+    component: LogBusiness,
+  },
+  {
+    path: '/log-dash-board-page',
     component: LogDashboardPage,
   },
   {

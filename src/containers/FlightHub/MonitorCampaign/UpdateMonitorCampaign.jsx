@@ -45,6 +45,7 @@ const UpdateMonitorCampaign = () => {
     } catch (error) {
       notification.error({
         message: 'Có lỗi xảy ra! Xin thử lại',
+        description: error.message
       });
     }
   };
@@ -54,7 +55,10 @@ const UpdateMonitorCampaign = () => {
       loading={loading}
       initialData={convertInitialDataToFieldValues(monitorCampaignData)}
       title='Sửa đợt giám sát'
-      handleSubmit={updateMonitorCampaign}></MonitorCampaignForm>
+      handleSubmit={updateMonitorCampaign}
+      isUpdate={true}
+      ></MonitorCampaignForm>
+      
   );
 };
 

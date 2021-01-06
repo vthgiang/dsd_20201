@@ -14,8 +14,11 @@ function Detail() {
     const { params } = useRouteMatch();
 
     const [imageVideo, setImageVideo] = useState({});
+    const [metaData, setMetaData] = useState({});
     const [imageVideoRelated, setImageVideoRelated] = useState([]);
+    const [campaign, setCampaign] = useState([]);
     const [problems, setProblems] = useState([]);
+    const [drone, setDrone] = useState("");
     const [monitoredObjects, setMonitoredObjects] = useState([]);
     const [currentMonitoredObject, setCurrentMonitoredObject] = useState({});
     const contentStyle = {
@@ -121,6 +124,44 @@ function Detail() {
         fetchData();
     }, [])
 
+    useEffect(()=>{
+        if(imageVideo?.metaData!=undefined){
+            setMetaData(JSON.parse(imageVideo?.metaData));
+            console.log(JSON.parse(imageVideo?.metaData));
+        }
+
+        axios({
+            method: "GET",
+            url: "http://skyrone.cf:6789/drone/getById/"+imageVideo?.idDrone,
+            params: {
+            },
+            headers: {
+                "api-token": localStorage.getItem("token"),
+                "project-type": localStorage.getItem("project-type")
+            },
+
+            data: {
+            }
+        }).then(({ data }) => {
+            setDrone(data)
+        })
+        axios({
+            method: "GET",
+            url: "http://123.30.235.196:5598/api/monitor-campaigns/"+imageVideo?.idCampaign,
+            params: {
+            },
+            headers: {
+                "api-token": localStorage.getItem("token"),
+                "projectType": localStorage.getItem("project-type"),
+                "Authorization": "Bearer "+localStorage.getItem("token")
+            },
+
+            data: {
+            }
+        }).then(({ data }) => {
+            setCampaign(data)
+        })
+},[imageVideo])
     return <Container>
         <div style={{
             marginBottom: "15px"
@@ -153,7 +194,7 @@ function Detail() {
                 <Info>
                     <Row>
                         <Col md={4}>
-                            <strong>Id:</strong>
+                            <strong>Id: </strong>
                         </Col>
                         <Col md={20}>
                             <span>{imageVideo.id}</span>
@@ -161,7 +202,7 @@ function Detail() {
                     </Row>
                     <Row>
                         <Col md={4}>
-                            <strong>Tên:</strong>
+                            <strong>Tên: </strong>
                         </Col>
                         <Col md={20}>
                             <span>{imageVideo.title}</span>
@@ -169,7 +210,7 @@ function Detail() {
                     </Row>
                     <Row>
                         <Col md={4}>
-                            <strong>Mô tả:</strong>
+                            <strong>Mô tả: </strong>
                         </Col>
                         <Col md={20}>
                             <span>{renderDescription(imageVideo.description)}</span>
@@ -177,7 +218,7 @@ function Detail() {
                     </Row>
                     <Row>
                         <Col md={4}>
-                            <strong>Loại dữ liệu:</strong>
+                            <strong>Loại dữ liệu: </strong>
                         </Col>
                         <Col md={20}>
                             <span>{imageVideo.type === 0 ? "Ảnh" : "Video"}</span>
@@ -185,7 +226,7 @@ function Detail() {
                     </Row>
                     <Row>
                         <Col md={4}>
-                            <strong>Loại sự cố:</strong>
+                            <strong>Loại sự cố: </strong>
                         </Col>
                         <Col md={20}>
                             <span>{problemTypes[imageVideo.problemType]}</span>
@@ -193,7 +234,7 @@ function Detail() {
                     </Row>
                     <Row>
                         <Col md={4}>
-                            <strong>Kinh độ:</strong>
+                            <strong>Kinh độ: </strong>
                         </Col>
                         <Col md={20}>
                             <span>{imageVideo.longitude}</span>
@@ -201,7 +242,7 @@ function Detail() {
                     </Row>
                     <Row>
                         <Col md={4}>
-                            <strong>Vĩ độ:</strong>
+                            <strong>Vĩ độ: </strong>
                         </Col>
                         <Col md={20}>
                             <span>{imageVideo.latitude}</span>
@@ -209,10 +250,34 @@ function Detail() {
                     </Row>
                     <Row>
                         <Col md={4}>
-                            <strong>Tạo lúc:</strong>
+                            <strong>Tạo lúc: </strong>
                         </Col>
                         <Col md={20}>
                             <span>{imageVideo.createdAt}</span>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={4}>
+                            <strong>Bởi drone: </strong>
+                        </Col>
+                        <Col md={20}>
+                            <span>{drone.name}</span>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={4}>
+                            <strong>Đường bay: </strong>
+                        </Col>
+                        <Col md={20}>
+                            <span>{metaData?.object?.flightPath?.name}</span>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={4}>
+                            <strong>Đợt giám sát: </strong>
+                        </Col>
+                        <Col md={20}>
+                            <span>{campaign?.result?.monitorCampaign?.name}</span>
                         </Col>
                     </Row>
                 </Info>

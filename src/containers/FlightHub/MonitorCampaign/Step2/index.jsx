@@ -50,6 +50,7 @@ const Step2 = ({
         setLoading(false);
         notification.error({
           message: 'Có lỗi xảy ra! Xin thử lại.',
+          description: 'Đối tượng giám sát: ' + error.message,
         });
       });
   };
