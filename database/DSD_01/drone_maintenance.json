@@ -1,0 +1,390 @@
+[{
+  "_id": {
+    "$oid": "5fbdad624e0fc003db237c66"
+  },
+  "name": "Mavic pro 20202306",
+  "timeStart": {
+    "$date": "2020-12-08T10:11:45.417Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-23T00:41:24.528Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fbdb9e94e0fc003db237c99"
+  },
+  "name": "Mavic pro 20201682",
+  "timeStart": {
+    "$date": "2020-12-08T10:11:45.417Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-08T10:43:45.417Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fce4e8afeae48098869a2cf"
+  },
+  "name": "Mavic pro 20202275",
+  "timeStart": {
+    "$date": "2020-12-24T02:24:17.057Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-14T02:24:17.057Z"
+  },
+  "isMaintenance": true,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fbdb08f4e0fc003db237c76"
+  },
+  "name": "Mavic pro 20201874",
+  "timeStart": {
+    "$date": "2020-12-14T15:48:38.638Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-22T07:16:38.982Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fce4eaffeae48098869a2d4"
+  },
+  "name": "Mavic pro 20201853",
+  "timeStart": {
+    "$date": "2020-12-20T16:02:45.894Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-29T16:39:50.632Z"
+  },
+  "isMaintenance": true,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fce4eaffeae48098869a2d6"
+  },
+  "name": "Mavic pro 20201902",
+  "timeStart": {
+    "$date": "2020-12-20T16:28:35.219Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-15T16:28:35.219Z"
+  },
+  "isMaintenance": true,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fe1be2049a67836a9849795"
+  },
+  "name": "Phantom 4 Advanced",
+  "timeStart": {
+    "$date": "2021-01-02T17:04:00.054Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-05T16:54:04.892Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fbdb09a4e0fc003db237c88"
+  },
+  "name": "Mavic pro 20201302",
+  "timeStart": {
+    "$date": "2020-12-24T09:58:24.547Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-02T09:58:24.547Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fbdad824e0fc003db237c6e"
+  },
+  "name": "Mavic pro 20201431",
+  "timeStart": {
+    "$date": "2020-12-22T09:49:07.854Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-24T09:49:07.854Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fe1be2049a67836a9849793"
+  },
+  "name": "Mavic plus max 20205104",
+  "timeStart": {
+    "$date": "2021-01-04T04:23:21.262Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-07T04:23:21.262Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fe1be2049a67836a9849794"
+  },
+  "name": "Mavic plus max 20209094",
+  "timeStart": {
+    "$date": "2021-01-04T04:23:57.862Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-08T04:23:57.862Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fe1be0a49a67836a9849746"
+  },
+  "name": "MG-1",
+  "timeStart": {
+    "$date": "2021-01-05T16:55:38.007Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-07T16:55:38.007Z"
+  },
+  "isMaintenance": true,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fe1bcce4a189f2b2676dd6f"
+  },
+  "name": "Spark",
+  "timeStart": {
+    "$date": "2021-01-06T16:23:15.281Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-07T16:23:15.281Z"
+  },
+  "isMaintenance": true,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fe1be0a49a67836a9849747"
+  },
+  "name": "Mavic plus max 20204414",
+  "timeStart": {
+    "$date": "2020-12-25T09:56:00.227Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-29T16:38:32.657Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fbdad614e0fc003db237c65"
+  },
+  "name": "Mavic pro 20201984",
+  "timeStart": {
+    "$date": "2020-12-23T01:00:35.764Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-23T01:00:35.764Z"
+  },
+  "isMaintenance": true,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fcb94e15bda1750f812b336"
+  },
+  "timeStart": {
+    "$date": "2020-12-05T21:30:22.241Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-30T21:30:22.241Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fbdb09a4e0fc003db237c8a"
+  },
+  "name": "Mavic pro 20201919",
+  "timeStart": {
+    "$date": "2020-12-17T02:33:20.001Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-24T02:33:20.001Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fbdb09a4e0fc003db237c89"
+  },
+  "name": "Mavic pro 20201738",
+  "timeStart": {
+    "$date": "2020-12-24T02:53:11.832Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-29T02:53:11.832Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fe2933088fdc948f4b2b974"
+  },
+  "name": "Mavic pro 20201985",
+  "timeStart": {
+    "$date": "2021-01-04T04:23:57.862Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-08T04:23:57.862Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fe1bdea49a67836a9849730"
+  },
+  "name": "Mavic plus max 20206114",
+  "timeStart": {
+    "$date": "2020-12-25T04:35:29.164Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-25T09:51:15.462Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fbdb09d4e0fc003db237c8f"
+  },
+  "name": "Mavic pro 20201426",
+  "timeStart": {
+    "$date": "2020-12-25T09:24:38.580Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-25T09:50:58.342Z"
+  },
+  "isMaintenance": true,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fbdb09d4e0fc003db237c8e"
+  },
+  "name": "Mavic pro 20201981",
+  "timeStart": {
+    "$date": "2020-12-25T09:24:38.580Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-25T09:50:59.344Z"
+  },
+  "isMaintenance": true,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fe1be0a49a67836a9849749"
+  },
+  "name": "Mavic plus max 20203507",
+  "timeStart": {
+    "$date": "2020-12-25T09:56:00.227Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-28T16:41:22.263Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fe1be0a49a67836a9849748"
+  },
+  "name": "Mavic plus max 20204825",
+  "timeStart": {
+    "$date": "2020-12-24T09:58:24.547Z"
+  },
+  "timeEnd": {
+    "$date": "2020-12-25T09:59:47.530Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fe1bdea49a67836a9849732"
+  },
+  "name": "Mavic plus max 20206448",
+  "timeStart": {
+    "$date": "2020-12-24T09:58:24.547Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-02T09:58:24.547Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fea96fdef4a52482dcea51b"
+  },
+  "name": "Mavic plus max 20208288",
+  "timeStart": {
+    "$date": "2021-01-04T04:23:57.862Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-08T04:23:57.862Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fbdb0984e0fc003db237c85"
+  },
+  "name": "Phantom 3 SE",
+  "timeStart": {
+    "$date": "2021-01-04T04:24:40.125Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-05T16:54:54.147Z"
+  },
+  "isMaintenance": true,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fbdb0924e0fc003db237c7b"
+  },
+  "name": "Mavic pro 2020183167896789",
+  "timeStart": {
+    "$date": "2021-01-04T04:24:40.125Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-08T04:24:40.125Z"
+  },
+  "isMaintenance": true,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fbdb0924e0fc003db237c7a"
+  },
+  "name": "Mavic pro 2020228367896789",
+  "timeStart": {
+    "$date": "2021-01-04T04:24:40.125Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-08T04:24:40.125Z"
+  },
+  "isMaintenance": true,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+},{
+  "_id": {
+    "$oid": "5fe1be1d49a67836a9849787"
+  },
+  "name": "Argas MG-1s",
+  "timeStart": {
+    "$date": "2021-01-06T16:51:53.677Z"
+  },
+  "timeEnd": {
+    "$date": "2021-01-08T16:51:53.677Z"
+  },
+  "isMaintenance": false,
+  "_class": "com.skyrone.drone.demo.model.DroneMaintenance"
+}]

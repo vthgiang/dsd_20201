@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5fbd489c2b4f84c5ef785520"},"userId":3,"userAvatar":null,"userFullname":"Test","createdAt":{"$date":"2020-11-24T17:00:00Z"},"comment":"Not good"}
+{"_id":{"$oid":"5fc51c75068cfc2928895bb0"},"userId":11,"userAvatarUrl":"/media/users/blank.png","userFullName":"Quản lý DSD07","comment":"Please check again"}

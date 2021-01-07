@@ -1,0 +1,11 @@
+{"_id":{"$oid":"5fcf3771854b4a00176e0338"},"name":"Camera nhiệt","description":"Camera phát hiện nhiệt","__v":0}
+{"_id":{"$oid":"5fcf3851854b4a00176e0339"},"name":"Camera hồng ngoại","description":"Camera chụp trong đêm","__v":0}
+{"_id":{"$oid":"5fcf38a2854b4a00176e033a"},"name":"Cảm biến nhiệt độ","description":"Cảm biến nhiệt độ","__v":0}
+{"_id":{"$oid":"5fcf3953854b4a00176e033b"},"name":"Cảm biến tiệm cận ","description":"Tránh vật thể","__v":0}
+{"_id":{"$oid":"5fd8eab91df7a400174fd605"},"name":"Panorama Camera","description":"Camera góc rộng","__v":0}
+{"_id":{"$oid":"5fd9736e0c915b0017775318"},"name":"Camera ","description":"Camera","__v":0}
+{"_id":{"$oid":"5feb3bf45755cd0017f02e14"},"name":"Camera góc rộng","description":"Camera góc rộng","__v":0}
+{"_id":{"$oid":"5feb40515755cd0017f02e20"},"name":"Cảm biến ánh sáng","description":"Cảm biến ánh sáng","__v":0}
+{"_id":{"$oid":"5feb44585755cd0017f02e2e"},"name":"Kingston","description":"thẻ nhớ","__v":0}
+{"_id":{"$oid":"5ff478cddc90550017fc2053"},"name":"Camera hun thuốc trừ sâu","description":"Hỗ trợ hun thuôc","__v":0}
+{"_id":{"$oid":"5ff47af3dc90550017fc2056"},"name":"Camera gắn thiết bị nhiệt","description":"Theo dõi u=nhiệt độ","__v":0}
