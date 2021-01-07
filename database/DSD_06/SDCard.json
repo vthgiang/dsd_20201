@@ -1,0 +1,11 @@
+{"_id":{"$oid":"5fcf92792569670017e6cd4d"},"name":"Kingston 16G","volume":16,"__v":0}
+{"_id":{"$oid":"5fcf92922569670017e6cd4e"},"name":"Kingston 128G 4.0","volume":128,"__v":0}
+{"_id":{"$oid":"5fe07a0e8004c200170f1434"},"name":"Ultra Disk 128GB","volume":128,"__v":0}
+{"_id":{"$oid":"5feb2ad35755cd0017f02e0b"},"name":"Kingston ","volume":69,"__v":0}
+{"_id":{"$oid":"5feb3d285755cd0017f02e16"},"name":"UBHs","volume":128,"__v":0}
+{"_id":{"$oid":"5feb46a95755cd0017f02e37"},"name":"SanDisk 128G","volume":128,"__v":0}
+{"_id":{"$oid":"5feb56785755cd0017f02e46"},"name":"SanDisk 16G","volume":4545,"__v":0}
+{"_id":{"$oid":"5feda82d20d7e40017e24ec1"},"name":"Sandisk","volume":128,"__v":0}
+{"_id":{"$oid":"5ff47892dc90550017fc2052"},"name":"Kingdton 64G","volume":64,"__v":0}
+{"_id":{"$oid":"5ff47ab8dc90550017fc2055"},"name":"Kingdton 128G","volume":128,"__v":0}
+{"_id":{"$oid":"5ff47c56dc90550017fc2059"},"name":"Kingdton 32G","volume":32,"__v":0}
