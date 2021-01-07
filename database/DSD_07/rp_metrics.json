@@ -1,0 +1,7 @@
+{"_id":{"$oid":"5fcfd99f9a861927c8e11206"},"type":"handle_incident","sent":0,"accepted":0,"reviewing":0}
+{"_id":{"$oid":"5fcfd9ae9a861927c8e11207"},"type":"uav","sent":2,"accepted":0,"reviewing":1}
+{"_id":{"$oid":"5fcfd9b99a861927c8e11208"},"type":"payload","sent":0,"accepted":0,"reviewing":0}
+{"_id":{"$oid":"5fcfd9c99a861927c8e11209"},"type":"user","sent":1,"accepted":0,"reviewing":0}
+{"_id":{"$oid":"5fcfd9d19a861927c8e1120a"},"type":"incident","sent":0,"accepted":0,"reviewing":0}
+{"_id":{"$oid":"5fcfd9f39a861927c8e1120b"},"type":"object","sent":0,"accepted":0,"reviewing":0}
+{"_id":{"$oid":"5fcfda2f9a861927c8e1120c"},"type":"monitor-zone","sent":0,"accepted":0,"reviewing":0}
