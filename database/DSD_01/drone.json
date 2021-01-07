@@ -1,0 +1,6115 @@
+[{
+  "_id": {
+    "$oid": "5fbdad744e0fc003db237c6c"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Pro",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 100,
+  "maxFlightHeight": 231,
+  "rangeBattery": 20000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 6,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdad824e0fc003db237c6e"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 200 Seres V2",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdad834e0fc003db237c70"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Matrice 600 Pro",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdad834e0fc003db237c71"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Phantom 3 SE",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb08e4e0fc003db237c72"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb08e4e0fc003db237c73"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Phantom 4 RTK",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb08e4e0fc003db237c74"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Mavic Mini",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb08f4e0fc003db237c75"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Mavic Air 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb08f4e0fc003db237c76"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0914e0fc003db237c77"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0914e0fc003db237c78"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Mavic 2 Enterprise",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0914e0fc003db237c79"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Phantom 4 Pro V2.0",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0924e0fc003db237c7a"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0924e0fc003db237c7b"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0934e0fc003db237c7c"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Phantom 3 SE",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0944e0fc003db237c7d"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0944e0fc003db237c7e"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0944e0fc003db237c7f"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Mavic Pro",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 6,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0964e0fc003db237c81"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0974e0fc003db237c82"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Mavic 2 Enterprise",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0974e0fc003db237c83"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0974e0fc003db237c84"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0984e0fc003db237c85"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 SE",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0994e0fc003db237c86"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Mavic Pro Platinum",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb0994e0fc003db237c87"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb09a4e0fc003db237c88"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Air",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb09a4e0fc003db237c89"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb09a4e0fc003db237c8a"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Mini",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb09c4e0fc003db237c8b"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb09c4e0fc003db237c8c"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb09d4e0fc003db237c8d"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Dji Mini 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 7,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb09d4e0fc003db237c8e"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb09d4e0fc003db237c8f"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb9d34e0fc003db237c90"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb9d74e0fc003db237c91"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Phantom 4",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb9d74e0fc003db237c92"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Mavic Air",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb9d74e0fc003db237c93"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb9d84e0fc003db237c94"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Mavic 2 Enterprise",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb9da4e0fc003db237c95"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb9dc4e0fc003db237c96"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Mavic Pro",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 6,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb9de4e0fc003db237c97"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb9e54e0fc003db237c98"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Mavic 2 Enterprise",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fbdb9e94e0fc003db237c99"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 SE",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fc371f577405748721a528e"
+  },
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "111",
+  "dimensions": "111",
+  "maxFlightRange": 11,
+  "maxFlightSpeed": 111,
+  "maxFlightTime": 111,
+  "maxFlightHeight": 11,
+  "rangeBattery": 111,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fc376a977405748721a528f"
+  },
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Matrice 300 RTK",
+  "brand": "Matrice",
+  "color": "3",
+  "dimensions": "3",
+  "maxFlightRange": 3,
+  "maxFlightSpeed": 3,
+  "maxFlightTime": 3,
+  "maxFlightHeight": 3,
+  "rangeBattery": 3,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fc37b1f77405748721a5290"
+  },
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Phantom 3 Advanced",
+  "brand": "Phantom",
+  "color": "33",
+  "maxFlightRange": 0,
+  "maxFlightSpeed": 33,
+  "maxFlightTime": 33,
+  "maxFlightHeight": 33,
+  "rangeBattery": 0,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 7,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": "5fbdad624e0fc003db237c67nhom11",
+  "code": "mavicNhom11",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fce4e8afeae48098869a2ce"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fce4e8afeae48098869a2cf"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Pro",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/file/d/1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz/view",
+  "type": 6,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fce4e8afeae48098869a2d0"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fce4e8bfeae48098869a2d1"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Air",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fce4e8bfeae48098869a2d2"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Air 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fce4eaefeae48098869a2d3"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fce4eaffeae48098869a2d4"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 4 RTK",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fce4eaffeae48098869a2d5"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fce4eaffeae48098869a2d6"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Mini",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fce4eaffeae48098869a2d7"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 300 RTK",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fcfa99c6ab3ed494026b65e"
+  },
+  "code": "ABC",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 200 Seres V2",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "0.4x0.4x0.3m",
+  "maxFlightRange": 50,
+  "maxFlightSpeed": 20,
+  "maxFlightTime": 60,
+  "maxFlightHeight": 1000,
+  "rangeBattery": 100000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fd88d3eb94e272f3f9e8ffd"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Pro",
+  "brand": "Mavic",
+  "color": "black",
+  "dimensions": "20x20x30",
+  "maxFlightRange": 300,
+  "maxFlightSpeed": 30,
+  "maxFlightTime": 23,
+  "maxFlightHeight": 100,
+  "rangeBattery": 1200000,
+  "urlImage": "https://drive.google.com/file/d/1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz/view",
+  "type": 6,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe0662430223238de7bd16e"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2",
+  "brand": "Mavic",
+  "color": "Black",
+  "dimensions": "1x0.5x0.5",
+  "maxFlightRange": 200000,
+  "maxFlightSpeed": 50,
+  "maxFlightTime": 60,
+  "maxFlightHeight": 210,
+  "rangeBattery": 15000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe06c0030223238de7bd16f"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 Professional",
+  "brand": "Phantom",
+  "color": "black",
+  "dimensions": "1x0.5x0.5",
+  "maxFlightRange": 20000,
+  "maxFlightSpeed": 52,
+  "maxFlightTime": 60,
+  "maxFlightHeight": 230,
+  "rangeBattery": 15200,
+  "urlImage": "https://drive.google.com/uc?id=19jYcl7WbzAiDDJAbRLXwQHemm_SJXXnk",
+  "type": 6,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bcc94a189f2b2676dd64"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bccb4a189f2b2676dd65"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 Advanced",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 7,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bccb4a189f2b2676dd66"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 4 Pro V2.0",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bccc4a189f2b2676dd67"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bccc4a189f2b2676dd68"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bccc4a189f2b2676dd69"
+  },
+  "code": "mavic1105",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bccc4a189f2b2676dd6a"
+  },
+  "code": "mavic1126",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bccd4a189f2b2676dd6b"
+  },
+  "code": "mavic1147",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bccd4a189f2b2676dd6c"
+  },
+  "code": "mavic1168",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Pro Platinum",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bccd4a189f2b2676dd6d"
+  },
+  "code": "mavic1189",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 Advanced",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 7,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bccd4a189f2b2676dd6e"
+  },
+  "code": "mavic1210",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bcce4a189f2b2676dd6f"
+  },
+  "code": "mavic1231",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bcce4a189f2b2676dd70"
+  },
+  "code": "mavic1252",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bcce4a189f2b2676dd71"
+  },
+  "code": "mavic1273",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bcce4a189f2b2676dd72"
+  },
+  "code": "mavic1294",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 2 Vision+",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 9,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bccf4a189f2b2676dd73"
+  },
+  "code": "mavic1315",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bccf4a189f2b2676dd74"
+  },
+  "code": "mavic1336",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 300 RTK",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bccf4a189f2b2676dd75"
+  },
+  "code": "mavic1357",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 Advanced",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 7,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bccf4a189f2b2676dd76"
+  },
+  "code": "mavic1378",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bcd04a189f2b2676dd77"
+  },
+  "code": "mavic1399",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Air",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde449a67836a9849720"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 300 RTK",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde649a67836a9849721"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde649a67836a9849722"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 300 RTK",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde649a67836a9849723"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde749a67836a9849724"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 300 RTK",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde749a67836a9849725"
+  },
+  "code": "mavic1105",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom FC40",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 10,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde749a67836a9849726"
+  },
+  "code": "mavic1126",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde749a67836a9849727"
+  },
+  "code": "mavic1147",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2 Enterprise",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde849a67836a9849728"
+  },
+  "code": "mavic1168",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Pro",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 6,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde849a67836a9849729"
+  },
+  "code": "mavic1189",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde849a67836a984972a"
+  },
+  "code": "mavic1210",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde849a67836a984972b"
+  },
+  "code": "mavic1231",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde949a67836a984972c"
+  },
+  "code": "mavic1252",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 200 Seres V2",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde949a67836a984972d"
+  },
+  "code": "mavic1273",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 SE",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde949a67836a984972e"
+  },
+  "code": "mavic1294",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bde949a67836a984972f"
+  },
+  "code": "mavic1315",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 4 RTK",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bdea49a67836a9849730"
+  },
+  "code": "mavic1336",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bdea49a67836a9849731"
+  },
+  "code": "mavic1357",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Dji Mini 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 7,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bdea49a67836a9849732"
+  },
+  "code": "mavic1378",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bdea49a67836a9849733"
+  },
+  "code": "mavic1399",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Pro",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 6,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bdeb49a67836a9849734"
+  },
+  "code": "mavic1420",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 1",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 11,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bdeb49a67836a9849735"
+  },
+  "code": "mavic1441",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 2 Vision+",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 9,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bdeb49a67836a9849736"
+  },
+  "code": "mavic1462",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bdeb49a67836a9849737"
+  },
+  "code": "mavic1483",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bdec49a67836a9849738"
+  },
+  "code": "mavic1504",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bdec49a67836a9849739"
+  },
+  "code": "mavic1525",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bdec49a67836a984973a"
+  },
+  "code": "mavic1546",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bded49a67836a984973b"
+  },
+  "code": "mavic1567",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 4 RTK",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bded49a67836a984973c"
+  },
+  "code": "mavic1588",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 Advanced",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 7,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1bded49a67836a984973d"
+  },
+  "code": "mavic1609",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600 Pro",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0849a67836a984973e"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0849a67836a984973f"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0849a67836a9849740"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0849a67836a9849741"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 2 Vision+",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 9,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0949a67836a9849742"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Air",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0949a67836a9849743"
+  },
+  "code": "mavic1105",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0949a67836a9849744"
+  },
+  "code": "mavic1126",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0949a67836a9849745"
+  },
+  "code": "mavic1147",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Pro Platinum",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0a49a67836a9849746"
+  },
+  "code": "mavic1168",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0a49a67836a9849747"
+  },
+  "code": "mavic1189",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 300 RTK",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0a49a67836a9849748"
+  },
+  "code": "mavic1210",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Phantom 2 Vision+",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 9,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0a49a67836a9849749"
+  },
+  "code": "mavic1231",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Dji Mini 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 7,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0b49a67836a984974a"
+  },
+  "code": "mavic1252",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2 Enterprise",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0b49a67836a984974b"
+  },
+  "code": "mavic1273",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0b49a67836a984974c"
+  },
+  "code": "mavic1294",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0b49a67836a984974d"
+  },
+  "code": "mavic1315",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Pro Platinum",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0c49a67836a984974e"
+  },
+  "code": "mavic1336",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0c49a67836a984974f"
+  },
+  "code": "mavic1357",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0c49a67836a9849750"
+  },
+  "code": "mavic1378",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0c49a67836a9849751"
+  },
+  "code": "mavic1399",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0d49a67836a9849752"
+  },
+  "code": "mavic1420",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0d49a67836a9849753"
+  },
+  "code": "mavic1441",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0d49a67836a9849754"
+  },
+  "code": "mavic1462",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Dji Mini 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 7,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0d49a67836a9849755"
+  },
+  "code": "mavic1483",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0e49a67836a9849756"
+  },
+  "code": "mavic1504",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0e49a67836a9849757"
+  },
+  "code": "mavic1525",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 200 Seres V2",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0e49a67836a9849758"
+  },
+  "code": "mavic1546",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0e49a67836a9849759"
+  },
+  "code": "mavic1567",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 4 RTK",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0f49a67836a984975a"
+  },
+  "code": "mavic1588",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be0f49a67836a984975b"
+  },
+  "code": "mavic1609",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1049a67836a984975c"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 SE",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1149a67836a984975d"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Pro",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 6,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1149a67836a984975e"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Air 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1149a67836a984975f"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1149a67836a9849760"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Air",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1249a67836a9849761"
+  },
+  "code": "mavic1105",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600 Pro",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1249a67836a9849762"
+  },
+  "code": "mavic1126",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 200 Seres V2",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1249a67836a9849763"
+  },
+  "code": "mavic1147",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 300 RTK",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1249a67836a9849764"
+  },
+  "code": "mavic1168",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 4 Advanced",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1349a67836a9849765"
+  },
+  "code": "mavic1189",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1349a67836a9849766"
+  },
+  "code": "mavic1210",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1349a67836a9849767"
+  },
+  "code": "mavic1231",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2 Enterprise",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1349a67836a9849768"
+  },
+  "code": "mavic1252",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1449a67836a9849769"
+  },
+  "code": "mavic1273",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1449a67836a984976a"
+  },
+  "code": "mavic1294",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1449a67836a984976b"
+  },
+  "code": "mavic1315",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1449a67836a984976c"
+  },
+  "code": "mavic1336",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom FC40",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 10,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1549a67836a984976d"
+  },
+  "code": "mavic1357",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 standard",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 8,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1549a67836a984976e"
+  },
+  "code": "mavic1378",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1649a67836a984976f"
+  },
+  "code": "mavic1399",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1649a67836a9849770"
+  },
+  "code": "mavic1420",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600 Pro",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1649a67836a9849771"
+  },
+  "code": "mavic1441",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 1",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 11,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1649a67836a9849772"
+  },
+  "code": "mavic1462",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 4 Advanced",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1749a67836a9849773"
+  },
+  "code": "mavic1483",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2 Enterprise",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1749a67836a9849774"
+  },
+  "code": "mavic1504",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2 Enterprise",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1749a67836a9849776"
+  },
+  "code": "mavic1546",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1849a67836a9849777"
+  },
+  "code": "mavic1567",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1849a67836a9849778"
+  },
+  "code": "mavic1588",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1849a67836a9849779"
+  },
+  "code": "mavic1609",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 300 RTK",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1949a67836a984977a"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1a49a67836a984977b"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 4 Advanced",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1a49a67836a984977c"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 2 Vision+",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 9,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1a49a67836a984977d"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Dji Mini 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 7,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1a49a67836a984977e"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1b49a67836a984977f"
+  },
+  "code": "mavic1105",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2 Enterprise",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1b49a67836a9849780"
+  },
+  "code": "mavic1126",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Dji Mini 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 7,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1b49a67836a9849781"
+  },
+  "code": "mavic1147",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1b49a67836a9849782"
+  },
+  "code": "mavic1168",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom FC40",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 10,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1c49a67836a9849783"
+  },
+  "code": "mavic1189",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1c49a67836a9849784"
+  },
+  "code": "mavic1210",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600 Pro",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1c49a67836a9849785"
+  },
+  "code": "mavic1231",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1c49a67836a9849786"
+  },
+  "code": "mavic1252",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600 Pro",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1d49a67836a9849787"
+  },
+  "code": "mavic1273",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1d49a67836a9849788"
+  },
+  "code": "mavic1294",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1d49a67836a9849789"
+  },
+  "code": "mavic1315",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 300 RTK",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1d49a67836a984978a"
+  },
+  "code": "mavic1336",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1e49a67836a984978b"
+  },
+  "code": "mavic1357",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2 Enterprise",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1e49a67836a984978c"
+  },
+  "code": "mavic1378",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1e49a67836a984978d"
+  },
+  "code": "mavic1399",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Mini",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1e49a67836a984978e"
+  },
+  "code": "mavic1420",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1f49a67836a984978f"
+  },
+  "code": "mavic1441",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1f49a67836a9849790"
+  },
+  "code": "mavic1462",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Pro Platinum",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1f49a67836a9849791"
+  },
+  "code": "mavic1483",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Pro",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 6,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be1f49a67836a9849792"
+  },
+  "code": "mavic1504",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be2049a67836a9849793"
+  },
+  "code": "mavic1525",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Air 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be2049a67836a9849794"
+  },
+  "code": "mavic1546",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600 Pro",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be2049a67836a9849795"
+  },
+  "code": "mavic1567",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 4 Advanced",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be2149a67836a9849796"
+  },
+  "code": "mavic1588",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Dji Mini 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 7,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe1be2149a67836a9849797"
+  },
+  "code": "mavic1609",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe2931e88fdc948f4b2b973"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": false,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe2933088fdc948f4b2b974"
+  },
+  "code": "mavic1045",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 SE",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1x0.95x0.7 m",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 230,
+  "rangeBattery": 105000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe29b1388fdc948f4b2b977"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Air",
+  "brand": "Mavic",
+  "color": "đen",
+  "dimensions": "200",
+  "maxFlightRange": 200,
+  "maxFlightSpeed": 50,
+  "maxFlightTime": 100,
+  "maxFlightHeight": 300,
+  "rangeBattery": 2000,
+  "urlImage": "https://drive.google.com/uc?id=1pdJQT7xJXELRhIxdXwfCjB0QhZxIv9Uv",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe29b1788fdc948f4b2b978"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "đen",
+  "dimensions": "200",
+  "maxFlightRange": 200,
+  "maxFlightSpeed": 50,
+  "maxFlightTime": 100,
+  "maxFlightHeight": 300,
+  "rangeBattery": 2000,
+  "urlImage": "https://drive.google.com/uc?id=12ml0L7i0ZyTlmZj3ZR-C8Ix6_KA_KXDs",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe29b1888fdc948f4b2b979"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2",
+  "brand": "Mavic",
+  "color": "đen",
+  "dimensions": "200",
+  "maxFlightRange": 200,
+  "maxFlightSpeed": 50,
+  "maxFlightTime": 100,
+  "maxFlightHeight": 300,
+  "rangeBattery": 2000,
+  "urlImage": "https://drive.google.com/uc?id=1npGAaTBlN-n1icFP3zlcbWzo-TC_rqiM",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe2a08088fdc948f4b2b980"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2",
+  "brand": "Mavic",
+  "color": "đen",
+  "dimensions": "23",
+  "maxFlightRange": 23,
+  "maxFlightSpeed": 3,
+  "maxFlightTime": 3,
+  "maxFlightHeight": 333,
+  "rangeBattery": 233,
+  "urlImage": "https://drive.google.com/uc?id=1Y2vf8brH8iQCzLhygdZSbSZufgCcWWJp",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe70b031dce632a089ff6ad"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 300 RTK",
+  "brand": "Matrice",
+  "color": "test",
+  "dimensions": "test",
+  "maxFlightRange": 232,
+  "maxFlightSpeed": 22,
+  "maxFlightTime": 22,
+  "maxFlightHeight": 22,
+  "rangeBattery": 33,
+  "urlImage": "https://drive.google.com/uc?id=1Hd8jjsYoNRWrPy0IpJPeKwW2ssGjxbhj",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe70b431dce632a089ff6ae"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 200 Seres V2",
+  "brand": "Matrice",
+  "color": "test",
+  "dimensions": "test",
+  "maxFlightRange": 22,
+  "maxFlightSpeed": 22,
+  "maxFlightTime": 22,
+  "maxFlightHeight": 22,
+  "rangeBattery": 22,
+  "urlImage": "https://drive.google.com/uc?id=1ywPG_v22FNVm7NKEzjVzlnbutt_lLYnp",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe70bd71dce632a089ff6af"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "test1",
+  "dimensions": "test1",
+  "maxFlightRange": 233,
+  "maxFlightSpeed": 22,
+  "maxFlightTime": 223,
+  "maxFlightHeight": 2343,
+  "rangeBattery": 243,
+  "urlImage": "https://drive.google.com/uc?id=12O-7UaLugKg2nSVF60WjJvmqo1C1ZEqO",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe70ca21dce632a089ff6b0"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Mini",
+  "brand": "Mavic",
+  "color": "test23",
+  "dimensions": "test23",
+  "maxFlightRange": 1,
+  "maxFlightSpeed": 2,
+  "maxFlightTime": 1,
+  "maxFlightHeight": 3,
+  "rangeBattery": 4,
+  "urlImage": "https://drive.google.com/uc?id=17oWqRd4K_0SXtfhvKBXE7t4TXx-y1Sya",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe70d2b1dce632a089ff6b1"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600",
+  "brand": "Matrice",
+  "color": "test",
+  "dimensions": "test",
+  "maxFlightRange": 22,
+  "maxFlightSpeed": 22,
+  "maxFlightTime": 22,
+  "maxFlightHeight": 22,
+  "rangeBattery": 222,
+  "urlImage": "https://drive.google.com/uc?id=1UM2yBc5vklQ4pyV4kcvXPmLwJQgNCVeW",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe70d8c1dce632a089ff6b2"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600",
+  "brand": "Matrice",
+  "color": "test",
+  "dimensions": "test",
+  "maxFlightRange": 222,
+  "maxFlightSpeed": 32,
+  "maxFlightTime": 2332,
+  "maxFlightHeight": 323,
+  "rangeBattery": 2323,
+  "urlImage": "https://drive.google.com/uc?id=1eaTWLSvDZ6Ev3OtnqcJ2x_bN2fcds9Bn",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe8627c1dce632a089ff6b6"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 200 Seres V2",
+  "brand": "Matrice",
+  "color": "12",
+  "dimensions": "20",
+  "maxFlightRange": 120,
+  "maxFlightSpeed": 12,
+  "maxFlightTime": 12,
+  "maxFlightHeight": 12,
+  "rangeBattery": 10000,
+  "urlImage": "https://drive.google.com/uc?id=1LoCp8EMNG-j2qVgcjD3K9ciyufQ5L7GV",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe8627d1dce632a089ff6b7"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2 Enterprise",
+  "brand": "Mavic",
+  "color": "12",
+  "dimensions": "20",
+  "maxFlightRange": 120,
+  "maxFlightSpeed": 12,
+  "maxFlightTime": 12,
+  "maxFlightHeight": 12,
+  "rangeBattery": 10000,
+  "urlImage": "https://drive.google.com/uc?id=1Ws1RnsJxRGk_Rl3demlwRWlVvnTmxV-6",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88dfc1dce632a089ff6b8"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88dfd1dce632a089ff6b9"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 200 Seres V2",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88dfd1dce632a089ff6ba"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88dfd1dce632a089ff6bb"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Mini",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88dfe1dce632a089ff6bc"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 300 RTK",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88dfe1dce632a089ff6bd"
+  },
+  "code": "mavic1105",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2 Enterprise",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88dfe1dce632a089ff6be"
+  },
+  "code": "mavic1126",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88dfe1dce632a089ff6bf"
+  },
+  "code": "mavic1147",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88dff1dce632a089ff6c0"
+  },
+  "code": "mavic1168",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88dff1dce632a089ff6c1"
+  },
+  "code": "mavic1189",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88dff1dce632a089ff6c2"
+  },
+  "code": "mavic1210",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 2 Vision+",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 9,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88dff1dce632a089ff6c3"
+  },
+  "code": "mavic1231",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom FC40",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 10,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e001dce632a089ff6c4"
+  },
+  "code": "mavic1252",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 standard",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 8,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e001dce632a089ff6c5"
+  },
+  "code": "mavic1273",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 Advanced",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 7,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e001dce632a089ff6c6"
+  },
+  "code": "mavic1294",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e001dce632a089ff6c7"
+  },
+  "code": "mavic1315",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e011dce632a089ff6c8"
+  },
+  "code": "mavic1336",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 Professional",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 6,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e011dce632a089ff6c9"
+  },
+  "code": "mavic1357",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 300 RTK",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e011dce632a089ff6ca"
+  },
+  "code": "mavic1378",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e011dce632a089ff6cb"
+  },
+  "code": "mavic1399",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e021dce632a089ff6cc"
+  },
+  "code": "mavic1420",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 SE",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e021dce632a089ff6cd"
+  },
+  "code": "mavic1441",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 4 Pro V2.0",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e021dce632a089ff6ce"
+  },
+  "code": "mavic1462",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e021dce632a089ff6cf"
+  },
+  "code": "mavic1483",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e031dce632a089ff6d0"
+  },
+  "code": "mavic1504",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e031dce632a089ff6d1"
+  },
+  "code": "mavic1525",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e031dce632a089ff6d2"
+  },
+  "code": "mavic1546",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e031dce632a089ff6d3"
+  },
+  "code": "mavic1567",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Mini",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e041dce632a089ff6d4"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 SE",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e041dce632a089ff6d5"
+  },
+  "code": "mavic1609",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e241dce632a089ff6d6"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 200 Seres V2",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e241dce632a089ff6d7"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Pro Platinum",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e241dce632a089ff6d8"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 SE",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e241dce632a089ff6d9"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 200 Seres V2",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e251dce632a089ff6da"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e251dce632a089ff6db"
+  },
+  "code": "mavic1105",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e251dce632a089ff6dc"
+  },
+  "code": "mavic1126",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e251dce632a089ff6dd"
+  },
+  "code": "mavic1147",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e261dce632a089ff6de"
+  },
+  "code": "mavic1168",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e261dce632a089ff6df"
+  },
+  "code": "mavic1189",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom FC40",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 10,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e261dce632a089ff6e0"
+  },
+  "code": "mavic1210",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e261dce632a089ff6e1"
+  },
+  "code": "mavic1231",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e271dce632a089ff6e2"
+  },
+  "code": "mavic1252",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e271dce632a089ff6e3"
+  },
+  "code": "mavic1273",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e271dce632a089ff6e4"
+  },
+  "code": "mavic1294",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e271dce632a089ff6e5"
+  },
+  "code": "mavic1315",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic 2 Enterprise",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e281dce632a089ff6e6"
+  },
+  "code": "mavic1336",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e281dce632a089ff6e7"
+  },
+  "code": "mavic1357",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e281dce632a089ff6e8"
+  },
+  "code": "mavic1378",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e281dce632a089ff6e9"
+  },
+  "code": "mavic1399",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 1",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 11,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e291dce632a089ff6ea"
+  },
+  "code": "mavic1420",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 4K",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e291dce632a089ff6eb"
+  },
+  "code": "mavic1441",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e291dce632a089ff6ec"
+  },
+  "code": "mavic1462",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 200 Seres V2",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e291dce632a089ff6ed"
+  },
+  "code": "mavic1483",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e2a1dce632a089ff6ee"
+  },
+  "code": "mavic1504",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e2a1dce632a089ff6ef"
+  },
+  "code": "mavic1525",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e2a1dce632a089ff6f0"
+  },
+  "code": "mavic1546",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e2a1dce632a089ff6f1"
+  },
+  "code": "mavic1567",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 300 RTK",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e2b1dce632a089ff6f2"
+  },
+  "code": "mavic1588",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Pro",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 6,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fe88e2b1dce632a089ff6f3"
+  },
+  "code": "mavic1609",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600 Pro",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96fbef4a52482dcea513"
+  },
+  "code": "mavic1000",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 2 Vision+",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 9,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96fcef4a52482dcea514"
+  },
+  "code": "mavic1021",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 300 RTK",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96fcef4a52482dcea515"
+  },
+  "code": "mavic1042",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96fcef4a52482dcea516"
+  },
+  "code": "mavic1063",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom FC40",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 10,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96fcef4a52482dcea517"
+  },
+  "code": "mavic1084",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96fdef4a52482dcea518"
+  },
+  "code": "mavic1105",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96fdef4a52482dcea519"
+  },
+  "code": "mavic1126",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 SE",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 5,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96fdef4a52482dcea51a"
+  },
+  "code": "mavic1147",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96fdef4a52482dcea51b"
+  },
+  "code": "mavic1168",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Dji Mini 2",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 7,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96feef4a52482dcea51c"
+  },
+  "code": "mavic1189",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96feef4a52482dcea51d"
+  },
+  "code": "mavic1210",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 4",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96feef4a52482dcea51e"
+  },
+  "code": "mavic1231",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96feef4a52482dcea51f"
+  },
+  "code": "mavic1252",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 3,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96ffef4a52482dcea520"
+  },
+  "code": "mavic1273",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Argas MG-1s",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96ffef4a52482dcea521"
+  },
+  "code": "mavic1294",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 standard",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 8,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96ffef4a52482dcea522"
+  },
+  "code": "mavic1315",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea96ffef4a52482dcea523"
+  },
+  "code": "mavic1336",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600 Pro",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea9700ef4a52482dcea524"
+  },
+  "code": "mavic1357",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 200 Seres V2",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea9700ef4a52482dcea525"
+  },
+  "code": "mavic1378",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea9700ef4a52482dcea526"
+  },
+  "code": "mavic1399",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea9700ef4a52482dcea527"
+  },
+  "code": "mavic1420",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "MG-1P",
+  "brand": "Agras",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea9701ef4a52482dcea528"
+  },
+  "code": "mavic1441",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Pro",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 6,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea9701ef4a52482dcea529"
+  },
+  "code": "mavic1462",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Mini",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 1,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea9701ef4a52482dcea52a"
+  },
+  "code": "mavic1483",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea9701ef4a52482dcea52b"
+  },
+  "code": "mavic1504",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 3 Professional",
+  "brand": "Phantom",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 6,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea9702ef4a52482dcea52c"
+  },
+  "code": "mavic1525",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea9702ef4a52482dcea52d"
+  },
+  "code": "mavic1546",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Mavic Pro",
+  "brand": "Mavic",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 6,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea9702ef4a52482dcea52e"
+  },
+  "code": "mavic1567",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea9702ef4a52482dcea52f"
+  },
+  "code": "mavic1588",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5fea9703ef4a52482dcea530"
+  },
+  "code": "mavic1609",
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Spark",
+  "brand": "Spark",
+  "color": "white",
+  "dimensions": "1.1x0.95x0.8 m",
+  "maxFlightRange": 19000,
+  "maxFlightSpeed": 35,
+  "maxFlightTime": 90,
+  "maxFlightHeight": 290,
+  "rangeBattery": 155000,
+  "urlImage": "https://drive.google.com/uc?id=1sfh6GyIVZBCte-ChWBTLhM9fPJKhRAkz",
+  "type": 0,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5feabaf4ef4a52482dcea539"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Phantom 2 Vision+",
+  "brand": "Phantom",
+  "color": "black",
+  "dimensions": "1x0.8x0.9",
+  "maxFlightRange": 20000,
+  "maxFlightSpeed": 40,
+  "maxFlightTime": 60,
+  "maxFlightHeight": 300,
+  "rangeBattery": 16000,
+  "urlImage": "https://drive.google.com/uc?id=1hQjEu8iaYmEePyeb77wEghe27Ivjf75E",
+  "type": 9,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5febd9343dcd980f14e6661a"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 600 Pro",
+  "brand": "Matrice edited 111",
+  "color": "black ",
+  "dimensions": "1x2x3 m",
+  "maxFlightRange": 300,
+  "maxFlightSpeed": 30,
+  "maxFlightTime": 67,
+  "maxFlightHeight": 400,
+  "rangeBattery": 234,
+  "urlImage": "https://drive.google.com/uc?id=1VWzXQav3PBVJ0iqOS3v7iPeV-TbO6sFj",
+  "type": 2,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+},{
+  "_id": {
+    "$oid": "5feda00b3dcd980f14e66653"
+  },
+  "idLog": 0,
+  "isUsed": true,
+  "task": 0,
+  "name": "Matrice 100",
+  "brand": "Matrice edited",
+  "color": "black",
+  "dimensions": "1x2x3",
+  "maxFlightRange": 16000,
+  "maxFlightSpeed": 40,
+  "maxFlightTime": 60,
+  "maxFlightHeight": 200,
+  "rangeBattery": 15000,
+  "urlImage": "https://drive.google.com/uc?id=1iH-TOkWG7k35tgaaNtQ3s0-o2A9namOm",
+  "type": 4,
+  "_class": "com.skyrone.drone.demo.model.Drone"
+}]
