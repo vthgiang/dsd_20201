@@ -148,7 +148,7 @@ export const getUsersMetrics = async (projectType) => {
                 }
             } = await requestWithCache(
                 "getUsersMetrics",
-                () => Axios.get("http://128.199.79.122:6006/api/user?page_id=0&page_size=10000", {
+                () => Axios.get("https://distributed.de-lalcool.com/api/user?page_id=0&page_size=10000", {
                     headers: {
                         token: "9e35bc1346ffd9113c17af3ac309bf85",
                         "project-type": "ALL_PROJECT",
@@ -177,7 +177,7 @@ export const getUsersMetrics = async (projectType) => {
                 }
             } = await requestWithCache(
                 "getUsersMetrics",
-                () => Axios.get("http://128.199.79.122:6006/api/user?page_id=0&page_size=1000000", {
+                () => Axios.get("https://distributed.de-lalcool.com/api/user?page_id=0&page_size=1000000", {
                     headers: {
                         token: "9e35bc1346ffd9113c17af3ac309bf85",
                         "project-type": "ALL_PROJECT",

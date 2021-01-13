@@ -584,7 +584,7 @@ class Manage extends React.Component {
     
     getIncident() {
         return new Promise((resolve, reject) => {
-            axios.get(`http://128.199.79.122:6006/api/projectType`, {
+            axios.get(`https://distributed.de-lalcool.com/api/projectType`, {
                     headers: {
                         token: 'd4266a83f48daac7868f73724ae1810d',
                     }

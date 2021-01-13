@@ -1,32 +1,32 @@
 import Base from "./baseService";
-import to from "await-to-js";
+import to from "await-to-js"
 class Service extends Base {
   login = async ({ email, password } = {}) => {
-    const url = "http://128.199.79.122:6006/api/login";
+    const url = 'https://distributed.de-lalcool.com/api/login'
 
     const response = await fetch(url, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({email, password})
     });
     return response.json();
   };
   getAllPayload = async (ids) => {
     return this.request({
-      url: "https://dsd06.herokuapp.com/api/payload",
+      url: 'https://dsd06.herokuapp.com/api/payload',
       method: "GET",
       data: {},
-      isExternalServer: true,
+      isExternalServer: true
     });
   };
   getUserName = async (ids) => {
     return this.request({
-      url: "http://128.199.79.122:6006/api/get-user-name",
+      url: 'https://distributed.de-lalcool.com/api/get-user-name',
       method: "POST",
-      data: { ids: ids },
-      isExternalServer: true,
+      data: {ids: ids},
+      isExternalServer: true
     });
   };
 }
